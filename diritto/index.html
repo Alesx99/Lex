@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="style.css">
     <!-- Marked.js Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Centralized Glossary Database -->
+    <script src="../js/glossary_db.js"></script>
     <style>
         /* Extra styles specific to index page */
         .search-container {
@@ -396,10 +398,22 @@
                 <div class="reading-progress-bar" id="progress-indicator"></div>
             </div>
             
-            <!-- Modal Body Text -->
-            <div class="modal-body" id="modal-body-content">
-                <div class="markdown-content" id="markdown-view">
-                    <!-- Rendered markdown goes here -->
+            <!-- Split Container for Body and Notes -->
+            <div class="modal-content-split">
+                <!-- Modal Body Text -->
+                <div class="modal-body" id="modal-body-content">
+                    <div class="markdown-content" id="markdown-view">
+                        <!-- Rendered markdown goes here -->
+                    </div>
+                </div>
+                <!-- Study Notepad Panel -->
+                <div class="modal-notes-panel" id="modal-notes-panel">
+                    <div class="notes-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span>Appunti di Studio</span>
+                    </div>
+                    <textarea id="notes-textarea" placeholder="Scrivi qui i tuoi appunti per questo capitolo... Verranno salvati automaticamente in locale."></textarea>
+                    <div class="notes-status" id="notes-status">Nessuna modifica.</div>
                 </div>
             </div>
         </div>
@@ -496,6 +510,13 @@
                     
                     // Render markdown using Marked
                     markdownView.innerHTML = marked.parse(text);
+
+                    // Initialize features after render
+                    setTimeout(() => {
+                        injectGlossaryTooltips(markdownView);
+                        initializeParagraphs(filePath);
+                        initializeNotepad(filePath);
+                    }, 50);
                 })
                 .catch(err => {
                     modalChapterTitle.textContent = "Errore";
@@ -509,6 +530,8 @@
         function closeSummary() {
             modal.classList.remove('open');
             document.body.style.overflow = 'auto'; // Release background scroll
+            const palette = document.getElementById('highlight-palette');
+            if (palette) palette.style.display = 'none';
         }
 
         // Close on backdrop click
@@ -536,6 +559,182 @@
                 progressIndicator.style.width = '0%';
             }
         });
+
+        // Open summary from URL query parameter if present
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const openPath = params.get('open');
+            if (openPath) {
+                const btns = document.querySelectorAll('button[onclick]');
+                for (const btn of btns) {
+                    const onclickStr = btn.getAttribute('onclick');
+                    if (onclickStr && onclickStr.includes(openPath)) {
+                        // Delay click slightly to allow smooth transition
+                        setTimeout(() => btn.click(), 100);
+                        break;
+                    }
+                }
+            }
+        });
+
+        // GLOSSARY TOOLTIPS INJECTOR
+        function injectGlossaryTooltips(container) {
+            if (!window.glossaryDatabase) return;
+            
+            const terms = Object.keys(window.glossaryDatabase);
+            if (terms.length === 0) return;
+            
+            // Sort terms by length descending, so longer phrases are matched first
+            terms.sort((a, b) => b.length - a.length);
+            
+            const walker = document.createTreeWalker(
+                container,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(node) {
+                        const parent = node.parentNode.tagName.toLowerCase();
+                        if (parent === 'a' || parent === 'code' || parent === 'pre' || parent === 'button' || parent === 'script' || parent === 'style' || parent === 'span' && node.parentNode.classList.contains('glossary-term')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+            
+            const nodesToReplace = [];
+            while (walker.nextNode()) {
+                nodesToReplace.push(walker.currentNode);
+            }
+            
+            nodesToReplace.forEach(node => {
+                let text = node.nodeValue;
+                let replaced = false;
+                
+                for (const term of terms) {
+                    const termMeta = window.glossaryDatabase[term];
+                    const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                    let regexStr = '\\b(' + escapedTerm + ')(i|e|a|o)?\\b';
+                    
+                    if (term.includes("'")) {
+                        regexStr = '(' + escapedTerm + ')';
+                    }
+                    
+                    const regex = new RegExp(regexStr, 'gi');
+                    
+                    if (regex.test(text)) {
+                        const span = document.createElement('span');
+                        span.innerHTML = text.replace(regex, (match) => {
+                            return `<span class="glossary-term" data-term="${term}">${match}<span class="glossary-tooltip"><strong>${termMeta.term}</strong>: ${termMeta.definition}</span></span>`;
+                        });
+                        
+                        node.parentNode.replaceChild(span, node);
+                        replaced = true;
+                        break; 
+                    }
+                }
+            });
+        }
+
+        // PARAGRAPH HIGHLIGHTS
+        let activeParagraphIndex = -1;
+        let activeFilePath = '';
+
+        function initializeParagraphs(filePath) {
+            activeFilePath = filePath;
+            const paragraphs = markdownView.querySelectorAll('p');
+            const palette = document.getElementById('highlight-palette');
+
+            paragraphs.forEach((p, index) => {
+                // Load saved highlight color
+                const savedColor = localStorage.getItem(`highlight-${filePath}-${index}`);
+                if (savedColor) {
+                    p.className = `highlighted-${savedColor}`;
+                }
+
+                // Click handler to open palette
+                p.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    activeParagraphIndex = index;
+                    
+                    const pRect = p.getBoundingClientRect();
+                    const bodyRect = document.body.getBoundingClientRect();
+                    
+                    // Position the palette
+                    const top = pRect.top - bodyRect.top - 40;
+                    const left = pRect.left + (pRect.width / 2) - 60;
+                    
+                    palette.style.top = `${top}px`;
+                    palette.style.left = `${left}px`;
+                    palette.style.display = 'flex';
+                });
+            });
+        }
+
+        function applyHighlightColor(color) {
+            const palette = document.getElementById('highlight-palette');
+            palette.style.display = 'none';
+
+            if (activeParagraphIndex === -1 || !activeFilePath) return;
+
+            const paragraphs = markdownView.querySelectorAll('p');
+            const p = paragraphs[activeParagraphIndex];
+
+            if (color === 'clear') {
+                p.className = '';
+                localStorage.removeItem(`highlight-${activeFilePath}-${activeParagraphIndex}`);
+            } else {
+                p.className = `highlighted-${color}`;
+                localStorage.setItem(`highlight-${activeFilePath}-${activeParagraphIndex}`, color);
+            }
+
+            activeParagraphIndex = -1;
+        }
+
+        // Close palette when clicking anywhere else
+        document.addEventListener('click', (e) => {
+            const palette = document.getElementById('highlight-palette');
+            if (palette && !palette.contains(e.target)) {
+                palette.style.display = 'none';
+            }
+        });
+
+        // STUDY NOTEPAD INITIALIZER
+        let notesTimeout = null;
+
+        function initializeNotepad(filePath) {
+            const textarea = document.getElementById('notes-textarea');
+            const status = document.getElementById('notes-status');
+            
+            const savedNotes = localStorage.getItem(`notes-${filePath}`);
+            textarea.value = savedNotes || '';
+            status.textContent = "Nessuna modifica.";
+
+            // Debounced save
+            textarea.oninput = () => {
+                status.textContent = "Salvataggio...";
+                clearTimeout(notesTimeout);
+                
+                notesTimeout = setTimeout(() => {
+                    try {
+                        localStorage.setItem(`notes-${filePath}`, textarea.value);
+                        status.textContent = "Modifiche salvate.";
+                    } catch (err) {
+                        status.textContent = "Errore salvataggio.";
+                        console.error(err);
+                    }
+                }, 600);
+            };
+        }
     </script>
+
+    <!-- Floating Paragraph Highlighter Palette -->
+    <div id="highlight-palette" class="highlight-palette" style="display: none;">
+        <button class="palette-color-btn color-yellow" onclick="applyHighlightColor('yellow')" title="Evidenzia in Giallo"></button>
+        <button class="palette-color-btn color-green" onclick="applyHighlightColor('green')" title="Evidenzia in Verde"></button>
+        <button class="palette-color-btn color-red" onclick="applyHighlightColor('red')" title="Evidenzia in Rosso"></button>
+        <button class="palette-color-btn color-clear" onclick="applyHighlightColor('clear')" title="Rimuovi Evidenziazione">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
 </body>
 </html>

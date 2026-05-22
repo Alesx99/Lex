@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulatore d'Esame - Lex Studiorum</title>
+    <meta name="description" content="Simulatore d'esame accademico personalizzabile con timer e report diagnostico per Diritto dei Beni Culturali e Storia dell'Arte Moderna.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet Reference -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Centralized Quiz Database -->
+    <script src="js/quiz_db.js"></script>
+    <style>
+        /* Specific Styles for Exam Simulator */
+        .exam-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem auto 4rem auto;
+            position: relative;
+        }
+
+        /* Config screen */
+        .config-card {
+            background: rgba(22, 28, 45, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .config-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .config-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-select, .form-input-number {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(10, 15, 28, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color var(--transition-speed) ease;
+        }
+
+        .form-select:focus, .form-input-number:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .form-row-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .custom-count-wrapper {
+            margin-top: 0.8rem;
+            display: none; /* Shown dynamically if custom is chosen */
+            animation: fadeInDown 0.3s ease;
+        }
+
+        .btn-start-exam {
+            width: 100%;
+            padding: 1.2rem;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b29024 100%);
+            color: #080b11;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1rem;
+        }
+
+        .btn-start-exam:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Active Exam Layout */
+        .exam-active-card {
+            background: rgba(18, 24, 38, 0.7);
+            border: 1px solid var(--border-color-hover);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .exam-meta {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* Timer ring / progress bar */
+        .timer-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timer-indicator {
+            height: 100%;
+            width: 100%;
+            background: var(--accent-green);
+            transition: width 0.1s linear, background-color 0.5s ease;
+        }
+
+        .timer-indicator.warning {
+            background: #f59e0b; /* Orange warning */
+        }
+
+        .timer-indicator.danger {
+            background: #ef4444; /* Red urgent */
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+
+        .exam-question-body {
+            margin-bottom: 2.5rem;
+        }
+
+        .exam-question-text {
+            font-family: var(--font-serif);
+            font-size: 1.55rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .exam-options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .exam-option-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            font-size: 1rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .exam-option-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+
+        .exam-option-btn.selected {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--accent-gold);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .option-letter-box {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .exam-option-btn.selected .option-letter-box {
+            background: var(--accent-gold);
+            color: #080b11;
+            border-color: var(--accent-gold);
+        }
+
+        .exam-footer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.5rem;
+        }
+
+        /* Diagnostic Report card */
+        .report-card {
+            background: rgba(22, 28, 45, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3.5rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            margin-top: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .report-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            padding-right: 2rem;
+        }
+
+        .score-circle-glow {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-gold);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 175, 55, 0.04);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+            margin-bottom: 1.5rem;
+        }
+
+        .score-percent {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .score-fraction {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .report-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat-bar-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .stat-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 99px;
+        }
+
+        .diritto-fill {
+            background: var(--accent-gold);
+        }
+
+        .arte-fill {
+            background: var(--accent-terracotta);
+        }
+
+        .recommendations-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 2rem;
+            text-align: left;
+        }
+
+        .recommendations-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .recommendations-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .rec-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background var(--transition-speed) ease;
+        }
+
+        .rec-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .rec-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .rec-link:hover {
+            text-decoration: underline;
+        }
+
+        .rec-label {
+            color: var(--text-primary);
+        }
+
+        .rec-subject-badge {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-right: 0.6rem;
+        }
+
+        .badge-d {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .badge-a {
+            background: rgba(200, 90, 50, 0.1);
+            color: var(--accent-terracotta);
+            border: 1px solid rgba(200, 90, 50, 0.2);
+        }
+
+        .back-hub {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .back-hub:hover {
+            color: var(--accent-gold);
+        }
+
+        @media (max-width: 768px) {
+            .report-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .report-left {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding-bottom: 2rem;
+            }
+            .form-row-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorative blur shapes -->
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>Simulatore d'Esame Multidisciplinare</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link active" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main style="max-width: 1200px; padding-top: 1rem;">
+        
+        <a href="index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Home
+        </a>
+
+        <div class="exam-container">
+            
+            <!-- STEP 1: EXAM SETUP CONFIG SCREEN -->
+            <div id="setup-screen" class="config-card" style="display: block;">
+                <h2 class="config-title">Configura la Sessione d'Esame</h2>
+                <p class="config-subtitle">Crea una simulazione d'esame personalizzata. Verranno estratti quesiti casuali dal pool multidisciplinare accademico, con timer opzionale e report diagnostico finale.</p>
+                
+                <div class="form-group">
+                    <label class="form-label">Materie d'Esame</label>
+                    <select id="exam-subject-select" class="form-select" onchange="updateMaxQuestions()">
+                        <option value="misto">Misto (Diritto e Arte)</option>
+                        <option value="diritto">Solo Diritto dei Beni Culturali (Max 12 domande)</option>
+                        <option value="arte">Solo Storia dell'Arte Moderna (Max 50 domande)</option>
+                    </select>
+                </div>
+
+                <div class="form-row-grid">
+                    <div class="form-group">
+                        <label class="form-label">Numero di Domande</label>
+                        <select id="exam-count-select" class="form-select" onchange="toggleCustomCount()">
+                            <option value="10">10 Domande (Consigliato rapido)</option>
+                            <option value="20">20 Domande (Consigliato standard)</option>
+                            <option value="30">30 Domande (Dettagliato)</option>
+                            <option value="custom">Numero Personalizzato...</option>
+                        </select>
+                        <div class="custom-count-wrapper" id="custom-count-wrapper">
+                            <input type="number" id="exam-custom-count-input" class="form-input-number" min="1" max="62" value="15" placeholder="Inserisci quantità...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tempo per Domanda</label>
+                        <select id="exam-timer-select" class="form-select">
+                            <option value="60">1 Minuto a domanda (Accademico)</option>
+                            <option value="30">30 Secondi a domanda (Sfida rapida)</option>
+                            <option value="120">2 Minuti a domanda (Lento)</option>
+                            <option value="0">Senza Limiti di Tempo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-start-exam" onclick="startExam()">Inizia la Simulazione d'Esame</button>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="exam-active-screen" class="exam-active-card" style="display: none;">
+                <div class="exam-header">
+                    <span class="exam-meta" id="exam-subject-tag">Materia: Diritto</span>
+                    <span class="exam-meta" id="exam-progress-tag">Domanda 1 di 20</span>
+                </div>
+
+                <!-- Timer Bar -->
+                <div class="timer-bar-bg" id="timer-bar-container">
+                    <div class="timer-indicator" id="timer-indicator"></div>
+                </div>
+
+                <!-- Question Area -->
+                <div class="exam-question-body">
+                    <h3 class="exam-question-text" id="exam-question-text">Testo della domanda...</h3>
+                    <div class="exam-options-grid" id="exam-options-container">
+                        <!-- Options buttons injected here -->
+                    </div>
+                </div>
+
+                <!-- Footer actions -->
+                <div class="exam-footer-actions">
+                    <button class="btn btn-secondary" onclick="confirmExitExam()">Abbandona</button>
+                    <button class="btn btn-primary" id="exam-next-btn" onclick="submitAnswer()">Invia e Continua</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: DIAGNOSTIC REPORT CARD -->
+            <div id="report-screen" class="report-card" style="display: none;">
+                <h2 style="font-family: var(--font-serif); font-size: 2.2rem; text-align: center; margin-bottom: 0.5rem;">Report Diagnostico Finale</h2>
+                <p style="color: var(--text-secondary); font-size: 1rem; text-align: center; margin-bottom: 2rem;">Di seguito trovi l'analisi dettagliata del tuo esame e le raccomandazioni di ripasso per superare le tue lacune.</p>
+
+                <div class="report-grid">
+                    <!-- Left: Total Score Ring -->
+                    <div class="report-left">
+                        <div class="score-circle-glow" id="report-score-glow">
+                            <span class="score-percent" id="report-percent-text">0%</span>
+                            <span class="score-fraction" id="report-score-text">0 / 0</span>
+                        </div>
+                        <h4 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;" id="report-outcome-title">Risultato d'Esame</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; line-height: 1.4;" id="report-outcome-desc">Spiegazione sull'idoneità o il ripasso.</p>
+                    </div>
+
+                    <!-- Right: Subject stats -->
+                    <div class="report-right">
+                        <div class="stat-bar-group">
+                            <div class="stat-label">
+                                <span>Diritto dei Beni Culturali</span>
+                                <span id="stat-diritto-text">0 / 0 (0%)</span>
+                            </div>
+                            <div class="stat-bar-bg">
+                                <div class="stat-bar-fill diritto-fill" id="stat-diritto-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-bar-group">
+                            <div class="stat-label">
+                                <span>Storia dell'Arte Moderna</span>
+                                <span id="stat-arte-text">0 / 0 (0%)</span>
+                            </div>
+                            <div class="stat-bar-bg">
+                                <div class="stat-bar-fill arte-fill" id="stat-arte-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter Review Recommendations -->
+                <div class="recommendations-section">
+                    <h3 class="recommendations-title">Sintesi Raccomandate per il Ripasso</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Il sistema ha individuato errori nei seguenti capitoli. Clicca sui link per studiare direttamente la sintesi focalizzata.</p>
+                    <ul class="recommendations-list" id="recommendations-list">
+                        <!-- Recommendation items injected here -->
+                    </ul>
+                </div>
+
+                <div class="summary-actions" style="margin-top: 3rem;">
+                    <button class="btn btn-primary" onclick="restartSetup()">Nuovo Esame</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">Vai alla Home</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <script>
+        // State variables
+        let examQuestions = [];
+        let currentQuestionIndex = 0;
+        let selectedOptionIdx = -1;
+        let score = 0;
+        let userResponses = []; // Track: {question, correctIndex, selectedIndex, subject, moduleKey}
+        
+        let examTimerDuration = 60; // default 60s per question
+        let timerInterval = null;
+        let timeRemaining = 60;
+        
+        // Dom Elements
+        const setupScreen = document.getElementById('setup-screen');
+        const activeScreen = document.getElementById('exam-active-screen');
+        const reportScreen = document.getElementById('report-screen');
+        
+        const subjectSelect = document.getElementById('exam-subject-select');
+        const countSelect = document.getElementById('exam-count-select');
+        const timerSelect = document.getElementById('exam-timer-select');
+        const customCountWrapper = document.getElementById('custom-count-wrapper');
+        const customCountInput = document.getElementById('exam-custom-count-input');
+        
+        const subjectTag = document.getElementById('exam-subject-tag');
+        const progressTag = document.getElementById('exam-progress-tag');
+        const timerIndicator = document.getElementById('timer-indicator');
+        const timerBarContainer = document.getElementById('timer-bar-container');
+        const questionText = document.getElementById('exam-question-text');
+        const optionsContainer = document.getElementById('exam-options-container');
+        const nextBtn = document.getElementById('exam-next-btn');
+
+        // Audio Context synthesizer for CORS-safe tone beeps
+        let audioCtx = null;
+        function playWarningBeep(pitch = 440, duration = 0.15) {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.frequency.value = pitch;
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime); // Low volume beep
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log("Audio synthesized alert blocked or unsupported: ", e);
+            }
+        }
+
+        // Map quiz module keys to actual chapter details & links
+        const moduleMetadata = {
+            fonti_tutela: {
+                chapterName: "Fonti, Organizzazione e Misure di Tutela",
+                subject: "diritto",
+                link: "diritto/index.html?open=summaries/1_patrimonio.md",
+                navText: "Apri Cap. I-V"
+            },
+            gestione_sanzioni: {
+                chapterName: "Circolazione, Regime Fiscale e Sanzioni",
+                subject: "diritto",
+                link: "diritto/index.html?open=summaries/13_sanzioni.md",
+                navText: "Apri Cap. VI-XIII"
+            },
+            origini: {
+                chapterName: "Origini del Rinascimento (Tardo Gotico e Brunelleschi)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/rinascimento_1_origini.md",
+                navText: "Apri Studio I"
+            },
+            fondatori: {
+                chapterName: "I Padri Fondatori (Brunelleschi, Donatello, Masaccio)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/rinascimento_2_fondatori.md",
+                navText: "Apri Studio II"
+            },
+            esperienze: {
+                chapterName: "Il Secondo Quattrocento e le Esperienze nelle Corti",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/rinascimento_3_esperienze.md",
+                navText: "Apri Studio III"
+            },
+            maturo: {
+                chapterName: "Il Rinascimento Maturo (Leonardo, Michelangelo, Raffaello)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/rinascimento_4_maturo.md",
+                navText: "Apri Studio IV"
+            },
+            veneto: {
+                chapterName: "Il Rinascimento Veneto e la Pittura Tonale",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/rinascimento_5_veneto.md",
+                navText: "Apri Studio V"
+            },
+            barocco: {
+                chapterName: "Il Barocco (Caravaggio, Bernini, Borromini)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/barocco_6.md",
+                navText: "Apri Studio VI"
+            },
+            neoclassicismo: {
+                chapterName: "Neoclassicismo, Canova e Preromanticismo (Il Sublime)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/neoclassicismo_7.md",
+                navText: "Apri Studio VII"
+            },
+            romanticismo: {
+                chapterName: "Romanticismo e Realismo (Géricault, Delacroix, Courbet)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/romanticismo_realismo_8.md",
+                navText: "Apri Studio VIII"
+            },
+            impressionismo: {
+                chapterName: "L'Impressionismo (Monet, Manet, Degas, Renoir)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/impressionismo_9.md",
+                navText: "Apri Studio IX"
+            },
+            postimpressionismo: {
+                chapterName: "Il Post-Impressionismo (Cézanne, Gauguin, Seurat, Van Gogh)",
+                subject: "arte",
+                link: "storia_arte/index.html?open=summaries/postimpressionismo_10.md",
+                navText: "Apri Studio X"
+            }
+        };
+
+        function updateMaxQuestions() {
+            const subject = subjectSelect.value;
+            let maxVal = 62;
+            if (subject === 'diritto') maxVal = 12;
+            if (subject === 'arte') maxVal = 50;
+
+            customCountInput.max = maxVal;
+            if (parseInt(customCountInput.value) > maxVal) {
+                customCountInput.value = maxVal;
+            }
+        }
+
+        function toggleCustomCount() {
+            if (countSelect.value === 'custom') {
+                customCountWrapper.style.display = 'block';
+            } else {
+                customCountWrapper.style.display = 'none';
+            }
+        }
+
+        function startExam() {
+            const subject = subjectSelect.value;
+            const timerOption = parseInt(timerSelect.value);
+            
+            // Build the question pool
+            let pool = [];
+            
+            Object.keys(quizDatabase).forEach(moduleKey => {
+                const mod = quizDatabase[moduleKey];
+                
+                // Filter by chosen subject
+                if (subject === 'misto' || mod.subject === subject) {
+                    mod.questions.forEach(q => {
+                        // Tag each question with its subject and module key for diagnostics
+                        pool.push({
+                            ...q,
+                            subject: mod.subject,
+                            moduleKey: moduleKey,
+                            moduleTitle: mod.title
+                        });
+                    });
+                }
+            });
+
+            // Determine question count
+            let qCount = 10;
+            if (countSelect.value === 'custom') {
+                qCount = parseInt(customCountInput.value);
+                if (isNaN(qCount) || qCount < 1) qCount = 10;
+                
+                const maxAllowed = pool.length;
+                if (qCount > maxAllowed) qCount = maxAllowed;
+            } else {
+                qCount = parseInt(countSelect.value);
+            }
+
+            // Suffle pool
+            pool.sort(() => Math.random() - 0.5);
+
+            // Slice to requested count
+            examQuestions = pool.slice(0, qCount);
+            
+            // Exam settings
+            currentQuestionIndex = 0;
+            score = 0;
+            userResponses = [];
+            examTimerDuration = timerOption;
+            
+            // Hide setup, show exam
+            setupScreen.style.display = 'none';
+            activeScreen.style.display = 'block';
+
+            if (examTimerDuration > 0) {
+                timerBarContainer.style.display = 'block';
+            } else {
+                timerBarContainer.style.display = 'none';
+            }
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Reset state
+            selectedOptionIdx = -1;
+            nextBtn.textContent = (currentQuestionIndex === examQuestions.length - 1) ? "Completa Esame" : "Invia e Continua";
+            nextBtn.disabled = true;
+
+            const q = examQuestions[currentQuestionIndex];
+
+            // Set text & metadata
+            const subName = q.subject === 'diritto' ? 'Diritto' : 'Arte';
+            subjectTag.textContent = `Materia: ${subName} - ${q.moduleTitle}`;
+            progressTag.textContent = `Domanda ${currentQuestionIndex + 1} di ${examQuestions.length}`;
+            questionText.textContent = q.question;
+
+            // Render options
+            optionsContainer.innerHTML = '';
+            q.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'exam-option-btn';
+                btn.innerHTML = `
+                    <div class="option-letter-box">${String.fromCharCode(65 + idx)}</div>
+                    <span>${option}</span>
+                `;
+                btn.onclick = () => selectOption(idx, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            // Handle timer
+            if (examTimerDuration > 0) {
+                resetTimer();
+            }
+        }
+
+        function selectOption(idx, btnEl) {
+            selectedOptionIdx = idx;
+            nextBtn.disabled = false;
+
+            // Clear previous selections
+            const btns = optionsContainer.querySelectorAll('.exam-option-btn');
+            btns.forEach(b => b.classList.remove('selected'));
+
+            // Select this one
+            btnEl.classList.add('selected');
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = examTimerDuration;
+            timerIndicator.className = 'timer-indicator';
+            updateTimerBar();
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerBar();
+
+                // 30 Seconds warning beep
+                if (timeRemaining === 30) {
+                    playWarningBeep(520, 0.25);
+                }
+
+                // 10 Seconds remaining alerts
+                if (timeRemaining <= 10 && timeRemaining > 0) {
+                    playWarningBeep(660, 0.1);
+                }
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    playWarningBeep(330, 0.5); // Low alert beep
+                    submitAnswer(true); // Submit current selection (or fail due to timeout)
+                }
+            }, 1000);
+        }
+
+        function updateTimerBar() {
+            const percent = (timeRemaining / examTimerDuration) * 100;
+            timerIndicator.style.width = percent + '%';
+
+            // Glow color thresholds
+            if (timeRemaining <= 10) {
+                timerIndicator.className = 'timer-indicator danger';
+            } else if (timeRemaining <= 25) {
+                timerIndicator.className = 'timer-indicator warning';
+            }
+        }
+
+        function submitAnswer(isTimeout = false) {
+            clearInterval(timerInterval);
+            
+            const q = examQuestions[currentQuestionIndex];
+            const isCorrect = (selectedOptionIdx === q.correctIndex);
+
+            if (isCorrect) {
+                score++;
+            }
+
+            // Save details for diagnostics
+            userResponses.push({
+                question: q.question,
+                correctIndex: q.correctIndex,
+                selectedIndex: selectedOptionIdx,
+                subject: q.subject,
+                moduleKey: q.moduleKey,
+                isCorrect: isCorrect,
+                timedOut: isTimeout && selectedOptionIdx === -1
+            });
+
+            // Move to next question or show report
+            if (currentQuestionIndex < examQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+            } else {
+                showReport();
+            }
+        }
+
+        function showReport() {
+            activeScreen.style.display = 'none';
+            reportScreen.style.display = 'block';
+
+            // Score details
+            const total = examQuestions.length;
+            const percent = Math.round((score / total) * 100);
+            
+            document.getElementById('report-percent-text').textContent = `${percent}%`;
+            document.getElementById('report-score-text').textContent = `${score} / ${total}`;
+
+            // Adjust ring glow based on score
+            const ring = document.getElementById('report-score-glow');
+            if (percent >= 75) {
+                ring.style.borderColor = 'var(--accent-green)';
+                ring.style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.25)';
+                document.getElementById('report-outcome-title').textContent = "Esame Superato!";
+                document.getElementById('report-outcome-desc').textContent = "Eccellente livello di preparazione accademica. Ottima padronanza interdisciplinare delle nozioni.";
+            } else if (percent >= 55) {
+                ring.style.borderColor = 'var(--accent-gold)';
+                ring.style.boxShadow = '0 0 30px rgba(212, 175, 55, 0.25)';
+                document.getElementById('report-outcome-title').textContent = "Esito Discreto";
+                document.getElementById('report-outcome-desc').textContent = "Preparazione sufficiente, ma ci sono diverse incertezze concettuali. Rivedi le sintesi raccomandate.";
+            } else {
+                ring.style.borderColor = '#ef4444';
+                ring.style.boxShadow = '0 0 30px rgba(239, 68, 68, 0.25)';
+                document.getElementById('report-outcome-title').textContent = "Esito non Sufficiente";
+                document.getElementById('report-outcome-desc').textContent = "Diverse lacune rilevate. È caldamente consigliata un'approfondita rilettura delle sintesi indicate.";
+            }
+
+            // Stat breakdowns
+            let dirittoCount = 0;
+            let dirittoCorrect = 0;
+            let arteCount = 0;
+            let arteCorrect = 0;
+
+            userResponses.forEach(resp => {
+                if (resp.subject === 'diritto') {
+                    dirittoCount++;
+                    if (resp.isCorrect) dirittoCorrect++;
+                } else if (resp.subject === 'arte') {
+                    arteCount++;
+                    if (resp.isCorrect) arteCorrect++;
+                }
+            });
+
+            // Render stats
+            const dirPercent = dirittoCount > 0 ? Math.round((dirittoCorrect / dirittoCount) * 100) : 0;
+            document.getElementById('stat-diritto-text').textContent = dirittoCount > 0 ? `${dirittoCorrect} / ${dirittoCount} (${dirPercent}%)` : "N/A";
+            document.getElementById('stat-diritto-bar').style.width = dirPercent + '%';
+
+            const artPercent = arteCount > 0 ? Math.round((arteCorrect / arteCount) * 100) : 0;
+            document.getElementById('stat-arte-text').textContent = arteCount > 0 ? `${arteCorrect} / ${arteCount} (${artPercent}%)` : "N/A";
+            document.getElementById('stat-arte-bar').style.width = artPercent + '%';
+
+            // Generate review recommendations
+            const recList = document.getElementById('recommendations-list');
+            recList.innerHTML = '';
+            
+            // Gather unique modules where mistakes occurred
+            const failedModules = new Set();
+            userResponses.forEach(resp => {
+                if (!resp.isCorrect) {
+                    failedModules.add(resp.moduleKey);
+                }
+            });
+
+            if (failedModules.size === 0) {
+                recList.innerHTML = `<li class="rec-item" style="justify-content: center; font-style: italic; color: var(--text-muted);">
+                    Nessuna lacuna riscontrata! Ottimo lavoro, non hai bisogno di ripassare capitoli specifici.
+                </li>`;
+            } else {
+                failedModules.forEach(modKey => {
+                    const meta = moduleMetadata[modKey];
+                    if (meta) {
+                        const li = document.createElement('li');
+                        li.className = 'rec-item';
+                        
+                        const subClass = meta.subject === 'diritto' ? 'badge-d' : 'badge-a';
+                        const subName = meta.subject === 'diritto' ? 'D' : 'A';
+
+                        li.innerHTML = `
+                            <div>
+                                <span class="rec-subject-badge ${subClass}">${subName}</span>
+                                <span class="rec-label">${meta.chapterName}</span>
+                            </div>
+                            <a href="${meta.link}" class="rec-link">
+                                ${meta.navText}
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        `;
+                        recList.appendChild(li);
+                    }
+                });
+            }
+        }
+
+        function confirmExitExam() {
+            if (confirm("Sei sicuro di voler abbandonare l'esame? I progressi andranno persi.")) {
+                clearInterval(timerInterval);
+                restartSetup();
+            }
+        }
+
+        function restartSetup() {
+            reportScreen.style.display = 'none';
+            activeScreen.style.display = 'none';
+            setupScreen.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

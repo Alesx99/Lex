@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa Trans-Disciplinare - Lex Studiorum</title>
+    <meta name="description" content="Esplora le interconnessioni accademiche e giuridiche tra il Diritto dei Beni Culturali e la Storia dell'Arte Moderna.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet Reference -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific Styles for Connections Map */
+        .connections-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            position: relative;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .map-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 10;
+        }
+
+        .column-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .column-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+        }
+
+        .diritto-column .column-title {
+            color: var(--accent-gold);
+        }
+        .diritto-column .column-title::after {
+            background: var(--accent-gold);
+        }
+
+        .arte-column .column-title {
+            color: var(--accent-terracotta);
+        }
+        .arte-column .column-title::after {
+            background: var(--accent-terracotta);
+        }
+
+        /* Node Cards */
+        .node-card {
+            background: rgba(20, 26, 40, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            background: rgba(30, 38, 58, 0.85);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .node-card.active-node {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .diritto-column .node-card:hover,
+        .diritto-column .node-card.active-node {
+            border-color: var(--accent-gold);
+        }
+
+        .arte-column .node-card:hover,
+        .arte-column .node-card.active-node {
+            border-color: var(--accent-terracotta);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .node-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Connection Lines SVG overlay */
+        #connections-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .connection-line {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 2;
+            transition: all var(--transition-speed) ease;
+            stroke-dasharray: 4 4;
+        }
+
+        .connection-line.cross-link {
+            stroke: rgba(212, 175, 55, 0.25);
+            stroke-width: 3;
+            stroke-dasharray: none;
+        }
+
+        .connection-line.highlighted {
+            stroke: var(--accent-gold);
+            stroke-width: 5;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
+            stroke-dasharray: none;
+        }
+
+        .connection-line.highlighted-arte {
+            stroke: var(--accent-terracotta);
+            stroke-width: 5;
+            filter: drop-shadow(0 0 8px rgba(200, 90, 50, 0.8));
+            stroke-dasharray: none;
+        }
+
+        /* Panel explaining connections */
+        .info-panel {
+            background: rgba(18, 25, 41, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.8s ease-out;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .info-placeholder {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .info-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .info-text {
+            line-height: 1.6;
+            color: var(--text-primary);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-hub {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .back-hub:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive styling */
+        @media (max-width: 992px) {
+            .connections-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            #connections-svg {
+                display: none; /* Hide lines on mobile layout as columns stack */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorative blur shapes -->
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>Mappa Trans-Disciplinare delle Connessioni</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link active" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main style="max-width: 1400px; padding-top: 1rem;">
+        
+        <a href="index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Home
+        </a>
+
+        <!-- Explanatory Panel -->
+        <div class="info-panel" id="explanatory-panel">
+            <div class="info-placeholder" id="explanatory-placeholder">
+                Passa il mouse sopra una delle tessere di Diritto o Arte per scoprire i collegamenti interdisciplinari e le relazioni storiche.
+            </div>
+            <div id="explanatory-content" style="display: none;">
+                <div class="info-title" id="info-title">
+                    Titolo Connessione
+                </div>
+                <div class="info-text" id="info-text">
+                    Testo esplicativo accademico delle connessioni.
+                </div>
+            </div>
+        </div>
+
+        <div class="connections-container">
+            <!-- SVG Line Canvas -->
+            <svg id="connections-svg"></svg>
+
+            <!-- LEFT COLUMN: DIRITTO -->
+            <div class="map-column diritto-column">
+                <h3 class="column-title">Diritto dei Beni Culturali</h3>
+
+                <div class="node-card" id="diritto-node-1" data-path="diritto/index.html?open=summaries/1_patrimonio.md">
+                    <div class="node-header"><span>Capitolo I</span></div>
+                    <div class="node-title">Costituzione e Bellezza</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-2" data-path="diritto/index.html?open=summaries/2_governo.md">
+                    <div class="node-header"><span>Capitolo II</span></div>
+                    <div class="node-title">Governo e MiC</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-3" data-path="diritto/index.html?open=summaries/3_individuazione.md">
+                    <div class="node-header"><span>Capitolo III</span></div>
+                    <div class="node-title">Individuazione e Vincolo</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-4" data-path="diritto/index.html?open=summaries/4_tutela_internazionale.md">
+                    <div class="node-header"><span>Capitolo IV</span></div>
+                    <div class="node-title">Tutela Internazionale</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-5" data-path="diritto/index.html?open=summaries/5_tutela.md">
+                    <div class="node-header"><span>Capitolo V</span></div>
+                    <div class="node-title">Misure di Conservazione</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-6" data-path="diritto/index.html?open=summaries/6_circolazione.md">
+                    <div class="node-header"><span>Capitolo VI</span></div>
+                    <div class="node-title">Circolazione e Alienazione</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-8" data-path="diritto/index.html?open=summaries/8_appalti.md">
+                    <div class="node-header"><span>Capitolo VIII</span></div>
+                    <div class="node-title">Appalti e Sponsorizzazioni</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-9" data-path="diritto/index.html?open=summaries/9_ritrovamenti.md">
+                    <div class="node-header"><span>Capitolo IX</span></div>
+                    <div class="node-title">Ricerche e Scoperte</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-10" data-path="diritto/index.html?open=summaries/10_espropriazione.md">
+                    <div class="node-header"><span>Capitolo X</span></div>
+                    <div class="node-title">Espropriazione</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-11" data-path="diritto/index.html?open=summaries/11_regime_fiscale.md">
+                    <div class="node-header"><span>Capitolo XI</span></div>
+                    <div class="node-title">Regime Fiscale e Art Bonus</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-12" data-path="diritto/index.html?open=summaries/12_paesaggio.md">
+                    <div class="node-header"><span>Capitolo XII</span></div>
+                    <div class="node-title">Beni Paesaggistici</div>
+                </div>
+
+                <div class="node-card" id="diritto-node-13" data-path="diritto/index.html?open=summaries/13_sanzioni.md">
+                    <div class="node-header"><span>Capitolo XIII</span></div>
+                    <div class="node-title">Sanzioni Penali (Riforma 2022)</div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: ARTE -->
+            <div class="map-column arte-column">
+                <h3 class="column-title">Storia dell'Arte Moderna</h3>
+
+                <div class="node-card" id="arte-node-1" data-path="storia_arte/index.html?open=summaries/rinascimento_1_origini.md">
+                    <div class="node-header"><span>Studio I</span></div>
+                    <div class="node-title">Gotico Internazionale e Prospettiva</div>
+                </div>
+
+                <div class="node-card" id="arte-node-2" data-path="storia_arte/index.html?open=summaries/rinascimento_2_fondatori.md">
+                    <div class="node-header"><span>Studio II</span></div>
+                    <div class="node-title">I Padri Fondatori (Rinascimento)</div>
+                </div>
+
+                <div class="node-card" id="arte-node-3" data-path="storia_arte/index.html?open=summaries/rinascimento_3_esperienze.md">
+                    <div class="node-header"><span>Studio III</span></div>
+                    <div class="node-title">Il Secondo Quattrocento e Corti</div>
+                </div>
+
+                <div class="node-card" id="arte-node-4" data-path="storia_arte/index.html?open=summaries/rinascimento_4_maturo.md">
+                    <div class="node-header"><span>Studio IV</span></div>
+                    <div class="node-title">Il Rinascimento Maturo</div>
+                </div>
+
+                <div class="node-card" id="arte-node-5" data-path="storia_arte/index.html?open=summaries/rinascimento_5_veneto.md">
+                    <div class="node-header"><span>Studio V</span></div>
+                    <div class="node-title">Il Rinascimento Veneto e il Tono</div>
+                </div>
+
+                <div class="node-card" id="arte-node-6" data-path="storia_arte/index.html?open=summaries/barocco_6.md">
+                    <div class="node-header"><span>Studio VI</span></div>
+                    <div class="node-title">Il Barocco e la Dinamica dei Sensi</div>
+                </div>
+
+                <div class="node-card" id="arte-node-7" data-path="storia_arte/index.html?open=summaries/neoclassicismo_7.md">
+                    <div class="node-header"><span>Studio VII</span></div>
+                    <div class="node-title">Neoclassicismo e Sublime</div>
+                </div>
+
+                <div class="node-card" id="arte-node-8" data-path="storia_arte/index.html?open=summaries/romanticismo_realismo_8.md">
+                    <div class="node-header"><span>Studio VIII</span></div>
+                    <div class="node-title">Romanticismo e Realismo</div>
+                </div>
+
+                <div class="node-card" id="arte-node-9" data-path="storia_arte/index.html?open=summaries/impressionismo_9.md">
+                    <div class="node-header"><span>Studio IX</span></div>
+                    <div class="node-title">Impressionismo</div>
+                </div>
+
+                <div class="node-card" id="arte-node-10" data-path="storia_arte/index.html?open=summaries/postimpressionismo_10.md">
+                    <div class="node-header"><span>Studio X</span></div>
+                    <div class="node-title">Post-Impressionismo</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <script>
+        // Definition of trans-disciplinary connections
+        const crossConnections = [
+            {
+                from: "diritto-node-11", // Regime Fiscale e Art Bonus
+                to: "arte-node-2",      // I Padri Fondatori (Medici)
+                title: "Mecenatismo Storico ⇄ Art Bonus",
+                description: "Il mecenatismo quattrocentesco dei Medici, che finanziò capolavori di Donatello, Masaccio e Brunelleschi, trova il suo parallelo giuridico contemporaneo nell'Art Bonus (Cap. XI del Codice). Questa norma agevolativa incentiva erogazioni liberali da privati in denaro per il sostegno della cultura con un credito d'imposta del 65%."
+            },
+            {
+                from: "diritto-node-5",  // Misure di Conservazione
+                to: "arte-node-2",       // I Padri Fondatori (Restauro)
+                title: "Conservazione delle Opere ⇄ Restauro Donatelliano",
+                description: "La manutenzione e la salvaguardia dei capolavori rinascimentali (come il David di Donatello o la Cupola di Brunelleschi) si ricollegano direttamente alle Misure di Conservazione (Cap. V, Art. 29). Il Codice definisce prevenzione, manutenzione e restauro impiegando lo stesso rigore scientifico e sottomettendo ogni intervento ad approvazione ministeriale."
+            },
+            {
+                from: "diritto-node-9",  // Ricerche e Scoperte
+                to: "arte-node-3",       // Il Secondo Quattrocento (Alberti e Antico)
+                title: "Demanio Archeologico ⇄ Riscoperta delle Rovine Classiche",
+                description: "La legislazione dello scavo archeologico e del demanio originario (Cap. IX, Art. 91) protegge giuridicamente ciò che guidò la rinascita rinascimentale del Quattrocento. Leon Battista Alberti e Mantegna trassero ispirazione dallo studio e dal rilievo grafico delle rovine di Roma, oggi tutelate come demanio inalienabile dello Stato."
+            },
+            {
+                from: "diritto-node-9",  // Ricerche e Scoperte
+                to: "arte-node-7",       // Neoclassicismo e Sublime
+                title: "Scoperte Archeologiche ⇄ Winckelmann e l'Antico",
+                description: "Gli scavi di Pompei ed Ercolano a metà Settecento stravolsero la storia dell'arte, ispirando il Neoclassicismo di Winckelmann e Canova. Dal punto di vista giuridico, le ricerche sono di esclusiva riserva statale (Art. 88), a garanzia dell'integrità contestuale dei reperti rinvenuti."
+            },
+            {
+                from: "diritto-node-4",  // Tutela Internazionale
+                to: "arte-node-6",       // Il Barocco (Caravaggio)
+                title: "Traffico Illecito di Opere ⇄ Caravaggio Scomparso",
+                description: "La Convenzione UNESCO del 1970 e UNIDROIT del 1995 sulla restituzione dei beni culturali rubati (Cap. IV) nascono per fermare l'esportazione clandestina. Celebre è il caso della 'Natività con i santi Lorenzo e Francesco d'Assisi' di Caravaggio, rubata a Palermo nel 1969 e tuttora ricercata."
+            },
+            {
+                from: "diritto-node-13", // Sanzioni Penali
+                to: "arte-node-6",       // Il Barocco
+                title: "Riforma dei Reati di Furto ⇄ Spoliazioni e Tutela Penale",
+                description: "La riforma penale del 2022 (Titolo VIII-bis del Codice Penale) punisce severamente il furto, la ricettazione e il deturpamento di opere d'arte. Caravaggio stesso visse una vita all'insegna del crimine e della fuga, ma oggi la tutela sanziona duramente chi danneggia o deturpa i capolavori barocchi."
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const svg = document.getElementById('connections-svg');
+            const nodes = document.querySelectorAll('.node-card');
+            const expPanel = document.getElementById('explanatory-panel');
+            const expPlaceholder = document.getElementById('explanatory-placeholder');
+            const expContent = document.getElementById('explanatory-content');
+            const infoTitle = document.getElementById('info-title');
+            const infoText = document.getElementById('info-text');
+
+            // Draw SVG connection lines
+            function drawLines() {
+                svg.innerHTML = ''; // clear previous lines
+                if (window.innerWidth <= 992) return; // Column layout on mobile, no lines needed
+
+                const svgRect = svg.getBoundingClientRect();
+
+                // Draw general connections
+                crossConnections.forEach(conn => {
+                    const fromEl = document.getElementById(conn.from);
+                    const toEl = document.getElementById(conn.to);
+
+                    if (fromEl && toEl) {
+                        const fromRect = fromEl.getBoundingClientRect();
+                        const toRect = toEl.getBoundingClientRect();
+
+                        // Calculate points relative to SVG canvas
+                        const x1 = fromRect.right - svgRect.left;
+                        const y1 = fromRect.top + (fromRect.height / 2) - svgRect.top;
+                        const x2 = toRect.left - svgRect.left;
+                        const y2 = toRect.top + (toRect.height / 2) - svgRect.top;
+
+                        // Create path
+                        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        // Curved bezier path
+                        const controlOffset = (x2 - x1) / 2;
+                        const d = `M ${x1} ${y1} C ${x1 + controlOffset} ${y1}, ${x2 - controlOffset} ${y2}, ${x2} ${y2}`;
+                        
+                        path.setAttribute('d', d);
+                        path.setAttribute('class', 'connection-line cross-link');
+                        path.setAttribute('id', `line-${conn.from}-${conn.to}`);
+                        svg.appendChild(path);
+                    }
+                });
+            }
+
+            // Highlight connections on hover
+            nodes.forEach(node => {
+                node.addEventListener('mouseenter', () => {
+                    const nodeId = node.id;
+                    const isDiritto = nodeId.startsWith('diritto');
+
+                    // Check if node has cross connections
+                    const activeConnections = crossConnections.filter(c => c.from === nodeId || c.to === nodeId);
+
+                    if (activeConnections.length > 0) {
+                        // Highlight lines and connected nodes
+                        activeConnections.forEach(conn => {
+                            const line = document.getElementById(`line-${conn.from}-${conn.to}`);
+                            if (line) {
+                                line.classList.add('highlighted');
+                                if (!isDiritto) {
+                                    line.classList.add('highlighted-arte');
+                                }
+                            }
+
+                            // Highlight the other node
+                            const otherNodeId = conn.from === nodeId ? conn.to : conn.from;
+                            const otherNode = document.getElementById(otherNodeId);
+                            if (otherNode) {
+                                otherNode.classList.add('active-node');
+                            }
+                        });
+
+                        // Populate Explanatory Panel (take first connection as primary)
+                        const primary = activeConnections[0];
+                        expPlaceholder.style.display = 'none';
+                        expContent.style.display = 'block';
+                        infoTitle.textContent = primary.title;
+                        infoText.textContent = primary.description;
+                        
+                        // Color styling for title based on source
+                        if (isDiritto) {
+                            infoTitle.style.color = 'var(--accent-gold)';
+                        } else {
+                            infoTitle.style.color = 'var(--accent-terracotta)';
+                        }
+                    } else {
+                        // Node has no connections defined yet
+                        const nodeNum = node.querySelector('.node-header span').textContent;
+                        const nodeTitleText = node.querySelector('.node-title').textContent;
+                        expPlaceholder.style.display = 'none';
+                        expContent.style.display = 'block';
+                        infoTitle.textContent = `${nodeNum}: ${nodeTitleText}`;
+                        infoTitle.style.color = 'var(--text-primary)';
+                        infoText.textContent = "Questo capitolo fa parte del percorso di studio. Puoi navigarlo cliccando sulla tessera per accedere alla sintesi approfondita.";
+                    }
+                });
+
+                node.addEventListener('mouseleave', () => {
+                    // Reset all classes
+                    document.querySelectorAll('.connection-line').forEach(l => {
+                        l.classList.remove('highlighted', 'highlighted-arte');
+                    });
+                    document.querySelectorAll('.node-card').forEach(n => {
+                        n.classList.remove('active-node');
+                    });
+
+                    // Reset panel
+                    expPlaceholder.style.display = 'block';
+                    expContent.style.display = 'none';
+                });
+
+                // Link to page on click
+                node.addEventListener('click', () => {
+                    const dest = node.getAttribute('data-path');
+                    if (dest) {
+                        window.location.href = dest;
+                    }
+                });
+            });
+
+            // Handle redraw on resize
+            window.addEventListener('resize', drawLines);
+
+            // Initial draw
+            setTimeout(drawLines, 200);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards Active Recall - Lex Studiorum</title>
+    <meta name="description" content="Esercitati con l'active recall e memorizza i concetti chiave di Diritto dei Beni Culturali e Storia dell'Arte Moderna con le nostre flashcard 3D.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet Reference -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific Styles for Flashcards */
+        .flashcard-deck-container {
+            max-width: 700px;
+            width: 100%;
+            margin: 2rem auto 4rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .deck-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.6rem 1.4rem;
+            border-radius: 99px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-btn.active {
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active.diritto-btn {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--accent-gold);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .filter-btn.active.arte-btn {
+            background: rgba(200, 90, 50, 0.15);
+            border-color: var(--accent-terracotta);
+            box-shadow: 0 4px 15px rgba(200, 90, 50, 0.15);
+        }
+
+        .filter-btn.active.all-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 3D Flashcard Design */
+        .flashcard-3d-scene {
+            width: 100%;
+            height: 380px;
+            perspective: 1200px;
+            cursor: pointer;
+            margin-bottom: 2.5rem;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .flashcard-3d-scene.is-flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Front / Question Face */
+        .card-face-front {
+            background: linear-gradient(135deg, rgba(22, 28, 45, 0.75) 0%, rgba(13, 17, 30, 0.85) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        /* Back / Answer Face */
+        .card-face-back {
+            background: linear-gradient(135deg, rgba(13, 17, 30, 0.85) 0%, rgba(22, 28, 45, 0.75) 100%);
+            transform: rotateY(180deg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .card-face-front.diritto-card {
+            border-top: 5px solid var(--accent-gold);
+        }
+
+        .card-face-front.arte-card {
+            border-top: 5px solid var(--accent-terracotta);
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .card-subject-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .diritto-badge {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .arte-badge {
+            background: rgba(200, 90, 50, 0.1);
+            color: var(--accent-terracotta);
+            border: 1px solid rgba(200, 90, 50, 0.2);
+        }
+
+        .card-content-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .card-question {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+
+        .card-answer {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .card-hint-text {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Action Feedback Buttons */
+        .feedback-actions {
+            display: flex;
+            gap: 1.2rem;
+            width: 100%;
+            justify-content: center;
+            opacity: 0.2;
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .flashcard-3d-scene.is-flipped + .feedback-actions {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .card-btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .btn-know {
+            background: var(--accent-green);
+            color: #080b11;
+        }
+
+        .btn-know:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-not-know {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-not-know:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Summary Result Card */
+        .summary-card {
+            background: rgba(22, 28, 45, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .summary-score-ring {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2rem;
+            font-weight: 700;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .summary-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* Header link override */
+        .back-hub {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .back-hub:hover {
+            color: var(--accent-gold);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 99px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .progress-indicator {
+            height: 100%;
+            background: var(--accent-gold);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorative blur shapes -->
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>Active Recall Flashcards Hub</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link active" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main style="max-width: 1200px; padding-top: 1rem;">
+        
+        <a href="index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Home
+        </a>
+
+        <div class="flashcard-deck-container">
+            
+            <!-- Category Filters -->
+            <div class="deck-controls" id="deck-filters">
+                <button class="filter-btn active all-btn" onclick="setFilter('tutte')">Tutte le Materie</button>
+                <button class="filter-btn diritto-btn" onclick="setFilter('diritto')">Diritto dei Beni Culturali</button>
+                <button class="filter-btn arte-btn" onclick="setFilter('arte')">Storia dell'Arte Moderna</button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container" id="deck-progress-bar" style="display: block;">
+                <div class="progress-indicator" id="deck-progress-indicator"></div>
+            </div>
+
+            <!-- Active Deck View -->
+            <div id="deck-active-view" style="width: 100%; display: block;">
+                <!-- 3D Flashcard -->
+                <div class="flashcard-3d-scene" id="flashcard-scene" onclick="flipCard()">
+                    <div class="flashcard-inner">
+                        
+                        <!-- Front (Question) -->
+                        <div class="card-face card-face-front" id="card-front">
+                            <div class="card-meta">
+                                <span class="card-subject-badge" id="card-front-badge">Diritto</span>
+                                <span id="card-front-index">Card 1 di 16</span>
+                            </div>
+                            <div class="card-content-wrapper">
+                                <h3 class="card-question" id="card-front-question">Caricamento domanda...</h3>
+                            </div>
+                            <div class="card-hint-text">Clicca per scoprire la risposta</div>
+                        </div>
+
+                        <!-- Back (Answer) -->
+                        <div class="card-face card-face-back" id="card-back">
+                            <div class="card-meta">
+                                <span class="card-subject-badge" id="card-back-badge">Diritto</span>
+                                <span>Definizione Accademica</span>
+                            </div>
+                            <div class="card-content-wrapper">
+                                <p class="card-answer" id="card-back-answer">Caricamento risposta...</p>
+                            </div>
+                            <div class="card-hint-text">Valuta la tua risposta qui sotto</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Self rating actions -->
+                <div class="feedback-actions" id="feedback-actions">
+                    <button class="card-btn btn-not-know" onclick="rateAnswer(false)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        Non la sapevo
+                    </button>
+                    <button class="card-btn btn-know" onclick="rateAnswer(true)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Lo sapevo!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Summary Session Screen (hidden by default) -->
+            <div id="deck-summary-view" style="width: 100%; display: none;">
+                <div class="summary-card">
+                    <div class="summary-score-ring" id="summary-score-text">0 / 0</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.8rem;">Sessione Completata!</h3>
+                    <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem auto;" id="summary-feedback-msg">
+                        Ottimo ripasso. Continua a esercitarti con l'active recall per solidificare la memoria a lungo termine degli argomenti.
+                    </p>
+                    <div class="summary-actions">
+                        <button class="btn btn-primary" onclick="restartSession()">Riprova Questo Deck</button>
+                        <button class="btn btn-secondary" onclick="resetFiltersAndRestart()">Tutte le Flashcards</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <script>
+        // Database of flashcards
+        const flashcardsDatabase = [
+            // DIRITTO DEI BENI CULTURALI
+            {
+                subject: "diritto",
+                question: "Cosa stabilisce l'Articolo 9 della Costituzione italiana riguardo al patrimonio culturale?",
+                answer: "Sancisce che la Repubblica promuove lo sviluppo della cultura e la ricerca scientifica e tecnica, tutelando il paesaggio e il patrimonio storico e artistico della Nazione. La riforma del 2022 ha aggiunto esplicitamente la tutela dell'ambiente, della biodiversità e degli ecosistemi."
+            },
+            {
+                subject: "diritto",
+                question: "Cos'è il diritto di 'prelazione artistica' esercitato dallo Stato?",
+                answer: "È la facoltà del Ministero (o degli enti pubblici territoriali delegati) di acquistare coattivamente un bene culturale vincolato, alienato a titolo oneroso, sostituendosi all'acquirente privato allo stesso prezzo. Va esercitato entro 60 giorni dalla denuncia di trasferimento (Art. 60)."
+            },
+            {
+                subject: "diritto",
+                question: "Qual è la differenza fondamentale tra il procedimento di 'verifica dell'interesse' e la 'dichiarazione dell'interesse'?",
+                answer: "La verifica dell'interesse (Art. 12) si applica provvisoriamente a beni pubblici o no-profit per accertarne l'interesse culturale. La dichiarazione (Art. 13), nota come vincolo storico-artistico, si applica a beni di proprietà privata e comporta la notifica formale al proprietario."
+            },
+            {
+                subject: "diritto",
+                question: "Quali sono le tre fasi operative dell'attività di 'conservazione' secondo l'Articolo 29 del Codice?",
+                answer: "La conservazione si realizza tramite tre attività programmate: 1) Prevenzione (limitazione dei rischi nel contesto ambientale); 2) Manutenzione (interventi periodici per l'efficienza funzionale); 3) Restauro (intervento diretto sull'integrità fisica del bene)."
+            },
+            {
+                subject: "diritto",
+                question: "Che cos'è l'agevolazione fiscale 'Art Bonus'?",
+                answer: "È un credito d'imposta pari al 65% introdotto nel 2014 per favorire le erogazioni liberali in denaro fatte da cittadini e imprese a sostegno del patrimonio culturale pubblico, per interventi di restauro, manutenzione o valorizzazione."
+            },
+            {
+                subject: "diritto",
+                question: "A chi appartengono per legge i reperti di interesse archeologico scoperti nel sottosuolo?",
+                answer: "Appartengono ab origine allo Stato (Art. 91 del Codice) ed entrano a far parte del demanio storico-artistico pubblico. Al proprietario del fondo e allo scopritore fortuito spetta, in presenza di determinate condizioni, solo un premio di ritrovamento fino al 25% del valore del bene."
+            },
+            {
+                subject: "diritto",
+                question: "Cos'è l'espropriazione strumentale disciplinata dall'Articolo 96 del Codice?",
+                answer: "È il potere di espropriare edifici o aree vicini a un bene culturale immobile non per acquisire il monumento, ma per isolarlo, proteggerne le condizioni di luce, garantirne la prospettiva, il decoro o la pubblica fruizione."
+            },
+            {
+                subject: "diritto",
+                question: "Quali novità di rilievo ha introdotto la riforma dei reati culturali nel 2022?",
+                answer: "Ha inserito nel Codice Penale un intero Titolo dedicato ai delitti contro il patrimonio culturale (Titolo VIII-bis), creando figure di reato autonome (come il furto d'arte, l'esportazione illecita e il riciclaggio di beni culturali) con pene severamente inasprite."
+            },
+            // STORIA DELL'ARTE
+            {
+                subject: "arte",
+                question: "Cos'è lo 'stiacciato' e chi lo ha inventato?",
+                answer: "È una tecnica scultorea ideata da Donatello che consente di rappresentare la prospettiva e la profondità atmosferica riducendo il rilievo a variazioni millimetriche infinitesimali, sfruttando la rifrazione della luce sul marmo."
+            },
+            {
+                subject: "arte",
+                question: "Qual è il significato teologico e dinastico dell'uovo appeso nella Pala di Brera di Piero della Francesca?",
+                answer: "L'uovo di struzzo simboleggia la purezza della nascita verginale di Gesù (riferimento alla Vergine Maria) ed è allo stesso tempo il simbolo di rinascita e lo stemma del casato del duca committente Federico da Montefeltro."
+            },
+            {
+                subject: "arte",
+                question: "Cosa intendeva Gian Lorenzo Bernini per 'bel composto'?",
+                answer: "È l'ideale estetico barocco che prevede l'integrazione inscindibile di scultura, pittura e architettura in un'unica opera d'arte totale e teatrale, volta a stupire e coinvolgere i sensi del fedele (es. Cappella Cornaro)."
+            },
+            {
+                subject: "arte",
+                question: "Che cos'è la scultura 'per via di levare' secondo Michelangelo?",
+                answer: "È la scultura in pietra che consiste nel togliere la materia superflua dal blocco di marmo per liberare la figura ideale che vi è già imprigionata e preesistente, in contrasto con la scultura 'per via di porre' (modellare la creta)."
+            },
+            {
+                subject: "arte",
+                question: "Cos'è il 'colorito tonale' veneto e quali sono i principali interpreti?",
+                answer: "È una tecnica pittorica veneta del Cinquecento (fondata da Giorgione e sviluppata da Tiziano) che costruisce le figure e la profondità spaziale sovrapponendo campiture di colore a calore differente senza utilizzare un disegno di contorno grafico preventivo."
+            },
+            {
+                subject: "arte",
+                question: "Come si differenzia lo sfumato leonardesco dalla prospettiva lineare geometrica?",
+                answer: "Mentre la prospettiva lineare restringe geometricamente le dimensioni degli oggetti, lo sfumato e la prospettiva aerea eliminano i contorni netti delle figure sfumandole nel chiaroscuro per riprodurre gli effetti ottici reali prodotti dallo spessore dell'aria e dell'umidità."
+            },
+            {
+                subject: "arte",
+                question: "Qual era la funzione della figura di spalle (Rückenfigur) nei dipinti di Friedrich?",
+                answer: "Fungere da ponte psicologico per lo spettatore: la persona in primo piano, voltata di spalle mentre contempla lo scenario naturale immenso, stimola l'immedesimazione emozionale e l'introspezione legata al sentimento del Sublime."
+            },
+            {
+                subject: "arte",
+                question: "In cosa consiste la scomposizione cromatica scientifica del Pointillisme?",
+                answer: "Introdotta da Georges Seurat, consiste nell'accostare sulla tela piccoli punti di colore puro complementare (secondo le leggi della chimica ottica di Chevreul), lasciando che sia l'occhio dello spettatore, e non il pennello, a fonderli otticamente."
+            }
+        ];
+
+        // State variables
+        let activeDeck = [];
+        let currentIndex = 0;
+        let knownCount = 0;
+        let currentFilter = 'tutte';
+
+        const scene = document.getElementById('flashcard-scene');
+        const cardFront = document.getElementById('card-front');
+        const cardBack = document.getElementById('card-back');
+        const cardFrontBadge = document.getElementById('card-front-badge');
+        const cardBackBadge = document.getElementById('card-back-badge');
+        const cardFrontIndex = document.getElementById('card-front-index');
+        const cardFrontQuestion = document.getElementById('card-front-question');
+        const cardBackAnswer = document.getElementById('card-back-answer');
+        
+        const activeView = document.getElementById('deck-active-view');
+        const summaryView = document.getElementById('deck-summary-view');
+        const summaryScoreText = document.getElementById('summary-score-text');
+        const summaryFeedbackMsg = document.getElementById('summary-feedback-msg');
+        
+        const progressIndicator = document.getElementById('deck-progress-indicator');
+        const progressBar = document.getElementById('deck-progress-bar');
+        const filtersContainer = document.getElementById('deck-filters');
+
+        function setFilter(subject) {
+            currentFilter = subject;
+            
+            // Highlight buttons
+            const btns = filtersContainer.querySelectorAll('.filter-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            if (subject === 'tutte') {
+                filtersContainer.querySelector('.all-btn').classList.add('active');
+            } else if (subject === 'diritto') {
+                filtersContainer.querySelector('.diritto-btn').classList.add('active');
+            } else if (subject === 'arte') {
+                filtersContainer.querySelector('.arte-btn').classList.add('active');
+            }
+
+            initDeck();
+        }
+
+        function initDeck() {
+            // Filter cards
+            if (currentFilter === 'tutte') {
+                activeDeck = [...flashcardsDatabase];
+            } else {
+                activeDeck = flashcardsDatabase.filter(card => card.subject === currentFilter);
+            }
+
+            // Shuffle deck
+            activeDeck.sort(() => Math.random() - 0.5);
+
+            currentIndex = 0;
+            knownCount = 0;
+
+            activeView.style.display = 'block';
+            summaryView.style.display = 'none';
+            progressBar.style.display = 'block';
+
+            showCard();
+        }
+
+        function showCard() {
+            // Remove flip state
+            scene.classList.remove('is-flipped');
+
+            const currentCard = activeDeck[currentIndex];
+
+            // Badges & Subject Style
+            const subjectText = currentCard.subject === 'diritto' ? 'Diritto' : 'Arte';
+            cardFrontBadge.textContent = subjectText;
+            cardBackBadge.textContent = subjectText;
+
+            cardFrontBadge.className = 'card-subject-badge ' + (currentCard.subject === 'diritto' ? 'diritto-badge' : 'arte-badge');
+            cardBackBadge.className = 'card-subject-badge ' + (currentCard.subject === 'diritto' ? 'diritto-badge' : 'arte-badge');
+
+            cardFront.className = 'card-face card-face-front ' + (currentCard.subject === 'diritto' ? 'diritto-card' : 'arte-card');
+
+            // Counter & Text
+            cardFrontIndex.textContent = `Card ${currentIndex + 1} di ${activeDeck.length}`;
+            cardFrontQuestion.textContent = currentCard.question;
+            cardBackAnswer.textContent = currentCard.answer;
+
+            // Progress Bar
+            const percent = (currentIndex / activeDeck.length) * 100;
+            progressIndicator.style.width = percent + '%';
+        }
+
+        function flipCard() {
+            scene.classList.toggle('is-flipped');
+        }
+
+        function rateAnswer(known) {
+            if (known) knownCount++;
+
+            // Move to next card or summary
+            if (currentIndex < activeDeck.length - 1) {
+                currentIndex++;
+                showCard();
+            } else {
+                showSummary();
+            }
+        }
+
+        function showSummary() {
+            activeView.style.display = 'none';
+            progressBar.style.display = 'none';
+            summaryView.style.display = 'block';
+
+            progressIndicator.style.width = '100%';
+            summaryScoreText.textContent = `${knownCount} / ${activeDeck.length}`;
+
+            // Custom advice message based on rating
+            const ratio = knownCount / activeDeck.length;
+            let message = "";
+            if (ratio === 1) {
+                message = "Incredibile! Conosci alla perfezione tutte le flashcard estratte. Ottima padronanza dell'active recall!";
+            } else if (ratio >= 0.75) {
+                message = "Ottimo risultato! La tua memoria a lungo termine è ben sviluppata per la maggior parte dei concetti chiavi. Riprova per raggiungere la perfezione.";
+            } else if (ratio >= 0.5) {
+                message = "Buono, ma c'è spazio per migliorare. Ti consigliamo di rileggere le sintesi relative alle flashcard che non ricordavi e ripetere il test.";
+            } else {
+                message = "Preparazione parziale. L'active recall mostra che diversi istituti o concetti stilistici non sono ancora memorizzati correttamente. Dedica più tempo alla lettura attiva.";
+            }
+            summaryFeedbackMsg.textContent = message;
+        }
+
+        function restartSession() {
+            initDeck();
+        }
+
+        function resetFiltersAndRestart() {
+            setFilter('tutte');
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setFilter('tutte');
+        });
+    </script>
+</body>
+</html>
