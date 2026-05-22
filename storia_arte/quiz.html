@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Art - Quiz di Autovalutazione</title>
+    <meta name="description" content="Mettiti alla prova con i nostri quiz accademici interattivi sul Rinascimento italiano, dalle origini tardogotiche a Tiziano.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Art</span></h1>
+            <p>Storia dell'Arte Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link active" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Mettiti alla Prova</h2>
+            <div class="hero-divider"></div>
+            <p>Valuta la tua preparazione accademica sul Rinascimento selezionando uno dei moduli di studio sottostanti. Ogni quiz contiene 5 domande a risposta multipla con spiegazione immediata.</p>
+        </section>
+
+        <!-- Dynamic Quiz Area -->
+        <div id="quiz-wrapper">
+            
+            <!-- STEP 1: SELECT TOPIC SCREEN -->
+            <div id="selection-screen" class="quiz-step active">
+                <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                <div class="selection-grid">
+                    <button class="select-btn" onclick="startQuiz('origini')">
+                        <span class="btn-chapter">Studio I</span>
+                        <span class="btn-title">Origini e Gotico Internazionale</span>
+                        <span class="btn-desc">Gentile da Fabriano, Pisanello, Umanesimo e la Prospettiva</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('fondatori')">
+                        <span class="btn-chapter">Studio II</span>
+                        <span class="btn-title">I Padri Fondatori</span>
+                        <span class="btn-desc">Brunelleschi, Donatello, Masaccio</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('esperienze')">
+                        <span class="btn-chapter">Studio III</span>
+                        <span class="btn-title">La Stagione delle Esperienze</span>
+                        <span class="btn-desc">Alberti, Piero della Francesca, Botticelli, Mantegna</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('maturo')">
+                        <span class="btn-chapter">Studio IV</span>
+                        <span class="btn-title">Il Rinascimento Maturo</span>
+                        <span class="btn-desc">Leonardo da Vinci, Michelangelo, Raffaello</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('veneto')">
+                        <span class="btn-chapter">Studio V</span>
+                        <span class="btn-title">Il Rinascimento Veneto</span>
+                        <span class="btn-desc">La Pittura Tonale, Giorgione, Tiziano</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="question-screen" class="quiz-step">
+                <div class="quiz-card-container">
+                    <div class="quiz-card-header">
+                        <span id="quiz-chapter-tag" class="quiz-chapter-tag">Studio I</span>
+                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 5</span>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="quiz-progress-bar-bg">
+                        <div id="quiz-progress-indicator" class="quiz-progress-indicator" style="width: 0%;"></div>
+                    </div>
+
+                    <!-- Question content -->
+                    <div class="quiz-question-body">
+                        <h3 id="quiz-question-text">Testo della domanda...</h3>
+                        <div id="quiz-options-container" class="quiz-options-grid">
+                            <!-- Injected buttons go here -->
+                        </div>
+                    </div>
+
+                    <!-- Feedback screen (hidden by default) -->
+                    <div id="quiz-feedback-box" class="quiz-feedback-box">
+                        <div class="feedback-header">
+                            <span id="feedback-icon" class="feedback-icon"></span>
+                            <span id="feedback-title" class="feedback-title">Esatto!</span>
+                        </div>
+                        <p id="feedback-explanation" class="feedback-explanation">Spiegazione accademica dell'errore o della correttezza...</p>
+                        <button id="next-question-btn" class="btn btn-primary" onclick="nextQuestion()">Prossima Domanda</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: SCORE / RESULT SCREEN -->
+            <div id="result-screen" class="quiz-step">
+                <div class="result-card">
+                    <div class="result-glow-ring">
+                        <span id="result-score-text">0 / 5</span>
+                    </div>
+                    <h3 id="result-title">Risultato</h3>
+                    <p id="result-message" class="result-message">Messaggio personalizzato...</p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Riprova questo Quiz</button>
+                        <button class="btn btn-secondary" onclick="showSelectionScreen()">Seleziona un altro argomento</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Database of Questions
+        const quizDatabase = {
+            origini: {
+                chapterTag: "Studio I",
+                title: "Origini e Gotico Internazionale",
+                questions: [
+                    {
+                        question: "Quale caratteristica distingue principalmente lo stile tardogotico o cortese dal primo Rinascimento?",
+                        options: [
+                            "L'applicazione rigida della prospettiva geometrica a griglia.",
+                            "L'evasione fiabesca, l'eleganza lineare e la ricchezza di dettagli ornamentali a scapito della tridimensionalità razionale.",
+                            "L'uso esclusivo di colori freddi e sbiaditi senza sfumature d'oro.",
+                            "La rimozione assoluta di ogni riferimento a soggetti naturali o animali."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Il Gotico Internazionale (o cortese) predilige l'eleganza astratta della linea, la decorazione sfarzosa e gli elementi fiabeschi aristrocratici, senza curarsi del rigore prospettico o della plasticità dei corpi caratteristici del Rinascimento."
+                    },
+                    {
+                        question: "In quale opera di Gentile da Fabriano l'oro viene lavorato in pastiglia a rilievo per rendere tridimensionali i particolari di armi e vesti?",
+                        options: [
+                            "Nel Polittico Quaratesi.",
+                            "Nell'affresco di San Giorgio e la principessa.",
+                            "Nell'Adorazione dei Magi (1423).",
+                            "Nella Maestà degli Uffizi."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Nell'Adorazione dei Magi, commissionata da Palla Strozzi, Gentile utilizza la tecnica della pastiglia dorata lavorata a rilievo per far risaltare sotto la luce le corone, le spade e le bardature dei cavalli della grandiosa sfilata dei Magi."
+                    },
+                    {
+                        question: "Qual era la funzione della tavoletta forata nel primo esperimento prospettico di Brunelleschi sul Battistero?",
+                        options: [
+                            "Filtrare la luce solare per accecare temporaneamente l'osservatore.",
+                            "Costringere l'osservatore a guardare dal retro tenendo uno specchio di fronte al dipinto, dimostrando che il punto di fuga coincideva geometricamente con la vista dell'edificio reale.",
+                            "Consentire di spiare le persone all'interno del Battistero.",
+                            "Creare un effetto ottico di zoom tridimensionale."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Praticando un foro svasato in corrispondenza del punto di fuga sul dipinto, l'osservatore accostava l'occhio sul retro e regolava uno specchio di fronte ad esso: l'immagine riflessa coincideva perfettamente con l'edificio reale retrostante, validando scientificamente la prospettiva."
+                    },
+                    {
+                        question: "Quale celebre opera di Pisanello unisce il crudo realismo anatomico di due impiccati sullo sfondo all'eleganza araldica di una principessa?",
+                        options: [
+                            "L'Adorazione dei Magi.",
+                            "Il ritratto di Leonello d'Este.",
+                            "San Giorgio e la principessa nella chiesa di Sant'Anastasia a Verona.",
+                            "Il monumento equestre al Gattamelata."
+                        ],
+                        correctIndex: 2,
+                        explanation: "L'affresco di San Giorgio e la principessa di Pisanello unisce la dimensione fiabesca della principessa vestita di broccato al realismo macabro di due cadaveri penzolanti sulla forca in lontananza."
+                    },
+                    {
+                        question: "In geometria prospettica, come viene definita la linea su cui giace sempre il punto di fuga?",
+                        options: [
+                            "La linea di terra.",
+                            "La linea dell'orizzonte.",
+                            "La retta di proiezione.",
+                            "L'asse di scomposizione."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La linea dell'orizzonte, collocata all'altezza dell'occhio ideale dello spettatore, ospita sempre il punto di fuga verso cui convergono tutte le rette perpendicolari al quadro prospettico."
+                    }
+                ]
+            },
+            fondatori: {
+                chapterTag: "Studio II",
+                title: "I Padri Fondatori",
+                questions: [
+                    {
+                        question: "Per quale motivo la muratura a spina di pesce concepita da Brunelleschi era fondamentale per la Cupola?",
+                        options: [
+                            "Per dare un aspetto estetico geometrico alle pareti interne.",
+                            "Perché i mattoni posti verticalmente a intervalli regolari bloccavano le file orizzontali, scaricando il peso sui costoloni e rendendo la struttura autoportante durante l'asciugatura.",
+                            "Per evitare infiltrazioni d'acqua all'interno dell'intercapedine.",
+                            "Per nascondere l'utilizzo di materiali di scarsa qualità."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La disposizione a 'spina di pesce' (opus spicatum) consentiva alla muratura di sostenersi da sola durante la costruzione senza bisogno di centine di legno, scaricando i carichi di compressione verso gli otto angoli della cupola."
+                    },
+                    {
+                        question: "Quale tecnica plastica è stata inventata da Donatello per suggerire la profondità atmosferica in bassorilievi di pochissimi millimetri?",
+                        options: [
+                            "La scultura a tuttotondo.",
+                            "Lo stiacciato (o schiacciato).",
+                            "Il bassorilievo a cera persa.",
+                            "L'intaglio ad altorilievo."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Lo stiacciato consiste nel modellare il rilievo riducendone progressivamente l'altezza in millimetri man mano che ci si allontana nello spazio, simulando l'effetto ottico della sfocatura atmosferica pittorica."
+                    },
+                    {
+                        question: "In quale opera di Masaccio si osserva per la prima volta un'illusione tridimensionale di una cappella classica voltata a botte?",
+                        options: [
+                            "Il Polittico di Pisa.",
+                            "L'affresco del Tributo.",
+                            "La Trinità in Santa Maria Novella.",
+                            "La Madonna del solletico."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Nella Trinità, Masaccio dipinge una finta cappella rinascimentale coperta da una volta a botte lacunata, talmente precisa da far supporre che la griglia prospettica sia stata calcolata direttamente con l'aiuto di Brunelleschi."
+                    },
+                    {
+                        question: "Nel dipinto del Tributo di Masaccio nella Cappella Brancacci, da quale direzione proviene la luce e perché?",
+                        options: [
+                            "Da sinistra, per evidenziare la figura del gabelliere.",
+                            "Proviene dal volto di Cristo, inteso come fonte di luce mistica autonoma.",
+                            "Da destra, coerentemente con la posizione della finestra reale all'interno della cappella, proiettando ombre reali.",
+                            "Dall'alto, come una luce zenitale diffusa e priva di ombre portate."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Masaccio uniforma la luce dei suoi affreschi basandosi sull'effettivo posizionamento della finestra reale della cappella, facendo sì che le ombre nel quadro cadano coerentemente con la luce naturale della stanza."
+                    },
+                    {
+                        question: "Quale importante differenza stilistica e drammatica separa la Cacciata dall'Eden di Masaccio dalla Tentazione di Masolino?",
+                        options: [
+                            "Masaccio dipinge i corpi fluttuanti e privi di gravità.",
+                            "Masaccio esprime un dolore tragico reale, con Adamo che si copre il volto vergognoso ed Eva che urla disperata, con i piedi che poggiano saldamente sul suolo proiettando ombre scure.",
+                            "Masolino usa colori molto più cupi e drammatici rispetto a Masaccio.",
+                            "Masaccio si limita a copiare le figure bizantine piatte e prive di volume."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Mentre Masolino dipinge Adamo ed Eva in posa elegante e decorativa, Masaccio toglie i filtri tardogotici e ritrae la disperazione cruda dei progenitori, dandogli un peso fisico reale e una profonda indagine psicologica."
+                    }
+                ]
+            },
+            esperienze: {
+                chapterTag: "Studio III",
+                title: "La Stagione delle Esperienze",
+                questions: [
+                    {
+                        question: "Quale soluzione geometrico-decorativa adotta Alberti sulla facciata di Santa Maria Novella per unire la navata centrale e le navate laterali?",
+                        options: [
+                            "Un portico sporgente ad arcate cieche.",
+                            "Due grandi volute laterali decorate con motivi marmorei geometrici.",
+                            "Due torri gotiche campanarie simmetriche.",
+                            "Un frontone triangolare greco sovrapposto."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Le volute (o raccordi ad S) create da Alberti in Santa Maria Novella divennero lo standard architettonico classico per connettere elegantemente le altezze disuguali tra la navata centrale alta e quelle laterali basse."
+                    },
+                    {
+                        question: "Qual è il significato teologico dell'uovo di struzzo che pende dall'abside della Pala di Brera di Piero della Francesca?",
+                        options: [
+                            "È un semplice elemento decorativo e simbolico della passione di Sigismondo Malatesta per l'esotico.",
+                            "Rappresenta la Creazione universale, la nascita verginale di Maria e fa riferimento al casato del duca Federico da Montefeltro.",
+                            "Simboleggia la fragilità del potere temporale dei papi.",
+                            "Indica il punto esatto in cui scavare per trovare le reliquie del Santo."
+                        ],
+                        correctIndex: 1,
+                        explanation: "L'uovo di struzzo appeso alla conchiglia è un simbolo mariano di nascita miracolosa (secondo la leggenda medievale lo struzzo cova le uova con il solo calore del sole), allude alla Verginità di Maria e richiama lo stemma dei Montefeltro."
+                    },
+                    {
+                        question: "Chi sono le tre fanciulle danzanti ritratte sulla sinistra nella Primavera di Botticelli?",
+                        options: [
+                            "Le tre Moire o Parche.",
+                            "Flora, Clori e Venere.",
+                            "Le Tre Grazie (simbolo neoplatonico di liberalità e bellezza).",
+                            "Le tre figlie predilette di Lorenzo il Magnifico."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Le Tre Grazie, vestite di veli trasparenti mentre intrecciano le dita in una danza rituale, rappresentano le tre declinazioni neoplatoniche dell'amore e della grazia."
+                    },
+                    {
+                        question: "In quale opera Andrea Mantegna realizza il celebre oculo illusionistico che apre il soffitto verso il cielo?",
+                        options: [
+                            "Nel Polittico di San Zeno a Verona.",
+                            "Nel San Sebastiano di Vienna.",
+                            "Nella Camera degli Sposi nel Palazzo Ducale di Mantova.",
+                            "Nel transetto della Basilica di Sant'Andrea."
+                        ],
+                        correctIndex: 2,
+                        explanation: "La Camera degli Sposi (fatta per Ludovico III Gonzaga) presenta sul soffitto un finto oculo dipinto in prospettiva dal basso verso l'alto ('sotto in su') che simula un'apertura reale verso il cielo."
+                    },
+                    {
+                        question: "Perché nel Cristo Morto di Brera Andrea Mantegna riduce le dimensioni dei piedi della salma?",
+                        options: [
+                            "Per un errore prospettico generato da un difetto di calcolo delle rette di fuga.",
+                            "Per motivi espressivi ed estetici, evitando che i piedi in primo piano risultassero troppo grandi nascondendo la vista del corpo di Cristo.",
+                            "Perché il marmo su cui dipingeva era troppo corto.",
+                            "Per rispettare la corporatura esile del modello reale."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Mantegna applica una deroga intenzionale alle regole prospettiche: se avesse mantenuto la proporzione geometrica pura, i piedi di Cristo sarebbero risultati enormi in primo piano, rovinando la visione della cassa toracica e del volto piangente."
+                    }
+                ]
+            },
+            maturo: {
+                chapterTag: "Studio IV",
+                title: "Il Rinascimento Maturo",
+                questions: [
+                    {
+                        question: "Quale importante innovazione visiva caratterizza la Vergine delle Rocce di Leonardo da Vinci?",
+                        options: [
+                            "L'applicazione della prospettiva centrale pura senza ombre.",
+                            "L'uso dello sfumato per fondere i contorni delle figure con le ombre umide della grotta e la prospettiva aerea sullo sfondo.",
+                            "La scomposizione geometrica cubista dei corpi.",
+                            "Il recupero delle aureole d'oro zecchino medievali."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La Vergine delle Rocce è un capolavoro dello sfumato leonardesco: i confini tra i volti dei santi e la roccia umida sfumano dolcemente, integrando perfettamente l'uomo nell'ambiente naturale."
+                    },
+                    {
+                        question: "Per quale motivo la pittura del Cenacolo di Leonardo cominciò a deteriorarsi già pochi anni dopo il completamento?",
+                        options: [
+                            "Perché i monaci lavarono la parete con detergenti aggressivi.",
+                            "Perché Leonardo dipinse a tempera grassa su intonaco asciutto invece di usare la tradizionale pittura ad affresco.",
+                            "Perché l'umidità del refettorio fece crollare l'intero muro portante.",
+                            "A causa del fumo delle cucine dei frati domenicani."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Leonardo, desiderando lavorare con tempi lunghi per correggere e sfumare i dettagli, utilizzò una tecnica sperimentale su muro asciutto, incompatibile con l'umidità della parete del refettorio, causando screpolature precoci."
+                    },
+                    {
+                        question: "Quale momento drammatico e psicologico coglie Michelangelo Buonarroti nel David?",
+                        options: [
+                            "La gioia successiva all'uccisione di Golia.",
+                            "La fatica fisica durante la corsa con la fionda in mano.",
+                            "L'attimo di massima tensione concentrata fisica e mentale prima dello scontro, con lo sguardo fiero e muscoli contratti.",
+                            "La rassegnazione morale di fronte alla superiorità nemica."
+                        ],
+                        correctIndex: 2,
+                        explanation: "A differenza dei David del Quattrocento, Michelangelo ritrae l'eroe prima di lanciare la pietra: il corpo è teso, le vene della mano sono gonfie, la fronte è aggrottata e lo sguardo esprime massima concentrazione mentale."
+                    },
+                    {
+                        question: "Cosa intende Michelangelo per scultura realizzata 'per via di levare'?",
+                        options: [
+                            "La tecnica di modellare i bozzetti in cera liquida.",
+                            "Il concetto platonico per cui lo scultore toglie la pietra in eccesso per liberare la figura ideale che è già custodita e preesistente nel marmo.",
+                            "La scultura realizzata incollando pezzi di pietre diverse.",
+                            "La tecnica di doratura a foglia d'oro del marmo."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Per Michelangelo la figura ideale è già contenuta all'interno della materia rocciosa; il compito dell'artista è semplicemente rimuovere lo strato superfluo di pietra con lo scalpello."
+                    },
+                    {
+                        question: "Quale grande intellettuale e artista del Rinascimento presta il volto al filosofo Platone nella Scuola di Atene di Raffaello?",
+                        options: [
+                            "Michelangelo Buonarroti.",
+                            "Leonardo da Vinci.",
+                            "Donato Bramante.",
+                            "Papa Giulio II."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Raffaello celebra i maestri del suo tempo ritraendoli nei panni dei filosofi antichi: Platone ha le sembianze del vecchio Leonardo da Vinci, Eraclito ha il volto di Michelangelo e Euclide ha quello di Bramante."
+                    }
+                ]
+            },
+            veneto: {
+                chapterTag: "Studio V",
+                title: "Il Rinascimento Veneto",
+                questions: [
+                    {
+                        question: "In cosa differisce principalmente il 'colorito tonale' veneto dal 'disegno' fiorentino?",
+                        options: [
+                            "I veneti dipingevano solo su tavola, i fiorentini su tela.",
+                            "I veneti costruivano la profondità e i volumi stendendo direttamente il colore in toni e calori caldi/freddi, senza un disegno di contorno netto e rigido.",
+                            "I fiorentini rifiutavano l'uso della pittura ad olio.",
+                            "I veneti applicavano la prospettiva centrale brunelleschiana con maggiore severità."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La pittura veneta si affida interamente alle modulazioni cromatiche e luminose stese direttamente sulla tela, mentre quella centro-italiana poggia sull'intelaiatura teorica e lineare del disegno preparatorio."
+                    },
+                    {
+                        question: "Chi sono i due personaggi raffigurati in primo piano nella Tempesta di Giorgione?",
+                        options: [
+                            "Una principessa in armatura e un drago ferito.",
+                            "Un soldato (o pastore) sulla sinistra e una donna seminuda che allatta sulla destra.",
+                            "Due filosofi che leggono una pergamena antica.",
+                            "Il doge di Venezia e la sposa del mare."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La Tempesta di Giorgione presenta a sinistra un giovane soldato in piedi e a destra una donna seduta che allatta, inseriti in un paesaggio naturale carico di tensione elettrica prima del temporale."
+                    },
+                    {
+                        question: "Nell'opera Amor Sacro e Amor Profano di Tiziano, quale figura rappresenta l'Amor Sacro secondo la critica neoplatonica e perché?",
+                        options: [
+                            "La donna riccamente vestita di seta bianca, perché simboleggia lo sfarzo delle cerimonie religiose.",
+                            "La donna nuda con il drappo rosso, poiché la nudità simboleggia la purezza dell'anima, la verità spirituale svestita delle passioni terrene e la bellezza divina.",
+                            "Il putto che gioca con l'acqua nella vasca di pietra.",
+                            "Il cavaliere che si scorge sullo sfondo collinare."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Nel Rinascimento, la nudità femminile non era intesa solo come sensualità erotica, ma rappresentava la Verità e la Bellezza divina svestita (e quindi pura), opposta alle vesti terrene dell'Amor Profano."
+                    },
+                    {
+                        question: "Quale capolavoro altare di Tiziano unisce tre registri diversi grazie a imponenti gesti dinamici e all'uso teatrale del colore rosso?",
+                        options: [
+                            "La Venere di Urbino.",
+                            "L'Assunta dei Frari a Venezia (1516-1518).",
+                            "La Pala Pesaro.",
+                            "L'Incoronazione di spine."
+                        ],
+                        correctIndex: 2,
+                        explanation: "L'Assunta dei Frari si impone nella navata per l'effetto teatrale e per il ritmo ascendente scandito dalle vesti rosse degli apostoli in basso e della Vergine al centro, che risaltano contro lo sfondo dorato del cielo."
+                    },
+                    {
+                        question: "Cosa caratterizza la tecnica pittorica dell'ultimo Tiziano (dopo il 1550)?",
+                        options: [
+                            "Una definizione millimetrica dei contorni tipica del neoclassicismo.",
+                            "Una pittura di tocco rapida, pastosa e materica, stesa talvolta direttamente con i polpastrelli, dove le forme si disgregano nella luce e nel buio drammatico.",
+                            "L'abbandono totale della pittura su tela a favore del mosaico.",
+                            "L'uso di colori trasparenti privi di rilievo e di ombre."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Nello stile tardo, Tiziano abbandona il rigore formale per stendere grumi densi di colore in modo concitato e materico, usando persino le dita per distribuire la pittura sulla tela, accentuando l'espressività drammatica."
+                    }
+                ]
+            }
+        };
+
+        // State variables
+        let currentSubject = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Dom Elements
+        const selectionScreen = document.getElementById('selection-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const quizChapterTag = document.getElementById('quiz-chapter-tag');
+        const quizProgressText = document.getElementById('quiz-progress-text');
+        const quizProgressIndicator = document.getElementById('quiz-progress-indicator');
+        const quizQuestionText = document.getElementById('quiz-question-text');
+        const quizOptionsContainer = document.getElementById('quiz-options-container');
+        
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        
+        const resultScoreText = document.getElementById('result-score-text');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+
+        function showSelectionScreen() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            selectionScreen.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz(subjectKey) {
+            currentSubject = subjectKey;
+            const data = quizDatabase[subjectKey];
+            currentQuestions = data.questions;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            quizChapterTag.textContent = data.chapterTag;
+            
+            selectionScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Hide feedback box
+            feedbackBox.classList.remove('open');
+            
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            
+            // Update progress
+            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di 5`;
+            const progressPercent = (currentQuestionIndex / 5) * 100;
+            quizProgressIndicator.style.width = progressPercent + '%';
+
+            // Set question text
+            quizQuestionText.textContent = currentQuestion.question;
+
+            // Render options
+            quizOptionsContainer.innerHTML = '';
+            currentQuestion.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + idx)}</span> <span class="option-text">${option}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                quizOptionsContainer.appendChild(btn);
+            });
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const correctIndex = currentQuestion.correctIndex;
+            const allOptionButtons = quizOptionsContainer.querySelectorAll('.quiz-option-btn');
+
+            // Disable all options to prevent double-clicking
+            allOptionButtons.forEach(btn => btn.disabled = true);
+
+            // Highlight answers
+            if (selectedIndex === correctIndex) {
+                selectedBtn.classList.add('correct');
+                feedbackTitle.textContent = "Esatto!";
+                feedbackTitle.style.color = "#10b981";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="width:24px; height:24px;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+                // Highlight the correct one too
+                allOptionButtons[correctIndex].classList.add('correct');
+                feedbackTitle.textContent = "Errato";
+                feedbackTitle.style.color = "#ef4444";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" style="width:24px; height:24px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            }
+
+            // Set explanation
+            feedbackExplanation.innerHTML = currentQuestion.explanation;
+
+            // Show feedback box
+            feedbackBox.classList.add('open');
+
+            // Set next button text
+            if (currentQuestionIndex === 4) {
+                nextQuestionBtn.textContent = "Visualizza Risultato";
+            } else {
+                nextQuestionBtn.textContent = "Prossima Domanda";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex === 4) {
+                showResult();
+            } else {
+                currentQuestionIndex++;
+                showQuestion();
+            }
+        }
+
+        function showResult() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+
+            // Update score progress bar at 100%
+            quizProgressIndicator.style.width = '100%';
+
+            resultScoreText.textContent = `${score} / 5`;
+            resultTitle.textContent = quizDatabase[currentSubject].title;
+
+            // Set custom score message
+            let message = '';
+            if (score === 5) {
+                message = "Eccellente! Hai dimostrato una conoscenza accademica impeccabile di questo modulo. Sei pronto per l'esame!";
+            } else if (score >= 4) {
+                message = "Ottimo lavoro! La tua preparazione è solida e hai compreso appieno i concetti stilistici e teorici principali.";
+            } else if (score >= 3) {
+                message = "Buono, ma ci sono alcuni dettagli da rivedere. Ti consigliamo di rileggere la sintesi dedicata per chiarire le tue incertezze.";
+            } else {
+                message = "Preparazione insufficiente. Molti concetti chiave di questo autore o stile ti sono sfuggiti. Rileggi attentamente le sintesi e riprova il quiz.";
+            }
+            resultMessage.textContent = message;
+
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            startQuiz(currentSubject);
+        }
+    </script>
+</body>
+</html>
