@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex - Codice dei Beni Culturali e del Paesaggio</title>
+    <meta name="description" content="Piattaforma interattiva di studio sul Diritto dei Beni Culturali e del Paesaggio in Italia. Sintesi accademiche, relazioni concettuali e testi originali.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Extra styles specific to index page */
+        .search-container {
+            max-width: 600px;
+            margin: -2rem auto 3rem auto;
+            position: relative;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            background: rgba(13, 20, 35, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-gold);
+            background: rgba(13, 20, 35, 0.8);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition-fast);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-gold);
+        }
+
+        /* Filter counters */
+        .results-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Patrimoniale</h1>
+            <p>Codice dei Beni Culturali e del Paesaggio</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link active" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Diritto e Tutela della Bellezza</h2>
+            <div class="hero-divider"></div>
+            <p>Una raccolta interattiva delle disposizioni penali, amministrative, tributarie ed organizzative poste a salvaguardia del patrimonio storico, artistico e paesaggistico della Nazione italiana.</p>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-input" placeholder="Cerca capitolo, autore o parole chiave (es. tutela, prelezione, sanzioni)...">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+
+        <div id="results-info" class="results-count">Visualizzati 12 di 12 capitoli</div>
+
+        <!-- Dashboard Grid of Chapters -->
+        <section class="dashboard-grid" id="chapters-grid">
+            
+            <!-- CHAPTER 1 -->
+            <article class="chapter-card" data-chapter="1" data-search="patrimonio culturale paesaggio costituzione bellezza art 9 faro cabiddu maria agostina">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo I</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Patrimonio culturale e paesaggio: il bello dell'Italia</h3>
+                    <div class="author">Autore: <span>Maria Agostina Cabiddu</span></div>
+                    <p class="description">Analisi del "diritto alla bellezza" fondato sull'Art. 9 della Costituzione e sulla Convenzione di Faro. Evoluzione storica del concetto di "bene culturale" (dalla Commissione Franceschini al Codice) e di "paesaggio" (dalla Legge 1497/1939 alla Convenzione Europea). Riparto di competenze Stato-Regioni (Titolo V) e sussidiarietà.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo I', 'summaries/1_patrimonio.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="1.patrimonuo culturale e paesaggio_ il bello dell'Italia.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/1_patrimonio.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 2 -->
+            <article class="chapter-card" data-chapter="2" data-search="governo ministero mic soprintendenza organizzazione centrale periferica colombo maria cristina accordi privati valorizzazione">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo II</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Il Governo dei beni culturali</h3>
+                    <div class="author">Autore: <span>Maria Cristina Colombo</span></div>
+                    <p class="description">Studio dell'assetto organizzativo del Ministero della Cultura (MiC), sia a livello centrale (Direzioni Generali) sia periferico (Segretariati Regionali, Soprintendenze, Musei autonomi). L'amministrazione per accordi e intese e il ruolo dei privati.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo II', 'summaries/2_governo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="2. il Governo dei beni culturali .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/2_governo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 3 -->
+            <article class="chapter-card" data-chapter="3" data-search="individuazione regime giuridico beni pubblici privati verifica dichiarazione vincolo art 12 art 13 alterio mariano">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo III</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Individuazione e regime giuridico dei beni culturali</h3>
+                    <div class="author">Autore: <span>Mariano Alterio</span></div>
+                    <p class="description">Approfondimento sui procedimenti di verifica dell'interesse culturale per beni pubblici (Art. 12) e di dichiarazione dell'interesse per beni privati (Art. 13). Conseguenze del vincolo sul regime proprietario e obblighi di conservazione.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo III', 'summaries/3_individuazione.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="iii. individuazione e regime giuridico dei beni culturali .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/3_individuazione.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 4 -->
+            <article class="chapter-card" data-chapter="4" data-search="tutela internazionale convenzioni unesco aja unidroit 1954 1970 1995 direttiva ue 2014/60/ue conflitti armati esportazione importazione">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo IV</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La tutela internazionale dei beni culturali</h3>
+                    <div class="author">Autore: <span>(Dottorato / Contributo specialistico)</span></div>
+                    <p class="description">Studio del quadro normativo globale ed europeo: la Convenzione dell'Aja del 1954 (conflitti armati), la Convenzione UNESCO del 1970 (traffico illecito), la Convenzione UNIDROIT del 1995 (restituzione di beni rubati) e la Direttiva UE 2014/60/UE sulla circolazione interna.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo IV', 'summaries/4_tutela_internazionale.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="iv. la tutela internazionale dei beni culturali .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/4_tutela_internazionale.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 5 -->
+            <article class="chapter-card" data-chapter="5" data-search="tutela vigilanza ispezione conservazione restauro prevenzione manutenzione grasso nicola">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo V</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~10 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La tutela dei beni culturali</h3>
+                    <div class="author">Autore: <span>Nicola Grasso</span></div>
+                    <p class="description">Il fulcro operativo della tutela: vigilanza, ispezione e interventi di conservazione e protezione. Analisi delle differenze tra restauro, prevenzione e manutenzione, e il riparto di competenze amministrative dello Stato.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo V', 'summaries/5_tutela.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="v. la tutela dei beni culturali .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/5_tutela.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 6 -->
+            <article class="chapter-card" data-chapter="6" data-search="circolazione trasferimento proprieta denuncia art 59 prelazione dello stato art 60 62 commercio esportazione dell'aversana fabio">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo VI</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~9 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La circolazione dei beni culturali</h3>
+                    <div class="author">Autore: <span>Fabio Dell'Aversana</span></div>
+                    <p class="description">Disciplina del trasferimento di proprietà dei beni culturali pubblici e privati. La denuncia di trasferimento (Art. 59), l'esercizio del diritto di prelazione artistica dello Stato (Artt. 60-62) e il commercio e l'esportazione di opere d'arte.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo VI', 'summaries/6_circolazione.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="vi. la circolazione dei beni culturali .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/6_circolazione.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 8 -->
+            <article class="chapter-card" data-chapter="8" data-search="appalti concessioni sponsorizzazioni restauro privati interventi salerno marcello qualificazioni contratti pubblici">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo VIII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~6 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Appalti, concessioni e sponsorizzazioni</h3>
+                    <div class="author">Autore: <span>Marcello Salerno</span></div>
+                    <p class="description">Modalità di coinvolgimento dei soggetti privati nella tutela e valorizzazione. Gli appalti di lavori nei beni culturali (qualificazione, restauro), le concessioni di servizi e lo strumento della sponsorizzazione a fini culturali.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo VIII', 'summaries/8_appalti.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="viii. appalti, concessioni e sponsorizzazioni .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/8_appalti.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 9 -->
+            <article class="chapter-card" data-chapter="9" data-search="ritrovamenti scoperte archeologia preventiva scavi clandestini demanio premio di rinvenimento art 90 mare art 94 terragno giuliana concessione">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo IX</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Ritrovamenti e scoperte</h3>
+                    <div class="author">Autore: <span>Giuliana Terragno</span></div>
+                    <p class="description">Regime delle ricerche archeologiche terrestri e marine. La titolarità statale dei reperti ex lege, l'istituto della concessione di ricerca, l'archeologia preventiva e il regime delle scoperte fortuite (Art. 90) con relativo premio di rinvenimento.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo IX', 'summaries/9_ritrovamenti.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="ix. ritrovamenti e scoperte .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/9_ritrovamenti.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 10 -->
+            <article class="chapter-card" data-chapter="10" data-search="espropriazione beni culturali fini strumentali interesse archeologico pubblica utilita indennita art 95 96 97 ragozzino roberto">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo X</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~6 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Espropriazione</h3>
+                    <div class="author">Autore: <span>Roberto Ragozzino</span></div>
+                    <p class="description">Il potere ablatorio della pubblica amministrazione applicato ai beni culturali: espropriazione del bene culturale in sé (Art. 95), espropriazione strumentale per finalità di isolamento o decoro (Art. 96) e per interesse archeologico (Art. 97). Procedura e indennità.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo X', 'summaries/10_espropriazione.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="x. espropriazione .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/10_espropriazione.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 11 -->
+            <article class="chapter-card" data-chapter="11" data-search="regime fiscale tassazione immobili vincolati art bonus mecenatismo imposte successioni donazioni cessione beni tundo francesco">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo XI</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Il regime fiscale</h3>
+                    <div class="author">Autore: <span>Francesco Tundo</span></div>
+                    <p class="description">La leva tributaria come strumento di promozione della cultura. La tassazione degli immobili vincolati (IMU, imposte sui redditi), la fiscalità indiretta sui trasferimenti (successioni e donazioni), l'Art Bonus per il mecenatismo e il pagamento delle imposte mediante cessione di opere d'arte.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo XI', 'summaries/11_regime_fiscale.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="xi. il regime fiscale .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/11_regime_fiscale.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 12 -->
+            <article class="chapter-card" data-chapter="12" data-search="beni paesaggistici territorio vincoli ex lege galasso piani paesaggistici regionali ppr autorizzazione art 134 art 146 interlandi margherita napolitano cristiana">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo XII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>I beni paesaggistici</h3>
+                    <div class="author">Autori: <span>Margherita Interlandi e Cristiana Napolitano</span></div>
+                    <p class="description">La tutela del territorio e del paesaggio ex Art. 134 del Codice. I beni individuati con provvedimento formale, i vincoli ex lege (Legge Galasso) e i Piani Paesaggistici Regionali (PPR). La complessa procedura di autorizzazione paesaggistica (Art. 146).</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo XII', 'summaries/12_paesaggio.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="xii. i beni paesaggistici .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/12_paesaggio.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CHAPTER 13 -->
+            <article class="chapter-card" data-chapter="13" data-search="sanzioni penali amministrative civili riforma 2022 delitti contro patrimonio culturale codice penale 518-bis alienazione abusiva reato paesaggistico battarino giuseppe palomba annalisa">
+                <div class="card-header">
+                    <span class="chapter-num">Capitolo XIII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~9 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Le sanzioni</h3>
+                    <div class="author">Autori: <span>Giuseppe Battarino e Annalisa Palomba</span></div>
+                    <p class="description">Il quadro sanzionatorio penale, amministrativo e civile. La storica riforma del 2022 che ha inserito i delitti contro il patrimonio culturale nel Codice Penale (Titolo VIII-bis). Le sanzioni per interventi illeciti, alienazione abusiva, scavi clandestini, illecita esportazione e violazioni paesaggistiche.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Capitolo XIII', 'summaries/13_sanzioni.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="xiii. le sanzioni .pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/13_sanzioni.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Capitolo I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Titolo del Capitolo</h3>
+                </div>
+                <div class="modal-controls">
+                    <!-- Print Button -->
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <!-- Close Button -->
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Reading Progress Bar -->
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <!-- Modal Body Text -->
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche del Diritto dei Beni Culturali. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Realtime Search and Filter
+        const searchBox = document.getElementById('search-box');
+        const cards = document.querySelectorAll('.chapter-card');
+        const resultsInfo = document.getElementById('results-info');
+
+        searchBox.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-search');
+                if (searchData.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (query.length > 0) {
+                resultsInfo.style.display = 'block';
+                resultsInfo.textContent = `Trovati ${visibleCount} di ${cards.length} capitoli per "${query}"`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+        });
+
+        // Markdown Reader Mechanism
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(212,175,55,0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            // Add spin animation to CSS
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+
+            // Reset reading progress
+            progressIndicator.style.width = '0%';
+
+            // Fetch and parse markdown
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("Errore nel caricamento del file.");
+                    return response.text();
+                })
+                .then(text => {
+                    // Extract Chapter title from the first header
+                    const firstHeaderMatch = text.match(/^#\s+(.+)$/m);
+                    if (firstHeaderMatch) {
+                        modalChapterTitle.textContent = firstHeaderMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = chapterTag;
+                    }
+                    
+                    // Render markdown using Marked
+                    markdownView.innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore";
+                    markdownView.innerHTML = `<div style="color:#ef4444; text-align:center; padding: 2rem;">
+                        <p>Impossibile caricare la sintesi. Verifica che il file esista localmente.</p>
+                        <p style="font-size:0.85rem; margin-top:0.5rem; opacity:0.7;">${err.message}</p>
+                    </div>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto'; // Release background scroll
+        }
+
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeSummary();
+            }
+        });
+
+        // Close on Escape key press
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('open')) {
+                closeSummary();
+            }
+        });
+
+        // Track scroll progress in modal body
+        modalBodyContent.addEventListener('scroll', function() {
+            const scrollTop = modalBodyContent.scrollTop;
+            const scrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (scrollHeight > 0) {
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressIndicator.style.width = scrollPercent + '%';
+            } else {
+                progressIndicator.style.width = '0%';
+            }
+        });
+    </script>
+</body>
+</html>

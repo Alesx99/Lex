@@ -1,0 +1,17 @@
+# Ignore original heavy scanned PDFs (exceeding 100MB GitHub limits)
+*.pdf
+*.PDF
+
+# Ignore heavy raw OCR text extractions
+extracted_text/
+
+# Ignore Python caches & virtual environments
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# Ignore system files
+.DS_Store
+Thumbs.db

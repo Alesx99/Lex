@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa delle Connessioni - Lex Patrimoniale</title>
+    <meta name="description" content="Mappa interattiva delle relazioni logiche e giuridiche tra i capitoli del Codice dei Beni Culturali e del Paesaggio.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Specific page override for map view */
+        main {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-section {
+            flex: 1;
+            margin-top: 1rem;
+        }
+
+        /* Responsive styling for connections layout */
+        @media (max-width: 1024px) {
+            main {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Patrimoniale</h1>
+            <p>Codice dei Beni Culturali e del Paesaggio</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link active" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Workspace -->
+    <main>
+        <section class="connections-container map-section">
+            
+            <!-- Graphic Map Panel -->
+            <div class="map-card">
+                <svg id="network-svg" class="map-svg" viewBox="0 0 720 720" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Glow filters for highlighted nodes/edges -->
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="6" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    
+                    <!-- Edges (Links) Layer -->
+                    <g id="edges-group"></g>
+                    <!-- Nodes Layer -->
+                    <g id="nodes-group"></g>
+                </svg>
+            </div>
+
+            <!-- Descriptive Right Panel -->
+            <div class="info-panel" id="detail-panel">
+                <div class="panel-placeholder" id="placeholder-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <h3>Mappa delle Relazioni Giuridiche</h3>
+                    <p>Seleziona o passa il mouse sopra un nodo del grafo per esplorare come i diversi istituti del Codice (Tutela, Circolazione, Sanzioni, Espropriazione) si collegano tra loro.</p>
+                </div>
+
+                <div class="panel-content" id="panel-details" style="display: none;">
+                    <div class="panel-header">
+                        <span class="panel-tag" id="panel-chapter-tag">Capitolo I</span>
+                        <h2 class="panel-title" id="panel-chapter-title">Patrimonio culturale e paesaggio: il bello dell'Italia</h2>
+                        <div class="panel-author">Autore: <span id="panel-chapter-author">Maria Agostina Cabiddu</span></div>
+                    </div>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        Descrizione
+                    </p>
+                    <p class="panel-desc" id="panel-chapter-desc">Descrizione sintetica del capitolo.</p>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path></svg>
+                        Collegamenti Tematici
+                    </p>
+                    <div class="connection-list" id="panel-connections-list">
+                        <!-- Connection list generated dynamically -->
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="btn-read-summary" style="width: 100%;">Leggi Sintesi Completa</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay (Identical to index.html) -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Capitolo I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Titolo del Capitolo</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche del Diritto dei Beni Culturali. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Graph Dataset
+        const nodes = [
+            { id: 1, label: "Cap. I", shortNum: "I", title: "Patrimonio e paesaggio: il bello dell'Italia", author: "Maria Agostina Cabiddu", file: "summaries/1_patrimonio.md", desc: "La base costituzionale (Art. 9) e il 'diritto alla bellezza' quale valore identitario, antropologico e di coesione sociale." },
+            { id: 2, label: "Cap. II", shortNum: "II", title: "Il Governo dei beni culturali", author: "Maria Cristina Colombo", file: "summaries/2_governo.md", desc: "La struttura organizzativa del Ministero della Cultura (MiC) ed il riparto tra amministrazione centrale e periferica." },
+            { id: 3, label: "Cap. III", shortNum: "III", title: "Individuazione e regime giuridico dei beni", author: "Mariano Alterio", file: "summaries/3_individuazione.md", desc: "I procedimenti di verifica per i beni pubblici e dichiarazione di interesse culturale per i beni privati." },
+            { id: 4, label: "Cap. IV", shortNum: "IV", title: "La tutela internazionale dei beni culturali", author: "(Contributo specialistico)", file: "summaries/4_tutela_internazionale.md", desc: "Le convenzioni globali (Aja 1954, UNESCO, UNIDROIT) e le direttive comunitarie per la salvaguardia del patrimonio." },
+            { id: 5, label: "Cap. V", shortNum: "V", title: "La tutela dei beni culturali", author: "Nicola Grasso", file: "summaries/5_tutela.md", desc: "Le attività di vigilanza, ispezione e le misure conservative (prevenzione, manutenzione e restauro)." },
+            { id: 6, label: "Cap. VI", shortNum: "VI", title: "La circolazione dei beni culturali", author: "Fabio Dell'Aversana", file: "summaries/6_circolazione.md", desc: "Disciplina dei trasferimenti proprietari, la denuncia di trasferimento e il diritto di prelazione artistica dello Stato." },
+            { id: 8, label: "Cap. VIII", shortNum: "VIII", title: "Appalti, concessioni e sponsorizzazioni", author: "Marcello Salerno", file: "summaries/8_appalti.md", desc: "La partecipazione dei privati: contratti pubblici di restauro, concessioni d'uso e sponsorizzazioni d'opere d'arte." },
+            { id: 9, label: "Cap. IX", shortNum: "IX", title: "Ritrovamenti e scoperte archeologiche", author: "Giuliana Terragno", file: "summaries/9_ritrovamenti.md", desc: "Il regime giuridico degli scavi archeologici, la titolarità statale dei reperti e le scoperte fortuite." },
+            { id: 10, label: "Cap. X", shortNum: "X", title: "Espropriazione dei beni culturali", author: "Roberto Ragozzino", file: "summaries/10_espropriazione.md", desc: "Il potere di esproprio per motivi di pubblica utilità: esproprio diretto, strumentale o per fini di scavo archeologico." },
+            { id: 11, label: "Cap. XI", shortNum: "XI", title: "Il regime fiscale dei beni culturali", author: "Francesco Tundo", file: "summaries/11_regime_fiscale.md", desc: "La fiscalità diretta e indiretta degli immobili vincolati, il pagamento delle imposte in opere d'arte e l'Art Bonus." },
+            { id: 12, label: "Cap. XII", shortNum: "XII", title: "I beni paesaggistici", author: "Margherita Interlandi e Cristiana Napolitano", file: "summaries/12_paesaggio.md", desc: "La pianificazione paesaggistica (PPR), i vincoli di tutela ex lege e il procedimento autorizzatorio ex Art. 146." },
+            { id: 13, label: "Cap. XIII", shortNum: "XIII", title: "Le sanzioni penali e amministrative", author: "Giuseppe Battarino e Annalisa Palomba", file: "summaries/13_sanzioni.md", desc: "Il quadro sanzionatorio penale, la riforma dei delitti nel Codice Penale (2022) e le misure ripristinatorie." }
+        ];
+
+        const links = [
+            { source: 1, target: 3, type: "core", desc: "La definizione di patrimonio culturale (Cap. I) costituisce l'oggetto del procedimento di individuazione (Cap. III)." },
+            { source: 1, target: 12, type: "core", desc: "Il paesaggio quale principio costituzionale (Cap. I) trova la sua attuazione nei piani paesaggistici regionali (Cap. XII)." },
+            { source: 2, target: 5, type: "procedural", desc: "L'organizzazione periferica del MiC (Soprintendenze) esercita concretamente la funzione di tutela e vigilanza (Cap. V)." },
+            { source: 2, target: 8, type: "procedural", desc: "Le sponsorizzazioni e gli appalti pubblici sono stipulati e controllati dagli organi ministeriali e periferici (Cap. II)." },
+            { source: 3, target: 5, type: "core", desc: "L'individuazione del bene culturale (Cap. III) è la condizione necessaria per l'applicazione delle misure di tutela e conservazione (Cap. V)." },
+            { source: 3, target: 6, type: "core", desc: "Una volta accertato l'interesse culturale del bene (Cap. III), ogni atto di alienazione o vendita deve seguire le regole di circolazione (Cap. VI)." },
+            { source: 3, target: 10, type: "core", desc: "Lo Stato può esercitare il potere di espropriazione (Cap. X) solo su beni precedentemente qualificati come culturali (Cap. III)." },
+            { source: 4, target: 6, type: "core", desc: "Le regole sulla circolazione internazionale dei beni culturali (Cap. VI) si conformano alle Convenzioni UNESCO e UNIDROIT (Cap. IV)." },
+            { source: 4, target: 13, type: "core", desc: "L'esportazione illecita al di fuori del territorio nazionale viola le norme internazionali (Cap. IV) ed è penalmente sanzionata (Cap. XIII)." },
+            { source: 5, target: 8, type: "procedural", desc: "Gli appalti pubblici di restauro (Cap. VIII) sono finalizzati all'attuazione degli obblighi di tutela e conservazione (Cap. V)." },
+            { source: 5, target: 9, type: "core", desc: "I reperti emersi durante le ricerche archeologiche (Cap. IX) sono assoggettati immediatamente al regime di tutela e demanialità (Cap. V)." },
+            { source: 5, target: 10, type: "core", desc: "L'espropriazione del bene (Cap. X) rappresenta una misura estrema per garantire la tutela e la conservazione fisica del bene (Cap. V)." },
+            { source: 5, target: 13, type: "core", desc: "Chi esegue interventi di restauro abusivi o danneggia un bene culturale viola le norme di tutela (Cap. V) e incorre in sanzioni penali (Cap. XIII)." },
+            { source: 6, target: 11, type: "procedural", desc: "Le transazioni e le alienazioni di beni (Cap. VI) beneficiano delle agevolazioni fiscali sulle imposte indirette (Cap. XI)." },
+            { source: 6, target: 13, type: "core", desc: "La vendita senza autorizzazione dei beni demaniali o l'omessa denuncia di trasferimento configurano reati specifici contro la circolazione (Cap. XIII)." },
+            { source: 8, target: 11, type: "procedural", desc: "Il finanziamento privato del restauro tramite sponsorizzazioni (Cap. VIII) è incentivato fiscalmente dall'Art Bonus (Cap. XI)." },
+            { source: 9, target: 10, type: "core", desc: "L'espropriazione per interesse archeologico (Cap. X) consente allo Stato di acquisire le aree in cui effettuare ricerche e scavi (Cap. IX)." },
+            { source: 9, target: 13, type: "core", desc: "L'impossessamento abusivo di reperti archeologici statali o gli scavi clandestini (Cap. IX) configurano delitti penali gravi (Cap. XIII)." },
+            { source: 11, target: 13, type: "core", desc: "Le sanzioni penali e civili (Cap. XIII) si estendono alle frodi tributarie connesse ai regimi agevolativi e all'Art Bonus (Cap. XI)." },
+            { source: 12, target: 13, type: "core", desc: "La realizzazione di lavori in assenza o difformità dall'autorizzazione paesaggistica (Cap. XII) integra il reato di danno al paesaggio (Cap. XIII)." }
+        ];
+
+        // Dimensions of SVG canvas
+        const width = 720;
+        const height = 720;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const R = 205; // radius of chapter nodes placement
+
+        // Calculate positions dynamically for radial layout
+        const nodePositions = {};
+        nodes.forEach((node, index) => {
+            const angle = (2 * Math.PI * index) / nodes.length - Math.PI / 2; // Offset by -PI/2 to start from top
+            nodePositions[node.id] = {
+                x: centerX + R * Math.cos(angle),
+                y: centerY + R * Math.sin(angle),
+                angle: angle
+            };
+        });
+
+        // SVG Render logic
+        const edgesGroup = document.getElementById('edges-group');
+        const nodesGroup = document.getElementById('nodes-group');
+
+        // Draw Edges (with a slight bend towards center to look clean)
+        links.forEach(link => {
+            const p1 = nodePositions[link.source];
+            const p2 = nodePositions[link.target];
+            
+            // Calculate quadratic curve control point
+            const mx = (p1.x + p2.x) / 2;
+            const my = (p1.y + p2.y) / 2;
+            const k = 0.22; // bend factor towards center
+            const cx = mx + (centerX - mx) * k;
+            const cy = my + (centerY - my) * k;
+            
+            const pathD = `M ${p1.x} ${p2.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`; // curve coordinates
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`);
+            path.setAttribute("class", "graph-edge");
+            path.setAttribute("data-source", link.source);
+            path.setAttribute("data-target", link.target);
+            path.setAttribute("id", `edge-${link.source}-${link.target}`);
+            edgesGroup.appendChild(path);
+        });
+
+        // Draw Nodes
+        nodes.forEach((node, index) => {
+            const pos = nodePositions[node.id];
+            
+            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.setAttribute("class", "graph-node");
+            g.setAttribute("data-id", node.id);
+            g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
+            
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "22");
+            
+            const textNum = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textNum.setAttribute("class", "graph-node-number");
+            textNum.setAttribute("y", "5");
+            textNum.textContent = node.shortNum;
+            
+            // Outer text labels positioned radially
+            const labelR = 34; // distance from circle node
+            const lx = labelR * Math.cos(pos.angle);
+            const ly = labelR * Math.sin(pos.angle);
+            
+            let anchor = "middle";
+            let labelOffsetY = 5;
+            
+            // Determine best text anchor based on circle side
+            const cosVal = Math.cos(pos.angle);
+            if (cosVal > 0.2) {
+                anchor = "start";
+            } else if (cosVal < -0.2) {
+                anchor = "end";
+            } else {
+                anchor = "middle";
+                labelOffsetY = Math.sin(pos.angle) > 0 ? 15 : -8;
+            }
+            
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", lx);
+            label.setAttribute("y", ly + labelOffsetY);
+            label.setAttribute("text-anchor", anchor);
+            
+            // Truncate labels for cleaner rendering in circle
+            let cleanTitle = node.title.split(":")[0]; // cut subtitle
+            if (cleanTitle.length > 25) {
+                cleanTitle = cleanTitle.substring(0, 23) + "...";
+            }
+            label.textContent = cleanTitle;
+            
+            g.appendChild(circle);
+            g.appendChild(textNum);
+            g.appendChild(label);
+            nodesGroup.appendChild(g);
+        });
+
+        // Interaction logic
+        const nodeElements = document.querySelectorAll('.graph-node');
+        const edgeElements = document.querySelectorAll('.graph-edge');
+        const placeholderView = document.getElementById('placeholder-view');
+        const panelDetails = document.getElementById('panel-details');
+        
+        const pChapterTag = document.getElementById('panel-chapter-tag');
+        const pChapterTitle = document.getElementById('panel-chapter-title');
+        const pChapterAuthor = document.getElementById('panel-chapter-author');
+        const pChapterDesc = document.getElementById('panel-chapter-desc');
+        const pConnectionsList = document.getElementById('panel-connections-list');
+        const btnReadSummary = document.getElementById('btn-read-summary');
+
+        let selectedNodeId = null;
+
+        // Function to select a node and render side panel info
+        function selectNode(nodeId) {
+            selectedNodeId = nodeId;
+            const node = nodes.find(n => n.id === nodeId);
+            
+            // UI classes adjustment
+            nodeElements.forEach(el => {
+                const elId = parseInt(el.getAttribute('data-id'));
+                if (elId === nodeId) {
+                    el.classList.add('active');
+                    el.classList.remove('dimmed');
+                } else {
+                    el.classList.remove('active');
+                    el.classList.add('dimmed');
+                }
+            });
+
+            // Highlight connections on SVG
+            edgeElements.forEach(edge => {
+                const s = parseInt(edge.getAttribute('data-source'));
+                const t = parseInt(edge.getAttribute('data-target'));
+                if (s === nodeId || t === nodeId) {
+                    edge.classList.add('active');
+                    edge.classList.remove('dimmed');
+                } else {
+                    edge.classList.remove('active');
+                    edge.classList.add('dimmed');
+                }
+            });
+
+            // Render Right Side Panel
+            placeholderView.style.display = 'none';
+            panelDetails.style.display = 'block';
+
+            pChapterTag.textContent = `Capitolo ${node.shortNum}`;
+            pChapterTitle.textContent = node.title;
+            pChapterAuthor.textContent = node.author;
+            pChapterDesc.textContent = node.desc;
+
+            // Generate connection list in panel
+            pConnectionsList.innerHTML = '';
+            const connectedLinks = links.filter(l => l.source === nodeId || l.target === nodeId);
+            
+            if (connectedLinks.length === 0) {
+                pConnectionsList.innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem;">Nessuna connessione diretta definita.</div>';
+            } else {
+                connectedLinks.forEach(link => {
+                    const isSource = link.source === nodeId;
+                    const partnerId = isSource ? link.target : link.source;
+                    const partnerNode = nodes.find(n => n.id === partnerId);
+                    
+                    const item = document.createElement('div');
+                    item.className = 'connection-item';
+                    item.onclick = (e) => {
+                        e.stopPropagation();
+                        selectNode(partnerId);
+                    };
+
+                    item.innerHTML = `
+                        <div class="connection-item-header">
+                            <span class="connection-target-title">Cap. ${partnerNode.shortNum}: ${partnerNode.title.split(':')[0]}</span>
+                            <span class="connection-type-badge type-${link.type}">${link.type === 'core' ? 'Logico' : 'Proc.'}</span>
+                        </div>
+                        <p class="connection-desc">${link.desc}</p>
+                    `;
+                    pConnectionsList.appendChild(item);
+                });
+            }
+
+            // Bind reader button click
+            btnReadSummary.onclick = () => {
+                openSummary(`Capitolo ${node.shortNum}`, node.file);
+            };
+        }
+
+        // Mouse Hover Actions (Temporary highlight without selecting)
+        nodeElements.forEach(nodeEl => {
+            const nodeId = parseInt(nodeEl.getAttribute('data-id'));
+            
+            nodeEl.addEventListener('mouseenter', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+
+                nodeElements.forEach(el => {
+                    const elId = parseInt(el.getAttribute('data-id'));
+                    if (elId === nodeId) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.add('dimmed');
+                    }
+                });
+
+                edgeElements.forEach(edge => {
+                    const s = parseInt(edge.getAttribute('data-source'));
+                    const t = parseInt(edge.getAttribute('data-target'));
+                    if (s === nodeId || t === nodeId) {
+                        edge.classList.add('active');
+                    } else {
+                        edge.classList.add('dimmed');
+                    }
+                });
+            });
+
+            nodeEl.addEventListener('mouseleave', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+                
+                nodeElements.forEach(el => {
+                    el.classList.remove('active', 'dimmed');
+                });
+                edgeElements.forEach(edge => {
+                    edge.classList.remove('active', 'dimmed');
+                });
+            });
+
+            nodeEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectNode(nodeId);
+            });
+        });
+
+        // Click SVG canvas to deselect node
+        document.getElementById('network-svg').addEventListener('click', () => {
+            selectedNodeId = null;
+            nodeElements.forEach(el => el.classList.remove('active', 'dimmed'));
+            edgeElements.forEach(edge => edge.classList.remove('active', 'dimmed'));
+            panelDetails.style.display = 'none';
+            placeholderView.style.display = 'flex';
+        });
+
+
+        // Reader Modal mechanism (identical to index.html)
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(212,175,55,0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            progressIndicator.style.width = '0%';
+
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("Errore nel caricamento del file.");
+                    return response.text();
+                })
+                .then(text => {
+                    const firstHeaderMatch = text.match(/^#\s+(.+)$/m);
+                    if (firstHeaderMatch) {
+                        modalChapterTitle.textContent = firstHeaderMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = chapterTag;
+                    }
+                    markdownView.innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore";
+                    markdownView.innerHTML = `<div style="color:#ef4444; text-align:center; padding: 2rem;">
+                        <p>Impossibile caricare la sintesi. Verifica che il file esista localmente.</p>
+                        <p style="font-size:0.85rem; margin-top:0.5rem; opacity:0.7;">${err.message}</p>
+                    </div>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeSummary();
+        });
+
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('open')) closeSummary();
+        });
+
+        modalBodyContent.addEventListener('scroll', function() {
+            const scrollTop = modalBodyContent.scrollTop;
+            const scrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (scrollHeight > 0) {
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressIndicator.style.width = scrollPercent + '%';
+            } else {
+                progressIndicator.style.width = '0%';
+            }
+        });
+    </script>
+</body>
+</html>
