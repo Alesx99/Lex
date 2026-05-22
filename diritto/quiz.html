@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Patrimoniale - Quiz di Autovalutazione</title>
+    <meta name="description" content="Mettiti alla prova con i nostri quiz accademici sul Codice dei Beni Culturali e del Paesaggio.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Patrimoniale</h1>
+            <p>Codice dei Beni Culturali e del Paesaggio</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+            <a href="quiz.html" class="nav-link active" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Autovalutazione Giuridica</h2>
+            <div class="hero-divider"></div>
+            <p>Valuta le tue competenze sul Diritto dei Beni Culturali e del Paesaggio. Seleziona uno dei due moduli tematici per avviare il test a risposta multipla (6 domande per modulo con spiegazione immediata).</p>
+        </section>
+
+        <!-- Dynamic Quiz Area -->
+        <div id="quiz-wrapper">
+            
+            <!-- STEP 1: SELECT TOPIC SCREEN -->
+            <div id="selection-screen" class="quiz-step active">
+                <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                <div class="selection-grid">
+                    <button class="select-btn" onclick="startQuiz('fonti_tutela')">
+                        <span class="btn-chapter">Modulo I</span>
+                        <span class="btn-title">Fonti, Organizzazione e Tutela</span>
+                        <span class="btn-desc">Principi costituzionali, assetto del MiC, verifica dell'interesse, convenzioni internazionali e misure di conservazione.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('gestione_sanzioni')">
+                        <span class="btn-chapter">Modulo II</span>
+                        <span class="btn-title">Circolazione, Gestione e Sanzioni</span>
+                        <span class="btn-desc">Prelazione dello Stato, appalti e sponsorizzazioni, espropriazione, agevolazioni fiscali, beni paesaggistici e riforma penale.</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="question-screen" class="quiz-step">
+                <div class="quiz-card-container">
+                    <div class="quiz-card-header">
+                        <span id="quiz-chapter-tag" class="quiz-chapter-tag">Modulo I</span>
+                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 6</span>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="quiz-progress-bar-bg">
+                        <div id="quiz-progress-indicator" class="quiz-progress-indicator" style="width: 0%;"></div>
+                    </div>
+
+                    <!-- Question content -->
+                    <div class="quiz-question-body">
+                        <h3 id="quiz-question-text">Testo della domanda...</h3>
+                        <div id="quiz-options-container" class="quiz-options-grid">
+                            <!-- Injected buttons go here -->
+                        </div>
+                    </div>
+
+                    <!-- Feedback screen (hidden by default) -->
+                    <div id="quiz-feedback-box" class="quiz-feedback-box">
+                        <div class="feedback-header">
+                            <span id="feedback-icon" class="feedback-icon"></span>
+                            <span id="feedback-title" class="feedback-title">Esatto!</span>
+                        </div>
+                        <p id="feedback-explanation" class="feedback-explanation">Spiegazione accademica...</p>
+                        <button id="next-question-btn" class="btn btn-primary" onclick="nextQuestion()">Prossima Domanda</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: SCORE / RESULT SCREEN -->
+            <div id="result-screen" class="quiz-step">
+                <div class="result-card">
+                    <div class="result-glow-ring">
+                        <span id="result-score-text">0 / 6</span>
+                    </div>
+                    <h3 id="result-title">Risultato</h3>
+                    <p id="result-message" class="result-message">Messaggio personalizzato...</p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Riprova questo Quiz</button>
+                        <button class="btn btn-secondary" onclick="showSelectionScreen()">Seleziona un altro argomento</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Database of Questions
+        const quizDatabase = {
+            fonti_tutela: {
+                chapterTag: "Modulo I",
+                title: "Fonti, Organizzazione e Tutela",
+                questions: [
+                    {
+                        question: "Quale trattato internazionale, ratificato dall'Italia nel 2020, ha sancito il passaggio dal \"diritto del patrimonio culturale\" (tutela dell'oggetto) al \"diritto al patrimonio culturale\" (diritto della persona e della collettività)?",
+                        options: [
+                            "La Convenzione Europea del Paesaggio (Firenze, 2000).",
+                            "La Convenzione di Faro (Consiglio d'Europa, 2005).",
+                            "La Convenzione UNIDROIT (Roma, 1995).",
+                            "La Convenzione UNESCO di Parigi (1970)."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La Convenzione di Faro sposta il baricentro dell'azione di tutela sul rapporto uomo-patrimonio, inteso come risorsa per lo sviluppo umano, il dialogo interculturale, la coesione sociale e il benessere democratico dei cittadini."
+                    },
+                    {
+                        question: "Nell'organizzazione periferica del Ministero della Cultura (MiC), quale organo esercita concretamente le funzioni di tutela e vigilanza sui beni culturali in un determinato ambito territoriale?",
+                        options: [
+                            "Il Segretariato Regionale.",
+                            "La Soprintendenza Archeologia, Belle Arti e Paesaggio.",
+                            "La Direzione Regionale Musei.",
+                            "La Commissione Regionale per il Patrimonio Culturale."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Le Soprintendenze sono organi tecnico-scientifici periferici del MiC incaricati della tutela dei beni storico-artistici, archeologici e paesaggistici sul territorio di competenza, mediante ispezioni, approvazione di progetti di restauro e ordini di sospensione di lavori non autorizzati."
+                    },
+                    {
+                        question: "Per i beni appartenenti a enti pubblici o persone giuridiche private senza fine di lucro (es. enti ecclesiastici), aventi più di 70 anni e opera di autore non vivente, quale regime si applica provvisoriamente prima della verifica formale?",
+                        options: [
+                            "Sono considerati beni privati di libero commercio.",
+                            "Sono tutelati provvisoriamente in virtù della presunzione di interesse culturale (Art. 12 del Codice).",
+                            "Entrano direttamente a far parte del patrimonio disponibile dello Stato.",
+                            "Sono soggetti a sdemanializzazione automatica decorsi 90 giorni."
+                        ],
+                        correctIndex: 1,
+                        explanation: "In virtù dell'Articolo 12 del Codice, i beni mobili e immobili ultra-settantennali e di autore non vivente di proprietà pubblica o ecclesiastica sono protetti provvisoriamente 'ope legis' finché non si effettua la verifica di interesse. Solo in caso di esito negativo escono dal campo d'applicazione della tutela."
+                    },
+                    {
+                        question: "Quale Convenzione internazionale disciplina la restituzione dei beni culturali rubati o illecitamente esportati, ponendo a carico dell'acquirente l'obbligo di diligenza al momento dell'acquisto per poter pretendere un indennizzo?",
+                        options: [
+                            "La Convenzione dell'Aja del 1954.",
+                            "La Convenzione UNESCO del 1970.",
+                            "La Convenzione UNIDROIT (Roma, 1995).",
+                            "La Convenzione di Faro del 2005."
+                        ],
+                        correctIndex: 2,
+                        explanation: "La Convenzione UNIDROIT del 1995 (operante sul piano civilistico del commercio privato) impone regole rigorose di buona fede e diligenza dell'acquirente all'atto dell'acquisto. Chi acquista un bene rubato è costretto a restituirlo e riceve un indennizzo equo solo se prova di aver svolto opportune indagini sulla provenienza."
+                    },
+                    {
+                        question: "Secondo l'Articolo 29 del Codice dei Beni Culturali, in quali tre fasi operative si articola l'attività di \"conservazione\" del patrimonio?",
+                        options: [
+                            "Censimento, catalogazione e restauro.",
+                            "Prevenzione, manutenzione e restauro.",
+                            "Vigilanza, ispezione e ripristino.",
+                            "Tutela, valorizzazione ed espropriazione."
+                        ],
+                        correctIndex: 1,
+                        explanation: "L'Art. 29 c.1 definisce la conservazione come attività coordinata e programmata che si realizza attraverso: 1. la Prevenzione (limitazione dei rischi di deterioramento ambientale); 2. la Manutenzione (interventi per mantenere l'efficienza funzionale); 3. il Restauro (intervento diretto sul bene per ripristinarne l'integrità)."
+                    },
+                    {
+                        question: "In base all'Articolo 91 del Codice, a chi appartengono per legge le cose d'interesse archeologico da chiunque e in qualunque modo ritrovate nel sottosuolo o sui fondali marini italiani?",
+                        options: [
+                            "Al proprietario del terreno in cui si effettua il ritrovamento.",
+                            "Allo Stato (demanio originario).",
+                            "In parti uguali allo scopritore fortuito e al proprietario del fondo.",
+                            "Al primo che ne prenda possesso materiale (diritto di occupazione)."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Tutte le cose d'interesse archeologico, da chiunque e ovunque ritrovate, appartengono ab origine allo Stato. È nullo qualsiasi patto contrario. Lo scopritore fortuito e il proprietario dell'immobile hanno diritto solo a un premio di ritrovamento che può giungere fino al 25% del valore dei beni rinvenuti."
+                    }
+                ]
+            },
+            gestione_sanzioni: {
+                chapterTag: "Modulo II",
+                title: "Circolazione, Gestione e Sanzioni",
+                questions: [
+                    {
+                        question: "Entro quanti giorni il Ministero della Cultura può esercitare il diritto di prelazione artistica sull'acquisto di un bene culturale vincolato alienato a titolo oneroso?",
+                        options: [
+                            "Entro 30 giorni dalla stipula dell'alienazione.",
+                            "Entro 60 giorni dalla ricezione della formale denuncia di trasferimento (Art. 60).",
+                            "Entro 90 giorni dalla trascrizione dell'atto nei registri pubblici.",
+                            "Entro 120 giorni dal compimento del rogito."
+                        ],
+                        correctIndex: 1,
+                        explanation: "L'Art. 60 del Codice stabilisce che il MiC (o le Regioni ed Enti locali a cui il Ministero deleghi la facoltà) ha il diritto di acquistare in prelazione il bene alienato a titolo oneroso, allo stesso prezzo indicato nell'atto di compravendita, entro il termine perentorio di 60 giorni dalla denuncia del trasferimento."
+                    },
+                    {
+                        question: "Nel settore dei beni culturali, qual è la principale differenza formale e causale tra una sponsorizzazione e una concessione d'uso?",
+                        options: [
+                            "La sponsorizzazione non prevede alcun corrispettivo a carico del privato.",
+                            "La sponsorizzazione è un contratto a prestazioni corrispettive volto ad associare il marchio del privato al bene (con finalità promozionali), mentre la concessione trasferisce a terzi l'uso o la gestione materiale dello spazio.",
+                            "La concessione d'uso è un provvedimento gratuito riservato a enti no-profit.",
+                            "La sponsorizzazione si applica solo a mostre temporanee, la concessione solo a beni immobili."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La sponsorizzazione (Art. 120) associa il logo/marchio di un privato a un intervento sul patrimonio culturale a scopo pubblicitario. La concessione d'uso (Art. 106) consente invece il godimento temporaneo, esclusivo o parziale, di spazi del demanio culturale (es. eventi privati in castelli o musei) in cambio del pagamento di un canone d'uso."
+                    },
+                    {
+                        question: "In quale tipo di espropriazione disciplinata dal Codice lo Stato acquisisce aree o edifici vicini a un bene culturale per garantirne la luce, la prospettiva o la dignità monumentale?",
+                        options: [
+                            "Espropriazione diretta del bene culturale.",
+                            "Espropriazione per fini di scavo archeologico.",
+                            "Espropriazione strumentale (Art. 96).",
+                            "Espropriazione per pubblica utilità generica."
+                        ],
+                        correctIndex: 2,
+                        explanation: "L'espropriazione strumentale ex Art. 96 consente di espropriare edifici o terreni adiacenti al bene culturale non per acquisire il bene in sé, ma per migliorarne la fruizione pubblica, garantirne la conservazione isolandolo da fonti di degrado o assicurarne condizioni di luce e prospettiva."
+                    },
+                    {
+                        question: "Quale incentivo fiscale, introdotto nel 2014, consente un credito d'imposta del 65% per le erogazioni liberali effettuate da privati a sostegno del restauro o della valorizzazione di beni culturali pubblici?",
+                        options: [
+                            "Il Tax Credit per il patrimonio storico.",
+                            "L'Art Bonus (D.L. 83/2014).",
+                            "Il Superbonus per i beni storici vincolati.",
+                            "La Detrazione IRPEF ordinaria del 19%."
+                        ],
+                        correctIndex: 1,
+                        explanation: "L'Art Bonus è una delle misure di mecenatismo culturale più vantaggiose in Europa. Consente a imprese e cittadini di beneficiare di un credito d'imposta pari al 65% delle somme donate a favore del patrimonio pubblico (es. manutenzione monumenti, musei, fondazioni lirico-sinfoniche)."
+                    },
+                    {
+                        question: "In base all'Articolo 146 del Codice, l'autorizzazione paesaggistica richiesta per interventi su aree sottoposte a vincolo paesaggistico ha natura:",
+                        options: [
+                            "Di provvedimento autonomo e preliminare rispetto al rilascio del titolo edilizio (es. permesso di costruire).",
+                            "Di parere consultivo non vincolante da parte del Soprintendente.",
+                            "Di atto successivo che può essere sanato in via ordinaria post-operam.",
+                            "Di nulla osta tacito soggetto al principio del silenzio-assenso tra pubbliche amministrazioni."
+                        ],
+                        correctIndex: 0,
+                        explanation: "L'autorizzazione paesaggistica è un atto presupposto, autonomo e preliminare rispetto a qualsiasi titolo abilitativo edilizio. Essa accerta la compatibilità paesaggistica dell'intervento, dura 5 anni e non può essere rilasciata in sanatoria a lavori ultimati (salvo ristrettissime ipotesi ex Art. 167)."
+                    },
+                    {
+                        question: "La riforma del 2022 (Legge 22/2022) ha introdotto nel Codice Penale un intero Titolo (VIII-bis) dedicato ai delitti contro il patrimonio culturale. Quale tra i seguenti costituisce un effetto di questa riforma?",
+                        options: [
+                            "La depenalizzazione dei reati minori di deturpamento artistico.",
+                            "La trasposizione di tutti i delitti penali all'interno del Codice dei Beni Culturali (D.Lgs. 42/2004).",
+                            "La creazione di fattispecie autonome e aggravate come il furto di beni culturali (Art. 518-bis c.p.) e il danneggiamento o deturpamento specifico (Art. 518-duodecies c.p.) con pene severamente aumentate.",
+                            "L'abolizione dell'arresto per le ricerche archeologiche clandestine."
+                        ],
+                        correctIndex: 2,
+                        explanation: "La riforma ha colmato un vuoto normativo inserendo nel Codice Penale delitti specifici contro il patrimonio artistico. In precedenza si applicavano i reati comuni di furto o danneggiamento. Oggi il furto di beni culturali (Art. 518-bis c.p.) e il danneggiamento specifico (Art. 518-duodecies c.p.) sono delitti autonomi gravemente puniti."
+                    }
+                ]
+            }
+        };
+
+        // State variables
+        let currentSubject = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Dom Elements
+        const selectionScreen = document.getElementById('selection-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const quizChapterTag = document.getElementById('quiz-chapter-tag');
+        const quizProgressText = document.getElementById('quiz-progress-text');
+        const quizProgressIndicator = document.getElementById('quiz-progress-indicator');
+        const quizQuestionText = document.getElementById('quiz-question-text');
+        const quizOptionsContainer = document.getElementById('quiz-options-container');
+        
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        
+        const resultScoreText = document.getElementById('result-score-text');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+
+        function showSelectionScreen() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            selectionScreen.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz(subjectKey) {
+            currentSubject = subjectKey;
+            const data = quizDatabase[subjectKey];
+            currentQuestions = data.questions;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            quizChapterTag.textContent = data.chapterTag;
+            
+            selectionScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Hide feedback box
+            feedbackBox.classList.remove('open');
+            
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            
+            // Update progress
+            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di 6`;
+            const progressPercent = (currentQuestionIndex / 6) * 100;
+            quizProgressIndicator.style.width = progressPercent + '%';
+
+            // Set question text
+            quizQuestionText.textContent = currentQuestion.question;
+
+            // Render options
+            quizOptionsContainer.innerHTML = '';
+            currentQuestion.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + idx)}</span> <span class="option-text">${option}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                quizOptionsContainer.appendChild(btn);
+            });
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const correctIndex = currentQuestion.correctIndex;
+            const allOptionButtons = quizOptionsContainer.querySelectorAll('.quiz-option-btn');
+
+            // Disable all options to prevent double-clicking
+            allOptionButtons.forEach(btn => btn.disabled = true);
+
+            // Highlight answers
+            if (selectedIndex === correctIndex) {
+                selectedBtn.classList.add('correct');
+                feedbackTitle.textContent = "Esatto!";
+                feedbackTitle.style.color = "#10b981";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="width:24px; height:24px;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+                // Highlight the correct one too
+                allOptionButtons[correctIndex].classList.add('correct');
+                feedbackTitle.textContent = "Errato";
+                feedbackTitle.style.color = "#ef4444";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" style="width:24px; height:24px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            }
+
+            // Set explanation
+            feedbackExplanation.innerHTML = currentQuestion.explanation;
+
+            // Show feedback box
+            feedbackBox.classList.add('open');
+
+            // Set next button text
+            if (currentQuestionIndex === 5) {
+                nextQuestionBtn.textContent = "Visualizza Risultato";
+            } else {
+                nextQuestionBtn.textContent = "Prossima Domanda";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex === 5) {
+                showResult();
+            } else {
+                currentQuestionIndex++;
+                showQuestion();
+            }
+        }
+
+        function showResult() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+
+            // Update score progress bar at 100%
+            quizProgressIndicator.style.width = '100%';
+
+            resultScoreText.textContent = `${score} / 6`;
+            resultTitle.textContent = quizDatabase[currentSubject].title;
+
+            // Set custom score message
+            let message = '';
+            if (score === 6) {
+                message = "Eccellente! Conoscenza e comprensione del Codice dei Beni Culturali impeccabile. Ottima padronanza delle discipline amministrative e penali.";
+            } else if (score >= 4) {
+                message = "Molto bene! Hai una conoscenza solida degli istituti fondamentali del diritto dei beni culturali. Qualche piccola incertezza superabile rileggendo le sintesi.";
+            } else if (score >= 3) {
+                message = "Sufficiente, ma ci sono lacune significative. Si consiglia una rilettura attenta delle sintesi specifiche per consolidare le distinzioni procedimentali.";
+            } else {
+                message = "Preparazione non sufficiente. Gli istituti giuridici, le sanzioni e i riparti di competenza non sono ancora chiari. Rileggi i moduli e ripeti il test.";
+            }
+            resultMessage.textContent = message;
+
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            startQuiz(currentSubject);
+        }
+    </script>
+</body>
+</html>
