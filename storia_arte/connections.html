@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Art - Mappa delle Relazioni Concettuali</title>
+    <meta name="description" content="Mappa concettuale interattiva delle relazioni storiche ed artistiche tra il Rinascimento di Brunelleschi, il manuale Cricco-Teodoro e il Neoclassicismo di Canova.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific layout styles for connections page */
+        .connections-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            flex-grow: 1;
+            margin-top: 1rem;
+            height: calc(100vh - 160px);
+        }
+
+        .map-wrapper {
+            background: rgba(20, 20, 25, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .details-panel {
+            background: rgba(20, 20, 25, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            overflow-y: auto;
+        }
+
+        /* SVG styling */
+        svg.network-map {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .edge {
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 2.5;
+            transition: all var(--transition-normal);
+            stroke-dasharray: 6 4;
+            animation: dash 30s linear infinite;
+        }
+
+        .edge.highlighted {
+            stroke: var(--accent-terracotta);
+            stroke-width: 4;
+            stroke-dasharray: none;
+            filter: drop-shadow(0 0 8px var(--accent-terracotta-glow));
+        }
+
+        .edge.highlighted-gold {
+            stroke: var(--accent-gold);
+            stroke-width: 4;
+            stroke-dasharray: none;
+            filter: drop-shadow(0 0 8px var(--accent-gold-glow));
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+
+        .node-group {
+            cursor: pointer;
+        }
+
+        .node-bg {
+            fill: #141418;
+            stroke: rgba(255, 255, 255, 0.15);
+            stroke-width: 2;
+            transition: all var(--transition-normal);
+        }
+
+        .node-glow {
+            fill: none;
+            stroke: none;
+            transition: all var(--transition-normal);
+        }
+
+        /* Hover Node States */
+        .node-group:hover .node-bg {
+            stroke: var(--accent-gold);
+            fill: rgba(212, 175, 55, 0.05);
+            transform: scale(1.05);
+            transform-origin: center;
+        }
+
+        .node-group:hover .node-glow {
+            stroke: var(--accent-gold);
+            stroke-width: 8;
+            stroke-opacity: 0.15;
+            transform: scale(1.05);
+            transform-origin: center;
+        }
+
+        /* Terracotta Accents for Canova Node */
+        .node-group.canova-node:hover .node-bg {
+            stroke: var(--accent-terracotta);
+            fill: rgba(200, 90, 50, 0.05);
+        }
+
+        .node-group.canova-node:hover .node-glow {
+            stroke: var(--accent-terracotta);
+        }
+
+        /* Active Selected Node States */
+        .node-group.selected .node-bg {
+            stroke: var(--accent-gold);
+            fill: rgba(212, 175, 55, 0.1);
+            stroke-width: 3;
+        }
+
+        .node-group.canova-node.selected .node-bg {
+            stroke: var(--accent-terracotta);
+            fill: rgba(200, 90, 50, 0.1);
+        }
+
+        .node-text {
+            fill: var(--text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            text-anchor: middle;
+            pointer-events: none;
+            font-family: var(--font-sans);
+        }
+
+        .node-subtitle {
+            fill: var(--text-secondary);
+            font-size: 10px;
+            font-weight: 400;
+            text-anchor: middle;
+            pointer-events: none;
+            font-family: var(--font-sans);
+        }
+
+        /* Details Panel Info */
+        .panel-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .panel-empty svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .panel-content {
+            display: none;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .relation-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .relation-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-gold);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .relation-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .relation-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .connection-list-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .connection-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .connection-item:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .connection-item strong {
+            color: var(--accent-gold);
+        }
+
+        .connection-item.terracotta-link strong {
+            color: var(--accent-terracotta);
+        }
+
+        .panel-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Responsive Layouts */
+        @media (max-width: 992px) {
+            .connections-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .map-wrapper {
+                height: 500px;
+            }
+            .details-panel {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Art</span></h1>
+            <p>Storia dell'Arte Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link active" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Connections Layout -->
+        <div class="connections-container">
+            
+            <!-- SVG Map Wrapper -->
+            <div class="map-wrapper">
+                <svg class="network-map" viewBox="0 0 800 500">
+                    <!-- Connections (Edges) -->
+                    <!-- Cricco to Brunelleschi (Line 1) -->
+                    <line x1="400" y1="150" x2="220" y2="350" class="edge" id="edge-cricco-brunelleschi"></line>
+                    <!-- Cricco to Canova (Line 2) -->
+                    <line x1="400" y1="150" x2="580" y2="350" class="edge" id="edge-cricco-canova"></line>
+                    <!-- Brunelleschi to Canova (Line 3) -->
+                    <line x1="220" y1="350" x2="580" y2="350" class="edge" id="edge-brunelleschi-canova"></line>
+
+                    <!-- Nodes -->
+                    <!-- CENTRAL CONTEXT: Cricco-Teodoro -->
+                    <g class="node-group" onclick="selectNode('cricco')" id="node-cricco">
+                        <circle cx="400" cy="150" r="70" class="node-glow"></circle>
+                        <circle cx="400" cy="150" r="60" class="node-bg" style="stroke: var(--accent-gold);"></circle>
+                        <text x="400" y="145" class="node-text">Cricco-Teodoro</text>
+                        <text x="400" y="163" class="node-subtitle">Umanesimo & Rinascimento</text>
+                    </g>
+
+                    <!-- BRUNELLESCHI -->
+                    <g class="node-group" onclick="selectNode('brunelleschi')" id="node-brunelleschi">
+                        <circle cx="220" cy="350" r="65" class="node-glow"></circle>
+                        <circle cx="220" cy="350" r="55" class="node-bg"></circle>
+                        <text x="220" y="345" class="node-text">Brunelleschi</text>
+                        <text x="220" y="363" class="node-subtitle">Prospettiva & Cupola</text>
+                    </g>
+
+                    <!-- CANOVA -->
+                    <g class="node-group canova-node" onclick="selectNode('canova')" id="node-canova">
+                        <circle cx="580" cy="350" r="65" class="node-glow"></circle>
+                        <circle cx="580" cy="350" r="55" class="node-bg"></circle>
+                        <text x="580" y="345" class="node-text">Antonio Canova</text>
+                        <text x="580" y="363" class="node-subtitle">Neoclassicismo & Marmo</text>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Details Sidebar Panel -->
+            <div class="details-panel" id="details-panel">
+                
+                <!-- Default empty panel state -->
+                <div class="panel-empty" id="panel-empty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <p>Seleziona un nodo nella mappa interattiva per visualizzare le relazioni e i dettagli accademici.</p>
+                </div>
+
+                <!-- Panel Content -->
+                <div class="panel-content" id="panel-content">
+                    <div>
+                        <div class="relation-header">
+                            <span class="relation-tag" id="panel-tag">Relazione</span>
+                            <h3 class="relation-title" id="panel-title">Titolo del Nodo</h3>
+                        </div>
+                        <p class="relation-description" id="panel-description">Descrizione del ruolo e dell'influenza...</p>
+                        
+                        <h4 class="connection-list-title">Nodi Collegati</h4>
+                        <div id="panel-connections-list">
+                            <!-- JS will inject connections here -->
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <a href="#" class="btn btn-primary" id="panel-read-btn" style="display:block;">Leggi la Sintesi Dedicata</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        const nodes = {
+            cricco: {
+                tag: "Inquadramento Storico-Critico",
+                title: "Itinerario nell'arte: Gotico e Rinascimento",
+                description: "Il Cricco-Teodoro (Volume 3) delinea la cornice entro la quale si sviluppa la rivoluzione fiorentina del primo Quattrocento. Masaccio e Donatello, guidati dalle scoperte matematiche del Brunelleschi, rompono con il tardogotico per riscoprire il naturalismo ed il classicismo filologico.",
+                filePath: "summaries/cricco_teodoro_3.md",
+                connections: [
+                    { target: "brunelleschi", text: "Fornisce le basi teoriche per il modulo geometrico del <strong>Brunelleschi</strong>.", class: "" },
+                    { target: "canova", text: "Traccia la riscoperta filologica dell'antico che sarà poi alla base del Neoclassicismo del <strong>Canova</strong>.", class: "terracotta-link" }
+                ]
+            },
+            brunelleschi: {
+                tag: "Pioniere del Rinascimento",
+                title: "Filippo Brunelleschi: Spazio e Prospettiva",
+                description: "Brunelleschi è il padre fondatore del Rinascimento architettonico. Attraverso l'invenzione della prospettiva lineare e la scomposizione modulare (basata sul diametro delle colonne o braccia fiorentine), rationalizza lo spazio rendendolo comprensibile e proporzionato all'uomo.",
+                filePath: "summaries/brunelleschi.md",
+                connections: [
+                    { target: "cricco", text: "È il protagonista centrale del capitolo sulla rivoluzione spaziale fiorentina nel <strong>Cricco-Teodoro</strong>.", class: "" },
+                    { target: "canova", text: "La sua ricerca sulle proporzioni geometriche perfette ispira il rigore simmetrico della scultura di <strong>Canova</strong>.", class: "terracotta-link" }
+                ]
+            },
+            canova: {
+                tag: "Maestro del Neoclassicismo",
+                title: "Antonio Canova: Il Marmo Sublime",
+                description: "Canova applica i principi teorici del Winckelmann per far risorgere l'ideale greco della 'nobile semplicità'. Il suo rigido processo basato su modelli in gesso con chiodi di riferimento (repères) per sbozzare il marmo rispecchia lo spirito scientifico e razionale introdotto da Brunelleschi nel Rinascimento.",
+                filePath: "summaries/canova.md",
+                connections: [
+                    { target: "cricco", text: "La sua scultura rappresenta il culmine del recupero dei miti classici trattati nelle origini del <strong>Cricco-Teodoro</strong>.", class: "" },
+                    { target: "brunelleschi", text: "Condivide la razionalizzazione del processo costruttivo ed artistico tramite moduli geometrici e calcoli matematici.", class: "" }
+                ]
+            }
+        };
+
+        function selectNode(nodeId) {
+            // Remove selected class from all nodes
+            document.querySelectorAll('.node-group').forEach(el => el.classList.remove('selected'));
+            // Remove highlighted class from all edges
+            document.querySelectorAll('.edge').forEach(el => {
+                el.classList.remove('highlighted');
+                el.classList.remove('highlighted-gold');
+            });
+
+            // Add selected class to chosen node
+            document.getElementById(`node-${nodeId}`).classList.add('selected');
+
+            // Highlight edges and update panel
+            const panelEmpty = document.getElementById('panel-empty');
+            const panelContent = document.getElementById('panel-content');
+            
+            panelEmpty.style.display = 'none';
+            panelContent.style.display = 'flex';
+
+            const data = nodes[nodeId];
+            document.getElementById('panel-tag').textContent = data.tag;
+            document.getElementById('panel-title').textContent = data.title;
+            document.getElementById('panel-description').textContent = data.description;
+            
+            const readBtn = document.getElementById('panel-read-btn');
+            // We can read it in the modal of index.html by referencing it, or redirect to index with an active state. 
+            // For simplicity, let's open the markdown raw/directly in a viewer or link to summaries.
+            readBtn.href = `index.html?open=${data.filePath}`;
+
+            // Highlight edges
+            if (nodeId === 'cricco') {
+                document.getElementById('edge-cricco-brunelleschi').classList.add('highlighted-gold');
+                document.getElementById('edge-cricco-canova').classList.add('highlighted-gold');
+            } else if (nodeId === 'brunelleschi') {
+                document.getElementById('edge-cricco-brunelleschi').classList.add('highlighted-gold');
+                document.getElementById('edge-brunelleschi-canova').classList.add('highlighted');
+            } else if (nodeId === 'canova') {
+                document.getElementById('edge-cricco-canova').classList.add('highlighted');
+                document.getElementById('edge-brunelleschi-canova').classList.add('highlighted');
+            }
+
+            // Populate connections list in sidebar
+            const connectionsList = document.getElementById('panel-connections-list');
+            connectionsList.innerHTML = '';
+            
+            data.connections.forEach(conn => {
+                const item = document.createElement('div');
+                item.className = `connection-item ${conn.class}`;
+                item.innerHTML = conn.text;
+                item.onclick = (e) => {
+                    e.stopPropagation();
+                    selectNode(conn.target);
+                };
+                connectionsList.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>

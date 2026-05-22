@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Art - Catalogo Storia dell'Arte Moderna</title>
+    <meta name="description" content="Piattaforma interattiva di studio sulla Storia dell'Arte Moderna. Sintesi accademiche, relazioni concettuali e testi originali su Filippo Brunelleschi, Antonio Canova e manuali Cricco-Teodoro.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .search-container {
+            max-width: 600px;
+            margin: -2rem auto 3rem auto;
+            position: relative;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-terracotta);
+            background: rgba(20, 20, 25, 0.8);
+            box-shadow: 0 0 25px rgba(200, 90, 50, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition-fast);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-terracotta);
+        }
+
+        .results-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Art</span></h1>
+            <p>Storia dell'Arte Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link active" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Dalla Geometria Prospettica al Marmo Sublime</h2>
+            <div class="hero-divider"></div>
+            <p>Esplora le sintesi accademiche basate sui testi originali di Storia dell'Arte Moderna, analizzando lo sviluppo formale, teorico e metodologico dei grandi maestri.</p>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-input" placeholder="Cerca opera, autore o parole chiave (es. cupola, neoclassicismo, marmo)...">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+
+        <div id="results-info" class="results-count">Visualizzati 3 di 3 capitoli</div>
+
+        <!-- Dashboard Grid of Chapters -->
+        <section class="dashboard-grid" id="chapters-grid">
+            
+            <!-- BRUNELLESCHI -->
+            <article class="chapter-card" data-chapter="Brunelleschi" data-search="brunelleschi filippo prospettiva lineare cupola firenze santa maria del fiore spedale innocenti sagrestia vecchia san lorenzo proporzioni rinascimento">
+                <div class="card-header">
+                    <span class="chapter-num">Studio I</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Filippo Brunelleschi e la Prospettiva Lineare</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">L'invenzione della prospettiva lineare centrica, la cupola di Santa Maria del Fiore a Firenze (la struttura autoportante e l'orditura a spina di pesce), l'architettura razionale del primo Rinascimento (Spedale degli Innocenti, Sagrestia Vecchia, Basilica di San Lorenzo) e l'uso del modulo geometrico.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio I', 'summaries/brunelleschi.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Brunelleschi.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/brunelleschi.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CANOVA -->
+            <article class="chapter-card" data-chapter="Canova" data-search="canova antonio neoclassicismo scultura marmo amore psiche venere adone tre grazie ideale classico bozzetto argilla modello gesso finitura patina cera">
+                <div class="card-header">
+                    <span class="chapter-num">Studio II</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~9 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Antonio Canova e il Neoclassicismo scultoreo</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">La rinascita della scultura classica, la perfezione formale, i concetti neoclassici di "nobile semplicità e quieta grandezza" teorizzati da Winckelmann. Studio approfondito del processo creativo (dal bozzetto in argilla al modello in gesso con i repères, fino alla finitura in marmo ed applicazione della patina di cera) e capolavori celebri.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio II', 'summaries/canova.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/canova.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- CRICCO-TEODORO -->
+            <article class="chapter-card" data-chapter="Cricco-Teodoro" data-search="cricco teodoro manuale itinerario arte gotico internazionale rinascimento umanesimo firenze donatello masaccio architettura pittura scultura manuale scolastico">
+                <div class="card-header">
+                    <span class="chapter-num">Studio III</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~10 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Itinerario nell'arte: dal Gotico al Rinascimento</h3>
+                    <div class="author">Autori: <span>Giorgio Cricco, Francesco Paolo Di Teodoro</span></div>
+                    <p class="description">Analisi critica e sintesi del Volume 3 del celebre manuale: la transizione dal Gotico Internazionale (stile cortese) all'Umanesimo. Il ruolo di Firenze come culla della rinascita artistica, l'integrazione tra le arti (architettura, pittura, scultura) e la riscoperta filologica del mondo classico.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio III', 'summaries/cricco_teodoro_3.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Itinerario nell'arte - Dal Gotico Internazionale al -- Giorgio Cricco, Francesco Paolo Di Teodoro -- 3.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cricco_teodoro_3.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Caricamento...</h3>
+                </div>
+                <div class="modal-controls">
+                    <!-- Print Button -->
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <!-- Close Button -->
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Reading Progress Bar -->
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <!-- Modal Body Text -->
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Storia dell'Arte. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Realtime Search and Filter
+        const searchBox = document.getElementById('search-box');
+        const cards = document.querySelectorAll('.chapter-card');
+        const resultsInfo = document.getElementById('results-info');
+
+        searchBox.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-search');
+                if (searchData.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (query.length > 0) {
+                resultsInfo.style.display = 'block';
+                resultsInfo.textContent = `Trovati ${visibleCount} di ${cards.length} studi per "${query}"`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+        });
+
+        // Markdown Reader Mechanism
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c85a32" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(200,90,50,0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            // Add spin animation to CSS
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+
+            // Reset reading progress
+            progressIndicator.style.width = '0%';
+
+            // Fetch and parse markdown
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("Errore nel caricamento del file.");
+                    return response.text();
+                })
+                .then(text => {
+                    // Extract Chapter title from the first header
+                    const firstHeaderMatch = text.match(/^#\s+(.+)$/m);
+                    if (firstHeaderMatch) {
+                        modalChapterTitle.textContent = firstHeaderMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = chapterTag;
+                    }
+                    
+                    // Render markdown using Marked
+                    markdownView.innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore";
+                    markdownView.innerHTML = `<div style="color:#ef4444; text-align:center; padding: 2rem;">
+                        <p>Impossibile caricare la sintesi. Verifica che il file esista localmente.</p>
+                        <p style="font-size:0.85rem; margin-top:0.5rem; opacity:0.7;">${err.message}</p>
+                    </div>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto'; // Release background scroll
+        }
+
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeSummary();
+            }
+        });
+
+        // Close on Escape key press
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('open')) {
+                closeSummary();
+            }
+        });
+
+        // Track scroll progress in modal body
+        modalBodyContent.addEventListener('scroll', function() {
+            const scrollTop = modalBodyContent.scrollTop;
+            const scrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (scrollHeight > 0) {
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressIndicator.style.width = scrollPercent + '%';
+            } else {
+                progressIndicator.style.width = '0%';
+            }
+        });
+
+        // Auto-open summary from URL parameter if present
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const openPath = urlParams.get('open');
+            if (openPath) {
+                let chapterTag = "Studio";
+                if (openPath.includes('brunelleschi')) {
+                    chapterTag = "Studio I";
+                } else if (openPath.includes('canova')) {
+                    chapterTag = "Studio II";
+                } else if (openPath.includes('cricco_teodoro')) {
+                    chapterTag = "Studio III";
+                }
+                openSummary(chapterTag, openPath);
+            }
+        });
+    </script>
+</body>
+</html>
