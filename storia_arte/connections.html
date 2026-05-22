@@ -4,158 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lex Art - Mappa delle Relazioni Concettuali</title>
-    <meta name="description" content="Mappa concettuale interattiva delle relazioni storiche ed artistiche tra il Rinascimento di Brunelleschi, il manuale Cricco-Teodoro e il Neoclassicismo di Canova.">
+    <meta name="description" content="Mappa concettuale interattiva delle relazioni storiche ed artistiche tra il Rinascimento, il Barocco, il Neoclassicismo, l'Impressionismo e il Post-Impressionismo.">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Main Style Sheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         /* Specific layout styles for connections page */
+        main {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+        }
+
         .connections-container {
             display: grid;
             grid-template-columns: 1fr 380px;
             gap: 2rem;
-            flex-grow: 1;
+            flex: 1;
             margin-top: 1rem;
-            height: calc(100vh - 160px);
+            height: 100%;
         }
 
-        .map-wrapper {
+        @media (max-width: 1024px) {
+            main {
+                height: auto;
+            }
+            .connections-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        .map-card {
             background: rgba(20, 20, 25, 0.4);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            height: 100%;
+            box-shadow: var(--shadow-lg);
         }
 
-        .details-panel {
+        .map-svg {
+            width: 100%;
+            height: 100%;
+            min-height: 550px;
+            display: block;
+            user-select: none;
+        }
+
+        /* SVG Graph Elements Styles */
+        .graph-edge {
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 1.5;
+            stroke-dasharray: 4 3;
+            transition: stroke var(--transition-normal), stroke-width var(--transition-normal), opacity var(--transition-normal), stroke-dasharray var(--transition-normal);
+        }
+
+        .graph-edge.active {
+            stroke: var(--accent-terracotta);
+            stroke-width: 3.5;
+            stroke-dasharray: none;
+            filter: drop-shadow(0 0 6px rgba(200, 90, 50, 0.4));
+            z-index: 10;
+        }
+
+        .graph-edge.active.type-influence {
+            stroke: var(--accent-gold);
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+        }
+
+        .graph-edge.active.type-contrast {
+            stroke: #ef4444;
+            filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.4));
+        }
+
+        .graph-edge.dimmed {
+            opacity: 0.15;
+        }
+
+        .graph-node {
+            cursor: pointer;
+            transition: transform var(--transition-normal);
+        }
+
+        .graph-node circle {
+            fill: #141418;
+            stroke: var(--text-muted);
+            stroke-width: 2;
+            transition: stroke var(--transition-normal), fill var(--transition-normal), r var(--transition-normal);
+        }
+
+        .graph-node:hover circle, .graph-node.active circle {
+            stroke: var(--accent-terracotta);
+            fill: #1e1e24;
+            filter: drop-shadow(0 0 10px rgba(200, 90, 50, 0.4));
+        }
+
+        .graph-node text {
+            fill: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 500;
+            text-anchor: middle;
+            transition: fill var(--transition-normal), font-size var(--transition-normal), font-weight var(--transition-normal);
+            pointer-events: none;
+        }
+
+        .graph-node:hover text, .graph-node.active text {
+            fill: var(--text-primary);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .graph-node-number {
+            font-family: var(--font-serif);
+            font-size: 14px;
+            fill: var(--accent-gold);
+            text-anchor: middle;
+            pointer-events: none;
+            font-weight: 600;
+        }
+
+        .graph-node:hover .graph-node-number, .graph-node.active .graph-node-number {
+            font-size: 16px;
+            fill: var(--accent-terracotta);
+        }
+
+        .graph-node.dimmed {
+            opacity: 0.3;
+        }
+
+        /* Sidebar Info Panel */
+        .info-panel {
             background: rgba(20, 20, 25, 0.6);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 2rem;
+            box-shadow: var(--shadow-lg);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            height: 100%;
+            overflow-y: auto;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            overflow-y: auto;
         }
 
-        /* SVG styling */
-        svg.network-map {
-            width: 100%;
-            height: 100%;
-            min-height: 500px;
-        }
-
-        .edge {
-            stroke: rgba(255, 255, 255, 0.08);
-            stroke-width: 2.5;
-            transition: all var(--transition-normal);
-            stroke-dasharray: 6 4;
-            animation: dash 30s linear infinite;
-        }
-
-        .edge.highlighted {
-            stroke: var(--accent-terracotta);
-            stroke-width: 4;
-            stroke-dasharray: none;
-            filter: drop-shadow(0 0 8px var(--accent-terracotta-glow));
-        }
-
-        .edge.highlighted-gold {
-            stroke: var(--accent-gold);
-            stroke-width: 4;
-            stroke-dasharray: none;
-            filter: drop-shadow(0 0 8px var(--accent-gold-glow));
-        }
-
-        @keyframes dash {
-            to {
-                stroke-dashoffset: -1000;
-            }
-        }
-
-        .node-group {
-            cursor: pointer;
-        }
-
-        .node-bg {
-            fill: #141418;
-            stroke: rgba(255, 255, 255, 0.15);
-            stroke-width: 2;
-            transition: all var(--transition-normal);
-        }
-
-        .node-glow {
-            fill: none;
-            stroke: none;
-            transition: all var(--transition-normal);
-        }
-
-        /* Hover Node States */
-        .node-group:hover .node-bg {
-            stroke: var(--accent-gold);
-            fill: rgba(212, 175, 55, 0.05);
-            transform: scale(1.05);
-            transform-origin: center;
-        }
-
-        .node-group:hover .node-glow {
-            stroke: var(--accent-gold);
-            stroke-width: 8;
-            stroke-opacity: 0.15;
-            transform: scale(1.05);
-            transform-origin: center;
-        }
-
-        /* Terracotta Accents for Canova Node */
-        .node-group.canova-node:hover .node-bg {
-            stroke: var(--accent-terracotta);
-            fill: rgba(200, 90, 50, 0.05);
-        }
-
-        .node-group.canova-node:hover .node-glow {
-            stroke: var(--accent-terracotta);
-        }
-
-        /* Active Selected Node States */
-        .node-group.selected .node-bg {
-            stroke: var(--accent-gold);
-            fill: rgba(212, 175, 55, 0.1);
-            stroke-width: 3;
-        }
-
-        .node-group.canova-node.selected .node-bg {
-            stroke: var(--accent-terracotta);
-            fill: rgba(200, 90, 50, 0.1);
-        }
-
-        .node-text {
-            fill: var(--text-primary);
-            font-size: 13px;
-            font-weight: 500;
-            text-anchor: middle;
-            pointer-events: none;
-            font-family: var(--font-sans);
-        }
-
-        .node-subtitle {
-            fill: var(--text-secondary);
-            font-size: 10px;
-            font-weight: 400;
-            text-anchor: middle;
-            pointer-events: none;
-            font-family: var(--font-sans);
-        }
-
-        /* Details Panel Info */
-        .panel-empty {
+        .panel-placeholder {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -163,105 +167,158 @@
             height: 100%;
             color: var(--text-muted);
             text-align: center;
-            padding: 2rem;
+            gap: 1rem;
         }
 
-        .panel-empty svg {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 1rem;
+        .panel-placeholder svg {
+            width: 64px;
+            height: 64px;
+            stroke: var(--text-muted);
             opacity: 0.5;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .panel-content {
-            display: none;
-            height: 100%;
+            animation: fade-in 0.4s ease-out;
+            display: flex;
             flex-direction: column;
             justify-content: space-between;
+            height: 100%;
         }
 
-        .relation-header {
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .panel-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        .relation-tag {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
+        .panel-tag {
+            display: inline-block;
             color: var(--accent-gold);
-            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
 
-        .relation-title {
+        .panel-title {
             font-family: var(--font-serif);
             font-size: 1.6rem;
-            color: var(--text-primary);
+            font-weight: 600;
             line-height: 1.3;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
-        .relation-description {
+        .panel-author {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .panel-author span {
+            font-style: normal;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .panel-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-section-title svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .panel-desc {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.6;
+            margin-bottom: 2rem;
             font-weight: 300;
-            margin-bottom: 1.5rem;
         }
 
-        .connection-list-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            font-weight: 600;
+        .connection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
         .connection-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.8rem;
-            margin-bottom: 0.8rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            cursor: pointer;
+            border-radius: 10px;
+            padding: 1rem;
             transition: var(--transition-fast);
+            cursor: pointer;
         }
 
         .connection-item:hover {
-            border-color: rgba(255, 255, 255, 0.15);
             background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(200, 90, 50, 0.2);
+        }
+
+        .connection-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .connection-target-title {
+            font-weight: 600;
+            font-size: 0.9rem;
             color: var(--text-primary);
         }
 
-        .connection-item strong {
-            color: var(--accent-gold);
+        .connection-type-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
-        .connection-item.terracotta-link strong {
+        .type-evolution {
+            background: rgba(200, 90, 50, 0.15);
             color: var(--accent-terracotta);
         }
 
-        .panel-footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
+        .type-influence {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
         }
 
-        /* Responsive Layouts */
-        @media (max-width: 992px) {
-            .connections-container {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-            .map-wrapper {
-                height: 500px;
-            }
-            .details-panel {
-                height: 400px;
-            }
+        .type-contrast {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        .connection-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -289,189 +346,379 @@
         </nav>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Workspace -->
     <main>
         <!-- Return Link to Root Hub -->
         <a href="../index.html" class="back-hub">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             Torna al Portale Centrale
         </a>
-
-        <!-- Connections Layout -->
-        <div class="connections-container">
+        
+        <section class="connections-container map-section">
             
-            <!-- SVG Map Wrapper -->
-            <div class="map-wrapper">
-                <svg class="network-map" viewBox="0 0 800 500">
-                    <!-- Connections (Edges) -->
-                    <!-- Cricco to Brunelleschi (Line 1) -->
-                    <line x1="400" y1="150" x2="220" y2="350" class="edge" id="edge-cricco-brunelleschi"></line>
-                    <!-- Cricco to Canova (Line 2) -->
-                    <line x1="400" y1="150" x2="580" y2="350" class="edge" id="edge-cricco-canova"></line>
-                    <!-- Brunelleschi to Canova (Line 3) -->
-                    <line x1="220" y1="350" x2="580" y2="350" class="edge" id="edge-brunelleschi-canova"></line>
-
-                    <!-- Nodes -->
-                    <!-- CENTRAL CONTEXT: Cricco-Teodoro -->
-                    <g class="node-group" onclick="selectNode('cricco')" id="node-cricco">
-                        <circle cx="400" cy="150" r="70" class="node-glow"></circle>
-                        <circle cx="400" cy="150" r="60" class="node-bg" style="stroke: var(--accent-gold);"></circle>
-                        <text x="400" y="145" class="node-text">Cricco-Teodoro</text>
-                        <text x="400" y="163" class="node-subtitle">Umanesimo & Rinascimento</text>
-                    </g>
-
-                    <!-- BRUNELLESCHI -->
-                    <g class="node-group" onclick="selectNode('brunelleschi')" id="node-brunelleschi">
-                        <circle cx="220" cy="350" r="65" class="node-glow"></circle>
-                        <circle cx="220" cy="350" r="55" class="node-bg"></circle>
-                        <text x="220" y="345" class="node-text">Brunelleschi</text>
-                        <text x="220" y="363" class="node-subtitle">Prospettiva & Cupola</text>
-                    </g>
-
-                    <!-- CANOVA -->
-                    <g class="node-group canova-node" onclick="selectNode('canova')" id="node-canova">
-                        <circle cx="580" cy="350" r="65" class="node-glow"></circle>
-                        <circle cx="580" cy="350" r="55" class="node-bg"></circle>
-                        <text x="580" y="345" class="node-text">Antonio Canova</text>
-                        <text x="580" y="363" class="node-subtitle">Neoclassicismo & Marmo</text>
-                    </g>
+            <!-- Graphic Map Panel -->
+            <div class="map-card">
+                <svg id="network-svg" class="map-svg" viewBox="0 0 720 720" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Glow filter -->
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="5" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    
+                    <!-- Edges Layer -->
+                    <g id="edges-group"></g>
+                    <!-- Nodes Layer -->
+                    <g id="nodes-group"></g>
                 </svg>
             </div>
 
-            <!-- Details Sidebar Panel -->
-            <div class="details-panel" id="details-panel">
-                
-                <!-- Default empty panel state -->
-                <div class="panel-empty" id="panel-empty">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    <p>Seleziona un nodo nella mappa interattiva per visualizzare le relazioni e i dettagli accademici.</p>
+            <!-- Descriptive Right Panel -->
+            <div class="info-panel" id="detail-panel">
+                <div class="panel-placeholder" id="placeholder-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <h3>Mappa delle Relazioni Storico-Artistiche</h3>
+                    <p>Seleziona o passa il mouse sopra un nodo del grafo per esplorare le evoluzioni, le influenze ed i contrasti teorico-stilistici tra i vari moduli di studio.</p>
                 </div>
 
-                <!-- Panel Content -->
-                <div class="panel-content" id="panel-content">
+                <div class="panel-content" id="panel-details" style="display: none;">
                     <div>
-                        <div class="relation-header">
-                            <span class="relation-tag" id="panel-tag">Relazione</span>
-                            <h3 class="relation-title" id="panel-title">Titolo del Nodo</h3>
+                        <div class="panel-header">
+                            <span class="panel-tag" id="panel-chapter-tag">Studio I</span>
+                            <h2 class="panel-title" id="panel-chapter-title">Titolo</h2>
+                            <div class="panel-author">Ambito: <span id="panel-chapter-author">Giorgio Cricco, Francesco Paolo Di Teodoro</span></div>
                         </div>
-                        <p class="relation-description" id="panel-description">Descrizione del ruolo e dell'influenza...</p>
                         
-                        <h4 class="connection-list-title">Nodi Collegati</h4>
-                        <div id="panel-connections-list">
-                            <!-- JS will inject connections here -->
+                        <p class="panel-section-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            Sintesi Critica
+                        </p>
+                        <p class="panel-desc" id="panel-chapter-desc">Descrizione...</p>
+                        
+                        <p class="panel-section-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path></svg>
+                            Collegamenti Concettuali
+                        </p>
+                        <div class="connection-list" id="panel-connections-list">
+                            <!-- Connection items generated dynamically -->
                         </div>
                     </div>
 
-                    <div class="panel-footer">
-                        <a href="#" class="btn btn-primary" id="panel-read-btn" style="display:block;">Leggi la Sintesi Dedicata</a>
+                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                        <a href="#" class="btn btn-primary" id="btn-read-summary" style="width: 100%; display: inline-flex; justify-content: center; text-decoration: none;">Leggi Sintesi Completa</a>
                     </div>
                 </div>
-
             </div>
 
-        </div>
+        </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Reading Modal Overlay (Used when navigating back or for integration) -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Titolo</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
     <footer>
-        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Storia dell'Arte. &copy; 2026</p>
     </footer>
 
     <!-- Interactive Scripting -->
     <script>
-        const nodes = {
-            cricco: {
-                tag: "Inquadramento Storico-Critico",
-                title: "Itinerario nell'arte: Gotico e Rinascimento",
-                description: "Il Cricco-Teodoro (Volume 3) delinea la cornice entro la quale si sviluppa la rivoluzione fiorentina del primo Quattrocento. Masaccio e Donatello, guidati dalle scoperte matematiche del Brunelleschi, rompono con il tardogotico per riscoprire il naturalismo ed il classicismo filologico.",
-                filePath: "summaries/rinascimento_1_origini.md",
-                connections: [
-                    { target: "brunelleschi", text: "Fornisce le basi teoriche per il modulo geometrico del <strong>Brunelleschi</strong>.", class: "" },
-                    { target: "canova", text: "Traccia la riscoperta filologica dell'antico che sarà poi alla base del Neoclassicismo del <strong>Canova</strong>.", class: "terracotta-link" }
-                ]
-            },
-            brunelleschi: {
-                tag: "Pioniere del Rinascimento",
-                title: "Filippo Brunelleschi: Spazio e Prospettiva",
-                description: "Brunelleschi è il padre fondatore del Rinascimento architettonico. Attraverso l'invenzione della prospettiva lineare e la scomposizione modulare (basata sul diametro delle colonne o braccia fiorentine), rationalizza lo spazio rendendolo comprensibile e proporzionato all'uomo.",
-                filePath: "summaries/rinascimento_2_fondatori.md",
-                connections: [
-                    { target: "cricco", text: "È il protagonista centrale del capitolo sulla rivoluzione spaziale fiorentina nel <strong>Cricco-Teodoro</strong>.", class: "" },
-                    { target: "canova", text: "La sua ricerca sulle proporzioni geometriche perfette ispira il rigore simmetrico della scultura di <strong>Canova</strong>.", class: "terracotta-link" }
-                ]
-            },
-            canova: {
-                tag: "Maestro del Neoclassicismo",
-                title: "Antonio Canova: Il Marmo Sublime",
-                description: "Canova applica i principi teorici del Winckelmann per far risorgere l'ideale greco della 'nobile semplicità'. Il suo rigido processo basato su modelli in gesso con chiodi di riferimento (repères) per sbozzare il marmo rispecchia lo spirito scientifico e razionale introdotto da Brunelleschi nel Rinascimento.",
-                filePath: "summaries/canova.md",
-                connections: [
-                    { target: "cricco", text: "La sua scultura rappresenta il culmine del recupero dei miti classici trattati nelle origini del <strong>Cricco-Teodoro</strong>.", class: "" },
-                    { target: "brunelleschi", text: "Condivide la razionalizzazione del processo costruttivo ed artistico tramite moduli geometrici e calcoli matematici.", class: "" }
-                ]
-            }
-        };
+        // Nodes dataset for Storia dell'Arte Moderna
+        const nodes = [
+            { id: 1, label: "Studio I", shortNum: "I", title: "Le Origini del Rinascimento", author: "Gotico Internazionale e Prospettiva", file: "summaries/rinascimento_1_origini.md", desc: "La transizione formale dal Gotico Internazionale (linearità ed evasione cortese) all'Umanesimo. La formulazione geometrica e matematica della prospettiva lineare di Brunelleschi." },
+            { id: 2, label: "Studio II", shortNum: "II", title: "I Padri Fondatori del Rinascimento", author: "Brunelleschi, Donatello, Masaccio", file: "summaries/rinascimento_2_fondatori.md", desc: "La triade dei pionieri fiorentini: la Cupola come meraviglia strutturale, lo stiacciato e il dramma psicologico in Donatello, la pittura plastica e monumentale di Masaccio." },
+            { id: 3, label: "Studio III", shortNum: "III", title: "La Stagione delle Esperienze", author: "Il Secondo Quattrocento", file: "summaries/rinascimento_3_esperienze.md", desc: "La maturazione e la diffusione delle teorie in Italia: l'architettura intellettuale di Alberti, la sintesi geometrica e luminosa di Piero della Francesca, l'allegoria di Botticelli e la prospettiva di Mantegna." },
+            { id: 4, label: "Studio IV", shortNum: "IV", title: "Il Rinascimento Maturo", author: "Leonardo, Michelangelo, Raffaello", file: "summaries/rinascimento_4_maturo.md", desc: "Il culmine monumentale: lo sfumato e l'ottica atmosferica di Leonardo, lo scalpello per 'via di levare' e il titanismo di Michelangelo, la grazia solare e la sintesi classica di Raffaello." },
+            { id: 5, label: "Studio V", shortNum: "V", title: "Il Rinascimento Veneto", author: "Giorgione e Tiziano", file: "summaries/rinascimento_5_veneto.md", desc: "La rivoluzione tonale a Venezia: il primato del colore sul disegno fiorentino, i misteri lirico-paesaggistici di Giorgione e la disgregazione materica e drammatica dell'ultimo Tiziano." },
+            { id: 6, label: "Studio VI", shortNum: "VI", title: "Il Barocco", author: "Caravaggio, Bernini, Borromini", file: "summaries/barocco_6.md", desc: "La teatralità controriformista e la sollecitazione sensoriale. Il naturalismo radicale e la luce divina di Caravaggio, la metamorfosi del marmo di Bernini, e il dinamismo geometrico di Borromini." },
+            { id: 7, label: "Studio VII", shortNum: "VII", title: "Neoclassicismo e Sublime", author: "Canova, David, Friedrich, Turner", file: "summaries/neoclassicismo_7.md", desc: "L'ordine geometrico razionale illuminista accostato all'emozione romantica dell'infinito. Il 'bello ideale' di Winckelmann e Canova, la pittura civile di David, ed il Sublime preromantico." },
+            { id: 8, label: "Studio VIII", shortNum: "VIII", title: "Romanticismo e Realismo", author: "Géricault, Delacroix, Courbet", file: "summaries/romanticismo_realismo_8.md", desc: "La drammaticità della storia e il rifiuto dell'idealizzazione accademica. Il naufragio epico di Géricault, l'espressionismo cromatico di Delacroix, ed il realismo politico del popolo di Courbet." },
+            { id: 9, label: "Studio IX", shortNum: "IX", title: "L'Impressionismo", author: "Manet, Monet, Renoir, Degas", file: "summaries/impressionismo_9.md", desc: "La pittura en plein air e la cattura percettiva dell'istante luminoso. Le campiture piatte di Manet, le serie luminose di Monet, la felicità festosa di Renoir, ed i tagli prospettici e fotografici di Degas." },
+            { id: 10, label: "Studio X", shortNum: "X", title: "Il Post-Impressionismo", author: "Cezanne, Seurat, Gauguin, Van Gogh", file: "summaries/postimpressionismo_10.md", desc: "Il superamento della pura impressione ottica. La ricerca di solidità geometrica di Cézanne, la scomposizione scientifica di Seurat, il cloisonnisme di Gauguin, e il colore espressionista di Van Gogh." }
+        ];
 
+        const links = [
+            { source: 1, target: 2, type: "evolution", desc: "La codificazione teorica della prospettiva lineare (Studio I) trova la prima attuazione geometrica e plastica nelle opere di Brunelleschi e Donatello (Studio II)." },
+            { source: 2, target: 3, type: "evolution", desc: "Le scoperte prospettiche e plastiche dei primi fondatori (Studio II) si diffondono e si rielaborano nelle grandi corti con Alberti, Piero della Francesca e Mantegna (Studio III)." },
+            { source: 2, target: 4, type: "evolution", desc: "La volumetria e il senso dello spazio di Masaccio e Brunelleschi (Studio II) costituiscono la solida base di partenza per il monumentalismo del Rinascimento Maturo (Studio IV)." },
+            { source: 3, target: 4, type: "evolution", desc: "L'equilibrio geometrico e la lucentezza di Piero della Francesca (Studio III) si evolvono nell'armonia classica e nella grazia spaziale di Raffaello (Studio IV)." },
+            { source: 4, target: 6, type: "influence", desc: "Il titanismo e la forza muscolare espressa dalla scultura di Michelangelo (Studio IV) sono lo stimolo fondamentale per le pose dinamiche e la drammaticità di Bernini (Studio VI)." },
+            { source: 4, target: 7, type: "influence", desc: "La perfezione anatomica di Michelangelo e la grazia formale di Raffaello (Studio IV) sono i riferimenti canonici supremi per la ricerca del 'bello ideale' di Canova (Studio VII)." },
+            { source: 5, target: 8, type: "influence", desc: "La stesura libera del colore e i caldi accordi tonali di Tiziano (Studio V) ispirano la pittura di colore e passione romantica di Eugène Delacroix (Studio VIII)." },
+            { source: 5, target: 9, type: "influence", desc: "La preminenza del colore sul disegno fiorentino e lo sfumato atmosferico veneto (Studio V) anticipano la pittura en plein air. Manet cita esplicitamente Giorgione per la composizione della Colazione sull'erba (Studio IX)." },
+            { source: 3, target: 10, type: "influence", desc: "L'immobilità solenne e la rigorosa armonia geometrica di Piero della Francesca (Studio III) influenzano la concezione statica e pointillista di Georges Seurat (Studio X)." },
+            { source: 6, target: 7, type: "contrast", desc: "Il Neoclassicismo di Canova e David (Studio VII) nasce come reazione razionale ed etica illuminista contro il disordine emotivo e lo sfarzo decorativo del Barocco (Studio VI)." },
+            { source: 7, target: 8, type: "contrast", desc: "La drammaticità del Romanticismo (Studio VIII) rifiuta le rigide regole formali ed etiche neoclassiche (Studio VII) per esaltare il sentimento individuale e gli impeti storici." },
+            { source: 8, target: 9, type: "evolution", desc: "La rottura dei soggetti storici e la pittura di realtà del Realismo (Studio VIII) spiana la strada alla cattura impressionista della vita quotidiana contemporanea (Studio IX)." },
+            { source: 9, target: 10, type: "evolution", desc: "I post-impressionisti (Studio X) superano la fugacità dell'attimo luminoso impressionista (Studio IX) per ricercare solidità geometrica (Cézanne), leggi ottiche (Seurat) o espressione interiore (Van Gogh)." }
+        ];
+
+        // Dimensions of SVG canvas
+        const width = 720;
+        const height = 720;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const R = 210; // radius of chapter nodes placement
+
+        // Calculate positions dynamically for radial layout
+        const nodePositions = {};
+        nodes.forEach((node, index) => {
+            const angle = (2 * Math.PI * index) / nodes.length - Math.PI / 2; // Offset by -PI/2 to start from top
+            nodePositions[node.id] = {
+                x: centerX + R * Math.cos(angle),
+                y: centerY + R * Math.sin(angle),
+                angle: angle
+            };
+        });
+
+        // SVG Render logic
+        const edgesGroup = document.getElementById('edges-group');
+        const nodesGroup = document.getElementById('nodes-group');
+
+        // Draw Edges (with a slight bend towards center to look clean)
+        links.forEach(link => {
+            const p1 = nodePositions[link.source];
+            const p2 = nodePositions[link.target];
+            
+            // Calculate quadratic curve control point
+            const mx = (p1.x + p2.x) / 2;
+            const my = (p1.y + p2.y) / 2;
+            const k = 0.22; // bend factor towards center
+            const cx = mx + (centerX - mx) * k;
+            const cy = my + (centerY - my) * k;
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`);
+            path.setAttribute("class", `graph-edge type-${link.type}`);
+            path.setAttribute("data-source", link.source);
+            path.setAttribute("data-target", link.target);
+            path.setAttribute("id", `edge-${link.source}-${link.target}`);
+            edgesGroup.appendChild(path);
+        });
+
+        // Draw Nodes
+        nodes.forEach((node, index) => {
+            const pos = nodePositions[node.id];
+            
+            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.setAttribute("class", "graph-node");
+            g.setAttribute("data-id", node.id);
+            g.setAttribute("id", `node-${node.id}`);
+            g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
+            
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "22");
+            
+            const textNum = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textNum.setAttribute("class", "graph-node-number");
+            textNum.setAttribute("y", "5");
+            textNum.textContent = node.shortNum;
+            
+            // Outer text labels positioned radially
+            const labelR = 34; // distance from circle node
+            const lx = labelR * Math.cos(pos.angle);
+            const ly = labelR * Math.sin(pos.angle);
+            
+            let anchor = "middle";
+            let labelOffsetY = 5;
+            
+            // Determine best text anchor based on circle side
+            const cosVal = Math.cos(pos.angle);
+            if (cosVal > 0.2) {
+                anchor = "start";
+            } else if (cosVal < -0.2) {
+                anchor = "end";
+            } else {
+                anchor = "middle";
+                labelOffsetY = Math.sin(pos.angle) > 0 ? 15 : -8;
+            }
+            
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", lx);
+            label.setAttribute("y", ly + labelOffsetY);
+            label.setAttribute("text-anchor", anchor);
+            
+            // Truncate labels for cleaner rendering in circle
+            let cleanTitle = node.title.split(":")[0]; // cut subtitle
+            if (cleanTitle.length > 25) {
+                cleanTitle = cleanTitle.substring(0, 23) + "...";
+            }
+            label.textContent = cleanTitle;
+            
+            g.appendChild(circle);
+            g.appendChild(textNum);
+            g.appendChild(label);
+            nodesGroup.appendChild(g);
+        });
+
+        // Interaction logic
+        const nodeElements = document.querySelectorAll('.graph-node');
+        const edgeElements = document.querySelectorAll('.graph-edge');
+        const placeholderView = document.getElementById('placeholder-view');
+        const panelDetails = document.getElementById('panel-details');
+        
+        const pChapterTag = document.getElementById('panel-chapter-tag');
+        const pChapterTitle = document.getElementById('panel-chapter-title');
+        const pChapterAuthor = document.getElementById('panel-chapter-author');
+        const pChapterDesc = document.getElementById('panel-chapter-desc');
+        const pConnectionsList = document.getElementById('panel-connections-list');
+        const btnReadSummary = document.getElementById('btn-read-summary');
+
+        let selectedNodeId = null;
+
+        // Function to select a node and render side panel info
         function selectNode(nodeId) {
-            // Remove selected class from all nodes
-            document.querySelectorAll('.node-group').forEach(el => el.classList.remove('selected'));
-            // Remove highlighted class from all edges
-            document.querySelectorAll('.edge').forEach(el => {
-                el.classList.remove('highlighted');
-                el.classList.remove('highlighted-gold');
+            selectedNodeId = nodeId;
+            const node = nodes.find(n => n.id === nodeId);
+            
+            // UI classes adjustment
+            nodeElements.forEach(el => {
+                const elId = parseInt(el.getAttribute('data-id'));
+                if (elId === nodeId) {
+                    el.classList.add('active');
+                    el.classList.remove('dimmed');
+                } else {
+                    el.classList.remove('active');
+                    el.classList.add('dimmed');
+                }
             });
 
-            // Add selected class to chosen node
-            document.getElementById(`node-${nodeId}`).classList.add('selected');
+            // Highlight connections on SVG
+            edgeElements.forEach(edge => {
+                const s = parseInt(edge.getAttribute('data-source'));
+                const t = parseInt(edge.getAttribute('data-target'));
+                if (s === nodeId || t === nodeId) {
+                    edge.classList.add('active');
+                    edge.classList.remove('dimmed');
+                } else {
+                    edge.classList.remove('active');
+                    edge.classList.add('dimmed');
+                }
+            });
 
-            // Highlight edges and update panel
-            const panelEmpty = document.getElementById('panel-empty');
-            const panelContent = document.getElementById('panel-content');
+            // Render Right Side Panel
+            placeholderView.style.display = 'none';
+            panelDetails.style.display = 'flex';
+
+            pChapterTag.textContent = node.label;
+            pChapterTitle.textContent = node.title;
+            pChapterAuthor.textContent = node.author;
+            pChapterDesc.textContent = node.desc;
+
+            // Generate connection list in panel
+            pConnectionsList.innerHTML = '';
+            const connectedLinks = links.filter(l => l.source === nodeId || l.target === nodeId);
             
-            panelEmpty.style.display = 'none';
-            panelContent.style.display = 'flex';
+            if (connectedLinks.length === 0) {
+                pConnectionsList.innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem;">Nessun collegamento diretto definito.</div>';
+            } else {
+                connectedLinks.forEach(link => {
+                    const isSource = link.source === nodeId;
+                    const partnerId = isSource ? link.target : link.source;
+                    const partnerNode = nodes.find(n => n.id === partnerId);
+                    
+                    const item = document.createElement('div');
+                    item.className = 'connection-item';
+                    item.onclick = (e) => {
+                        e.stopPropagation();
+                        selectNode(partnerId);
+                    };
 
-            const data = nodes[nodeId];
-            document.getElementById('panel-tag').textContent = data.tag;
-            document.getElementById('panel-title').textContent = data.title;
-            document.getElementById('panel-description').textContent = data.description;
-            
-            const readBtn = document.getElementById('panel-read-btn');
-            // We can read it in the modal of index.html by referencing it, or redirect to index with an active state. 
-            // For simplicity, let's open the markdown raw/directly in a viewer or link to summaries.
-            readBtn.href = `index.html?open=${data.filePath}`;
+                    let typeLabel = 'Evoluzione';
+                    if (link.type === 'influence') typeLabel = 'Influenza';
+                    else if (link.type === 'contrast') typeLabel = 'Contrasto';
 
-            // Highlight edges
-            if (nodeId === 'cricco') {
-                document.getElementById('edge-cricco-brunelleschi').classList.add('highlighted-gold');
-                document.getElementById('edge-cricco-canova').classList.add('highlighted-gold');
-            } else if (nodeId === 'brunelleschi') {
-                document.getElementById('edge-cricco-brunelleschi').classList.add('highlighted-gold');
-                document.getElementById('edge-brunelleschi-canova').classList.add('highlighted');
-            } else if (nodeId === 'canova') {
-                document.getElementById('edge-cricco-canova').classList.add('highlighted');
-                document.getElementById('edge-brunelleschi-canova').classList.add('highlighted');
+                    item.innerHTML = `
+                        <div class="connection-item-header">
+                            <span class="connection-target-title">${partnerNode.label}: ${partnerNode.title.split(':')[0]}</span>
+                            <span class="connection-type-badge type-${link.type}">${typeLabel}</span>
+                        </div>
+                        <p class="connection-desc">${link.desc}</p>
+                    `;
+                    pConnectionsList.appendChild(item);
+                });
             }
 
-            // Populate connections list in sidebar
-            const connectionsList = document.getElementById('panel-connections-list');
-            connectionsList.innerHTML = '';
-            
-            data.connections.forEach(conn => {
-                const item = document.createElement('div');
-                item.className = `connection-item ${conn.class}`;
-                item.innerHTML = conn.text;
-                item.onclick = (e) => {
-                    e.stopPropagation();
-                    selectNode(conn.target);
-                };
-                connectionsList.appendChild(item);
-            });
+            // Bind reader button click
+            btnReadSummary.onclick = (e) => {
+                e.preventDefault();
+                window.location.href = `index.html?open=${node.file}`;
+            };
         }
+
+        // Mouse Hover Actions (Temporary highlight without selecting)
+        nodeElements.forEach(nodeEl => {
+            const nodeId = parseInt(nodeEl.getAttribute('data-id'));
+            
+            nodeEl.addEventListener('mouseenter', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+
+                nodeElements.forEach(el => {
+                    const elId = parseInt(el.getAttribute('data-id'));
+                    if (elId === nodeId) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.add('dimmed');
+                    }
+                });
+
+                edgeElements.forEach(edge => {
+                    const s = parseInt(edge.getAttribute('data-source'));
+                    const t = parseInt(edge.getAttribute('data-target'));
+                    if (s === nodeId || t === nodeId) {
+                        edge.classList.add('active');
+                    } else {
+                        edge.classList.add('dimmed');
+                    }
+                });
+            });
+
+            nodeEl.addEventListener('mouseleave', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+                
+                nodeElements.forEach(el => {
+                    el.classList.remove('active', 'dimmed');
+                });
+                edgeElements.forEach(edge => {
+                    edge.classList.remove('active', 'dimmed');
+                });
+            });
+
+            nodeEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectNode(nodeId);
+            });
+        });
+
+        // Click SVG canvas to deselect node
+        document.getElementById('network-svg').addEventListener('click', () => {
+            selectedNodeId = null;
+            nodeElements.forEach(el => el.classList.remove('active', 'dimmed'));
+            edgeElements.forEach(edge => edge.classList.remove('active', 'dimmed'));
+            panelDetails.style.display = 'none';
+            placeholderView.style.display = 'flex';
+        });
     </script>
 </body>
 </html>

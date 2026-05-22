@@ -81,6 +81,31 @@
                         <span class="btn-title">Il Rinascimento Veneto</span>
                         <span class="btn-desc">La Pittura Tonale, Giorgione, Tiziano</span>
                     </button>
+                    <button class="select-btn" onclick="startQuiz('barocco')">
+                        <span class="btn-chapter">Studio VI</span>
+                        <span class="btn-title">Il Barocco</span>
+                        <span class="btn-desc">Caravaggio, Bernini, Borromini</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('neoclassicismo')">
+                        <span class="btn-chapter">Studio VII</span>
+                        <span class="btn-title">Neoclassicismo e Sublime</span>
+                        <span class="btn-desc">David, Canova, Friedrich, Turner</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('romanticismo')">
+                        <span class="btn-chapter">Studio VIII</span>
+                        <span class="btn-title">Romanticismo e Realismo</span>
+                        <span class="btn-desc">Géricault, Delacroix, Courbet</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('impressionismo')">
+                        <span class="btn-chapter">Studio IX</span>
+                        <span class="btn-title">L'Impressionismo</span>
+                        <span class="btn-desc">Manet, Monet, Renoir, Degas</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('postimpressionismo')">
+                        <span class="btn-chapter">Studio X</span>
+                        <span class="btn-title">Il Post-Impressionismo</span>
+                        <span class="btn-desc">Cézanne, Seurat, Gauguin, Van Gogh</span>
+                    </button>
                 </div>
             </div>
 
@@ -446,6 +471,311 @@
                         ],
                         correctIndex: 1,
                         explanation: "Nello stile tardo, Tiziano abbandona il rigore formale per stendere grumi densi di colore in modo concitato e materico, usando persino le dita per distribuire la pittura sulla tela, accentuando l'espressività drammatica."
+                    }
+                ]
+            },
+            barocco: {
+                chapterTag: "Studio VI",
+                title: "Il Barocco",
+                questions: [
+                    {
+                        question: "Quale importante innovazione introduce Caravaggio nella stesura del quadro sacro per rifiutare l'idealizzazione accademica?",
+                        options: [
+                            "L'uso di tele rotonde per focalizzare la prospettiva.",
+                            "L'utilizzo di modelli reali estrapolati dal popolo e dagli emarginati, ritratti con fedele naturalezza senza abbellimenti.",
+                            "La rimozione totale del colore ad olio a favore dell'acquerello rapido.",
+                            "Il recupero di cornici dorate intarsiate a motivi geometrici bizantini."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Caravaggio rifiuta l'idealizzazione accademica dipingendo i soggetti sacri a partire da persone comuni, prostitute o popolani incontrati per strada, ritraendone con assoluto realismo i piedi sporchi, le rughe e i segni della povertà."
+                    },
+                    {
+                        question: "Nella \"Vocazione di san Matteo\" di Caravaggio, quale significato assume il fascio di luce radente proveniente da destra?",
+                        options: [
+                            "È un semplice espediente per illuminare il bancone del gabelliere.",
+                            "Simboleggia la Grazia divina che squarcia il buio del peccato, parallela al braccio teso di Cristo.",
+                            "Rappresenta la luce solare filtrata dalle tende della taverna.",
+                            "Serve a deviare lo sguardo dello spettatore verso la finestra reale."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La luce ha un valore morale e teologico: rappresenta la Grazia divina della vocazione che investe Matteo ed i suoi compagni di tavolo, procedendo parallelamente alla direzione del braccio teso di Cristo."
+                    },
+                    {
+                        question: "Quale capolavoro scultoreo di Bernini fonde in un unico \"bel composto\" la scultura drammatica, l'architettura classica e la luce zenitale dorata proveniente da una finestra nascosta?",
+                        options: [
+                            "L'Apollo e Dafne della Galleria Borghese.",
+                            "Il monumento equestre a Costantino.",
+                            "L'Estasi di santa Teresa nella Cappella Cornaro.",
+                            "Il Baldacchino di San Pietro."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Nell'Estasi di santa Teresa, Bernini realizza la sintesi ideale delle arti: la scultura del gruppo sacro è fusa con l'architettura scenografica della cappella e illuminata da una vera fonte di luce naturale gialla nascosta dietro la trabeazione."
+                    },
+                    {
+                        question: "Quale virtuosismo scultoreo caratterizza l'opera \"Apollo e Dafne\" di Bernini?",
+                        options: [
+                            "La fusione in bronzo a cera persa di un gruppo di 15 figure complesse.",
+                            "La resa plastica della metamorfosi della ninfa in alloro, con foglie sottilissime, radici che spuntano dai piedi e corteccia ruvida scavate direttamente nel marmo.",
+                            "La pittura delle vesti con pigmenti naturali dorati luccicanti.",
+                            "L'aggiunta di veri innesti di rami e legno sul marmo di Carrara."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Bernini sfida i limiti fisici del marmo scolpendo con straordinaria morbidezza la ninfa nell'attimo della trasformazione vegetale: le sue mani fioriscono in rami d'alloro, i piedi si fanno radici e una corteccia ruvida avvolge il corpo liscio."
+                    },
+                    {
+                        question: "Su quale complessa pianta geometrica (rifiutando il modulo antropomorfico del Rinascimento) Borromini edifica la chiesa di Sant'Ivo alla Sapienza?",
+                        options: [
+                            "Una pianta ellittica pura basata su due cerchi tangenti.",
+                            "Una pianta a stella a sei punte generata dalla sovrapposizione di due triangoli equilateri ruotati.",
+                            "Una croce latina a tre navate voltate a botte.",
+                            "Una pianta ottagonale ispirata al Battistero fiorentino."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Borromini imposta Sant'Ivo su una pianta stellare basata sulla sovrapposizione di due triangoli equilateri, creando uno spazio interno dinamico in cui nicchie concave e sporgenze convesse si alternano ritmicamente salendo nella cupola."
+                    }
+                ]
+            },
+            neoclassicismo: {
+                chapterTag: "Studio VII",
+                title: "Neoclassicismo e Sublime",
+                questions: [
+                    {
+                        question: "Quale celebre formula conia l'archeologo Winckelmann per definire l'essenza dell'opera d'arte classica greca?",
+                        options: [
+                            "Dinamismo concavo e ricchezza espressiva barocca.",
+                            "Nobile semplicità e quieta grandezza.",
+                            "Proporzione prospettica e modularità geometrica.",
+                            "Realismo brutale e chiaroscuro drammatico."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Winckelmann teorizza che i capolavori greci esprimono una 'nobile semplicità e quieta grandezza' (edle Einfalt und stille Größe), dove la violenza delle passioni è mitigata e sublimata in un'armonia equilibrata e pacata."
+                    },
+                    {
+                        question: "In quale capolavoro di Jacques-Louis David la morte fisica di un leader politico viene assimilata iconograficamente alla deposizione di Cristo?",
+                        options: [
+                            "Il giuramento degli Orazi.",
+                            "La morte di Marat (1793).",
+                            "L'incoronazione di Napoleone.",
+                            "Leonida alle Termopili."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Nella Morte di Marat, David ritrae il braccio esanime del rivoluzionario caduto nella vasca riprendendo la posa del Cristo morto della Pietà di Michelangelo e della Deposizione di Raffaello, elevandolo a martire laico della Rivoluzione."
+                    },
+                    {
+                        question: "Quale trattamento superficiale applicava Canova sulle sculture finite per conferire al marmo di Carrara un calore simile a quello della pelle umana?",
+                        options: [
+                            "Una lucidatura ad olio bollente stesa a pennello.",
+                            "Una miscela fluida a base di cera d'api ed 'acqua di rotaia' (ricca di ossidi di ferro).",
+                            "Una vernice trasparente acrilica lucida.",
+                            "Una stesura di gesso liquido diluito in cera."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Per eliminare la freddezza del marmo bianco, Canova eseguiva personalmente 'l'ultima mano' e applicava una patina calda a base di cera d'api e 'acqua di rotaia' (l'acqua di raffreddamento dei fabbri contenente ruggine e ossidi di ferro), rendendo la pietra rosea e semitrasparente."
+                    },
+                    {
+                        question: "Nel gruppo monumentale di \"Amore e Psiche giacenti\" di Canova, quale momento della favola mitologica viene rappresentato?",
+                        options: [
+                            "L'ira di Venere contro la fanciulla.",
+                            "Il bacio carnale ed erotico dei due amanti.",
+                            "L'attimo sospeso immediatamente precedente al bacio, dove le labbra e gli sguardi si sfiorano in perfetta tensione formale.",
+                            "La fuga di Amore verso il monte Olimpo."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Canova predilige il 'momento di transizione': non il bacio avvenuto, ma l'istante in cui Amore risveglia Psiche e i due volti si avvicinano sospesi in un abbraccio chiasmatico a forma di X."
+                    },
+                    {
+                        question: "Quale caratteristica compositiva definisce l'opera \"Viandante sul mare di nebbia\" di Friedrich come emblema del Sublime preromantico?",
+                        options: [
+                            "La presenza di fulmini e navi in fiamme all'orizzonte.",
+                            "La raffigurazione del protagonista di spalle (Rückenfigur) che invita lo spettatore a immedesimarsi e a contemplare l'infinito naturale.",
+                            "La scomposizione scientifica dei colori in micro-punti accostati.",
+                            "L'eliminazione totale di riferimenti umani a favore del puro paesaggio."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La tecnica del personaggio ritratto di spalle (Rückenfigur) focalizza la composizione sulla meditazione solitaria: lo spettatore si immedesima nel viandante e si confronta con l'immensità vertiginosa e divina della natura coperta di nebbia."
+                    }
+                ]
+            },
+            romanticismo: {
+                chapterTag: "Studio VIII",
+                title: "Romanticismo e Realismo",
+                questions: [
+                    {
+                        question: "Quale metafora politica e morale rappresenta, secondo la critica romantica, la struttura instabile e dinamica della \"Zattera della Medusa\" di Géricault?",
+                        options: [
+                            "L'inevitabile progresso tecnologico navale.",
+                            "Il naufragio ideale della Francia post-napoleonica e la fragilità della condizione umana alla deriva.",
+                            "La sottomissione dell'uomo alla sovranità assoluta dei re.",
+                            "Il trionfo della ragione illuminista sulle tempeste della superstizione."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La Zattera della Medusa, dipinta con crudo realismo basato su studi di cadaveri veri, esprime la disperazione e la speranza traballante dei naufraghi, offrendosi come allegoria morale del fallimento politico della Restaurazione francese."
+                    },
+                    {
+                        question: "In \"La Libertà che guida il popolo\" di Delacroix, quale elemento simboleggia l'unione interclassista della rivolta parigina del 1830?",
+                        options: [
+                            "Il colore uniforme degli abiti delle figure sullo sfondo.",
+                            "L'affiancamento del borghese col cilindro, dell'operaio con la sciabola e dello studente del popolo con le pistole.",
+                            "La parata ufficiale dei generali a cavallo in primo piano.",
+                            "L'assenza di bandiere o simboli politici."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Delacroix unisce nella battaglia figure appartenenti a estrazioni sociali diverse (borghesia, classe operaia e giovani popolani), che marciano compatti e solidali attorno all'allegoria a seno scoperto della Libertà."
+                    },
+                    {
+                        question: "Quale scandalosa scelta stilistica compì Gustave Courbet nell'opera \"Un funerale a Ornans\" per manifestare il suo Realismo?",
+                        options: [
+                            "Dipinse figure mostruose o spettrali per deridere la chiesa.",
+                            "Rappresentò un funerale anonimo di campagna su una tela di enormi dimensioni (3x6 metri) riservata storicamente ai grandi temi eroici.",
+                            "Abolì totalmente la pittura ad olio usando il carboncino su muro.",
+                            "Inserì angeli e santi dipinti a campiture d'oro zecchino."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Courbet scandalizzò l'Accademia dipingendo una modesta e sobria cerimonia funebre di provincia su un formato monumentale solenne. Inoltre, dispose le figure in orizzontale senza gerarchie e tagliò la fossa al margine del quadro."
+                    },
+                    {
+                        question: "Quale celebre affermazione di Courbet sintetizza il suo rifiuto per la pittura mitologica, allegorica e accademica?",
+                        options: [
+                            "'Il disegno è la probità dell'arte'.",
+                            "'Mostratemi un angelo e io lo dipingerò'.",
+                            "'La pittura è un'emozione pura senza oggetti'.",
+                            "'Il colore è la musica della tela'."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Con la frase 'Mostratemi un angelo e io lo dipingerò', Courbet rivendica il dovere morale del pittore realista di rappresentare solo ciò che appartiene all'esperienza sensibile e reale, rifiutando soggetti fittizi o religiosi invisibili."
+                    },
+                    {
+                        question: "Nell'opera \"Gli spaccapietre\" di Courbet, come viene espressa la denuncia sociale del duro lavoro manuale?",
+                        options: [
+                            "Ritraendo i due operai che piangono tenendosi la testa tra le mani.",
+                            "Mostrando figure grottesche e deformi sullo sfondo di una miniera d'oro.",
+                            "Ritraendo i due lavoratori di spalle o con il volto coperto, vestiti di stracci e intenti a un lavoro disumanizzante, senza aneddotica compassionevole.",
+                            "Aggiungendo la figura di un proprietario terriero che li frusta."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Courbet evita il sentimentalismo patetico: nasconde i volti dei due protagonisti e ne evidenzia gli abiti logori, le toppe e i gesti pesanti legati al duro lavoro quotidiano, elevandoli a simboli universali della fatica operaia."
+                    }
+                ]
+            },
+            impressionismo: {
+                chapterTag: "Studio IX",
+                title: "L'Impressionismo",
+                questions: [
+                    {
+                        question: "Quale opera di Édouard Manet, esposta al Salon des Refusés del 1863, scatenò un enorme scandalo per la presenza di un nudo femminile contemporaneo e privo di giustificazione mitologica?",
+                        options: [
+                            "L'Olympia.",
+                            "La colazione sull'erba (Le Déjeuner sur l'herbe).",
+                            "Il bar delle Folies-Bergère.",
+                            "La ferrovia."
+                        ],
+                        correctIndex: 1,
+                        explanation: "La Colazione sull'erba sconvolse la morale borghese perché ritraeva una donna nuda seduta in mezzo a due uomini vestiti con abiti alla moda contemporanea, senza alcuna veste allegorica, e dipinta con toni piatti senza chiaroscuro."
+                    },
+                    {
+                        question: "In quale opera Manet ritrae una prostituta parigina che fissa fiera l'osservatore, definita con contrasti netti contro lenzuola bianche e un gatto nero?",
+                        options: [
+                            "La colazione sull'erba.",
+                            "L'Olympia.",
+                            "La cantante di strada.",
+                            "Il pifferaio."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Olympia suscitò enorme scalpore sia per il soggetto (una cortigiana contemporanea che riceve fiori da un cliente) sia per lo stile: il corpo pallido e quasi bidimensionale contrasta duramente con lo sfondo buio e le lenzuola."
+                    },
+                    {
+                        question: "Quale dipinto di Claude Monet, raffigurante il porto di Le Havre all'alba, diede origine (inizialmente con intento derisorio) al termine \"Impressionismo\"?",
+                        options: [
+                            "I papaveri.",
+                            "La terrazza a Sainte-Adresse.",
+                            "Impressione, sole nascente (1872).",
+                            "Lo stagno delle ninfee."
+                        ],
+                        correctIndex: 2,
+                        explanation: "Esposto nel 1874 presso lo studio del fotografo Nadar, il dipinto Impressione, sole nascente ispirò al critico Louis Leroy l'articolo satirico 'La mostra degli impressionisti', battezzando il movimento."
+                    },
+                    {
+                        question: "Per quale motivo Monet dipinse la facciata della Cattedrale di Rouen in oltre 30 tele diverse?",
+                        options: [
+                            "Perché la Cattedrale minacciava di crollare e voleva documentarne i dettagli.",
+                            "Per studiare la variabilità degli effetti luminosi e cromatici sulla pietra nelle diverse ore del giorno e stagioni.",
+                            "Su commissione specifica dell'arcivescovo della città.",
+                            "Per dimostrare la superiorità dell'architettura gotica su quella rinascimentale."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Monet studia la luce come fattore dinamico: dipingendo la cattedrale in serie (alba, sole calante, pioggia) dimostra che la materia solida della pietra gotica si dissolve visivamente a seconda del variare dell'atmosfera."
+                    },
+                    {
+                        question: "Quale caratteristica compositiva distingue le opere di Edgar Degas come \"La classe di danza\" e \"L'assenzio\"?",
+                        options: [
+                            "L'uso esclusivo della pittura en plein air in mezzo alle paludi.",
+                            "Le inquadrature asimmetriche, i tagli diagonali del pavimento e le composizioni decentrate di derivazione fotografica.",
+                            "Il recupero di fondali dorati zecchini e icone bizantine.",
+                            "L'applicazione rigorosa del modulo del cerchio perfetto di origine classica."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Degas, appassionato di fotografia e stampe giapponesi, inventa tagli audaci: nella Classe di danza usa una forte diagonale e lascia il centro vuoto; nell'Assenzio decostruisce la prospettiva posizionando i tavoli a zigzag ed i personaggi in alto a destra."
+                    }
+                ]
+            },
+            postimpressionismo: {
+                chapterTag: "Studio X",
+                title: "Il Post-Impressionismo",
+                questions: [
+                    {
+                        question: "Quale formula geometrica teorizza Paul Cézanne per strutturare e razionalizzare gli oggetti della natura?",
+                        options: [
+                            "La retta, la curva e il piano inclinato.",
+                            "Il cilindro, la sfera e il cono.",
+                            "Il quadrato, il cerchio e il triangolo equilatero.",
+                            "La spirale, l'ovale e la piramide."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Cézanne scrive che la natura va trattata secondo il cilindro, la sfera e il cono: l'artista non deve copiare le apparenze luminose ma scomporre e ricomporre la realtà secondo volumi solidi e geometrici puri."
+                    },
+                    {
+                        question: "In che modo Georges Seurat applica le scoperte scientifiche sui colori complementari nell'opera \"Una domenica pomeriggio sull'isola della Grande Jatte\"?",
+                        options: [
+                            "Dipingendo con colori metallici riflettenti.",
+                            "Utilizzando la tecnica del Pointillisme, accostando micro-punti di colori puri sulla tela lasciando che sia l'occhio dello spettatore a fonderli otticamente.",
+                            "Mescolando il nero a tutti i pigmenti per creare ombre profonde.",
+                            "Abolendo totalmente il disegno e lasciando colare il colore a macchie casuali."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Seurat applica le teorie scientifiche sulla visione: accostando puntini di colori complementari (es. rosso e verde) senza mischiarli fisicamente, ottiene una luminosità straordinaria grazie alla ricomposizione ottica retinica dello spettatore."
+                    },
+                    {
+                        question: "Quale tecnica, ispirata alle vetrate medievali e alle stampe giapponesi, viene utilizzata da Paul Gauguin per stendere il colore?",
+                        options: [
+                            "Lo stiacciato prospettico.",
+                            "Il Cloisonnisme (campiture piatte racchiuse da spessi contorni scuri).",
+                            "Lo sfumato a tempera grassa.",
+                            "La pittura a spruzzo d'inchiostro."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Il Cloisonnisme consiste nel delimitare zone di colore piatto con una marcata linea di contorno scura (simile al metallo che separa gli smalti o i vetri colorati medievali), accentuando la bidimensionalità antinaturalistica della tela."
+                    },
+                    {
+                        question: "Nel capolavoro di Van Gogh \"Notte stellata\", quale elemento naturale funge da legame verticale e simbolico tra la terra e il cielo cosmico?",
+                        options: [
+                            "Il campanile a bulbo del paese.",
+                            "Il grande cipresso in primo piano a sinistra, simile a una fiamma oscura protesa verso il cielo.",
+                            "La fitta schiera di olivi coltivati a terrazze.",
+                            "La catena montuosa delle Alpilles sullo sfondo."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Il cipresso, pianta associata storicamente ai cimiteri e alla morte, si erge come una fiamma scura e dinamica in primo piano, unendo la terra (la fragilità umana del villaggio) al cielo (il turbinio delle stelle e l'infinito)."
+                    },
+                    {
+                        question: "Quale profonda differenza separa lo stile e la tavolozza dei \"Mangiatori di patate\" (1885) di Van Gogh dalle sue opere del periodo di Arles e Saint-Rémy?",
+                        options: [
+                            "I Mangiatori di patate presentano colori psichedelici e sfondi completamente astratti.",
+                            "Nel periodo olandese la tavolozza è cupa, terrosa e monocroma per esprimere la sacralità della povertà, mentre in Provenza esplode l'uso espressionista di gialli, blu e verdi saturi.",
+                            "L'uso esclusivo di pennellate lisce e prive di spessore materico.",
+                            "Il recupero di prospettive aeree leonardesche con fitti sfumati azzurri."
+                        ],
+                        correctIndex: 1,
+                        explanation: "Nel primo periodo olandese (es. I mangiatori di patate), Van Gogh usa toni scuri e terrosi per evidenziare il legame tra i contadini e la terra. Successivamente, dopo il soggiorno a Parigi e lo spostamento a Sud, la sua arte sperimenta l'esplosione cromatica espressionista e simbolica del giallo e del blu."
                     }
                 ]
             }
