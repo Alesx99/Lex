@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Main Style Sheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Fuse.js for Fuzzy Search -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.basic.min.js"></script>
 </head>
 <body>
 
@@ -42,6 +46,18 @@
                 Simulatore d'Esame
             </a>
         </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <div id="pomodoro-container" class="pomodoro-mini">
+                <span id="pomo-timer">25:00</span>
+                <button id="pomo-start-btn" class="pomo-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+            </div>
+        </div>
     </header>
 
     <!-- Main Content Container -->
@@ -231,6 +247,72 @@
             // Hide overlay by default
             overlay.style.display = 'none';
 
+            // --- THEME TOGGLE LOGIC ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            
+            const savedTheme = localStorage.getItem('lex-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-theme');
+                const isLight = document.body.classList.contains('light-theme');
+                localStorage.setItem('lex-theme', isLight ? 'light' : 'dark');
+                sunIcon.style.display = isLight ? 'block' : 'none';
+                moonIcon.style.display = isLight ? 'none' : 'block';
+            });
+
+            // --- POMODORO TIMER LOGIC ---
+            let pomoMinutes = 25;
+            let pomoSeconds = 0;
+            let pomoInterval = null;
+            let isPomoRunning = false;
+
+            const pomoTimerDisplay = document.getElementById('pomo-timer');
+            const pomoStartBtn = document.getElementById('pomo-start-btn');
+
+            function updatePomoDisplay() {
+                pomoTimerDisplay.textContent = `${pomoMinutes.toString().padStart(2, '0')}:${pomoSeconds.toString().padStart(2, '0')}`;
+            }
+
+            pomoStartBtn.addEventListener('click', () => {
+                if (isPomoRunning) {
+                    clearInterval(pomoInterval);
+                    pomoStartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+                } else {
+                    pomoInterval = setInterval(() => {
+                        if (pomoSeconds === 0) {
+                            if (pomoMinutes === 0) {
+                                clearInterval(pomoInterval);
+                                alert('Sessione terminata! Fai una pausa.');
+                                pomoMinutes = 25;
+                                isPomoRunning = false;
+                                pomoStartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+                            } else {
+                                pomoMinutes--;
+                                pomoSeconds = 59;
+                            }
+                        } else {
+                            pomoSeconds--;
+                        }
+                        updatePomoDisplay();
+                    }, 1000);
+                    pomoStartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+                }
+                isPomoRunning = !isPomoRunning;
+            });
+
+            // --- FUZZY SEARCH WITH FUSE.JS ---
+            const fuse = new Fuse(searchDatabase, {
+                keys: ['title', 'keywords', 'description'],
+                threshold: 0.4
+            });
+
             searchBox.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase().trim();
                 if (query.length < 2) {
@@ -239,13 +321,7 @@
                     return;
                 }
 
-                // Search in database
-                const results = searchDatabase.filter(item => {
-                    return item.title.toLowerCase().includes(query) ||
-                           item.description.toLowerCase().includes(query) ||
-                           item.keywords.toLowerCase().includes(query) ||
-                           item.chapterTag.toLowerCase().includes(query);
-                });
+                const results = fuse.search(query).map(r => r.item);
 
                 // Render results
                 resultsList.innerHTML = '';
@@ -288,6 +364,15 @@
                     overlay.style.display = 'none';
                 }
             });
+
+            // Register Service Worker for PWA
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(reg => console.log('SW Registered', reg))
+                        .catch(err => console.log('SW Registration failed', err));
+                });
+            }
         });
     </script>
 </body>

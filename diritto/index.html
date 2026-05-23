@@ -89,6 +89,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
                 Quiz Valutazione
             </a>
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema" style="background:none; border:none; color:inherit; cursor:pointer; margin-left:1rem; display:flex; align-items:center;">
+                <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
         </nav>
     </header>
 
@@ -736,5 +740,66 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
     </div>
+
+    <!-- Reading Mode Controls -->
+    <div id="reading-controls" class="reading-controls" style="display: none;">
+        <button id="font-size-btn" class="reader-btn" title="Aumenta Font">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        </button>
+        <button id="dyslexic-btn" class="reader-btn" title="Font Alta Leggibilità">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+        </button>
+    </div>
+
+    <script>
+        // THEME TOGGLE LOGIC (Sync with root)
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        const savedTheme = localStorage.getItem('lex-theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            localStorage.setItem('lex-theme', isLight ? 'light' : 'dark');
+            sunIcon.style.display = isLight ? 'block' : 'none';
+            moonIcon.style.display = isLight ? 'none' : 'block';
+        });
+
+        // READING MODE LOGIC
+        const fontSizeBtn = document.getElementById('font-size-btn');
+        const dyslexicBtn = document.getElementById('dyslexic-btn');
+        const readingControls = document.getElementById('reading-controls');
+        
+        fontSizeBtn.addEventListener('click', () => {
+            markdownView.classList.toggle('large-font');
+            fontSizeBtn.classList.toggle('active');
+        });
+
+        dyslexicBtn.addEventListener('click', () => {
+            markdownView.classList.toggle('dyslexic-font');
+            dyslexicBtn.classList.toggle('active');
+        });
+
+        // Show reading controls only when summary is open
+        const originalOpenSummary = window.openSummary;
+        window.openSummary = function(title, path) {
+            originalOpenSummary(title, path);
+            readingControls.style.display = 'flex';
+            markdownView.classList.add('reading-content');
+        };
+
+        const originalCloseSummary = window.closeSummary;
+        window.closeSummary = function() {
+            originalCloseSummary();
+            readingControls.style.display = 'none';
+        };
+    </script>
 </body>
 </html>

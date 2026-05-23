@@ -23,6 +23,19 @@
     --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Light Theme Variables */
+body.light-theme {
+    --bg-main: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --bg-card-hover: rgba(255, 255, 255, 1);
+    --bg-modal: rgba(255, 255, 255, 0.98);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color-hover: rgba(212, 175, 55, 0.6);
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+}
+
 /* Global Reset & Base Styles */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -67,9 +80,63 @@ body::after {
     animation: pulse-slow 25s infinite alternate-reverse;
 }
 
-@keyframes pulse-slow {
-    0% { transform: scale(1) translate(0, 0); opacity: 0.1; }
-    100% { transform: scale(1.15) translate(5%, 5%); opacity: 0.15; }
+/* Reading Mode Styles */
+.reading-controls {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem;
+    border-radius: 16px;
+    display: flex;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+}
+
+.reader-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.reader-btn:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+.reader-btn.active {
+    background: var(--accent-gold);
+    color: #000;
+    border-color: var(--accent-gold);
+}
+
+.reading-content {
+    transition: all 0.3s ease;
+}
+
+.reading-content.large-font {
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+.reading-content.dyslexic-font {
+    font-family: 'OpenDyslexic', sans-serif !important;
+}
+
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('https://cdn.jsdelivr.net/npm/opendyslexic@1.0.3/OpenDyslexic-Regular.otf');
 }
 
 /* Scrollbar Styling */
