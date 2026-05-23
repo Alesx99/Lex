@@ -1,46 +1,44 @@
 # Capitolo VI: La circolazione dei beni culturali
 **Autore:** Fabio Dell'Aversana
 
+Il tema della circolazione ha visto un costante attivismo legislativo, dalla Legge Bottai (1939) al Testo Unico del 1999, fino al Codice del 2004. La disciplina attuale cerca di contemperare il diritto di proprietà privata con l'interesse pubblico alla conservazione e all'integrità del patrimonio nazionale.
+
 ## Sommario
-1. Introduzione: beni culturali (pubblici e privati).
-2. Libera circolazione vs. autorizzazione.
-3. Un ulteriore controllo sulla circolazione dei beni culturali: la denuncia di trasferimento.
-4. La prelazione artistica tra intenzioni del legislatore e prassi.
-5. I controlli sul commercio dei beni culturali.
-6. La circolazione in ambito internazionale tra controlli e tutela dell'integrità.
+1. Beni Pubblici vs Privati: la rilevanza del regime proprietario.
+2. Inalienabilità demaniale e autorizzazione all'alienazione.
+3. Controllo sulla circolazione: la denuncia di trasferimento (Art. 59).
+4. Il diritto di prelazione dello Stato (Artt. 60-62).
+5. Controlli sul commercio e autenticità.
+6. Circolazione internazionale ed esportazione.
 
 ---
 
-## 1. Introduzione: beni culturali (pubblici e privati)
-La circolazione dei beni culturali è soggetta a forti limitazioni pubblicistiche, differenziate in base alla natura pubblica o privata del soggetto proprietario. Mentre la circolazione dei beni privati è volta principalmente al controllo dei passaggi di proprietà e alla tutela dell'integrità nazionale, per i beni pubblici vige un principio generale di inalienabilità demaniale, mitigato da specifiche autorizzazioni.
+## 1. Introduzione: il regime proprietario
+La distinzione tra proprietà pubblica e privata è cruciale nella circolazione. 
+*   **Demanio Culturale:** Comprende beni di Stato ed Enti territoriali che soddisfano durevolmente esigenze collettive (Art. 822 c.c.). L'appartenenza non basta; serve la **destinazione pubblica** legata alla qualità del bene.
+*   **Federalismo Demaniale (d.lgs. 85/2010):** Permette il trasferimento di beni tra Stato, Regioni ed Enti locali anche a titolo non oneroso (Art. 54, comma 3 Codice).
 
-## 2. Libera circolazione vs. autorizzazione
-* **Beni inalienabili (Art. 54):** Sono assolutamente inalienabili i beni del demanio culturale quali:
-  * Gli archivi degli enti pubblici territoriali.
-  * I beni archeologici (che appartengono ex lege allo Stato).
-  * Le singole cose mobili o immobili di proprietà pubblica che siano state dichiarate monumenti nazionali.
-  * Le raccolte di musei, pinacoteche, gallerie e biblioteche pubbliche.
-* **Beni alienabili previa autorizzazione (Artt. 55-56):** Altri beni culturali di proprietà pubblica o di enti no-profit possono essere alienati solo previa autorizzazione del Ministero. L'autorizzazione è rilasciata a condizione che l'alienazione non pregiudichi la conservazione e la pubblica fruizione del bene. L'atto di alienazione privo di autorizzazione è nullo di diritto.
+## 2. Inalienabilità e Autorizzazione
+*   **Inalienabilità Assoluta (Art. 54):** Riguarda archivi, aree archeologiche, monumenti nazionali dichiarati e raccolte di musei. Questi beni non possono essere venduti né formare oggetto di diritti a terzi.
+*   **Alienabilità previa Autorizzazione (Artt. 55-56):** Altri beni pubblici o di enti no-profit possono essere alienati solo se il Ministero accerta che l'atto non danneggi la tutela o la fruizione.
+*   **Clausole Risolutive (Art. 55-bis):** Le prescrizioni del Ministero devono essere riportate nell'atto di vendita a pena di nullità (clausola risolutiva espressa ex Art. 1456 c.c.) e trascritte nei registri.
 
 ## 3. La denuncia di trasferimento (Art. 59)
-Qualsiasi atto che trasferisce, in tutto o in parte, a qualsiasi titolo (compresa la successione ereditaria o la vendita a titolo oneroso/gratuito), la proprietà o la detenzione di un bene culturale deve essere denunciato al Ministero:
-* **Termine:** La denuncia deve essere presentata entro **30 giorni** dall'atto.
-* **Soggetti obbligati:** L'alienante (venditore), l'acquirente (in caso di trasferimento coattivo) o l'erede.
-* **Contenuto:** Dati identificativi delle parti, descrizione e localizzazione del bene, indicazione del titolo di trasferimento.
-* **Effetti:** La denuncia rende edotto il Ministero del trasferimento ed è presupposto di efficacia del trasferimento stesso, avviando il termine per l'eventuale esercizio del diritto di prelazione.
+Qualsiasi atto che trasferisce la proprietà o la detenzione (es. vendita, donazione, eredità) deve essere denunciato al Ministero entro **30 giorni**.
+*   **Presupposto di efficacia:** Senza denuncia, il trasferimento non è opponibile allo Stato e l'atto è considerato nullo o privo di effetti traslativi definitivi fino alla scadenza dei termini di prelazione.
 
-## 4. La prelazione artistica dello Stato (Artt. 60-62)
-Nel caso di alienazione a titolo oneroso (es. compravendita o permuta) di un bene culturale, il Ministero della Cultura, le Regioni o gli altri enti territoriali interessati hanno il diritto di acquistarlo in via di prelazione al medesimo prezzo stabilito nell'atto di alienazione:
-* **Termine:** Lo Stato può esercitare la prelazione entro **60 giorni** dalla ricezione della denuncia di trasferimento. Se la denuncia è omessa o tardiva, il termine è di **180 giorni** dal momento in cui il Ministero ha comunque avuto notizia dell'atto.
-* **Effetti del contratto in pendenza del termine:** In pendenza del termine di 60 giorni, l'atto di alienazione rimane condizionato sospensivamente (la proprietà non passa all'acquirente privato e l'alienante non può consegnare il bene).
-* **Prelazione parziale (Art. 61, comma 2):** Qualora il trasferimento riguardi una pluralità di beni, lo Stato può esercitare la prelazione anche solo su una parte di essi, ferma restando la riduzione proporzionale del prezzo.
+## 4. La prelazione artistica (Artt. 60-62)
+In caso di alienazione a titolo oneroso, lo Stato (o le Regioni/Comuni se delegati) può sostituirsi all'acquirente privato al medesimo prezzo.
+*   **Termine Ordinario:** 60 giorni dalla denuncia.
+*   **Termine Straordinario:** 180 giorni se la denuncia è omessa o tardiva.
+*   **Effetto Sospensivo:** In pendenza del termine, l'atto è condizionato; il venditore non può consegnare il bene e il compratore non ne acquista la proprietà.
+*   **Prelazione Parziale (Art. 61):** Se la vendita riguarda un lotto di beni, lo Stato può scegliere di acquistarne solo alcuni, con riduzione proporzionale del prezzo.
 
-## 5. I controlli sul commercio dei beni culturali (Artt. 63-64)
-* **Registro delle operazioni (Art. 63):** Chi esercita professionalmente il commercio di cose antiche o usate, o di beni culturali, deve tenere un registro giornaliero delle operazioni, preventivamente vidimato, in cui descrive i beni acquistati e venduti, identificando le parti contraenti.
-* **Attestato di autenticità (Art. 64):** I commercianti o gli intermediari hanno l'obbligo di consegnare all'acquirente una documentazione che attesti l'autenticità o almeno la probabile attribuzione e la provenienza del bene.
+## 5. Controlli sul commercio (Artt. 63-64)
+*   **Esercizio del commercio:** Chi vende beni culturali professionalmente deve tenere un registro giornaliero vidimato.
+*   **Attestato di Autenticità:** Obbligo per il commerciante di consegnare all'acquirente copia fotografica del bene con dichiarazione di autenticità o probabile attribuzione.
 
-## 6. La circolazione in ambito internazionale (Artt. 65-74)
-Il legislatore tutela l'integrità del patrimonio storico-artistico nazionale controllandone l'uscita dai confini dello Stato:
-* **Divieto di uscita definitiva (Art. 65):** È vietata l'uscita definitiva dal territorio della Repubblica dei beni culturali dichiarati (mobili) e di cose mobili di proprietà pubblica o privata che presentino interesse storico, artistico, archeologico, e la cui esecuzione risalga ad oltre 70 anni (per autore non vivente), qualora presentino un interesse eccezionale.
-* **Attestato di Libera Circolazione (Art. 68):** Chi intende far uscire definitivamente dal territorio della Repubblica cose mobili di autore non più vivente e la cui esecuzione risalga ad oltre 70 anni (che non siano già state dichiarate culturali), deve farne denuncia alla Soprintendenza e chiedere l'attestato di libera circolazione. L'ufficio di esportazione può negare l'attestato e proporre l'acquisto coattivo del bene da parte dello Stato. L'attestato ha validità di 5 anni.
-* **Uscita Temporanea (Artt. 66-67):** È ammessa l'uscita temporanea dal territorio nazionale per mostre, manifestazioni culturali o restauri all'estero, previa autorizzazione del Ministero e prestazione di una garanzia fideiussoria a copertura del valore del bene.
+## 6. Circolazione internazionale
+*   **Uscita Definitiva (Art. 65):** Vietata per i beni culturali dichiarati e per le cose di interesse eccezionale.
+*   **Attestato di Libera Circolazione (Art. 68):** Necessario per esportare beni di autore non più vivente (>70 anni). Ha validità di 5 anni. L'ufficio esportazione può negarlo e avviare l'**acquisto coattivo** del bene.
+*   **Uscita Temporanea (Art. 66):** Permessa solo per mostre o restauri, con obbligo di autorizzazione e garanzia assicurativa/fideiussoria.
