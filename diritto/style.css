@@ -139,6 +139,94 @@ body::after {
     src: url('https://cdn.jsdelivr.net/npm/opendyslexic@1.0.3/OpenDyslexic-Regular.otf');
 }
 
+/* Pomodoro Styles */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.control-btn:hover {
+    color: var(--accent-gold);
+}
+
+.pomodoro-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--bg-card);
+    padding: 0.4rem 0.8rem;
+    border-radius: 99px;
+    border: 1px solid var(--border-color);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    position: relative;
+}
+
+.pomo-btn {
+    background: none;
+    border: none;
+    color: #c85a32;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.pomo-btn svg, .pomo-settings-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.pomo-settings-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.pomo-settings-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-modal);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    backdrop-filter: blur(20px);
+    z-index: 1001;
+    min-width: 180px;
+    box-shadow: var(--shadow-lg);
+}
+
+.setting-row { margin-bottom: 0.8rem; }
+.setting-row label { display: block; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
+.setting-row input { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); padding: 0.4rem; outline: none; }
+#save-pomo-settings { width: 100%; background: var(--accent-gold); color: #000; border: none; border-radius: 6px; padding: 0.5rem; font-weight: 600; cursor: pointer; }
+
+.break-lock-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(6, 9, 19, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+}
+
+.break-timer { font-size: 5rem; font-weight: 700; color: #c85a32; font-family: var(--font-serif); margin: 1.5rem 0; }
+.break-quote { font-style: italic; color: var(--text-muted); }
+.pomodoro-mini.on-break { border-color: #c85a32; box-shadow: 0 0 15px rgba(200, 90, 50, 0.3); }
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
     width: 10px;
