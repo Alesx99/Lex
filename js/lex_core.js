@@ -69,6 +69,21 @@ const LexCore = {
                         <input type="number" id="lex-input-break" value="${this.breakTime}" min="1">
                     </div>
                     <button id="lex-save-pomo">Salva Impostazioni</button>
+                    
+                    <div class="pomo-divider"></div>
+                    
+                    <div class="backup-section">
+                        <span class="backup-title">Backup Dati Studio</span>
+                        <button id="lex-export-btn" class="backup-btn btn-export">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                            Esporta Appunti
+                        </button>
+                        <button id="lex-import-btn" class="backup-btn btn-import">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                            Importa Dati
+                        </button>
+                        <input type="file" id="lex-import-file" style="display:none;" accept=".json">
+                    </div>
                 </div>
                 
                 <span id="lex-pomo-label" class="pomo-label" style="display: ${this.state === 'idle' ? 'none' : 'block'}">
@@ -149,6 +164,55 @@ const LexCore = {
             if (settingsPopup && !settingsPopup.contains(e.target) && e.target !== settingsBtn) {
                 settingsPopup.style.display = 'none';
             }
+        });
+
+        // --- BACKUP LOGIC ---
+        const exportBtn = document.getElementById('lex-export-btn');
+        const importBtn = document.getElementById('lex-import-btn');
+        const importFile = document.getElementById('lex-import-file');
+
+        exportBtn?.addEventListener('click', () => {
+            const data = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                // Export only Lex-related data (notes, highlights, progress)
+                if (key.startsWith('notes-') || key.startsWith('highlight-') || key.startsWith('lex-')) {
+                    data[key] = localStorage.getItem(key);
+                }
+            }
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const date = new Date().toISOString().split('T')[0];
+            a.href = url;
+            a.download = `Lex_Backup_${date}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        importBtn?.addEventListener('click', () => importFile?.click());
+
+        importFile?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    if (confirm('Importando questi dati, sovrascriverai gli appunti attuali su questo dispositivo. Continuare?')) {
+                        Object.keys(data).forEach(key => {
+                            localStorage.setItem(key, data[key]);
+                        });
+                        alert('Importazione completata con successo! La pagina verrà ricaricata.');
+                        window.location.reload();
+                    }
+                } catch (err) {
+                    alert('Errore durante l\'importazione: file non valido.');
+                }
+            };
+            reader.readAsText(file);
         });
     },
 

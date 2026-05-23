@@ -118,12 +118,69 @@
     border-radius: 6px; color: var(--text-primary); padding: 0.5rem; outline: none;
 }
 
-#save-pomo-settings {
+#lex-save-pomo {
     width: 100%; background: var(--accent-gold); color: #000; border: none; 
     border-radius: 6px; padding: 0.6rem; font-weight: 700; cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.pomo-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 1rem 0;
+}
+
+.backup-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.backup-title {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+.backup-btn {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+}
+
+.btn-export {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-export:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-gold);
+}
+
+.btn-import {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--accent-gold);
+}
+
+.btn-import:hover {
+    background: rgba(212, 175, 55, 0.2);
 }
 
 /* Break Lock Overlay */
+
 .break-lock-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
