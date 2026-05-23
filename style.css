@@ -111,18 +111,20 @@ header {
 }
 
 .control-btn {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-speed);
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    backdrop-filter: blur(8px);
-    transition: all var(--transition-speed);
+    padding: 0.2rem;
+}
+
+.control-btn svg {
+    width: 20px;
+    height: 20px;
 }
 
 .control-btn:hover {
@@ -156,6 +158,112 @@ header {
 .pomo-btn svg {
     width: 18px;
     height: 18px;
+}
+
+.pomo-settings-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: var(--transition-speed);
+}
+
+.pomo-settings-btn:hover {
+    color: var(--accent-gold);
+}
+
+.pomo-settings-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.pomo-settings-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    backdrop-filter: blur(20px);
+    z-index: 1001;
+    min-width: 180px;
+    box-shadow: var(--shadow-lg);
+}
+
+.setting-row {
+    margin-bottom: 0.8rem;
+}
+
+.setting-row label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.setting-row input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    padding: 0.4rem;
+    outline: none;
+}
+
+#save-pomo-settings {
+    width: 100%;
+    background: var(--accent-gold);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Break Lock Overlay */
+.break-lock-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 11, 17, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.break-content {
+    max-width: 500px;
+    padding: 2rem;
+}
+
+.break-timer {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--accent-terracotta);
+    font-family: var(--font-serif);
+    margin: 1.5rem 0;
+}
+
+.break-quote {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.pomodoro-mini.on-break {
+    border-color: var(--accent-terracotta);
+    box-shadow: 0 0 15px var(--accent-terracotta-glow);
 }
 
 header h1 {

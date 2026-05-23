@@ -236,6 +236,8 @@
 
     <!-- Centralized Search Database -->
     <script src="js/search_db.js"></script>
+    <!-- Centralized Pomodoro Timer -->
+    <script src="js/pomo_timer.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchBox = document.getElementById('global-search-box');
@@ -265,46 +267,6 @@
                 localStorage.setItem('lex-theme', isLight ? 'light' : 'dark');
                 sunIcon.style.display = isLight ? 'block' : 'none';
                 moonIcon.style.display = isLight ? 'none' : 'block';
-            });
-
-            // --- POMODORO TIMER LOGIC ---
-            let pomoMinutes = 25;
-            let pomoSeconds = 0;
-            let pomoInterval = null;
-            let isPomoRunning = false;
-
-            const pomoTimerDisplay = document.getElementById('pomo-timer');
-            const pomoStartBtn = document.getElementById('pomo-start-btn');
-
-            function updatePomoDisplay() {
-                pomoTimerDisplay.textContent = `${pomoMinutes.toString().padStart(2, '0')}:${pomoSeconds.toString().padStart(2, '0')}`;
-            }
-
-            pomoStartBtn.addEventListener('click', () => {
-                if (isPomoRunning) {
-                    clearInterval(pomoInterval);
-                    pomoStartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
-                } else {
-                    pomoInterval = setInterval(() => {
-                        if (pomoSeconds === 0) {
-                            if (pomoMinutes === 0) {
-                                clearInterval(pomoInterval);
-                                alert('Sessione terminata! Fai una pausa.');
-                                pomoMinutes = 25;
-                                isPomoRunning = false;
-                                pomoStartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
-                            } else {
-                                pomoMinutes--;
-                                pomoSeconds = 59;
-                            }
-                        } else {
-                            pomoSeconds--;
-                        }
-                        updatePomoDisplay();
-                    }, 1000);
-                    pomoStartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
-                }
-                isPomoRunning = !isPomoRunning;
             });
 
             // --- FUZZY SEARCH WITH FUSE.JS ---
