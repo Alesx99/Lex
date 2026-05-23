@@ -25,17 +25,17 @@
     --font-serif: 'Playfair Display', Georgia, serif;
 }
 
-/* Light Theme Variables */
+/* Light Theme Variables (Refined Paper Aesthetic) */
 body.light-theme {
-    --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    --bg-card: rgba(255, 255, 255, 0.8);
-    --bg-card-hover: rgba(255, 255, 255, 1);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --border-color-hover: rgba(0, 0, 0, 0.2);
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    --accent-gold-glow: rgba(212, 175, 55, 0.2);
+    --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #f5f2ed 100%);
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-hover: rgba(255, 255, 255, 0.95);
+    --border-color: rgba(180, 160, 140, 0.2);
+    --border-color-hover: rgba(180, 160, 140, 0.4);
+    --text-primary: #3c3836;
+    --text-secondary: #665c54;
+    --text-muted: #928374;
+    --accent-gold-glow: rgba(212, 175, 55, 0.15);
 }
 
 * {

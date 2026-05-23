@@ -27,16 +27,16 @@
     --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* Light Theme Variables */
+/* Light Theme Variables (Refined Paper Aesthetic) */
 body.light-theme {
-    --bg-dark: #f8fafc;
-    --bg-surface: rgba(255, 255, 255, 0.8);
-    --bg-surface-hover: rgba(255, 255, 255, 1);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --border-color-hover: rgba(200, 90, 50, 0.5);
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
+    --bg-dark: #fdfbf7;
+    --bg-surface: rgba(255, 255, 255, 0.6);
+    --bg-surface-hover: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(180, 160, 140, 0.2);
+    --border-color-hover: rgba(200, 90, 50, 0.4);
+    --text-primary: #3c3836;
+    --text-secondary: #665c54;
+    --text-muted: #928374;
 }
 
 * {
