@@ -503,8 +503,8 @@
                 <div class="form-group">
                     <label class="form-label">Materie d'Esame</label>
                     <select id="exam-subject-select" class="form-select" onchange="updateMaxQuestions()">
-                        <option value="misto">Misto (Diritto e Arte)</option>
-                        <option value="diritto">Solo Diritto dei Beni Culturali (Max 12 domande)</option>
+                        <option value="misto">Misto (Diritto e Arte — Max 110 domande)</option>
+                        <option value="diritto">Solo Diritto dei Beni Culturali (Max 60 domande)</option>
                         <option value="arte">Solo Storia dell'Arte Moderna (Max 50 domande)</option>
                     </select>
                 </div>
@@ -519,7 +519,7 @@
                             <option value="custom">Numero Personalizzato...</option>
                         </select>
                         <div class="custom-count-wrapper" id="custom-count-wrapper">
-                            <input type="number" id="exam-custom-count-input" class="form-input-number" min="1" max="62" value="15" placeholder="Inserisci quantità...">
+                            <input type="number" id="exam-custom-count-input" class="form-input-number" min="1" max="110" value="15" placeholder="Inserisci quantità...">
                         </div>
                     </div>
 
@@ -683,90 +683,74 @@
             }
         }
 
-        // Map quiz module keys to actual chapter details & links
-        const moduleMetadata = {
-            fonti_tutela: {
-                chapterName: "Fonti, Organizzazione e Misure di Tutela",
-                subject: "diritto",
-                link: "diritto/index.html?open=summaries/1_patrimonio.md",
-                navText: "Apri Cap. I-V"
-            },
-            gestione_sanzioni: {
-                chapterName: "Circolazione, Regime Fiscale e Sanzioni",
-                subject: "diritto",
-                link: "diritto/index.html?open=summaries/13_sanzioni.md",
-                navText: "Apri Cap. VI-XIII"
-            },
-            origini: {
-                chapterName: "Origini del Rinascimento (Tardo Gotico e Brunelleschi)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/rinascimento_1_origini.md",
-                navText: "Apri Studio I"
-            },
-            fondatori: {
-                chapterName: "I Padri Fondatori (Brunelleschi, Donatello, Masaccio)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/rinascimento_2_fondatori.md",
-                navText: "Apri Studio II"
-            },
-            esperienze: {
-                chapterName: "Il Secondo Quattrocento e le Esperienze nelle Corti",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/rinascimento_3_esperienze.md",
-                navText: "Apri Studio III"
-            },
-            maturo: {
-                chapterName: "Il Rinascimento Maturo (Leonardo, Michelangelo, Raffaello)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/rinascimento_4_maturo.md",
-                navText: "Apri Studio IV"
-            },
-            veneto: {
-                chapterName: "Il Rinascimento Veneto e la Pittura Tonale",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/rinascimento_5_veneto.md",
-                navText: "Apri Studio V"
-            },
-            barocco: {
-                chapterName: "Il Barocco (Caravaggio, Bernini, Borromini)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/barocco_6.md",
-                navText: "Apri Studio VI"
-            },
-            neoclassicismo: {
-                chapterName: "Neoclassicismo, Canova e Preromanticismo (Il Sublime)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/neoclassicismo_7.md",
-                navText: "Apri Studio VII"
-            },
-            romanticismo: {
-                chapterName: "Romanticismo e Realismo (Géricault, Delacroix, Courbet)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/romanticismo_realismo_8.md",
-                navText: "Apri Studio VIII"
-            },
-            impressionismo: {
-                chapterName: "L'Impressionismo (Monet, Manet, Degas, Renoir)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/impressionismo_9.md",
-                navText: "Apri Studio IX"
-            },
-            postimpressionismo: {
-                chapterName: "Il Post-Impressionismo (Cézanne, Gauguin, Seurat, Van Gogh)",
-                subject: "arte",
-                link: "storia_arte/index.html?open=summaries/postimpressionismo_10.md",
-                navText: "Apri Studio X"
-            }
+        // Link capitoli diritto → sintesi (12 capitoli × 5 domande)
+        const dirittoChapterLinks = {
+            cap1_patrimonio: "summaries/1_patrimonio.md",
+            cap2_governo: "summaries/2_governo.md",
+            cap3_individuazione: "summaries/3_individuazione.md",
+            cap4_tutela_internazionale: "summaries/4_tutela_internazionale.md",
+            cap5_tutela: "summaries/5_tutela.md",
+            cap6_circolazione: "summaries/6_circolazione.md",
+            cap8_appalti: "summaries/8_appalti.md",
+            cap9_ritrovamenti: "summaries/9_ritrovamenti.md",
+            cap10_espropriazione: "summaries/10_espropriazione.md",
+            cap11_regime_fiscale: "summaries/11_regime_fiscale.md",
+            cap12_paesaggio: "summaries/12_paesaggio.md",
+            cap13_sanzioni: "summaries/13_sanzioni.md"
         };
+
+        const arteChapterLinks = {
+            origini: "summaries/rinascimento_1_origini.md",
+            fondatori: "summaries/rinascimento_2_fondatori.md",
+            esperienze: "summaries/rinascimento_3_esperienze.md",
+            maturo: "summaries/rinascimento_4_maturo.md",
+            veneto: "summaries/rinascimento_5_veneto.md",
+            barocco: "summaries/barocco_6.md",
+            neoclassicismo: "summaries/neoclassicismo_7.md",
+            romanticismo: "summaries/romanticismo_realismo_8.md",
+            impressionismo: "summaries/impressionismo_9.md",
+            postimpressionismo: "summaries/postimpressionismo_10.md"
+        };
+
+        function getPoolSize(subject) {
+            let count = 0;
+            Object.values(quizDatabase).forEach(mod => {
+                if (subject === 'misto' || mod.subject === subject) {
+                    count += mod.questions.length;
+                }
+            });
+            return count;
+        }
+
+        function getModuleMeta(moduleKey) {
+            const mod = quizDatabase[moduleKey];
+            if (!mod) return null;
+
+            if (mod.subject === 'diritto') {
+                const summary = dirittoChapterLinks[moduleKey];
+                return {
+                    chapterName: mod.title,
+                    subject: 'diritto',
+                    link: summary ? `diritto/index.html?open=${summary}` : 'diritto/index.html',
+                    navText: `Apri ${mod.chapterTag}`
+                };
+            }
+
+            const summary = arteChapterLinks[moduleKey];
+            return {
+                chapterName: mod.title,
+                subject: 'arte',
+                link: summary ? `storia_arte/index.html?open=${summary}` : 'storia_arte/index.html',
+                navText: `Apri ${mod.chapterTag}`
+            };
+        }
 
         function updateMaxQuestions() {
             const subject = subjectSelect.value;
-            let maxVal = 62;
-            if (subject === 'diritto') maxVal = 12;
-            if (subject === 'arte') maxVal = 50;
+            const maxVal = getPoolSize(subject);
 
             customCountInput.max = maxVal;
-            if (parseInt(customCountInput.value) > maxVal) {
+            if (parseInt(customCountInput.value, 10) > maxVal) {
                 customCountInput.value = maxVal;
             }
         }
@@ -1028,7 +1012,7 @@
                 </li>`;
             } else {
                 failedModules.forEach(modKey => {
-                    const meta = moduleMetadata[modKey];
+                    const meta = getModuleMeta(modKey);
                     if (meta) {
                         const li = document.createElement('li');
                         li.className = 'rec-item';
@@ -1064,6 +1048,8 @@
             activeScreen.style.display = 'none';
             setupScreen.style.display = 'block';
         }
+
+        updateMaxQuestions();
     </script>
 </body>
 </html>
