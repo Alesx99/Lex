@@ -48,7 +48,7 @@
         <section class="hero">
             <h2>Autovalutazione Giuridica</h2>
             <div class="hero-divider"></div>
-            <p>Valuta le tue competenze sul Diritto dei Beni Culturali e del Paesaggio. Seleziona uno dei due moduli tematici per avviare il test a risposta multipla (6 domande per modulo con spiegazione immediata).</p>
+            <p>Valuta le tue competenze sul Diritto dei Beni Culturali e del Paesaggio selezionando uno dei 12 capitoli del Codice. Ogni quiz contiene 5 domande a risposta multipla con spiegazione immediata.</p>
         </section>
 
         <!-- Dynamic Quiz Area -->
@@ -58,15 +58,65 @@
             <div id="selection-screen" class="quiz-step active">
                 <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
                 <div class="selection-grid">
-                    <button class="select-btn" onclick="startQuiz('fonti_tutela')">
-                        <span class="btn-chapter">Modulo I</span>
-                        <span class="btn-title">Fonti, Organizzazione e Tutela</span>
-                        <span class="btn-desc">Principi costituzionali, assetto del MiC, verifica dell'interesse, convenzioni internazionali e misure di conservazione.</span>
+                    <button class="select-btn" onclick="startQuiz('cap1_patrimonio')">
+                        <span class="btn-chapter">Cap. I</span>
+                        <span class="btn-title">Il Patrimonio Culturale e il Paesaggio</span>
+                        <span class="btn-desc">Art. 9 Cost., Convenzione di Faro, patrimonio culturale e paesaggio</span>
                     </button>
-                    <button class="select-btn" onclick="startQuiz('gestione_sanzioni')">
-                        <span class="btn-chapter">Modulo II</span>
-                        <span class="btn-title">Circolazione, Gestione e Sanzioni</span>
-                        <span class="btn-desc">Prelazione dello Stato, appalti e sponsorizzazioni, espropriazione, agevolazioni fiscali, beni paesaggistici e riforma penale.</span>
+                    <button class="select-btn" onclick="startQuiz('cap2_governo')">
+                        <span class="btn-chapter">Cap. II</span>
+                        <span class="btn-title">Il Governo dei Beni Culturali</span>
+                        <span class="btn-desc">MiC, Soprintendenze, amministrazione per accordi e privati</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap3_individuazione')">
+                        <span class="btn-chapter">Cap. III</span>
+                        <span class="btn-title">Individuazione e Regime Giuridico</span>
+                        <span class="btn-desc">Verifica dell'interesse (Art. 12), dichiarazione (Art. 13), vincolo</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap4_tutela_internazionale')">
+                        <span class="btn-chapter">Cap. IV</span>
+                        <span class="btn-title">La Tutela Internazionale</span>
+                        <span class="btn-desc">Convenzioni dell'Aja, UNESCO 1970, UNIDROIT, Direttiva UE 2014/60</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap5_tutela')">
+                        <span class="btn-chapter">Cap. V</span>
+                        <span class="btn-title">La Tutela dei Beni Culturali</span>
+                        <span class="btn-desc">Vigilanza, ispezione, conservazione, restauro e manutenzione</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap6_circolazione')">
+                        <span class="btn-chapter">Cap. VI</span>
+                        <span class="btn-title">La Circolazione dei Beni Culturali</span>
+                        <span class="btn-desc">Denuncia (Art. 59), prelazione dello Stato, commercio ed esportazione</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap8_appalti')">
+                        <span class="btn-chapter">Cap. VIII</span>
+                        <span class="btn-title">Appalti, Concessioni e Sponsorizzazioni</span>
+                        <span class="btn-desc">Appalti di restauro, concessioni di servizi, sponsorizzazione culturale</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap9_ritrovamenti')">
+                        <span class="btn-chapter">Cap. IX</span>
+                        <span class="btn-title">Ritrovamenti e Scoperte</span>
+                        <span class="btn-desc">Archeologia terrestre e marina, concessioni, scoperte fortuite (Art. 90)</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap10_espropriazione')">
+                        <span class="btn-chapter">Cap. X</span>
+                        <span class="btn-title">Espropriazione dei Beni Culturali</span>
+                        <span class="btn-desc">Espropriazione del bene, strumentale e per interesse archeologico</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap11_regime_fiscale')">
+                        <span class="btn-chapter">Cap. XI</span>
+                        <span class="btn-title">Il Regime Fiscale</span>
+                        <span class="btn-desc">IMU, successioni, Art Bonus, cessione di opere d'arte</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap12_paesaggio')">
+                        <span class="btn-chapter">Cap. XII</span>
+                        <span class="btn-title">I Beni Paesaggistici</span>
+                        <span class="btn-desc">Art. 134, vincoli ex lege Galasso, PPR, autorizzazione (Art. 146)</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap13_sanzioni')">
+                        <span class="btn-chapter">Cap. XIII</span>
+                        <span class="btn-title">Le Sanzioni</span>
+                        <span class="btn-desc">Riforma penale 2022, Titolo VIII-bis c.p., sanzioni amministrative e civili</span>
                     </button>
                 </div>
             </div>
@@ -76,7 +126,7 @@
                 <div class="quiz-card-container">
                     <div class="quiz-card-header">
                         <span id="quiz-chapter-tag" class="quiz-chapter-tag">Modulo I</span>
-                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 6</span>
+                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 5</span>
                     </div>
 
                     <!-- Progress bar -->
@@ -108,7 +158,7 @@
             <div id="result-screen" class="quiz-step">
                 <div class="result-card">
                     <div class="result-glow-ring">
-                        <span id="result-score-text">0 / 6</span>
+                        <span id="result-score-text">0 / 5</span>
                     </div>
                     <h3 id="result-title">Risultato</h3>
                     <p id="result-message" class="result-message">Messaggio personalizzato...</p>
@@ -185,8 +235,8 @@
             const currentQuestion = currentQuestions[currentQuestionIndex];
             
             // Update progress
-            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di 6`;
-            const progressPercent = (currentQuestionIndex / 6) * 100;
+            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di 5`;
+            const progressPercent = (currentQuestionIndex / 5) * 100;
             quizProgressIndicator.style.width = progressPercent + '%';
 
             // Set question text
@@ -236,7 +286,7 @@
             feedbackBox.classList.add('open');
 
             // Set next button text
-            if (currentQuestionIndex === 5) {
+            if (currentQuestionIndex === 4) {
                 nextQuestionBtn.textContent = "Visualizza Risultato";
             } else {
                 nextQuestionBtn.textContent = "Prossima Domanda";
@@ -244,7 +294,7 @@
         }
 
         function nextQuestion() {
-            if (currentQuestionIndex === 5) {
+            if (currentQuestionIndex === 4) {
                 showResult();
             } else {
                 currentQuestionIndex++;
@@ -259,19 +309,19 @@
             // Update score progress bar at 100%
             quizProgressIndicator.style.width = '100%';
 
-            resultScoreText.textContent = `${score} / 6`;
+            resultScoreText.textContent = `${score} / 5`;
             resultTitle.textContent = quizDatabase[currentSubject].title;
 
             // Set custom score message
             let message = '';
-            if (score === 6) {
+            if (score === 5) {
                 message = "Eccellente! Conoscenza e comprensione del Codice dei Beni Culturali impeccabile. Ottima padronanza delle discipline amministrative e penali.";
             } else if (score >= 4) {
                 message = "Molto bene! Hai una conoscenza solida degli istituti fondamentali del diritto dei beni culturali. Qualche piccola incertezza superabile rileggendo le sintesi.";
             } else if (score >= 3) {
                 message = "Sufficiente, ma ci sono lacune significative. Si consiglia una rilettura attenta delle sintesi specifiche per consolidare le distinzioni procedimentali.";
             } else {
-                message = "Preparazione non sufficiente. Gli istituti giuridici, le sanzioni e i riparti di competenza non sono ancora chiari. Rileggi i moduli e ripeti il test.";
+                message = "Preparazione non sufficiente. Gli istituti giuridici, le sanzioni e i riparti di competenza non sono ancora chiari. Rileggi il capitolo e ripeti il test.";
             }
             resultMessage.textContent = message;
 

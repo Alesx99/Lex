@@ -1,150 +1,762 @@
 /* CENTRALIZED QUIZ DATABASE - LEX STUDIORUM */
 
 const quizDatabase = {
-    // DIRITTO DEI BENI CULTURALI
-    fonti_tutela: {
+    // ═══════════════════════════════════════════════════════════════
+    // DIRITTO DEI BENI CULTURALI — 12 Capitoli × 5 Domande = 60 Domande
+    // ═══════════════════════════════════════════════════════════════
+
+    cap1_patrimonio: {
         subject: "diritto",
-        chapterTag: "Modulo I",
-        title: "Fonti, Organizzazione e Tutela",
+        chapterTag: "Cap. I",
+        title: "Il Patrimonio Culturale e il Paesaggio",
         questions: [
             {
-                question: "Quale trattato internazionale, ratificato dall'Italia nel 2020, ha sancito il passaggio dal \"diritto del patrimonio culturale\" (tutela dell'oggetto) al \"diritto al patrimonio culturale\" (diritto della persona e della collettività)?",
+                question: "L'Articolo 9 della Costituzione è collocato tra i Principi Fondamentali. Quale conseguenza giuridica comporta questa collocazione per la tutela del patrimonio?",
                 options: [
-                    "La Convenzione Europea del Paesaggio (Firenze, 2000).",
-                    "La Convenzione di Faro (Consiglio d'Europa, 2005).",
-                    "La Convenzione UNIDROIT (Roma, 1995).",
-                    "La Convenzione UNESCO di Parigi (1970)."
+                    "Si tratta di una norma meramente programmatica priva di effetti giuridici diretti.",
+                    "Essendo un principio fondamentale, vincola tutti i poteri dello Stato e costituisce parametro di legittimità costituzionale delle leggi ordinarie, prevalendo anche in sede di bilanciamento con altri diritti.",
+                    "Si applica esclusivamente ai rapporti tra lo Stato e le Regioni a statuto speciale.",
+                    "Ha efficacia solo nei confronti degli enti pubblici territoriali, non dei privati cittadini."
                 ],
                 correctIndex: 1,
-                explanation: "La Convenzione di Faro sposta il baricentro dell'azione di tutela sul rapporto uomo-patrimonio, inteso come risorsa per lo sviluppo umano, il dialogo interculturale, la coesione sociale e il benessere democratico dei cittadini."
+                explanation: "La collocazione dell'Art. 9 tra i Principi Fondamentali (artt. 1-12) conferisce alla tutela del patrimonio e del paesaggio il rango di valore supremo dell'ordinamento, non derogabile dal legislatore ordinario e utilizzabile dalla Corte Costituzionale come parametro di giudizio."
             },
             {
-                question: "Nell'organizzazione periferica del Ministero della Cultura (MiC), quale organo esercita concretamente le funzioni di tutela e vigilanza sui beni culturali in un determinato ambito territoriale?",
+                question: "La Commissione Franceschini (1964) ha introdotto una definizione fondamentale per il diritto dei beni culturali. Quale?",
                 options: [
-                    "Il Segretariato Regionale.",
-                    "La Soprintendenza Archeologia, Belle Arti e Paesaggio.",
-                    "La Direzione Regionale Musei.",
-                    "La Commissione Regionale per il Patrimonio Culturale."
+                    "Ha definito il patrimonio culturale come l'insieme delle opere d'arte di proprietà statale.",
+                    "Ha definito il bene culturale come «testimonianza materiale avente valore di civiltà», svincolandolo dai criteri estetici tradizionali.",
+                    "Ha introdotto il concetto di «bellezza naturale» come fondamento della tutela paesaggistica.",
+                    "Ha stabilito che sono beni culturali esclusivamente le opere aventi più di 100 anni."
                 ],
                 correctIndex: 1,
-                explanation: "Le Soprintendenze sono organi tecnico-scientifici periferici del MiC incaricati della tutela dei beni storico-artistici, archeologici e paesaggistici sul territorio di competenza, mediante ispezioni, approvazione di progetti di restauro e ordini di sospensione di lavori non autorizzati."
+                explanation: "La Commissione Franceschini ha superato la concezione estetizzante della «cosa d'arte» introducendo la nozione aperta di «testimonianza materiale avente valore di civiltà», che consente di includere nella tutela oggetti di valore storico, documentario ed etnoantropologico, non solo estetico."
             },
             {
-                question: "Per i beni appartenenti a enti pubblici o persone giuridiche private senza fine di lucro (es. enti ecclesiastici), aventi più di 70 anni e opera di autore non vivente, quale regime si applica provvisoriamente prima della verifica formale?",
+                question: "Ai sensi dell'Articolo 2 del Codice dei Beni Culturali (D.Lgs. 42/2004), da quali due componenti è costituito il «patrimonio culturale»?",
                 options: [
-                    "Sono considerati beni privati di libero commercio.",
-                    "Sono tutelati provvisoriamente in virtù della presunzione di interesse culturale (Art. 12 del Codice).",
-                    "Entrano direttamente a far parte del patrimonio disponibile dello Stato.",
-                    "Sono soggetti a sdemanializzazione automatica decorsi 90 giorni."
+                    "Beni artistici e beni ambientali.",
+                    "Beni culturali e beni paesaggistici.",
+                    "Beni demaniali e beni patrimoniali indisponibili.",
+                    "Beni materiali e beni immateriali."
                 ],
                 correctIndex: 1,
-                explanation: "In virtù dell'Articolo 12 del Codice, i beni mobili e immobili ultra-settantennali e di autore non vivente di proprietà pubblica o ecclesiastica sono protetti provvisoriamente 'ope legis' finché non si effettua la verifica di interesse. Solo in caso di esito negativo escono dal campo d'applicazione della tutela."
+                explanation: "L'Art. 2 del Codice definisce il patrimonio culturale come l'insieme unitario dei beni culturali (artt. 10-11: cose mobili e immobili di interesse artistico, storico, archeologico, etnoantropologico) e dei beni paesaggistici (art. 134 e ss.)."
             },
             {
-                question: "Quale Convenzione internazionale disciplina la restituzione dei beni culturali rubati o illecitamente esportati, ponendo a carico dell'acquirente l'obbligo di diligenza al momento dell'acquisto per poter pretendere un indennizzo?",
+                question: "Quale riforma costituzionale del 2022 ha modificato l'Articolo 9 della Costituzione, ampliandone la portata?",
                 options: [
-                    "La Convenzione dell'Aja del 1954.",
-                    "La Convenzione UNESCO del 1970.",
-                    "La Convenzione UNIDROIT (Roma, 1995).",
-                    "La Convenzione di Faro del 2005."
-                ],
-                correctIndex: 2,
-                explanation: "La Convenzione UNIDROIT del 1995 (operante sul piano civilistico del commercio privatistico) impone regole rigorose di buona fede e diligenza dell'acquirente all'atto dell'acquisto. Chi acquista un bene rubato è costretto a restituirlo e riceve un indennizzo equo solo se prova di aver svolto opportune indagini sulla provenienza."
-            },
-            {
-                question: "Secondo l'Articolo 29 del Codice dei Beni Culturali, in quali tre fasi operative si articola l'attività di \"conservazione\" del patrimonio?",
-                options: [
-                    "Censimento, catalogazione e restauro.",
-                    "Prevenzione, manutenzione e restauro.",
-                    "Vigilanza, ispezione e ripristino.",
-                    "Tutela, valorizzazione ed espropriazione."
+                    "L'introduzione del diritto alla fruizione digitale del patrimonio culturale.",
+                    "L'aggiunta della tutela dell'ambiente, della biodiversità e degli ecosistemi, anche nell'interesse delle future generazioni.",
+                    "L'inserimento del principio di sussidiarietà orizzontale nella gestione dei musei.",
+                    "La previsione dell'obbligo di insegnamento della storia dell'arte in tutte le scuole."
                 ],
                 correctIndex: 1,
-                explanation: "L'Art. 29 c.1 definisce la conservazione come attività coordinata e programmata che si realizza attraverso: 1. la Prevenzione (limitazione dei rischi di deterioramento ambientale); 2. la Manutenzione (interventi per mantenere l'efficienza funzionale); 3. il Restauro (intervento diretto sul bene per ripristinarne l'integrità)."
+                explanation: "La Legge Costituzionale 1/2022 ha aggiunto all'Art. 9 un nuovo comma che estende la tutela repubblicana all'ambiente, alla biodiversità e agli ecosistemi, anche nell'interesse delle future generazioni, affiancando la tutela ambientale a quella del patrimonio storico-artistico."
             },
             {
-                question: "In base all'Articolo 91 del Codice, a chi appartengono per legge le cose d'interesse archeologico da chiunque e in qualunque modo ritrovate nel sottosuolo o sui fondali marini italiani?",
+                question: "Quale importante evoluzione concettuale segna il passaggio dalla Legge 1497/1939 alla Convenzione Europea del Paesaggio (Firenze, 2000) nella nozione di «paesaggio»?",
                 options: [
-                    "Al proprietario del terreno in cui si effettua il ritrovamento.",
-                    "Allo Stato (demanio originario).",
-                    "In parti uguali allo scopritore fortuito e al proprietario del fondo.",
-                    "Al primo che ne prenda possesso materiale (diritto di occupazione)."
+                    "Il paesaggio passa da «bellezza naturale» (visione estetica e selettiva) a «territorio espressivo di identità» (visione olistica che include ogni porzione di territorio percepita dalle popolazioni).",
+                    "Il paesaggio viene escluso dalla competenza statale e affidato interamente alle Regioni.",
+                    "Si elimina la distinzione tra paesaggio urbano e paesaggio rurale.",
+                    "Il paesaggio diventa competenza esclusiva dell'UNESCO e non più degli Stati nazionali."
                 ],
-                correctIndex: 1,
-                explanation: "Tutte le cose d'interesse archeologico, da chiunque e ovunque ritrovate, appartengono ab origine allo Stato. È nullo qualsiasi patto contrario. Lo scopritore fortuito e il proprietario dell'immobile hanno diritto solo a un premio di ritrovamento che può giungere fino al 25% del valore dei beni rinvenuti."
+                correctIndex: 0,
+                explanation: "La Legge 1497/1939 tutelava solo le «bellezze naturali» di pregio estetico (il «paesaggio-cartolina»). La Convenzione di Firenze del 2000 rivoluziona la nozione, definendo il paesaggio come qualsiasi parte di territorio così come è percepita dalle popolazioni, estendendo la tutela all'intero territorio."
             }
         ]
     },
-    gestione_sanzioni: {
+
+    cap2_governo: {
         subject: "diritto",
-        chapterTag: "Modulo II",
-        title: "Circolazione, Gestione e Sanzioni",
+        chapterTag: "Cap. II",
+        title: "Il Governo dei Beni Culturali",
         questions: [
             {
-                question: "Entro quanti giorni il Ministero della Cultura può esercitare il diritto di prelazione artistica sull'acquisto di un bene culturale vincolato alienato a titolo oneroso?",
+                question: "Il D.P.C.M. 15 marzo 2024, n. 57 ha riorganizzato il Ministero della Cultura in quanti e quali Dipartimenti?",
                 options: [
-                    "Entro 30 giorni dalla stipula dell'alienazione.",
-                    "Entro 60 giorni dalla ricezione della formale denuncia di trasferimento (Art. 60).",
-                    "Entro 90 giorni dalla trascrizione dell'atto nei registri pubblici.",
-                    "Entro 120 giorni dal compimento del rogito."
+                    "3 Dipartimenti: Tutela, Valorizzazione e Attività Culturali.",
+                    "4 Dipartimenti: DiAG (Amministrazione Generale), DiT (Tutela), DiVA (Valorizzazione), DiAC (Attività Culturali).",
+                    "2 Dipartimenti: Patrimonio Materiale e Patrimonio Immateriale.",
+                    "5 Dipartimenti: Musei, Archeologia, Archivi, Biblioteche e Spettacolo."
                 ],
                 correctIndex: 1,
-                explanation: "L'Art. 60 del Codice stabilisce che il MiC (o le Regioni ed Enti locali a cui il Ministero deleghi la facoltà) ha il diritto di acquistare in prelazione il bene alienato a titolo oneroso, allo stesso prezzo indicato nell'atto di compravendita, entro il termine perentorio di 60 giorni dalla denuncia del trasferimento."
+                explanation: "La riforma del 2024 ha articolato il MiC in quattro Dipartimenti: DiAG (Amministrazione Generale), DiT (Tutela del patrimonio culturale), DiVA (Valorizzazione del patrimonio culturale) e DiAC (Attività culturali), ciascuno con proprie Direzioni Generali."
             },
             {
-                question: "Nel settore dei beni culturali, qual è la principale differenza formale e causale tra una sponsorizzazione e una concessione d'uso?",
+                question: "L'Articolo 4 del Codice dei Beni Culturali riserva le funzioni di tutela a quale soggetto istituzionale?",
                 options: [
-                    "La sponsorizzazione non prevede alcun corrispettivo a carico del privato.",
-                    "La sponsorizzazione è un contratto a prestazioni corrispettive volto ad associare il marchio del privato al bene (con finalità promozionali), mentre la concessione trasferisce a terzi l'uso o la gestione materiale dello spazio.",
-                    "La concessione d'uso è un provvedimento gratuito riservato a enti no-profit.",
-                    "La sponsorizzazione si applica solo a mostre temporanee, la concessione solo a beni immobili."
+                    "Alle Regioni, in applicazione del principio di decentramento amministrativo.",
+                    "Al Ministero della Cultura (MiC), che le esercita in via esclusiva.",
+                    "Ai Comuni, in quanto enti più vicini al territorio.",
+                    "Alle Soprintendenze, in quanto organi autonomi e indipendenti."
                 ],
                 correctIndex: 1,
-                explanation: "La sponsorizzazione (Art. 120) associa il logo/marchio di un privato a un intervento sul patrimonio culturale a scopo pubblicitario. La concessione d'uso (Art. 106) consente invece il godimento temporaneo, esclusivo o parziale, di spazi del demanio culturale (es. eventi privati in castelli o musei) in cambio del pagamento di un canone d'uso."
+                explanation: "L'Art. 4 del Codice stabilisce che le funzioni di tutela sono esercitate dal Ministero della Cultura, al quale spetta la potestà esclusiva in materia. Le Soprintendenze sono organi periferici del Ministero, non enti autonomi."
             },
             {
-                question: "In quale tipo di espropriazione disciplinata dal Codice lo Stato acquisisce aree o edifici vicini a un bene culturale per garantirne la luce, la prospettiva o la dignità monumentale?",
+                question: "Ai sensi dell'Articolo 112 del Codice, con quale strumento Stato, Regioni ed enti locali definiscono strategie comuni di valorizzazione del patrimonio?",
                 options: [
-                    "Espropriazione diretta del bene culturale.",
-                    "Espropriazione per fini di scavo archeologico.",
-                    "Espropriazione strumentale (Art. 96).",
-                    "Espropriazione per pubblica utilità generica."
+                    "Mediante decreti ministeriali vincolanti per gli enti locali.",
+                    "Mediante accordi di valorizzazione su base regionale o sub-regionale.",
+                    "Tramite ordinanze sindacali urgenti in materia di beni culturali.",
+                    "Attraverso regolamenti dell'Unione Europea direttamente applicabili."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 112 prevede che Stato, Regioni e altri enti stipulino accordi di valorizzazione per definire strategie e obiettivi comuni di fruizione del patrimonio. Tali accordi possono anche coinvolgere soggetti privati proprietari di beni culturali, previo il loro consenso."
+            },
+            {
+                question: "Quale peculiare regime organizzativo caratterizza istituti come gli Uffizi, il Colosseo, Pompei e la Pinacoteca di Brera?",
+                options: [
+                    "Sono gestiti interamente da fondazioni private con scopo di lucro.",
+                    "Sono istituti museali dotati di autonomia scientifica, finanziaria, contabile e organizzativa.",
+                    "Dipendono gerarchicamente dal Segretariato Regionale del MiC senza alcuna autonomia.",
+                    "Sono enti pubblici economici quotati in borsa."
+                ],
+                correctIndex: 1,
+                explanation: "La riforma Franceschini del 2014 ha conferito a numerosi musei e parchi archeologici statali lo status di istituti dotati di autonomia speciale, consentendo loro di gestire autonomamente i proventi della biglietteria, il personale e le strategie di valorizzazione."
+            },
+            {
+                question: "In base all'Articolo 9 del Codice, come deve operare il Ministero quando si tratta di beni culturali di proprietà ecclesiastica destinati al culto?",
+                options: [
+                    "Può disporre unilateralmente senza alcuna consultazione dell'autorità religiosa.",
+                    "Deve operare d'accordo con le autorità ecclesiastiche competenti, nel rispetto delle intese concordatarie.",
+                    "Deve cedere la competenza esclusiva alla Santa Sede.",
+                    "Non può intervenire in alcun modo su beni destinati al culto."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 9 del Codice dispone che, per i beni culturali di interesse religioso appartenenti a enti ecclesiastici, il MiC e le Regioni provvedano d'intesa con le autorità religiose competenti, nel quadro delle intese concordatarie tra Stato e Chiesa cattolica (e degli accordi con le altre confessioni)."
+            }
+        ]
+    },
+
+    cap3_individuazione: {
+        subject: "diritto",
+        chapterTag: "Cap. III",
+        title: "Individuazione e Regime Giuridico dei Beni Culturali",
+        questions: [
+            {
+                question: "Quale differenza fondamentale distingue la «verifica dell'interesse culturale» (Art. 12) dalla «dichiarazione dell'interesse culturale» (Art. 13) nel Codice?",
+                options: [
+                    "La verifica si applica ai beni mobili, la dichiarazione ai beni immobili.",
+                    "La verifica è obbligatoria per i beni pubblici e di enti no-profit (con presunzione provvisoria di culturalità), mentre la dichiarazione è discrezionale e riguarda i beni di proprietà privata (senza presunzione).",
+                    "La verifica è gratuita, la dichiarazione è a pagamento.",
+                    "La verifica è di competenza regionale, la dichiarazione è di competenza comunale."
+                ],
+                correctIndex: 1,
+                explanation: "La distinzione è cruciale: l'Art. 12 impone la verifica per beni di enti pubblici/no-profit ultra-settantennali, i quali godono di presunzione provvisoria di culturalità. L'Art. 13 disciplina invece la dichiarazione per beni privati, dove non opera alcuna presunzione e il vincolo deve essere formalmente imposto."
+            },
+            {
+                question: "Entro quanti giorni dalla notifica della dichiarazione di interesse culturale (Art. 13) il proprietario privato può proporre ricorso amministrativo?",
+                options: [
+                    "Entro 60 giorni dalla pubblicazione in Gazzetta Ufficiale.",
+                    "Entro 30 giorni dalla notifica del provvedimento.",
+                    "Entro 90 giorni dalla trascrizione nei registri immobiliari.",
+                    "Entro 120 giorni dalla comunicazione al Comune di residenza."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 16 del Codice prevede la possibilità di ricorso amministrativo entro 30 giorni dalla notifica. Il ricorso sospende l'efficacia del provvedimento di alienazione, ma restano ferme le misure cautelari di protezione applicate fin dall'avvio del procedimento."
+            },
+            {
+                question: "Nel sistema del Codice Civile e del Codice dei Beni Culturali, in quale categoria rientrano le raccolte dei musei, le aree archeologiche e gli archivi pubblici?",
+                options: [
+                    "Beni patrimoniali disponibili, liberamente alienabili sul mercato.",
+                    "Beni del demanio culturale, assolutamente inalienabili ai sensi dell'Art. 54.",
+                    "Beni patrimoniali indisponibili, alienabili con autorizzazione del prefetto.",
+                    "Beni privati di uso pubblico, soggetti a servitù di passaggio."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 54 del Codice elenca tassativamente i beni assolutamente inalienabili: aree archeologiche, raccolte di musei, pinacoteche, gallerie e biblioteche pubbliche, archivi e singoli documenti di Stato. Questi beni non possono essere alienati per nessun motivo."
+            },
+            {
+                question: "Nell'ambito della verifica dell'interesse culturale (Art. 12), qual è la soglia temporale e soggettiva che attiva la presunzione provvisoria di culturalità?",
+                options: [
+                    "Beni di proprietà pubblica con più di 50 anni, a prescindere dalla condizione dell'autore.",
+                    "Beni di enti pubblici o persone giuridiche senza scopo di lucro, di autore non più vivente, con esecuzione risalente a oltre 70 anni.",
+                    "Qualsiasi bene immobile di proprietà pubblica costruito prima del 1900.",
+                    "Beni mobili di proprietà ecclesiastica con più di 100 anni."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 12 fissa una doppia soglia cumulativa: il bene deve appartenere a un ente pubblico o a un ente no-profit, l'autore deve essere non più vivente e l'esecuzione deve risalire a oltre 70 anni. Solo al ricorrere di tutti i requisiti opera la presunzione provvisoria."
+            },
+            {
+                question: "Nel procedimento di dichiarazione dell'interesse culturale su un bene privato (Artt. 14-15), quale effetto produce la comunicazione di avvio del procedimento al proprietario?",
+                options: [
+                    "Nessun effetto giuridico fino alla conclusione del procedimento.",
+                    "L'applicazione immediata e cautelare di tutte le misure di protezione previste dal Codice, ancor prima della conclusione del procedimento.",
+                    "L'obbligo di depositare il bene presso la Soprintendenza.",
+                    "La sospensione automatica del diritto di proprietà per 180 giorni."
+                ],
+                correctIndex: 1,
+                explanation: "La comunicazione di avvio del procedimento di dichiarazione comporta l'applicazione immediata, in via cautelare, delle disposizioni di tutela (divieto di alienazione, obbligo di conservazione, autorizzazioni per interventi), a protezione del bene durante l'istruttoria."
+            }
+        ]
+    },
+
+    cap4_tutela_internazionale: {
+        subject: "diritto",
+        chapterTag: "Cap. IV",
+        title: "La Tutela Internazionale dei Beni Culturali",
+        questions: [
+            {
+                question: "Il Secondo Protocollo della Convenzione dell'Aja (1999) ha introdotto un regime specifico per i beni di eccezionale valore. Come si chiama questo regime?",
+                options: [
+                    "Tutela ordinaria internazionale.",
+                    "Protezione speciale rafforzata, con sanzioni penali internazionali per le violazioni.",
+                    "Custodia diplomatica privilegiata presso le ambasciate.",
+                    "Immunità assoluta da qualsiasi forma di requisizione o sequestro."
+                ],
+                correctIndex: 1,
+                explanation: "Il II Protocollo del 1999 ha istituito la categoria della «protezione speciale rafforzata» per i beni di massima importanza per l'umanità, affiancandola a un sistema di sanzioni penali internazionali e a un Comitato intergovernativo di vigilanza."
+            },
+            {
+                question: "Quale Convenzione UNESCO protegge il patrimonio culturale subacqueo e quale soglia temporale stabilisce per la protezione?",
+                options: [
+                    "La Convenzione dell'Aja (1954), per beni sommersi da almeno 50 anni.",
+                    "La Convenzione UNESCO del 2001, per tracce di esistenza umana sommerse da almeno 100 anni.",
+                    "La Convenzione UNIDROIT (1995), per relitti navali affondati prima del 1800.",
+                    "La Convenzione di Faro (2005), senza limiti temporali specifici."
+                ],
+                correctIndex: 1,
+                explanation: "La Convenzione UNESCO del 2001 tutela il patrimonio culturale subacqueo, definendolo come tutte le tracce di esistenza umana aventi un carattere culturale, storico o archeologico, che siano state sommerse per almeno 100 anni. Vieta inoltre lo sfruttamento commerciale di tali beni."
+            },
+            {
+                question: "Quale Regolamento dell'Unione Europea disciplina le licenze di esportazione uniformi per i beni culturali che escono dal territorio doganale dell'UE?",
+                options: [
+                    "Il Regolamento UE 2019/880 sull'importazione di beni culturali.",
+                    "La Direttiva 2014/60/UE sulla restituzione dei beni.",
+                    "Il Regolamento CE 116/2009 sulle esportazioni di beni culturali.",
+                    "Il Trattato di Lisbona (Art. 167 TFUE)."
                 ],
                 correctIndex: 2,
-                explanation: "L'espropriazione strumentale ex Art. 96 consente di espropriare edifici o terreni adiacenti al bene culturale non per acquisire il bene in sé, ma per migliorarne la fruizione pubblica, garantirne la conservazione isolandolo da fonti di degrado o assicurarne condizioni di luce e prospettiva."
+                explanation: "Il Regolamento CE 116/2009 stabilisce un sistema uniforme di licenze di esportazione per i beni culturali che lasciano il territorio doganale dell'UE, garantendo un controllo armonizzato alle frontiere esterne dell'Unione."
             },
             {
-                question: "Quale incentivo fiscale, introdotto nel 2014, consente un credito d'imposta del 65% per le erogazioni liberali effettuate da privati a sostegno del restauro o della valorizzazione di beni culturali pubblici?",
+                question: "Quale differenza fondamentale distingue la Convenzione UNESCO del 1970 dalla Convenzione UNIDROIT del 1995 in materia di traffico illecito?",
                 options: [
-                    "Il Tax Credit per il patrimonio storico.",
-                    "L'Art Bonus (D.L. 83/2014).",
-                    "Il Superbonus per i beni storici vincolati.",
-                    "La Detrazione IRPEF ordinaria del 19%."
+                    "La Convenzione UNESCO riguarda i beni immobili, quella UNIDROIT i beni mobili.",
+                    "La Convenzione UNESCO opera sul piano del diritto pubblico internazionale (obblighi tra Stati), mentre la UNIDROIT disciplina i rapporti di diritto privato (restituzione tra privati e onere di diligenza).",
+                    "La Convenzione UNESCO si applica solo in tempo di guerra, quella UNIDROIT solo in tempo di pace.",
+                    "Sono identiche nel contenuto ma ratificate da gruppi diversi di Stati."
                 ],
                 correctIndex: 1,
-                explanation: "L'Art Bonus è una delle misure di mecenatismo culturale più vantaggiose in Europa. Consente a imprese e cittadini di beneficiare di un credito d'imposta pari al 65% delle somme donate a favore del patrimonio pubblico (es. manutenzione monumenti, musei, fondazioni lirico-sinfoniche)."
+                explanation: "La Convenzione UNESCO del 1970 impone obblighi agli Stati (certificati di esportazione, inventari, cooperazione doganale). La Convenzione UNIDROIT del 1995 disciplina i rapporti privatistici: il possessore di buona fede deve restituire il bene rubato e può ottenere un indennizzo solo dimostrando di aver esercitato la dovuta diligenza."
             },
             {
-                question: "In base all'Articolo 146 del Codice, l'autorizzazione paesaggistica richiesta per interventi su aree sottoposte a vincolo paesaggistico ha natura:",
+                question: "Il Regolamento UE 2019/880 disciplina l'importazione di beni culturali da paesi terzi. Qual è la sua principale finalità?",
                 options: [
-                    "Di provvedimento autonomo e preliminare rispetto al rilascio del titolo edilizio (es. permesso di costruire).",
-                    "Di parere consultivo non vincolante da parte del Soprintendente.",
-                    "Di atto successivo che può essere sanato in via ordinaria post-operam.",
-                    "Di nulla osta tacito soggetto al principio del silenzio-assenso tra pubbliche amministrazioni."
+                    "Facilitare il libero commercio di antichità tra l'UE e i paesi del Medio Oriente.",
+                    "Prevenire il commercio illecito di beni culturali, specialmente quelli provenienti da zone di conflitto, richiedendo documentazione di provenienza legittima.",
+                    "Abolire tutti i dazi doganali sui beni culturali importati nell'UE.",
+                    "Creare un mercato unico europeo delle opere d'arte senza controlli."
                 ],
-                correctIndex: 0,
-                explanation: "L'autorizzazione paesaggistica è un atto presupposto, autonomo e preliminare rispetto a qualsiasi titolo abilitativo edilizio. Essa accerta la compatibilità paesaggistica dell'intervento, dura 5 anni e non può essere rilasciata in sanatoria a lavori ultimati (salvo ristrettissime ipotesi ex Art. 167)."
-            },
+                correctIndex: 1,
+                explanation: "Il Regolamento UE 2019/880 mira a impedire l'ingresso nel territorio doganale dell'UE di beni culturali esportati illecitamente da paesi terzi, con particolare attenzione ai beni provenienti da zone di conflitto armato, richiedendo licenze e dichiarazioni di importazione con prove di provenienza."
+            }
+        ]
+    },
+
+    cap5_tutela: {
+        subject: "diritto",
+        chapterTag: "Cap. V",
+        title: "La Tutela dei Beni Culturali",
+        questions: [
             {
-                question: "La riforma del 2022 (Legge 22/2022) ha introdotto nel Codice Penale un intero Titolo (VIII-bis) dedicato ai delitti contro il patrimonio culturale. Quale tra i seguenti costituisce un effetto di questa riforma?",
+                question: "Ai sensi dell'Articolo 22 del Codice, entro quanti giorni il Soprintendente deve pronunciarsi sulla richiesta di autorizzazione per interventi su beni culturali?",
                 options: [
-                    "La depenalizzazione dei reati minori di deturpamento artistico.",
-                    "La trasposizione di tutti i delitti penali all'interno del Codice dei Beni Culturali (D.Lgs. 42/2004).",
-                    "La creazione di fattispecie autonome e aggravate come il furto di beni culturali (Art. 518-bis c.p.) e il danneggiamento o deturpamento specifico (Art. 518-duodecies c.p.) con pene severamente aumentate.",
-                    "L'abolizione dell'arresto per le ricerche archeologiche clandestine."
+                    "Entro 30 giorni dalla presentazione della richiesta.",
+                    "Entro 60 giorni, prorogabili a 90.",
+                    "Entro 120 giorni dalla richiesta.",
+                    "Non esiste un termine specifico; il procedimento si chiude con il silenzio-assenso."
                 ],
                 correctIndex: 2,
-                explanation: "La riforma ha colmato un vuoto normativo inserendo nel Codice Penale delitti specifici contro il patrimonio artistico. In precedenza si applicavano i reati comuni di furto o danneggiamento. Oggi il furto di beni culturali (Art. 518-bis c.p.) e il danneggiamento specifico (Art. 518-duodecies c.p.) sono delitti autonomi gravemente puniti."
+                explanation: "L'Art. 22 del Codice stabilisce che il Soprintendente deve pronunciarsi entro 120 giorni dalla presentazione della richiesta di autorizzazione. L'autorizzazione può contenere prescrizioni tecniche e può essere revocata o modificata per nuove esigenze di tutela."
+            },
+            {
+                question: "L'Articolo 28 del Codice conferisce al Soprintendente un potere cautelare particolarmente incisivo. Di quale potere si tratta?",
+                options: [
+                    "Il potere di confiscare direttamente i beni mobili di proprietà privata.",
+                    "Il potere di sospensione (inibitoria) dei lavori eseguiti senza autorizzazione o in difformità, estensibile anche a cose non ancora dichiarate di interesse culturale.",
+                    "Il potere di espropriare immediatamente qualsiasi bene a rischio.",
+                    "Il potere di imporre sanzioni pecuniarie senza procedimento amministrativo."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 28 consente al Soprintendente di ordinare la sospensione immediata dei lavori non autorizzati o difformi. Questo potere di inibitoria si estende anche a cose non ancora formalmente dichiarate di interesse culturale, fungendo da misura cautelare preventiva."
+            },
+            {
+                question: "L'Articolo 20 del Codice stabilisce una serie di divieti assoluti per i beni culturali. Quale tra i seguenti rientra tra tali divieti?",
+                options: [
+                    "Il divieto di riproduzione fotografica per scopi editoriali.",
+                    "Il divieto di distruzione, deterioramento, danneggiamento o destinazione ad usi non compatibili con il carattere storico o artistico del bene.",
+                    "Il divieto di apertura al pubblico senza il pagamento di un biglietto.",
+                    "Il divieto di collocazione in edifici moderni costruiti dopo il 1950."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 20 stabilisce che i beni culturali non possono essere distrutti, deteriorati, danneggiati o adibiti ad usi non compatibili con il loro carattere storico o artistico, pregiudicandone la conservazione. Si tratta di divieti assoluti e inderogabili."
+            },
+            {
+                question: "In base all'Articolo 27 del Codice, in caso di urgenza per evitare danni al bene culturale, quale procedura eccezionale è ammessa?",
+                options: [
+                    "Il proprietario può procedere liberamente senza alcuna comunicazione.",
+                    "Il proprietario può eseguire lavori provvisori indispensabili per evitare danni, con immediata comunicazione alla Soprintendenza e invio tempestivo del progetto definitivo.",
+                    "Solo il Ministero può intervenire, con un decreto d'urgenza da emanarsi entro 48 ore.",
+                    "È ammessa esclusivamente la messa in sicurezza da parte dei Vigili del Fuoco."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 27 prevede una deroga al regime autorizzatorio: in caso di assoluta urgenza, il proprietario può eseguire interventi provvisori indispensabili per evitare danni, a condizione di darne immediata comunicazione alla Soprintendenza e di trasmettere tempestivamente il progetto dei lavori definitivi."
+            },
+            {
+                question: "Nell'Articolo 29 del Codice, quale distinzione concettuale viene tracciata tra «prevenzione», «manutenzione» e «restauro»?",
+                options: [
+                    "Sono tre sinonimi che indicano la stessa attività di conservazione.",
+                    "La prevenzione limita i rischi di deterioramento del contesto; la manutenzione mantiene l'integrità funzionale e l'identità; il restauro è l'intervento diretto per l'integrità materiale e il recupero dei valori culturali.",
+                    "La prevenzione è obbligatoria, la manutenzione è facoltativa, il restauro è vietato.",
+                    "La prevenzione riguarda i beni mobili, la manutenzione i beni immobili, il restauro solo i beni archeologici."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 29 distingue tre concetti: la prevenzione (limitazione dei fattori di rischio nel contesto ambientale), la manutenzione (controllo delle condizioni e mantenimento dell'integrità e dell'identità del bene) e il restauro (intervento diretto sul bene per garantire l'integrità materiale e il recupero dei valori culturali)."
+            }
+        ]
+    },
+
+    cap6_circolazione: {
+        subject: "diritto",
+        chapterTag: "Cap. VI",
+        title: "La Circolazione dei Beni Culturali",
+        questions: [
+            {
+                question: "Ai sensi dell'Articolo 59 del Codice, entro quanti giorni dall'atto di trasferimento deve essere effettuata la denuncia obbligatoria?",
+                options: [
+                    "Entro 15 giorni dalla trascrizione nei registri immobiliari.",
+                    "Entro 30 giorni dall'atto di trasferimento della proprietà o della detenzione.",
+                    "Entro 60 giorni dalla stipula del contratto notarile.",
+                    "Entro 90 giorni dalla data di consegna materiale del bene."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 59 impone che ogni atto che trasferisca la proprietà o la detenzione di beni culturali a titolo oneroso o gratuito sia denunciato al MiC entro 30 giorni. La denuncia è presupposto di efficacia del trasferimento e fa decorrere il termine per la prelazione."
+            },
+            {
+                question: "Se la denuncia di trasferimento ex Art. 59 viene omessa o effettuata tardivamente, come si modifica il termine per l'esercizio della prelazione artistica dello Stato?",
+                options: [
+                    "Il termine resta invariato a 60 giorni, ma decorre dalla data dell'atto.",
+                    "Il termine si estende a 180 giorni dalla data in cui il Ministero ha notizia del trasferimento.",
+                    "La prelazione diventa imprescrittibile e può essere esercitata in qualunque momento.",
+                    "Il diritto di prelazione decade automaticamente."
+                ],
+                correctIndex: 1,
+                explanation: "In caso di denuncia omessa o tardiva, il termine per la prelazione si dilata da 60 a 180 giorni, decorrenti dal momento in cui il Ministero viene a conoscenza del trasferimento avvenuto. Si tratta di una sanzione indiretta contro l'inadempimento dell'obbligo di denuncia."
+            },
+            {
+                question: "L'Articolo 63 del Codice impone un particolare obbligo a chi esercita il commercio di beni culturali, cose antiche o usate. Di quale obbligo si tratta?",
+                options: [
+                    "L'obbligo di assicurare ogni bene venduto per un valore almeno pari al doppio del prezzo di cessione.",
+                    "L'obbligo di tenere un registro giornaliero delle operazioni commerciali, preventivamente vidimato dalla questura.",
+                    "L'obbligo di esporre una copia della licenza di esportazione in vetrina.",
+                    "L'obbligo di comunicare ogni vendita alla Guardia di Finanza entro 24 ore."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 63 prescrive che chiunque eserciti il commercio di cose antiche, usate o di beni culturali tenga un registro giornaliero delle operazioni preventivamente vidimato, annotandovi le generalità del cedente e dell'acquirente, la descrizione del bene e il prezzo."
+            },
+            {
+                question: "Qual è la validità dell'attestato di libera circolazione rilasciato dall'Ufficio di Esportazione per l'uscita definitiva di beni culturali dal territorio nazionale?",
+                options: [
+                    "Ha validità illimitata.",
+                    "Ha validità di 5 anni, rinnovabile.",
+                    "Ha validità di 1 anno dalla data di rilascio.",
+                    "Ha validità di 3 anni, non rinnovabile."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 68 del Codice stabilisce che l'attestato di libera circolazione ha validità di 5 anni dalla data del rilascio. Se l'Ufficio di Esportazione nega l'attestato, può avviare d'ufficio il procedimento di dichiarazione di interesse culturale (Art. 14)."
+            },
+            {
+                question: "Durante il periodo di pendenza del termine di 60 giorni per la prelazione (Art. 60), quale effetto giuridico si produce sull'atto di alienazione?",
+                options: [
+                    "L'atto è immediatamente efficace e la proprietà passa all'acquirente.",
+                    "L'atto è sottoposto a condizione sospensiva: la proprietà NON passa all'acquirente e l'alienante NON può consegnare il bene.",
+                    "L'atto è annullabile solo su istanza del Ministero.",
+                    "L'atto produce effetti parziali, limitatamente al godimento del bene."
+                ],
+                correctIndex: 1,
+                explanation: "L'atto di alienazione è condizionato sospensivamente all'esito della prelazione: durante il termine di 60 giorni la proprietà non si trasferisce e il bene non può essere consegnato all'acquirente. Solo al decorso infruttuoso del termine l'atto diviene pienamente efficace."
+            }
+        ]
+    },
+
+    cap8_appalti: {
+        subject: "diritto",
+        chapterTag: "Cap. VIII",
+        title: "Appalti, Concessioni e Sponsorizzazioni",
+        questions: [
+            {
+                question: "L'Articolo 120 del Codice dei Beni Culturali disciplina la sponsorizzazione. Quale distinzione fondamentale opera tra le due forme di sponsorizzazione?",
+                options: [
+                    "Sponsorizzazione nazionale e sponsorizzazione internazionale.",
+                    "Sponsorizzazione pura (erogazione di risorse finanziarie) e sponsorizzazione tecnica (lo sponsor esegue direttamente i lavori a propria cura e spese, sotto vigilanza del Ministero).",
+                    "Sponsorizzazione pubblica (tra enti pubblici) e sponsorizzazione privata (tra privati).",
+                    "Sponsorizzazione temporanea (per mostre) e sponsorizzazione permanente (per restauri)."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 120 e l'Art. 134 del Codice dei Contratti distinguono tra sponsorizzazione pura (il privato eroga denaro) e sponsorizzazione tecnica (il privato esegue direttamente i lavori di restauro/valorizzazione a proprie spese, sotto la vigilanza e le prescrizioni della Soprintendenza)."
+            },
+            {
+                question: "L'Articolo 115 del Codice prevede la possibilità di affidare a privati la gestione di determinate attività presso istituti culturali. Di quali attività si tratta?",
+                options: [
+                    "Esclusivamente le funzioni di vigilanza e sorveglianza notturna.",
+                    "I servizi per la pubblica fruizione: biglietteria, caffetteria, bookshop, guide turistiche, didattica museale.",
+                    "La sola gestione amministrativa e contabile dell'istituto.",
+                    "L'intera attività scientifica di catalogazione e restauro."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 115 disciplina la concessione di servizi di valorizzazione, consentendo alle amministrazioni di affidare a privati, mediante gara pubblica, la gestione dei servizi per la fruizione del patrimonio culturale (biglietteria, caffetteria, bookshop, didattica, visite guidate)."
+            },
+            {
+                question: "Per poter eseguire lavori di restauro su beni culturali tutelati, quali categorie di qualificazione SOA devono possedere le imprese?",
+                options: [
+                    "Le categorie OG1 (Edifici civili) e OG2 (Fabbricati industriali).",
+                    "Le categorie OS2-A (Superfici decorate di beni immobili) e OS2-B (Beni culturali mobili e superfici decorate di beni architettonici).",
+                    "La sola categoria OG11 (Impianti tecnologici).",
+                    "Non è richiesta alcuna qualificazione specifica per i lavori di restauro."
+                ],
+                correctIndex: 1,
+                explanation: "Per i lavori su beni culturali tutelati è richiesta l'attestazione SOA nelle categorie specialistiche OS2-A (superfici decorate di beni immobili del patrimonio culturale) e OS2-B (beni culturali mobili e superfici decorate di beni architettonici), che certificano l'esperienza pregressa nell'ambito del restauro."
+            },
+            {
+                question: "Quale criterio di aggiudicazione è obbligatorio per gli appalti relativi a lavori su beni culturali tutelati?",
+                options: [
+                    "Il massimo ribasso sul prezzo base d'asta.",
+                    "L'Offerta Economicamente Più Vantaggiosa (OEPV), in cui il punteggio tecnico ha peso preponderante rispetto al prezzo.",
+                    "Il sorteggio tra le imprese qualificate.",
+                    "L'affidamento diretto all'impresa con il fatturato più elevato."
+                ],
+                correctIndex: 1,
+                explanation: "Per i lavori su beni culturali il Codice dei Contratti impone il criterio dell'OEPV (Offerta Economicamente Più Vantaggiosa), dove la componente qualitativa e tecnica della proposta prevale sulla mera offerta economica, a garanzia della qualità dell'intervento conservativo."
+            },
+            {
+                question: "Quale differenza fondamentale distingue la sponsorizzazione (Art. 120 Codice) dall'erogazione liberale agevolata dall'Art Bonus (D.L. 83/2014)?",
+                options: [
+                    "Non esiste alcuna differenza: sono sinonimi giuridici.",
+                    "La sponsorizzazione prevede un ritorno di immagine (corrispettivo promozionale per lo sponsor), mentre l'erogazione liberale è un atto di mecenatismo senza corrispettivo, incentivato esclusivamente dal beneficio fiscale.",
+                    "La sponsorizzazione è riservata alle persone fisiche, l'Art Bonus alle imprese.",
+                    "La sponsorizzazione è deducibile al 100%, l'Art Bonus solo al 30%."
+                ],
+                correctIndex: 1,
+                explanation: "La sponsorizzazione è un contratto a prestazioni corrispettive (lo sponsor finanzia in cambio dell'associazione del proprio marchio al bene). L'erogazione liberale è un atto gratuito di mecenatismo: il donante non riceve alcun corrispettivo se non il credito d'imposta del 65% previsto dall'Art Bonus."
+            }
+        ]
+    },
+
+    cap9_ritrovamenti: {
+        subject: "diritto",
+        chapterTag: "Cap. IX",
+        title: "Ritrovamenti e Scoperte",
+        questions: [
+            {
+                question: "L'Articolo 88 del Codice riserva in via esclusiva le ricerche archeologiche a quale soggetto istituzionale?",
+                options: [
+                    "Alle università pubbliche, in virtù dell'autonomia didattica e scientifica.",
+                    "Al Ministero della Cultura (MiC), che può concederne l'esecuzione a soggetti terzi.",
+                    "Ai Comuni, in quanto enti territoriali più vicini al sito archeologico.",
+                    "A qualsiasi privato cittadino che ne faccia richiesta motivata."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 88 riserva le ricerche archeologiche in via esclusiva al Ministero della Cultura. Tuttavia, l'Art. 89 consente al MiC di concederne l'esecuzione a soggetti terzi (università, CNR, fondazioni), fermo restando che tutti i reperti devono essere consegnati allo Stato."
+            },
+            {
+                question: "In caso di scoperta fortuita di beni di interesse archeologico, entro quale termine lo scopritore deve darne comunicazione alle autorità competenti?",
+                options: [
+                    "Entro 7 giorni lavorativi dalla scoperta.",
+                    "Entro 24 ore dalla scoperta, al Soprintendente o all'autorità di pubblica sicurezza.",
+                    "Entro 30 giorni dalla scoperta, mediante raccomandata al Ministero.",
+                    "Non esiste un termine specifico, purché la comunicazione avvenga in tempi ragionevoli."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 90 del Codice impone allo scopritore fortuito l'obbligo di denuncia entro 24 ore al Soprintendente o, in alternativa, al Sindaco o all'autorità di pubblica sicurezza (Carabinieri). Lo scopritore deve inoltre conservare le cose nel luogo e nelle condizioni del ritrovamento."
+            },
+            {
+                question: "Quanto può ammontare al massimo il premio di rinvenimento spettante allo scopritore fortuito e al proprietario del fondo, ai sensi degli Artt. 92-93 del Codice?",
+                options: [
+                    "Fino al 50% del valore commerciale dei reperti, ripartito liberamente.",
+                    "Fino a un quarto (25%) del valore commerciale dei reperti, ripartito in parti uguali tra scopritore e proprietario del fondo.",
+                    "Un importo fisso di 10.000 euro, indipendentemente dal valore dei beni.",
+                    "Il 10% del valore dei reperti, interamente destinato allo scopritore."
+                ],
+                correctIndex: 1,
+                explanation: "Gli Artt. 92-93 prevedono un premio che non può superare il 25% del valore commerciale dei reperti. Il premio è ripartito in parti uguali tra lo scopritore e il proprietario dell'immobile, salvo diverso accordo tra le parti. Lo scopritore che abbia effettuato ricerche abusive non ha diritto ad alcun premio."
+            },
+            {
+                question: "In che cosa consiste la Verifica Preventiva dell'Interesse Archeologico (VPIA) prevista dall'Art. 28 del Codice per le opere pubbliche?",
+                options: [
+                    "In una semplice dichiarazione sostitutiva dell'impresa appaltatrice.",
+                    "In un procedimento articolato in tre fasi: relazione di assoggettabilità, saggi preventivi (carotaggi/trincee), e scavo stratigrafico, con spese a carico della stazione appaltante.",
+                    "In un'ispezione visiva superficiale effettuata dal direttore dei lavori.",
+                    "In un'analisi satellitare del terreno condotta dall'Agenzia Spaziale Italiana."
+                ],
+                correctIndex: 1,
+                explanation: "La VPIA si articola in tre fasi progressive: 1) relazione di assoggettabilità (studio documentale e ricognizione di superficie); 2) saggi preventivi (carotaggi e trincee esplorative); 3) scavo stratigrafico completo. Tutte le spese sono a carico della stazione appaltante."
+            },
+            {
+                question: "Perché il regime del «tesoro» previsto dall'Art. 932 del Codice Civile non si applica ai beni di interesse archeologico?",
+                options: [
+                    "Perché il Codice Civile è stato abrogato dal Codice dei Beni Culturali.",
+                    "Perché i beni archeologici appartengono ab origine allo Stato (demanio originario ex Art. 91), rendendo inapplicabile la norma sul tesoro (cose di cui nessuno può provare la proprietà).",
+                    "Perché il regime del tesoro si applica solo ai beni mobili di valore inferiore a 1.000 euro.",
+                    "Perché i beni archeologici sono per definizione di proprietà del proprietario del fondo."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 91 del Codice stabilisce che tutte le cose di interesse archeologico appartengono allo Stato ab origine, indipendentemente da chi le ritrovi e dove. Questa riserva di proprietà statale rende inapplicabile l'Art. 932 c.c. sul tesoro, che presuppone che nessuno possa provare la proprietà."
+            }
+        ]
+    },
+
+    cap10_espropriazione: {
+        subject: "diritto",
+        chapterTag: "Cap. X",
+        title: "Espropriazione dei Beni Culturali",
+        questions: [
+            {
+                question: "Quale differenza fondamentale distingue l'espropriazione ex Art. 95 (espropriazione del bene culturale) dall'espropriazione ex Art. 96 (espropriazione strumentale)?",
+                options: [
+                    "L'Art. 95 riguarda solo beni mobili, l'Art. 96 solo beni immobili.",
+                    "L'Art. 95 espropria il bene culturale stesso per conservazione o fruizione; l'Art. 96 espropria beni ordinari adiacenti per garantire luce, prospettiva, decoro e accessibilità al bene culturale.",
+                    "L'Art. 95 non prevede indennità, l'Art. 96 sì.",
+                    "L'Art. 95 è di competenza regionale, l'Art. 96 di competenza comunale."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 95 consente di espropriare direttamente il bene culturale di proprietà privata quando la conservazione e la fruizione pubblica lo richiedano. L'Art. 96 espropria invece edifici e terreni circostanti (non culturali) per isolamento, restauro, luce, prospettiva e decoro del bene culturale."
+            },
+            {
+                question: "L'Articolo 97 del Codice prevede un'ulteriore ipotesi di espropriazione. Per quale finalità specifica?",
+                options: [
+                    "Per costruire parcheggi a servizio dei musei statali.",
+                    "Per consentire l'esecuzione di scavi e ricerche per il ritrovamento di beni archeologici.",
+                    "Per realizzare infrastrutture stradali nei pressi di siti tutelati.",
+                    "Per edificare nuovi musei su terreni privati."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 97 prevede la possibilità di espropriare immobili per consentire interventi di interesse archeologico o ricerche e scavi finalizzati al ritrovamento di beni archeologici, completando il trittico delle espropriazioni culturali (Art. 95, 96, 97)."
+            },
+            {
+                question: "Come viene calcolata l'indennità di esproprio per i beni culturali ai sensi dell'Art. 99 del Codice?",
+                options: [
+                    "In base al valore catastale dell'immobile, senza maggiorazioni.",
+                    "In base al valore venale (commerciale) al momento dell'esproprio, senza tener conto né del decremento di valore derivante dal vincolo né del plusvalore futuro derivante dal restauro programmato.",
+                    "In base a una stima forfettaria pari al 50% del valore di mercato.",
+                    "In base al costo storico di costruzione dell'immobile attualizzato con l'indice ISTAT."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 99 stabilisce che l'indennità si calcola sul valore venale (di mercato) al momento dell'esproprio. Non si tiene conto del decremento dovuto al vincolo culturale (che ridurrebbe artificiosamente il valore) né del plusvalore futuro derivante dal restauro programmato (che lo aumenterebbe speculativamente)."
+            },
+            {
+                question: "Se un bene espropriato non viene utilizzato per lo scopo dichiarato, entro quale termine il precedente proprietario può chiederne la retrocessione?",
+                options: [
+                    "Entro 5 anni dall'esproprio.",
+                    "Entro 10 anni dalla data del decreto di esproprio.",
+                    "La retrocessione non è mai ammessa per i beni culturali.",
+                    "Entro 20 anni, ma solo se il bene non ha subito restauri."
+                ],
+                correctIndex: 1,
+                explanation: "Se il bene espropriato non viene destinato allo scopo dichiarato (conservazione, fruizione pubblica, scavi) entro 10 anni dal decreto di esproprio, il precedente proprietario può chiederne la retrocessione, ovvero la restituzione del bene dietro rimborso dell'indennità percepita."
+            },
+            {
+                question: "Quale atto formale è necessario prima di procedere all'espropriazione di un bene culturale privato?",
+                options: [
+                    "Un'ordinanza del Sindaco del Comune di ubicazione del bene.",
+                    "La dichiarazione di pubblica utilità, che può equivalere all'approvazione del progetto di conservazione o all'autorizzazione alle ricerche.",
+                    "Un referendum popolare nel Comune interessato.",
+                    "Una delibera della Corte dei Conti sulla congruità della spesa."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 98 del Codice richiede la dichiarazione di pubblica utilità come presupposto formale dell'espropriazione. L'approvazione del progetto di conservazione/valorizzazione o l'autorizzazione alle ricerche archeologiche equivale automaticamente a dichiarazione di pubblica utilità."
+            }
+        ]
+    },
+
+    cap11_regime_fiscale: {
+        subject: "diritto",
+        chapterTag: "Cap. XI",
+        title: "Il Regime Fiscale dei Beni Culturali",
+        questions: [
+            {
+                question: "L'Art Bonus (D.L. 83/2014) prevede un credito d'imposta del 65% per le erogazioni liberali. Quali sono i limiti massimi di spesa agevolabile?",
+                options: [
+                    "Nessun limite per le persone fisiche, 10% dei ricavi per le imprese.",
+                    "Il 15% del reddito imponibile per le persone fisiche e gli enti non commerciali; il 5 per mille dei ricavi annui per le imprese.",
+                    "Un tetto fisso di 100.000 euro per tutti i contribuenti.",
+                    "Il 50% del reddito imponibile, senza distinzione tra persone fisiche e imprese."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art Bonus fissa limiti differenziati: per le persone fisiche e gli enti non commerciali il credito è calcolato su un massimo del 15% del reddito imponibile; per le imprese (soggetti IRES) su un massimo del 5 per mille dei ricavi annui. Il credito è ripartito in 3 quote annuali di pari importo."
+            },
+            {
+                question: "Quale agevolazione IMU è prevista per gli immobili di interesse storico-artistico vincolati?",
+                options: [
+                    "Esenzione totale dall'IMU per tutti gli immobili vincolati.",
+                    "Riduzione del 50% della base imponibile IMU, a prescindere dall'utilizzo del bene.",
+                    "Riduzione del 25% dell'aliquota ordinaria comunale.",
+                    "Nessuna agevolazione; l'IMU si applica integralmente."
+                ],
+                correctIndex: 1,
+                explanation: "Per gli immobili riconosciuti di interesse storico-artistico la base imponibile IMU è ridotta del 50%. L'agevolazione si applica indipendentemente dall'utilizzo del bene (abitativo, commerciale, monumentale), quale compensazione degli onerosi vincoli conservativi."
+            },
+            {
+                question: "In che cosa consiste la «dazione in pagamento» (datio in solutum) prevista dall'Art. 28-bis del D.P.R. 602/1973 in materia di beni culturali?",
+                options: [
+                    "La possibilità per lo Stato di pagare i restauri cedendo titoli di Stato ai proprietari.",
+                    "La possibilità per il contribuente di estinguere debiti tributari (IRPEF, IRES, imposte di successione) mediante la cessione allo Stato di beni culturali vincolati, il cui valore è determinato da una commissione paritetica MiC-Agenzia delle Entrate.",
+                    "L'obbligo per il proprietario di pagare un canone annuale al Ministero per la conservazione.",
+                    "La possibilità per le banche di accettare beni culturali come garanzia per mutui ipotecari."
+                ],
+                correctIndex: 1,
+                explanation: "La dazione in pagamento consente al contribuente di cedere allo Stato beni culturali vincolati (o di eccezionale interesse anche se non vincolati) in luogo del pagamento di imposte, sanzioni e interessi. Il valore è determinato da una commissione paritetica Ministero della Cultura/Agenzia delle Entrate."
+            },
+            {
+                question: "A quali condizioni i beni culturali vincolati sono esenti dall'imposta di successione e donazione?",
+                options: [
+                    "Sono sempre e incondizionatamente esenti.",
+                    "Sono esenti a condizione che gli eredi/donatari si obblighino a rispettare gli obblighi di conservazione e a consentire l'accesso per motivi di studio, con vincolo regolarmente trascritto.",
+                    "Sono esenti solo se il valore del bene è inferiore a 50.000 euro.",
+                    "Sono esenti esclusivamente per i beni archeologici di proprietà dello Stato."
+                ],
+                correctIndex: 1,
+                explanation: "I beni culturali vincolati possono essere esclusi dall'attivo ereditario e godere dell'esenzione dall'imposta di successione/donazione, a condizione che: il vincolo sia regolarmente trascritto, gli eredi denuncino il trasferimento al Ministero e si impegnino a conservare il bene e a consentire l'accesso per motivi di studio."
+            },
+            {
+                question: "Quale regime fiscale si applica alle spese di sponsorizzazione culturale sostenute da un'impresa?",
+                options: [
+                    "Sono parzialmente deducibili come erogazioni liberali (50% dell'importo).",
+                    "Sono integralmente deducibili dal reddito d'impresa come spese di pubblicità, non come liberalità.",
+                    "Non sono deducibili in nessun caso.",
+                    "Sono deducibili solo se l'importo è inferiore a 10.000 euro annui."
+                ],
+                correctIndex: 1,
+                explanation: "Le spese di sponsorizzazione culturale sono considerate spese di pubblicità (e non erogazioni liberali) poiché prevedono un ritorno di immagine. In quanto tali, sono integralmente deducibili dal reddito d'impresa senza limiti percentuali, a differenza delle liberalità soggette a tetti."
+            }
+        ]
+    },
+
+    cap12_paesaggio: {
+        subject: "diritto",
+        chapterTag: "Cap. XII",
+        title: "I Beni Paesaggistici",
+        questions: [
+            {
+                question: "L'Articolo 134 del Codice individua tre categorie di beni paesaggistici. Quali sono?",
+                options: [
+                    "Beni demaniali, beni patrimoniali e beni privati vincolati.",
+                    "Immobili con provvedimento formale (Art. 136), aree tutelate per legge — «Vincoli Galasso» (Art. 142), e immobili individuati dai piani paesaggistici (Art. 143).",
+                    "Parchi nazionali, riserve naturali e oasi protette.",
+                    "Beni rurali, beni costieri e beni montani."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 134 del Codice distingue tre categorie: 1) beni sottoposti a vincolo con provvedimento individuale (Art. 136: ville, giardini, bellezze panoramiche); 2) aree tutelate direttamente per legge — i «Vincoli Galasso» ex Art. 142 (coste, fiumi, montagne, boschi, vulcani); 3) beni individuati dai piani paesaggistici regionali (Art. 143)."
+            },
+            {
+                question: "Quali distanze metriche stabilisce l'Art. 142 del Codice (Vincoli Galasso) per le coste marine e le sponde dei fiumi?",
+                options: [
+                    "100 metri per le coste e 50 metri per i fiumi.",
+                    "300 metri dalla riva per i territori costieri e 150 metri dalle sponde dei fiumi e torrenti.",
+                    "500 metri dalla riva per le coste e 200 metri per i fiumi.",
+                    "1.000 metri dalla riva per le coste e 300 metri per i fiumi."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 142 stabilisce vincoli metrici precisi: i territori costieri sono tutelati fino a 300 metri dalla linea di battigia, le sponde dei fiumi e torrenti fino a 150 metri dal ciglio di sponda. Per le montagne, la soglia è 1.600 metri per le Alpi e 1.200 metri per gli Appennini."
+            },
+            {
+                question: "Qual è la caratteristica più significativa dell'autorizzazione paesaggistica prevista dall'Art. 146 del Codice?",
+                options: [
+                    "È un parere consultivo non vincolante che il Comune può disattendere motivatamente.",
+                    "È un atto presupposto, autonomo e preliminare rispetto a qualsiasi titolo edilizio, NON sanabile (non può essere rilasciata in sanatoria), con validità di 5 anni.",
+                    "È un atto successivo al permesso di costruire, rilasciabile anche dopo i lavori.",
+                    "È un nulla osta tacito soggetto al principio del silenzio-assenso dopo 30 giorni."
+                ],
+                correctIndex: 1,
+                explanation: "L'autorizzazione paesaggistica è l'unico atto amministrativo che per legge non è sanabile: non può mai essere rilasciata in sanatoria a lavori ultimati (salvo ristrettissime ipotesi di lieve entità ex Art. 167). È autonoma e preliminare rispetto a qualsiasi titolo edilizio, con validità di 5 anni."
+            },
+            {
+                question: "Quale particolarità distingue il Piano Paesaggistico Regionale da tutti gli altri strumenti urbanistici nella sua formazione?",
+                options: [
+                    "Viene approvato esclusivamente dal Consiglio comunale.",
+                    "È l'unico strumento urbanistico che richiede l'elaborazione congiunta Stato-Regione (copianificazione), prevalendo sugli strumenti urbanistici comunali.",
+                    "È un atto del Governo approvato con decreto del Presidente della Repubblica.",
+                    "Non ha valore vincolante e funge da mero indirizzo per i Comuni."
+                ],
+                correctIndex: 1,
+                explanation: "Il Piano Paesaggistico è l'unico strumento urbanistico soggetto a copianificazione obbligatoria tra Stato e Regione (Artt. 135 e 143), poiché il paesaggio è un valore costituzionale inderogabile. Le sue prescrizioni d'uso prevalgono su tutti gli strumenti urbanistici comunali (PGT, PRG)."
+            },
+            {
+                question: "In caso di lavori eseguiti senza autorizzazione paesaggistica, quale sanzione prevede l'Art. 167 del Codice?",
+                options: [
+                    "Una multa simbolica e l'obbligo di presentare l'autorizzazione entro 90 giorni.",
+                    "L'obbligo di rimessione in pristino a spese del trasgressore; in alternativa, se i lavori non arrecano danno irreversibile, una sanzione pecuniaria pari al maggior importo tra il danno arrecato e il profitto conseguito.",
+                    "La confisca automatica dell'immobile da parte del Comune.",
+                    "La sola segnalazione alla Procura della Repubblica senza conseguenze amministrative."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 167 prevede come sanzione primaria la rimessione in pristino (demolizione delle opere abusive) a spese del trasgressore. Solo quando il ripristino non è possibile o non è ritenuto necessario, si applica in via alternativa una sanzione pecuniaria pari al maggiore tra il danno arrecato e il profitto conseguito."
+            }
+        ]
+    },
+
+    cap13_sanzioni: {
+        subject: "diritto",
+        chapterTag: "Cap. XIII",
+        title: "Le Sanzioni a Tutela del Patrimonio Culturale",
+        questions: [
+            {
+                question: "La Legge 9 marzo 2022, n. 22 ha introdotto nel Codice Penale un nuovo Titolo dedicato ai reati contro il patrimonio culturale. Come si chiama questo Titolo e dove è collocato?",
+                options: [
+                    "Titolo XII-bis del Libro III del Codice Penale.",
+                    "Titolo VIII-bis del Libro II del Codice Penale, intitolato «Dei delitti contro il patrimonio culturale» (Artt. 518-bis – 518-undevicies c.p.).",
+                    "Titolo IV-ter del Codice dei Beni Culturali (D.Lgs. 42/2004).",
+                    "Titolo I del Libro I del Codice di Procedura Penale."
+                ],
+                correctIndex: 1,
+                explanation: "La Legge 22/2022 ha inserito nel Codice Penale il Titolo VIII-bis del Libro II, intitolato «Dei delitti contro il patrimonio culturale», contenente fattispecie autonome e aggravate (Artt. 518-bis a 518-undevicies c.p.), spostando i reati più gravi dal Codice dei Beni Culturali al Codice Penale."
+            },
+            {
+                question: "Quale pena detentiva prevede l'Art. 518-bis c.p. per il furto di beni culturali?",
+                options: [
+                    "Reclusione da 6 mesi a 3 anni.",
+                    "Reclusione da 2 a 6 anni e multa da 927 a 1.500 euro.",
+                    "Reclusione da 1 a 4 anni.",
+                    "Arresto fino a 1 anno e ammenda fino a 2.000 euro."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 518-bis c.p. prevede per il furto di beni culturali la reclusione da 2 a 6 anni e la multa da 927 a 1.500 euro. La pena è significativamente più severa rispetto al furto ordinario (Art. 624 c.p.: reclusione da 6 mesi a 3 anni), a tutela dell'eccezionalità del bene."
+            },
+            {
+                question: "Per quale reato contro il patrimonio culturale il Codice Penale prevede la pena più severa, con reclusione da 8 a 15 anni?",
+                options: [
+                    "Il furto di beni culturali (Art. 518-bis c.p.).",
+                    "La ricettazione di beni culturali (Art. 518-quater c.p.).",
+                    "La devastazione e il saccheggio di beni culturali (Art. 518-novies c.p.).",
+                    "La contraffazione di opere d'arte (Art. 518-quaterdecies c.p.)."
+                ],
+                correctIndex: 2,
+                explanation: "L'Art. 518-novies c.p. punisce con la reclusione da 8 a 15 anni chiunque commette fatti di devastazione e saccheggio aventi ad oggetto beni culturali. Si tratta della fattispecie più gravemente sanzionata del Titolo VIII-bis, a tutela del patrimonio contro atti di distruzione sistematica."
+            },
+            {
+                question: "Quale effetto patrimoniale accessorio è disposto per tutti i reati del Titolo VIII-bis del Codice Penale?",
+                options: [
+                    "L'obbligo di risarcimento in denaro pari al doppio del valore del bene.",
+                    "La confisca obbligatoria dei beni culturali oggetto del reato e del profitto derivante dal reato.",
+                    "La sospensione della patente di guida per 5 anni.",
+                    "L'interdizione perpetua dai pubblici uffici."
+                ],
+                correctIndex: 1,
+                explanation: "Per tutti i delitti del Titolo VIII-bis è disposta la confisca obbligatoria sia dei beni culturali oggetto del reato (che vengono restituiti al legittimo proprietario o acquisiti dal patrimonio dello Stato) sia del profitto economico derivante dall'attività criminosa."
+            },
+            {
+                question: "Quale pena è prevista dall'Art. 518-duodecies c.p. per la distruzione, il deterioramento, il deturpamento o l'imbrattamento di beni culturali o paesaggistici?",
+                options: [
+                    "Arresto da 1 a 6 mesi e ammenda fino a 1.000 euro.",
+                    "Reclusione da 2 a 5 anni e multa da 2.500 a 15.000 euro.",
+                    "Reclusione da 6 a 12 anni.",
+                    "Sanzione amministrativa pecuniaria senza conseguenze penali."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 518-duodecies c.p. punisce con la reclusione da 2 a 5 anni e la multa da 2.500 a 15.000 euro chiunque distrugga, disperda, deteriori, danneggi, deturpi o imbratti beni culturali o paesaggistici propri o altrui. Si noti che il reato è configurabile anche sul bene di proprietà del reo."
             }
         ]
     },
