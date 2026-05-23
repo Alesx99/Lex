@@ -10,11 +10,15 @@
     <!-- Main Style Sheet -->
     <link rel="stylesheet" href="style.css">
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
     <!-- Fuse.js for Fuzzy Search -->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.basic.min.js"></script>
-</head>
-<body>
+    </head>
+    <body>
+
 
     <!-- Background decorative blur shapes -->
     <div class="blur-shapes">
@@ -236,8 +240,6 @@
 
     <!-- Centralized Search Database -->
     <script src="js/search_db.js"></script>
-    <!-- Centralized Pomodoro Timer -->
-    <script src="js/pomo_timer.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchBox = document.getElementById('global-search-box');
@@ -248,26 +250,6 @@
 
             // Hide overlay by default
             overlay.style.display = 'none';
-
-            // --- THEME TOGGLE LOGIC ---
-            const themeToggle = document.getElementById('theme-toggle');
-            const sunIcon = document.getElementById('sun-icon');
-            const moonIcon = document.getElementById('moon-icon');
-            
-            const savedTheme = localStorage.getItem('lex-theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-            }
-
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('light-theme');
-                const isLight = document.body.classList.contains('light-theme');
-                localStorage.setItem('lex-theme', isLight ? 'light' : 'dark');
-                sunIcon.style.display = isLight ? 'block' : 'none';
-                moonIcon.style.display = isLight ? 'none' : 'block';
-            });
 
             // --- FUZZY SEARCH WITH FUSE.JS ---
             const fuse = new Fuse(searchDatabase, {

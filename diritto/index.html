@@ -9,12 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Main Style Sheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
     <!-- Marked.js Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- Centralized Glossary Database -->
     <script src="../js/glossary_db.js"></script>
-    <!-- Centralized Pomodoro Timer -->
-    <script src="../js/pomo_timer.js"></script>
     <style>
         /* Extra styles specific to index page */
         .search-container {
@@ -756,26 +757,6 @@
     </div>
 
     <script>
-        // THEME TOGGLE LOGIC (Sync with root)
-        const themeToggle = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
-        
-        const savedTheme = localStorage.getItem('lex-theme');
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-theme');
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            localStorage.setItem('lex-theme', isLight ? 'light' : 'dark');
-            sunIcon.style.display = isLight ? 'block' : 'none';
-            moonIcon.style.display = isLight ? 'none' : 'block';
-        });
-
         // READING MODE LOGIC
         const fontSizeBtn = document.getElementById('font-size-btn');
         const dyslexicBtn = document.getElementById('dyslexic-btn');
