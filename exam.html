@@ -342,6 +342,10 @@
             background: var(--accent-terracotta);
         }
 
+        .romana-fill {
+            background: var(--accent-romana);
+        }
+
         .recommendations-section {
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 2rem;
@@ -418,6 +422,12 @@
             background: rgba(200, 90, 50, 0.1);
             color: var(--accent-terracotta);
             border: 1px solid rgba(200, 90, 50, 0.2);
+        }
+
+        .badge-ar {
+            background: rgba(169, 50, 38, 0.15);
+            color: var(--accent-romana);
+            border: 1px solid rgba(169, 50, 38, 0.2);
         }
 
         .back-hub {
@@ -512,9 +522,10 @@
                 <div class="form-group">
                     <label class="form-label">Materie d'Esame</label>
                     <select id="exam-subject-select" class="form-select" onchange="updateMaxQuestions()">
-                        <option value="misto">Misto (Diritto e Arte — Max 110 domande)</option>
+                        <option value="misto">Misto (Diritto, Arte Moderna e Arte Romana — Max 160 domande)</option>
                         <option value="diritto">Solo Diritto dei Beni Culturali (Max 60 domande)</option>
                         <option value="arte">Solo Storia dell'Arte Moderna (Max 50 domande)</option>
+                        <option value="arte_romana">Solo Arte Romana (Max 50 domande)</option>
                     </select>
                 </div>
 
@@ -528,7 +539,7 @@
                             <option value="custom">Numero Personalizzato...</option>
                         </select>
                         <div class="custom-count-wrapper" id="custom-count-wrapper">
-                            <input type="number" id="exam-custom-count-input" class="form-input-number" min="1" max="110" value="15" placeholder="Inserisci quantità...">
+                            <input type="number" id="exam-custom-count-input" class="form-input-number" min="1" max="160" value="15" placeholder="Inserisci quantità...">
                         </div>
                     </div>
 
@@ -608,6 +619,16 @@
                             </div>
                             <div class="stat-bar-bg">
                                 <div class="stat-bar-fill arte-fill" id="stat-arte-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-bar-group">
+                            <div class="stat-label">
+                                <span>Arte Romana</span>
+                                <span id="stat-romana-text">0 / 0 (0%)</span>
+                            </div>
+                            <div class="stat-bar-bg">
+                                <div class="stat-bar-fill romana-fill" id="stat-romana-bar" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
@@ -721,6 +742,19 @@
             postimpressionismo: "summaries/postimpressionismo_10.md"
         };
 
+        const romanaChapterLinks = {
+            cap1_introduzione: "summaries/cap1_introduzione.md",
+            cap2_fondazione: "summaries/cap2_fondazione.md",
+            cap3_repubblica: "summaries/cap3_repubblica.md",
+            cap4_ellenismo: "summaries/cap4_ellenismo.md",
+            cap5_tardo_repubblica: "summaries/cap5_tardo_repubblica.md",
+            cap6_augusto_ara_pacis: "summaries/cap6_augusto_ara_pacis.md",
+            cap7_augusto_foro_successori: "summaries/cap7_augusto_foro_successori.md",
+            cap8_traiano: "summaries/cap8_traiano.md",
+            cap9_adriano: "summaries/cap9_adriano.md",
+            cap10_antonini_tardoantico: "summaries/cap10_antonini_tardoantico.md"
+        };
+
         function getPoolSize(subject) {
             let count = 0;
             Object.values(quizDatabase).forEach(mod => {
@@ -741,6 +775,14 @@
                     chapterName: mod.title,
                     subject: 'diritto',
                     link: summary ? `diritto/index.html?open=${summary}` : 'diritto/index.html',
+                    navText: `Apri ${mod.chapterTag}`
+                };
+            } else if (mod.subject === 'arte_romana') {
+                const summary = romanaChapterLinks[moduleKey];
+                return {
+                    chapterName: mod.title,
+                    subject: 'arte_romana',
+                    link: summary ? `arte_romana/index.html?open=${summary}` : 'arte_romana/index.html',
                     navText: `Apri ${mod.chapterTag}`
                 };
             }
@@ -842,7 +884,14 @@
             const q = examQuestions[currentQuestionIndex];
 
             // Set text & metadata
-            const subName = q.subject === 'diritto' ? 'Diritto' : 'Arte';
+            let subName;
+            if (q.subject === 'diritto') {
+                subName = 'Diritto';
+            } else if (q.subject === 'arte_romana') {
+                subName = 'Arte Romana';
+            } else {
+                subName = 'Arte Moderna';
+            }
             subjectTag.textContent = `Materia: ${subName} - ${q.moduleTitle}`;
             progressTag.textContent = `Domanda ${currentQuestionIndex + 1} di ${examQuestions.length}`;
             questionText.textContent = q.question;
@@ -983,12 +1032,17 @@
             let dirittoCorrect = 0;
             let arteCount = 0;
             let arteCorrect = 0;
+            let romanaCount = 0;
+            let romanaCorrect = 0;
 
             userResponses.forEach(resp => {
                 if (resp.subject === 'diritto') {
                     dirittoCount++;
                     if (resp.isCorrect) dirittoCorrect++;
-                } else if (resp.subject === 'arte') {
+                } else if (resp.subject === 'arte_romana') {
+                    romanaCount++;
+                    if (resp.isCorrect) romanaCorrect++;
+                } else {
                     arteCount++;
                     if (resp.isCorrect) arteCorrect++;
                 }
@@ -1002,6 +1056,10 @@
             const artPercent = arteCount > 0 ? Math.round((arteCorrect / arteCount) * 100) : 0;
             document.getElementById('stat-arte-text').textContent = arteCount > 0 ? `${arteCorrect} / ${arteCount} (${artPercent}%)` : "N/A";
             document.getElementById('stat-arte-bar').style.width = artPercent + '%';
+
+            const romPercent = romanaCount > 0 ? Math.round((romanaCorrect / romanaCount) * 100) : 0;
+            document.getElementById('stat-romana-text').textContent = romanaCount > 0 ? `${romanaCorrect} / ${romanaCount} (${romPercent}%)` : "N/A";
+            document.getElementById('stat-romana-bar').style.width = romPercent + '%';
 
             // Generate review recommendations
             const recList = document.getElementById('recommendations-list');
@@ -1026,8 +1084,8 @@
                         const li = document.createElement('li');
                         li.className = 'rec-item';
                         
-                        const subClass = meta.subject === 'diritto' ? 'badge-d' : 'badge-a';
-                        const subName = meta.subject === 'diritto' ? 'D' : 'A';
+                        const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : 'badge-a');
+                        const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : 'AM');
 
                         li.innerHTML = `
                             <div>

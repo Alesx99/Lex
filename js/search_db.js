@@ -179,6 +179,87 @@ const searchDatabase = [
         description: "La scomposizione formale ed emotiva: il geometrismo di Cézanne, il Pointillisme ottico di Seurat, il cloisonnisme di Gauguin e il colore espressionista di Van Gogh.",
         keywords: "postimpressionismo post-impressionismo paul cezanne scomposizione geometria giocatori carte montagna sainte victoire taches georges seurat divisionismo pointillisme pointillismo grande jatte michel eugene chevreul paul gauguin cloisonnisme sintetismo da dove veniamo chi siamo vincent van gogh notte stellata mangiatori patate espressionismo pennellata materica",
         navPath: "storia_arte/index.html?open=summaries/postimpressionismo_10.md"
+    },
+    // ARTE ROMANA
+    {
+        title: "Introduzione metodologica e storiografica",
+        subject: "arte_romana",
+        chapterTag: "Studio I",
+        description: "La storiografia dell'arte romana da Winckelmann a Wickhoff e Riegl. Lo storicismo marxista di Bianchi Bandinelli e le letture semantiche di Hölscher e Zanker.",
+        keywords: "arte romana storiografia winckelmann scuola vienna wickhoff riegl kunstwollen bianchi bandinelli senatoria plebea holscher zanker",
+        navPath: "arte_romana/index.html?open=summaries/cap1_introduzione.md"
+    },
+    {
+        title: "Origini di Roma e influenza etrusca",
+        subject: "arte_romana",
+        chapterTag: "Studio II",
+        description: "I riti etruschi di fondazione, lo sviluppo delle Mura Serviane e l'architettura etrusco-italica del Tempio di Giove Ottimo Massimo sul Campidoglio. Area sacra di Sant'Omobono.",
+        keywords: "origini roma fondazione etrusca mura serviane giove ottimo massimo campidoglio sant omobono minerva ercole tessera hospitalis",
+        navPath: "arte_romana/index.html?open=summaries/cap2_fondazione.md"
+    },
+    {
+        title: "L'età repubblicana tra V e III secolo a.C.",
+        subject: "arte_romana",
+        chapterTag: "Studio III",
+        description: "L'evoluzione artistica nel periodo repubblicano: il tempio di Cerere, la Ficoroni Cista, il Sarcofago di Scipione Barbato, il Bruto Capitolino e la Concordia.",
+        keywords: "eta repubblicana tempio cerere damofilo gorgaso ficoroni cista scipione barbato bruto capitolino concordia",
+        navPath: "arte_romana/index.html?open=summaries/cap3_repubblica.md"
+    },
+    {
+        title: "L'influenza ellenistica nel II secolo a.C.",
+        subject: "arte_romana",
+        chapterTag: "Studio IV",
+        description: "La monumentalizzazione del Campo Marzio, il lusso della Porticus Metelli, la rivoluzione del calcestruzzo e i complessi santuari a terrazze (Palestrina e Foro Boario).",
+        keywords: "ellenismo II secolo campo marzio porticus metelli giove statore lisippo porticus aemilia opus caementicium palestrina fortuna primigenia portuno boario",
+        navPath: "arte_romana/index.html?open=summaries/cap4_ellenismo.md"
+    },
+    {
+        title: "Tardo-repubblicano, ritrattistica e Pompeo",
+        subject: "arte_romana",
+        chapterTag: "Studio V",
+        description: "Il primo teatro stabile di Pompeo. L'origine sociale del verismo patrizio e del ius imaginum. Mosaici della Casa del Fauno e stili pompeiani.",
+        keywords: "tardo repubblica pompeo teatro venere vincitrice verismo patrizio ius imaginum casa fauno alessandro mosaico stili pittura pompei affreschi",
+        navPath: "arte_romana/index.html?open=summaries/cap5_tardo_repubblica.md"
+    },
+    {
+        title: "L'età augustea e l'Ara Pacis",
+        subject: "arte_romana",
+        chapterTag: "Studio VI",
+        description: "Il programma figurativo della Pax Romana: il Mausoleo di Augusto e l'analisi dettagliata dei rilievi storici, mitologici e vegetali dell'Ara Pacis.",
+        keywords: "augusto ara pacis propaganda imperiale mausoleo campus martius acanto tellus dea madre processione dinastica",
+        navPath: "arte_romana/index.html?open=summaries/cap6_augusto_ara_pacis.md"
+    },
+    {
+        title: "Foro di Augusto e Giulio-Claudi",
+        subject: "arte_romana",
+        chapterTag: "Studio VII",
+        description: "Il Foro di Augusto e il Tempio di Marte Ultore con le Cariatidi. L'architettura dei Giulio-Claudi: Porta Maggiore in opus rusticum e la Tomba di Eurisace.",
+        keywords: "foro augusto marte ultore cariatidi claudio porta maggiore stile rustico eurisace panificatore ara pietatis",
+        navPath: "arte_romana/index.html?open=summaries/cap7_augusto_foro_successori.md"
+    },
+    {
+        title: "Età flavia, Foro di Traiano e Colonna Traiana",
+        subject: "arte_romana",
+        chapterTag: "Studio VIII",
+        description: "La monumentalità e la narrazione storica: il Colosseo, l'Arco di Tito, la Tomba degli Haterii e l'enorme Foro di Traiano con la Basilica Ulpia e la Colonna Traiana.",
+        keywords: "eta flavia traiano colosseo anfiteatro flavio arco tito haterii foro traiano basilica ulpia colonna traiana mercati",
+        navPath: "arte_romana/index.html?open=summaries/cap8_traiano.md"
+    },
+    {
+        title: "Adriano: Il Pantheon e Villa Adriana",
+        subject: "arte_romana",
+        chapterTag: "Studio IX",
+        description: "La spazialità sferica del Pantheon, il ritiro imperiale di Villa Adriana a Tivoli (Teatro Marittimo e Canopo) e il Tempio di Venere e Roma.",
+        keywords: "adriano pantheon rotonda oculus tivoli villa adriana teatro marittimo canopo venere roma apollodoro",
+        navPath: "arte_romana/index.html?open=summaries/cap9_adriano.md"
+    },
+    {
+        title: "Antonini e Tarda Antichità",
+        subject: "arte_romana",
+        chapterTag: "Studio X",
+        description: "La transizione formale verso il Medioevo: la Colonna di Antonino Pio e di Marco Aurelio. L'uso politico degli spolia nell'Arco di Costantino e la fortuna dantesca.",
+        keywords: "antonini tarda antichita antonino pio decursio marco aurelio colonna aureliana arco costantino spolia reimpiego fregi dante",
+        navPath: "arte_romana/index.html?open=summaries/cap10_antonini_tardoantico.md"
     }
 ];
 

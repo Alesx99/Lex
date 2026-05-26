@@ -65,6 +65,12 @@
             box-shadow: 0 4px 15px rgba(200, 90, 50, 0.15);
         }
 
+        .filter-btn.active.romana-btn {
+            background: rgba(169, 50, 38, 0.15);
+            border-color: var(--accent-romana);
+            box-shadow: 0 4px 15px rgba(169, 50, 38, 0.15);
+        }
+
         .filter-btn.active.all-btn {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.3);
@@ -132,6 +138,10 @@
             border-top: 5px solid var(--accent-terracotta);
         }
 
+        .card-face-front.romana-card {
+            border-top: 5px solid var(--accent-romana);
+        }
+
         .card-meta {
             display: flex;
             justify-content: space-between;
@@ -159,6 +169,12 @@
             background: rgba(200, 90, 50, 0.1);
             color: var(--accent-terracotta);
             border: 1px solid rgba(200, 90, 50, 0.2);
+        }
+
+        .romana-badge {
+            background: rgba(169, 50, 38, 0.15);
+            color: var(--accent-romana);
+            border: 1px solid rgba(169, 50, 38, 0.2);
         }
 
         .card-content-wrapper {
@@ -358,6 +374,9 @@
             Torna alla Home
         </a>
 
+
+
+
         <div class="flashcard-deck-container">
             
             <!-- Category Filters -->
@@ -365,6 +384,7 @@
                 <button class="filter-btn active all-btn" onclick="setFilter('tutte')">Tutte le Materie</button>
                 <button class="filter-btn diritto-btn" onclick="setFilter('diritto')">Diritto dei Beni Culturali</button>
                 <button class="filter-btn arte-btn" onclick="setFilter('arte')">Storia dell'Arte Moderna</button>
+                <button class="filter-btn romana-btn" onclick="setFilter('romana')">Arte Romana</button>
             </div>
 
             <!-- Progress Bar -->
@@ -374,6 +394,7 @@
 
             <!-- Active Deck View -->
             <div id="deck-active-view" style="width: 100%; display: block;">
+                
                 <!-- 3D Flashcard -->
                 <div class="flashcard-3d-scene" id="flashcard-scene" onclick="flipCard()">
                     <div class="flashcard-inner">
@@ -486,7 +507,7 @@
                 question: "Quali novità di rilievo ha introdotto la riforma dei reati culturali nel 2022?",
                 answer: "Ha inserito nel Codice Penale un intero Titolo dedicato ai delitti contro il patrimonio culturale (Titolo VIII-bis), creando figure di reato autonome (come il furto d'arte, l'esportazione illecita e il riciclaggio di beni culturali) con pene severamente inasprite."
             },
-            // STORIA DELL'ARTE
+            // STORIA DELL'ARTE MODERNA
             {
                 subject: "arte",
                 question: "Cos'è lo 'stiacciato' e chi lo ha inventato?",
@@ -526,6 +547,47 @@
                 subject: "arte",
                 question: "In cosa consiste la scomposizione cromatica scientifica del Pointillisme?",
                 answer: "Introdotta da Georges Seurat, consiste nell'accostare sulla tela piccoli punti di colore puro complementare (secondo le leggi della chimica ottica di Chevreul), lasciando che sia l'occhio dello spettatore, e non il pennello, a fonderli otticamente."
+            },
+            // ARTE ROMANA
+            {
+                subject: "romana",
+                question: "Chi fu lo storiografo che superò il pregiudizio di decadenza dell'arte romana ed etichettò lo stile tardoantico come un'evoluzione espressionistica?",
+                answer: "Alois Riegl, esponente della Scuola di Vienna, che nel suo saggio 'Spätrömische Kunstindustrie' (1901) rivalutò l'arte tardoromana coniando concetti come il 'volere artistico' (Kunstwollen) e la transizione da una visione tattile (aptica) a una ottica."
+            },
+            {
+                subject: "romana",
+                question: "In quale opera d'arte romana repubblicana si riscontra la fusione tra la ritrattistica veristica patrizia (mos maiorum) e il corpo eroico di stampo ellenistico?",
+                answer: "Nel Generale di Tivoli (I secolo a.C.), dove una testa dai tratti senili e rugosi espressione di dignitas repubblicana è innestata su un corpo nudo muscoloso ed idealizzato di derivazione tardo-classica greca."
+            },
+            {
+                subject: "romana",
+                question: "Quale materiale rivoluzionò l'architettura romana permettendo cupole e volte colossali, e da cosa era composto?",
+                answer: "L'opus caementicium (calcestruzzo romano), composto da una malta di calce, sabbia vulcanica (pozzolana) e acqua, miscelata con frammenti di pietra o mattone (caementa). La pozzolana consentiva la presa anche sott'acqua."
+            },
+            {
+                subject: "romana",
+                question: "Quale monumento augusteo celebra la Pax Romana e quali stili artistici fonde nel suo apparato decorativo?",
+                answer: "L'Ara Pacis Augustae (13-9 a.C.). Fonde la solenne impronta classica e idealizzata del fregio processionale (ispirato al Partenone) con la precisione realistica della ritrattistica romana e la straordinaria esuberanza naturalistica dei girali d'acanto decorativi nel registro inferiore."
+            },
+            {
+                subject: "romana",
+                question: "Cos'è il 'rilievo storico' romano e qual è il suo più celebre esempio continuativo?",
+                answer: "È la narrazione visiva e cronologica di eventi storici reali e documentati (campagne militari, trionfi). Il massimo esempio è il fregio coclide della Colonna Traiana (113 d.C.), che racconta in 200 metri di rilievo a spirale le due guerre daciche condotte dall'imperatore Traiano."
+            },
+            {
+                subject: "romana",
+                question: "Quali innovazioni architettoniche caratterizzano il Pantheon ricostruito sotto Adriano?",
+                answer: "L'innesto di un pronao ottastilo classico su una gigantesca cella rotonda sormontata da una cupola emisferica in calcestruzzo (diametro 43,30 m), dotata di un oculo zenitale di 9 metri. La cupola è alleggerita da cassettoni e dall'uso di inerti sempre più leggeri (pomice) verso la sommità."
+            },
+            {
+                subject: "romana",
+                question: "Qual è il significato artistico e politico dell'Arco di Costantino (315 d.C.) in relazione alla tecnica dello spoglio (spolia)?",
+                answer: "L'arco riutilizza elementi scultorei (rilievi, statue, capitelli) sottratti a monumenti di Traiano, Adriano e Marco Aurelio. Politicamente, associa Costantino ai grandi 'buoni imperatori' del passato; artisticamente, segna il trionfo dello stile tardoantico anticlassico (plebeo, bidimensionale, gerarchico)."
+            },
+            {
+                subject: "romana",
+                question: "Qual è la differenza fondamentale teorizzata da Ranuccio Bianchi Bandinelli tra 'arte patrizia' e 'arte plebea'?",
+                answer: "L'arte patrizia (o senatoria) adotta modelli ellenistici, naturalistici e raffinati per celebrare il potere. L'arte plebea (o provinciale) privilegia la chiarezza immediata del messaggio con proporzioni gerarchiche, frontalità, bidimensionalità e prospettiva ribaltata."
             }
         ];
 
@@ -566,6 +628,8 @@
                 filtersContainer.querySelector('.diritto-btn').classList.add('active');
             } else if (subject === 'arte') {
                 filtersContainer.querySelector('.arte-btn').classList.add('active');
+            } else if (subject === 'romana') {
+                filtersContainer.querySelector('.romana-btn').classList.add('active');
             }
 
             initDeck();
@@ -599,14 +663,26 @@
             const currentCard = activeDeck[currentIndex];
 
             // Badges & Subject Style
-            const subjectText = currentCard.subject === 'diritto' ? 'Diritto' : 'Arte';
+            let subjectText, badgeClass, cardClass;
+            if (currentCard.subject === 'diritto') {
+                subjectText = 'Diritto';
+                badgeClass = 'card-subject-badge diritto-badge';
+                cardClass = 'card-face card-face-front diritto-card';
+            } else if (currentCard.subject === 'romana') {
+                subjectText = 'Arte Romana';
+                badgeClass = 'card-subject-badge romana-badge';
+                cardClass = 'card-face card-face-front romana-card';
+            } else {
+                subjectText = 'Arte Moderna';
+                badgeClass = 'card-subject-badge arte-badge';
+                cardClass = 'card-face card-face-front arte-card';
+            }
             cardFrontBadge.textContent = subjectText;
             cardBackBadge.textContent = subjectText;
 
-            cardFrontBadge.className = 'card-subject-badge ' + (currentCard.subject === 'diritto' ? 'diritto-badge' : 'arte-badge');
-            cardBackBadge.className = 'card-subject-badge ' + (currentCard.subject === 'diritto' ? 'diritto-badge' : 'arte-badge');
-
-            cardFront.className = 'card-face card-face-front ' + (currentCard.subject === 'diritto' ? 'diritto-card' : 'arte-card');
+            cardFrontBadge.className = badgeClass;
+            cardBackBadge.className = badgeClass;
+            cardFront.className = cardClass;
 
             // Counter & Text
             cardFrontIndex.textContent = `Card ${currentIndex + 1} di ${activeDeck.length}`;

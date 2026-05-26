@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Romana - Catalogo Arte Romana</title>
+    <meta name="description" content="Piattaforma interattiva di studio sull'Archeologia e l'Arte Romana. Sintesi accademiche, relazioni concettuali e testi originali dalle origini alla Tarda Antichità.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Centralized Glossary Database -->
+    <script src="../js/glossary_db.js"></script>
+    <style>
+        .search-container {
+            max-width: 600px;
+            margin: -2rem auto 3rem auto;
+            position: relative;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-romana);
+            background: rgba(20, 20, 25, 0.8);
+            box-shadow: 0 0 25px rgba(169, 50, 38, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition-fast);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-romana);
+        }
+
+        .results-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Romana</span></h1>
+            <p>Archeologia e Arte Romana</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link active" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Dal Rigore della Fondazione al Trionfo Imperiale</h2>
+            <div class="hero-divider"></div>
+            <p>Esplora le sintesi accademiche basate sui testi d'esame di Archeologia e Arte Romana, analizzando lo sviluppo storiografico, formale e propagandistico dell'antichità classica.</p>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-input" placeholder="Cerca opera, monumento o parole chiave (es. pantheon, colonna traiana, spolia)...">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+
+        <div id="results-info" class="results-count">Visualizzati 10 di 10 capitoli</div>
+
+        <!-- Dashboard Grid of Chapters -->
+        <section class="dashboard-grid" id="chapters-grid">
+            
+            <!-- STUDIO I: INTRODUZIONE -->
+            <article class="chapter-card" data-chapter="Introduzione" data-search="introduzione metodologica storiografica winckelmann scuola vienna wickhoff riegl kunstwollen bianchi bandinelli arte senatoria arte plebea holscher semantica zanker immagini potere">
+                <div class="card-header">
+                    <span class="chapter-num">Studio I</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Introduzione metodologica e storiografica</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">La rivalutazione dell'autonomia artistica romana. Dallo schema estetico di Winckelmann alle scoperte della Scuola di Vienna (Wickhoff e Riegl). Lo storicismo marxista di Bianchi Bandinelli (arte senatoria vs plebea) e le moderne analisi semantiche di Hölscher e sociologiche di Zanker.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio I', 'summaries/cap1_introduzione.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap1_introduzione.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO II: FONDAZIONE -->
+            <article class="chapter-card" data-chapter="Fondazione" data-search="origini roma fondazione influenza etrusca rito fondazione mura serviane cappellaccio grotta oscura giove ottimo massimo campidoglio sant'omobono minerva ercole avorio tessera hospitalis">
+                <div class="card-header">
+                    <span class="chapter-num">Studio II</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Origini di Roma e influenza etrusca</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">La fondazione dell'Urbe tra mito ed evidenze archeologiche. I riti etruschi (liberatus, effatus, inauguratus), lo sviluppo delle mura serviane e l'architettura etrusco-italica del Tempio di Giove Capitolino. Le scoperte di Sant'Omobono e la tessera hospitalis.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio II', 'summaries/cap2_fondazione.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap2_fondazione.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO III: REPUBBLICA -->
+            <article class="chapter-card" data-chapter="Repubblica" data-search="eta repubblicana tempio cerere damofilo gorgaso ficoroni cista novio plautio dindia macolnia scipione barbato sarcofago peperino bruto capitolino concordia camillo patrizi plebei">
+                <div class="card-header">
+                    <span class="chapter-num">Studio III</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~6 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>L'età repubblicana tra V e III secolo a.C.</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">L'espansione nel Lazio e i contatti mediterranei. Dal tempio di Cerere aventinese alla raffinatezza incisa della Ficoroni Cista. Il Sarcofago di Scipione Barbato tra classicismo e rito, la severità del Bruto Capitolino e la fondazione politica del Tempio della Concordia.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio III', 'summaries/cap3_repubblica.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap3_repubblica.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO IV: ELLENISMO -->
+            <article class="chapter-card" data-chapter="Ellenismo" data-search="influenza ellenistica II secolo campo marzio porticus metelli giove statore lisippo macedonia emporium porticus aemilia opus caementicium palestrina fortuna primigenia foro boario portuno">
+                <div class="card-header">
+                    <span class="chapter-num">Studio IV</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>L'influenza ellenistica nel II secolo a.C.</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">La monumentalizzazione greca di Roma. Il lusso propagandistico della Porticus Metelli con il tempio marmoreo di Ermodoro, la rivoluzione del calcestruzzo (opus caementicium) nell'architettura commerciale e i grandi santuari a terrazze di Palestrina e del Foro Boario.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio IV', 'summaries/cap4_ellenismo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap4_ellenismo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO V: TARDO REPUBBLICA -->
+            <article class="chapter-card" data-chapter="TardoRepubblica" data-search="tardo repubblicano pompeo teatro venere vincitrice ritratto verista verismo patrizio ius imaginum casa del fauno alessandro mosaico pittura pompeiana stili pompei affreschi cera">
+                <div class="card-header">
+                    <span class="chapter-num">Studio V</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Tardo-repubblicano, ritrattistica e Pompeo</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">L'età delle guerre civili e dei condottieri. La sfida di Pompeo con il primo teatro stabile in muratura. L'origini sociali della ritrattistica verista attraverso il ius imaginum. Lo splendore musivo della Casa del Fauno e lo studio dei primi tre stili della decorazione parietale.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio V', 'summaries/cap5_tardo_repubblica.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap5_tardo_repubblica.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO VI: AUGUSTO ARA PACIS -->
+            <article class="chapter-card" data-chapter="AugustoAraPacis" data-search="eta augustea propaganda ottaviano augusto mausoleo campus martius ara pacis altare pace senato acanto tellus dea madre processione imperiale dinastica">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VI</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>L'età augustea e l'Ara Pacis</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Il programma figurativo della Pax Romana. Il Mausoleo circolare in Campo Marzio e la propaganda dell'età dell'oro. Analisi iconografica dell'Ara Pacis: il simbolismo vegetale dei girali d'acanto, i pannelli mitologici (Tellus ed Enea) e la processione storica dinastica.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VI', 'summaries/cap6_augusto_ara_pacis.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap6_augusto_ara_pacis.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO VII: FORO AUGUSTO -->
+            <article class="chapter-card" data-chapter="ForoAugusto" data-search="foro augusto marte ultore cariatidi eretteo claudio porta maggiore opus rusticum stile rustico eurisace panificatore ara pietatis augustae giulio claudi">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~6 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Foro di Augusto e Giulio-Claudi</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Il foro imperiale di Augusto come tempio della dinastia, dal classicismo ateniese delle Cariatidi al tempio di Marte Ultore. L'architettura dei successori: lo stile bugnato rustico di Porta Maggiore e l'esaltazione plebea nella tomba del panettiere Eurisace.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VII', 'summaries/cap7_augusto_foro_successori.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap7_augusto_foro_successori.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO VIII: TRAIANO -->
+            <article class="chapter-card" data-chapter="Traiano" data-search="eta flavia traiano colosseo anfiteatro flavio vespasiano arco tito rilievo parabolico haterii gru ruota asinaria foro traiano basilica ulpia colonna traiana dacia mercati apollodoro">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VIII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Età flavia, Foro di Traiano e Colonna Traiana</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Il trionfo dell'ingegneria e della narrazione storica. Il Colosseo e l'Arco di Tito con il suo rilievo prospettico. L'epopea di Traiano: la Basilica Ulpia e la narrazione spiraliforme continua della Colonna Traiana eretta per le campagne daciche.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VIII', 'summaries/cap8_traiano.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap8_traiano.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO IX: ADRIANO -->
+            <article class="chapter-card" data-chapter="Adriano" data-search="adriano pantheon rotonda sfera oculus tivoli villa adriana teatro marittimo canopo venere roma apollodoro damasco esilio cupola ombrello">
+                <div class="card-header">
+                    <span class="chapter-num">Studio IX</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~7 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Adriano: Il Pantheon e Villa Adriana</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">L'imperatore architetto e il classicismo eclettico. La spazialità sferica e la luce cosmica del Pantheon. Il ritiro privato di Villa Adriana a Tivoli (Teatro Marittimo e Canopo), il Tempio di Venere e Roma e lo scontro metodologico con Apollodoro di Damasco.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio IX', 'summaries/cap9_adriano.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap9_adriano.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO X: ANTONINI TARDOANTICO -->
+            <article class="chapter-card" data-chapter="AntoniniTardoantico" data-search="antonini tarda antichita antonino pio decursio apoteosi marco aurelio colonna aureliana pioggia arco costantino spolia reimpiego fregi costantiniani dante purgatorio">
+                <div class="card-header">
+                    <span class="chapter-num">Studio X</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~10 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Antonini e Tarda Antichità</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">La transizione formale verso il Medioevo. Il dualismo stilistico nella base della colonna di Antonino Pio. L'espressionismo profondo della Colonna Aureliana e il reimpiego ideologico degli spolia nell'Arco di Costantino. Fregi costantiniani e ricezione dantesca.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio X', 'summaries/cap10_antonini_tardoantico.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap10_antonini_tardoantico.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Caricamento...</h3>
+                </div>
+                <div class="modal-controls">
+                    <!-- Print Button -->
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <!-- Close Button -->
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Reading Progress Bar -->
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <!-- Split Container for Body and Notes -->
+            <div class="modal-content-split">
+                <!-- Modal Body Text -->
+                <div class="modal-body" id="modal-body-content">
+                    <div class="markdown-content" id="markdown-view">
+                        <!-- Rendered markdown goes here -->
+                    </div>
+                </div>
+                <!-- Study Notepad Panel -->
+                <div class="modal-notes-panel" id="modal-notes-panel">
+                    <div class="notes-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span>Appunti di Studio</span>
+                    </div>
+                    <textarea id="notes-textarea" placeholder="Scrivi qui i tuoi appunti per questo capitolo... Verranno salvati automaticamente in locale."></textarea>
+                    <div class="notes-status" id="notes-status">Nessuna modifica.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Archeologia e Arte Romana. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Realtime Search and Filter
+        const searchBox = document.getElementById('search-box');
+        const cards = document.querySelectorAll('.chapter-card');
+        const resultsInfo = document.getElementById('results-info');
+
+        searchBox.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-search');
+                if (searchData.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (query.length > 0) {
+                resultsInfo.style.display = 'block';
+                resultsInfo.textContent = `Trovati ${visibleCount} di ${cards.length} studi per "${query}"`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+        });
+
+        // Markdown Reader Mechanism
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a93226" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(169,50,38,0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            // Add spin animation to CSS
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+
+            // Reset reading progress
+            progressIndicator.style.width = '0%';
+
+            // Fetch and parse markdown
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("Errore nel caricamento del file.");
+                    return response.text();
+                })
+                .then(text => {
+                    const firstHeaderMatch = text.match(/^#\s+(.+)$/m);
+                    if (firstHeaderMatch) {
+                        modalChapterTitle.textContent = firstHeaderMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = chapterTag;
+                    }
+                    
+                    // Render markdown using Marked
+                    markdownView.innerHTML = marked.parse(text);
+
+                    // Initialize features after render
+                    setTimeout(() => {
+                        injectGlossaryTooltips(markdownView);
+                        initializeParagraphs(filePath);
+                        initializeNotepad(filePath);
+                    }, 50);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore";
+                    markdownView.innerHTML = `<div style="color:#ef4444; text-align:center; padding: 2rem;">
+                        <p>Impossibile caricare la sintesi. Verifica che il file esista localmente.</p>
+                        <p style="font-size:0.85rem; margin-top:0.5rem; opacity:0.7;">${err.message}</p>
+                    </div>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto'; // Release background scroll
+            const palette = document.getElementById('highlight-palette');
+            if (palette) palette.style.display = 'none';
+        }
+
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeSummary();
+            }
+        });
+
+        // Close on Escape key press
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('open')) {
+                closeSummary();
+            }
+        });
+
+        // Track scroll progress in modal body
+        modalBodyContent.addEventListener('scroll', function() {
+            const scrollTop = modalBodyContent.scrollTop;
+            const scrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (scrollHeight > 0) {
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressIndicator.style.width = scrollPercent + '%';
+            } else {
+                progressIndicator.style.width = '0%';
+            }
+        });
+
+        // Auto-open summary from URL parameter if present
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const openPath = urlParams.get('open');
+            if (openPath) {
+                let chapterTag = "Studio";
+                if (openPath.includes('cap1_introduzione')) {
+                    chapterTag = "Studio I";
+                } else if (openPath.includes('cap2_fondazione')) {
+                    chapterTag = "Studio II";
+                } else if (openPath.includes('cap3_repubblica')) {
+                    chapterTag = "Studio III";
+                } else if (openPath.includes('cap4_ellenismo')) {
+                    chapterTag = "Studio IV";
+                } else if (openPath.includes('cap5_tardo_repubblica')) {
+                    chapterTag = "Studio V";
+                } else if (openPath.includes('cap6_augusto_ara_pacis')) {
+                    chapterTag = "Studio VI";
+                } else if (openPath.includes('cap7_augusto_foro_successori')) {
+                    chapterTag = "Studio VII";
+                } else if (openPath.includes('cap8_traiano')) {
+                    chapterTag = "Studio VIII";
+                } else if (openPath.includes('cap9_adriano')) {
+                    chapterTag = "Studio IX";
+                } else if (openPath.includes('cap10_antonini_tardoantico')) {
+                    chapterTag = "Studio X";
+                }
+                openSummary(chapterTag, openPath);
+            }
+        });
+
+        // GLOSSARY TOOLTIPS INJECTOR
+        function injectGlossaryTooltips(container) {
+            if (!window.glossaryDatabase) return;
+            
+            const terms = Object.keys(window.glossaryDatabase);
+            if (terms.length === 0) return;
+            
+            terms.sort((a, b) => b.length - a.length);
+            
+            const walker = document.createTreeWalker(
+                container,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(node) {
+                        const parent = node.parentNode.tagName.toLowerCase();
+                        if (parent === 'a' || parent === 'code' || parent === 'pre' || parent === 'button' || parent === 'script' || parent === 'style' || parent === 'span' && node.parentNode.classList.contains('glossary-term')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+            
+            const nodesToReplace = [];
+            while (walker.nextNode()) {
+                nodesToReplace.push(walker.currentNode);
+            }
+            
+            nodesToReplace.forEach(node => {
+                let text = node.nodeValue;
+                let replaced = false;
+                
+                for (const term of terms) {
+                    const termMeta = window.glossaryDatabase[term];
+                    const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                    let regexStr = '\\b(' + escapedTerm + ')(i|e|a|o)?\\b';
+                    
+                    if (term.includes("'")) {
+                        regexStr = '(' + escapedTerm + ')';
+                    }
+                    
+                    const regex = new RegExp(regexStr, 'gi');
+                    
+                    if (regex.test(text)) {
+                        const span = document.createElement('span');
+                        span.innerHTML = text.replace(regex, (match) => {
+                            return `<span class="glossary-term" data-term="${term}">${match}<span class="glossary-tooltip"><strong>${termMeta.term}</strong>: ${termMeta.definition}</span></span>`;
+                        });
+                        
+                        node.parentNode.replaceChild(span, node);
+                        replaced = true;
+                        break; 
+                    }
+                }
+            });
+        }
+
+        // PARAGRAPH HIGHLIGHTS
+        let activeParagraphIndex = -1;
+        let activeFilePath = '';
+
+        function initializeParagraphs(filePath) {
+            activeFilePath = filePath;
+            const paragraphs = markdownView.querySelectorAll('p');
+            const palette = document.getElementById('highlight-palette');
+
+            paragraphs.forEach((p, index) => {
+                const savedColor = localStorage.getItem(`highlight-${filePath}-${index}`);
+                if (savedColor) {
+                    p.className = `highlighted-${savedColor}`;
+                }
+
+                p.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    activeParagraphIndex = index;
+                    
+                    const pRect = p.getBoundingClientRect();
+                    const bodyRect = document.body.getBoundingClientRect();
+                    
+                    const top = pRect.top - bodyRect.top - 40;
+                    const left = pRect.left + (pRect.width / 2) - 60;
+                    
+                    palette.style.top = `${top}px`;
+                    palette.style.left = `${left}px`;
+                    palette.style.display = 'flex';
+                });
+            });
+        }
+
+        function applyHighlightColor(color) {
+            const palette = document.getElementById('highlight-palette');
+            palette.style.display = 'none';
+
+            if (activeParagraphIndex === -1 || !activeFilePath) return;
+
+            const paragraphs = markdownView.querySelectorAll('p');
+            const p = paragraphs[activeParagraphIndex];
+
+            if (color === 'clear') {
+                p.className = '';
+                localStorage.removeItem(`highlight-${activeFilePath}-${activeParagraphIndex}`);
+            } else {
+                p.className = `highlighted-${color}`;
+                localStorage.setItem(`highlight-${activeFilePath}-${activeParagraphIndex}`, color);
+            }
+
+            activeParagraphIndex = -1;
+        }
+
+        document.addEventListener('click', (e) => {
+            const palette = document.getElementById('highlight-palette');
+            if (palette && !palette.contains(e.target)) {
+                palette.style.display = 'none';
+            }
+        });
+
+        // STUDY NOTEPAD INITIALIZER
+        let notesTimeout = null;
+
+        function initializeNotepad(filePath) {
+            const textarea = document.getElementById('notes-textarea');
+            const status = document.getElementById('notes-status');
+            
+            const savedNotes = localStorage.getItem(`notes-${filePath}`);
+            textarea.value = savedNotes || '';
+            status.textContent = "Nessuna modifica.";
+
+            textarea.oninput = () => {
+                status.textContent = "Salvataggio...";
+                clearTimeout(notesTimeout);
+                
+                notesTimeout = setTimeout(() => {
+                    try {
+                        localStorage.setItem(`notes-${filePath}`, textarea.value);
+                        status.textContent = "Modifiche salvate.";
+                    } catch (err) {
+                        status.textContent = "Errore salvataggio.";
+                        console.error(err);
+                    }
+                }, 600);
+            };
+        }
+    </script>
+
+    <!-- Floating Paragraph Highlighter Palette -->
+    <div id="highlight-palette" class="highlight-palette" style="display: none;">
+        <button class="palette-color-btn color-yellow" onclick="applyHighlightColor('yellow')" title="Evidenzia in Giallo"></button>
+        <button class="palette-color-btn color-green" onclick="applyHighlightColor('green')" title="Evidenzia in Verde"></button>
+        <button class="palette-color-btn color-red" onclick="applyHighlightColor('red')" title="Evidenzia in Rosso"></button>
+        <button class="palette-color-btn color-clear" onclick="applyHighlightColor('clear')" title="Rimuovi Evidenziazione">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+</body>
+</html>

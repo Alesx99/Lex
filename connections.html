@@ -16,8 +16,8 @@
         /* Specific Styles for Connections Map */
         .connections-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2.5rem;
             position: relative;
             margin-top: 2rem;
             margin-bottom: 4rem;
@@ -63,6 +63,13 @@
             background: var(--accent-terracotta);
         }
 
+        .romana-column .column-title {
+            color: var(--accent-romana);
+        }
+        .romana-column .column-title::after {
+            background: var(--accent-romana);
+        }
+
         /* Node Cards */
         .node-card {
             background: rgba(20, 26, 40, 0.6);
@@ -96,6 +103,11 @@
         .arte-column .node-card:hover,
         .arte-column .node-card.active-node {
             border-color: var(--accent-terracotta);
+        }
+
+        .romana-column .node-card:hover,
+        .romana-column .node-card.active-node {
+            border-color: var(--accent-romana);
         }
 
         .node-header {
@@ -136,7 +148,7 @@
         }
 
         .connection-line.cross-link {
-            stroke: rgba(212, 175, 55, 0.25);
+            stroke: rgba(255, 255, 255, 0.15);
             stroke-width: 3;
             stroke-dasharray: none;
         }
@@ -152,6 +164,13 @@
             stroke: var(--accent-terracotta);
             stroke-width: 5;
             filter: drop-shadow(0 0 8px rgba(200, 90, 50, 0.8));
+            stroke-dasharray: none;
+        }
+
+        .connection-line.highlighted-romana {
+            stroke: var(--accent-romana);
+            stroke-width: 5;
+            filter: drop-shadow(0 0 8px rgba(169, 50, 38, 0.8));
             stroke-dasharray: none;
         }
 
@@ -214,7 +233,7 @@
         }
 
         /* Responsive styling */
-        @media (max-width: 992px) {
+        @media (max-width: 1200px) {
             .connections-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
@@ -411,6 +430,61 @@
                     <div class="node-title">Post-Impressionismo</div>
                 </div>
             </div>
+
+            <!-- RIGHT COLUMN: ARTE ROMANA -->
+            <div class="map-column romana-column">
+                <h3 class="column-title">Arte Romana</h3>
+
+                <div class="node-card" id="romana-node-1" data-path="arte_romana/index.html?open=summaries/cap1_introduzione.md">
+                    <div class="node-header"><span>Capitolo I</span></div>
+                    <div class="node-title">Metodologia e Storiografia</div>
+                </div>
+
+                <div class="node-card" id="romana-node-2" data-path="arte_romana/index.html?open=summaries/cap2_fondazione.md">
+                    <div class="node-header"><span>Capitolo II</span></div>
+                    <div class="node-title">Origini e Mura Serviane</div>
+                </div>
+
+                <div class="node-card" id="romana-node-3" data-path="arte_romana/index.html?open=summaries/cap3_repubblica.md">
+                    <div class="node-header"><span>Capitolo III</span></div>
+                    <div class="node-title">L'Età Repubblicana</div>
+                </div>
+
+                <div class="node-card" id="romana-node-4" data-path="arte_romana/index.html?open=summaries/cap4_ellenismo.md">
+                    <div class="node-header"><span>Capitolo IV</span></div>
+                    <div class="node-title">L'Influenza Ellenistica</div>
+                </div>
+
+                <div class="node-card" id="romana-node-5" data-path="arte_romana/index.html?open=summaries/cap5_tardo_repubblica.md">
+                    <div class="node-header"><span>Capitolo V</span></div>
+                    <div class="node-title">Tardo-Repubblica e Pompeo</div>
+                </div>
+
+                <div class="node-card" id="romana-node-6" data-path="arte_romana/index.html?open=summaries/cap6_augusto_ara_pacis.md">
+                    <div class="node-header"><span>Capitolo VI</span></div>
+                    <div class="node-title">Età Augustea e Ara Pacis</div>
+                </div>
+
+                <div class="node-card" id="romana-node-7" data-path="arte_romana/index.html?open=summaries/cap7_augusto_foro_successori.md">
+                    <div class="node-header"><span>Capitolo VII</span></div>
+                    <div class="node-title">Foro di Augusto e Successori</div>
+                </div>
+
+                <div class="node-card" id="romana-node-8" data-path="arte_romana/index.html?open=summaries/cap8_traiano.md">
+                    <div class="node-header"><span>Capitolo VIII</span></div>
+                    <div class="node-title">Età Flavia e Traianea</div>
+                </div>
+
+                <div class="node-card" id="romana-node-9" data-path="arte_romana/index.html?open=summaries/cap9_adriano.md">
+                    <div class="node-header"><span>Capitolo IX</span></div>
+                    <div class="node-title">Adriano: Pantheon e Villa</div>
+                </div>
+
+                <div class="node-card" id="romana-node-10" data-path="arte_romana/index.html?open=summaries/cap10_antonini_tardoantico.md">
+                    <div class="node-header"><span>Capitolo X</span></div>
+                    <div class="node-title">Tarda Antichità e Spolia</div>
+                </div>
+            </div>
         </div>
 
     </main>
@@ -436,7 +510,7 @@
                 description: "La manutenzione e la salvaguardia dei capolavori rinascimentali (come il David di Donatello o la Cupola di Brunelleschi) si ricollegano direttamente alle Misure di Conservazione (Cap. V, Art. 29). Il Codice definisce prevenzione, manutenzione e restauro impiegando lo stesso rigore scientifico e sottomettendo ogni intervento ad approvazione ministeriale."
             },
             {
-                from: "diritto-node-9",  // Ricerche e Scoperte
+                from: "diritto-node-9",  // Ricerche e Scoperte (Demanio)
                 to: "arte-node-3",       // Il Secondo Quattrocento (Alberti e Antico)
                 title: "Demanio Archeologico ⇄ Riscoperta delle Rovine Classiche",
                 description: "La legislazione dello scavo archeologico e del demanio originario (Cap. IX, Art. 91) protegge giuridicamente ciò che guidò la rinascita rinascimentale del Quattrocento. Leon Battista Alberti e Mantegna trassero ispirazione dallo studio e dal rilievo grafico delle rovine di Roma, oggi tutelate come demanio inalienabile dello Stato."
@@ -458,6 +532,37 @@
                 to: "arte-node-6",       // Il Barocco
                 title: "Riforma dei Reati di Furto ⇄ Spoliazioni e Tutela Penale",
                 description: "La riforma penale del 2022 (Titolo VIII-bis del Codice Penale) punisce severamente il furto, la ricettazione e il deturpamento di opere d'arte. Caravaggio stesso visse una vita all'insegna del crimine e della fuga, ma oggi la tutela sanziona duramente chi danneggia o deturpa i capolavori barocchi."
+            },
+            // Roman Art connections
+            {
+                from: "diritto-node-9",  // Ricerche e Scoperte
+                to: "romana-node-8",     // Età Flavia e Traianea (Colonna Traiana)
+                title: "Scavi Archeologici ⇄ Foro e Colonna Traiana",
+                description: "La Colonna Traiana e i Mercati di Traiano rappresentano capolavori dell'ingegneria e della propaganda imperiale romana. Dal punto di vista giuridico contemporaneo, questi complessi monumentali sotterranei o emersi sono tutelati dalle norme sulle Ricerche Archeologiche e Scoperte (Cap. IX, Art. 91), che ne sanciscono l'appartenenza automatica e inalienabile al demanio dello Stato per preservarne l'integrità."
+            },
+            {
+                from: "arte-node-7",      // Neoclassicismo
+                to: "romana-node-9",      // Adriano: Pantheon e Villa
+                title: "Ritorno all'Antico ⇄ Modelli Adrianei",
+                description: "Il Neoclassicismo di fine Settecento si fonda sul mito dell'antichità greco-romana codificato da Winckelmann. Scultori come Antonio Canova e architetti neoclassici studiarono direttamente le collezioni di Villa Adriana e la geometrica perfezione del Pantheon, elevandoli a canoni universali di bellezza ideale, armonia e proporzione."
+            },
+            {
+                from: "diritto-node-5",   // Misure di Conservazione
+                to: "romana-node-10",     // Tarda Antichità e Spolia
+                title: "Conservazione delle Opere ⇄ Pratica del Reimpiego (Spolia)",
+                description: "Nel tardoantico e sull'Arco di Costantino divenne comune il reimpiego di rilievi scultorei da monumenti precedenti (spolia). Oggi, una simile manipolazione o smembramento di monumenti storici è severamente vietata dalle Misure di Conservazione (Cap. V, Art. 20 del Codice), che impongono l'integrità fisica e vietano l'uso non compatibile o la scomposizione dei beni culturali."
+            },
+            {
+                from: "diritto-node-12",  // Beni Paesaggistici
+                to: "romana-node-2",      // Origini e Mura Serviane
+                title: "Paesaggio Storico ⇄ Mura Serviane e Sviluppo Urbano",
+                description: "La prima cinta muraria di Roma (mura serviane) e il Tempio di Giove Capitolino definirono la forma urbis originaria. Nel diritto contemporaneo, la tutela del paesaggio (Cap. XII) non si limita alla natura vergine, ma protegge il paesaggio antropico storicizzato, integrando lo sviluppo urbano antico con la pianificazione paesaggistica congiunta Stato-Regione (Art. 135)."
+            },
+            {
+                from: "diritto-node-4",   // Tutela Internazionale
+                to: "romana-node-8",      // Età Flavia e Traianea
+                title: "Tutela Internazionale ⇄ Spoliazioni Belliche dell'Antichità",
+                description: "I rilievi della Colonna Traiana celebrano la sottomissione dei Daci e il trionfo militare, inclusa l'acquisizione del tesoro reale dacico. Nell'epoca contemporanea, la Convenzione dell'Aja del 1954 e il II Protocollo del 1999 vietano categoricamente il saccheggio e la spoliazione dei beni culturali in caso di conflitto armato, proteggendo il patrimonio storico dell'umanità."
             }
         ];
 
@@ -492,7 +597,7 @@
             // Draw SVG connection lines
             function drawLines() {
                 svg.innerHTML = ''; // clear previous lines
-                if (window.innerWidth <= 992) return; // Column layout on mobile, no lines needed
+                if (window.innerWidth <= 1200) return; // Column layout on mobile, no lines needed
 
                 const svgRect = svg.getBoundingClientRect();
 
@@ -505,10 +610,18 @@
                         const fromRect = fromEl.getBoundingClientRect();
                         const toRect = toEl.getBoundingClientRect();
 
-                        // Calculate points relative to SVG canvas
-                        const x1 = fromRect.right - svgRect.left;
+                        // Calculate points relative to SVG canvas dynamically
+                        let x1, x2;
+                        if (fromRect.left + fromRect.width / 2 < toRect.left + toRect.width / 2) {
+                            // from is to the left of to
+                            x1 = fromRect.right - svgRect.left;
+                            x2 = toRect.left - svgRect.left;
+                        } else {
+                            // from is to the right of to
+                            x1 = fromRect.left - svgRect.left;
+                            x2 = toRect.right - svgRect.left;
+                        }
                         const y1 = fromRect.top + (fromRect.height / 2) - svgRect.top;
-                        const x2 = toRect.left - svgRect.left;
                         const y2 = toRect.top + (toRect.height / 2) - svgRect.top;
 
                         // Create path
@@ -540,7 +653,9 @@
                             const line = document.getElementById(`line-${conn.from}-${conn.to}`);
                             if (line) {
                                 line.classList.add('highlighted');
-                                if (!isDiritto) {
+                                if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                                    line.classList.add('highlighted-romana');
+                                } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
                                     line.classList.add('highlighted-arte');
                                 }
                             }
@@ -561,8 +676,10 @@
                         infoText.textContent = primary.description;
                         
                         // Color styling for title based on source
-                        if (isDiritto) {
+                        if (nodeId.startsWith('diritto')) {
                             infoTitle.style.color = 'var(--accent-gold)';
+                        } else if (nodeId.startsWith('romana')) {
+                            infoTitle.style.color = 'var(--accent-romana)';
                         } else {
                             infoTitle.style.color = 'var(--accent-terracotta)';
                         }
@@ -581,7 +698,7 @@
                 node.addEventListener('mouseleave', () => {
                     // Reset all classes
                     document.querySelectorAll('.connection-line').forEach(l => {
-                        l.classList.remove('highlighted', 'highlighted-arte');
+                        l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana');
                     });
                     document.querySelectorAll('.node-card').forEach(n => {
                         n.classList.remove('active-node');

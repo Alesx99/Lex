@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Romana - Quiz di Autovalutazione</title>
+    <meta name="description" content="Mettiti alla prova con i nostri quiz accademici interattivi sull'Archeologia e l'Arte Romana, dalle origini all'Arco di Costantino.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Centralized Quiz Database -->
+    <script src="../js/quiz_db.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Romana</span></h1>
+            <p>Archeologia e Arte Romana</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link active" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Mettiti alla Prova</h2>
+            <div class="hero-divider"></div>
+            <p>Valuta la tua preparazione accademica sull'Archeologia e l'Arte Romana selezionando uno dei moduli di studio sottostanti. Ogni quiz contiene 5 domande a risposta multipla con spiegazione immediata.</p>
+        </section>
+
+        <!-- Dynamic Quiz Area -->
+        <div id="quiz-wrapper">
+            
+            <!-- STEP 1: SELECT TOPIC SCREEN -->
+            <div id="selection-screen" class="quiz-step active">
+                <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                <div class="selection-grid">
+                    <button class="select-btn" onclick="startQuiz('cap1_introduzione')">
+                        <span class="btn-chapter">Studio I</span>
+                        <span class="btn-title">Introduzione metodologica e storiografica</span>
+                        <span class="btn-desc">Da Winckelmann alla Scuola di Vienna, Bianchi Bandinelli, Hölscher e Zanker</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap2_fondazione')">
+                        <span class="btn-chapter">Studio II</span>
+                        <span class="btn-title">Origini di Roma e influenza etrusca</span>
+                        <span class="btn-desc">Miti fondativi, Mura Serviane, Giove Capitolino, Sant'Omobono</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap3_repubblica')">
+                        <span class="btn-chapter">Studio III</span>
+                        <span class="btn-title">L'età repubblicana tra V e III secolo a.C.</span>
+                        <span class="btn-desc">Cerere aventinese, Ficoroni Cista, Scipione Barbato, Bruto Capitolino</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap4_ellenismo')">
+                        <span class="btn-chapter">Studio IV</span>
+                        <span class="btn-title">L'influenza ellenistica nel II secolo a.C.</span>
+                        <span class="btn-desc">Porticus Metelli, Lisippo, cementizio, Palestrina, Foro Boario</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap5_tardo_repubblica')">
+                        <span class="btn-chapter">Studio V</span>
+                        <span class="btn-title">Tardo-repubblicano, ritrattistica e Pompeo</span>
+                        <span class="btn-desc">Teatro di Pompeo, verismo fisionomico, Casa del Fauno, stili pittorici</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap6_augusto_ara_pacis')">
+                        <span class="btn-chapter">Studio VI</span>
+                        <span class="btn-title">L'età augustea e l'Ara Pacis</span>
+                        <span class="btn-desc">Mausoleo, propaganda imperiale, rilievi, acanto, Tellus</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap7_augusto_foro_successori')">
+                        <span class="btn-chapter">Studio VII</span>
+                        <span class="btn-title">Foro di Augusto e Giulio-Claudi</span>
+                        <span class="btn-desc">Marte Ultore, Cariatidi, Porta Maggiore, Tomba di Eurisace</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap8_traiano')">
+                        <span class="btn-chapter">Studio VIII</span>
+                        <span class="btn-title">Età flavia e di Traiano</span>
+                        <span class="btn-desc">Colosseo, Arco di Tito, Haterii, Foro di Traiano, Colonna Traiana</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap9_adriano')">
+                        <span class="btn-chapter">Studio IX</span>
+                        <span class="btn-title">L'età di Adriano</span>
+                        <span class="btn-desc">Pantheon, Villa Adriana, Canopo, Venere e Roma, Apollodoro</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cap10_antonini_tardoantico')">
+                        <span class="btn-chapter">Studio X</span>
+                        <span class="btn-title">Antonini e Tarda Antichità</span>
+                        <span class="btn-desc">Antonino Pio, Marco Aurelio, Arco di Costantino, spolia, fregi, Dante</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="question-screen" class="quiz-step">
+                <div class="quiz-card-container">
+                    <div class="quiz-card-header">
+                        <span id="quiz-chapter-tag" class="quiz-chapter-tag">Studio I</span>
+                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 5</span>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="quiz-progress-bar-bg">
+                        <div id="quiz-progress-indicator" class="quiz-progress-indicator" style="width: 0%;"></div>
+                    </div>
+
+                    <!-- Question content -->
+                    <div class="quiz-question-body">
+                        <h3 id="quiz-question-text">Testo della domanda...</h3>
+                        <div id="quiz-options-container" class="quiz-options-grid">
+                            <!-- Injected buttons go here -->
+                        </div>
+                    </div>
+
+                    <!-- Feedback box -->
+                    <div id="quiz-feedback-box" class="quiz-feedback-box">
+                        <div class="feedback-header">
+                            <span id="feedback-icon" class="feedback-icon"></span>
+                            <span id="feedback-title" class="feedback-title">Esatto!</span>
+                        </div>
+                        <p id="feedback-explanation" class="feedback-explanation">Spiegazione accademica dell'errore o della correttezza...</p>
+                        <button id="feedback-next-btn" class="btn btn-primary" onclick="nextQuestion()">Continua</button>
+                    </div>
+
+                    <!-- Skip button -->
+                    <div class="quiz-card-footer">
+                        <button id="quit-quiz-btn" class="btn btn-secondary" onclick="quitQuiz()">Esci dal Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: SCORE REPORT SCREEN -->
+            <div id="result-screen" class="quiz-step">
+                <div class="quiz-result-card">
+                    <div class="score-circle">
+                        <span id="score-text">0/5</span>
+                    </div>
+                    <h3 id="result-outcome" class="result-outcome">Discreto!</h3>
+                    <p id="result-desc" class="result-desc">Molto bene, hai risposto correttamente a 4 domande su 5. Puoi migliorare rivedendo le note.</p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Riprova Questo Quiz</button>
+                        <button class="btn btn-secondary" onclick="backToSelection()">Seleziona Altro Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <script>
+        // State variables
+        let currentChapterKey = '';
+        let currentQuestions = [];
+        let currentQuestionIdx = 0;
+        let selectedOptionIdx = -1;
+        let score = 0;
+        let hasAnswered = false;
+
+        // DOM elements
+        const selectionScreen = document.getElementById('selection-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+
+        const quizChapterTag = document.getElementById('quiz-chapter-tag');
+        const quizProgressText = document.getElementById('quiz-progress-text');
+        const quizProgressIndicator = document.getElementById('quiz-progress-indicator');
+        const quizQuestionText = document.getElementById('quiz-question-text');
+        const quizOptionsContainer = document.getElementById('quiz-options-container');
+
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+
+        const scoreText = document.getElementById('score-text');
+        const resultOutcome = document.getElementById('result-outcome');
+        const resultDesc = document.getElementById('result-desc');
+
+        function startQuiz(chapterKey) {
+            currentChapterKey = chapterKey;
+            
+            // Fetch questions from the global quizDatabase
+            const chapterData = quizDatabase[chapterKey];
+            if (!chapterData || !chapterData.questions || chapterData.questions.length === 0) {
+                alert("Errore: impossibile trovare le domande per questo capitolo nel database.");
+                return;
+            }
+
+            // Shuffle questions to make it dynamic
+            currentQuestions = [...chapterData.questions].sort(() => Math.random() - 0.5);
+            currentQuestionIdx = 0;
+            score = 0;
+
+            // Transition UI
+            selectionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            hasAnswered = false;
+            selectedOptionIdx = -1;
+
+            // Hide feedback
+            feedbackBox.classList.remove('open');
+
+            const q = currentQuestions[currentQuestionIdx];
+            const chapterData = quizDatabase[currentChapterKey];
+
+            // Render text
+            quizChapterTag.textContent = chapterData.chapterTag;
+            quizProgressText.textContent = `Domanda ${currentQuestionIdx + 1} di ${currentQuestions.length}`;
+            quizQuestionText.textContent = q.question;
+
+            // Progress bar indicator width
+            const progressPercent = (currentQuestionIdx / currentQuestions.length) * 100;
+            quizProgressIndicator.style.width = `${progressPercent}%`;
+
+            // Clear and inject option buttons
+            quizOptionsContainer.innerHTML = '';
+            q.options.forEach((optionText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                    <span>${optionText}</span>
+                `;
+                btn.onclick = () => selectOption(idx, btn);
+                quizOptionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(idx, btnEl) {
+            if (hasAnswered) return;
+            hasAnswered = true;
+            selectedOptionIdx = idx;
+
+            const q = currentQuestions[currentQuestionIdx];
+            const isCorrect = (idx === q.correctIndex);
+
+            // Style selected option
+            if (isCorrect) {
+                btnEl.classList.add('correct');
+                score++;
+                showFeedback(true, q.explanation);
+            } else {
+                btnEl.classList.add('wrong');
+                // Highlight the correct answer option
+                const correctBtn = quizOptionsContainer.children[q.correctIndex];
+                if (correctBtn) {
+                    correctBtn.classList.add('correct');
+                }
+                showFeedback(false, q.explanation);
+            }
+        }
+
+        function showFeedback(isCorrect, explanationText) {
+            feedbackBox.classList.add('open');
+            if (isCorrect) {
+                feedbackBox.className = "quiz-feedback-box open correct";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                feedbackTitle.textContent = "Esatto!";
+            } else {
+                feedbackBox.className = "quiz-feedback-box open wrong";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+                feedbackTitle.textContent = "Errato.";
+            }
+            feedbackExplanation.textContent = explanationText;
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIdx < currentQuestions.length - 1) {
+                currentQuestionIdx++;
+                showQuestion();
+            } else {
+                showScoreReport();
+            }
+        }
+
+        function showScoreReport() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+
+            // Render score
+            scoreText.textContent = `${score} / ${currentQuestions.length}`;
+            
+            // Adjust score circle colors
+            const ratio = score / currentQuestions.length;
+            const circle = document.querySelector('.score-circle');
+            
+            if (ratio === 1) {
+                circle.style.borderColor = "var(--accent-green)";
+                circle.style.boxShadow = "0 0 25px rgba(16, 185, 129, 0.25)";
+                resultOutcome.textContent = "Eccellente!";
+                resultOutcome.style.color = "var(--accent-green)";
+                resultDesc.textContent = "Hai ottenuto il massimo dei voti. Conosci alla perfezione tutti i dettagli storiografici e monumentali di questo modulo.";
+            } else if (ratio >= 0.75) {
+                circle.style.borderColor = "var(--accent-romana)";
+                circle.style.boxShadow = "0 0 25px rgba(169, 50, 38, 0.25)";
+                resultOutcome.textContent = "Ottimo Risultato!";
+                resultOutcome.style.color = "var(--accent-romana)";
+                resultDesc.textContent = `Hai risposto correttamente a ${score} domande su 5. La tua preparazione è solida, ma ci sono piccole sfumature da rifinire.`;
+            } else if (ratio >= 0.5) {
+                circle.style.borderColor = "var(--accent-gold)";
+                circle.style.boxShadow = "0 0 25px rgba(212, 175, 55, 0.25)";
+                resultOutcome.textContent = "Sufficiente";
+                resultOutcome.style.color = "var(--accent-gold)";
+                resultDesc.textContent = `Risposte corrette: ${score} su 5. Ti consigliamo di rileggere la sintesi per fissare meglio i concetti meno chiari.`;
+            } else {
+                circle.style.borderColor = "#ef4444";
+                circle.style.boxShadow = "0 0 25px rgba(239, 68, 68, 0.25)";
+                resultOutcome.textContent = "Richiesto Ripasso";
+                resultOutcome.style.color = "#ef4444";
+                resultDesc.textContent = `Risposte corrette: ${score} su 5. Ti consigliamo vivamente una lettura approfondita del capitolo e delle note prima di riprovare.`;
+            }
+        }
+
+        function restartQuiz() {
+            startQuiz(currentChapterKey);
+        }
+
+        function backToSelection() {
+            resultScreen.classList.remove('active');
+            selectionScreen.classList.add('active');
+        }
+
+        function quitQuiz() {
+            if (confirm("Sei sicuro di voler abbandonare il quiz? I progressi della sessione andranno persi.")) {
+                backToSelection();
+            }
+        }
+    </script>
+</body>
+</html>

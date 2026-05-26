@@ -1382,6 +1382,632 @@ const quizDatabase = {
             }
         ]
     }
+,
+
+    // ═══════════════════════════════════════════════════════════════
+    // ARTE ROMANA — 10 Capitoli × 5 Domande = 50 Domande
+    // ═══════════════════════════════════════════════════════════════
+
+    cap1_introduzione: {
+        subject: "arte_romana",
+        chapterTag: "Cap. I",
+        title: "Introduzione metodologica e storiografica",
+        questions: [
+            {
+                question: "Quale visione dell'arte romana proponeva Johann Joachim Winckelmann nella sua opera del 1764?",
+                options: [
+                    "Un'arte dotata di piena autonomia formale che raggiunge il suo massimo splendore sotto Augusto.",
+                    "Un'arte greca sotto i Romani, caratterizzata da una progressiva decadenza e priva di vera originalità.",
+                    "Un'espressione puramente italica che si oppone radicalmente ai modelli greci classici.",
+                    "Una corrente artistica volta esclusivamente all'utilitarismo e priva di qualsiasi pregio estetico."
+                ],
+                correctIndex: 1,
+                explanation: "Per Winckelmann, l'arte romana non aveva un'identità autonoma ma rappresentava una decadenza dell'arte greca sotto il dominio di Roma, con un tracollo stilistico che si consumava a partire dall'età imperiale."
+            },
+            {
+                question: "In quali ambiti Franz Wickhoff individuò l'originalità dell'arte romana rispetto a quella greca?",
+                options: [
+                    "L'uso dell'ordine dorico, la pittura su cavalletto e la statuaria bronzea colossale.",
+                    "L'illusionismo ottico-spaziale, la narrazione continuata e il ritratto realistico.",
+                    "La prospettiva lineare geometrica, la pittura vascolare e le scene mitologiche.",
+                    "L'impiego del marmo carrarese, la fusione a cera persa e le scene di parata militare."
+                ],
+                correctIndex: 1,
+                explanation: "Studiando la Genesi di Vienna, Wickhoff riconobbe all'arte romana l'originalità nella resa spaziale illusionistica, nella narrazione continua senza stacchi temporali (es. Colonna Traiana) e nel ritratto realistico."
+            },
+            {
+                question: "Quali sono i tre stadi dello sviluppo del Kunstwollen definiti da Alois Riegl?",
+                options: [
+                    "Stadio lineare, stadio pittorico e stadio plastico.",
+                    "Stadio arcaico, stadio classico e stadio tardo-ellenistico.",
+                    "Stadio tattico, stadio ottico-geometrico e stadio spaziale.",
+                    "Stadio tattile (visione ravvicinata), stadio tattile-ottico (visione normale) e stadio ottico (visione da lontano)."
+                ],
+                correctIndex: 3,
+                explanation: "Riegl propose una scansione dell'evoluzione formale basata sulla percezione visiva: tattile per l'arte egizia, tattile-ottica per l'arte greca classica e ottica per l'arte tardoantica."
+            },
+            {
+                question: "Come interpreta Ranuccio Bianchi Bandinelli lo scontro formale tra 'arte senatoria' e 'arte plebea'?",
+                options: [
+                    "Come una differenza geografica tra le officine di Roma e quelle delle province orientali.",
+                    "Come un riflesso ideologico dello scontro sociale tra la classe patrizio-senatoria e il ceto medio dei liberti e commercianti.",
+                    "Come il passaggio cronologico tra l'età repubblicana e l'età imperiale.",
+                    "Come una pura scelta estetica operata dagli scultori greci immigrati a Roma."
+                ],
+                correctIndex: 2,
+                explanation: "Secondo lo storicismo marxista di Bianchi Bandinelli, l'arte senatoria (aulica e classicizzante) e l'arte plebea (espressionista, paratattica, con proporzioni gerarchiche) riflettono le diverse ideologie e il posizionamento sociale delle classi committenti."
+            },
+            {
+                question: "Secondo la teoria del linguaggio formale di Tonio Hölscher, in che modo i Romani riutilizzano i modelli greci?",
+                options: [
+                    "Copiandoli in modo identico senza apportare alcuna modifica stilistica o concettuale.",
+                    "Attraverso un sistema semantico in cui stili greci diversi sono scelti appositamente in base al messaggio politico o religioso da trasmettere.",
+                    "Utilizzando esclusivamente lo stile arcaizzante per tutti i tipi di monumenti pubblici.",
+                    "Sostituendo completamente la scultura in pietra con la modellazione fittile etrusca."
+                ],
+                correctIndex: 1,
+                explanation: "Hölscher teorizza che l'arte romana usi stili greci diversi (classico per le divinità, ellenistico/barocco per le battaglie, arcaico per culti antichi) come codici semantici per dare uno specifico significato romano all'immagine."
+            }
+        ]
+    },
+    cap2_fondazione: {
+        subject: "arte_romana",
+        chapterTag: "Cap. II",
+        title: "Origini di Roma e influenza etrusca",
+        questions: [
+            {
+                question: "Quali erano le tre fasi del rituale etrusco di fondazione di una città adottate per Roma?",
+                options: [
+                    "Liberatus (purificazione), Effatus (limiti) e Inauguratus (consacrazione sotto auspici).",
+                    "Pomerium (tracciamento), Cardo (orientamento) e Decumanus (scansione).",
+                    "Augurium (volo degli uccelli), Haruspicina (viscere) e Sacrificium (consacrazione).",
+                    "Effatus (enunciazione), Pomerium (aratro) e Templum (spazio sacro)."
+                ],
+                correctIndex: 0,
+                explanation: "Il cerimoniale di fondazione prevedeva la purificazione del luogo (liberatus), la definizione verbale e fisica dei confini (effatus) e la consacrazione formale tramite rito augurale (inauguratus)."
+            },
+            {
+                question: "Quali materiali differenziano la fase arcaica da quella repubblicana (378 a.C.) nelle Mura Serviane?",
+                options: [
+                    "Il marmo pentelico per la fase arcaica e il travertino per la fase repubblicana.",
+                    "Il calcestruzzo per la fase arcaica e il mattone cotto per la fase repubblicana.",
+                    "Il tufo grigio locale (cappellaccio) per la fase arcaica e il tufo di Grotta Oscura per la fase repubblicana.",
+                    "Il tufo di Monteverde per la fase arcaica e il peperino per la fase repubblicana."
+                ],
+                correctIndex: 2,
+                explanation: "Le prime difese serviane arcaiche erano in blocchi di cappellaccio (tufo locale friabile). Dopo il sacco gallico del 390 a.C., le mura vennero ricostruite nel 378 a.C. impiegando il tufo di Grotta Oscura proveniente dal territorio di Veio."
+            },
+            {
+                question: "Quale caratteristica tipologica presentava il Tempio di Giove Ottimo Massimo sul Campidoglio?",
+                options: [
+                    "Era un tempio periptero circolare in marmo su tre gradini di crepidine.",
+                    "Era un tempio etrusco-italico su alto podio, quasi quadrato, con tre celle parallele e profondo pronao.",
+                    "Era un tempio diptero con doppia fila di colonne e due celle speculari addossate.",
+                    "Era un tempio pseudoperiptero in mattoni con una singola cella monumentale."
+                ],
+                correctIndex: 1,
+                explanation: "Inaugurato nel 509 a.C., rispondeva al tipo etrusco-italico: sorgeva su un alto podio di cappellaccio, diviso in tre celle (Giove, Giunone, Minerva) precedute da un profondo pronao colonnato, privo di colonnato posteriore (sine postico)."
+            },
+            {
+                question: "Cosa raffigurano le sculture acroteriali tardo-arcaiche rinvenute nell'area sacra di Sant'Omobono?",
+                options: [
+                    "L'apoteosi di Romolo e Remo alla presenza di Faustolo.",
+                    "Ercole introdotto e protetto da Minerva armata.",
+                    "Un sacrificio di suovetaurilia officiato da Servio Tullio.",
+                    "La contesa tra Minerva e Nettuno per il controllo del Lazio."
+                ],
+                correctIndex: 1,
+                explanation: "Il gruppo acroteriale fittile (540-530 a.C.) mostra Minerva armata che introduce Ercole. Questa raffigurazione era un manifesto politico legato a Servio Tullio, che si assimilava all'eroe protetto dalla dea."
+            },
+            {
+                question: "Cos'è la 'tessera hospitalis' rinvenuta a Sant'Omobono e cosa documenta?",
+                options: [
+                    "Una tavoletta bronzea che elenca i dazi doganali del porto fluviale.",
+                    "Un oggetto in avorio a forma di leoncino con iscrizione etrusca, che documenta gli scambi commerciali e diplomatici arcaici.",
+                    "Una maschera funebre in cera appartenente a un mercante greco.",
+                    "Un gettone fittile usato per l'accesso ai giochi nel Foro Boario."
+                ],
+                correctIndex: 1,
+                explanation: "La tessera hospitalis in avorio, databile al VI secolo a.C., reca un nome etrusco legato a Sulcis (Sardegna), dimostrando i ricchi contatti internazionali del porto arcaico sul Tevere."
+            }
+        ]
+    },
+    cap3_repubblica: {
+        subject: "arte_romana",
+        chapterTag: "Cap. III",
+        title: "L'età repubblicana tra V e III secolo a.C.",
+        questions: [
+            {
+                question: "Quale innovazione artistica è legata ai pittori greci Damofilo e Gorgaso nel 493 a.C.?",
+                options: [
+                    "La fusione della statua bronzea del Bruto Capitolino.",
+                    "La decorazione fittile e pittorica del Tempio di Cerere, Libero e Libera sull'Aventino.",
+                    "L'introduzione della pittura trionfale su tela nel Foro Romano.",
+                    "Il disegno del fregio dorico del Sarcofago di Scipione Barbato."
+                ],
+                correctIndex: 1,
+                explanation: "Damofilo e Gorgaso furono chiamati a decorare con terrecotte e pitture il Tempio di Cerere sull'Aventino nel 493 a.C., segnando una delle prime importazioni dirette di artisti greci a Roma."
+            },
+            {
+                question: "Quali elementi figurativi e iscrizioni caratterizzano la celebre Ficoroni Cista?",
+                options: [
+                    "Scene del mito degli Argonauti incise sul bronzo e la firma del fabbricante Novio Plautio.",
+                    "Rilievi con la processione trionfale dei generali romani e un'iscrizione a Scipione.",
+                    "Decorazioni a rilievo in oro con le fatiche di Ercole e una dedica a Giove.",
+                    "Affreschi in secondo stile raffiguranti paesaggi bucolici e la firma di un artista campano."
+                ],
+                correctIndex: 0,
+                explanation: "La cista presenta incisioni in bronzo del mito degli Argonauti (punizione di Amico) e un'iscrizione in latino arcaico che cita il creatore Novio Plautio e la committente Dindia Macolnia."
+            },
+            {
+                question: "In quale materiale è realizzato il Sarcofago di Scipione Barbato e quale stile architettonico richiama?",
+                options: [
+                    "In marmo carrarese, a forma di tempio corinzio.",
+                    "In tufo peperino, a forma di altare ellenistico con fregio dorico e volute ioniche.",
+                    "In terracotta dipinta, a forma di letto conviviale etrusco.",
+                    "In bronzo dorato, a forma di cassa liscia con iscrizioni in versi saturni."
+                ],
+                correctIndex: 1,
+                explanation: "Il sarcofago (inizi III secolo a.C.) è in peperino e imita un altare ellenistico, fondendo elementi del fregio dorico (metope e triglifi) con volute ioniche sul coronamento."
+            },
+            {
+                question: "Per quale motivo il busto bronzeo del 'Bruto Capitolino' è considerato un capolavoro della ritrattistica repubblicana?",
+                options: [
+                    "Perché è il primo ritratto imperiale a presentare la corona d'alloro.",
+                    "Per l'uso del marmo greco unito alla resa veristica di ascendenza plebea.",
+                    "Per la resa espressiva dei valori del mos maiorum attraverso occhi in pasta vitrea, barba incisa e cipiglio severo.",
+                    "Perché raffigura fedelmente le fattezze fisiche del cesaricida Bruto documentate dalle monete."
+                ],
+                correctIndex: 2,
+                explanation: "Il Bruto Capitolino (fine IV - inizio III secolo a.C.) unisce schemi greci dei ritratti dei filosofi con tecniche calligrafiche italiche, esprimendo severità, fermezza e virtù repubblicana."
+            },
+            {
+                question: "Quale evento storico portò alla fondazione del Tempio della Concordia nel 367 a.C.?",
+                options: [
+                    "La fine della seconda guerra punica e la vittoria contro Cartagine.",
+                    "L'approvazione delle Leggi Licinie-Sestie che pacificarono patrizi e plebei.",
+                    "La cacciata dei Tarquini e l'istituzione della Repubblica.",
+                    "Il superamento della pestilenza grazie all'intervento di Apollo Medico."
+                ],
+                correctIndex: 1,
+                explanation: "Il tempio fu promosso da Marco Furio Camillo nel 367 a.C. per celebrare la riconciliazione tra patrizi e plebei sancita dalle Leggi Licinie-Sestie, che garantivano l'accesso al consolato per i plebei."
+            }
+        ]
+    },
+    cap4_ellenismo: {
+        subject: "arte_romana",
+        chapterTag: "Cap. IV",
+        title: "L'influenza ellenistica nel II secolo a.C.",
+        questions: [
+            {
+                question: "Quale primato architettonico spetta al Tempio di Giove Statore eretto all'interno della Porticus Metelli?",
+                options: [
+                    "È il primo tempio romano ad adottare una cupola in calcestruzzo armato.",
+                    "È il primo tempio a Roma costruito interamente in marmo greco alla maniera ellenica.",
+                    "È l'unico tempio repubblicano a conservare intatto il podio in cappellaccio.",
+                    "È il primo tempio periptero rotondo edificato nel Foro Boario."
+                ],
+                correctIndex: 1,
+                explanation: "Progettato da Ermodoro di Salamina all'interno della Porticus Metelli, fu il primo tempio romano costruito interamente in marmo (marmo di Paro), importando la tipologia greca senza alto podio."
+            },
+            {
+                question: "Cos'era la 'Turma Alexandri' esposta nella Porticus Metelli e quale valore politico assunse?",
+                options: [
+                    "Un gruppo di 25 statue equestri di Lisippo, bottino di guerra che avviò il fenomeno dell'imitatio Alexandri.",
+                    "Una serie di dipinti trionfali raffiguranti le vittorie di Alessandro Magno in Asia.",
+                    "Un collegio sacerdotale dedito al culto dinastico dei generali romani.",
+                    "Una collezione di armi macedoni consacrata nel Tempio di Giove Statore."
+                ],
+                correctIndex: 0,
+                explanation: "La Turma Alexandri era un monumento bronzeo di Lisippo raffigurante i compagni di Alessandro alla battaglia del Granico. Portata a Roma da Metello nel 146 a.C., spinse i generali romani a emulare il sovrano macedone."
+            },
+            {
+                question: "Quali soluzioni strutturali caratterizzano la Porticus Aemilia dell'Emporium?",
+                options: [
+                    "Un colonnato continuo in marmo di Carrara con capitelli corinzi in bronzo.",
+                    "Una pianta circolare a cupola con oculus centrale aperta sul Tevere.",
+                    "Una enorme struttura coperta da volte a botte in opus caementicium disposte su più livelli.",
+                    "Un quadriportico greco con templi sine postico dedicati alle divinità marine."
+                ],
+                correctIndex: 2,
+                explanation: "La Porticus Aemilia (193/174 a.C.) era un immenso interporto commerciale in cui le volte a botte di calcestruzzo consentivano di coprire circa 30.000 m² disposti su terrazze digradanti verso il fiume."
+            },
+            {
+                question: "Come si articola lo spazio scenografico nel Santuario di Fortuna Primigenia a Palestrina?",
+                options: [
+                    "Attorno a una singola cella monumentale posta su un altissimo podio di travertino.",
+                    "Su terrazze artificiali scavate sul fianco della collina, collegate da rampe e scale in calcestruzzo.",
+                    "In una piazza chiusa dominata da cariatidi greche e fontane monumentali.",
+                    "Attorno a un porto artificiale collegato direttamente a un canale navigabile."
+                ],
+                correctIndex: 1,
+                explanation: "Il santuario tardo-ellenistico di Palestrina si sviluppa su terrazze collegate da rampe assiali e scale, unendo la plasticità strutturale del cementizio romano alla concezione scenografica greca del paesaggio."
+            },
+            {
+                question: "Quale sintesi stilistica esprime il Tempio di Portuno nel Foro Boario?",
+                options: [
+                    "Unisce una pianta circolare greca a un coronamento di volute ioniche arcaiche.",
+                    "Combina la pianta del tempio ionico pseudoperiptero greco con l'alto podio di tradizione etrusco-italica.",
+                    "Associa colonne doriche in marmo a un frontone fittile modellato da Vulca.",
+                    "Accosta una cupola in calcestruzzo a un pronao corinzio in bronzo dorato."
+                ],
+                correctIndex: 1,
+                explanation: "Il Tempio di Portuno presenta mezze colonne addossate alla cella tipiche dello pseudoperiptero greco, ma mantiene l'impianto italico con alto podio e scalinata monumentale solo sul fronte."
+            }
+        ]
+    },
+    cap5_tardo_repubblica: {
+        subject: "arte_romana",
+        chapterTag: "Cap. V",
+        title: "Tardo-repubblicano, ritrattistica e Pompeo",
+        questions: [
+            {
+                question: "In che modo Pompeo riuscì a edificare il suo teatro stabile in muratura nel 55 a.C. superando il divieto del Senato?",
+                options: [
+                    "Corrompendo i censori in carica con il bottino della campagna in Oriente.",
+                    "Costruendolo fuori dai confini dell'Italia, nel territorio di Ostia.",
+                    "Collocando un tempio a Venere Vincitrice sulla sommità della cavea, rendendo le gradinate una scalinata d'accesso.",
+                    "Dedicandolo esclusivamente a spettacoli religiosi e ludi plebei."
+                ],
+                correctIndex: 2,
+                explanation: "Per aggirare il divieto del Senato contro i teatri stabili, Pompeo pose al culmine della cavea un tempio a Venus Victrix, facendo passare le gradinate come una monumentale scalinata d'accesso al luogo sacro."
+            },
+            {
+                question: "Quale istituto sociale e giuridico romano favorì la nascita della ritrattistica veristica patrizia?",
+                options: [
+                    "Il ius publicum che imponeva la dedica di statue nel Foro Romano.",
+                    "Il ius imaginum, ovvero il diritto dei patrizi di conservare ed esibire le maschere funebri in cera degli antenati.",
+                    "L'uso delle tabulae triumphales per registrare i tratti fisionomici dei generali.",
+                    "La clientela che imponeva ai clienti di regalare busti in marmo al patrono."
+                ],
+                correctIndex: 1,
+                explanation: "Il verismo patrizio (Testa Torlonia, Patrizio di Otricoli) deriva dalle maschere di cera (imagines maiorum) colate sul volto dei defunti e conservate negli atri, che esaltavano le rughe ed i segni della vecchiaia come simboli di virtù civica."
+            },
+            {
+                question: "Quali elementi rendono eccezionale la struttura e le decorazioni della Casa del Fauno a Pompei?",
+                options: [
+                    "La presenza di affreschi in IV stile e di un anfiteatro privato.",
+                    "La facciata in pietra rustica e il monumentale tempio a doppia cella nell'atrio.",
+                    "L'articolazione attorno a due atri e due peristili greci, uniti a pavimenti musivi come il Mosaico di Alessandro.",
+                    "La totale assenza di decorazioni dipinte a favore di lastre di marmo greco."
+                ],
+                correctIndex: 2,
+                explanation: "La Casa del Fauno è una delle domus più grandi dell'antichità, caratterizzata da due atri, due grandi peristili di tipo ellenistico e mosaici di altissimo livello come quello della battaglia di Isso tra Alessandro e Dario."
+            },
+            {
+                question: "Qual è la caratteristica fondamentale del I Stile della pittura pompeiana?",
+                options: [
+                    "Lo sfondamento prospettico delle pareti tramite architetture dipinte.",
+                    "L'imitazione di lastre marmoree pregiate realizzate in stucco colorato a rilievo.",
+                    "L'uso di campiture monocrome piatte con candelabri sottili e mini-quadri.",
+                    "La raffigurazione di scene teatrali ed elementi architettonici fantastici."
+                ],
+                correctIndex: 1,
+                explanation: "Il primo stile (Incrostazione o Strutturale) imita i rivestimenti interni in marmo delle ricche regge ellenistiche utilizzando stucco sagomato e dipinto a rilievo."
+            },
+            {
+                question: "Come si distingue il III Stile pittorico (Ornamentale) rispetto al II Stile (Architettonico)?",
+                options: [
+                    "Rifiuta l'illusionismo prospettico chiudendo la parete con campiture piatte, candelabri e piccoli quadri sospesi.",
+                    "Aumenta la profondità spaziale inserendo giardini e paesaggi bucolici complessi.",
+                    "Utilizza esclusivamente stucco a rilievo per imitare le murature esterne.",
+                    "Introduce grandi scene storiche tratte dalle campagne militari romane."
+                ],
+                correctIndex: 0,
+                explanation: "Il terzo stile (della Parete Chiusa) abbandona i giochi prospettici del secondo stile a favore di pareti piatte, campiture monocrome ed elementi ornamentali filiformi ed esili di gusto egittizzante o classico."
+            }
+        ]
+    },
+    cap6_augusto_ara_pacis: {
+        subject: "arte_romana",
+        chapterTag: "Cap. VI",
+        title: "L'età augustea e l'Ara Pacis",
+        questions: [
+            {
+                question: "Quale modello storiografico e architettonico influenzò l'edificazione del Mausoleo di Augusto nel 28 a.C.?",
+                options: [
+                    "La tholos del Pantheon e la rotonda del tempio di Ercole Vincitore.",
+                    "I tumuli sepolcrali etruschi e la monumentalità dei mausolei dinastici ellenistici.",
+                    "La staccionata lignea dell'Ara Pacis e il foro di Cesare.",
+                    "Gli ustrina degli Antonini e la colonna centenaria."
+                ],
+                correctIndex: 1,
+                explanation: "Il Mausoleo di Augusto combina il tumulo circolare di tradizione italico-etrusca (esaltazione del mos maiorum) con la grandiosità dei monumenti funerari ellenistici orientali per affermare la dinastia Giulio-Claudia."
+            },
+            {
+                question: "In quale anno venne votata dal Senato e in quale anno inaugurata l'Ara Pacis Augustae?",
+                options: [
+                    "Votata nel 27 a.C. e inaugurata nel 23 a.C.",
+                    "Votata nel 13 a.C. e inaugurata nel 9 a.C.",
+                    "Votata nel 2 a.C. e inaugurata nel 14 d.C.",
+                    "Votata nel 42 a.C. e inaugurata nel 2 a.C."
+                ],
+                correctIndex: 1,
+                explanation: "L'Ara Pacis fu votata dal Senato nel 13 a.C. per il ritorno di Augusto dalle province occidentali e consacrata solennemente il 30 gennaio del 9 a.C."
+            },
+            {
+                question: "Cosa raffigura il registro inferiore del recinto esterno dell'Ara Pacis?",
+                options: [
+                    "Una parata militare a cavallo con la decursio funebre.",
+                    "La sfilata dei membri del Senato e dei magistrati romani.",
+                    "Un fitto fregio di girali d'acanto popolato da piccoli animali e cigni, simbolo dell'età dell'oro.",
+                    "Le fatiche di Ercole e il mito della fondazione di Roma."
+                ],
+                correctIndex: 2,
+                explanation: "Il registro inferiore presenta una composizione vegetale di girali d'acanto arricchita da piccoli animali, raffigurazione allegorica della fertilità, della pace e del ritorno del saeculum aureum."
+            },
+            {
+                question: "Chi sono i personaggi principali raffigurati nel pannello mitologico della Tellus (o Saturnia Tellus)?",
+                options: [
+                    "Romolo e Remo allattati dalla lupa alla presenza di Faustolo.",
+                    "Enea che sacrifica una scrofa ai Penati di Lavinio.",
+                    "Una dea madre seduta tra bambini, frutti e animali, affiancata dalle Aure del vento di terra e di mare.",
+                    "La dea Roma seduta su una pila di armi barbariche catturate."
+                ],
+                correctIndex: 2,
+                explanation: "Il pannello est dell'Ara Pacis mostra una divinità femminile (Tellus, Italia o Pax) prospera, seduta tra bimbi e animali, con le personificazioni dei venti terrestri e marini che simboleggiano la fertilità universale."
+            },
+            {
+                question: "Quale messaggio politico esprime la processione storica scolpita sui lati nord e sud dell'Ara Pacis?",
+                options: [
+                    "La sottomissione delle province barbare d'Oriente e d'Occidente.",
+                    "La legittimazione della dinastia imperiale attraverso la sfilata unita di Augusto, dei sacerdoti e dei suoi successori designati.",
+                    "La rievocazione storica del trionfo di Augusto nella battaglia di Azio.",
+                    "Il giuramento dei soldati romani al princeps prima della campagna gallica."
+                ],
+                correctIndex: 1,
+                explanation: "Il fregio storico (ispirato al Partenone) mostra la famiglia imperiale (con Agrippa, Livia, Tiberio e i figli Gaio e Lucius) accanto ai sacerdoti per propagandare la stabilità dello Stato e la continuità dinastica."
+            }
+        ]
+    },
+    cap7_augusto_foro_successori: {
+        subject: "arte_romana",
+        chapterTag: "Cap. VII",
+        title: "Foro di Augusto e Giulio-Claudi",
+        questions: [
+            {
+                question: "Quale divinità era ospitata nel tempio principale del Foro di Augusto e quale promessa celebrava?",
+                options: [
+                    "Venere Genitrice, a celebrazione dell'origine divina della Gens Iulia.",
+                    "Giove Statore, promesso da Metello dopo la conquista della Grecia.",
+                    "Marte Ultore (Vendicatore), promesso da Ottaviano a Filippi (42 a.C.) per vendicare l'uccisione di Cesare.",
+                    "Apollo Medico, eretto per debellare la pestilenza del V secolo a.C."
+                ],
+                correctIndex: 2,
+                explanation: "Il Tempio di Marte Ultore (inaugurato nel 2 a.C.) fu promesso da Ottaviano nel 42 a.C. prima della battaglia di Filippi contro i cesaricidi Bruto e Cassio."
+            },
+            {
+                question: "Cosa simboleggiavano le Cariatidi collocate nell'attico dei portici del Foro di Augusto?",
+                options: [
+                    "La sottomissione della Grecia e il ruolo di Roma come garante dell'ordine e della cultura dell'impero.",
+                    "Le virtù domestiche delle donne della famiglia Giulio-Claudia.",
+                    "La divinizzazione delle province galliche e ispaniche.",
+                    "I sacerdoti dediti al culto di Marte e Venere."
+                ],
+                correctIndex: 0,
+                explanation: "Le Cariatidi, copie fedeli di quelle dell'Eretteo di Atene, poste ad alternarsi con scudi di Giove Ammone, simboleggiavano la sottomissione e l'integrazione del mondo greco ed universale sotto l'egida di Roma."
+            },
+            {
+                question: "Quale stile architettonico caratterizza la Porta Maggiore edificata sotto l'imperatore Claudio?",
+                options: [
+                    "Il classicismo fine in marmo di Luni con capitelli corinzi dorati.",
+                    "Lo stile rustico (opus rusticum) con blocchi di travertino lasciati grezzi e sporgenti.",
+                    "La muratura in mattoni sormontata da una cupola in calcestruzzo.",
+                    "La decorazione con cariatidi e scudi di Giove Ammone."
+                ],
+                correctIndex: 1,
+                explanation: "Claudio scelse per Porta Maggiore (52 d.C.) lo stile rustico, lasciando i blocchi di pietra grezzi per dare una sensazione di forza ingegneristica, solidità e deliberata antichità istituzionale."
+            },
+            {
+                question: "Quali fasi della produzione sono rappresentate nei rilievi della Tomba di Eurisace il Panificatore?",
+                options: [
+                    "La mietitura del grano nelle province africane e il trasporto marittimo ad Ostia.",
+                    "Le fasi della panificazione: scarico del grano, macinazione asinara, impasto, cottura e pesa del pane davanti ai magistrati.",
+                    "La vendita dei pani al mercato del Foro Boario e le offerte votive a Cerere.",
+                    "Il giuramento dei fornai al prefetto dell'annona e la distribuzione gratuita del pane."
+                ],
+                correctIndex: 1,
+                explanation: "I rilievi della tomba del liberto Eurisace (fine I secolo a.C.) descrivono fedelmente il ciclo di panificazione della sua impresa, incarnando l'orgoglio del lavoro e l'estetica dell'arte plebea."
+            },
+            {
+                question: "Quale virtù celebrava l'Ara Pietatis Augustae completata sotto Claudio nel 43 d.C.?",
+                options: [
+                    "La sottomissione militare delle tribù germaniche e britanniche.",
+                    "La devozione religiosa e il rispetto per i doveri familiari della dinastia imperiale.",
+                    "La stabilità economica garantita dalle distribuzioni dell'annona.",
+                    "La giustizia imperiale esercitata direttamente dal principe nei tribunali."
+                ],
+                correctIndex: 1,
+                explanation: "L'Ara Pietatis celebrava la pietas (devozione agli dei e alla famiglia) della dinastia giulio-claudia, mostrando rilievi dettagliati di sacrifici solenni dinanzi ai templi monumentali di Roma."
+            }
+        ]
+    },
+    cap8_traiano: {
+        subject: "arte_romana",
+        chapterTag: "Cap. VIII",
+        title: "Età flavia e di Traiano",
+        questions: [
+            {
+                question: "Quale scelta urbanistica di Vespasiano caratterizza la collocazione del Colosseo?",
+                options: [
+                    "Fu costruito sul Quirinale per sostenerne il fianco franoso.",
+                    "Fu edificato nel Campo Marzio per facilitare la processione trionfale.",
+                    "Fu posto sul sito del lago artificiale della Domus Aurea, restituendo al pubblico un'area privata sottratta da Nerone.",
+                    "Fu addossato al tempio di Marte Ultore per scopi difensivi."
+                ],
+                correctIndex: 2,
+                explanation: "Edificare il Colosseo sopra il lago della Domus Aurea servì a Vespasiano come forte atto di propaganda politica: restituire al popolo di Roma, sotto forma di spazio ludico pubblico, il terreno privato espropriato da Nerone."
+            },
+            {
+                question: "Quale espediente prospettico rende celebre il rilievo del corteo trionfale all'interno dell'Arco di Tito?",
+                options: [
+                    "La disposizione delle figure su piani perfettamente orizzontali e privi di sfondo.",
+                    "La prospettiva ribaltata che mostra contemporaneamente l'interno e l'esterno del tempio.",
+                    "L'andamento parabolico del corteo che si avvicina e si allontana dallo spettatore creando profondità ottica.",
+                    "L'uso di proporzioni gerarchiche in cui Tito è rappresentato grande quanto l'arco."
+                ],
+                correctIndex: 2,
+                explanation: "Il rilievo dell'Arco di Tito (81 d.C.) curva la linea del corteo in senso parabolico, dando l'impressione che i portatori dei bottini e la quadriga stiano girando nello spazio tridimensionale."
+            },
+            {
+                question: "Quale monumento plebeo raffigura dettagliatamente i macchinari da cantiere e le costruzioni flavie?",
+                options: [
+                    "Il Sarcofago di Scipione Barbato.",
+                    "La Tomba di Eurisace il Panificatore.",
+                    "La Tomba degli Haterii.",
+                    "La decorazione acroteriale di Sant'Omobono."
+                ],
+                correctIndex: 2,
+                explanation: "La Tomba degli Haterii (inizi II secolo d.C.) apparteneva a un costruttore edile e mostra nei dettagli una grande gru mossa da una ruota asinaria (*magna machina*) e i monumenti romani eretti dalla sua impresa."
+            },
+            {
+                question: "Quale fu la funzione della Basilica Ulpia all'interno del Foro di Traiano?",
+                options: [
+                    "Ospitare le ceneri dell'imperatore all'interno della camera sepolcrale.",
+                    "Svolgere funzioni giudiziarie ed economiche come la più grande basilica civile di Roma.",
+                    "Essere il tempio principale per il culto di Traiano divinizzato.",
+                    "Fungere da mercato coperto per la vendita del grano e dell'olio."
+                ],
+                correctIndex: 1,
+                explanation: "La Basilica Ulpia, progettata da Apollodoro di Damasco, chiudeva la piazza del Foro di Traiano e fungeva da monumentale tribunale e centro di affari amministrativi civili."
+            },
+            {
+                question: "Quale caratteristica distingue la decorazione figurativa della Colonna Traiana?",
+                options: [
+                    "Un fregio continuo a spirale che narra realisticamente le due guerre daciche senza nascondere il valore dei vinti.",
+                    "Scene mitologiche tratte dall'Odissea e dall'Iliade legate alla figura di Enea.",
+                    "Una sequenza di tondi raffiguranti cacce dell'imperatore ed eventi miracolosi.",
+                    "Pannelli quadrangolari staccati che presentano la divinizzazione di Traiano e Plotina."
+                ],
+                correctIndex: 0,
+                explanation: "La Colonna Traiana (113 d.C.) ospita un fregio coclide di 23 spire che narra le campagne in Dacia con precisione cronachistica e rispetto per i nemici, celebrando Traiano come optimus princeps."
+            }
+        ]
+    },
+    cap9_adriano: {
+        subject: "arte_romana",
+        chapterTag: "Cap. IX",
+        title: "L'età di Adriano",
+        questions: [
+            {
+                question: "Quale espediente geometrico definisce lo spazio interno del Pantheon di Adriano?",
+                options: [
+                    "Un ottagono regolare coperto da volte a crociera incrociate.",
+                    "Una sfera perfetta inserita in un cilindro, in cui diametro e altezza corrispondono a 43,30 metri.",
+                    "Una serie di cupole ad ombrello disposte in sequenza ellittica.",
+                    "Un rettangolo allungato scandito da cariatidi e clypei di Giove Ammone."
+                ],
+                correctIndex: 1,
+                explanation: "La rotonda del Pantheon è progettata in modo che lo spazio interno corrisponda a una sfera perfetta: il diametro alla base della cupola è uguale all'altezza totale da terra all'oculus (43,30 m)."
+            },
+            {
+                question: "Cos'era il Teatro Marittimo all'interno di Villa Adriana a Tivoli?",
+                options: [
+                    "Una piscina monumentale in cui si svolgevano finti combattimenti navali (naumachie).",
+                    "Un'isola artificiale circondata da un canale, usata da Adriano come rifugio privato.",
+                    "Un teatro all'aperto decorato con copie bronzee della Scilla rodia.",
+                    "Un tempio dedicato al dio Nettuno per propiziare i viaggi imperiali."
+                ],
+                correctIndex: 1,
+                explanation: "Il Teatro Marittimo era una domus privata situata su un'isola artificiale circondata da un canale (euripo) all'interno del complesso perimetrale, accessibile tramite ponti mobili."
+            },
+            {
+                question: "Quali sculture greche ornavano il Canopo di Villa Adriana?",
+                options: [
+                    "Copie delle Cariatidi dell'Eretteo di Atene, delle Amazzoni e del Doriforo.",
+                    "La quadriga di Vulca di Veio e le sculture di Sant'Omobono.",
+                    "I rilievi storici dei cavalieri e delle aquile imperiali della via Traiana.",
+                    "La serie di statue equestri in bronzo della Turma Alexandri."
+                ],
+                correctIndex: 0,
+                explanation: "Il Canopo (lungo canale a Tivoli) era arricchito da repliche di sculture greche celebri, tra cui cariatidi, statue di guerrieri e personificazioni fluviali care al gusto eclettico di Adriano."
+            },
+            {
+                question: "Quale deviazione dalla tradizione del podio italico presenta il Tempio di Venere e Roma?",
+                options: [
+                    "Sorgeva su una terrazza sotterranea collegata direttamente al Colosseo.",
+                    "Non aveva fondamenta stabili ma era sospeso su archi in cementizio.",
+                    "Sorgeva su una crepidine a gradini alla greca ed era un periptero diptero.",
+                    "Presentava un podio ottagonale in laterizio ricoperto di marmo colorato."
+                ],
+                correctIndex: 2,
+                explanation: "Il tempio di Venere e Roma (135 d.C.) fu costruito su una crepidine greca a gradini (senza il tradizionale podio ad accesso frontale), seguendo il modello diptero dell'Asia Minore."
+            },
+            {
+                question: "Quale critica storiografica mosse l'architetto Apollodoro di Damasco al progetto del tempio di Venere e Roma voluto da Adriano?",
+                options: [
+                    "Sostenne che il cementizio usato per le volte sarebbe crollato al primo terremoto.",
+                    "Affermò che le celle erano troppo basse rispetto alle statue di culto sedute, che avrebbero urtato il soffitto volendosi alzare.",
+                    "Criticò l'uso di mattoni a vista ritenendoli indegni di un tempio statale.",
+                    "Sottolineò che la posizione del tempio bloccava l'accesso trionfale al Foro Romano."
+                ],
+                correctIndex: 1,
+                explanation: "Secondo Cassio Dione, Apollodoro criticò l'altezza ridotta delle celle rispetto alle statue colossali delle dee sedute, scontro intellettuale che determinò la sua condanna a morte da parte dell'imperatore."
+            }
+        ]
+    },
+    cap10_antonini_tardoantico: {
+        subject: "arte_romana",
+        chapterTag: "Cap. X",
+        title: "Antonini e Tarda Antichità",
+        questions: [
+            {
+                question: "Quale contrapposizione stilistica caratterizza il basamento della Colonna di Antonino Pio?",
+                options: [
+                    "L'uso contemporaneo dell'incisione su bronzo e della pittura ad affresco.",
+                    "Lo stile classicista nella scena dell'Apoteosi e lo stile plebeo/popolare nei lati con la Decursio.",
+                    "La prospettiva lineare geometrica unita a rilievi in argilla etrusca.",
+                    "La presenza di divinità greche ed egizie disposte in ordine gerarchico."
+                ],
+                correctIndex: 1,
+                explanation: "La base (161 d.C.) mostra sul fronte l'apoteosi classica di stampo ellenizzante, mentre sui lati presenta la decursio (parata militare) in prospettiva ribaltata e figure tozze tipiche dell'arte plebea."
+            },
+            {
+                question: "In cosa differisce lo stile della Colonna di Marco Aurelio rispetto alla precedente Colonna Traiana?",
+                options: [
+                    "Rinuncia completamente alla narrazione storica a favore di scene mitologiche.",
+                    "Usa un rilievo molto più piatto e privo di contrasti chiaroscurali.",
+                    "Adotta un rilievo più profondo ottenuto col trapano, figure frontali dell'imperatore ed elementi miracolosi.",
+                    "È realizzata interamente in mattoni rivestiti di stucco dorato anziché in marmo."
+                ],
+                correctIndex: 2,
+                explanation: "La Colonna Aureliana (dedicata nel 180 d.C.) presenta un rilievo più sporgente e drammatico lavorato col trapano, la frontazione della figura imperiale e l'inserimento di elementi sovrannaturali come il miracolo della pioggia."
+            },
+            {
+                question: "Da quali monumenti imperiali provengono gli spolia (rilievi di reimpiego) dell'Arco di Costantino?",
+                options: [
+                    "Dai monumenti di Giulio Cesare, Augusto e Claudio.",
+                    "Dai monumenti di Traiano, Adriano e Marco Aurelio.",
+                    "Dalla Domus Aurea di Nerone e dal Colosseo dei Flavi.",
+                    "Dall'area sacra di Sant'Omobono e dal foro di Nerva."
+                ],
+                correctIndex: 1,
+                explanation: "Costantino utilizzò rilievi appartenenti a Traiano (fregio dacico), Adriano (tondi di caccia) e Marco Aurelio (pannelli storici dell'attico) per collegarsi ideologicamente ai 'buoni imperatori' del passato."
+            },
+            {
+                question: "Quali caratteri formali distinguono i fregi costantiniani eseguiti nel 315 d.C. sull'Arco di Costantino?",
+                options: [
+                    "L'adesione rigorosa al naturalismo fidiaco e alle proporzioni classiche greche.",
+                    "La perdita del naturalismo a favore di figure bidimensionali, rigida simmetria, frontalità e proporzioni gerarchiche.",
+                    "La pittura illusionistica impressionista e la prospettiva aerea.",
+                    "La modellazione calligrafica della barba e l'inserimento di occhi in pasta vitrea."
+                ],
+                correctIndex: 1,
+                explanation: "I rilievi costantiniani abbandonano il realismo tridimensionale classico a favore di una composizione gerarchica e simbolica (l'imperatore è grande e frontale al centro), inaugurando lo stile dell'arte medievale."
+            },
+            {
+                question: "Quale scena scolpita sulla Colonna Traiana o sull'Arco di Costantino ispirò a Dante la descrizione del Purgatorio (Canto X)?",
+                options: [
+                    "Il miracolo di Giove Pluvio che salva le legioni assetate.",
+                    "La processione dei portatori del candelabro a sette bracci di Gerusalemme.",
+                    "L'imperatore davanti a una donna implorante, interpretata nel Medioevo come la leggenda di Traiano e la vedova.",
+                    "La sottomissione del re dace Decebalo e il ponte di barche sul Danubio."
+                ],
+                correctIndex: 2,
+                explanation: "Nel Medioevo la personificazione della via Traiana su una ruota (sull'Arco di Costantino) o le supplici daciche (sulla Colonna Traiana) vennero interpretate come la vedovella che chiede giustizia a Traiano, ispirando i versi del Purgatorio di Dante."
+            }
+        ]
+    }
 };
 
 // Global export

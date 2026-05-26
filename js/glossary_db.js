@@ -98,6 +98,43 @@ const glossaryDatabase = {
         term: "Il Sublime",
         definition: "Concetto estetico teorizzato da Burke e incarnato dai pittori preromantici (Friedrich, Turner). Rappresenta il sentimento di terrore dilettevole e smarrimento provato dall'uomo di fronte alle forze infinite e spaventose della natura.",
         domain: "arte"
+    },
+
+    // TERMINI DI ARTE ROMANA
+    "opus caementicium": {
+        term: "Opus Caementicium",
+        definition: "La rivoluzionaria opera cementizia dei Romani. Una miscela di calce, pozzolana e acqua combinata con scaglie di tufo o pietra (caementa). Consentì la costruzione di volte e cupole monumentali (come il Pantheon) che ridefinirono lo spazio architettonico.",
+        domain: "arte_romana"
+    },
+    "spolia": {
+        term: "Reimpiego (Spolia)",
+        definition: "Pratica tardoantica consistente nel prelevare rilievi, colonne o elementi architettonici da monumenti del passato per riutilizzarli in nuove fabbriche (come nell'Arco di Costantino), assumendo forti valenze ideologiche di continuità o trionfo politico.",
+        domain: "arte_romana"
+    },
+    "rilievo storico": {
+        term: "Rilievo Storico Romano",
+        definition: "Genere artistico romano per eccellenza volto alla narrazione documentaria e cronachistica di eventi statali, trionfi militari e sacrifici. Si contrappone all'idealizzazione mitologica greca, privilegiando la veridicità degli eventi.",
+        domain: "arte_romana"
+    },
+    "verismo repubblicano": {
+        term: "Verismo Repubblicano",
+        definition: "Stile ritrattistico che riproduce rughe, calvizie e segni dell'età con spietato realismo. Deriva dal diritto patrizio di conservare le maschere funebri di cera (ius imaginum) ed esprimeva l'attaccamento ai valori del mos maiorum.",
+        domain: "arte_romana"
+    },
+    "adlocutio": {
+        term: "Adlocutio",
+        definition: "Discorso solenne rivolto da un comandante o imperatore alle truppe riunite. Nell'iconografia imperiale (come nell'Augusto di Prima Porta) è simboleggiata dal braccio destro sollevato in un gesto autorevole di richiamo all'attenzione.",
+        domain: "arte_romana"
+    },
+    "oculus": {
+        term: "Oculus (Pantheon)",
+        definition: "Grande apertura circolare posta alla sommità di una cupola. Oltre a illuminare l'ambiente simulando il cammino solare, alleggerisce notevolmente la calotta di calcestruzzo nel punto di massima tensione strutturale.",
+        domain: "arte_romana"
+    },
+    "basilica civile": {
+        term: "Basilica Civile",
+        definition: "Grande spazio coperto a pianta rettangolare scandito da navate colonnate. Nell'architettura romana fungeva da centro amministrativo, tribunale e luogo di scambi commerciali, ispirando successivamente le basiliche paleocristiane.",
+        domain: "arte_romana"
     }
 };
 
