@@ -348,6 +348,36 @@
             animation: pulse 1s infinite alternate;
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* WebLLM progress bar */
+        .webllm-progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.4rem;
+        }
+
+        .webllm-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .webllm-progress-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            min-height: 1.2em;
+        }
+
         /* Layout responsive styling */
         @media (max-width: 900px) {
             .assistant-layout {
@@ -444,7 +474,26 @@
                         <div id="model-indicator" class="status-indicator"></div>
                         <span id="model-status-text">Non caricato (usa ricerca testuale)</span>
                     </div>
-                    <button id="btn-load-model" class="btn btn-secondary" onclick="loadLocalModel()" style="width: 100%; padding: 0.6rem; font-size: 0.85rem;">Carica Modello (90MB)</button>
+                    <button id="btn-load-model" class="btn btn-secondary" onclick="loadLocalModel()" style="width: 100%; padding: 0.6rem; font-size: 0.85rem;">Carica Reranker (90MB)</button>
+                </div>
+
+                <div class="sidebar-section" id="webllm-section">
+                    <h3 class="sidebar-title">IA Generativa Locale (WebGPU)</h3>
+                    <div class="model-status-badge">
+                        <div id="webllm-indicator" class="status-indicator"></div>
+                        <span id="webllm-status-text">Verifica WebGPU...</span>
+                    </div>
+                    <select id="webllm-model-select" class="form-input" style="width:100%; padding:0.5rem; border-radius:8px; background:rgba(0,0,0,0.2); border:1px solid var(--border-color); color:var(--text-primary); font-size:0.8rem; margin-top:0.4rem;" onchange="updateWebLlmBtnLabel()" disabled>
+                        <option value="SmolLM2-360M-Instruct-q4f16_1-MLC">SmolLM2-360M · ~270 MB (tablet/low-end)</option>
+                        <option value="Qwen2.5-0.5B-Instruct-q4f16_1-MLC">Qwen2.5-0.5B · ~400 MB (leggero, multilingua)</option>
+                        <option value="Llama-3.2-1B-Instruct-q4f16_1-MLC">Llama-3.2-1B · ~580 MB (bilanciato)</option>
+                        <option value="Gemma-2-2b-it-q4f16_1-MLC">Gemma-2-2B · ~1.4 GB (alta qualità)</option>
+                    </select>
+                    <div class="webllm-progress-container" id="webllm-progress-container" style="display:none;">
+                        <div class="webllm-progress-bar" id="webllm-progress-bar"></div>
+                    </div>
+                    <div class="webllm-progress-label" id="webllm-progress-label"></div>
+                    <button id="btn-load-webllm" class="btn btn-secondary" onclick="loadWebLlmModel()" style="width: 100%; padding: 0.6rem; font-size: 0.85rem;" disabled>Carica IA Locale (~270 MB)</button>
                 </div>
 
                 <div class="sidebar-section">
@@ -558,6 +607,32 @@
         let localPipeline = null;
         let localModelLoading = false;
 
+        // WebLLM generative model variables
+        let webLlmEngine = null;
+        let webLlmLoading = false;
+        let isWebGpuAvailable = false;
+
+        // WebLLM model catalogue (id → display info)
+        const WEBLLM_MODELS = {
+            'SmolLM2-360M-Instruct-q4f16_1-MLC':  { label: 'SmolLM2-360M',  size: '~270 MB' },
+            'Qwen2.5-0.5B-Instruct-q4f16_1-MLC':  { label: 'Qwen2.5-0.5B', size: '~400 MB' },
+            'Llama-3.2-1B-Instruct-q4f16_1-MLC':   { label: 'Llama-3.2-1B',  size: '~580 MB' },
+            'Gemma-2-2b-it-q4f16_1-MLC':           { label: 'Gemma-2-2B',    size: '~1.4 GB' }
+        };
+
+        function getSelectedWebLlmModelId() {
+            return document.getElementById('webllm-model-select').value;
+        }
+
+        function updateWebLlmBtnLabel() {
+            const id = getSelectedWebLlmModelId();
+            const info = WEBLLM_MODELS[id];
+            const btn = document.getElementById('btn-load-webllm');
+            if (info && !webLlmEngine && !webLlmLoading) {
+                btn.textContent = `Carica IA Locale (${info.size})`;
+            }
+        }
+
         // Speech systems
         let recognition = null;
         let isDictating = false;
@@ -578,10 +653,16 @@
             // Build / Preload KB
             await preloadKnowledgeBase();
 
+            // Check WebGPU availability for generative model
+            await checkWebGpuSupport();
+
             // Check if model was cached or load configuration
             const savedEngine = localStorage.getItem('lex-oral-ai-engine') || 'local';
             if (savedEngine === 'local') {
-                addBotMessage("Benvenuto! Sono il tuo tutor accademico. Le impostazioni indicano l'uso del **modello locale offline**. Fai clic su 'Carica Modello' nella barra laterale per abilitare il reranking vettoriale semantico, oppure poni direttamente una domanda!");
+                const webgpuHint = isWebGpuAvailable
+                    ? " Puoi anche caricare l'**IA Generativa Locale** dalla barra laterale per ricevere risposte ragionate e discorsive direttamente nel browser!"
+                    : "";
+                addBotMessage(`Benvenuto! Sono il tuo tutor accademico. Le impostazioni indicano l'uso del **modello locale offline**.${webgpuHint} Poni una domanda per iniziare!`);
             } else {
                 addBotMessage(`Benvenuto! Sono il tuo tutor accademico. Pronto ad aiutarti utilizzando l'engine **${savedEngine.toUpperCase()}**.`);
             }
@@ -871,9 +952,9 @@
                 localModelLoading = false;
                 indicator.className = "status-indicator ready";
                 text.textContent = "Pronto (vettoriale attivo)";
-                btn.textContent = "Caricamento completato";
+                btn.textContent = "Reranker Caricato";
                 
-                addBotMessage("Modello locale caricato con successo! Il reranking semantico vettoriale è ora attivo.");
+                addBotMessage("Modello di reranking locale caricato con successo! La qualità della ricerca semantica è ora migliorata.");
             } catch (err) {
                 console.error(err);
                 localModelLoading = false;
@@ -882,6 +963,103 @@
                 btn.textContent = "Riprova caricamento";
                 btn.disabled = false;
                 alert("Impossibile caricare il modello locale. Controlla la connessione di rete.");
+            }
+        }
+
+        // Check if browser supports WebGPU for generative AI
+        async function checkWebGpuSupport() {
+            const indicator = document.getElementById('webllm-indicator');
+            const statusText = document.getElementById('webllm-status-text');
+            const btn = document.getElementById('btn-load-webllm');
+
+            try {
+                if (!navigator.gpu) {
+                    throw new Error('WebGPU non supportato');
+                }
+                const adapter = await navigator.gpu.requestAdapter();
+                if (!adapter) {
+                    throw new Error('Nessun adapter GPU trovato');
+                }
+                isWebGpuAvailable = true;
+                indicator.className = "status-indicator";
+                statusText.textContent = "WebGPU disponibile — pronto per il caricamento";
+                btn.disabled = false;
+                document.getElementById('webllm-model-select').disabled = false;
+                updateWebLlmBtnLabel();
+            } catch (e) {
+                isWebGpuAvailable = false;
+                indicator.className = "status-indicator";
+                indicator.style.background = 'var(--accent-romana, #c85a32)';
+                statusText.textContent = "WebGPU non disponibile su questo dispositivo";
+                btn.textContent = "Non compatibile";
+                btn.disabled = true;
+                btn.title = "Il tuo browser o dispositivo non supporta WebGPU. Usa Chrome 113+ con una GPU compatibile oppure seleziona un motore cloud (Gemini, Ollama).";
+                console.warn('WebGPU not available:', e.message);
+            }
+        }
+
+        // On-demand loader for WebLLM generative model
+        async function loadWebLlmModel() {
+            if (webLlmEngine) return;
+            if (webLlmLoading) return;
+            if (!isWebGpuAvailable) {
+                alert('WebGPU non è disponibile su questo dispositivo. Usa un browser compatibile (Chrome 113+) con una GPU supportata, oppure seleziona Gemini/Ollama/LM Studio come motore.');
+                return;
+            }
+
+            webLlmLoading = true;
+            const selectedModelId = getSelectedWebLlmModelId();
+            const modelInfo = WEBLLM_MODELS[selectedModelId] || { label: selectedModelId, size: '?' };
+            const indicator = document.getElementById('webllm-indicator');
+            const statusText = document.getElementById('webllm-status-text');
+            const btn = document.getElementById('btn-load-webllm');
+            const modelSelect = document.getElementById('webllm-model-select');
+            const progressContainer = document.getElementById('webllm-progress-container');
+            const progressBar = document.getElementById('webllm-progress-bar');
+            const progressLabel = document.getElementById('webllm-progress-label');
+
+            indicator.className = "status-indicator loading";
+            statusText.textContent = `Download ${modelInfo.label} (${modelInfo.size})...`;
+            btn.textContent = "Download in corso...";
+            btn.disabled = true;
+            modelSelect.disabled = true;
+            progressContainer.style.display = 'block';
+
+            try {
+                const { CreateMLCEngine } = await import('https://esm.run/@mlc-ai/web-llm');
+
+                webLlmEngine = await CreateMLCEngine(selectedModelId, {
+                    initProgressCallback: (progress) => {
+                        const pct = Math.round((progress.progress || 0) * 100);
+                        progressBar.style.width = pct + '%';
+                        progressLabel.textContent = progress.text || `Download: ${pct}%`;
+                        statusText.textContent = `Caricamento: ${pct}%`;
+                    }
+                });
+
+                webLlmLoading = false;
+                indicator.className = "status-indicator ready";
+                statusText.textContent = `IA Pronta (${modelInfo.label})`;
+                btn.textContent = `${modelInfo.label} Caricato ✓`;
+                progressContainer.style.display = 'none';
+                progressLabel.textContent = '';
+
+                addBotMessage(`<strong>IA Generativa Locale caricata!</strong> Modello: <em>${modelInfo.label}</em> (${modelInfo.size}). D'ora in poi le risposte in modalità locale saranno generate con ragionamento e considerazioni, basate sui tuoi testi di studio. Il modello gira interamente nel tuo browser — nessun dato viene inviato a server esterni.`);
+
+            } catch (err) {
+                console.error('WebLLM loading error:', err);
+                webLlmLoading = false;
+                webLlmEngine = null;
+                indicator.className = "status-indicator";
+                indicator.style.background = 'var(--accent-romana, #c85a32)';
+                statusText.textContent = "Errore caricamento — fallback a ricerca";
+                btn.textContent = "Riprova caricamento";
+                btn.disabled = false;
+                modelSelect.disabled = false;
+                progressContainer.style.display = 'none';
+                progressLabel.textContent = '';
+
+                addBotMessage(`<span style="color:var(--accent-romana);">Impossibile caricare l'IA Generativa Locale.</span> Possibili cause: GPU non compatibile, memoria insufficiente, o browser non aggiornato.<br><br>L'assistente continuerà a funzionare in modalità <strong>ricerca testuale</strong> (estrazione di riferimenti senza ragionamento). Per risposte ragionate, usa un motore cloud (Gemini) o locale (Ollama/LM Studio).`);
             }
         }
 
@@ -1017,8 +1195,8 @@
             const sysPrompt = document.getElementById('system-prompt').value.trim();
 
             if (engine === 'local') {
-                // Offline Local Semantic Search helper
-                executeLocalOfflineAssistant(question, contextSections);
+                // Offline Local Search — with or without generative AI
+                await executeLocalOfflineAssistant(question, contextSections);
             } else {
                 // Online LLM RAG
                 await executeLlmAssistant(engine, credentials, sysPrompt, question, contextSections);
@@ -1123,17 +1301,24 @@
             }
         }
 
-        // Executing local offline search display
-        function executeLocalOfflineAssistant(question, sections) {
+        // Executing local offline search display (with optional WebLLM generative response)
+        async function executeLocalOfflineAssistant(question, sections) {
             if (sections.length === 0) {
                 addBotMessage("Non ho trovato alcun riferimento specifico per la tua domanda nel manuale di studio. Prova a inserire termini diversi o a cambiare engine in modalità cloud (Gemini).");
                 return;
             }
 
-            let responseHtml = `<p>Ecco i riferimenti accademici più rilevanti trovati direttamente nei tuoi riassunti di studio offline:</p><br>`;
+            // If WebLLM generative engine is loaded, generate a reasoned response
+            if (webLlmEngine) {
+                await executeWebLlmAssistant(question, sections);
+                return;
+            }
+
+            // Fallback: show extracted references only (no generative AI)
+            let responseHtml = `<p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">💡 <em>Modalità ricerca testuale — carica l'IA Generativa dalla barra laterale per ottenere risposte ragionate.</em></p>`;
+            responseHtml += `<p>Ecco i riferimenti accademici più rilevanti trovati nei tuoi testi di studio:</p><br>`;
             
             sections.forEach((sec, idx) => {
-                // Shorten snippet if it's too long
                 let textExcerpt = sec.text;
                 if (textExcerpt.length > 300) {
                     textExcerpt = textExcerpt.substring(0, 300) + '...';
@@ -1149,6 +1334,81 @@
             });
 
             addBotMessage(responseHtml, sections);
+        }
+
+        // Generate a reasoned response using the local WebLLM generative model
+        async function executeWebLlmAssistant(question, contextSections) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const sysPrompt = document.getElementById('system-prompt').value.trim();
+
+            // Show loading placeholder
+            const placeholder = document.createElement('div');
+            placeholder.className = "chat-bubble assistant";
+            placeholder.id = "webllm-loading-bubble";
+            placeholder.innerHTML = `
+                <div class="bubble-meta">
+                    <span class="bubble-speaker assistant">ASSISTENTE LEX</span>
+                    <span>Elaborazione locale...</span>
+                </div>
+                <div class="bubble-text" style="display:flex; align-items:center; gap:0.5rem; color:var(--text-secondary);">
+                    <span class="spinner" style="display:inline-block; width:12px; height:12px; border:2px solid rgba(255,255,255,0.1); border-top-color:var(--accent-gold); border-radius:50%; animation:spin 1s infinite linear;"></span>
+                    <span>L'IA locale sta ragionando sui testi di studio...</span>
+                </div>
+            `;
+            messagesContainer.appendChild(placeholder);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Build RAG context
+            let contextText = contextSections.map((sec, idx) =>
+                `[Fonte ${idx+1}: ${sec.chapterTitle} — ${sec.sectionTitle}]\n${sec.text.substring(0, 800)}`
+            ).join('\n\n');
+
+            const messages = [
+                {
+                    role: 'system',
+                    content: `${sysPrompt}\n\nRispondi SEMPRE in italiano. Basa la tua risposta rigorosamente sulle fonti accademiche fornite qui sotto. Indica esplicitamente da quale fonte provengono le informazioni. Se le fonti non contengono informazioni sufficienti, dichiaralo.`
+                },
+                {
+                    role: 'user',
+                    content: `Contesto accademico estratto dai manuali di studio:\n\n${contextText}\n\nDomanda dello studente: "${question}"\n\nFornisci una risposta chiara, completa e ragionata in italiano, citando le fonti.`
+                }
+            ];
+
+            try {
+                const reply = await webLlmEngine.chat.completions.create({
+                    messages: messages,
+                    temperature: 0.6,
+                    max_tokens: 1024
+                });
+
+                const textResponse = reply.choices[0].message.content;
+
+                // Remove loading placeholder
+                placeholder.remove();
+
+                // Format and display
+                const formattedHtml = formatLlmText(textResponse);
+                addBotMessage(formattedHtml, contextSections, textResponse);
+
+            } catch (err) {
+                console.error('WebLLM generation error:', err);
+                placeholder.remove();
+
+                // Fallback: show search results instead
+                let fallbackHtml = `<span style="color:var(--accent-romana);">Errore durante la generazione della risposta locale: ${escapeHtml(err.message)}</span><br><br>`;
+                fallbackHtml += `<p>Ecco comunque i riferimenti trovati nei testi:</p><br>`;
+                contextSections.forEach((sec, idx) => {
+                    let textExcerpt = sec.text.substring(0, 300) + (sec.text.length > 300 ? '...' : '');
+                    fallbackHtml += `
+                        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px; margin-bottom: 0.8rem;">
+                            <strong style="color: var(--accent-gold);">${idx + 1}. ${sec.chapterTitle}</strong><br>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); font-style: italic;">Sezione: ${sec.sectionTitle}</span>
+                            <p style="margin-top: 0.4rem; font-size: 0.9rem; color: var(--text-primary); line-height: 1.4;">${escapeHtml(textExcerpt)}</p>
+                        </div>
+                    `;
+                });
+                addBotMessage(fallbackHtml, contextSections);
+            }
         }
 
         // Executing remote LLM (Gemini, Ollama, LM Studio)
