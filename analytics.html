@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiche di Studio - Lex Studiorum</title>
+    <meta name="description" content="Monitora i tuoi progressi accademici, i punteggi dei quiz e i tempi di risposta con grafici interattivi di autovalutazione.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet Reference -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .analytics-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 2rem auto 4rem auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background: rgba(22, 28, 45, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chart-card.wide {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            align-self: flex-start;
+        }
+
+        .canvas-container {
+            width: 100%;
+            position: relative;
+            min-height: 250px;
+        }
+
+        .summary-banner {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(200, 90, 50, 0.1) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .metric-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .metric-val {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .demo-notice {
+            background: rgba(234, 179, 8, 0.08);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            color: #f59e0b;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .demo-notice svg {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorative blur shapes -->
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>Dashboard Analitica di Studio</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="analytics-container">
+        
+        <a href="exam.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Simulatore d'Esame
+        </a>
+
+        <!-- Demo Notice if stats are empty -->
+        <div id="demo-notice" class="demo-notice" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span><strong>Nessuna simulazione d'esame registrata!</strong> Stai vedendo un esempio dimostrativo dell'andamento. Completa una simulazione per tracciare i tuoi progressi.</span>
+        </div>
+
+        <!-- Summary Metrics Row -->
+        <section class="summary-banner">
+            <div class="metric-box">
+                <span class="metric-val" id="metric-sessions">0</span>
+                <span class="metric-label">Sessioni Svolte</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-val" id="metric-avg-score">0.0</span>
+                <span class="metric-label">Voto Medio</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-val" id="metric-speed">0s</span>
+                <span class="metric-label">Tempo Medio Risposta</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-val" id="metric-completion">0%</span>
+                <span class="metric-label">Tasso Risposte Corrette</span>
+            </div>
+        </section>
+
+        <!-- Charts Grid -->
+        <section class="stats-grid">
+            
+            <!-- PROGRESS OVER TIME -->
+            <div class="chart-card wide">
+                <h4 class="chart-title">Andamento dei Punteggi nel Tempo</h4>
+                <div class="canvas-container">
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </div>
+
+            <!-- SUBJECT COMPARISON -->
+            <div class="chart-card">
+                <h4 class="chart-title">Livello di Preparazione per Materia</h4>
+                <div class="canvas-container">
+                    <canvas id="subjectChart"></canvas>
+                </div>
+            </div>
+
+            <!-- SPEED METRIC -->
+            <div class="chart-card">
+                <h4 class="chart-title">Velocità Media di Risposta (Secondi)</h4>
+                <div class="canvas-container">
+                    <canvas id="speedChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load stats from localStorage
+            let stats = [];
+            let isDemo = false;
+            try {
+                const stored = localStorage.getItem('lex-quiz-stats');
+                if (stored) {
+                    stats = JSON.parse(stored);
+                }
+            } catch(e) {
+                console.error("Errore lettura statistiche:", e);
+            }
+
+            // Fallback mock stats if empty
+            if (stats.length === 0) {
+                isDemo = true;
+                document.getElementById('demo-notice').style.display = 'flex';
+                stats = [
+                    { date: '2026-05-20', score: 18, total: 30, speed: 22, subject: 'diritto', correct: 3, totalQuestions: 5 },
+                    { date: '2026-05-21', score: 22, total: 30, speed: 18, subject: 'arte', correct: 4, totalQuestions: 5 },
+                    { date: '2026-05-22', score: 20, total: 30, speed: 19, subject: 'diritto', correct: 3, totalQuestions: 5 },
+                    { date: '2026-05-24', score: 26, total: 30, speed: 14, subject: 'romana', correct: 4, totalQuestions: 5 },
+                    { date: '2026-05-25', score: 28, total: 30, speed: 12, subject: 'arte', correct: 5, totalQuestions: 5 },
+                    { date: '2026-05-26', score: 30, total: 30, speed: 10, subject: 'romana', correct: 5, totalQuestions: 5 }
+                ];
+            }
+
+            // Calculate Metrics
+            const totalSessions = stats.length;
+            const avgScore = (stats.reduce((acc, curr) => acc + curr.score, 0) / totalSessions).toFixed(1);
+            const avgSpeed = Math.round(stats.reduce((acc, curr) => acc + curr.speed, 0) / totalSessions);
+            
+            let totalCorrect = stats.reduce((acc, curr) => acc + (curr.correct || 0), 0);
+            let totalQ = stats.reduce((acc, curr) => acc + (curr.totalQuestions || 5), 0);
+            const completionRate = Math.round((totalCorrect / totalQ) * 100);
+
+            // Update DOM metrics
+            document.getElementById('metric-sessions').textContent = isDemo ? '0' : totalSessions;
+            document.getElementById('metric-avg-score').textContent = avgScore;
+            document.getElementById('metric-speed').textContent = `${avgSpeed}s`;
+            document.getElementById('metric-completion').textContent = `${completionRate}%`;
+
+            // Subject metrics aggregation
+            const subjects = {
+                diritto: { scoreSum: 0, speedSum: 0, count: 0 },
+                arte: { scoreSum: 0, speedSum: 0, count: 0 },
+                romana: { scoreSum: 0, speedSum: 0, count: 0 }
+            };
+
+            stats.forEach(s => {
+                const sub = s.subject || 'diritto';
+                if (subjects[sub]) {
+                    subjects[sub].scoreSum += s.score;
+                    subjects[sub].speedSum += s.speed;
+                    subjects[sub].count++;
+                }
+            });
+
+            // Set Chart Defaults for Dark Theme
+            Chart.defaults.color = '#9ca3af';
+            Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.08)';
+            Chart.defaults.font.family = "'Inter', sans-serif";
+
+            // 1. PROGRESS CHART (Line)
+            const ctxProgress = document.getElementById('progressChart').getContext('2d');
+            new Chart(ctxProgress, {
+                type: 'line',
+                data: {
+                    labels: stats.map((s, idx) => `Sessione ${idx + 1}`),
+                    datasets: [{
+                        label: 'Voto Conseguito (Trentesimi)',
+                        data: stats.map(s => s.score),
+                        borderColor: '#d4af37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#d4af37'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 30,
+                            ticks: { stepSize: 5 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // 2. SUBJECT PREPARATION CHART (Radar)
+            const ctxSubject = document.getElementById('subjectChart').getContext('2d');
+            const dataSubject = [
+                subjects.diritto.count > 0 ? (subjects.diritto.scoreSum / subjects.diritto.count) : 0,
+                subjects.arte.count > 0 ? (subjects.arte.scoreSum / subjects.arte.count) : 0,
+                subjects.romana.count > 0 ? (subjects.romana.scoreSum / subjects.romana.count) : 0
+            ];
+
+            new Chart(ctxSubject, {
+                type: 'radar',
+                data: {
+                    labels: ['Diritto dei Beni Culturali', 'Storia dell\'Arte Moderna', 'Arte Romana'],
+                    datasets: [{
+                        label: 'Voto Medio',
+                        data: dataSubject,
+                        backgroundColor: 'rgba(200, 90, 50, 0.2)',
+                        borderColor: '#c85a32',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#c85a32'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 30,
+                            ticks: {
+                                display: false,
+                                stepSize: 10
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.08)'
+                            },
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.08)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // 3. RESPONSE SPEED CHART (Bar)
+            const ctxSpeed = document.getElementById('speedChart').getContext('2d');
+            const dataSpeed = [
+                subjects.diritto.count > 0 ? Math.round(subjects.diritto.speedSum / subjects.diritto.count) : 0,
+                subjects.arte.count > 0 ? Math.round(subjects.arte.speedSum / subjects.arte.count) : 0,
+                subjects.romana.count > 0 ? Math.round(subjects.romana.speedSum / subjects.romana.count) : 0
+            ];
+
+            new Chart(ctxSpeed, {
+                type: 'bar',
+                data: {
+                    labels: ['Diritto', 'Arte Moderna', 'Arte Romana'],
+                    datasets: [{
+                        label: 'Tempo Medio (s)',
+                        data: dataSpeed,
+                        backgroundColor: [
+                            'rgba(212, 175, 55, 0.6)', // Gold
+                            'rgba(200, 90, 50, 0.6)',  // Terracotta
+                            'rgba(169, 50, 38, 0.6)'   // Pompeian Red
+                        ],
+                        borderColor: [
+                            '#d4af37',
+                            '#c85a32',
+                            '#a93226'
+                        ],
+                        borderWidth: 1.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            ticks: { stepSize: 5 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

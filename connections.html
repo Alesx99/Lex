@@ -243,6 +243,111 @@
                 display: none; /* Hide lines on mobile layout as columns stack */
             }
         }
+
+        /* Style for custom connections line */
+        .connection-line.custom-link {
+            stroke: #06b6d4;
+            stroke-width: 2.5;
+            stroke-dasharray: 5 4;
+            filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.6));
+            opacity: 0.7;
+        }
+
+        .connection-line.custom-link.highlighted-custom {
+            stroke: #22d3ee;
+            stroke-width: 5;
+            stroke-dasharray: none;
+            filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.9));
+            opacity: 1;
+        }
+
+        /* Edit Mode Controls floating bar */
+        .edit-mode-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .edit-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .edit-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .edit-btn.active-edit {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: #06b6d4;
+            color: #22d3ee;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.25);
+        }
+
+        /* Edit mode active notification banner */
+        .edit-banner {
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            color: #22d3ee;
+            border-radius: 12px;
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        /* Pulsing source node indicator */
+        .source-node-selection {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4) !important;
+            animation: pulseCyan 1.5s infinite;
+        }
+
+        @keyframes pulseCyan {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Delete connection button */
+        .delete-conn-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+            margin-top: 0.8rem;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .delete-conn-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
     </style>
 </head>
 <body>
@@ -292,6 +397,20 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             Torna alla Home
         </a>
+
+        <!-- Mode Controls floating bar -->
+        <div class="edit-mode-controls">
+            <button id="toggle-edit-mode-btn" class="edit-btn" onclick="toggleEditMode()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Personalizza Relazioni
+            </button>
+        </div>
+
+        <!-- Edit active banner notifications -->
+        <div id="edit-mode-banner" class="edit-banner" style="display: none;">
+            <span id="edit-banner-text"><strong>Modalità Personalizzazione Relazioni Attiva:</strong> Clicca sul primo capitolo (partenza), poi clicca sul secondo capitolo (arrivo) per creare un collegamento.</span>
+            <button class="btn btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.8rem; background: rgba(255,255,255,0.05); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.4);" onclick="toggleEditMode()">Disattiva</button>
+        </div>
 
         <!-- Explanatory Panel -->
         <div class="info-panel" id="explanatory-panel">
@@ -595,15 +714,150 @@
             const infoTitle = document.getElementById('info-title');
             const infoText = document.getElementById('info-text');
 
+            // Custom connections state
+            window.customConnections = [];
+            window.allConnections = [];
+
+            // Load custom connections
+            function loadCustomConnections() {
+                try {
+                    const stored = localStorage.getItem('lex-custom-connections');
+                    if (stored) {
+                        window.customConnections = JSON.parse(stored);
+                    }
+                } catch(e) {
+                    console.error("Errore lettura connessioni personalizzate:", e);
+                }
+                window.allConnections = [...crossConnections, ...window.customConnections];
+            }
+
+            loadCustomConnections();
+
+            // Toggle Edit mode variables
+            window.isEditMode = false;
+            window.selectedStartNode = null;
+            let pendingFromId = '';
+            let pendingToId = '';
+
+            window.toggleEditMode = function() {
+                window.isEditMode = !window.isEditMode;
+                const btn = document.getElementById('toggle-edit-mode-btn');
+                const banner = document.getElementById('edit-mode-banner');
+                
+                if (window.selectedStartNode) {
+                    const prev = document.getElementById(window.selectedStartNode);
+                    if (prev) prev.classList.remove('source-node-selection');
+                    window.selectedStartNode = null;
+                }
+                
+                if (window.isEditMode) {
+                    btn.classList.add('active-edit');
+                    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Esci da Modifica`;
+                    banner.style.display = 'flex';
+                    document.getElementById('edit-banner-text').innerHTML = `<strong>Modalità Personalizzazione Relazioni Attiva:</strong> Clicca sul primo capitolo (partenza), poi clicca sul secondo capitolo (arrivo) per creare un collegamento.`;
+                } else {
+                    btn.classList.remove('active-edit');
+                    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Personalizza Relazioni`;
+                    banner.style.display = 'none';
+                }
+            };
+
+            function handleNodeClickInEditMode(node) {
+                const nodeId = node.id;
+                
+                if (!window.selectedStartNode) {
+                    window.selectedStartNode = nodeId;
+                    node.classList.add('source-node-selection');
+                    
+                    const nodeNum = node.querySelector('.node-header span').textContent;
+                    const nodeTitle = node.querySelector('.node-title').textContent;
+                    
+                    document.getElementById('edit-banner-text').innerHTML = `<strong>Partenza selezionata:</strong> ${nodeNum} - ${nodeTitle}. Clicca ora sul capitolo di destinazione per collegarli.`;
+                } else {
+                    if (window.selectedStartNode === nodeId) {
+                        node.classList.remove('source-node-selection');
+                        window.selectedStartNode = null;
+                        document.getElementById('edit-banner-text').innerHTML = `<strong>Modalità Personalizzazione Relazioni Attiva:</strong> Clicca sul primo capitolo (partenza), poi clicca sul secondo capitolo (arrivo).`;
+                        return;
+                    }
+                    
+                    pendingFromId = window.selectedStartNode;
+                    pendingToId = nodeId;
+                    
+                    const fromNode = document.getElementById(pendingFromId);
+                    const toNode = document.getElementById(pendingToId);
+                    const fromTitle = fromNode.querySelector('.node-title').textContent;
+                    const toTitle = toNode.querySelector('.node-title').textContent;
+                    
+                    document.getElementById('modal-conn-subtitle').textContent = `Creazione di un nesso tra: "${fromTitle}" e "${toTitle}"`;
+                    document.getElementById('custom-conn-title-input').value = `${fromTitle} ⇄ ${toTitle}`;
+                    document.getElementById('custom-conn-desc-input').value = '';
+                    
+                    document.getElementById('custom-conn-modal').style.display = 'flex';
+                    
+                    fromNode.classList.remove('source-node-selection');
+                    window.selectedStartNode = null;
+                    document.getElementById('edit-banner-text').innerHTML = `<strong>Modalità Personalizzazione Relazioni Attiva:</strong> Clicca sul primo capitolo (partenza), poi clicca sul secondo capitolo (arrivo).`;
+                }
+            }
+
+            window.closeCustomConnModal = function() {
+                document.getElementById('custom-conn-modal').style.display = 'none';
+                pendingFromId = '';
+                pendingToId = '';
+            };
+
+            window.saveCustomConnection = function() {
+                const title = document.getElementById('custom-conn-title-input').value.trim();
+                const desc = document.getElementById('custom-conn-desc-input').value.trim();
+                
+                if (!title || !desc) {
+                    alert("Titolo e descrizione sono obbligatori per salvare una relazione.");
+                    return;
+                }
+                
+                const newConn = {
+                    from: pendingFromId,
+                    to: pendingToId,
+                    title: title,
+                    description: desc,
+                    isCustom: true
+                };
+                
+                window.customConnections.push(newConn);
+                localStorage.setItem('lex-custom-connections', JSON.stringify(window.customConnections));
+                
+                window.allConnections.push(newConn);
+                drawLines();
+                window.closeCustomConnModal();
+                window.toggleEditMode();
+            };
+
+            window.deleteCustomConnection = function(fromId, toId) {
+                if (confirm("Sei sicuro di voler eliminare questo collegamento personalizzato?")) {
+                    window.customConnections = window.customConnections.filter(c => !(c.from === fromId && c.to === toId));
+                    localStorage.setItem('lex-custom-connections', JSON.stringify(window.customConnections));
+                    
+                    const index = window.allConnections.findIndex(c => c.from === fromId && c.to === toId && c.isCustom);
+                    if (index !== -1) {
+                        window.allConnections.splice(index, 1);
+                    }
+                    
+                    drawLines();
+                    
+                    expPlaceholder.style.display = 'block';
+                    expContent.style.display = 'none';
+                }
+            };
+
             // Draw SVG connection lines
             function drawLines() {
-                svg.innerHTML = ''; // clear previous lines
-                if (window.innerWidth <= 1200) return; // Column layout on mobile, no lines needed
+                svg.innerHTML = ''; 
+                if (window.innerWidth <= 1200) return; 
 
                 const svgRect = svg.getBoundingClientRect();
 
-                // Draw general connections
-                crossConnections.forEach(conn => {
+                window.allConnections.forEach(conn => {
                     const fromEl = document.getElementById(conn.from);
                     const toEl = document.getElementById(conn.to);
 
@@ -611,28 +865,27 @@
                         const fromRect = fromEl.getBoundingClientRect();
                         const toRect = toEl.getBoundingClientRect();
 
-                        // Calculate points relative to SVG canvas dynamically
                         let x1, x2;
                         if (fromRect.left + fromRect.width / 2 < toRect.left + toRect.width / 2) {
-                            // from is to the left of to
                             x1 = fromRect.right - svgRect.left;
                             x2 = toRect.left - svgRect.left;
                         } else {
-                            // from is to the right of to
                             x1 = fromRect.left - svgRect.left;
                             x2 = toRect.right - svgRect.left;
                         }
                         const y1 = fromRect.top + (fromRect.height / 2) - svgRect.top;
                         const y2 = toRect.top + (toRect.height / 2) - svgRect.top;
 
-                        // Create path
                         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                        // Curved bezier path
                         const controlOffset = (x2 - x1) / 2;
                         const d = `M ${x1} ${y1} C ${x1 + controlOffset} ${y1}, ${x2 - controlOffset} ${y2}, ${x2} ${y2}`;
                         
                         path.setAttribute('d', d);
-                        path.setAttribute('class', 'connection-line cross-link');
+                        if (conn.isCustom) {
+                            path.setAttribute('class', 'connection-line custom-link');
+                        } else {
+                            path.setAttribute('class', 'connection-line cross-link');
+                        }
                         path.setAttribute('id', `line-${conn.from}-${conn.to}`);
                         svg.appendChild(path);
                     }
@@ -643,25 +896,24 @@
             nodes.forEach(node => {
                 node.addEventListener('mouseenter', () => {
                     const nodeId = node.id;
-                    const isDiritto = nodeId.startsWith('diritto');
-
-                    // Check if node has cross connections
-                    const activeConnections = crossConnections.filter(c => c.from === nodeId || c.to === nodeId);
+                    const activeConnections = window.allConnections.filter(c => c.from === nodeId || c.to === nodeId);
 
                     if (activeConnections.length > 0) {
-                        // Highlight lines and connected nodes
                         activeConnections.forEach(conn => {
                             const line = document.getElementById(`line-${conn.from}-${conn.to}`);
                             if (line) {
-                                line.classList.add('highlighted');
-                                if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
-                                    line.classList.add('highlighted-romana');
-                                } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
-                                    line.classList.add('highlighted-arte');
+                                if (conn.isCustom) {
+                                    line.classList.add('highlighted-custom');
+                                } else {
+                                    line.classList.add('highlighted');
+                                    if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                                        line.classList.add('highlighted-romana');
+                                    } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
+                                        line.classList.add('highlighted-arte');
+                                    }
                                 }
                             }
 
-                            // Highlight the other node
                             const otherNodeId = conn.from === nodeId ? conn.to : conn.from;
                             const otherNode = document.getElementById(otherNodeId);
                             if (otherNode) {
@@ -669,23 +921,28 @@
                             }
                         });
 
-                        // Populate Explanatory Panel (take first connection as primary)
                         const primary = activeConnections[0];
                         expPlaceholder.style.display = 'none';
                         expContent.style.display = 'block';
                         infoTitle.textContent = primary.title;
-                        infoText.textContent = primary.description;
                         
-                        // Color styling for title based on source
-                        if (nodeId.startsWith('diritto')) {
-                            infoTitle.style.color = 'var(--accent-gold)';
-                        } else if (nodeId.startsWith('romana')) {
-                            infoTitle.style.color = 'var(--accent-romana)';
+                        if (primary.isCustom) {
+                            infoTitle.style.color = '#22d3ee'; 
+                            infoText.innerHTML = `${primary.description}<br><button class="delete-conn-btn" onclick="deleteCustomConnection('${primary.from}', '${primary.to}')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle; margin-right:3px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                Elimina Collegamento
+                            </button>`;
                         } else {
-                            infoTitle.style.color = 'var(--accent-terracotta)';
+                            infoText.textContent = primary.description;
+                            if (nodeId.startsWith('diritto')) {
+                                infoTitle.style.color = 'var(--accent-gold)';
+                            } else if (nodeId.startsWith('romana')) {
+                                infoTitle.style.color = 'var(--accent-romana)';
+                            } else {
+                                infoTitle.style.color = 'var(--accent-terracotta)';
+                            }
                         }
                     } else {
-                        // Node has no connections defined yet
                         const nodeNum = node.querySelector('.node-header span').textContent;
                         const nodeTitleText = node.querySelector('.node-title').textContent;
                         expPlaceholder.style.display = 'none';
@@ -697,34 +954,55 @@
                 });
 
                 node.addEventListener('mouseleave', () => {
-                    // Reset all classes
                     document.querySelectorAll('.connection-line').forEach(l => {
-                        l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana');
+                        l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-custom');
                     });
                     document.querySelectorAll('.node-card').forEach(n => {
                         n.classList.remove('active-node');
                     });
 
-                    // Reset panel
                     expPlaceholder.style.display = 'block';
                     expContent.style.display = 'none';
                 });
 
-                // Link to page on click
                 node.addEventListener('click', () => {
-                    const dest = node.getAttribute('data-path');
-                    if (dest) {
-                        window.location.href = dest;
+                    if (window.isEditMode) {
+                        handleNodeClickInEditMode(node);
+                    } else {
+                        const dest = node.getAttribute('data-path');
+                        if (dest) {
+                            window.location.href = dest;
+                        }
                     }
                 });
             });
 
-            // Handle redraw on resize
             window.addEventListener('resize', drawLines);
-
-            // Initial draw
             setTimeout(drawLines, 200);
         });
     </script>
+
+    <!-- Glassmorphic Modal for Creating Custom Connection -->
+    <div id="custom-conn-modal" class="modal" style="display: none; align-items:center; justify-content:center; z-index: 10000; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(8,11,17,0.75); backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px);">
+        <div class="modal-content" style="max-width: 500px; width: 90%; background:rgba(22,28,45,0.9); border:1px solid var(--border-color); border-radius:20px; padding:2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.5);">
+            <h3 style="font-family: var(--font-serif); font-size:1.5rem; color:var(--accent-gold); margin-bottom:1rem;" id="modal-conn-title">Nuovo Collegamento Interdisciplinare</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;" id="modal-conn-subtitle">Crea una relazione tra i due capitoli selezionati.</p>
+            
+            <div class="form-group" style="margin-bottom:1.2rem;">
+                <label class="form-label" style="font-size:0.8rem; text-transform:uppercase; font-weight:600; color:var(--text-primary);">Titolo del Collegamento</label>
+                <input type="text" id="custom-conn-title-input" class="form-input-number" style="width:100%; padding:0.8rem; margin-top:0.4rem; background:rgba(10,15,28,0.8); border:1px solid var(--border-color); border-radius:8px; color:var(--text-primary);" placeholder="es. Mecenatismo ⇄ Liberalità Art Bonus">
+            </div>
+            
+            <div class="form-group" style="margin-bottom:1.5rem;">
+                <label class="form-label" style="font-size:0.8rem; text-transform:uppercase; font-weight:600; color:var(--text-primary);">Descrizione Accademica / Relazione</label>
+                <textarea id="custom-conn-desc-input" rows="4" style="width:100%; padding:0.8rem; margin-top:0.4rem; background:rgba(10,15,28,0.8); border:1px solid var(--border-color); border-radius:8px; color:var(--text-primary); font-family:inherit; resize:vertical; line-height:1.4;" placeholder="Descrivi il nesso logico, giuridico o storico che unisce questi due capitoli..."></textarea>
+            </div>
+            
+            <div style="display:flex; justify-content:flex-end; gap:1rem;">
+                <button class="btn btn-secondary" onclick="closeCustomConnModal()">Annulla</button>
+                <button class="btn btn-primary" onclick="saveCustomConnection()">Salva Collegamento</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

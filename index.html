@@ -254,43 +254,184 @@
                 threshold: 0.4
             });
 
+            // Global Cache for fetched markdown files
+            const mdCache = {};
+
+            function getFetchUrlFromNavPath(navPath) {
+                const match = navPath.match(/^([^/]+)\/index\.html\?open=(.+)$/);
+                return match ? `${match[1]}/${match[2]}` : null;
+            }
+
+            function escapeRegExp(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            async function searchFullText(query) {
+                const queryWords = query.split(/\s+/).filter(w => w.length > 1);
+                if (queryWords.length === 0) return [];
+                
+                const regex = new RegExp(`(${queryWords.map(escapeRegExp).join('|')})`, 'gi');
+                const matches = [];
+                
+                const fetchPromises = searchDatabase.map(async (item) => {
+                    const url = getFetchUrlFromNavPath(item.navPath);
+                    if (!url) return;
+                    
+                    try {
+                        let text = mdCache[url];
+                        if (!text) {
+                            const res = await fetch(url);
+                            if (res.ok) {
+                                text = await res.text();
+                                mdCache[url] = text;
+                            }
+                        }
+                        
+                        if (text) {
+                            const blocks = text.split(/\n+/).map(b => b.trim()).filter(b => b.length > 0);
+                            
+                            for (let block of blocks) {
+                                if (block.startsWith('#') || block.startsWith('---') || block.startsWith('**')) continue;
+                                
+                                if (regex.test(block)) {
+                                    let cleanBlock = block
+                                        .replace(/^[*+-]\s+/, '')
+                                        .replace(/^\d+\.\s+/, '')
+                                        .replace(/\*\*/g, '')
+                                        .replace(/_/g, '')
+                                        .trim();
+                                        
+                                    const highlighted = cleanBlock.replace(regex, '<mark>$1</mark>');
+                                    
+                                    matches.push({
+                                        item: item,
+                                        snippet: highlighted
+                                    });
+                                    break; // one match per chapter is enough
+                                }
+                            }
+                        }
+                    } catch(e) {
+                        console.error("Errore fetch fulltext:", url, e);
+                    }
+                });
+                
+                await Promise.all(fetchPromises);
+                return matches;
+            }
+
+            let searchTimeout = null;
+
             searchBox.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase().trim();
+                
+                if (searchTimeout) clearTimeout(searchTimeout);
+                
                 if (query.length < 2) {
                     overlay.style.display = 'none';
                     resultsList.innerHTML = '';
                     return;
                 }
 
-                const results = fuse.search(query).map(r => r.item);
+                // Debounce search slightly to avoid excessive UI updates on typing
+                searchTimeout = setTimeout(async () => {
+                    const results = fuse.search(query).map(r => r.item);
 
-                // Render results
-                resultsList.innerHTML = '';
-                if (results.length === 0) {
-                    countText.textContent = 'Nessun risultato trovato';
-                    resultsList.innerHTML = `<div class="no-results-msg">Nessun capitolo o sintesi corrispondente alla ricerca. Prova altri termini (es. "demanio", "Canova").</div>`;
-                } else {
-                    countText.textContent = `${results.length} risultat${results.length === 1 ? 'o' : 'i'} trovator${results.length === 1 ? 'o' : 'i'}`;
-                    results.forEach(item => {
-                        const resultCard = document.createElement('a');
-                        resultCard.href = item.navPath;
-                        resultCard.className = `result-item-card ${item.subject === 'diritto' ? 'diritto-result' : 'arte-result'}`;
+                    resultsList.innerHTML = '';
+                    overlay.style.display = 'block';
+
+                    if (results.length === 0) {
+                        // Trigger async full-text fallback search
+                        resultsList.innerHTML = `<div class="no-results-msg" id="fulltext-loader">
+                            <span class="spinner" style="display:inline-block; width:12px; height:12px; border:2px solid rgba(255,255,255,0.1); border-top-color:var(--accent-gold); border-radius:50%; animation:spin 1s infinite linear; margin-right:8px; vertical-align:middle;"></span>
+                            Nessun capitolo trovato. Ricerca nel testo integrale delle sintesi in corso...
+                        </div>`;
                         
-                        const badgeClass = item.subject === 'diritto' ? 'badge-diritto' : 'badge-arte';
-                        const subjectName = item.subject === 'diritto' ? 'Diritto' : 'Arte';
+                        // Add CSS for spinner on the fly if needed
+                        if (!document.getElementById('spinner-style-index')) {
+                            const s = document.createElement('style');
+                            s.id = 'spinner-style-index';
+                            s.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+                            document.head.appendChild(s);
+                        }
 
-                        resultCard.innerHTML = `
-                            <div class="result-meta">
-                                <span class="result-badge ${badgeClass}">${subjectName}</span>
-                                <span class="result-chapter">${item.chapterTag}</span>
-                            </div>
-                            <h4 class="result-title">${item.title}</h4>
-                            <p class="result-desc">${item.description}</p>
-                        `;
-                        resultsList.appendChild(resultCard);
-                    });
-                }
-                overlay.style.display = 'block';
+                        const fullTextMatches = await searchFullText(query);
+                        const loader = document.getElementById('fulltext-loader');
+                        if (loader) loader.remove();
+
+                        if (fullTextMatches.length === 0) {
+                            countText.textContent = 'Nessun risultato trovato';
+                            resultsList.innerHTML = `<div class="no-results-msg">Nessun capitolo o testo corrispondente alla ricerca. Prova altri termini (es. "demanio", "Canova").</div>`;
+                        } else {
+                            countText.textContent = `${fullTextMatches.length} risultat${fullTextMatches.length === 1 ? 'o' : 'i'} nel testo integrale`;
+                            fullTextMatches.forEach(match => {
+                                const item = match.item;
+                                const resultCard = document.createElement('a');
+                                resultCard.href = item.navPath;
+                                
+                                let resultClass = 'arte-result';
+                                let badgeClass = 'badge-arte';
+                                let subjectName = 'Arte Moderna';
+                                
+                                if (item.subject === 'diritto') {
+                                    resultClass = 'diritto-result';
+                                    badgeClass = 'badge-diritto';
+                                    subjectName = 'Diritto';
+                                } else if (item.subject === 'arte_romana') {
+                                    resultClass = 'romana-result';
+                                    badgeClass = 'badge-romana';
+                                    subjectName = 'Arte Romana';
+                                }
+
+                                resultCard.className = `result-item-card ${resultClass}`;
+                                resultCard.innerHTML = `
+                                    <div class="result-meta">
+                                        <span class="result-badge ${badgeClass}">${subjectName}</span>
+                                        <span class="result-chapter">${item.chapterTag}</span>
+                                        <span class="result-badge" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.25);">Corrispondenza Testo</span>
+                                    </div>
+                                    <h4 class="result-title">${item.title}</h4>
+                                    <p class="result-desc" style="font-size:0.9rem; color: var(--text-primary); background: rgba(255,255,255,0.02); padding: 0.8rem; border-radius: 8px; border-left: 2px solid #8b5cf6; margin-top:0.5rem; line-height:1.4;">
+                                        ...${match.snippet}...
+                                    </p>
+                                `;
+                                resultsList.appendChild(resultCard);
+                            });
+                        }
+                    } else {
+                        // Render direct database search results
+                        countText.textContent = `${results.length} risultat${results.length === 1 ? 'o' : 'i'} trovator${results.length === 1 ? 'o' : 'i'}`;
+                        results.forEach(item => {
+                            const resultCard = document.createElement('a');
+                            resultCard.href = item.navPath;
+                            
+                            let resultClass = 'arte-result';
+                            let badgeClass = 'badge-arte';
+                            let subjectName = 'Arte Moderna';
+                            
+                            if (item.subject === 'diritto') {
+                                resultClass = 'diritto-result';
+                                badgeClass = 'badge-diritto';
+                                subjectName = 'Diritto';
+                            } else if (item.subject === 'arte_romana') {
+                                resultClass = 'romana-result';
+                                badgeClass = 'badge-romana';
+                                subjectName = 'Arte Romana';
+                            }
+
+                            resultCard.className = `result-item-card ${resultClass}`;
+                            resultCard.innerHTML = `
+                                <div class="result-meta">
+                                    <span class="result-badge ${badgeClass}">${subjectName}</span>
+                                    <span class="result-chapter">${item.chapterTag}</span>
+                                </div>
+                                <h4 class="result-title">${item.title}</h4>
+                                <p class="result-desc">${item.description}</p>
+                            `;
+                            resultsList.appendChild(resultCard);
+                        });
+                    }
+                }, 200);
             });
 
             closeBtn.addEventListener('click', () => {

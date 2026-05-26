@@ -462,6 +462,292 @@
                 gap: 1rem;
             }
         }
+
+        /* Tabs for selecting Exam Mode */
+        .exam-mode-tabs {
+            display: flex;
+            background: rgba(10, 15, 28, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b29024 100%);
+            color: #080b11;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Professor speech bubble layout */
+        .professor-avatar-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .professor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+            flex-shrink: 0;
+        }
+
+        .professor-avatar svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .professor-speech-bubble {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.5;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .professor-speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 24px;
+            width: 15px;
+            height: 15px;
+            background: rgba(22, 28, 45, 0.5);
+            border-left: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transform: rotate(45deg);
+        }
+
+        .tts-small-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .tts-small-btn:hover {
+            background: var(--accent-gold);
+            color: #080b11;
+            border-color: var(--accent-gold);
+        }
+
+        /* Microphone dictation button */
+        .mic-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .mic-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .mic-btn.listening {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+            color: #ef4444;
+            animation: pulseMic 1.5s infinite;
+        }
+
+        @keyframes pulseMic {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .oral-textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(10, 15, 28, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            line-height: 1.5;
+            outline: none;
+            resize: vertical;
+            transition: border-color var(--transition-speed) ease;
+            margin-top: 0.8rem;
+        }
+
+        .oral-textarea:focus {
+            border-color: var(--accent-gold);
+        }
+
+        /* Evaluation layout details */
+        .examiner-feedback-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+
+        .concepts-evaluation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .concepts-evaluation-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .concepts-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .concepts-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concepts-header.cited {
+            color: var(--accent-green);
+        }
+
+        .concepts-header.missing {
+            color: #ef4444;
+        }
+
+        .concepts-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .concepts-list li {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Loading model progress styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(8, 11, 17, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-box {
+            max-width: 450px;
+            width: 90%;
+            background: rgba(22, 28, 45, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .spinner-glow {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(212, 175, 55, 0.1);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 99px;
+            overflow: hidden;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b29024 100%);
+            transition: width 0.1s ease;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
@@ -516,45 +802,101 @@
             
             <!-- STEP 1: EXAM SETUP CONFIG SCREEN -->
             <div id="setup-screen" class="config-card" style="display: block;">
-                <h2 class="config-title">Configura la Sessione d'Esame</h2>
-                <p class="config-subtitle">Crea una simulazione d'esame personalizzata. Verranno estratti quesiti casuali dal pool multidisciplinare accademico, con timer opzionale e report diagnostico finale.</p>
-                
-                <div class="form-group">
-                    <label class="form-label">Materie d'Esame</label>
-                    <select id="exam-subject-select" class="form-select" onchange="updateMaxQuestions()">
-                        <option value="misto">Misto (Diritto, Arte Moderna e Arte Romana — Max 160 domande)</option>
-                        <option value="diritto">Solo Diritto dei Beni Culturali (Max 60 domande)</option>
-                        <option value="arte">Solo Storia dell'Arte Moderna (Max 50 domande)</option>
-                        <option value="arte_romana">Solo Arte Romana (Max 50 domande)</option>
-                    </select>
+                <!-- Mode Toggle Tabs -->
+                <div class="exam-mode-tabs">
+                    <button id="tab-quiz" class="tab-btn active" onclick="switchExamMode('quiz')">Test Scritto (Quiz)</button>
+                    <button id="tab-oral" class="tab-btn" onclick="switchExamMode('oral')">Colloquio Orale (IA)</button>
                 </div>
 
-                <div class="form-row-grid">
+                <div id="quiz-config-fields" style="display: block;">
+                    <h2 class="config-title">Configura la Sessione d'Esame</h2>
+                    <p class="config-subtitle">Crea una simulazione d'esame personalizzata. Verranno estratti quesiti casuali dal pool multidisciplinare accademico, con timer opzionale e report diagnostico finale.</p>
+                    
                     <div class="form-group">
-                        <label class="form-label">Numero di Domande</label>
-                        <select id="exam-count-select" class="form-select" onchange="toggleCustomCount()">
-                            <option value="10">10 Domande (Consigliato rapido)</option>
-                            <option value="20">20 Domande (Consigliato standard)</option>
-                            <option value="30">30 Domande (Dettagliato)</option>
-                            <option value="custom">Numero Personalizzato...</option>
+                        <label class="form-label">Materie d'Esame</label>
+                        <select id="exam-subject-select" class="form-select" onchange="updateMaxQuestions()">
+                            <option value="misto">Misto (Diritto, Arte Moderna e Arte Romana — Max 160 domande)</option>
+                            <option value="diritto">Solo Diritto dei Beni Culturali (Max 60 domande)</option>
+                            <option value="arte">Solo Storia dell'Arte Moderna (Max 50 domande)</option>
+                            <option value="arte_romana">Solo Arte Romana (Max 50 domande)</option>
                         </select>
-                        <div class="custom-count-wrapper" id="custom-count-wrapper">
-                            <input type="number" id="exam-custom-count-input" class="form-input-number" min="1" max="160" value="15" placeholder="Inserisci quantità...">
+                    </div>
+
+                    <div class="form-row-grid">
+                        <div class="form-group">
+                            <label class="form-label">Numero di Domande</label>
+                            <select id="exam-count-select" class="form-select" onchange="toggleCustomCount()">
+                                <option value="10">10 Domande (Consigliato rapido)</option>
+                                <option value="20">20 Domande (Consigliato standard)</option>
+                                <option value="30">30 Domande (Dettagliato)</option>
+                                <option value="custom">Numero Personalizzato...</option>
+                            </select>
+                            <div class="custom-count-wrapper" id="custom-count-wrapper">
+                                <input type="number" id="exam-custom-count-input" class="form-input-number" min="1" max="160" value="15" placeholder="Inserisci quantità...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Tempo per Domanda</label>
+                            <select id="exam-timer-select" class="form-select">
+                                <option value="60">1 Minuto a domanda (Accademico)</option>
+                                <option value="30">30 Secondi a domanda (Sfida rapida)</option>
+                                <option value="120">2 Minuti a domanda (Lento)</option>
+                                <option value="0">Senza Limiti di Tempo</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Tempo per Domanda</label>
-                        <select id="exam-timer-select" class="form-select">
-                            <option value="60">1 Minuto a domanda (Accademico)</option>
-                            <option value="30">30 Secondi a domanda (Sfida rapida)</option>
-                            <option value="120">2 Minuti a domanda (Lento)</option>
-                            <option value="0">Senza Limiti di Tempo</option>
-                        </select>
-                    </div>
+                    <button class="btn-start-exam" onclick="startExam()">Inizia la Simulazione d'Esame</button>
                 </div>
 
-                <button class="btn-start-exam" onclick="startExam()">Inizia la Simulazione d'Esame</button>
+                <div id="oral-config-fields" style="display: none;">
+                    <h2 class="config-title">Colloquio Orale con IA</h2>
+                    <p class="config-subtitle">Simula un esame orale accademico. L'intelligenza artificiale interrogherà e valuterà le tue risposte in base ai concetti chiave delle sintesi, evidenziando lacune e assegnando un voto.</p>
+
+                    <div class="form-row-grid">
+                        <div class="form-group">
+                            <label class="form-label">Materia d'Esame</label>
+                            <select id="oral-subject-select" class="form-select" onchange="populateOralChapters()">
+                                <option value="diritto">Diritto dei Beni Culturali</option>
+                                <option value="arte">Storia dell'Arte Moderna</option>
+                                <option value="arte_romana">Arte Romana</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Capitolo da Discutere</label>
+                            <select id="oral-chapter-select" class="form-select">
+                                <option value="random">Casuale (Tutti i capitoli)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row-grid">
+                        <div class="form-group">
+                            <label class="form-label">Motore IA di Valutazione</label>
+                            <select id="oral-ai-engine" class="form-select" onchange="toggleOralEngineFields()">
+                                <option value="local">IA Locale (Offline - all-MiniLM-L6-v2 ~90MB)</option>
+                                <option value="gemini">Gemini API (Cloud - Richiede Chiave API)</option>
+                                <option value="ollama">Ollama (Locale - default port 11434)</option>
+                                <option value="lmstudio">LM Studio (Locale - default port 12345)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="oral-credentials-group" style="display: none;">
+                            <label class="form-label" id="oral-credentials-label">Chiave API Gemini</label>
+                            <input type="password" id="oral-ai-key" class="form-input-number" style="font-family: monospace;" placeholder="Inserisci credenziali...">
+                            <div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="oral-save-key-checkbox" checked>
+                                <label for="oral-save-key-checkbox" style="font-size: 0.75rem; color: var(--text-muted); cursor: pointer; user-select: none;">Salva credenziali su questo dispositivo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-start-exam" onclick="startOralExam()">Avvia Colloquio Orale</button>
+                </div>
+
+                <a href="analytics.html" class="btn-start-exam" style="margin-top: 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); text-align: center; display: block; text-decoration: none; line-height: 1.2; box-shadow: none;">Visualizza Statistiche di Preparazione</a>
             </div>
 
             <!-- STEP 2: ACTIVE QUESTION SCREEN -->
@@ -581,6 +923,51 @@
                 <div class="exam-footer-actions">
                     <button class="btn btn-secondary" onclick="confirmExitExam()">Abbandona</button>
                     <button class="btn btn-primary" id="exam-next-btn" onclick="submitAnswer()">Invia e Continua</button>
+                </div>
+            </div>
+
+            <!-- STEP 2B: ACTIVE ORAL QUESTION SCREEN -->
+            <div id="oral-active-screen" class="exam-active-card" style="display: none;">
+                <div class="exam-header">
+                    <span class="exam-meta" id="oral-subject-tag">Colloquio Orale</span>
+                    <span class="exam-meta" id="oral-chapter-tag">Capitolo</span>
+                </div>
+
+                <div class="professor-avatar-container" style="margin-top: 1.5rem;">
+                    <div class="professor-avatar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div class="professor-speech-bubble">
+                        <p id="oral-question-text">Il Professore sta preparando la domanda...</p>
+                        <button id="oral-question-tts-btn" class="tts-small-btn" title="Ascolta domanda" onclick="speakOralQuestion()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="oral-answer-container" style="margin-top: 2rem;">
+                    <label class="form-label" style="display:flex; justify-content:space-between; align-items:center;">
+                        La tua Risposta Orale o Scritta
+                        <button id="oral-mic-btn" class="mic-btn" onclick="toggleOralDictation()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+                                <line x1="12" y1="19" x2="12" y2="23"></line>
+                                <line x1="8" y1="23" x2="16" y2="23"></line>
+                            </svg>
+                            <span id="mic-status-text">Detta Risposta</span>
+                        </button>
+                    </label>
+                    <textarea id="oral-answer-input" placeholder="Scrivi qui la tua risposta, oppure clicca su 'Detta Risposta' per parlare a voce..." rows="6" class="oral-textarea"></textarea>
+                </div>
+
+                <!-- Footer actions -->
+                <div class="exam-footer-actions">
+                    <button class="btn btn-secondary" onclick="confirmExitOral()">Ritirati</button>
+                    <button class="btn btn-primary" id="oral-submit-btn" onclick="submitOralAnswer()">Invia Risposta</button>
                 </div>
             </div>
 
@@ -649,6 +1036,66 @@
                 </div>
             </div>
 
+            <!-- STEP 3B: ORAL REPORT SCREEN -->
+            <div id="oral-report-screen" class="report-card" style="display: none;">
+                <h2 style="font-family: var(--font-serif); font-size: 2.2rem; text-align: center; margin-bottom: 0.5rem;">Risultato del Colloquio Orale</h2>
+                <p style="color: var(--text-secondary); font-size: 1rem; text-align: center; margin-bottom: 2.5rem;">Valutazione accademica basata sull'analisi della risposta e la coerenza semantica.</p>
+
+                <div class="report-grid">
+                    <!-- Left: Grade Ring -->
+                    <div class="report-left">
+                        <div class="score-circle-glow" id="oral-score-glow">
+                            <span class="score-percent" id="oral-grade-text" style="font-size: 1.8rem;">30 e Lode</span>
+                        </div>
+                        <h4 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;" id="oral-outcome-title">Promosso</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; line-height: 1.4;" id="oral-outcome-desc">Esito del colloquio.</p>
+                    </div>
+
+                    <!-- Right: Feedback & Details -->
+                    <div class="report-right">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 0.8rem;">Giudizio dell'Esaminatore</h4>
+                        <div class="examiner-feedback-box" id="oral-feedback-text">
+                            Feedback dettagliato...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cited and Missing Concepts Section -->
+                <div class="concepts-evaluation-grid">
+                    <div class="concepts-column">
+                        <h4 class="concepts-header cited">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Concetti Corretti Citati
+                        </h4>
+                        <ul class="concepts-list" id="oral-cited-list">
+                            <!-- Cited concepts injected here -->
+                        </ul>
+                    </div>
+                    <div class="concepts-column">
+                        <h4 class="concepts-header missing">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            Concetti Chiave Omessi
+                        </h4>
+                        <ul class="concepts-list" id="oral-missing-list">
+                            <!-- Missing concepts injected here -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Recommendations link -->
+                <div class="recommendations-section" style="margin-top: 2.5rem;">
+                    <h3 class="recommendations-title">Sintesi Consigliata per il Ripasso</h3>
+                    <ul class="recommendations-list" id="oral-rec-list">
+                        <!-- Recommendation links -->
+                    </ul>
+                </div>
+
+                <div class="summary-actions" style="margin-top: 3rem;">
+                    <button class="btn btn-primary" onclick="restartSetup()">Nuovo Colloquio Orale</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">Vai alla Home</button>
+                </div>
+            </div>
+
         </div>
 
     </main>
@@ -669,6 +1116,7 @@
         let examTimerDuration = 60; // default 60s per question
         let timerInterval = null;
         let timeRemaining = 60;
+        let examStartTime = 0;
         
         // Dom Elements
         const setupScreen = document.getElementById('setup-screen');
@@ -860,6 +1308,7 @@
             currentQuestionIndex = 0;
             score = 0;
             userResponses = [];
+            examStartTime = Date.now();
             examTimerDuration = timerOption;
             
             // Hide setup, show exam
@@ -1048,6 +1497,53 @@
                 }
             });
 
+            // Save stats to localStorage
+            try {
+                const stored = localStorage.getItem('lex-quiz-stats');
+                const stats = stored ? JSON.parse(stored) : [];
+                
+                const today = new Date().toISOString().split('T')[0];
+                const sessionSpeed = Math.round((Date.now() - examStartTime) / 1000);
+                
+                if (dirittoCount > 0) {
+                    stats.push({
+                        date: today,
+                        score: Math.round((dirittoCorrect / dirittoCount) * 30),
+                        total: 30,
+                        speed: Math.round(sessionSpeed / total),
+                        subject: 'diritto',
+                        correct: dirittoCorrect,
+                        totalQuestions: dirittoCount
+                    });
+                }
+                if (arteCount > 0) {
+                    stats.push({
+                        date: today,
+                        score: Math.round((arteCorrect / arteCount) * 30),
+                        total: 30,
+                        speed: Math.round(sessionSpeed / total),
+                        subject: 'arte',
+                        correct: arteCorrect,
+                        totalQuestions: arteCount
+                    });
+                }
+                if (romanaCount > 0) {
+                    stats.push({
+                        date: today,
+                        score: Math.round((romanaCorrect / romanaCount) * 30),
+                        total: 30,
+                        speed: Math.round(sessionSpeed / total),
+                        subject: 'romana',
+                        correct: romanaCorrect,
+                        totalQuestions: romanaCount
+                    });
+                }
+                
+                localStorage.setItem('lex-quiz-stats', JSON.stringify(stats));
+            } catch(e) {
+                console.error("Errore salvataggio statistiche:", e);
+            }
+
             // Render stats
             const dirPercent = dirittoCount > 0 ? Math.round((dirittoCorrect / dirittoCount) * 100) : 0;
             document.getElementById('stat-diritto-text').textContent = dirittoCount > 0 ? `${dirittoCorrect} / ${dirittoCount} (${dirPercent}%)` : "N/A";
@@ -1113,8 +1609,812 @@
         function restartSetup() {
             reportScreen.style.display = 'none';
             activeScreen.style.display = 'none';
+            const oralActiveScreen = document.getElementById('oral-active-screen');
+            if (oralActiveScreen) oralActiveScreen.style.display = 'none';
+            const oralReportScreen = document.getElementById('oral-report-screen');
+            if (oralReportScreen) oralReportScreen.style.display = 'none';
             setupScreen.style.display = 'block';
         }
+
+        // ═══════════════════════════════════════════════════════════════
+        // COLLOQUIO ORALE IA — LOGICA DI INTEGRAZIONE
+        // ═══════════════════════════════════════════════════════════════
+
+        let currentExamMode = 'quiz'; 
+        let currentOralSubject = '';
+        let currentOralModuleKey = '';
+        let currentOralSection = null;
+        let currentOralQuestion = '';
+        let currentParsedSummary = null;
+
+        let localPipeline = null;
+        let localModelLoading = false;
+        let recognition = null;
+        let isDictating = false;
+
+        function switchExamMode(mode) {
+            currentExamMode = mode;
+            
+            const tabQuiz = document.getElementById('tab-quiz');
+            const tabOral = document.getElementById('tab-oral');
+            
+            const quizFields = document.getElementById('quiz-config-fields');
+            const oralFields = document.getElementById('oral-config-fields');
+            
+            if (mode === 'quiz') {
+                tabQuiz.classList.add('active');
+                tabOral.classList.remove('active');
+                quizFields.style.display = 'block';
+                oralFields.style.display = 'none';
+            } else {
+                tabQuiz.classList.remove('active');
+                tabOral.classList.add('active');
+                quizFields.style.display = 'none';
+                oralFields.style.display = 'block';
+                populateOralChapters();
+            }
+        }
+
+        function populateOralChapters() {
+            const subject = document.getElementById('oral-subject-select').value;
+            const select = document.getElementById('oral-chapter-select');
+            select.innerHTML = '<option value="random">Casuale (Tutti i capitoli)</option>';
+            
+            Object.keys(quizDatabase).forEach(key => {
+                const mod = quizDatabase[key];
+                if (mod.subject === subject) {
+                    const opt = document.createElement('option');
+                    opt.value = key;
+                    opt.textContent = `${mod.chapterTag} - ${mod.title}`;
+                    select.appendChild(opt);
+                }
+            });
+        }
+
+        function toggleOralEngineFields() {
+            const engine = document.getElementById('oral-ai-engine').value;
+            const group = document.getElementById('oral-credentials-group');
+            const label = document.getElementById('oral-credentials-label');
+            const input = document.getElementById('oral-ai-key');
+            
+            if (engine === 'local') {
+                group.style.display = 'none';
+            } else {
+                group.style.display = 'block';
+                if (engine === 'gemini') {
+                    label.textContent = "Chiave API Gemini";
+                    input.placeholder = "Inserisci la tua API Key...";
+                    input.type = "password";
+                } else if (engine === 'ollama') {
+                    label.textContent = "Indirizzo Server Ollama";
+                    input.placeholder = "es. http://localhost:11434 (lascia vuoto per default)";
+                    input.type = "text";
+                } else if (engine === 'lmstudio') {
+                    label.textContent = "Indirizzo Server LM Studio";
+                    input.placeholder = "es. http://localhost:12345 (lascia vuoto per default)";
+                    input.type = "text";
+                }
+            }
+        }
+
+        async function startOralExam() {
+            const engine = document.getElementById('oral-ai-engine').value;
+            const key = document.getElementById('oral-ai-key').value.trim();
+            const saveKey = document.getElementById('oral-save-key-checkbox').checked;
+            
+            if (saveKey) {
+                localStorage.setItem('lex-oral-ai-engine', engine);
+                localStorage.setItem('lex-oral-ai-key', key);
+            } else {
+                localStorage.removeItem('lex-oral-ai-engine');
+                localStorage.removeItem('lex-oral-ai-key');
+            }
+            
+            if (engine === 'local') {
+                const loaded = await loadLocalModel();
+                if (!loaded) return;
+            } else if (engine === 'gemini' && !key) {
+                alert("Inserisci la chiave API di Gemini per continuare.");
+                return;
+            }
+            
+            setupScreen.style.display = 'none';
+            document.getElementById('oral-active-screen').style.display = 'block';
+            document.getElementById('oral-answer-input').value = '';
+            
+            await prepareOralQuestion();
+        }
+
+        function getSummaryPath(subject, moduleKey) {
+            if (subject === 'diritto') {
+                const link = dirittoChapterLinks[moduleKey];
+                return link ? `diritto/${link}` : null;
+            } else if (subject === 'arte_romana') {
+                const link = romanaChapterLinks[moduleKey];
+                return link ? `arte_romana/${link}` : null;
+            } else if (subject === 'arte') {
+                const link = arteChapterLinks[moduleKey];
+                return link ? `storia_arte/${link}` : null;
+            }
+            return null;
+        }
+
+        function parseSummaryMarkdown(mdText) {
+            const lines = mdText.split('\n');
+            const sections = [];
+            let currentSection = null;
+            
+            const h1Regex = /^#\s+(.+)$/;
+            const h2Regex = /^##\s+(.+)$/;
+            let chapterTitle = '';
+
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) continue;
+                
+                if (line.startsWith('**Autore:**') || line.startsWith('---')) continue;
+                
+                const h1Match = line.match(h1Regex);
+                if (h1Match) {
+                    chapterTitle = h1Match[1].trim();
+                    continue;
+                }
+
+                const h2Match = line.match(h2Regex);
+                if (h2Match) {
+                    const secName = h2Match[1].trim();
+                    if (secName.toLowerCase().includes('sommario') || secName.toLowerCase() === 'indice') {
+                        continue;
+                    }
+                    currentSection = {
+                        title: secName,
+                        concepts: []
+                    };
+                    sections.push(currentSection);
+                    continue;
+                }
+
+                if (currentSection) {
+                    let cleanText = line
+                        .replace(/^[*+-]\s+/, '') 
+                        .replace(/^\d+\.\s+/, '') 
+                        .replace(/\*\*/g, '') 
+                        .replace(/_/g, '') 
+                        .trim();
+                    
+                    if (cleanText.length > 15) { 
+                        currentSection.concepts.push(cleanText);
+                    }
+                }
+            }
+            
+            if (sections.length === 0 && chapterTitle) {
+                const defaultSec = { title: chapterTitle, concepts: [] };
+                for (let line of lines) {
+                    line = line.trim();
+                    if (!line || line.startsWith('#') || line.startsWith('**') || line.startsWith('---')) continue;
+                    let cleanText = line.replace(/^[*+-]\s+/, '').replace(/^\d+\.\s+/, '').replace(/\*\*/g, '').trim();
+                    if (cleanText.length > 15) defaultSec.concepts.push(cleanText);
+                }
+                sections.push(defaultSec);
+            }
+            
+            return {
+                title: chapterTitle,
+                sections: sections.filter(sec => sec.concepts.length > 0)
+            };
+        }
+
+        async function prepareOralQuestion() {
+            const subject = document.getElementById('oral-subject-select').value;
+            const chapterSelection = document.getElementById('oral-chapter-select').value;
+            
+            currentOralSubject = subject;
+            
+            if (chapterSelection === 'random') {
+                const availableModules = [];
+                Object.keys(quizDatabase).forEach(key => {
+                    if (quizDatabase[key].subject === subject) {
+                        availableModules.push(key);
+                    }
+                });
+                currentOralModuleKey = availableModules[Math.floor(Math.random() * availableModules.length)];
+            } else {
+                currentOralModuleKey = chapterSelection;
+            }
+            
+            document.getElementById('oral-question-text').textContent = "Caricamento capitolo e generazione della domanda...";
+            
+            const summaryPath = getSummaryPath(subject, currentOralModuleKey);
+            if (!summaryPath) {
+                document.getElementById('oral-question-text').textContent = "Errore: impossibile trovare il file di sintesi per questo capitolo.";
+                return;
+            }
+            
+            try {
+                const response = await fetch(summaryPath);
+                if (!response.ok) throw new Error("File fetch failed");
+                const mdText = await response.text();
+                
+                currentParsedSummary = parseSummaryMarkdown(mdText);
+                
+                if (currentParsedSummary.sections.length === 0) {
+                    throw new Error("No sections found in summary");
+                }
+                
+                currentOralSection = currentParsedSummary.sections[Math.floor(Math.random() * currentParsedSummary.sections.length)];
+                
+                const promptVariations = [
+                    `Mi parli in dettaglio della sezione: "${currentOralSection.title}".`,
+                    `Esponga gli aspetti principali relativi a: "${currentOralSection.title}".`,
+                    `Descriva l'argomento accademico: "${currentOralSection.title}" e i suoi punti chiave.`,
+                    `Cosa stabiliscono le fonti riguardo a: "${currentOralSection.title}"?`
+                ];
+                
+                currentOralQuestion = promptVariations[Math.floor(Math.random() * promptVariations.length)];
+                
+                document.getElementById('oral-question-text').textContent = currentOralQuestion;
+                
+                const chapterMeta = quizDatabase[currentOralModuleKey];
+                document.getElementById('oral-subject-tag').textContent = `Materia: ${subject === 'diritto' ? 'Diritto' : (subject === 'arte_romana' ? 'Arte Romana' : 'Arte Moderna')}`;
+                document.getElementById('oral-chapter-tag').textContent = `${chapterMeta.chapterTag} - ${currentParsedSummary.title || chapterMeta.title}`;
+                
+            } catch(err) {
+                console.error(err);
+                document.getElementById('oral-question-text').textContent = "Errore nel caricamento della sintesi. Verifica la connessione o prova un altro capitolo.";
+            }
+        }
+
+        // Dictation logic
+        function initDictation() {
+            if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+                alert("Il riconoscimento vocale non è supportato in questo browser. Usa Chrome o Safari.");
+                return false;
+            }
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRec();
+            recognition.lang = 'it-IT';
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            
+            const textarea = document.getElementById('oral-answer-input');
+            let startText = '';
+
+            recognition.onstart = () => {
+                isDictating = true;
+                document.getElementById('oral-mic-btn').classList.add('listening');
+                document.getElementById('mic-status-text').textContent = "Ascoltando...";
+                startText = textarea.value;
+            };
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                
+                textarea.value = startText + (startText ? ' ' : '') + finalTranscript + interimTranscript;
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error", event.error);
+                stopDictation();
+            };
+
+            recognition.onend = () => {
+                stopDictation();
+            };
+            
+            return true;
+        }
+
+        function toggleOralDictation() {
+            if (!recognition) {
+                if (!initDictation()) return;
+            }
+            if (isDictating) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
+        }
+
+        function stopDictation() {
+            isDictating = false;
+            const btn = document.getElementById('oral-mic-btn');
+            if (btn) {
+                btn.classList.remove('listening');
+                document.getElementById('mic-status-text').textContent = "Detta Risposta";
+            }
+        }
+
+        function speakOralQuestion() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); 
+                const text = document.getElementById('oral-question-text').textContent;
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'it-IT';
+                utterance.rate = 1.0;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("La sintesi vocale non è supportata dal tuo browser.");
+            }
+        }
+
+        function confirmExitOral() {
+            if (confirm("Sei sicuro di voler interrompere il colloquio orale? I progressi andranno persi.")) {
+                if (window.speechSynthesis) window.speechSynthesis.cancel();
+                stopDictation();
+                restartSetup();
+            }
+        }
+
+        async function submitOralAnswer() {
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            stopDictation();
+            
+            const answer = document.getElementById('oral-answer-input').value.trim();
+            if (answer.length < 15) {
+                alert("La risposta è troppo breve per essere valutata. Sii più esaustivo.");
+                return;
+            }
+            
+            const engine = document.getElementById('oral-ai-engine').value;
+            if (engine === 'local') {
+                await evaluateOralLocal(answer);
+            } else {
+                await evaluateOralLLM(answer);
+            }
+        }
+
+        // Local evaluation (Transformers.js)
+        async function loadLocalModel() {
+            if (localPipeline) return true;
+            if (localModelLoading) return false;
+            
+            localModelLoading = true;
+            showLoadingOverlay("Caricamento del modello di intelligenza artificiale locale (~90MB)... Questo processo avviene interamente nel tuo browser ed è richiesto solo al primo avvio.");
+            
+            try {
+                const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+                localPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', {
+                    progress_callback: (data) => {
+                        if (data.status === 'progress') {
+                            updateLoadingProgress(data.file, data.progress);
+                        }
+                    }
+                });
+                hideLoadingOverlay();
+                localModelLoading = false;
+                return true;
+            } catch (e) {
+                console.error("Local model load error: ", e);
+                hideLoadingOverlay();
+                localModelLoading = false;
+                alert("Impossibile caricare il modello locale. Controlla la tua connessione a internet. Se l'errore persiste, prova a usare la modalità API.");
+                return false;
+            }
+        }
+
+        function showLoadingOverlay(text) {
+            let overlay = document.getElementById('lex-loading-overlay');
+            if (!overlay) {
+                const html = `
+                    <div id="lex-loading-overlay" class="loading-overlay">
+                        <div class="loading-box">
+                            <div class="spinner-glow"></div>
+                            <h3 style="font-family: var(--font-serif); margin-bottom: 0.8rem;" id="loading-title">Valutazione in corso</h3>
+                            <p style="font-size:0.9rem; color: var(--text-secondary); line-height: 1.5;" id="loading-desc">${text}</p>
+                            <div class="progress-container" id="loading-progress-container" style="display:none;">
+                                <div class="progress-fill" id="loading-progress-fill"></div>
+                            </div>
+                            <span class="progress-text" id="loading-progress-text" style="display:none;">0%</span>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', html);
+                overlay = document.getElementById('lex-loading-overlay');
+            } else {
+                document.getElementById('loading-title').textContent = "Valutazione in corso";
+                document.getElementById('loading-desc').textContent = text;
+                overlay.style.display = 'flex';
+            }
+        }
+
+        function hideLoadingOverlay() {
+            const overlay = document.getElementById('lex-loading-overlay');
+            if (overlay) overlay.style.display = 'none';
+        }
+
+        const downloadTracker = {};
+        function updateLoadingProgress(file, progress) {
+            document.getElementById('loading-progress-container').style.display = 'block';
+            const textEl = document.getElementById('loading-progress-text');
+            textEl.style.display = 'block';
+            
+            downloadTracker[file] = progress;
+            
+            const files = Object.keys(downloadTracker);
+            const sum = files.reduce((acc, curr) => acc + downloadTracker[curr], 0);
+            const avg = files.length > 0 ? Math.round(sum / files.length) : 0;
+            
+            document.getElementById('loading-progress-fill').style.width = avg + '%';
+            textEl.textContent = `Scaricamento ${avg}% (file: ${file.split('/').pop()})`;
+        }
+
+        async function evaluateOralLocal(userAnswer) {
+            const loaded = await loadLocalModel();
+            if (!loaded) return;
+            
+            showLoadingOverlay("Il Professore sta analizzando e confrontando la tua risposta con i concetti chiave della sintesi...");
+            
+            try {
+                const concepts = currentOralSection.concepts;
+                const citedConcepts = [];
+                const missingConcepts = [];
+                
+                const normUser = userAnswer.toLowerCase();
+                
+                const getEmbed = async (text) => {
+                    const output = await localPipeline(text, { pooling: 'mean', normalize: true });
+                    return Array.from(output.data);
+                };
+                
+                const embedUser = await getEmbed(userAnswer);
+                
+                for (let concept of concepts) {
+                    const embedConcept = await getEmbed(concept);
+                    const sim = cosineSimilarity(embedUser, embedConcept);
+                    const isWordMatch = checkKeywordMatch(normUser, concept.toLowerCase());
+                    
+                    if (sim > 0.48 || isWordMatch) {
+                        citedConcepts.push(concept);
+                    } else {
+                        missingConcepts.push(concept);
+                    }
+                }
+                
+                const totalC = concepts.length;
+                const citedC = citedConcepts.length;
+                
+                let grade = 18;
+                let isPassed = true;
+                let gradeText = "";
+                let feedback = "";
+                
+                if (citedC === 0) {
+                    isPassed = false;
+                    grade = 12; 
+                    gradeText = "Respinto";
+                    feedback = "La tua risposta non copre nessuno dei punti cardine della sezione d'esame. È necessario studiare la sintesi.";
+                } else {
+                    grade = 18 + Math.round((citedC / totalC) * 12);
+                    if (grade > 30) grade = 30;
+                    
+                    if (grade === 30 && citedC === totalC) {
+                        gradeText = "30 e Lode";
+                        feedback = "Colloquio orale impeccabile! Hai dimostrato una comprensione superba di tutti i concetti chiave previsti dal programma.";
+                    } else {
+                        gradeText = `${grade} / 30`;
+                        if (grade >= 27) {
+                            feedback = "Ottima risposta. Ha dimostrato una chiara comprensione degli argomenti, cogliendo quasi tutti i dettagli fondamentali.";
+                        } else if (grade >= 23) {
+                            feedback = "Risposta discreta. Ha esposto i concetti principali, ma ha trascurato alcuni dettagli importanti che avrebbero completato l'esposizione.";
+                        } else {
+                            feedback = "Risposta sufficiente. Ha compreso a grandi linee il tema, ma l'esposizione è stata molto parziale ed ha tralasciato concetti cardine.";
+                        }
+                    }
+                }
+                
+                hideLoadingOverlay();
+                showOralReport(isPassed, grade, gradeText, feedback, citedConcepts, missingConcepts);
+                
+            } catch (e) {
+                console.error(e);
+                hideLoadingOverlay();
+                alert("Errore durante l'analisi della risposta: " + e.message);
+            }
+        }
+
+        function cosineSimilarity(arr1, arr2) {
+            let dotProduct = 0;
+            let normA = 0;
+            let normB = 0;
+            for (let i = 0; i < arr1.length; i++) {
+                dotProduct += arr1[i] * arr2[i];
+                normA += arr1[i] * arr1[i];
+                normB += arr2[i] * arr2[i];
+            }
+            return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+        }
+
+        function checkKeywordMatch(userText, conceptText) {
+            const stopWords = new Set(['il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'uno', 'una', 'di', 'a', 'da', 'in', 'con', 'su', 'per', 'tra', 'fra', 'che', 'ed', 'del', 'dello', 'della', 'dei', 'degli', 'delle', 'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle', 'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'col', 'coi', 'pel', 'pei', 'non', 'sono', 'è', 'questo', 'questa', 'questi', 'queste', 'quello', 'quella', 'quelli', 'quelle']);
+            
+            const getWords = (text) => {
+                return text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g, "")
+                           .split(/\s+/)
+                           .map(w => w.trim())
+                           .filter(w => w.length > 3 && !stopWords.has(w));
+            };
+            
+            const userWords = new Set(getWords(userText));
+            const conceptWords = getWords(conceptText);
+            
+            if (conceptWords.length === 0) return false;
+            
+            let matches = 0;
+            conceptWords.forEach(w => {
+                if (userWords.has(w)) matches++;
+            });
+            
+            const ratio = matches / conceptWords.length;
+            return ratio >= 0.35;
+        }
+
+        // LLM evaluation logic
+        async function evaluateOralLLM(userAnswer) {
+            const engine = document.getElementById('oral-ai-engine').value;
+            const keyInput = document.getElementById('oral-ai-key').value.trim();
+            
+            if (engine === 'gemini' && !keyInput) {
+                alert("Per utilizzare la modalità Gemini API, devi inserire la tua chiave API.");
+                return;
+            }
+            
+            showLoadingOverlay("Il Professore sta analizzando la tua risposta tramite modello linguistico...");
+            
+            const chapterMeta = quizDatabase[currentOralModuleKey];
+            const sectionText = currentOralSection.concepts.map(c => `- ${c}`).join('\n');
+            
+            const prompt = `Sei un severo e colto professore universitario italiano che sta conducendo un esame orale.
+Materia: ${currentOralSubject}
+Capitolo: ${chapterMeta.title}
+Sezione da discutere: ${currentOralSection.title}
+
+Sommario ufficiale di riferimento (lo studente deve esporre questi concetti):
+${sectionText}
+
+Domanda posta allo studente: ${currentOralQuestion}
+Risposta fornita dallo studente: "${userAnswer}"
+
+Analizza la risposta dello studente confrontandola con il sommario ufficiale di riferimento.
+Identifica quali concetti chiave del sommario sono stati citati correttamente o parzialmente (correct_concepts) e quali concetti chiave importanti sono stati omessi (missing_concepts).
+Assegna un voto accademico italiano in trentesimi:
+- Da 18 a 30 per la sufficienza.
+- Se lo studente espone egregiamente TUTTI i concetti, assegna 30 (e opzionalmente menziona la Lode nel feedback).
+- Se la risposta è gravemente insufficiente (es. non copre alcun concetto o è fuori tema), il voto deve essere inferiore a 18 (e l'esito sarà bocciato/respinto).
+
+Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italiano, senza alcun blocco di codice markdown aggiuntivo (ad esempio non circondare il risultato con tag \`\`\`json):
+{
+  "outcome": "promosso" o "respinto",
+  "score": numero (es. 26),
+  "scoreText": "stringa del voto" (es. "26 / 30" oppure "30 e Lode" o "Respinto"),
+  "correct_concepts": ["concetto 1", "concetto 2"],
+  "missing_concepts": ["concetto 1", "concetto 2"],
+  "feedback": "spiegazione discorsiva accademica in italiano"
+}`;
+
+            try {
+                let responseJson = null;
+                
+                if (engine === 'gemini') {
+                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${keyInput}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{ text: prompt }]
+                            }],
+                            generationConfig: {
+                                responseMimeType: "application/json"
+                            }
+                        })
+                    });
+                    
+                    if (!res.ok) {
+                        const errData = await res.json().catch(() => ({}));
+                        throw new Error(errData?.error?.message || `HTTP ${res.status}`);
+                    }
+                    
+                    const data = await res.json();
+                    const textResponse = data.candidates[0].content.parts[0].text;
+                    responseJson = JSON.parse(cleanJsonResponse(textResponse));
+                    
+                } else if (engine === 'ollama') {
+                    const serverUrl = keyInput || 'http://localhost:11434';
+                    const res = await fetch(`${serverUrl}/api/chat`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: "llama3", 
+                            messages: [{ role: "user", content: prompt }],
+                            stream: false,
+                            format: "json"
+                        })
+                    });
+                    
+                    if (!res.ok) throw new Error(`Ollama server returned ${res.status}`);
+                    const data = await res.json();
+                    responseJson = JSON.parse(cleanJsonResponse(data.message.content));
+                    
+                } else if (engine === 'lmstudio') {
+                    const serverUrl = keyInput || 'http://localhost:12345';
+                    const res = await fetch(`${serverUrl}/v1/chat/completions`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            messages: [{ role: "user", content: prompt }],
+                            temperature: 0.2,
+                            response_format: { type: "json_object" }
+                        })
+                    });
+                    
+                    if (!res.ok) throw new Error(`LM Studio server returned ${res.status}`);
+                    const data = await res.json();
+                    responseJson = JSON.parse(cleanJsonResponse(data.choices[0].message.content));
+                }
+                
+                hideLoadingOverlay();
+                
+                if (responseJson) {
+                    const isPassed = responseJson.outcome === 'promosso';
+                    const score = responseJson.score || 18;
+                    const scoreText = responseJson.scoreText || `${score} / 30`;
+                    const feedback = responseJson.feedback || "Esame completato.";
+                    const correct = responseJson.correct_concepts || [];
+                    const missing = responseJson.missing_concepts || [];
+                    
+                    showOralReport(isPassed, score, scoreText, feedback, correct, missing);
+                } else {
+                    throw new Error("Impossibile ottenere risposta valida dal server.");
+                }
+                
+            } catch(err) {
+                console.error(err);
+                hideLoadingOverlay();
+                alert(`Errore nella chiamata LLM: ${err.message}. Prova con la modalità IA Locale.`);
+            }
+        }
+
+        function cleanJsonResponse(rawText) {
+            let clean = rawText.trim();
+            if (clean.startsWith('```')) {
+                clean = clean.replace(/^```[a-zA-Z]*\n/, '').replace(/\n```$/, '');
+            }
+            return clean.trim();
+        }
+
+        function showOralReport(isPassed, score, scoreText, feedback, correctConcepts, missingConcepts) {
+            activeScreen.style.display = 'none';
+            const oralActiveScreen = document.getElementById('oral-active-screen');
+            if (oralActiveScreen) oralActiveScreen.style.display = 'none';
+            
+            const reportOral = document.getElementById('oral-report-screen');
+            reportOral.style.display = 'block';
+            
+            const textGrade = document.getElementById('oral-grade-text');
+            textGrade.textContent = scoreText;
+            
+            const ring = document.getElementById('oral-score-glow');
+            const outcomeTitle = document.getElementById('oral-outcome-title');
+            const outcomeDesc = document.getElementById('oral-outcome-desc');
+            
+            if (isPassed) {
+                outcomeTitle.textContent = "Esame Superato!";
+                outcomeTitle.style.color = "var(--accent-green)";
+                outcomeDesc.textContent = "Congratulazioni, hai risposto correttamente ai quesiti fondamentali.";
+                
+                if (score >= 27) {
+                    ring.style.borderColor = 'var(--accent-green)';
+                    ring.style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.25)';
+                } else {
+                    ring.style.borderColor = 'var(--accent-gold)';
+                    ring.style.boxShadow = '0 0 30px rgba(212, 175, 55, 0.25)';
+                }
+            } else {
+                outcomeTitle.textContent = "Esito non Sufficiente";
+                outcomeTitle.style.color = "#ef4444";
+                outcomeDesc.textContent = "Colloquio respinto. Ti consigliamo di rileggere la sintesi del capitolo.";
+                
+                ring.style.borderColor = '#ef4444';
+                ring.style.boxShadow = '0 0 30px rgba(239, 68, 68, 0.25)';
+            }
+            
+            document.getElementById('oral-feedback-text').textContent = feedback;
+            
+            const citedList = document.getElementById('oral-cited-list');
+            citedList.innerHTML = '';
+            if (correctConcepts.length === 0) {
+                citedList.innerHTML = '<li style="color:var(--text-muted); font-style:italic;">Nessun concetto citato in modo soddisfacente.</li>';
+            } else {
+                correctConcepts.forEach(c => {
+                    const li = document.createElement('li');
+                    li.textContent = c;
+                    citedList.appendChild(li);
+                });
+            }
+            
+            const missingList = document.getElementById('oral-missing-list');
+            missingList.innerHTML = '';
+            if (missingConcepts.length === 0) {
+                missingList.innerHTML = '<li style="color:var(--accent-green); font-style:italic;">Tutti i concetti sono stati citati! Ottimo!</li>';
+            } else {
+                missingConcepts.forEach(c => {
+                    const li = document.createElement('li');
+                    li.textContent = c;
+                    missingList.appendChild(li);
+                });
+            }
+            
+            const recList = document.getElementById('oral-rec-list');
+            recList.innerHTML = '';
+            
+            const meta = getModuleMeta(currentOralModuleKey);
+            if (meta) {
+                const li = document.createElement('li');
+                li.className = 'rec-item';
+                
+                const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : 'badge-a');
+                const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : 'AM');
+
+                li.innerHTML = `
+                    <div>
+                        <span class="rec-subject-badge ${subClass}">${subName}</span>
+                        <span class="rec-label">${meta.chapterName}</span>
+                    </div>
+                    <a href="${meta.link}" class="rec-link">
+                        ${meta.navText}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                `;
+                recList.appendChild(li);
+            }
+            
+            try {
+                const stored = localStorage.getItem('lex-quiz-stats');
+                const stats = stored ? JSON.parse(stored) : [];
+                const today = new Date().toISOString().split('T')[0];
+                
+                let statSubjectKey = currentOralSubject;
+                if (currentOralSubject === 'arte_romana') statSubjectKey = 'romana';
+
+                stats.push({
+                    date: today,
+                    score: isPassed ? (score > 30 ? 30 : score) : 12,
+                    total: 30,
+                    speed: 30, 
+                    subject: statSubjectKey,
+                    correct: correctConcepts.length,
+                    totalQuestions: correctConcepts.length + missingConcepts.length
+                });
+                
+                localStorage.setItem('lex-quiz-stats', JSON.stringify(stats));
+            } catch(e) {
+                console.error("Error saving stats:", e);
+            }
+        }
+
+        // Credentials load & events setup
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedEngine = localStorage.getItem('lex-oral-ai-engine') || 'local';
+            const savedKey = localStorage.getItem('lex-oral-ai-key') || '';
+            
+            const engineSelect = document.getElementById('oral-ai-engine');
+            const keyInput = document.getElementById('oral-ai-key');
+            
+            if (engineSelect) engineSelect.value = savedEngine;
+            if (keyInput) keyInput.value = savedKey;
+            
+            toggleOralEngineFields();
+            populateOralChapters();
+        });
 
         updateMaxQuestions();
     </script>
