@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa delle Connessioni - Lex Romana</title>
+    <meta name="description" content="Mappa interattiva delle relazioni storiografiche, architettoniche e monumentali dell'Archeologia e dell'Arte Romana.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Specific page override for map view */
+        main {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-section {
+            flex: 1;
+            margin-top: 1rem;
+        }
+
+        /* SVG override for Pompeian Red Theme */
+        .graph-edge.active {
+            stroke: var(--accent-romana);
+            filter: drop-shadow(0 0 6px var(--accent-romana));
+        }
+
+        .graph-node:hover circle, .graph-node.active circle {
+            stroke: var(--accent-romana);
+            filter: drop-shadow(0 0 10px rgba(169, 50, 38, 0.5));
+        }
+
+        .graph-node-number {
+            fill: var(--accent-romana);
+        }
+
+        .panel-tag {
+            color: var(--accent-romana) !important;
+        }
+
+        .connection-item {
+            border-left-color: var(--accent-romana) !important;
+        }
+
+        /* Connection Map Container & SVG styles */
+        .connections-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            height: calc(100vh - 220px);
+            min-height: 600px;
+        }
+
+        @media (max-width: 1024px) {
+            .connections-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            main {
+                height: auto;
+            }
+        }
+
+        .map-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .map-svg {
+            width: 100%;
+            height: 100%;
+            min-height: 550px;
+            display: block;
+            user-select: none;
+        }
+
+        /* SVG Graph Elements Styles */
+        .graph-edge {
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 1.5;
+            transition: stroke var(--transition-normal), stroke-width var(--transition-normal), opacity var(--transition-normal);
+        }
+
+        .graph-edge.dimmed {
+            opacity: 0.15;
+        }
+
+        .graph-node {
+            cursor: pointer;
+            transition: transform var(--transition-normal);
+        }
+
+        .graph-node circle {
+            fill: #111827;
+            stroke: var(--text-muted);
+            stroke-width: 2;
+            transition: stroke var(--transition-normal), fill var(--transition-normal), r var(--transition-normal);
+        }
+
+        .graph-node text {
+            fill: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 500;
+            text-anchor: middle;
+            transition: fill var(--transition-normal), font-size var(--transition-normal), font-weight var(--transition-normal);
+            pointer-events: none;
+        }
+
+        .graph-node:hover text, .graph-node.active text {
+            fill: var(--text-primary);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .graph-node-number {
+            font-family: var(--font-serif);
+            font-size: 14px;
+            text-anchor: middle;
+            pointer-events: none;
+            font-weight: 600;
+        }
+
+        .graph-node:hover .graph-node-number, .graph-node.active .graph-node-number {
+            font-size: 16px;
+        }
+
+        .graph-node.dimmed {
+            opacity: 0.3;
+        }
+
+        /* Info Panel for Connections */
+        .info-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+            transition: var(--transition-normal);
+        }
+
+        .panel-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .panel-placeholder svg {
+            width: 64px;
+            height: 64px;
+            stroke: var(--text-muted);
+            opacity: 0.5;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .panel-content {
+            animation: fade-in 0.4s ease-out;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .panel-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-author {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .panel-author span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .panel-section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .panel-section-title svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .panel-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .connection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .connection-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--text-muted);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .connection-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .conn-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .conn-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Romana</h1>
+            <p>Archeologia e Arte Romana</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link active" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+        
+        <section class="connections-container map-section">
+            
+            <!-- Graphic Map Panel -->
+            <div class="map-card">
+                <svg id="network-svg" class="map-svg" viewBox="0 0 720 720" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Glow filters for highlighted nodes/edges -->
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="6" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    
+                    <!-- Edges (Links) Layer -->
+                    <g id="edges-group"></g>
+                    <!-- Nodes Layer -->
+                    <g id="nodes-group"></g>
+                </svg>
+            </div>
+
+            <!-- Descriptive Right Panel -->
+            <div class="info-panel" id="detail-panel">
+                <div class="panel-placeholder" id="placeholder-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <h3>Mappa delle Relazioni Storico-Artistiche</h3>
+                    <p>Seleziona o passa il mouse sopra un nodo del grafo per esplorare come i diversi studi monumentali ed evoluzioni formali si collegano tra loro.</p>
+                </div>
+
+                <div class="panel-content" id="panel-details" style="display: none;">
+                    <div class="panel-header">
+                        <span class="panel-tag" id="panel-chapter-tag">Studio I</span>
+                        <h2 class="panel-title" id="panel-chapter-title">Introduzione metodologica</h2>
+                        <div class="panel-author">Autore: <span id="panel-chapter-author">Sintesi Accademica</span></div>
+                    </div>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        Descrizione
+                    </p>
+                    <p class="panel-desc" id="panel-chapter-desc">Descrizione sintetica dello studio.</p>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path></svg>
+                        Collegamenti Tematici
+                    </p>
+                    <div class="connection-list" id="panel-connections-list">
+                        <!-- Connection list generated dynamically -->
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="btn-read-summary" style="width: 100%;">Leggi Sintesi Completa</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag-view">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title-view">Titolo dello Studio</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche dell'Arte Romana. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Graph Dataset
+        const nodes = [
+            { id: 1, label: "Studio I", shortNum: "I", title: "Introduzione metodologica e storiografica", author: "Compendio d'Esame", file: "summaries/cap1_introduzione.md", desc: "La rivalutazione dell'autonomia artistica romana. Dallo schema estetico di Winckelmann alle scoperte della Scuola di Vienna (Wickhoff e Riegl). Lo storicismo marxista di Bianchi Bandinelli (arte senatoria vs plebea) e le moderne analisi semantiche di Hölscher e sociologiche di Zanker." },
+            { id: 2, label: "Studio II", shortNum: "II", title: "Origini di Roma e influenza etrusca", author: "Compendio d'Esame", file: "summaries/cap2_fondazione.md", desc: "I miti fondativi e la prima urbanizzazione. Le mura serviane e l'introduzione delle tecniche edilizie in tufo. Il Tempio di Giove Capitolino quale centro sacrale e politico, e i reperti dell'area di Sant'Omobono." },
+            { id: 3, label: "Studio III", shortNum: "III", title: "L'età repubblicana tra V e III secolo a.C.", author: "Compendio d'Esame", file: "summaries/cap3_repubblica.md", desc: "La produzione artistico-religiosa della media repubblica. Il Tempio di Cerere sull'Aventino quale centro plebeo, la lavorazione del bronzo con la Ficoroni Cista, il sarcofago di Scipione Barbato e la dignità senatoria del Bruto Capitolino." },
+            { id: 4, label: "Studio IV", shortNum: "IV", title: "L'influenza ellenistica nel II secolo a.C.", author: "Compendio d'Esame", file: "summaries/cap4_ellenismo.md", desc: "L'afflusso di bottini di guerra greci a Roma e la trasformazione architettonica del Campo Marzio. L'introduzione dell'opus caementicium e lo sviluppo dei grandi santuari laziali (Palestrina). I templi del Foro Boario." },
+            { id: 5, label: "Studio V", shortNum: "V", title: "Tardo-repubblicano, ritrattistica e Pompeo", author: "Compendio d'Esame", file: "summaries/cap5_tardo_repubblica.md", desc: "La nascita della ritrattistica veristica patrizia basata sui calchi in cera del mos maiorum. Il Teatro di Pompeo come primo teatro stabile. L'evoluzione della pittura parietale nei primi due stili pompeiani." },
+            { id: 6, label: "Studio VI", shortNum: "VI", title: "L'età augustea e l'Ara Pacis", author: "Compendio d'Esame", file: "summaries/cap6_augusto_ara_pacis.md", desc: "Il programma ideologico e propagandistico di Augusto. L'Ara Pacis Augustae quale capolavoro celebrativo, fondendo il classicismo processionale fidiaco con il realismo romano e i simboli cosmici di fertilità." },
+            { id: 7, label: "Studio VII", shortNum: "VII", title: "Foro di Augusto e Giulio-Claudi", author: "Compendio d'Esame", file: "summaries/cap7_augusto_foro_successori.md", desc: "La monumentalizzazione del Foro di Augusto con il Tempio di Marte Ultore. Gli sviluppi dinastici sotto i Giulio-Claudi (Ara Pietatis, Porta Maggiore) e l'arte funeraria della plebe con il sepolcro del fornaio Eurisace." },
+            { id: 8, label: "Studio VIII", shortNum: "VIII", title: "Età flavia e Foro di Traiano", author: "Compendio d'Esame", file: "summaries/cap8_traiano.md", desc: "La celebrazione del potere imperiale flavio (Colosseo, Arco di Tito, rilievi degli Haterii). La grandiosità del Foro di Traiano progettato da Apollodoro di Damasco, la Basilica Ulpia e il racconto storico-militare della Colonna Traiana." },
+            { id: 9, label: "Studio IX", shortNum: "IX", title: "L'età di Adriano", author: "Compendio d'Esame", file: "summaries/cap9_adriano.md", desc: "Il classicismo eclettico e l'innovazione spaziale sotto Adriano. La ricostruzione del Pantheon con la cupola emisferica in calcestruzzo, il complesso monumentale e residenziale di Villa Adriano a Tivoli e il Tempio di Venere e Roma." },
+            { id: 10, label: "Studio X", shortNum: "X", title: "Antonini e Tarda Antichità", author: "Compendio d'Esame", file: "summaries/cap10_antonini_tardoantico.md", desc: "La transizione stilistica verso forme espressionistiche bidimensionali (Colonna Aureliana, Arco di Costantino). La pratica del reimpiego sistematico (spolia) di rilievi di imperatori precedenti a fini di legittimazione politica." }
+        ];
+
+        const links = [
+            { source: 1, target: 5, type: "concept", desc: "Il ritratto veristico repubblicano (Studio V) costituisce un perno delle tesi storiografiche sull'indipendenza formale romana (Studio I)." },
+            { source: 1, target: 10, type: "concept", desc: "L'espressività e i canoni non classici dell'arte plebea (Studio I) trovano la definitiva canonizzazione nei fregi tardoantichi dell'Arco di Costantino (Studio X)." },
+            { source: 2, target: 3, desc: "La nascita dell'architettura templare urbana delle origini (Studio II) si arricchisce in età repubblicana con le fondazioni sacre plebee (Cerere, Studio III)." },
+            { source: 2, target: 7, desc: "L'evoluzione delle tecniche murarie difensive e monumentali delle origini (Studio II) prosegue con le imponenti strutture dei Giulio-Claudi (Porta Maggiore, Studio VII)." },
+            { source: 4, target: 9, desc: "La sperimentazione tardo-repubblicana delle volte in opus caementicium (Studio IV) raggiunge il suo culmine tecnologico ed estetico nella cupola emisferica del Pantheon (Studio IX)." },
+            { source: 5, target: 8, desc: "La tipologia architettonica del teatro stabile in muratura di Pompeo (Studio V) viene ripresa e monumentalizzata nel Colosseo flavio (Studio VIII)." },
+            { source: 6, target: 7, desc: "La propaganda classicista inaugurata da Augusto (Studio VI) viene consolidata nella decorazione del Foro e del Tempio di Marte Ultore (Studio VII)." },
+            { source: 6, target: 9, desc: "Il classicismo accademico e i girali vegetali dell'Ara Pacis (Studio VI) influenzano l'eclettismo adrianeo e i programmi scultorei del Pantheon e di Villa Adriana (Studio IX)." },
+            { source: 8, target: 10, desc: "Il rilievo storico continuativo della Colonna Traiana (Studio VIII) funge da modello diretto per la Colonna Aureliana e per i pannelli storici di spoglio riutilizzati sull'Arco di Costantino (Studio X)." }
+        ];
+
+        // Dimensions of SVG canvas
+        const width = 720;
+        const height = 720;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const R = 205; // radius of chapter nodes placement
+
+        // Calculate positions dynamically for radial layout
+        const nodePositions = {};
+        nodes.forEach((node, index) => {
+            const angle = (2 * Math.PI * index) / nodes.length - Math.PI / 2; // Offset by -PI/2 to start from top
+            nodePositions[node.id] = {
+                x: centerX + R * Math.cos(angle),
+                y: centerY + R * Math.sin(angle),
+                angle: angle
+            };
+        });
+
+        // SVG Render logic
+        const edgesGroup = document.getElementById('edges-group');
+        const nodesGroup = document.getElementById('nodes-group');
+
+        // Draw Edges (with a slight bend towards center to look clean)
+        links.forEach(link => {
+            const p1 = nodePositions[link.source];
+            const p2 = nodePositions[link.target];
+            
+            // Calculate quadratic curve control point
+            const mx = (p1.x + p2.x) / 2;
+            const my = (p1.y + p2.y) / 2;
+            const k = 0.22; // bend factor towards center
+            const cx = mx + (centerX - mx) * k;
+            const cy = my + (centerY - my) * k;
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`);
+            path.setAttribute("class", "graph-edge");
+            path.setAttribute("data-source", link.source);
+            path.setAttribute("data-target", link.target);
+            path.setAttribute("id", `edge-${link.source}-${link.target}`);
+            edgesGroup.appendChild(path);
+        });
+
+        // Draw Nodes
+        nodes.forEach((node, index) => {
+            const pos = nodePositions[node.id];
+            
+            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.setAttribute("class", "graph-node");
+            g.setAttribute("data-id", node.id);
+            g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
+            
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "22");
+            
+            const textNum = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textNum.setAttribute("class", "graph-node-number");
+            textNum.setAttribute("y", "5");
+            textNum.textContent = node.shortNum;
+            
+            // Outer text labels positioned radially
+            const labelR = 34; // distance from circle node
+            const lx = labelR * Math.cos(pos.angle);
+            const ly = labelR * Math.sin(pos.angle);
+            
+            let anchor = "middle";
+            let labelOffsetY = 5;
+            
+            // Determine best text anchor based on circle side
+            const cosVal = Math.cos(pos.angle);
+            if (cosVal > 0.2) {
+                anchor = "start";
+            } else if (cosVal < -0.2) {
+                anchor = "end";
+            } else {
+                anchor = "middle";
+                labelOffsetY = Math.sin(pos.angle) > 0 ? 15 : -8;
+            }
+            
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", lx);
+            label.setAttribute("y", ly + labelOffsetY);
+            label.setAttribute("text-anchor", anchor);
+            
+            // Truncate labels for cleaner rendering in circle
+            let cleanTitle = node.title.split(":")[0]; // cut subtitle
+            if (cleanTitle.length > 25) {
+                cleanTitle = cleanTitle.substring(0, 23) + "...";
+            }
+            label.textContent = cleanTitle;
+            
+            g.appendChild(circle);
+            g.appendChild(textNum);
+            g.appendChild(label);
+            nodesGroup.appendChild(g);
+        });
+
+        // Interaction logic
+        const nodeElements = document.querySelectorAll('.graph-node');
+        const edgeElements = document.querySelectorAll('.graph-edge');
+        const placeholderView = document.getElementById('placeholder-view');
+        const panelDetails = document.getElementById('panel-details');
+        
+        const pChapterTag = document.getElementById('panel-chapter-tag');
+        const pChapterTitle = document.getElementById('panel-chapter-title');
+        const pChapterAuthor = document.getElementById('panel-chapter-author');
+        const pChapterDesc = document.getElementById('panel-chapter-desc');
+        const pConnectionsList = document.getElementById('panel-connections-list');
+        const btnReadSummary = document.getElementById('btn-read-summary');
+
+        let selectedNodeId = null;
+
+        // Function to select a node and render side panel info
+        function selectNode(nodeId) {
+            selectedNodeId = nodeId;
+            const node = nodes.find(n => n.id === nodeId);
+            
+            // UI classes adjustment
+            nodeElements.forEach(el => {
+                const elId = parseInt(el.getAttribute('data-id'));
+                if (elId === nodeId) {
+                    el.classList.add('active');
+                    el.classList.remove('dimmed');
+                } else {
+                    el.classList.remove('active');
+                    el.classList.add('dimmed');
+                }
+            });
+
+            // Highlight connections on SVG
+            edgeElements.forEach(edge => {
+                const s = parseInt(edge.getAttribute('data-source'));
+                const t = parseInt(edge.getAttribute('data-target'));
+                if (s === nodeId || t === nodeId) {
+                    edge.classList.add('active');
+                    edge.classList.remove('dimmed');
+                } else {
+                    edge.classList.remove('active');
+                    edge.classList.add('dimmed');
+                }
+            });
+
+            // Fill Panel text
+            pChapterTag.textContent = node.label;
+            pChapterTitle.textContent = node.title;
+            pChapterAuthor.textContent = node.author;
+            pChapterDesc.textContent = node.desc;
+
+            // Generate connection list on panel
+            pConnectionsList.innerHTML = '';
+            const associatedLinks = links.filter(l => l.source === nodeId || l.target === nodeId);
+            
+            if (associatedLinks.length === 0) {
+                pConnectionsList.innerHTML = '<p class="panel-desc" style="font-style: italic;">Nessuna connessione diretta definita per questo capitolo.</p>';
+            } else {
+                associatedLinks.forEach(link => {
+                    const targetId = link.source === nodeId ? link.target : link.source;
+                    const targetNode = nodes.find(n => n.id === targetId);
+                    
+                    const item = document.createElement('div');
+                    item.className = 'connection-item';
+                    item.innerHTML = `
+                        <div class="conn-header">
+                            <span>Connesso con ${targetNode.label}</span>
+                            <span>VEDI GRAFO</span>
+                        </div>
+                        <div class="conn-desc">${link.desc || 'Collegamento tematico o cronologico.'}</div>
+                    `;
+                    item.onclick = (e) => {
+                        e.stopPropagation(); // prevent resetting
+                        selectNode(targetId);
+                    };
+                    pConnectionsList.appendChild(item);
+                });
+            }
+
+            // Assign modal loading
+            btnReadSummary.onclick = () => {
+                openSummary(node.label, node.file);
+            };
+
+            placeholderView.style.display = 'none';
+            panelDetails.style.display = 'block';
+        }
+
+        // Click handler to select node
+        nodeElements.forEach(node => {
+            node.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(node.getAttribute('data-id'));
+                selectNode(id);
+            });
+        });
+
+        // Click outside to clear selection
+        document.addEventListener('click', () => {
+            selectedNodeId = null;
+            nodeElements.forEach(el => el.classList.remove('active', 'dimmed'));
+            edgeElements.forEach(el => el.classList.remove('active', 'dimmed'));
+            placeholderView.style.display = 'flex';
+            panelDetails.style.display = 'none';
+        });
+
+        // Modal functions
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag-view');
+        const modalChapterTitle = document.getElementById('modal-chapter-title-view');
+        const markdownView = document.getElementById('markdown-view');
+        const progressIndicator = document.getElementById('progress-indicator');
+        const modalBody = document.getElementById('modal-body-content');
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento in corso...";
+            markdownView.innerHTML = `<div class="loading-spinner-wrapper"><div class="spinner"></div><p style="margin-top: 1rem; color: var(--text-secondary);">Caricamento sintesi accademica...</p></div>`;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // stop page scrolling
+
+            // Scroll indicator reset
+            progressIndicator.style.width = '0%';
+            modalBody.scrollTop = 0;
+
+            // Fetch file
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("File non trovato");
+                    return response.text();
+                })
+                .then(text => {
+                    // Extract Title from markdown if exists
+                    const titleMatch = text.match(/^#\s+(.+)$/m);
+                    if (titleMatch) {
+                        modalChapterTitle.textContent = titleMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = nodes.find(n => n.file === filePath).title;
+                    }
+                    markdownView.innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore di caricamento";
+                    markdownView.innerHTML = `<p style="color: #ef4444; text-align: center; margin-top: 2rem;">Impossibile caricare il file di sintesi (${filePath}). Assicurati di eseguire l'app in locale o da server e che il file esista.</p>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // restore page scroll
+        }
+
+        // Scroll indicator calculation inside modal
+        modalBody.addEventListener('scroll', () => {
+            const winScroll = modalBody.scrollTop;
+            const height = modalBody.scrollHeight - modalBody.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressIndicator.style.width = scrolled + "%";
+        });
+    </script>
+</body>
+</html>

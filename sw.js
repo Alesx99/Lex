@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v3';
+const CACHE_NAME = 'lex-cache-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -8,7 +8,8 @@ const ASSETS = [
   './js/glossary_db.js',
   './arte_romana/index.html',
   './arte_romana/style.css',
-  './arte_romana/quiz.html'
+  './arte_romana/quiz.html',
+  './arte_romana/connections.html'
 ];
 
 self.addEventListener('install', event => {
