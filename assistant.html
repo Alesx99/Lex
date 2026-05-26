@@ -654,35 +654,113 @@
 
             const fetchPromises = [];
 
-            // Helper to add tasks
-            const addFetchTask = (subject, links, baseDir) => {
-                Object.entries(links).forEach(([chapterKey, relPath]) => {
-                    const fullUrl = `${baseDir}/${relPath}`;
-                    fetchPromises.push(
-                        fetch(fullUrl)
-                            .then(res => {
-                                if (!res.ok) throw new Error(`Fetch failed for ${fullUrl}`);
-                                return res.text();
-                            })
-                            .then(mdText => {
-                                const chapterTitle = quizDatabase[chapterKey]?.title || chapterKey;
-                                const sections = parseSummaryIntoSections(subject, chapterKey, chapterTitle, mdText);
-                                knowledgeBase.push(...sections);
-                            })
-                            .catch(err => {
-                                console.error(`Error loading chapter ${chapterKey}:`, err);
-                            })
-                    );
-                });
+            // 1. Diritto: load from knowledge_base/diritto/
+            Object.entries(dirittoChapterLinks).forEach(([chapterKey, relPath]) => {
+                const filename = relPath.split('/').pop();
+                const fullUrl = `knowledge_base/diritto/${filename}`;
+                fetchPromises.push(
+                    fetch(fullUrl)
+                        .then(res => {
+                            if (!res.ok) throw new Error(`Fetch failed for ${fullUrl}`);
+                            return res.text();
+                        })
+                        .then(mdText => {
+                            const chapterTitle = quizDatabase[chapterKey]?.title || chapterKey;
+                            const sections = parseSummaryIntoSections('diritto', chapterKey, chapterTitle, mdText);
+                            knowledgeBase.push(...sections);
+                        })
+                        .catch(err => {
+                            console.error(`Error loading diritto chapter ${chapterKey}:`, err);
+                        })
+                );
+            });
+
+            // 2. Arte Romana: load the single complete file from knowledge_base/arte_romana/arte_romana_completo.md
+            const romanaUrl = "knowledge_base/arte_romana/arte_romana_completo.md";
+            fetchPromises.push(
+                fetch(romanaUrl)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Fetch failed for ${romanaUrl}`);
+                        return res.text();
+                    })
+                    .then(mdText => {
+                        const sections = parseSummaryIntoSections('arte_romana', 'arte_romana_completo', 'Arte Romana (Manuale Completo)', mdText);
+                        knowledgeBase.push(...sections);
+                    })
+                    .catch(err => {
+                        console.error(`Error loading complete Roman Art text:`, err);
+                    })
+            );
+
+            // 3. Storia dell'Arte:
+            // - Load Brunelleschi complete: knowledge_base/storia_arte/brunelleschi_completo.md
+            // - Load Canova complete: knowledge_base/storia_arte/canova_completo.md
+            // - Load fallbacks for other chapters (esperienze, maturo, veneto, barocco, romanticismo, impressionismo, postimpressionismo) from storia_arte/summaries/
+            const brunelleschiUrl = "knowledge_base/storia_arte/brunelleschi_completo.md";
+            fetchPromises.push(
+                fetch(brunelleschiUrl)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Fetch failed for ${brunelleschiUrl}`);
+                        return res.text();
+                    })
+                    .then(mdText => {
+                        const sections = parseSummaryIntoSections('storia_arte', 'brunelleschi_completo', 'Filippo Brunelleschi (Manuale Completo)', mdText);
+                        knowledgeBase.push(...sections);
+                    })
+                    .catch(err => {
+                        console.error(`Error loading Brunelleschi text:`, err);
+                    })
+            );
+
+            const canovaUrl = "knowledge_base/storia_arte/canova_completo.md";
+            fetchPromises.push(
+                fetch(canovaUrl)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Fetch failed for ${canovaUrl}`);
+                        return res.text();
+                    })
+                    .then(mdText => {
+                        const sections = parseSummaryIntoSections('storia_arte', 'canova_completo', 'Antonio Canova (Manuale Completo)', mdText);
+                        knowledgeBase.push(...sections);
+                    })
+                    .catch(err => {
+                        console.error(`Error loading Canova text:`, err);
+                    })
+            );
+
+            // Load other Storia dell'Arte chapters from summaries/ as fallback
+            const fallbackArteChapters = {
+                esperienze: "summaries/rinascimento_3_esperienze.md",
+                maturo: "summaries/rinascimento_4_maturo.md",
+                veneto: "summaries/rinascimento_5_veneto.md",
+                barocco: "summaries/barocco_6.md",
+                romanticismo: "summaries/romanticismo_realismo_8.md",
+                impressionismo: "summaries/impressionismo_9.md",
+                postimpressionismo: "summaries/postimpressionismo_10.md"
             };
 
-            addFetchTask('diritto', dirittoChapterLinks, 'diritto');
-            addFetchTask('storia_arte', shortcutResolveArteLinks(arteChapterLinks), 'storia_arte');
-            addFetchTask('arte_romana', romanaChapterLinks, 'arte_romana');
+            Object.entries(fallbackArteChapters).forEach(([chapterKey, relPath]) => {
+                const fullUrl = `storia_arte/${relPath}`;
+                fetchPromises.push(
+                    fetch(fullUrl)
+                        .then(res => {
+                            if (!res.ok) throw new Error(`Fetch failed for ${fullUrl}`);
+                            return res.text();
+                        })
+                        .then(mdText => {
+                            const chapterTitle = quizDatabase[chapterKey]?.title || chapterKey;
+                            const sections = parseSummaryIntoSections('storia_arte', chapterKey, chapterTitle, mdText);
+                            knowledgeBase.push(...sections);
+                        })
+                        .catch(err => {
+                            console.error(`Error loading fallback history of art chapter ${chapterKey}:`, err);
+                        })
+                );
+            });
 
             await Promise.all(fetchPromises);
             isKbReady = true;
-            statusLabel.textContent = `Knowledge Base attiva: ${knowledgeBase.length} argomenti caricati.`;
+            statusLabel.textContent = `Knowledge Base attiva: ${knowledgeBase.length} pagine/argomenti caricati.`;
         }
 
         // Fix path mapping for history of art
@@ -982,7 +1060,7 @@
             if (citations.length > 0) {
                 citationHtml = `<div class="rag-citations">`;
                 citations.forEach(c => {
-                    const path = getDirittoOrArteOrRomanaPath(c.subject, c.chapterKey);
+                    const path = getDirittoOrArteOrRomanaPath(c.subject, c.chapterKey, c.sectionTitle);
                     citationHtml += `
                         <div class="citation-tag">
                             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -1015,10 +1093,27 @@
         }
 
         // Helper to resolve navigation links based on subject
-        function getDirittoOrArteOrRomanaPath(subject, chapterKey) {
+        function getDirittoOrArteOrRomanaPath(subject, chapterKey, sectionTitle) {
+            // Check if it's one of the complete files in knowledge_base
+            if (chapterKey === 'arte_romana_completo') {
+                const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                return `knowledge_base/arte_romana/arte_romana_completo.md${anchor}`;
+            } else if (chapterKey === 'brunelleschi_completo') {
+                const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                return `knowledge_base/storia_arte/brunelleschi_completo.md${anchor}`;
+            } else if (chapterKey === 'canova_completo') {
+                const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                return `knowledge_base/storia_arte/canova_completo.md${anchor}`;
+            }
+
             if (subject === 'diritto') {
                 const rel = dirittoChapterLinks[chapterKey];
-                return rel ? `diritto/index.html?open=${rel}` : `diritto/index.html`;
+                if (rel) {
+                    const filename = rel.split('/').pop();
+                    const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                    return `knowledge_base/diritto/${filename}${anchor}`;
+                }
+                return `diritto/index.html`;
             } else if (subject === 'arte_romana') {
                 const rel = romanaChapterLinks[chapterKey];
                 return rel ? `arte_romana/index.html?open=${rel}` : `arte_romana/index.html`;
