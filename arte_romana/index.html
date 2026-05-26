@@ -16,8 +16,6 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- Centralized Glossary Database -->
     <script src="../js/glossary_db.js"></script>
-    <!-- Google Model Viewer Script -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <style>
         .search-container {
             max-width: 600px;
@@ -290,7 +288,6 @@
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="openSummary('Studio VIII', 'summaries/cap8_traiano.md')">Leggi Sintesi</button>
-                    <button class="btn btn-secondary" onclick="open3DViewer('Colonna Traiana', 'colonna_traiana')" title="Esplora il modello 3D">Modello 3D</button>
                     <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
                     <a class="btn btn-secondary" href="summaries/cap8_traiano.md" target="_blank" title="Visualizza Markdown raw">MD</a>
                 </div>
@@ -312,7 +309,6 @@
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="openSummary('Studio IX', 'summaries/cap9_adriano.md')">Leggi Sintesi</button>
-                    <button class="btn btn-secondary" onclick="open3DViewer('Pantheon', 'pantheon')" title="Esplora il modello 3D">Modello 3D</button>
                     <a class="btn btn-secondary" href="../Arte romana.pdf" target="_blank" title="Apri PDF originale">PDF</a>
                     <a class="btn btn-secondary" href="summaries/cap9_adriano.md" target="_blank" title="Visualizza Markdown raw">MD</a>
                 </div>
@@ -702,72 +698,7 @@
             };
         }
 
-        // 3D MODEL VIEWER
-        function open3DViewer(title, modelKey) {
-            const modal3d = document.getElementById('modal-3d');
-            const title3d = document.getElementById('modal-3d-title');
-            const viewer = document.getElementById('viewer-3d-element');
-            
-            title3d.textContent = title;
-            
-            const models = {
-                colonna_traiana: "https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/Models/Column/glTF-Binary/Column.glb",
-                pantheon: "https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/Models/AntiqueCamera/glTF-Binary/AntiqueCamera.glb"
-            };
-            
-            viewer.src = models[modelKey] || "";
-            modal3d.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function close3DViewer() {
-            const modal3d = document.getElementById('modal-3d');
-            const viewer = document.getElementById('viewer-3d-element');
-            viewer.src = "";
-            modal3d.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close 3D Modal on click outside
-        document.addEventListener('click', (e) => {
-            const modal3d = document.getElementById('modal-3d');
-            if (e.target === modal3d) {
-                close3DViewer();
-            }
-        });
     </script>
-
-    <!-- 3D Model Viewer Modal Overlay -->
-    <div id="modal-3d" class="modal">
-        <div class="modal-container" style="max-width: 800px; height: 600px;">
-            <div class="modal-header">
-                <div class="modal-title-area">
-                    <span class="modal-chapter-tag">Esplora in 3D</span>
-                    <h3 class="modal-title" id="modal-3d-title">Modello 3D</h3>
-                </div>
-                <div class="modal-controls">
-                    <button class="modal-close" onclick="close3DViewer()" title="Chiudi finestra">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="modal-body" style="padding: 0; overflow: hidden; height: calc(100% - 70px); position: relative;">
-                <model-viewer id="viewer-3d-element" 
-                              src="" 
-                              alt="Modello 3D Ricostruttivo" 
-                              auto-rotate 
-                              camera-controls 
-                              ar 
-                              style="width: 100%; height: 100%; background-color: #0b0f19;">
-                    <div id="lazy-load-poster" slot="poster" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0b0f19; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-secondary);">
-                        <div class="spinner" style="border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid var(--accent-romana); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;"></div>
-                        <p style="margin-top: 1rem; font-size: 0.9rem;">Caricamento modello tridimensionale...</p>
-                    </div>
-                </model-viewer>
-            </div>
-        </div>
-    </div>
 
     <!-- Floating Paragraph Highlighter Palette -->
     <div id="highlight-palette" class="highlight-palette" style="display: none;">
