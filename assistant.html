@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Assistant - Assistente Studio con Intelligenza Artificiale</title>
+    <meta name="description" content="Parla con il tuo assistente di studio personale. Poni domande libere sui testi d'esame e ricevi spiegazioni contestualizzate con RAG semantica locale.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
+    <style>
+        .assistant-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 180px);
+            margin-top: 1rem;
+        }
+
+        /* Sidebar Settings Panel */
+        .assistant-sidebar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: fit-content;
+            animation: fade-in-up 0.5s ease-out both;
+        }
+
+        .sidebar-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .sidebar-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Active Model Badge */
+        .model-status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+
+        .status-indicator.ready {
+            background: var(--accent-green, #10b981);
+            box-shadow: 0 0 10px var(--accent-green);
+        }
+
+        .status-indicator.loading {
+            background: var(--accent-gold, #d4af37);
+            animation: pulse 1s infinite alternate;
+        }
+
+        /* Main Chat Area */
+        .chat-main-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 200px);
+            min-height: 550px;
+            overflow: hidden;
+            animation: fade-in-up 0.6s ease-out 0.1s both;
+        }
+
+        .chat-header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .chat-header-info h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .chat-header-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.1rem;
+        }
+
+        /* Scrollable Message Box */
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            scroll-behavior: smooth;
+        }
+
+        /* Chat Bubbles */
+        .chat-bubble {
+            max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+            animation: fade-in-up 0.3s ease-out both;
+        }
+
+        .chat-bubble.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 1px solid var(--accent-gold-glow);
+            border-bottom-right-radius: 2px;
+            color: var(--text-primary);
+        }
+
+        .chat-bubble.assistant {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 2px;
+            color: var(--text-primary);
+        }
+
+        /* Message Headers and Metadata */
+        .bubble-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bubble-speaker {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bubble-speaker.user {
+            color: var(--accent-gold);
+        }
+
+        .bubble-speaker.assistant {
+            color: var(--accent-cyan);
+        }
+
+        /* Citations & Source Links */
+        .rag-citations {
+            margin-top: 0.8rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .citation-tag {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .citation-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-speed);
+        }
+
+        .citation-link:hover {
+            text-decoration: underline;
+            color: var(--text-primary);
+        }
+
+        /* Suggested Prompts Grid */
+        .suggestion-chips-container {
+            padding: 0.8rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 0.8rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .suggestion-chips-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .suggestion-chips-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .suggestion-chip {
+            padding: 0.5rem 0.9rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-speed);
+        }
+
+        .suggestion-chip:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-gold);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Chat Input Wrap */
+        .chat-input-area {
+            padding: 1.2rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.01);
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .chat-textarea {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.8rem 1.1rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: var(--font-sans);
+            resize: none;
+            height: 48px;
+            outline: none;
+            transition: var(--transition-speed);
+        }
+
+        .chat-textarea:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        .action-icon-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-speed);
+        }
+
+        .action-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            border-color: var(--border-color-hover);
+        }
+
+        .action-icon-btn.active {
+            background: rgba(200, 90, 50, 0.15);
+            border-color: var(--accent-terracotta);
+            color: var(--accent-terracotta);
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .btn-send-message {
+            background: var(--accent-gold);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0b0f19;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition-speed);
+        }
+
+        .btn-send-message:hover {
+            background: #e5c158;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Sound speech bubble button */
+        .bubble-audio-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition-speed);
+        }
+
+        .bubble-audio-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        .bubble-audio-btn.playing {
+            color: var(--accent-terracotta);
+            animation: pulse 1s infinite alternate;
+        }
+
+        /* Layout responsive styling */
+        @media (max-width: 900px) {
+            .assistant-layout {
+                grid-template-columns: 1fr;
+            }
+            .assistant-sidebar {
+                display: none; /* Collapsible side panel on mobile */
+            }
+            .assistant-sidebar.open {
+                display: flex;
+                position: fixed;
+                top: 80px;
+                left: 10px;
+                right: 10px;
+                z-index: 1000;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorative blur shapes -->
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>Assistente di Studio con Intelligenza Artificiale</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+            <a href="assistant.html" class="nav-link active" id="nav-assistant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path></svg>
+                Assistente Studio
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main style="max-width: 1200px; padding-top: 1rem;">
+        <a href="index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Home
+        </a>
+
+        <div class="assistant-layout">
+            
+            <!-- Left Side Settings -->
+            <aside class="assistant-sidebar" id="assistant-sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Motore AI</h3>
+                    <select id="chat-engine" class="form-select" onchange="toggleCredentialsField(); saveSettings();">
+                        <option value="local">Ricerca Semantica Locale (Offline)</option>
+                        <option value="gemini">Gemini API (Cloud RAG)</option>
+                        <option value="ollama">Ollama (Local Host RAG)</option>
+                        <option value="lm-studio">LM Studio (Local Host RAG)</option>
+                    </select>
+                </div>
+
+                <div class="sidebar-section" id="credentials-wrapper">
+                    <h3 class="sidebar-title" id="credentials-label">Chiave API Gemini</h3>
+                    <input type="password" id="chat-key" class="form-input" placeholder="Inserisci chiave o URL..." onchange="saveSettings();" style="width: 100%; padding: 0.6rem; border-radius: 8px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--text-primary);">
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">RAG Vettoriale Locale</h3>
+                    <div class="model-status-badge">
+                        <div id="model-indicator" class="status-indicator"></div>
+                        <span id="model-status-text">Non caricato (usa ricerca testuale)</span>
+                    </div>
+                    <button id="btn-load-model" class="btn btn-secondary" onclick="loadLocalModel()" style="width: 100%; padding: 0.6rem; font-size: 0.85rem;">Carica Modello (90MB)</button>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Istruzioni di Sistema</h3>
+                    <textarea id="system-prompt" class="form-input" style="width: 100%; height: 100px; resize: none; font-size: 0.8rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; padding: 0.5rem;" onchange="saveSettings();">Sei un tutor accademico colto ed empatico. Rispondi alle domande degli studenti in modo preciso e dettagliato, basandoti rigorosamente sulle fonti accresciute fornite.</textarea>
+                </div>
+
+                <div class="sidebar-section" style="margin-top: auto;">
+                    <button class="btn btn-secondary" onclick="exportChat()" style="width: 100%; border-color: var(--accent-cyan); color: var(--accent-cyan);">Esporta Conversazione (MD)</button>
+                    <button class="btn btn-secondary" onclick="clearChat()" style="width: 100%; margin-top: 0.5rem; border-color: var(--accent-romana); color: var(--accent-romana);">Cancella Cronologia</button>
+                </div>
+            </aside>
+
+            <!-- Right Side Chat Window -->
+            <section class="chat-main-panel">
+                <div class="chat-header">
+                    <div class="chat-header-info">
+                        <h2>Tutor Didattico Lex</h2>
+                        <p id="kb-status">Precaricamento della base di conoscenza...</p>
+                    </div>
+                    <button class="action-icon-btn" onclick="toggleSidebarMobile()" title="Mostra Impostazioni" style="display: none;" id="sidebar-toggle-mobile">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                </div>
+
+                <!-- Messages -->
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Dynamic chat bubbles loaded here -->
+                </div>
+
+                <!-- Suggestion Chips -->
+                <div class="suggestion-chips-container" id="suggestion-container">
+                    <div class="suggestion-chip" onclick="askSuggestion('Cos\'è l\'Art Bonus e come si differenzia la quota massima deducibile?')">Cos'è l'Art Bonus?</div>
+                    <div class="suggestion-chip" onclick="askSuggestion('Spiegami le differenze tra il rito di fondazione etrusco e le mura serviane')">Origini di Roma</div>
+                    <div class="suggestion-chip" onclick="askSuggestion('Come ha risolto Filippo Brunelleschi il problema strutturale della Cupola?')">Cupola del Brunelleschi</div>
+                    <div class="suggestion-chip" onclick="askSuggestion('Qual è la differenza fondamentale tra il concetto di bellezza di Winckelmann e il sublime?')">Neoclassicismo vs Sublime</div>
+                </div>
+
+                <!-- Input area -->
+                <div class="chat-input-area">
+                    <button id="btn-stt" class="action-icon-btn" onclick="toggleDictation()" title="Dettatura vocale">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                    </button>
+                    <textarea id="chat-user-input" class="chat-textarea" placeholder="Chiedi spiegazioni sui testi di studio..." onkeydown="handleInputKeydown(event)"></textarea>
+                    <button class="btn-send-message" onclick="sendMessage()" title="Invia messaggio">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(45deg);"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: 2rem;">
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Centralized Search Database -->
+    <script src="js/search_db.js"></script>
+    <script src="js/quiz_db.js"></script>
+
+    <!-- Chatbot Logic -->
+    <script>
+        // Mapping from index files
+        const dirittoChapterLinks = {
+            cap1_patrimonio: "summaries/1_patrimonio.md",
+            cap2_governo: "summaries/2_governo.md",
+            cap3_individuazione: "summaries/3_individuazione.md",
+            cap4_tutela_internazionale: "summaries/4_tutela_internazionale.md",
+            cap5_tutela: "summaries/5_tutela.md",
+            cap6_circolazione: "summaries/6_circolazione.md",
+            cap8_appalti: "summaries/8_appalti.md",
+            cap9_ritrovamenti: "summaries/9_ritrovamenti.md",
+            cap10_espropriazione: "summaries/10_espropriazione.md",
+            cap11_regime_fiscale: "summaries/11_regime_fiscale.md",
+            cap12_paesaggio: "summaries/12_paesaggio.md",
+            cap13_sanzioni: "summaries/13_sanzioni.md"
+        };
+
+        const arteChapterLinks = {
+            origini: "summaries/rinascimento_1_origini.md",
+            fondatori: "summaries/rinascimento_2_fondatori.md",
+            esperienze: "summaries/rinascimento_3_esperienze.md",
+            maturo: "summaries/rinascimento_4_maturo.md",
+            veneto: "summaries/rinascimento_5_veneto.md",
+            barocco: "summaries/barocco_6.md",
+            neoclassicismo: "summaries/neoclassicismo_7.md",
+            romanticismo: "summaries/romanticismo_realismo_8.md",
+            impressionismo: "summaries/impressionismo_9.md",
+            postimpressionismo: "summaries/postimpressionismo_10.md"
+        };
+
+        const romanaChapterLinks = {
+            cap1_introduzione: "summaries/cap1_introduzione.md",
+            cap2_fondazione: "summaries/cap2_fondazione.md",
+            cap3_repubblica: "summaries/cap3_repubblica.md",
+            cap4_ellenismo: "summaries/cap4_ellenismo.md",
+            cap5_tardo_repubblica: "summaries/cap5_tardo_repubblica.md",
+            cap6_augusto_ara_pacis: "summaries/cap6_augusto_ara_pacis.md",
+            cap7_augusto_foro_successori: "summaries/cap7_augusto_foro_successori.md",
+            cap8_traiano: "summaries/cap8_traiano.md",
+            cap9_adriano: "summaries/cap9_adriano.md",
+            cap10_antonini_tardoantico: "summaries/cap10_antonini_tardoantico.md"
+        };
+
+        // Knowledge Base flat paragraphs
+        let knowledgeBase = [];
+        let isKbReady = false;
+
+        // Transformers.js local variables
+        let localPipeline = null;
+        let localModelLoading = false;
+
+        // Speech systems
+        let recognition = null;
+        let isDictating = false;
+        let currentUtterance = null;
+
+        // Chat conversation history state
+        let conversationHistory = [];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check mobile sidebar button
+            if (window.innerWidth <= 900) {
+                document.getElementById('sidebar-toggle-mobile').style.display = 'flex';
+            }
+
+            // Load saved settings
+            loadSettings();
+            
+            // Build / Preload KB
+            await preloadKnowledgeBase();
+
+            // Check if model was cached or load configuration
+            const savedEngine = localStorage.getItem('lex-oral-ai-engine') || 'local';
+            if (savedEngine === 'local') {
+                addBotMessage("Benvenuto! Sono il tuo tutor accademico. Le impostazioni indicano l'uso del **modello locale offline**. Fai clic su 'Carica Modello' nella barra laterale per abilitare il reranking vettoriale semantico, oppure poni direttamente una domanda!");
+            } else {
+                addBotMessage(`Benvenuto! Sono il tuo tutor accademico. Pronto ad aiutarti utilizzando l'engine **${savedEngine.toUpperCase()}**.`);
+            }
+
+            // Sync model indicator if script exists
+            checkModelCached();
+        });
+
+        // Toggle settings inputs depending on selected engine
+        function toggleCredentialsField() {
+            const engine = document.getElementById('chat-engine').value;
+            const wrapper = document.getElementById('credentials-wrapper');
+            const label = document.getElementById('credentials-label');
+            const input = document.getElementById('chat-key');
+
+            if (engine === 'local') {
+                wrapper.style.display = 'none';
+            } else {
+                wrapper.style.display = 'flex';
+                if (engine === 'gemini') {
+                    label.textContent = "Chiave API Gemini";
+                    input.placeholder = "AIzaSy...";
+                    input.type = "password";
+                } else if (engine === 'ollama') {
+                    label.textContent = "Indirizzo Ollama Host";
+                    input.placeholder = "http://localhost:11434";
+                    input.type = "text";
+                } else if (engine === 'lm-studio') {
+                    label.textContent = "Indirizzo LM Studio Host";
+                    input.placeholder = "http://localhost:12345";
+                    input.type = "text";
+                }
+            }
+        }
+
+        // Save preferences
+        function saveSettings() {
+            const engine = document.getElementById('chat-engine').value;
+            const key = document.getElementById('chat-key').value.trim();
+            const sysPrompt = document.getElementById('system-prompt').value.trim();
+
+            localStorage.setItem('lex-oral-ai-engine', engine);
+            localStorage.setItem('lex-oral-ai-key', key);
+            localStorage.setItem('lex-assistant-system-prompt', sysPrompt);
+        }
+
+        // Load preferences
+        function loadSettings() {
+            const engine = localStorage.getItem('lex-oral-ai-engine') || 'local';
+            const key = localStorage.getItem('lex-oral-ai-key') || '';
+            const sysPrompt = localStorage.getItem('lex-assistant-system-prompt') || "Sei un tutor accademico colto ed empatico. Rispondi alle domande degli studenti in modo preciso e dettagliato, basandoti rigorosamente sulle fonti accresciute fornite.";
+
+            document.getElementById('chat-engine').value = engine;
+            document.getElementById('chat-key').value = key;
+            document.getElementById('system-prompt').value = sysPrompt;
+
+            toggleCredentialsField();
+        }
+
+        // Mobile responsive sidebar
+        function toggleSidebarMobile() {
+            const sidebar = document.getElementById('assistant-sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Parallel summary fetcher to build the Knowledge Base
+        async function preloadKnowledgeBase() {
+            const statusLabel = document.getElementById('kb-status');
+            statusLabel.textContent = "Caricamento testi di studio in corso...";
+
+            const fetchPromises = [];
+
+            // Helper to add tasks
+            const addFetchTask = (subject, links, baseDir) => {
+                Object.entries(links).forEach(([chapterKey, relPath]) => {
+                    const fullUrl = `${baseDir}/${relPath}`;
+                    fetchPromises.push(
+                        fetch(fullUrl)
+                            .then(res => {
+                                if (!res.ok) throw new Error(`Fetch failed for ${fullUrl}`);
+                                return res.text();
+                            })
+                            .then(mdText => {
+                                const chapterTitle = quizDatabase[chapterKey]?.title || chapterKey;
+                                const sections = parseSummaryIntoSections(subject, chapterKey, chapterTitle, mdText);
+                                knowledgeBase.push(...sections);
+                            })
+                            .catch(err => {
+                                console.error(`Error loading chapter ${chapterKey}:`, err);
+                            })
+                    );
+                });
+            };
+
+            addFetchTask('diritto', dirittoChapterLinks, 'diritto');
+            addFetchTask('storia_arte', shortcutResolveArteLinks(arteChapterLinks), 'storia_arte');
+            addFetchTask('arte_romana', romanaChapterLinks, 'arte_romana');
+
+            await Promise.all(fetchPromises);
+            isKbReady = true;
+            statusLabel.textContent = `Knowledge Base attiva: ${knowledgeBase.length} argomenti caricati.`;
+        }
+
+        // Fix path mapping for history of art
+        function shortcutResolveArteLinks(links) {
+            const newLinks = {};
+            Object.entries(links).forEach(([k, v]) => {
+                newLinks[k] = v;
+            });
+            return newLinks;
+        }
+
+        // Parse markdown summary into sections
+        function parseSummaryIntoSections(subject, chapterKey, chapterTitle, mdText) {
+            const lines = mdText.split('\n');
+            const sections = [];
+            let currentSection = null;
+            let currentTextLines = [];
+            
+            const h1Regex = /^#\s+(.+)$/;
+            const h2Regex = /^##\s+(.+)$/;
+            
+            for (let line of lines) {
+                const trimmed = line.trim();
+                if (!trimmed) continue;
+                
+                if (trimmed.startsWith('**Autore:**') || trimmed.startsWith('---')) continue;
+                
+                const h1Match = trimmed.match(h1Regex);
+                if (h1Match) {
+                    continue; // Skip main title, we have chapterTitle
+                }
+                
+                const h2Match = trimmed.match(h2Regex);
+                if (h2Match) {
+                    if (currentSection) {
+                        currentSection.text = currentTextLines.join('\n');
+                        sections.push(currentSection);
+                    }
+                    const secName = h2Match[1].trim();
+                    currentSection = {
+                        subject,
+                        chapterKey,
+                        chapterTitle,
+                        sectionTitle: secName,
+                        text: ''
+                    };
+                    currentTextLines = [];
+                    continue;
+                }
+                
+                if (currentSection) {
+                    currentTextLines.push(trimmed);
+                }
+            }
+            
+            if (currentSection) {
+                currentSection.text = currentTextLines.join('\n');
+                sections.push(currentSection);
+            }
+            
+            if (sections.length === 0) {
+                // Whole document fallback
+                sections.push({
+                    subject,
+                    chapterKey,
+                    chapterTitle,
+                    sectionTitle: "Introduzione generale",
+                    text: mdText
+                });
+            }
+            
+            return sections;
+        }
+
+        // Check if model is cached or available in browser Cache storage
+        async function checkModelCached() {
+            const indicator = document.getElementById('model-indicator');
+            const text = document.getElementById('model-status-text');
+
+            // Transformers.js downloads to cache, so we can check if loaded in memory
+            if (localPipeline) {
+                indicator.className = "status-indicator ready";
+                text.textContent = "Pronto (vettoriale attivo)";
+                document.getElementById('btn-load-model').textContent = "Modello Caricato";
+                document.getElementById('btn-load-model').disabled = true;
+            }
+        }
+
+        // On-demand loader for the 90MB local all-MiniLM-L6-v2 model
+        async function loadLocalModel() {
+            if (localPipeline) return;
+            if (localModelLoading) return;
+
+            localModelLoading = true;
+            const indicator = document.getElementById('model-indicator');
+            const text = document.getElementById('model-status-text');
+            const btn = document.getElementById('btn-load-model');
+
+            indicator.className = "status-indicator loading";
+            text.textContent = "Caricamento modello (90MB)...";
+            btn.textContent = "Caricamento...";
+            btn.disabled = true;
+
+            try {
+                const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+                localPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+                
+                localModelLoading = false;
+                indicator.className = "status-indicator ready";
+                text.textContent = "Pronto (vettoriale attivo)";
+                btn.textContent = "Caricamento completato";
+                
+                addBotMessage("Modello locale caricato con successo! Il reranking semantico vettoriale è ora attivo.");
+            } catch (err) {
+                console.error(err);
+                localModelLoading = false;
+                indicator.className = "status-indicator";
+                text.textContent = "Errore caricamento";
+                btn.textContent = "Riprova caricamento";
+                btn.disabled = false;
+                alert("Impossibile caricare il modello locale. Controlla la connessione di rete.");
+            }
+        }
+
+        // TF-IDF / Term Frequency keyword scoring helper
+        function calculateKeywordScore(text, query) {
+            const queryWords = query.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+            if (queryWords.length === 0) return 0;
+            
+            let score = 0;
+            const lowerText = text.toLowerCase();
+            
+            queryWords.forEach(word => {
+                const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(escapedWord, 'g');
+                const count = (lowerText.match(regex) || []).length;
+                score += count;
+                
+                // Extra bonus for matching title keywords
+                if (lowerText.includes(' ' + word) || lowerText.startsWith(word)) {
+                    score += 2;
+                }
+            });
+            
+            return score;
+        }
+
+        // Cosine similarity
+        function cosineSimilarity(vecA, vecB) {
+            let dotProduct = 0.0;
+            let normA = 0.0;
+            let normB = 0.0;
+            for (let i = 0; i < vecA.length; i++) {
+                dotProduct += vecA[i] * vecB[i];
+                normA += vecA[i] * vecA[i];
+                normB += vecB[i] * vecB[i];
+            }
+            return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+        }
+
+        // Embed search helper
+        async function getEmbedding(text) {
+            if (!localPipeline) return null;
+            const output = await localPipeline(text, { pooling: 'mean', normalize: true });
+            return Array.from(output.data);
+        }
+
+        // Dual-stage RAG query retriever
+        async function retrieveContext(query) {
+            if (knowledgeBase.length === 0) return [];
+
+            // Stage 1: Fast keyword filter
+            const scored = knowledgeBase.map(sec => {
+                const textToSearch = `${sec.chapterTitle} ${sec.sectionTitle} ${sec.text}`;
+                const score = calculateKeywordScore(textToSearch, query);
+                return { section: sec, score };
+            });
+
+            // Filter and sort by score
+            const candidates = scored
+                .filter(c => c.score > 0)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 10);
+
+            if (candidates.length === 0) return [];
+
+            // Stage 2: Semantic vector reranking (only if model is loaded)
+            if (localPipeline) {
+                try {
+                    const queryEmbedding = await getEmbedding(query);
+                    if (queryEmbedding) {
+                        const rerankedPromises = candidates.map(async (cand) => {
+                            const blockText = `${cand.section.sectionTitle}: ${cand.section.text}`;
+                            const blockEmbedding = await getEmbedding(blockText);
+                            if (blockEmbedding) {
+                                const similarity = cosineSimilarity(queryEmbedding, blockEmbedding);
+                                return { section: cand.section, score: similarity };
+                            }
+                            return cand;
+                        });
+
+                        const reranked = await Promise.all(rerankedPromises);
+                        return reranked
+                            .sort((a, b) => b.score - a.score)
+                            .slice(0, 3)
+                            .map(r => r.section);
+                    }
+                } catch (e) {
+                    console.error("Vector reranking failed, falling back to keyword selection", e);
+                }
+            }
+
+            // Fallback: top 3 keyword matches
+            return candidates.slice(0, 3).map(c => c.section);
+        }
+
+        // Suggestions
+        function askSuggestion(questionText) {
+            document.getElementById('chat-user-input').value = questionText;
+            sendMessage();
+        }
+
+        // Enter key keydown listener
+        function handleInputKeydown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Core Send Message function
+        async function sendMessage() {
+            const inputField = document.getElementById('chat-user-input');
+            const question = inputField.value.trim();
+            if (!question) return;
+
+            if (!isKbReady) {
+                alert("La Knowledge Base si sta ancora caricando, attendi qualche secondo.");
+                return;
+            }
+
+            // Reset user input field
+            inputField.value = '';
+            
+            // Add user message to UI
+            addUserMessage(question);
+
+            // Retrieve top RAG context paragraphs
+            const contextSections = await retrieveContext(question);
+
+            // Execute bot reply matching the engine
+            const engine = document.getElementById('chat-engine').value;
+            const credentials = document.getElementById('chat-key').value.trim();
+            const sysPrompt = document.getElementById('system-prompt').value.trim();
+
+            if (engine === 'local') {
+                // Offline Local Semantic Search helper
+                executeLocalOfflineAssistant(question, contextSections);
+            } else {
+                // Online LLM RAG
+                await executeLlmAssistant(engine, credentials, sysPrompt, question, contextSections);
+            }
+        }
+
+        // UI rendering helper for user messages
+        function addUserMessage(text) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const bubble = document.createElement('div');
+            bubble.className = "chat-bubble user";
+            
+            const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            bubble.innerHTML = `
+                <div class="bubble-meta">
+                    <span class="bubble-speaker user">STUDENTE</span>
+                    <span>${timestamp}</span>
+                </div>
+                <div class="bubble-text">${escapeHtml(text)}</div>
+            `;
+            
+            messagesContainer.appendChild(bubble);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            conversationHistory.push({ role: 'user', text });
+        }
+
+        // UI rendering helper for assistant messages (with custom HTML support for links)
+        function addBotMessage(htmlContent, citations = [], textToSpeak = '') {
+            const messagesContainer = document.getElementById('chat-messages');
+            const bubble = document.createElement('div');
+            bubble.className = "chat-bubble assistant";
+            
+            const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const messageId = 'bot-msg-' + Date.now();
+            bubble.id = messageId;
+            
+            let citationHtml = '';
+            if (citations.length > 0) {
+                citationHtml = `<div class="rag-citations">`;
+                citations.forEach(c => {
+                    const path = getDirittoOrArteOrRomanaPath(c.subject, c.chapterKey);
+                    citationHtml += `
+                        <div class="citation-tag">
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            Fonte: <a href="${path}" class="citation-link" target="_blank">${c.chapterTitle} (${c.sectionTitle})</a>
+                        </div>
+                    `;
+                });
+                citationHtml += `</div>`;
+            }
+
+            const speakText = textToSpeak || stripHtml(htmlContent);
+
+            bubble.innerHTML = `
+                <div class="bubble-meta">
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <span class="bubble-speaker assistant">ASSISTENTE LEX</span>
+                        <button class="bubble-audio-btn" onclick="speakMessage('${messageId}', ${JSON.stringify(speakText).replace(/"/g, '&quot;')})" title="Leggi a voce alta">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                    </div>
+                    <span>${timestamp}</span>
+                </div>
+                <div class="bubble-text">${htmlContent}</div>
+                ${citationHtml}
+            `;
+            
+            messagesContainer.appendChild(bubble);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            conversationHistory.push({ role: 'assistant', text: speakText, html: htmlContent, citations });
+        }
+
+        // Helper to resolve navigation links based on subject
+        function getDirittoOrArteOrRomanaPath(subject, chapterKey) {
+            if (subject === 'diritto') {
+                const rel = dirittoChapterLinks[chapterKey];
+                return rel ? `diritto/index.html?open=${rel}` : `diritto/index.html`;
+            } else if (subject === 'arte_romana') {
+                const rel = romanaChapterLinks[chapterKey];
+                return rel ? `arte_romana/index.html?open=${rel}` : `arte_romana/index.html`;
+            } else {
+                const rel = arteChapterLinks[chapterKey];
+                return rel ? `storia_arte/index.html?open=${rel}` : `storia_arte/index.html`;
+            }
+        }
+
+        // Executing local offline search display
+        function executeLocalOfflineAssistant(question, sections) {
+            if (sections.length === 0) {
+                addBotMessage("Non ho trovato alcun riferimento specifico per la tua domanda nel manuale di studio. Prova a inserire termini diversi o a cambiare engine in modalità cloud (Gemini).");
+                return;
+            }
+
+            let responseHtml = `<p>Ecco i riferimenti accademici più rilevanti trovati direttamente nei tuoi riassunti di studio offline:</p><br>`;
+            
+            sections.forEach((sec, idx) => {
+                // Shorten snippet if it's too long
+                let textExcerpt = sec.text;
+                if (textExcerpt.length > 300) {
+                    textExcerpt = textExcerpt.substring(0, 300) + '...';
+                }
+                
+                responseHtml += `
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px; margin-bottom: 0.8rem;">
+                        <strong style="color: var(--accent-gold);">${idx + 1}. ${sec.chapterTitle}</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary); font-style: italic;">Sezione: ${sec.sectionTitle}</span>
+                        <p style="margin-top: 0.4rem; font-size: 0.9rem; color: var(--text-primary); line-height: 1.4;">${escapeHtml(textExcerpt)}</p>
+                    </div>
+                `;
+            });
+
+            addBotMessage(responseHtml, sections);
+        }
+
+        // Executing remote LLM (Gemini, Ollama, LM Studio)
+        async function executeLlmAssistant(engine, key, systemPrompt, question, contextSections) {
+            // Show loading placeholder bubble
+            const messagesContainer = document.getElementById('chat-messages');
+            const placeholder = document.createElement('div');
+            placeholder.className = "chat-bubble assistant";
+            placeholder.id = "assistant-loading-bubble";
+            placeholder.innerHTML = `
+                <div class="bubble-meta">
+                    <span class="bubble-speaker assistant">ASSISTENTE LEX</span>
+                    <span>Elaborazione...</span>
+                </div>
+                <div class="bubble-text" style="display:flex; align-items:center; gap:0.5rem; color:var(--text-secondary);">
+                    <span class="spinner" style="display:inline-block; width:12px; height:12px; border:2px solid rgba(255,255,255,0.1); border-top-color:var(--accent-gold); border-radius:50%; animation:spin 1s infinite linear;"></span>
+                    <span>L'assistente sta formulando la risposta basandosi sulle fonti...</span>
+                </div>
+            `;
+            messagesContainer.appendChild(placeholder);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Build Prompt with local RAG context
+            let contextText = "";
+            if (contextSections.length > 0) {
+                contextText = contextSections.map((sec, idx) => `[Fonte ${idx+1}: ${sec.chapterTitle} - Sezione: ${sec.sectionTitle}]\n${sec.text}`).join('\n\n');
+            } else {
+                contextText = "Nessun paragrafo specifico estratto. Rispondi usando la tua conoscenza generale.";
+            }
+
+            const prompt = `Istruzioni di sistema: ${systemPrompt}
+
+Contesto di riferimento accademico (Usa solo queste informazioni per rispondere se pertinenti):
+${contextText}
+
+Domanda dello studente: "${question}"
+
+Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul contesto fornito, indica esplicitamente a quale capitolo o fonte stai facendo riferimento.`;
+
+            try {
+                let textResponse = "";
+
+                if (engine === 'gemini') {
+                    if (!key) throw new Error("Chiave API Gemini mancante. Inseriscila nella barra laterale.");
+                    
+                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{ text: prompt }]
+                            }]
+                        })
+                    });
+
+                    if (!res.ok) {
+                        const err = await res.json().catch(() => ({}));
+                        throw new Error(err?.error?.message || `HTTP ${res.status}`);
+                    }
+
+                    const data = await res.json();
+                    textResponse = data.candidates[0].content.parts[0].text;
+
+                } else if (engine === 'ollama') {
+                    const host = key || 'http://localhost:11434';
+                    const res = await fetch(`${host}/api/chat`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: 'llama3', // or user configured model, llama3 is standard default
+                            messages: [{ role: 'user', content: prompt }],
+                            stream: false
+                        })
+                    });
+
+                    if (!res.ok) throw new Error(`Ollama HTTP ${res.status}`);
+                    const data = await res.json();
+                    textResponse = data.message?.content || data.response;
+
+                } else if (engine === 'lm-studio') {
+                    const host = key || 'http://localhost:12345';
+                    const res = await fetch(`${host}/v1/chat/completions`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            messages: [{ role: 'user', content: prompt }],
+                            temperature: 0.7,
+                            stream: false
+                        })
+                    });
+
+                    if (!res.ok) throw new Error(`LM Studio HTTP ${res.status}`);
+                    const data = await res.json();
+                    textResponse = data.choices[0].message.content;
+                }
+
+                // Remove loading placeholder
+                placeholder.remove();
+
+                // Format LLM markdown-style response
+                const formattedHtml = formatLlmText(textResponse);
+                addBotMessage(formattedHtml, contextSections, textResponse);
+
+            } catch (err) {
+                console.error(err);
+                placeholder.remove();
+                addBotMessage(`<span style="color:var(--accent-romana);">Errore durante l'elaborazione del messaggio: ${escapeHtml(err.message)}</span><br><br>Verifica la configurazione del motore nella barra laterale o la tua connessione internet.`);
+            }
+        }
+
+        // Format raw LLM output into HTML (converting bold, lists, breaks)
+        function formatLlmText(text) {
+            let html = text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\n\n/g, '<br><br>')
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.06); padding:2px 4px; border-radius:4px;">$1</code>');
+
+            // Format bullet lists simply
+            html = html.replace(/(?:^|<br>)\s*-\s+(.*?)(?=<br>|$)/g, '<br><span style="padding-left:1rem; display:inline-block;">&bull; $1</span>');
+
+            return html;
+        }
+
+        // Text-To-Speech (TTS) logic using SpeechSynthesis API
+        function speakMessage(messageId, text) {
+            const btn = document.querySelector(`#${messageId} .bubble-audio-btn`);
+
+            if (currentUtterance && window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                if (btn && btn.classList.contains('playing')) {
+                    btn.classList.remove('playing');
+                    currentUtterance = null;
+                    return;
+                }
+            }
+
+            // Remove playing animation from other buttons
+            document.querySelectorAll('.bubble-audio-btn').forEach(b => b.classList.remove('playing'));
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.lang = 'it-IT';
+            currentUtterance.rate = 1.0;
+
+            currentUtterance.onstart = () => {
+                if (btn) btn.classList.add('playing');
+            };
+
+            currentUtterance.onend = () => {
+                if (btn) btn.classList.remove('playing');
+                currentUtterance = null;
+            };
+
+            currentUtterance.onerror = () => {
+                if (btn) btn.classList.remove('playing');
+                currentUtterance = null;
+            };
+
+            window.speechSynthesis.speak(currentUtterance);
+        }
+
+        // Speech-To-Text (STT) voice dictation logic
+        function toggleDictation() {
+            const btn = document.getElementById('btn-stt');
+            const input = document.getElementById('chat-user-input');
+
+            if (isDictating) {
+                if (recognition) recognition.stop();
+                isDictating = false;
+                btn.classList.remove('active');
+                return;
+            }
+
+            if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+                alert("Il riconoscimento vocale non è supportato in questo browser. Consigliato Google Chrome o Safari.");
+                return;
+            }
+
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRec();
+            recognition.lang = 'it-IT';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                isDictating = true;
+                btn.classList.add('active');
+                input.placeholder = "Ascolto in corso...";
+            };
+
+            recognition.onresult = (event) => {
+                const text = event.results[0][0].transcript;
+                input.value += (input.value ? ' ' : '') + text;
+            };
+
+            recognition.onend = () => {
+                isDictating = false;
+                btn.classList.remove('active');
+                input.placeholder = "Chiedi spiegazioni sui testi di studio...";
+            };
+
+            recognition.onerror = (e) => {
+                console.error("Speech recognition error:", e);
+                isDictating = false;
+                btn.classList.remove('active');
+                input.placeholder = "Chiedi spiegazioni sui testi di studio...";
+            };
+
+            recognition.start();
+        }
+
+        // Export conversation history to Markdown file (.md)
+        function exportChat() {
+            if (conversationHistory.length === 0) {
+                alert("Nessun messaggio da esportare.");
+                return;
+            }
+
+            let md = `# Cronologia Studio - Lex Assistant\nData: ${new Date().toLocaleDateString()}\n\n`;
+
+            conversationHistory.forEach(msg => {
+                if (msg.role === 'user') {
+                    md += `## Studente\n${msg.text}\n\n`;
+                } else {
+                    md += `## Assistente Tutor\n${msg.text}\n\n`;
+                    if (msg.citations && msg.citations.length > 0) {
+                        md += `*Fonti consultate:*\n`;
+                        msg.citations.forEach(c => {
+                            md += `- ${c.chapterTitle} (Sezione: ${c.sectionTitle})\n`;
+                        });
+                        md += `\n`;
+                    }
+                }
+            });
+
+            const blob = new Blob([md], { type: 'text/markdown;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute('download', `Lex_Chat_Studio_${Date.now()}.md`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Clear conversation
+        function clearChat() {
+            if (confirm("Sei sicuro di voler cancellare tutta la cronologia della chat corrente?")) {
+                document.getElementById('chat-messages').innerHTML = '';
+                conversationHistory = [];
+                addBotMessage("Cronologia della chat cancellata. Poni una nuova domanda!");
+            }
+        }
+
+        // HTML escaping utilities
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function stripHtml(html) {
+            let tmp = document.createElement("DIV");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        }
+    </script>
+</body>
+</html>
