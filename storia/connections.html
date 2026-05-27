@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lex Historia - Mappa Relazioni Storiche</title>
-    <meta name="description" content="Visualizza le relazioni storiche, geopolitiche ed economiche tra i capitoli di Storia Moderna.">
+    <title>Mappa delle Connessioni - Lex Historia</title>
+    <meta name="description" content="Mappa interattiva delle relazioni storiografiche, geopolitiche ed economiche della Storia Moderna.">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Main Style Sheet -->
@@ -12,51 +12,285 @@
     <!-- Lex Core (Shared UI & Logic) -->
     <link rel="stylesheet" href="../js/lex_core.css">
     <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        .connections-wrapper {
+        /* Specific page override for map view */
+        main {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            height: calc(100vh - 100px);
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+        }
+
+        .map-section {
+            flex: 1;
             margin-top: 1rem;
-            animation: fade-in 0.8s ease-out;
         }
 
-        .info-card {
-            background: rgba(255, 255, 255, 0.03);
+        /* SVG override for Storia Royal Blue Theme */
+        .graph-edge.active {
+            stroke: var(--accent-storia);
+            filter: drop-shadow(0 0 6px var(--accent-storia));
+        }
+
+        .graph-node:hover circle, .graph-node.active circle {
+            stroke: var(--accent-storia);
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+        }
+
+        .graph-node-number {
+            fill: var(--accent-storia);
+        }
+
+        .panel-tag {
+            color: var(--accent-storia) !important;
+        }
+
+        .connection-item {
+            border-left-color: var(--accent-storia) !important;
+        }
+
+        /* Connection Map Container & SVG styles */
+        .connections-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            height: calc(100vh - 220px);
+            min-height: 600px;
+        }
+
+        @media (max-width: 1024px) {
+            .connections-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            main {
+                height: auto;
+            }
+        }
+
+        .map-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            text-align: center;
-        }
-
-        .info-card h3 {
-            color: var(--accent-storia);
-            font-family: var(--font-serif);
-            margin-bottom: 0.5rem;
-        }
-
-        .info-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .back-to-index {
-            display: inline-flex;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-storia);
-            text-decoration: none;
+            height: 100%;
+        }
+
+        .map-svg {
+            width: 100%;
+            height: 100%;
+            min-height: 550px;
+            display: block;
+            user-select: none;
+        }
+
+        /* SVG Graph Elements Styles */
+        .graph-edge {
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 1.5;
+            transition: stroke var(--transition-normal), stroke-width var(--transition-normal), opacity var(--transition-normal);
+        }
+
+        .graph-edge.dimmed {
+            opacity: 0.15;
+        }
+
+        .graph-node {
+            cursor: pointer;
+            transition: transform var(--transition-normal);
+        }
+
+        .graph-node circle {
+            fill: #111827;
+            stroke: var(--text-muted);
+            stroke-width: 2;
+            transition: stroke var(--transition-normal), fill var(--transition-normal), r var(--transition-normal);
+        }
+
+        .graph-node text {
+            fill: var(--text-secondary);
+            font-size: 11px;
             font-weight: 500;
-            transition: var(--transition-fast);
+            text-anchor: middle;
+            transition: fill var(--transition-normal), font-size var(--transition-normal), font-weight var(--transition-normal);
+            pointer-events: none;
+        }
+
+        .graph-node:hover text, .graph-node.active text {
+            fill: var(--text-primary);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .graph-node-number {
+            font-family: var(--font-serif);
+            font-size: 14px;
+            text-anchor: middle;
+            pointer-events: none;
+            font-weight: 600;
+        }
+
+        .graph-node:hover .graph-node-number, .graph-node.active .graph-node-number {
+            font-size: 16px;
+        }
+
+        .graph-node.dimmed {
+            opacity: 0.3;
+        }
+
+        /* Info Panel for Connections */
+        .info-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+            transition: var(--transition-normal);
+        }
+
+        .panel-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .panel-placeholder svg {
+            width: 64px;
+            height: 64px;
+            stroke: var(--text-muted);
+            opacity: 0.5;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .panel-content {
+            animation: fade-in 0.4s ease-out;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .panel-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        .back-to-index:hover {
+        .panel-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.3;
             color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-author {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .panel-author span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .panel-section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .panel-section-title svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .panel-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .connection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .connection-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--text-muted);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .connection-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .conn-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .conn-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -90,28 +324,427 @@
         </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Workspace -->
     <main>
-        <a href="index.html" class="back-to-index">
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Torna al Catalogo Storia
+            Torna al Portale Centrale
         </a>
-
-        <div class="connections-wrapper">
-            <div class="info-card">
-                <h3>Relazioni Cronologiche e Geopolitiche</h3>
-                <p>Usa la <strong>Mappa Trans-Disciplinare</strong> generale per visualizzare e tracciare le connessioni tra gli eventi di Storia Moderna, gli istituti di Diritto dei Beni Culturali e le correnti della Storia dell'Arte. Troverai una colonna dedicata interamente alle relazioni della storia moderna.</p>
-                <a href="../connections.html" class="btn btn-primary" style="margin-top: 1.5rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-                    Apri Mappa Trans-Disciplinare
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
+        
+        <section class="connections-container map-section">
+            
+            <!-- Graphic Map Panel -->
+            <div class="map-card">
+                <svg id="network-svg" class="map-svg" viewBox="0 0 720 720" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Glow filters for highlighted nodes/edges -->
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="6" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    
+                    <!-- Edges (Links) Layer -->
+                    <g id="edges-group"></g>
+                    <!-- Nodes Layer -->
+                    <g id="nodes-group"></g>
+                </svg>
             </div>
-        </div>
+
+            <!-- Descriptive Right Panel -->
+            <div class="info-panel" id="detail-panel">
+                <div class="panel-placeholder" id="placeholder-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <h3>Mappa delle Relazioni Geopolitiche</h3>
+                    <p>Seleziona o passa il mouse sopra un nodo del grafo per esplorare come i diversi processi ed eventi di Storia Moderna si collegano tra loro.</p>
+                </div>
+
+                <div class="panel-content" id="panel-details" style="display: none;">
+                    <div class="panel-header">
+                        <span class="panel-tag" id="panel-chapter-tag">Studio I</span>
+                        <h2 class="panel-title" id="panel-chapter-title">Riforma Protestante</h2>
+                        <div class="panel-author">Autore: <span id="panel-chapter-author">Sintesi Accademica</span></div>
+                    </div>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        Descrizione
+                    </p>
+                    <p class="panel-desc" id="panel-chapter-desc">Descrizione sintetica dello studio.</p>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path></svg>
+                        Collegamenti Tematici
+                    </p>
+                    <div class="connection-list" id="panel-connections-list">
+                        <!-- Connection list generated dynamically -->
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="btn-read-summary" style="width: 100%;">Leggi Sintesi Completa</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag-view">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title-view">Titolo dello Studio</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
     <footer>
         <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
     </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Graph Dataset
+        const nodes = [
+            { id: 1, label: "Studio I", shortNum: "I", title: "La Riforma Protestante e l'Impero di Carlo V", author: "Compendio d'Esame", file: "summaries/sto1_riforma.md", desc: "La frattura confessionale dell'Europa del Cinquecento. Erasmo da Rotterdam e la filologia umanistica; le 95 tesi di Martin Lutero, la scomunica e la Dieta di Worms (1521). L'ambizioso sogno imperiale universale di Carlo V, il conflitto egemonico con la Francia di Francesco I, il sacco di Roma (1527), la pressione ottomana, e la rivolta castigliana dei Comuneros, fino alla Pace di Augusta (1555) e lo scisma anglicano." },
+            { id: 2, label: "Studio II", shortNum: "II", title: "La Controriforma e la Nascita dello Stato Moderno", author: "Compendio d'Esame", file: "summaries/sto2_controriforma.md", desc: "La risposta cattolica alla Riforma: il Concilio di Trento (1545-1563) tra definizione dogmatica e moralizzazione disciplinare del clero. La nascita dell'Inquisizione romana e della Congregazione dell'Indice per il controllo sociale. La teorizzazione dello Stato moderno centralizzato (Bodin, Hobbes, Botero) con capitali fisse, corti e fiscalità burocratizzata." },
+            { id: 3, label: "Studio III", shortNum: "III", title: "Le Rivoluzioni Inglesi e la Crisi del Seicento", author: "Compendio d'Esame", file: "summaries/sto3_rivoluzioni_inglesi.md", desc: "Le tensioni religiose e costituzionali tra la corona Stuart e il Parlamento sotto Giacomo I e Carlo I. Lo scoppio della Guerra Civile (1642), il New Model Army di Oliver Cromwell, l'esecuzione del re (1649) e il Commonwealth repubblicano. La proliferazione delle sette radicali (Livellatori e Zappatori) e la Gloriosa Rivoluzione (1688) con il Bill of Rights." },
+            { id: 4, label: "Studio IV", shortNum: "IV", title: "L'Assolutismo di Luigi XIV e il Concerto delle Potenze", author: "Compendio d'Esame", file: "summaries/sto4_assolutismo_guerre.md", desc: "La centralizzazione assoluta della Francia sotto Luigi XIV, l'accentramento nobiliare a Versailles e la dottrina mercantilista di Colbert (colbertismo). Le guerre d'espansione e la Guerra di Successione Spagnola. L'ascesa della Russia di Pietro il Grande, il declino polacco e l'avvento della diplomazia del concerto europeo nel Settecento." },
+            { id: 5, label: "Studio V", shortNum: "V", title: "L'Illuminismo e il Riformismo del Settecento", author: "Compendio d'Esame", file: "summaries/sto5_illuminismo_riforme.md", desc: "La rivoluzione scientifica e il trionfo della ragione critica. Le correnti dell'Illuminismo europeo (Locke, Montesquieu, Rousseau). I governi e i sovrani del dispotismo illuminato: le riforme penali in Toscana (Codice Leopoldino), la modernizzazione in Austria (Giuseppinismo), in Portogallo (Pombal) e nel Regno di Napoli (Tanucci)." },
+            { id: 6, label: "Studio VI", shortNum: "VI", title: "La Rivoluzione Americana e lo Scoppio della Rivoluzione Francese", author: "Compendio d'Esame", file: "summaries/sto6_rivoluzione_americana_francese.md", desc: "La ribellione fiscale e politica delle tredici colonie nordamericane contro la Gran Bretagna, sfociata nella Guerra d'Indipendenza e nella Costituzione USA. La crisi finanziaria dell'Antico Regime in Francia, la convocazione degli Stati Generali, la presa della Bastiglia, la Costituzione Civile del Clero, la fine della monarchia e il Terrore giacobino guidato da Robespierre." },
+            { id: 7, label: "Studio VII", shortNum: "VII", title: "L'Età Napoleonica e il Congresso di Vienna", author: "Compendio d'Esame", file: "summaries/sto7_napoleone_restaurazione.md", desc: "L'ascesa folgorante di Napoleone Bonaparte dal consolato all'Impero (1804). La riorganizzazione amministrativa e giuridica (Codice Civile) e le guerre napoleoniche. La disfatta russa, l'abdicazione e il Congresso di Vienna (1814-1815) improntato ai princìpi di legittimità ed equilibrio per ripristinare la mappa dinastica europea." },
+            { id: 8, label: "Studio VIII", shortNum: "VIII", title: "La Società Borghese e l'Europa Liberale (1830-1848)", author: "Compendio d'Esame", file: "summaries/sto8_societa_borghese_liberalismo.md", desc: "L'industrializzazione e l'emergere della borghesia e del proletariato. Lo scontro ideologico tra reazione legittimista e rivendicazioni liberal-nazionali. Le ondate insurrezionali del 1830 e, soprattutto, la Primavera dei Popoli del 1848 che scuote l'intero continente chiedendo costituzioni e riforme civili." },
+            { id: 9, label: "Studio IX", shortNum: "IX", title: "Il Risorgimento Italiano e i Moti Rivoluzionari", author: "Compendio d'Esame", file: "summaries/sto9_risorgimento_italiano.md", desc: "La nascita dell'ideale risorgimentale e il dibattito sul modello d'unificazione (Mazzini, Gioberti, Cattaneo). Il 1848 in Italia, le cinque giornate di Milano e la Prima Guerra d'Indipendenza contro l'Impero Austriaco. Il fallimento militare e la concessione dello Statuto Albertino nel Regno di Sardegna, unico baluardo costituzionale rimasto." },
+            { id: 10, label: "Studio X", shortNum: "X", title: "Cavour, Garibaldi e la Nascita del Regno d'Italia", author: "Compendio d'Esame", file: "summaries/sto10_unificazione_regno.md", desc: "L'opera diplomatica e modernizzatrice di Camillo Benso Conte di Cavour. La Seconda Guerra d'Indipendenza (1859), l'alleanza con Napoleone III e le annessioni. La spedizione dei Mille di Giuseppe Garibaldi nel Meridione, lo storico incontro di Teano e la proclamazione del Regno d'Italia il 17 marzo 1861." }
+        ];
+
+        const links = [
+            { source: 1, target: 2, desc: "La rottura teologica avviata da Lutero (Studio I) rende necessaria la convocazione del Concilio di Trento per definire i dogmi e la Controriforma cattolica (Studio II)." },
+            { source: 1, target: 4, desc: "La frammentazione politica derivante dalla Pace di Augusta (Studio I) anticipa il declino degli universalismi e l'ascesa degli assolutismi monarchici come quello di Luigi XIV (Studio IV)." },
+            { source: 2, target: 4, desc: "Le teorizzazioni cinquecentesche sullo Stato e sulla sovranità (Bodin, Hobbes, Studio II) trovano piena attuazione pratica nella struttura della corte di Luigi XIV a Versailles (Studio IV)." },
+            { source: 3, target: 5, desc: "La Gloriosa Rivoluzione inglese (Studio III) getta le basi per la filosofia politica di Locke sull'empirismo e i diritti naturali, nucleo del movimento illuminista del Settecento (Studio V)." },
+            { source: 5, target: 6, desc: "Le tesi contrattualiste e di separazione dei poteri dell'Illuminismo (Montesquieu e Rousseau, Studio V) ispirano le costituzioni e le dichiarazioni dei diritti delle rivoluzioni americana e francese (Studio VI)." },
+            { source: 6, target: 7, desc: "L'instabilità politica del Terrore e del Direttorio (Studio VI) apre la strada all'ascesa militare e dittatoriale di Napoleone Bonaparte (Studio VII)." },
+            { source: 7, target: 8, desc: "L'ordine reazionario imposto dal Congresso di Vienna (Studio VII) scatena per reazione i moti insurrezionali del 1830 e del 1848 guidati dalle forze liberali e patriottiche (Studio VIII)." },
+            { source: 8, target: 9, desc: "La Primavera dei Popoli del 1848 in tutta Europa (Studio VIII) innesca immediatamente le cinque giornate di Milano e la Prima Guerra d'Indipendenza in Italia (Studio IX)." },
+            { source: 9, target: 10, desc: "Il fallimento delle insurrezioni del 1848 (Studio IX) convince i patrioti della necessità di un coordinamento regio e dell'azione politico-diplomatica sabauda guidata da Cavour e Garibaldi (Studio X)." },
+            { source: 4, target: 7, desc: "Il concerto diplomatico e l'equilibrio delle potenze formatosi nel Settecento (Studio IV) viene utilizzato come modello al Congresso di Vienna (Studio VII) per riorganizzare la geopolitica post-napoleonica." }
+        ];
+
+        // Dimensions of SVG canvas
+        const width = 720;
+        const height = 720;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const R = 205; // radius of chapter nodes placement
+
+        // Calculate positions dynamically for radial layout
+        const nodePositions = {};
+        nodes.forEach((node, index) => {
+            const angle = (2 * Math.PI * index) / nodes.length - Math.PI / 2; // Offset by -PI/2 to start from top
+            nodePositions[node.id] = {
+                x: centerX + R * Math.cos(angle),
+                y: centerY + R * Math.sin(angle),
+                angle: angle
+            };
+        });
+
+        // SVG Render logic
+        const edgesGroup = document.getElementById('edges-group');
+        const nodesGroup = document.getElementById('nodes-group');
+
+        // Draw Edges (with a slight bend towards center to look clean)
+        links.forEach(link => {
+            const p1 = nodePositions[link.source];
+            const p2 = nodePositions[link.target];
+            
+            // Calculate quadratic curve control point
+            const mx = (p1.x + p2.x) / 2;
+            const my = (p1.y + p2.y) / 2;
+            const k = 0.22; // bend factor towards center
+            const cx = mx + (centerX - mx) * k;
+            const cy = my + (centerY - my) * k;
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`);
+            path.setAttribute("class", "graph-edge");
+            path.setAttribute("data-source", link.source);
+            path.setAttribute("data-target", link.target);
+            path.setAttribute("id", `edge-${link.source}-${link.target}`);
+            edgesGroup.appendChild(path);
+        });
+
+        // Draw Nodes
+        nodes.forEach((node, index) => {
+            const pos = nodePositions[node.id];
+            
+            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.setAttribute("class", "graph-node");
+            g.setAttribute("data-id", node.id);
+            g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
+            
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "22");
+            
+            const textNum = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textNum.setAttribute("class", "graph-node-number");
+            textNum.setAttribute("y", "5");
+            textNum.textContent = node.shortNum;
+            
+            // Outer text labels positioned radially
+            const labelR = 34; // distance from circle node
+            const lx = labelR * Math.cos(pos.angle);
+            const ly = labelR * Math.sin(pos.angle);
+            
+            let anchor = "middle";
+            let labelOffsetY = 5;
+            
+            // Determine best text anchor based on circle side
+            const cosVal = Math.cos(pos.angle);
+            if (cosVal > 0.2) {
+                anchor = "start";
+            } else if (cosVal < -0.2) {
+                anchor = "end";
+            } else {
+                anchor = "middle";
+                labelOffsetY = Math.sin(pos.angle) > 0 ? 15 : -8;
+            }
+            
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", lx);
+            label.setAttribute("y", ly + labelOffsetY);
+            label.setAttribute("text-anchor", anchor);
+            
+            // Truncate labels for cleaner rendering in circle
+            let cleanTitle = node.title.split(":")[0]; // cut subtitle
+            if (cleanTitle.length > 25) {
+                cleanTitle = cleanTitle.substring(0, 23) + "...";
+            }
+            label.textContent = cleanTitle;
+            
+            g.appendChild(circle);
+            g.appendChild(textNum);
+            g.appendChild(label);
+            nodesGroup.appendChild(g);
+        });
+
+        // Interaction logic
+        const nodeElements = document.querySelectorAll('.graph-node');
+        const edgeElements = document.querySelectorAll('.graph-edge');
+        const placeholderView = document.getElementById('placeholder-view');
+        const panelDetails = document.getElementById('panel-details');
+        
+        const pChapterTag = document.getElementById('panel-chapter-tag');
+        const pChapterTitle = document.getElementById('panel-chapter-title');
+        const pChapterAuthor = document.getElementById('panel-chapter-author');
+        const pChapterDesc = document.getElementById('panel-chapter-desc');
+        const pConnectionsList = document.getElementById('panel-connections-list');
+        const btnReadSummary = document.getElementById('btn-read-summary');
+
+        let selectedNodeId = null;
+
+        // Function to select a node and render side panel info
+        function selectNode(nodeId) {
+            selectedNodeId = nodeId;
+            const node = nodes.find(n => n.id === nodeId);
+            
+            // UI classes adjustment
+            nodeElements.forEach(el => {
+                const elId = parseInt(el.getAttribute('data-id'));
+                if (elId === nodeId) {
+                    el.classList.add('active');
+                    el.classList.remove('dimmed');
+                } else {
+                    el.classList.remove('active');
+                    el.classList.add('dimmed');
+                }
+            });
+
+            // Highlight connections on SVG
+            edgeElements.forEach(edge => {
+                const s = parseInt(edge.getAttribute('data-source'));
+                const t = parseInt(edge.getAttribute('data-target'));
+                if (s === nodeId || t === nodeId) {
+                    edge.classList.add('active');
+                    edge.classList.remove('dimmed');
+                } else {
+                    edge.classList.remove('active');
+                    edge.classList.add('dimmed');
+                }
+            });
+
+            // Fill Panel text
+            pChapterTag.textContent = node.label;
+            pChapterTitle.textContent = node.title;
+            pChapterAuthor.textContent = node.author;
+            pChapterDesc.textContent = node.desc;
+
+            // Generate connection list on panel
+            pConnectionsList.innerHTML = '';
+            const associatedLinks = links.filter(l => l.source === nodeId || l.target === nodeId);
+            
+            if (associatedLinks.length === 0) {
+                pConnectionsList.innerHTML = '<p class="panel-desc" style="font-style: italic;">Nessuna connessione diretta definita per questo capitolo.</p>';
+            } else {
+                associatedLinks.forEach(link => {
+                    const targetId = link.source === nodeId ? link.target : link.source;
+                    const targetNode = nodes.find(n => n.id === targetId);
+                    
+                    const item = document.createElement('div');
+                    item.className = 'connection-item';
+                    item.innerHTML = `
+                        <div class="conn-header">
+                            <span>Connesso con ${targetNode.label}</span>
+                            <span>VEDI GRAFO</span>
+                        </div>
+                        <div class="conn-desc">${link.desc || 'Collegamento tematico o cronologico.'}</div>
+                    `;
+                    item.onclick = (e) => {
+                        e.stopPropagation(); // prevent resetting
+                        selectNode(targetId);
+                    };
+                    pConnectionsList.appendChild(item);
+                });
+            }
+
+            // Assign modal loading
+            btnReadSummary.onclick = () => {
+                openSummary(node.label, node.file);
+            };
+
+            placeholderView.style.display = 'none';
+            panelDetails.style.display = 'block';
+        }
+
+        // Mouse Hover & Click Actions (Highlight connections and nodes)
+        nodeElements.forEach(nodeEl => {
+            const nodeId = parseInt(nodeEl.getAttribute('data-id'));
+            
+            nodeEl.addEventListener('mouseenter', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+
+                nodeElements.forEach(el => {
+                    const elId = parseInt(el.getAttribute('data-id'));
+                    if (elId === nodeId) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.add('dimmed');
+                    }
+                });
+
+                edgeElements.forEach(edge => {
+                    const s = parseInt(edge.getAttribute('data-source'));
+                    const t = parseInt(edge.getAttribute('data-target'));
+                    if (s === nodeId || t === nodeId) {
+                        edge.classList.add('active');
+                    } else {
+                        edge.classList.add('dimmed');
+                    }
+                });
+            });
+
+            nodeEl.addEventListener('mouseleave', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+                
+                nodeElements.forEach(el => {
+                    el.classList.remove('active', 'dimmed');
+                });
+                edgeElements.forEach(edge => {
+                    edge.classList.remove('active', 'dimmed');
+                });
+            });
+
+            nodeEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectNode(nodeId);
+            });
+        });
+
+        // Click outside to clear selection
+        document.addEventListener('click', () => {
+            selectedNodeId = null;
+            nodeElements.forEach(el => el.classList.remove('active', 'dimmed'));
+            edgeElements.forEach(el => el.classList.remove('active', 'dimmed'));
+            placeholderView.style.display = 'flex';
+            panelDetails.style.display = 'none';
+        });
+
+        // Modal functions
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag-view');
+        const modalChapterTitle = document.getElementById('modal-chapter-title-view');
+        const markdownView = document.getElementById('markdown-view');
+        const progressIndicator = document.getElementById('progress-indicator');
+        const modalBody = document.getElementById('modal-body-content');
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento in corso...";
+            markdownView.innerHTML = `<div class="loading-spinner-wrapper"><div class="spinner"></div><p style="margin-top: 1rem; color: var(--text-secondary);">Caricamento sintesi accademica...</p></div>`;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // stop page scrolling
+
+            // Scroll indicator reset
+            progressIndicator.style.width = '0%';
+            modalBody.scrollTop = 0;
+
+            // Fetch file
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("File non trovato");
+                    return response.text();
+                })
+                .then(text => {
+                    // Extract Title from markdown if exists
+                    const titleMatch = text.match(/^#\s+(.+)$/m);
+                    if (titleMatch) {
+                        modalChapterTitle.textContent = titleMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = nodes.find(n => n.file === filePath).title;
+                    }
+                    markdownView.innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore di caricamento";
+                    markdownView.innerHTML = `<p style="color: #ef4444; text-align: center; margin-top: 2rem;">Impossibile caricare il file di sintesi (${filePath}). Assicurati di eseguire l'app in locale o da server e che il file esista.</p>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // restore page scroll
+        }
+
+        // Scroll indicator calculation inside modal
+        modalBody.addEventListener('scroll', () => {
+            const winScroll = modalBody.scrollTop;
+            const height = modalBody.scrollHeight - modalBody.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressIndicator.style.width = scrolled + "%";
+        });
+    </script>
 </body>
 </html>
