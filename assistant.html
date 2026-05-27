@@ -570,7 +570,12 @@
             cap10_espropriazione: "summaries/10_espropriazione.md",
             cap11_regime_fiscale: "summaries/11_regime_fiscale.md",
             cap12_paesaggio: "summaries/12_paesaggio.md",
-            cap13_sanzioni: "summaries/13_sanzioni.md"
+            cap13_sanzioni: "summaries/13_sanzioni.md",
+            pub1_costituzione: "summaries/pub1_costituzione.md",
+            pub2_governo_parlamento: "summaries/pub2_governo_parlamento.md",
+            pub3_fonti_diritto: "summaries/pub3_fonti_diritto.md",
+            pub4_diritti_liberta: "summaries/pub4_diritti_liberta.md",
+            pub5_proprieta_impresa: "summaries/pub5_proprieta_impresa.md"
         };
 
         const arteChapterLinks = {
@@ -755,6 +760,23 @@
                         })
                 );
             });
+
+            // 1b. Diritto Pubblico & Codice completo: load from knowledge_base/diritto/diritto_completo.md
+            const dirittoCompletoUrl = "knowledge_base/diritto/diritto_completo.md";
+            fetchPromises.push(
+                fetch(dirittoCompletoUrl)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Fetch failed for ${dirittoCompletoUrl}`);
+                        return res.text();
+                    })
+                    .then(mdText => {
+                        const sections = parseSummaryIntoSections('diritto', 'diritto_completo', 'Diritto Pubblico e Codice (Manuale Completo)', mdText);
+                        knowledgeBase.push(...sections);
+                    })
+                    .catch(err => {
+                        console.error(`Error loading complete Diritto text:`, err);
+                    })
+            );
 
             // 2. Arte Romana: load the single complete file from knowledge_base/arte_romana/arte_romana_completo.md
             const romanaUrl = "knowledge_base/arte_romana/arte_romana_completo.md";
@@ -1276,6 +1298,9 @@
             if (chapterKey === 'arte_romana_completo') {
                 const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
                 return `knowledge_base/arte_romana/arte_romana_completo.md${anchor}`;
+            } else if (chapterKey === 'diritto_completo') {
+                const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                return `knowledge_base/diritto/diritto_completo.md${anchor}`;
             } else if (chapterKey === 'brunelleschi_completo') {
                 const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
                 return `knowledge_base/storia_arte/brunelleschi_completo.md${anchor}`;

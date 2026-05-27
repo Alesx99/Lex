@@ -761,6 +761,321 @@ const quizDatabase = {
         ]
     },
 
+    pub1_costituzione: {
+        subject: "diritto",
+        chapterTag: "D. Pub. I",
+        title: "Il Diritto Pubblico e la Costituzione Italiana",
+        questions: [
+            {
+                question: "Cosa distingue una norma giuridica da altre regole sociali o morali?",
+                options: [
+                    "La norma giuridica è scritta obbligatoriamente in latino arcaico.",
+                    "La norma giuridica è coattiva e supportata dal monopolio statale della forza per garantirne il rispetto.",
+                    "La norma giuridica è flessibile e può essere disapplicata se il destinatario dichiara di non essere d'accordo.",
+                    "La norma giuridica si applica esclusivamente ai rapporti patrimoniali tra privati cittadini."
+                ],
+                correctIndex: 1,
+                explanation: "La norma giuridica è coattiva, il che significa che l'ordinamento prevede sanzioni e può ricorrere all'uso della forza pubblica legittima per imporne il rispetto anche contro la volontà del destinatario, a differenza delle norme morali o di costume."
+            },
+            {
+                question: "Quando è entrata formalmente in vigore la Costituzione della Repubblica Italiana?",
+                options: [
+                    "Il 2 giugno 1946, giorno del referendum istituzionale.",
+                    "Il 1° gennaio 1948, dopo l'approvazione dell'Assemblea Costituente.",
+                    "Il 22 dicembre 1947, giorno della votazione finale.",
+                    "Il 17 marzo 1861, in concomitanza con l'Unità d'Italia."
+                ],
+                correctIndex: 1,
+                explanation: "La Costituzione è stata approvata dall'Assemblea Costituente il 22 dicembre 1947 ed è entrata ufficialmente in vigore il 1° gennaio 1948, segnando la nascita dello Stato costituzionale repubblicano."
+            },
+            {
+                question: "Cosa si intende in diritto per \"rigidità della costituzione\"?",
+                options: [
+                    "L'impossibilità assoluta di modificare qualsiasi articolo della Costituzione.",
+                    "Il fatto che le sue disposizioni possono essere integrate o modificate solo con procedure speciali e più complesse (aggravate) rispetto alle leggi ordinarie.",
+                    "La natura puramente scritta e non modificabile del testo conservato negli archivi di Stato.",
+                    "L'applicazione inflessibile delle pene senza alcuna possibilità di concessione di attenuanti."
+                ],
+                correctIndex: 1,
+                explanation: "La rigidità costituzionale indica che la Costituzione si pone al vertice gerarchico delle fonti e non può essere modificata da una normale legge del Parlamento, ma richiede la procedura aggravata prevista dall'Art. 138 Cost."
+            },
+            {
+                question: "Quanti articoli componevano originariamente il testo della Costituzione Italiana?",
+                options: [
+                    "139 articoli, oltre a 18 disposizioni transitorie e finali.",
+                    "150 articoli suddivisi in tre parti paritarie.",
+                    "12 articoli che contengono solo i diritti dell'uomo.",
+                    "57 articoli dedicati all'organizzazione dello Stato."
+                ],
+                correctIndex: 0,
+                explanation: "La Costituzione italiana conta originariamente 139 articoli (di cui 5 successivamente abrogati nel tempo a seguito di riforme) e 18 disposizioni transitorie e finali."
+            },
+            {
+                question: "In quale organo costituzionale risiede l'esercizio del potere giudiziario nell'ordinamento italiano?",
+                options: [
+                    "Nel Governo e nei singoli Ministeri competenti.",
+                    "Nel Parlamento, per il tramite delle commissioni d'inchiesta.",
+                    "Nella Magistratura, che costituisce un ordine autonomo e indipendente da ogni altro potere.",
+                    "Nella Corte Costituzionale in via esclusiva."
+                ],
+                correctIndex: 2,
+                explanation: "In base al principio di separazione dei poteri, il potere giudiziario (l'applicazione delle leggi ai casi concreti) è affidato alla Magistratura, definita dalla Costituzione come un ordine autonomo e indipendente da ogni altro potere dello Stato."
+            }
+        ]
+    },
+
+    pub2_governo_parlamento: {
+        subject: "diritto",
+        chapterTag: "D. Pub. II",
+        title: "Gli Organi dello Stato: Parlamento e Governo",
+        questions: [
+            {
+                question: "Quale caratteristica definisce il bicameralismo del Parlamento italiano?",
+                options: [
+                    "Un bicameralismo imperfetto, in cui il Senato ha solo funzioni consultive e non vota le leggi.",
+                    "Un bicameralismo perfetto o paritario, dove Camera dei deputati e Senato hanno gli stessi poteri e funzioni costituzionali.",
+                    "Un bicameralismo monocamerale, in cui le decisioni vengono sempre prese in aule riunite in seduta comune.",
+                    "Un bicameralismo federale, in cui una Camera rappresenta i Comuni e l'altra rappresenta le Province."
+                ],
+                correctIndex: 1,
+                explanation: "In Italia vige il bicameralismo perfetto: affinché un disegno di legge diventi legge, deve essere approvato nel medesimo testo da entrambe le Camere (Camera dei Deputati e Senato della Repubblica)."
+            },
+            {
+                question: "Quale delle seguenti figure fa parte degli organi governativi definiti \"non necessari\"?",
+                options: [
+                    "Il Presidente del Consiglio dei Ministri.",
+                    "Il Ministro senza portafoglio.",
+                    "Il Ministro degli Affari Esteri.",
+                    "Il Consiglio dei Ministri in composizione collegiale."
+                ],
+                correctIndex: 1,
+                explanation: "I ministri senza portafoglio (così come i viceministri, i sottosegretari e i vicepresidenti del Consiglio) sono organi non necessari, introdotti con legge ordinaria. Gli organi necessari (PdC, Ministri e CDM) sono invece previsti direttamente dall'Art. 92 della Costituzione."
+            },
+            {
+                question: "Entro quale termine costituzionale il Governo appena nominato deve presentarsi alle Camere per esporre il programma e ottenere la fiducia?",
+                options: [
+                    "Entro 48 ore dal giuramento.",
+                    "Entro 10 giorni dalla sua formazione.",
+                    "Entro 30 giorni dalla pubblicazione del decreto sul Quirinale.",
+                    "Entro 60 giorni, coincidente con la durata massima dell'ordinaria amministrazione."
+                ],
+                correctIndex: 1,
+                explanation: "Ai sensi dell'Articolo 94 della Costituzione, entro dieci giorni dalla sua formazione (avvenuta con la firma dei decreti e il giuramento), il Governo si deve presentare alle Camere per ottenerne la fiducia."
+            },
+            {
+                question: "In quale dei seguenti casi il Parlamento si riunisce in \"seduta comune\" integrato dai delegati regionali?",
+                options: [
+                    "Per deliberare lo stato di guerra o convertire decreti d'urgenza.",
+                    "Per approvare le leggi costituzionali e di revisione.",
+                    "Per eleggere il Presidente della Repubblica.",
+                    "Per approvare la mozione di sfiducia contro il Governo."
+                ],
+                correctIndex: 2,
+                explanation: "Il Parlamento in seduta comune (presieduto dal Presidente della Camera) si riunisce a Montecitorio per eleggere il Presidente della Repubblica (in questo caso integrato da 3 delegati per regione, 1 per la Valle d'Aosta), per l'elezione di 1/3 dei giudici della Corte Costituzionale, di 1/3 del CSM e per la messa in stato d'accusa del PdR."
+            },
+            {
+                question: "Che valore assume la \"controfirma\" ministeriale (Art. 89 Cost.) sugli atti del Presidente della Repubblica sostanzialmente presidenziali (decisi dal PdR)?",
+                options: [
+                    "Ha valore puramente economico per coprire le spese dell'atto.",
+                    "Ha valore di controllo formale sulla regolarità dell'atto, mentre la decisione spetta al Presidente della Repubblica che ne è autore.",
+                    "Ha valore decisionale, obbligando il Presidente della Repubblica a firmare ciò che il ministro propone.",
+                    "Serve solo come registrazione notarile e non influisce sulla validità giuridica dell'atto."
+                ],
+                correctIndex: 1,
+                explanation: "Negli atti sostanzialmente presidenziali (es. nomina dei 5 senatori a vita), la decisione spetta al PdR. La controfirma del ministro attesta la regolarità formale dell'atto, sollevando il PdR dalla responsabilità politica."
+            }
+        ]
+    },
+
+    pub3_fonti_diritto: {
+        subject: "diritto",
+        chapterTag: "D. Pub. III",
+        title: "Le Fonti del Diritto e il Pluralismo Giuridico",
+        questions: [
+            {
+                question: "Come si risolve un'antinomia (conflitto) tra due norme di pari grado gerarchico entrate in vigore in momenti diversi?",
+                options: [
+                    "Prevale sempre la norma speciale anche se precedente.",
+                    "Si applica il criterio cronologico, in base al quale la norma successiva abroga quella precedente.",
+                    "Entrambe le norme vengono dichiarate illegittime dalla Corte Costituzionale.",
+                    "La risoluzione è rimessa a un arbitrato internazionale dell'Unione Europea."
+                ],
+                correctIndex: 1,
+                explanation: "Il criterio cronologico dispone che la norma più recente nel tempo prevale su quella precedente di pari grado gerarchico, determinando l'abrogazione della norma più vecchia."
+            },
+            {
+                question: "In base all'Articolo 138 Cost., in quale dei seguenti casi NON è consentito richiedere il referendum costituzionale confermativo?",
+                options: [
+                    "Se la legge è stata approvata in seconda votazione a maggioranza assoluta dei componenti di ciascuna Camera.",
+                    "Se la legge è stata approvata in seconda votazione con la maggioranza qualificata dei 2/3 dei componenti di ciascuna Camera.",
+                    "Se la richiesta viene formulata da almeno 5 Consigli regionali.",
+                    "Se la richiesta viene presentata da 500.000 elettori entro tre mesi."
+                ],
+                correctIndex: 1,
+                explanation: "L'Art. 138 stabilisce che non si fa luogo a referendum confermativo se la legge costituzionale è stata approvata nella seconda votazione da ciascuna delle Camere a maggioranza qualificata dei due terzi dei suoi componenti."
+            },
+            {
+                question: "Cosa accade a un decreto-legge (DL) se il Parlamento non lo converte in legge entro 60 giorni dalla pubblicazione?",
+                options: [
+                    "Resta in vigore come regolamento secondario governativo.",
+                    "Perde efficacia sin dall'inizio (decadenza retroattiva ex tunc), come se non fosse mai stato emanato.",
+                    "Viene automaticamente prorogato per ulteriori 60 giorni dal Presidente della Repubblica.",
+                    "Cessa di avere efficacia solo per il futuro (ex nunc), mantenendo salvi gli effetti passati."
+                ],
+                correctIndex: 1,
+                explanation: "Il decreto-legge è una fonte provvisoria adottata in casi di necessità e urgenza. Se non convertito in legge dal Parlamento entro 60 giorni, perde efficacia retroattivamente (*ex tunc*)."
+            },
+            {
+                question: "Quale differenza distingue un Regolamento dell'Unione Europea da una Direttiva UE?",
+                options: [
+                    "Il Regolamento si applica solo all'estero, la Direttiva solo in Italia.",
+                    "Il Regolamento ha portata generale ed è direttamente applicabile negli Stati membri, mentre la Direttiva vincola gli Stati al raggiungimento di un obiettivo ma richiede un atto nazionale di recepimento.",
+                    "Il Regolamento è emanato dal Parlamento europeo, la Direttiva dal Consiglio dei Ministri italiano.",
+                    "Il Regolamento dura solo 5 anni, la Direttiva ha validità perpetua."
+                ],
+                correctIndex: 1,
+                explanation: "Il regolamento UE ha diretta applicabilità e si impone immediatamente negli ordinamenti nazionali senza atti di recepimento. La direttiva fissa invece scopi obbligatori lasciando agli Stati la scelta sui mezzi e le forme per raggiungerli tramite leggi di attuazione."
+            },
+            {
+                question: "Ai sensi dell'Articolo 117 della Costituzione italiana, a quale ente spetta la potestà legislativa esclusiva in materia di \"tutela dei beni culturali\"?",
+                options: [
+                    "Alle Regioni, in forza del principio di sussidiarietà.",
+                    "Allo Stato, che la esercita in via esclusiva su tutto il territorio nazionale.",
+                    "A Stato e Regioni in modo concorrente tramite leggi quadro.",
+                    "Ai Comuni d'intesa con le singole Soprintendenze locali."
+                ],
+                correctIndex: 1,
+                explanation: "L'Articolo 117, comma 2, lettera s), riserva in via esclusiva allo Stato la potestà legislativa in materia di tutela dell'ambiente, dell'ecosistema e dei beni culturali, al fine di garantire una protezione uniforme sul territorio nazionale. Alle Regioni spetta la valorizzazione (potestà concorrente)."
+            }
+        ]
+    },
+
+    pub4_diritti_liberta: {
+        subject: "diritto",
+        chapterTag: "D. Pub. IV",
+        title: "I Diritti e le Libertà Costituzionali",
+        questions: [
+            {
+                question: "Quale principio fondamentale è codificato dall'Articolo 3, comma 2, della Costituzione (uguaglianza sostanziale)?",
+                options: [
+                    "L'uguaglianza dei cittadini davanti alla legge senza distinzioni di sesso, razza o religione.",
+                    "Il dovere della Repubblica di rimuovere gli ostacoli economici e sociali che limitano di fatto la libertà e l'uguaglianza dei cittadini.",
+                    "L'obbligo per ciascun cittadino di concorrere alle spese pubbliche in base alla propria capacità contributiva.",
+                    "L'uguaglianza morale e giuridica dei coniugi all'interno del matrimonio."
+                ],
+                correctIndex: 1,
+                explanation: "L'uguaglianza sostanziale impegna la Repubblica a rimuovere attivamente gli ostacoli materiali che di fatto impediscono il pieno sviluppo della persona e l'effettiva partecipazione dei lavoratori alla vita del Paese."
+            },
+            {
+                question: "Quali garanzie costituzionali richiede l'Articolo 13 per poter limitare legittimamente la libertà personale?",
+                options: [
+                    "La sola presenza delle forze dell'ordine sul luogo del reato.",
+                    "La riserva di legge (casi e modi stabiliti dalla legge) e la riserva di giurisdizione (atto motivato dell'autorità giudiziaria).",
+                    "La denuncia formale scritta di almeno tre cittadini italiani maggiorenni.",
+                    "La convalida immediata del Prefetto o del Questore della provincia."
+                ],
+                correctIndex: 1,
+                explanation: "La libertà personale è tutelata da una doppia garanzia: riserva di legge (solo il legislatore stabilisce le regole) e riserva di giurisdizione (solo un giudice può autorizzare provvedimenti restrittivi)."
+            },
+            {
+                question: "In caso di fermo o arresto d'urgenza operato dalla pubblica sicurezza, entro quante ore l'atto deve essere comunicato al giudice per la convalida?",
+                options: [
+                    "Entro 12 ore dal fermo.",
+                    "Entro 48 ore (e il giudice ha ulteriori 48 ore per convalidarlo, pena la decadenza).",
+                    "Entro 7 giorni lavorativi.",
+                    "Non vi sono limiti temporali rigidi purché vi sia flagranza di reato."
+                ],
+                correctIndex: 1,
+                explanation: "I provvedimenti provvisori restrittivi presi dalle forze dell'ordine devono essere comunicati entro 48 ore all'autorità giudiziaria e convalidati da questa nelle 48 ore successive, altrimenti l'arresto decade retroattivamente."
+            },
+            {
+                question: "Per quale tipologia di riunione (Articolo 17 della Costituzione) è richiesto il \"preavviso\" scritto al Questore?",
+                options: [
+                    "Per le riunioni tenute in luogo privato.",
+                    "Per le riunioni tenute in luogo aperto al pubblico (es. cinema, teatri).",
+                    "Per le riunioni tenute in luogo pubblico (es. strade, piazze).",
+                    "Nessuna riunione richiede preavviso, in quanto il diritto di riunione è sempre libero."
+                ],
+                correctIndex: 2,
+                explanation: "Le riunioni in luogo pubblico richiedono il preavviso scritto alle autorità almeno 3 giorni prima, per consentire la gestione dell'ordine e della sicurezza pubblica. Il Questore può vietarle solo per comprovati motivi di sicurezza o salute pubblica."
+            },
+            {
+                question: "Quali tipi di associazioni sono espressamente vietate dall'Articolo 18 della Costituzione?",
+                options: [
+                    "Le associazioni politiche che si oppongono al Governo in carica.",
+                    "Le associazioni segrete e quelle che perseguono, anche indirettamente, scopi politici mediante organizzazioni di carattere militare.",
+                    "Le associazioni culturali e sportive prive di statuto vidimato.",
+                    "Le associazioni sindacali con iscritti stranieri."
+                ],
+                correctIndex: 1,
+                explanation: "L'Articolo 18 vieta le associazioni segrete (che occultano soci o scopi per influenzare le istituzioni) e le associazioni paramilitari che usano una struttura di tipo militare per fini politici."
+            }
+        ]
+    },
+
+    pub5_proprieta_impresa: {
+        subject: "diritto",
+        chapterTag: "D. Pub. V",
+        title: "Costituzione Economica: Proprietà e Impresa",
+        questions: [
+            {
+                question: "Quali limiti pone l'Articolo 41 della Costituzione alla libertà d'iniziativa economica privata?",
+                options: [
+                    "Non può essere avviata da cittadini privi di titoli accademici specifici.",
+                    "Non può svolgersi in contrasto con l'utilità sociale o in modo da recare danno alla salute, all'ambiente, alla sicurezza, alla libertà e alla dignità umana.",
+                    "È soggetta al monopolio esclusivo dello Stato in tutti i settori commerciali.",
+                    "Non può superare i tetti di profitto stabiliti annualmente dalla Legge di Bilancio."
+                ],
+                correctIndex: 1,
+                explanation: "L'iniziativa economica privata è libera (Art. 41 comma 1), ma non può essere svolta a danno del benessere sociale, della salute, dell'ambiente (riforma 2022) o dei diritti fondamentali dei lavoratori."
+            },
+            {
+                question: "Che cosa si intende per \"funzione sociale\" della proprietà privata (Articolo 42 Cost.)?",
+                options: [
+                    "L'obbligo del proprietario di consentire il libero accesso a chiunque all'interno del proprio bene.",
+                    "La facoltà del legislatore ordinario di imporre limiti e obblighi per contemperare l'interesse egoistico del proprietario con l'utilità e il benessere collettivo.",
+                    "La destinazione automatica del bene a uffici pubblici o sindacali in caso di inutilizzo.",
+                    "L'esenzione totale dalle imposte per tutti i proprietari di beni storici dichiarati."
+                ],
+                correctIndex: 1,
+                explanation: "La funzione sociale giustifica l'intervento del legislatore nel limitare il godimento del proprietario privato per soddisfare interessi generali (es. vincoli di tutela storico-artistica e paesaggistica)."
+            },
+            {
+                question: "Quali sono i tre requisiti costituzionali richiesti per procedere all'espropriazione di un bene privato (Art. 42)?",
+                options: [
+                    "Una condanna penale passata in giudicato, la presenza di testimoni e un decreto ministeriale.",
+                    "La riserva di legge (casi previsti dalla legge), motivi di interesse generale e il pagamento di un indennizzo.",
+                    "La perizia della Soprintendenza, la delibera del Comune e il consenso del proprietario.",
+                    "La mancanza di eredi legittimi, lo stato di insolvenza e lo stato di abbandono del bene."
+                ],
+                correctIndex: 1,
+                explanation: "L'espropriazione è legittima solo se prevista da una legge ordinaria, motivata da un reale interesse pubblico (es. infrastruttura, scavo archeologico) e accompagnata dal pagamento di un indennizzo che ristori il proprietario."
+            },
+            {
+                question: "Quale regime giuridico caratterizza i beni del \"demanio pubblico accidentale\" (es. musei, archivi, pinacoteche pubbliche)?",
+                options: [
+                    "Possono essere alienati liberamente a privati senza alcuna autorizzazione ministeriale.",
+                    "Appartengono necessariamente allo Stato per la loro stessa conformazione fisica naturale.",
+                    "Se appartengono a enti pubblici territoriali, sono soggetti al regime demaniale di inalienabilità assoluta e non possono formare oggetto di diritti di terzi.",
+                    "Sono pignorabili dai creditori dell'ente pubblico proprietario in caso di dissesto finanziario."
+                ],
+                correctIndex: 2,
+                explanation: "I beni del demanio accidentale (storico-artistico) sono inalienabili se appartengono allo Stato o ad altri enti pubblici territoriali, e non possono essere sottratti alla loro destinazione pubblica se non nei modi speciali stabiliti dalla legge."
+            },
+            {
+                question: "In quale categoria rientrano i beni pubblici che, pur non essendo demaniali, non possono essere sottratti alla loro destinazione pubblica se non nei modi stabiliti dalle leggi speciali (es. caserme, uffici pubblici)?",
+                options: [
+                    "Beni del demanio necessario.",
+                    "Beni del patrimonio indisponibile.",
+                    "Beni del patrimonio disponibile.",
+                    "Beni culturali privati dichiarati."
+                ],
+                correctIndex: 1,
+                explanation: "I beni del patrimonio indisponibile (Art. 826 c.c.) servono direttamente all'esercizio di funzioni pubbliche o servizi pubblici (es. caserme, uffici statali, miniere) e non possono essere venduti o sottratti alla loro destinazione se non tramite apposite procedure di sclassificazione."
+            }
+        ]
+    },
+
     // STORIA DELL'ARTE MODERNA
     origini: {
         subject: "arte",

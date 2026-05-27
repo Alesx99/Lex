@@ -66,6 +66,43 @@
             <!-- STEP 1: SELECT TOPIC SCREEN -->
             <div id="selection-screen" class="quiz-step active">
                 <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                
+                <h4 class="section-subtitle" style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--accent-gold); margin: 2rem 0 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Parte Istituzionale: Diritto Pubblico
+                </h4>
+                <div class="selection-grid" style="margin-bottom: 3rem;">
+                    <button class="select-btn" onclick="startQuiz('pub1_costituzione')">
+                        <span class="btn-chapter">D. Pub. I</span>
+                        <span class="btn-title">Il Diritto Pubblico e la Costituzione Italiana</span>
+                        <span class="btn-desc">Differenza pubblico/privato, nascita ed entrata in vigore della Costituzione</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('pub2_governo_parlamento')">
+                        <span class="btn-chapter">D. Pub. II</span>
+                        <span class="btn-title">Gli Organi dello Stato: Parlamento e Governo</span>
+                        <span class="btn-desc">Bicameralismo perfetto, separazione dei poteri, ruolo del Presidente della Repubblica</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('pub3_fonti_diritto')">
+                        <span class="btn-chapter">D. Pub. III</span>
+                        <span class="btn-title">Le Fonti del Diritto e il Pluralismo Giuridico</span>
+                        <span class="btn-desc">Risoluzione antinomie, revisione costituzionale (Art. 138), riparto Stato-Regioni (Art. 117)</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('pub4_diritti_liberta')">
+                        <span class="btn-chapter">D. Pub. IV</span>
+                        <span class="btn-title">I Diritti e le Libertà Costituzionali</span>
+                        <span class="btn-desc">Diritti inviolabili (Art. 2), uguaglianza (Art. 3), principali libertà e doveri</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('pub5_proprieta_impresa')">
+                        <span class="btn-chapter">D. Pub. V</span>
+                        <span class="btn-title">Costituzione Economica: Proprietà e Impresa</span>
+                        <span class="btn-desc">Libertà d'impresa (Art. 41), proprietà privata e funzione sociale (Art. 42), espropriazione</span>
+                    </button>
+                </div>
+
+                <h4 class="section-subtitle" style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--accent-gold); margin: 2rem 0 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Codice dei Beni Culturali e del Paesaggio
+                </h4>
                 <div class="selection-grid">
                     <button class="select-btn" onclick="startQuiz('cap1_patrimonio')">
                         <span class="btn-chapter">Cap. I</span>

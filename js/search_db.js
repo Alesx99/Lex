@@ -98,6 +98,47 @@ const searchDatabase = [
         keywords: "sanzioni penali amministrative delitti codice penale titolo viii-bis furto ricettazione danneggiamento esportazione illecita contraffazione riforme penali 2022",
         navPath: "diritto/index.html?open=summaries/13_sanzioni.md"
     },
+    // DIRITTO PUBBLICO (PARTE ISTITUZIONALE)
+    {
+        title: "Il Diritto Pubblico e la Costituzione Italiana",
+        subject: "diritto",
+        chapterTag: "Capitolo I-Pub",
+        description: "Differenza tra diritto pubblico e privato, coattività delle norme giuridiche, nascita della Costituzione repubblicana (referendum del 2 giugno 1946) ed entrata in vigore il 1° gennaio 1948. Analisi dei caratteri e struttura della Costituzione rigida e scritta.",
+        keywords: "diritto pubblico privato coattività giurisprudenza dottrina costituzione assemblea costituente referendum 2 giugno 1946 1 gennaio 1948 rigidità repubblica bicameralismo parlamento",
+        navPath: "diritto/index.html?open=summaries/pub1_costituzione.md"
+    },
+    {
+        title: "Gli Organi dello Stato: Parlamento e Governo",
+        subject: "diritto",
+        chapterTag: "Capitolo II-Pub",
+        description: "Studio della separazione dei poteri. Bicameralismo perfetto, ruoli e commissioni del Parlamento. Struttura del Governo (Presidente del Consiglio e Ministri), procedimento di nomina fiduciario, e poteri di garanzia del Presidente della Repubblica.",
+        keywords: "separazione poteri parlamento bicameralismo deputati senato gruppi commissioni governo premier consiglio dei ministri fiducia sfiducia presidente della repubblica controfirma",
+        navPath: "diritto/index.html?open=summaries/pub2_governo_parlamento.md"
+    },
+    {
+        title: "Le Fonti del Diritto e il Pluralismo Giuridico",
+        subject: "diritto",
+        chapterTag: "Capitolo III-Pub",
+        description: "Analisi della piramide gerarchica delle fonti e risoluzione delle antinomie. Procedimento aggravato di revisione costituzionale (Art. 138), leggi ordinarie, decreti legge, decreti legislativi, fonti europee e riparto Stato-Regioni (Art. 117).",
+        keywords: "fonti diritto antinomie gerarchico cronologico specialità competenza revisione costituzionale art 138 referendum confermativo legge ordinaria decreto legge legislativo regionali art 117 unione europea",
+        navPath: "diritto/index.html?open=summaries/pub3_fonti_diritto.md"
+    },
+    {
+        title: "I Diritti e le Libertà Costituzionali",
+        subject: "diritto",
+        chapterTag: "Capitolo IV-Pub",
+        description: "I diritti inviolabili e doveri di solidarietà (Art. 2), il principio di uguaglianza formale e sostanziale (Art. 3). Le libertà costituzionali: personale (Art. 13), domicilio, riunione (Art. 17), associazione (Art. 18), pensiero, salute e istruzione.",
+        keywords: "diritti doveri art 2 solidarietà art 3 uguaglianza formale sostanziale libertà personale domicilio riunione associazione pensiero stampa salute istruzione",
+        navPath: "diritto/index.html?open=summaries/pub4_diritti_liberta.md"
+    },
+    {
+        title: "Costituzione Economica: Proprietà e Impresa",
+        subject: "diritto",
+        chapterTag: "Capitolo V-Pub",
+        description: "La tutela della libertà d'impresa e i suoi limiti sociali (Art. 41). La proprietà privata e il concetto costituzionale di 'funzione sociale' (Art. 42). Disciplina dell'espropriazione con indennizzo e classificazione dei beni pubblici.",
+        keywords: "costituzione economica art 41 impresa mercati art 42 proprietà privata funzione sociale espropriazione indennità demanio patrimonio indisponibile",
+        navPath: "diritto/index.html?open=summaries/pub5_proprieta_impresa.md"
+    },
 
     // STORIA DELL'ARTE MODERNA
     {
