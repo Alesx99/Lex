@@ -21,6 +21,8 @@
     --accent-purple: #a855f7;
     --accent-green: #10b981;
     --accent-blue: #3b82f6;
+    --accent-storia: #3b82f6;
+    --accent-storia-glow: rgba(59, 130, 246, 0.35);
 
     --transition-speed: 0.3s;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -347,6 +349,10 @@ main {
     background: var(--accent-romana);
 }
 
+.subject-card.active-storia::before {
+    background: var(--accent-blue);
+}
+
 .subject-card.active:hover {
     transform: translateY(-8px);
     border-color: var(--border-color-hover);
@@ -363,6 +369,10 @@ main {
 
 .subject-card.active-romana:hover {
     box-shadow: 0 15px 35px var(--accent-romana-glow);
+}
+
+.subject-card.active-storia:hover {
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.35);
 }
 
 /* Subject Meta (Top info) */
@@ -402,6 +412,12 @@ main {
     background: rgba(169, 50, 38, 0.1);
     border-color: var(--accent-romana);
     color: var(--accent-romana);
+}
+
+.subject-card.active-storia:hover .subject-icon {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
 }
 
 .status-badge {
@@ -444,6 +460,10 @@ main {
 
 .subject-card.active-romana:hover .card-content h2 {
     color: var(--accent-romana);
+}
+
+.subject-card.active-storia:hover .card-content h2 {
+    color: var(--accent-blue);
 }
 
 .card-content p {
@@ -490,6 +510,10 @@ main {
 
 .subject-card.active-romana .card-footer {
     color: var(--accent-romana);
+}
+
+.subject-card.active-storia .card-footer {
+    color: var(--accent-blue);
 }
 
 /* Upcoming Card Specific Styling */

@@ -16,7 +16,7 @@
         /* Specific Styles for Connections Map */
         .connections-container {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 2.5rem;
             position: relative;
             margin-top: 2rem;
@@ -70,6 +70,13 @@
             background: var(--accent-romana);
         }
 
+        .storia-column .column-title {
+            color: var(--accent-storia);
+        }
+        .storia-column .column-title::after {
+            background: var(--accent-storia);
+        }
+
         /* Node Cards */
         .node-card {
             background: rgba(20, 26, 40, 0.6);
@@ -108,6 +115,11 @@
         .romana-column .node-card:hover,
         .romana-column .node-card.active-node {
             border-color: var(--accent-romana);
+        }
+
+        .storia-column .node-card:hover,
+        .storia-column .node-card.active-node {
+            border-color: var(--accent-storia);
         }
 
         .node-header {
@@ -171,6 +183,13 @@
             stroke: var(--accent-romana);
             stroke-width: 5;
             filter: drop-shadow(0 0 8px rgba(169, 50, 38, 0.8));
+            stroke-dasharray: none;
+        }
+
+        .connection-line.highlighted-storia {
+            stroke: var(--accent-storia);
+            stroke-width: 5;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8));
             stroke-dasharray: none;
         }
 
@@ -240,7 +259,7 @@
                 gap: 3rem;
             }
             #connections-svg {
-                display: none; /* Hide lines on mobile layout as columns stack */
+                display: none;
             }
         }
 
@@ -609,6 +628,61 @@
                     <div class="node-title">Tarda Antichità e Spolia</div>
                 </div>
             </div>
+
+            <!-- RIGHT COLUMN: STORIA MODERNA -->
+            <div class="map-column storia-column">
+                <h3 class="column-title">Storia Moderna</h3>
+
+                <div class="node-card" id="storia-node-1" data-path="storia/index.html?open=summaries/sto1_riforma.md">
+                    <div class="node-header"><span>Studio I</span></div>
+                    <div class="node-title">La Riforma e Carlo V</div>
+                </div>
+
+                <div class="node-card" id="storia-node-2" data-path="storia/index.html?open=summaries/sto2_controriforma.md">
+                    <div class="node-header"><span>Studio II</span></div>
+                    <div class="node-title">Controriforma e Stato Moderno</div>
+                </div>
+
+                <div class="node-card" id="storia-node-3" data-path="storia/index.html?open=summaries/sto3_rivoluzioni_inglesi.md">
+                    <div class="node-header"><span>Studio III</span></div>
+                    <div class="node-title">Rivoluzioni Inglesi</div>
+                </div>
+
+                <div class="node-card" id="storia-node-4" data-path="storia/index.html?open=summaries/sto4_assolutismo_guerre.md">
+                    <div class="node-header"><span>Studio IV</span></div>
+                    <div class="node-title">Luigi XIV e Concerto Potenze</div>
+                </div>
+
+                <div class="node-card" id="storia-node-5" data-path="storia/index.html?open=summaries/sto5_illuminismo_riforme.md">
+                    <div class="node-header"><span>Studio V</span></div>
+                    <div class="node-title">Illuminismo e Riformismo</div>
+                </div>
+
+                <div class="node-card" id="storia-node-6" data-path="storia/index.html?open=summaries/sto6_rivoluzione_americana_francese.md">
+                    <div class="node-header"><span>Studio VI</span></div>
+                    <div class="node-title">Rivoluzioni Americana e Francese</div>
+                </div>
+
+                <div class="node-card" id="storia-node-7" data-path="storia/index.html?open=summaries/sto7_napoleone_restaurazione.md">
+                    <div class="node-header"><span>Studio VII</span></div>
+                    <div class="node-title">Napoleone e Restaurazione</div>
+                </div>
+
+                <div class="node-card" id="storia-node-8" data-path="storia/index.html?open=summaries/sto8_societa_borghese_liberalismo.md">
+                    <div class="node-header"><span>Studio VIII</span></div>
+                    <div class="node-title">Società Borghese ed Europa Liberale</div>
+                </div>
+
+                <div class="node-card" id="storia-node-9" data-path="storia/index.html?open=summaries/sto9_risorgimento_italiano.md">
+                    <div class="node-header"><span>Studio IX</span></div>
+                    <div class="node-title">Risorgimento Italiano</div>
+                </div>
+
+                <div class="node-card" id="storia-node-10" data-path="storia/index.html?open=summaries/sto10_unificazione_regno.md">
+                    <div class="node-header"><span>Studio X</span></div>
+                    <div class="node-title">Nascita del Regno d'Italia</div>
+                </div>
+            </div>
         </div>
 
     </main>
@@ -621,6 +695,37 @@
     <script>
         // Definition of trans-disciplinary connections
         const crossConnections = [
+            // STORIA MODERNA CONNECTIONS
+            {
+                from: "storia-node-5",
+                to: "diritto-node-13",
+                title: "Illuminismo Giuridico ⇄ Abolizione della Pena di Morte",
+                description: "Le idee di Cesare Beccaria espresse in 'Dei delitti e delle pene' (1764) ispirarono direttamente le riforme penali del Settecento, in particolare il Codice Leopoldino in Toscana (1786), che per primo abolì la pena di morte e la tortura. Nel diritto contemporaneo, la tutela penale dei beni culturali (Cap. XIII, Titolo VIII-bis c.p.) si inserisce nello sviluppo moderno della giustizia ispirato alla proporzionalità e alla riabilitazione."
+            },
+            {
+                from: "storia-node-6",
+                to: "arte-node-7",
+                title: "Rivoluzione Francese ⇄ Pittura Civile di David",
+                description: "La pittura neoclassica di Jacques-Louis David divenne lo strumento di propaganda visiva della Rivoluzione Francese e poi del regime napoleonico. Opere come 'Il giuramento degli Orazi' o 'La morte di Marat' incarnano i valori civili e repubblicani del Terzo Stato prima, e la celebrazione eroica della Repubblica poi, mostrando lo stretto legame tra trasformazione politica ed evoluzione estetica."
+            },
+            {
+                from: "storia-node-7",
+                to: "arte-node-7",
+                title: "Spoliazioni Napoleoniche ⇄ Canova Recuperatore d'Arte",
+                description: "La disastrosa campagna napoleonica in Italia comportò enormi spoliazioni di opere d'arte inviate al Louvre. Nel 1815, dopo il Congresso di Vienna, lo scultore Antonio Canova fu inviato a Parigi come rappresentante pontificio per recuperare le opere sottratte, riuscendo a riportare in Italia capolavori inestimabili. Questo evento storico stimolò la nascita della moderna coscienza di tutela internazionale dei beni culturali (Cap. IV) e del vincolo territoriale delle opere."
+            },
+            {
+                from: "storia-node-9",
+                to: "diritto-node-1",
+                title: "Statuto Albertino ⇄ Art. 9 della Costituzione",
+                description: "Lo Statuto Albertino (1848), esteso al Regno d'Italia unificato nel 1861, era una carta flessibile priva di norme di tutela del patrimonio storico-artistico. Le gravi speculazioni immobiliari post-unitarie e la dispersione delle collezioni patrizie spinsero all'approvazione delle prime leggi organiche (Legge Rosadi 1909), fino alla scelta pioneristica dei Costituenti del 1947 di inserire la tutela del patrimonio tra i Principi Fondamentali (Art. 9 Cost.)."
+            },
+            {
+                from: "storia-node-10",
+                to: "diritto-node-2",
+                title: "Secolarizzazione dei Beni ⇄ Tutela dei Beni Ecclesiastici",
+                description: "La presa di Roma nel 1870 e le precedenti leggi di soppressione delle corporazioni religiose (1866-1867) comportarono l'incameramento da parte dello Stato di enormi patrimoni immobiliari, librari e artistici ecclesiastici. Questo immenso trasferimento di proprietà richiese l'elaborazione di regimi speciali di tutela per i beni destinati al culto, oggi regolati dall'Art. 9 del Codice d'intesa con le autorità ecclesiastiche."
+            },
             {
                 from: "diritto-node-11", // Regime Fiscale e Art Bonus
                 to: "arte-node-2",      // I Padri Fondatori (Medici)
@@ -912,6 +1017,8 @@
                                     line.classList.add('highlighted');
                                     if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
                                         line.classList.add('highlighted-romana');
+                                    } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                                        line.classList.add('highlighted-storia');
                                     } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
                                         line.classList.add('highlighted-arte');
                                     }
@@ -942,6 +1049,8 @@
                                 infoTitle.style.color = 'var(--accent-gold)';
                             } else if (nodeId.startsWith('romana')) {
                                 infoTitle.style.color = 'var(--accent-romana)';
+                            } else if (nodeId.startsWith('storia')) {
+                                infoTitle.style.color = 'var(--accent-storia)';
                             } else {
                                 infoTitle.style.color = 'var(--accent-terracotta)';
                             }
@@ -959,7 +1068,7 @@
 
                 node.addEventListener('mouseleave', () => {
                     document.querySelectorAll('.connection-line').forEach(l => {
-                        l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-custom');
+                        l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-storia', 'highlighted-custom');
                     });
                     document.querySelectorAll('.node-card').forEach(n => {
                         n.classList.remove('active-node');

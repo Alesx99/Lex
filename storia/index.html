@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Historia - Catalogo Storia Moderna</title>
+    <meta name="description" content="Piattaforma interattiva di studio sulla Storia Moderna europea. Sintesi accademiche, relazioni concettuali e testi integrali dalla Riforma all'Unità d'Italia.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Centralized Glossary Database -->
+    <script src="../js/glossary_db.js"></script>
+    <style>
+        .search-container {
+            max-width: 600px;
+            margin: -2rem auto 3rem auto;
+            position: relative;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-storia);
+            background: rgba(20, 20, 25, 0.8);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition-fast);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-storia);
+        }
+
+        .results-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Historia</span></h1>
+            <p>Storia Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link active" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Dalla Riforma all'Unità Nazionale</h2>
+            <div class="hero-divider"></div>
+            <p>Esplora le sintesi accademiche basate sui testi d'esame di Storia Moderna, analizzando i grandi processi di frattura religiosa, di accentramento statale e le rivoluzioni politiche europee e americane.</p>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-input" placeholder="Cerca capitolo, evento o parole chiave (es. Lutero, Vestfalia, Cavour)...">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+
+        <div id="results-info" class="results-count">Visualizzati 10 di 10 capitoli</div>
+
+        <!-- Dashboard Grid of Chapters -->
+        <section class="dashboard-grid" id="chapters-grid">
+            
+            <!-- STUDIO I -->
+            <article class="chapter-card" data-chapter="Studio I" data-search="riforma protestante carlo v lutero erasmo indulgenze 95 tesi worms smalcalda pavia sacco roma lepanto comuneros augusta anglicanesimo">
+                <div class="card-header">
+                    <span class="chapter-num">Studio I</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~9 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La Riforma Protestante e l'Impero di Carlo V</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Le voci di dissenso ecclesiale, filologia umanistica ed Erasmo. La vendita delle indulgenze e le 95 Tesi di Lutero. L'ascesa imperiale asburgica di Carlo V, lo scontro egemonico con Francesco I, il Sacco di Roma (1527), la minaccia ottomana, la rivolta dei contadini e dei Comuneros, fino alla Pace di Augusta (1555) e lo scisma anglicano di Enrico VIII.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio I', 'summaries/sto1_riforma.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto1_riforma.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO II -->
+            <article class="chapter-card" data-chapter="Studio II" data-search="controriforma trento gesuiti inquisizione sant'uffizio stato moderno botero bodin hobbes althusius ragion stato favoriti">
+                <div class="card-header">
+                    <span class="chapter-num">Studio II</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La Controriforma e la Nascita dello Stato Moderno</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Il Concilio di Trento (1545-1563) tra dogmi e disciplina morale. Il disciplinamento sociale e l'Inquisizione romana. L'architettura istituzionale dello Stato moderno: capitali, corti, fiscalità ed eserciti. La riflessione sul potere sovrano da Machiavelli e Botero all'assolutismo di Bodin, Hobbes e Althusius.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio II', 'summaries/sto2_controriforma.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto2_controriforma.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO III -->
+            <article class="chapter-card" data-chapter="Studio III" data-search="rivoluzioni inglesi stuart carlo i puritani parlamento guerra civile new model army cromwell livellatori zappatori gloriosa rivoluzione bill of rights">
+                <div class="card-header">
+                    <span class="chapter-num">Studio III</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~9 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Le Rivoluzioni Inglesi e la Crisi del Seicento</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Le tensioni religiose e costituzionali sotto Giacomo I e Carlo I. Lo scontro tra Corona e Parlamento, la guerra civile e la decapitazione del Re (1649). L'epoca repubblicana di Cromwell, la proliferazione delle sette religiose e dei movimenti livellatori/zappatori. La Restaurazione Stuarda e la svolta costituzionale della Gloriosa Rivoluzione (1688) con il Bill of Rights.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio III', 'summaries/sto3_rivoluzioni_inglesi.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto3_rivoluzioni_inglesi.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO IV -->
+            <article class="chapter-card" data-chapter="Studio IV" data-search="assolutismo luigi xiv versailles colbertismo successione spagnola utrecht successione polacca successione austriaca sette anni russia pietro grande polonia">
+                <div class="card-header">
+                    <span class="chapter-num">Studio IV</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>L'Assolutismo di Luigi XIV e il Concerto delle Potenze</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Il governo assolutistico di Luigi XIV, la vita di corte a Versailles e le riforme mercantilistiche di Colbert. Le guerre di espansione francesi e la Guerra di Successione Spagnola (Trattati di Utrecht e Rastatt). L'ascesa coloniale inglese, la modernizzazione della Russia di Pietro il Grande e il concerto diplomatico delle potenze nelle guerre dinastiche del Settecento (Polacca, Austriaca, Sette Anni).</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio IV', 'summaries/sto4_assolutismo_guerre.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto4_assolutismo_guerre.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO V -->
+            <article class="chapter-card" data-chapter="Studio V" data-search="illuminismo montesquieu rousseau locke leopoldo toscana tanucci napoli giuseppe ii asburgo pombal portogallo inghilterra francia stallo">
+                <div class="card-header">
+                    <span class="chapter-num">Studio V</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>L'Illuminismo e il Riformismo del Settecento</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">La rivoluzione scientifica e il superamento dei dogmi tradizionali. Il pensiero politico dei Lumi (Locke, Montesquieu, Rousseau). I laboratori del dispotismo illuminato: le grandi riforme penali in Toscana (Pietro Leopoldo), fiscali e civili a Napoli (Tanucci), in Portogallo (Pombal) e nell'Impero asburgico (Giuseppe II). Lo stallo istituzionale e fiscale della Francia pre-rivoluzionaria.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio V', 'summaries/sto5_illuminismo_riforme.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto5_illuminismo_riforme.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO VI -->
+            <article class="chapter-card" data-chapter="Studio VI" data-search="rivoluzione americana colonie indipendenza washington costituzione rivoluzione francese stati generali pallacorda bastiglia diritti uomo costituzione clero vandea terrore robespierre">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VI</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~9 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La Rivoluzione Americana e lo Scoppio della Rivoluzione Francese</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Le tredici colonie nordamericane e lo scontro fiscale con la Gran Bretagna; la guerra d'indipendenza e la Costituzione degli Stati Uniti. La crisi dell'Antico Regime in Francia, gli Stati Generali, la presa della Bastiglia e la fine dei privilegi feudali. La monarchia costituzionale, la guerra, la nascita della Repubblica (1792), la rivolta di Vandea e la dittatura giacobina del Terrore di Robespierre.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VI', 'summaries/sto6_rivoluzione_americana_francese.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto6_rivoluzione_americana_francese.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO VII -->
+            <article class="chapter-card" data-chapter="Studio VII" data-search="direttorio napoleone bonaparte campagna italia campoformio repubbliche sorelle consolato codice civile 1804 impero austerlitz blocco continentale russia waterloo vienna restaurazione metternich">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>L'Età Napoleonica e la Restaurazione</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Il Direttorio e le vittorie giovanili di Napoleone in Italia (Campoformio). Il Consolato e l'uniformazione legislativa del Codice Civile (1804). L'autoinoronazione a Imperatore, le guerre di conquista in Europa, la disastrosa campagna di Russia e la disfatta di Waterloo (1815). Il Congresso di Vienna, il reinsediamento delle monarchie legittime e l'equilibrio della Restaurazione.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VII', 'summaries/sto7_napoleone_restaurazione.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto7_napoleone_restaurazione.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO VIII -->
+            <article class="chapter-card" data-chapter="Studio VIII" data-search="societa borghese rivoluzione industriale liberalismo inghilterra riforme carlo x orleans monarchia luglio 1848 ateliers nationaux napoleone iii reich bismarck comune parigi sedan">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VIII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La Società Borghese e l'Europa Liberale (1830-1848)</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">L'espansione industriale e l'affermazione della borghesia. Il liberalismo e le riforme parlamentari inglesi. La rivoluzione del 1830 in Francia e la monarchia orleanista. Le rivoluzioni del 1848 in Europa, la nascita della Seconda Repubblica francese e la svolta plebiscitaria di Napoleone III. L'ascesa della Prussia di Bismarck, la disfatta francese a Sedan e la nascita dell'Impero tedesco (1871).</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VIII', 'summaries/sto8_societa_borghese_liberalismo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto8_societa_borghese_liberalismo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO IX -->
+            <article class="chapter-card" data-chapter="Studio IX" data-search="risorgimento italiano divisione italia carboneria moti 1820 1830 mazzini giovine italia neoguelfismo gioberti balbo d'azeglio 1848 milano cinque giornate venezia manin prima guerra indipendenza republica romana">
+                <div class="card-header">
+                    <span class="chapter-num">Studio IX</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~9 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Il Risorgimento Italiano e i Moti del 1848</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">L'Italia della Restaurazione e l'influenza asburgica. Le cospirazioni della Carboneria e i fallimenti dei moti del 1820-21 e 1830-31. Il programma repubblicano ed unitario di Giuseppe Mazzini (Giovine Italia) e i progetti federalisti moderati (Gioberti, Balbo). Il 1848 italiano: le Cinque Giornate di Milano, lo Statuto Albertino, la Prima Guerra d'Indipendenza e la gloriosa Repubblica Romana del 1849.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio IX', 'summaries/sto9_risorgimento_italiano.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto9_risorgimento_italiano.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+            <!-- STUDIO X -->
+            <article class="chapter-card" data-chapter="Studio X" data-search="unificazione italiana cavour connubio crimea plombieres seconda guerra indipendenza magenta solferino villafranca spedizione mille garibaldi teano regno italia guarentigie non expedit porta pia">
+                <div class="card-header">
+                    <span class="chapter-num">Studio X</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Cavour, Garibaldi e la Nascita del Regno d'Italia</h3>
+                    <div class="author">Autore: <span>Sintesi Accademica</span></div>
+                    <p class="description">Il Piemonte costituzionale di Cavour, le riforme economiche e l'internazionalizzazione della causa italiana (Crimea, Plombières). La Seconda Guerra d'Indipendenza (1859), la Spedizione dei Mille di Garibaldi e la risalita nel Mezzogiorno. L'intervento sabaudo, l'incontro di Teano e la proclamazione del Regno d'Italia (17 marzo 1861). La presa di Roma (Porta Pia, 1870), la legge delle Guarentigie e la frattura del Non Expedit.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio X', 'summaries/sto10_unificazione_regno.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="../Storia Moderna.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/sto10_unificazione_regno.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Titolo del Capitolo</h3>
+                </div>
+                <div class="modal-controls">
+                    <!-- Print Button -->
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <!-- Close Button -->
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Reading Progress Bar -->
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <!-- Split Container for Body and Notes -->
+            <div class="modal-content-split">
+                <!-- Modal Body Text -->
+                <div class="modal-body" id="modal-body-content">
+                    <div class="markdown-content" id="markdown-view">
+                        <!-- Rendered markdown goes here -->
+                    </div>
+                </div>
+                <!-- Study Notepad Panel -->
+                <div class="modal-notes-panel" id="modal-notes-panel">
+                    <div class="notes-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span>Appunti di Studio</span>
+                    </div>
+                    <textarea id="notes-textarea" placeholder="Scrivi qui i tuoi appunti per questo capitolo... Verranno salvati automaticamente in locale."></textarea>
+                    <div class="notes-status" id="notes-status">Nessuna modifica.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Storia Moderna. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Realtime Search and Filter
+        const searchBox = document.getElementById('search-box');
+        const cards = document.querySelectorAll('.chapter-card');
+        const resultsInfo = document.getElementById('results-info');
+
+        searchBox.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-search');
+                if (searchData.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (query.length > 0) {
+                resultsInfo.style.display = 'block';
+                resultsInfo.textContent = `Trovati ${visibleCount} di ${cards.length} capitoli per "${query}"`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+        });
+
+        // Markdown Reader Mechanism
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(59, 130, 246, 0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            // Add spin animation to CSS if not present
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = "@keyframes spin { 100% { transform: rotate(360deg); } }";
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            // Reset notes
+            currentChapterKey = 'storia-' + filePath.replace(/\//g, '-').replace('.md', '');
+            initNotes();
+
+            // Fetch summary file
+            fetch(filePath)
+                .then(res => {
+                    if (!res.ok) throw new Error("Sintesi non trovata");
+                    return res.text();
+                })
+                .then(text => {
+                    // Split the title from the rest of the text
+                    const lines = text.split('\n');
+                    let title = "Sintesi";
+                    let contentText = text;
+                    
+                    if (lines[0].startsWith('# ')) {
+                        title = lines[0].substring(2).trim();
+                        contentText = lines.slice(1).join('\n');
+                    }
+                    
+                    modalChapterTitle.textContent = title;
+                    markdownView.innerHTML = marked.parse(contentText);
+                    
+                    // Reset scroll
+                    modalBodyContent.scrollTop = 0;
+                    progressIndicator.style.width = '0%';
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore di Caricamento";
+                    markdownView.innerHTML = `<p style="color:var(--accent-storia); text-align:center; padding: 2rem 0;">Impossibile caricare la sintesi. Errore: ${err.message}</p>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+            saveNotes();
+        }
+
+        // Close on escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('open')) {
+                closeSummary();
+            }
+        });
+
+        // Reading progress calculation
+        modalBodyContent.addEventListener('scroll', () => {
+            const totalScrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (totalScrollHeight > 0) {
+                const percentage = (modalBodyContent.scrollTop / totalScrollHeight) * 100;
+                progressIndicator.style.width = percentage + '%';
+            }
+        });
+
+        // Study Notepad Logic (Localstorage)
+        let currentChapterKey = '';
+        const notesTextarea = document.getElementById('notes-textarea');
+        const notesStatus = document.getElementById('notes-status');
+        let saveTimeout = null;
+
+        function initNotes() {
+            const savedNote = localStorage.getItem(currentChapterKey) || '';
+            notesTextarea.value = savedNote;
+            notesStatus.textContent = "Nessuna modifica non salvata.";
+            notesStatus.style.color = "var(--text-muted)";
+        }
+
+        function saveNotes() {
+            if (!currentChapterKey) return;
+            localStorage.setItem(currentChapterKey, notesTextarea.value);
+            notesStatus.textContent = "Appunti salvati localmente!";
+            notesStatus.style.color = "var(--accent-storia)";
+            setTimeout(() => {
+                if (notesStatus.textContent === "Appunti salvati localmente!") {
+                    notesStatus.textContent = "Nessuna modifica.";
+                    notesStatus.style.color = "var(--text-muted)";
+                }
+            }, 2000);
+        }
+
+        notesTextarea.addEventListener('input', () => {
+            notesStatus.textContent = "Modifiche in corso...";
+            notesStatus.style.color = "var(--accent-storia)";
+            
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveNotes, 1000);
+        });
+
+        // Check if there are query parameters to open a specific summary (e.g. ?open=summaries/sto1_riforma.md)
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const openPath = params.get('open');
+            if (openPath) {
+                // Find matching card button
+                const btn = Array.from(document.querySelectorAll('.chapter-card button')).find(b => {
+                    const onclickStr = b.getAttribute('onclick') || '';
+                    return onclickStr.includes(openPath);
+                });
+                
+                if (btn) {
+                    btn.click();
+                } else {
+                    // Direct open if not mapped to a button but valid path
+                    const titleMatch = openPath.match(/sto(\d+)/);
+                    const tag = titleMatch ? "Studio " + titleMatch[1] : "Sintesi";
+                    openSummary(tag, openPath);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

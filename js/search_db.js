@@ -301,6 +301,87 @@ const searchDatabase = [
         description: "La transizione formale verso il Medioevo: la Colonna di Antonino Pio e di Marco Aurelio. L'uso politico degli spolia nell'Arco di Costantino e la fortuna dantesca.",
         keywords: "antonini tarda antichita antonino pio decursio marco aurelio colonna aureliana arco costantino spolia reimpiego fregi dante",
         navPath: "arte_romana/index.html?open=summaries/cap10_antonini_tardoantico.md"
+    },
+    // STORIA MODERNA
+    {
+        title: "La Riforma Protestante e l'Impero di Carlo V",
+        subject: "storia",
+        chapterTag: "Studio I",
+        description: "Le origini della Riforma protestante, Erasmo, le 95 tesi di Martin Lutero, la Dieta di Worms, la Lega di Smalcalda, l'impero asburgico di Carlo V, il Sacco di Roma e lo scisma anglicano.",
+        keywords: "riforma protestante carlo v martin lutero erasmo indulgenze 95 tesi worms smalcalda pavia sacco roma lepanto comuneros augusta anglicanesimo scisma enrico viii",
+        navPath: "storia/index.html?open=summaries/sto1_riforma.md"
+    },
+    {
+        title: "La Controriforma e la Nascita dello Stato Moderno",
+        subject: "storia",
+        chapterTag: "Studio II",
+        description: "Il Concilio di Trento, la riorganizzazione dottrinale e disciplinare cattolica, il disciplinamento sociale e i teorici del potere moderno come Bodin, Hobbes e Botero.",
+        keywords: "controriforma trento gesuiti inquisizione sant'uffizio stato moderno botero bodin hobbes althusius ragion stato favoriti potere sovrano",
+        navPath: "storia/index.html?open=summaries/sto2_controriforma.md"
+    },
+    {
+        title: "Le Rivoluzioni Inglesi e la Crisi del Seicento",
+        subject: "storia",
+        chapterTag: "Studio III",
+        description: "Le tensioni politiche e religiose sotto gli Stuart, la guerra civile, la condanna a morte di Carlo I, la repubblica di Cromwell, la Gloriosa Rivoluzione e il Bill of Rights.",
+        keywords: "rivoluzioni inglesi stuart carlo i puritani parlamento guerra civile new model army cromwell livellatori zappatori gloriosa rivoluzione bill of rights costituzionale",
+        navPath: "storia/index.html?open=summaries/sto3_rivoluzioni_inglesi.md"
+    },
+    {
+        title: "L'Assolutismo di Luigi XIV e il Concerto delle Potenze",
+        subject: "storia",
+        chapterTag: "Studio IV",
+        description: "Il regno assolutistico del Re Sole a Versailles, le riforme finanziarie di Colbert, le guerre dinastiche europee del Settecento e l'ascesa russa di Pietro il Grande.",
+        keywords: "assolutismo luigi xiv versailles colbertismo successione spagnola utrecht successione polacca successione austriaca sette anni russia pietro grande polonia re sole fontainebleau",
+        navPath: "storia/index.html?open=summaries/sto4_assolutismo_guerre.md"
+    },
+    {
+        title: "L'Illuminismo e il Riformismo del Settecento",
+        subject: "storia",
+        chapterTag: "Studio V",
+        description: "La rivoluzione scientifica e il pensiero illuminista di Montesquieu, Rousseau e Locke. I laboratori del dispotismo illuminato in Europa (Toscana, Napoli, Austria).",
+        keywords: "illuminismo montesquieu rousseau locke leopoldo toscana tanucci napoli giuseppe ii asburgo pombal portogallo inghilterra francia stallo fisiocrazia beccaria",
+        navPath: "storia/index.html?open=summaries/sto5_illuminismo_riforme.md"
+    },
+    {
+        title: "La Rivoluzione Americana e lo Scoppio della Rivoluzione Francese",
+        subject: "storia",
+        chapterTag: "Studio VI",
+        description: "L'indipendenza delle colonie americane e la Costituzione USA. La crisi dell'Antico Regime in Francia, la presa della Bastiglia e la dittatura del Terrore di Robespierre.",
+        keywords: "rivoluzione americana colonie indipendenza washington costituzione rivoluzione francese stati generali pallacorda bastiglia diritti uomo costituzione clero vandea terrore robespierre",
+        navPath: "storia/index.html?open=summaries/sto6_rivoluzione_americana_francese.md"
+    },
+    {
+        title: "L'Età Napoleonica e la Restaurazione",
+        subject: "storia",
+        chapterTag: "Studio VII",
+        description: "La discesa di Napoleone Bonaparte in Italia, la riorganizzazione legislativa del Codice Civile del 1804, la sconfitta a Waterloo e il Congresso di Vienna con Metternich.",
+        keywords: "direttorio napoleone bonaparte campagna italia campoformio repubbliche sorelle consolato codice civile 1804 impero austerlitz blocco continentale russia waterloo vienna restaurazione metternich",
+        navPath: "storia/index.html?open=summaries/sto7_napoleone_restaurazione.md"
+    },
+    {
+        title: "La Società Borghese e l'Europa Liberale (1830-1848)",
+        subject: "storia",
+        chapterTag: "Studio VIII",
+        description: "L'espansione industriale e l'avvento dei regimi liberali in Inghilterra e Francia. I moti insurrezionali del 1848, l'ascesa della Prussia di Bismarck e la Comune di Parigi.",
+        keywords: "societa borghese rivoluzione industriale liberalismo inghilterra riforme carlo x orleans monarchia luglio 1848 ateliers nationaux napoleone iii reich bismarck comune parigi sedan",
+        navPath: "storia/index.html?open=summaries/sto8_societa_borghese_liberalismo.md"
+    },
+    {
+        title: "Il Risorgimento Italiano e i Moti Rivoluzionari",
+        subject: "storia",
+        chapterTag: "Studio IX",
+        description: "L'Italia divisa della Restaurazione, i moti settari della Carboneria, il programma unitario di Mazzini, il federalismo di Gioberti e le rivoluzioni del 1848.",
+        keywords: "risorgimento italiano divisione italia carboneria moti 1820 1830 mazzini giovine italia neoguelfismo gioberti balbo d'azeglio 1848 milano cinque giornate venezia manin prima guerra indipendenza republica romana triumvirato",
+        navPath: "storia/index.html?open=summaries/sto9_risorgimento_italiano.md"
+    },
+    {
+        title: "Cavour, Garibaldi e la Nascita del Regno d'Italia",
+        subject: "storia",
+        chapterTag: "Studio X",
+        description: "La politica diplomatica sabauda di Cavour, l'alleanza di Plombières, la Spedizione dei Mille di Garibaldi, la nascita del Regno d'Italia (1861) e la breccia di Porta Pia (1870).",
+        keywords: "unificazione italiana cavour connubio crimea plombieres seconda guerra indipendenza magenta solferino villafranca spedizione mille garibaldi teano regno italia guarentigie non expedit porta pia",
+        navPath: "storia/index.html?open=summaries/sto10_unificazione_regno.md"
     }
 ];
 

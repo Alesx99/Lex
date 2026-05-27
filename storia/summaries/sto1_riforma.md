@@ -1,0 +1,35 @@
+# Studio I: La Riforma Protestante e l'Impero di Carlo V
+**Autore:** Sintesi Accademica
+**Pagine di riferimento:** 2-9
+
+---
+
+## 1. La crisi della Chiesa e le voci di dissenso
+Tra il Quattrocento e il Cinquecento si consuma una profonda frattura tra la funzione spirituale della Chiesa e il suo consolidamento politico e finanziario come Stato Pontificio. Le proteste pauperistiche medievali riprendono vigore attraverso figure chiave:
+*   **John Wycliffe e i lollardi (Inghilterra):** Contestazione dell'autorità papale, condanna della corruzione e rifiuto delle gerarchie.
+*   **Jan Hus e gli hussiti (Boemia):** Promozione di una Chiesa nazionale boema indipendente da Roma. Hus fu condannato al rogo nel 1414 durante il Concilio di Costanza, innescando una rivolta dei suoi seguaci che presero il controllo delle città boeme fino alla sconfitta dell'ala radicale nella battaglia di Lipany (1434).
+*   **Umanesimo filologico:** La riscoperta dei classici favorisce la critica scientifica al potere temporale della Chiesa. Lorenzo Valla dimostra filologicamente la falsità della *Donazione di Costantino*. Erasmo da Rotterdam (*Elogio della follia*, 1509) critica la teologia scolastica e le indulgenze a favore del libero arbitrio e della pace, pur rimanendo nell'alveo cattolico. Tommaso Moro (*Utopia*, 1516) immagina una società razionale fondata sulla convivenza e la tolleranza religiosa.
+
+## 2. Le indulgenze e Martin Lutero
+La necessità della Curia romana di finanziare imponenti progetti di riqualificazione urbana (come la Basilica di San Pietro sotto Leone X) porta all'appalto a privati della vendita delle indulgenze. Nel 1517, Alberto di Hohenzollern riceve l'appalto per la Germania, avvalendosi del predicatore Johann Tetzel.
+*   **Le 95 Tesi (1517):** Martin Lutero, monaco agostiniano, affigge a Wittenberg un manifesto in cui nega il potere del papa di rimettere le pene del Purgatorio e critica il commercio dei meriti divini. La stampa a caratteri mobili (Gutenberg) diffonde il testo in tutta Europa in poche settimane.
+*   **La scomunica e la Dieta di Worms (1521):** Papa Leone X condanna Lutero con la bolla *Exsurge Domine* (1520), bruciata pubblicamente dal monaco. Nel 1521, la Dieta imperiale di Worms, convocata dal giovane imperatore Carlo V, intima a Lutero di ritrattare. Al suo rifiuto ("Qui sto. Non posso fare altrimenti"), segue il bando dall'Impero e la scomunica. Lutero viene salvato dal principe Federico il Saggio di Sassonia, che lo nasconde nel castello di Wartburg, dove traduce la Bibbia in tedesco.
+
+## 3. Le rivolte sociali e la divisione religiosa
+La Riforma assume subito una forte connotazione politica e sociale:
+*   **La rivolta dei cavalieri:** Attacco ai possedimenti del vescovado di Treviri per riottenere un ruolo feudale, represso dai principi.
+*   **La guerra dei contadini (1524-1525):** Guidata dal predicatore radicale Thomas Müntzer, unisce istanze evangeliche e antifeudali. I *Dodici Articoli* dei contadini chiedono l'abolizione della servitù della gleba, il ripristino delle terre comuni e l'elezione dei parroci. Lutero condanna duramente la rivolta, esortando i principi alla repressione, che culmina nel massacro di Frankenhausen (maggio 1525).
+*   **Gli Anabattisti:** Movimento radicale che teorizza il battesimo cosciente in età adulta e la separazione netta tra Stato e Chiesa, perseguitato sia da cattolici che da luterani.
+*   **La divisione politica (Smalcalda):** Alla Dieta di Spira (1529) i principi luterani "protestano" contro il bando di Lutero. Alla Dieta di Augusta (1530) presentano la *Confessio Augustana*, rifiutata da Carlo V. I principi protestanti si uniscono nella *Lega di Smalcalda* (1531), un'alleanza militare antiasburgica. La Dieta di Ratisbona (1541) sancisce l'inconciliabilità dottrinale tra le due sponde del cristianesimo.
+
+## 4. Il sogno imperiale di Carlo V e i conflitti globali
+Carlo V d'Asburgo eredita un territorio immenso grazie alle alleanze matrimoniali dei nonni (Filippo il Bello e Giovanna la Pazza, Massimiliano I e Maria di Borgogna): Spagna, colonie americane, Paesi Bassi, domini austriaci. Nel 1519 viene eletto imperatore comprando i voti dei grandi elettori grazie ai prestiti dei banchieri Fugger. Coltiva il sogno della *Restauratio Imperii*, un impero universale cristiano, ma si scontra con tre grandi ostacoli:
+*   **La Francia di Francesco I:** L'Italia è il teatro dello scontro egemonico per il controllo del Ducato di Milano (collegamento strategico tra Spagna e Germania). Nel 1525, Francesco I viene sconfitto e catturato a Pavia. Firma il Trattato di Madrid (1526), ma una volta libero aderisce alla Lega di Cognac con papa Clemente VII. Nel maggio 1527, le truppe imperiali (lanzichenecchi luterani senza paga) compiono il devastante *Sacco di Roma*. Clemente VII si riconcilia con Carlo V incoronandolo a Bologna (1530) in cambio del reinsediamento dei Medici a Firenze. La pace di Cateau-Cambrésis (1559, firmata dal figlio Filippo II) sancirà la definitiva egemonia spagnola in Italia.
+*   **L'Impero Ottomano:** Guidato da Solimano il Magnifico, preme sul confine danubiano (assedio di Vienna del 1529) e nel Mediterraneo con le flotte corsare di Barbarossa. Nonostante la presa imperiale di Tunisi (1535), la flotta cristiana subisce pesanti sconfitte a Prevesa (1538) e Algeri (1541), giungendo a una tregua nel 1547. La minaccia turca sarà ridimensionata solo a Lepanto (1571).
+*   **La ribellione dei Comuneros (1520-1522):** Rivolta delle città castigliane contro le tasse e l'amministrazione dei consiglieri fiamminghi di Carlo V, domata militarmente a Villalar (1521).
+*   **La Pace di Augusta (1555):** Sancisce il principio del *cuius regio eius religio* (i sudditi devono seguire la religione del proprio principe). È la fine dell'unità religiosa e del sogno universalistico. Carlo V abdica dividendo l'Impero: al figlio Filippo II vanno Spagna, Paesi Bassi e Italia; al fratello Ferdinando I vanno i domini austriaci e il titolo imperiale.
+
+## 5. La Riforma in Inghilterra: lo scisma anglicano
+Enrico VIII Tudor, desideroso di un erede maschio e dell'annullamento del matrimonio con Caterina d'Aragona per sposare Anna Bolena, incontra il rifiuto di papa Clemente VII.
+*   **L'Atto di Supremazia (1534):** Votato dal Parlamento, dichiara il Re unico capo supremo della Chiesa d'Inghilterra (anglicana). Segue l'incameramento dei beni dei monasteri e la trasformazione dei rapporti economici agrari (ascesa della gentry).
+*   **Consolidamento liturgico:** Sotto Edoardo VI si redige il *Book of Common Prayer* (1549) ad opera dell'arcivescovo Cranmer, combinando teologia calvinista e liturgia cattolica. Dopo la sanguinosa parentesi di restaurazione cattolica sotto Maria I Tudor ("la Sanguinaria"), il regno di Elisabetta I consolida lo scisma.

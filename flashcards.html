@@ -71,6 +71,12 @@
             box-shadow: 0 4px 15px rgba(169, 50, 38, 0.15);
         }
 
+        .filter-btn.active.storia-btn {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--accent-storia);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+        }
+
         .filter-btn.active.all-btn {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.3);
@@ -142,6 +148,10 @@
             border-top: 5px solid var(--accent-romana);
         }
 
+        .card-face-front.storia-card {
+            border-top: 5px solid var(--accent-storia);
+        }
+
         .card-meta {
             display: flex;
             justify-content: space-between;
@@ -175,6 +185,12 @@
             background: rgba(169, 50, 38, 0.15);
             color: var(--accent-romana);
             border: 1px solid rgba(169, 50, 38, 0.2);
+        }
+
+        .storia-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-storia);
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .card-content-wrapper {
@@ -402,6 +418,7 @@
                 <button class="filter-btn diritto-btn" onclick="setFilter('diritto')">Diritto dei Beni Culturali</button>
                 <button class="filter-btn arte-btn" onclick="setFilter('arte')">Storia dell'Arte Moderna</button>
                 <button class="filter-btn romana-btn" onclick="setFilter('romana')">Arte Romana</button>
+                <button class="filter-btn storia-btn" onclick="setFilter('storia')">Storia Moderna</button>
             </div>
 
             <!-- SRS Mode Toggle -->
@@ -700,6 +717,127 @@
                 subject: "romana",
                 question: "Qual è la differenza fondamentale teorizzata da Ranuccio Bianchi Bandinelli tra 'arte patrizia' e 'arte plebea'?",
                 answer: "L'arte patrizia (o senatoria) adotta modelli ellenistici, naturalistici e raffinati per celebrare il potere. L'arte plebea (o provinciale) privilegia la chiarezza immediata del messaggio con proporzioni gerarchiche, frontalità, bidimensionalità e prospettiva ribaltata."
+            },
+            // STORIA MODERNA
+            {
+                id: "storia-fc1",
+                subject: "storia",
+                question: "Quale principio stabilì la Pace di Augusta del 1555 riguardo alla religione dei sudditi dell'Impero?",
+                answer: "Il principio del 'cuius regio eius religio', che imponeva ai sudditi di seguire la religione (cattolica o luterana) del proprio principe territoriale, ponendo fine all'unità cristiana ma frammentando l'Impero."
+            },
+            {
+                id: "storia-fc2",
+                subject: "storia",
+                question: "Cos'è l'Atto di Supremazia promulgato nel 1534 in Inghilterra?",
+                answer: "È la legge con cui il Parlamento dichiarò il re Enrico VIII capo supremo della Chiesa anglicana, separando l'Inghilterra da Roma e consentendo al sovrano di confiscare i beni dei monasteri."
+            },
+            {
+                id: "storia-fc3",
+                subject: "storia",
+                question: "Quali furono le principali decisioni dogmatiche riaffermate dal Concilio di Trento (1545-1563) in opposizione ai protestanti?",
+                answer: "Riaffermò i sette sacramenti, l'autorità del clero, il Purgatorio, il culto dei santi e delle reliquie, il valore delle opere per la salvezza e l'adozione esclusiva della Vulgata latina."
+            },
+            {
+                id: "storia-fc4",
+                subject: "storia",
+                question: "Quale opera di Jean Bodin formalizzò il concetto moderno di sovranità intesa come potere supremo, indivisibile ed assoluto?",
+                answer: "I 'Sei libri dello Stato' (Les Six Livres de la République, 1576), scritti nel contesto delle guerre di religione francesi per legittimare la monarchia come organo superiore alle fazioni."
+            },
+            {
+                id: "storia-fc5",
+                subject: "storia",
+                question: "Quale esito politico ebbe la prima rivoluzione inglese nel 1649?",
+                answer: "La condanna a morte e la decapitazione pubblica di re Carlo I Stuart, l'abolizione della camera dei Lord e della monarchia, e la proclamazione del Commonwealth (Repubblica) guidato da Oliver Cromwell."
+            },
+            {
+                id: "storia-fc6",
+                subject: "storia",
+                question: "Quale importanza costituzionale assunse il Bill of Rights firmato in Inghilterra nel 1689?",
+                answer: "Definì i limiti del potere regio, vietando al re di sospendere leggi o imporre tasse senza il consenso parlamentare e garantendo libere elezioni, dando vita alla prima monarchia parlamentare."
+            },
+            {
+                id: "storia-fc7",
+                subject: "storia",
+                question: "Qual era l'obiettivo della politica economica nota come 'colbertismo' applicata nella Francia di Luigi XIV?",
+                answer: "Un protezionismo mercantilista volto ad accumulare metalli preziosi favorendo le esportazioni, tassando le importazioni, creando manifatture regie e compagnie commerciali privilegiate."
+            },
+            {
+                id: "storia-fc8",
+                subject: "storia",
+                question: "Quale conflitto (1756-1763) si disputò in Europa e nelle colonie d'America e India, sancendo il primato navale britannico sulla Francia?",
+                answer: "La Guerra dei Sette Anni, conclusa con la pace di Parigi (1763) che privò la Francia del Canada e dell'influenza in India a vantaggio della Gran Bretagna."
+            },
+            {
+                id: "storia-fc9",
+                subject: "storia",
+                question: "Quale importante primato detiene la riforma penale attuata nel Granducato di Toscana da Pietro Leopoldo nel 1786?",
+                answer: "Fu la prima legislazione al mondo (Codice Leopoldino) ad abolire del tutto la pena di morte e la tortura giudiziaria, accogliendo le tesi dell'opera di Cesare Beccaria."
+            },
+            {
+                id: "storia-fc10",
+                subject: "storia",
+                question: "In cosa consisteva la politica ecclesiastica asburgica denominata 'giuseppinismo'?",
+                answer: "Una politica di subordinazione della Chiesa cattolica allo Stato, attuata da Giuseppe II sopprimendo gli ordini contemplativi, istituendo seminari statali e concedendo tolleranza agli acattolici."
+            },
+            {
+                id: "storia-fc11",
+                subject: "storia",
+                question: "Quale principio fiscale fu all'origine dello scontro tra le colonie americane e la madrepatria inglese prima della rivoluzione del 1776?",
+                answer: "Il principio 'No taxation without representation' (nessuna tassazione senza rappresentanza), per cui i coloni rifiutavano di pagare dazi imposti da un Parlamento a Londra in cui non avevano deputati."
+            },
+            {
+                id: "storia-fc12",
+                subject: "storia",
+                question: "Quale organo straordinario governò la Francia durante la dittatura del 'Terrore' (1793-1794) capeggiata da Robespierre?",
+                answer: "Il Comitato di Salute Pubblica, che concentrò su di sé i poteri esecutivi e di difesa della nazione, reprimendo ferocemente i nemici della rivoluzione con la ghigliottina."
+            },
+            {
+                id: "storia-fc13",
+                subject: "storia",
+                question: "Quale trattato firmato da Napoleone nel 1797 decretò la fine della millenaria indipendenza della Repubblica di Venezia?",
+                answer: "Il Trattato di Campoformio, con cui Napoleone cedette Venezia all'Impero Asburgico in cambio del Belgio e del riconoscimento della Repubblica Cisalpina."
+            },
+            {
+                id: "storia-fc14",
+                subject: "storia",
+                question: "Quali erano i due capisaldi diplomatici del Congresso di Vienna (1814-1815) diretti da Metternich?",
+                answer: "Il principio di legittimità (reinsediare le dinastie pre-rivoluzionarie) e il principio di equilibrio (tracciare confini bilanciati per evitare nuove tentazioni egemoniche)."
+            },
+            {
+                id: "storia-fc15",
+                subject: "storia",
+                question: "Quale svolta politica produsse in Francia l'insurrezione delle 'Tre Giornate Gloriose' del luglio 1830?",
+                answer: "La cacciata del re assolutista Carlo X Stuart e l'ascesa al trono di Luigi Filippo d'Orléans come monarca costituzionale proclamato 'per volontà della nazione'."
+            },
+            {
+                id: "storia-fc16",
+                subject: "storia",
+                question: "Quale esito militare nel 1870 provocò il crollo del Secondo Impero di Napoleone III e favorì l'unificazione della Germania?",
+                answer: "La disfatta francese nella battaglia di Sedan (1 settembre 1870), che portò alla nascita della Terza Repubblica in Francia e alla proclamazione dell'Impero tedesco a Versailles."
+            },
+            {
+                id: "storia-fc17",
+                subject: "storia",
+                question: "Qual era il nucleo centrale del programma politico di Giuseppe Mazzini per il Risorgimento italiano?",
+                answer: "L'unificazione dell'Italia da realizzare tramite un'insurrezione popolare per fondare una Repubblica democratica ed unitaria ('Una, Indipendente e Sovrana')."
+            },
+            {
+                id: "storia-fc18",
+                subject: "storia",
+                question: "Quale costituzione fu concessa nel marzo 1848 da Carlo Alberto nel Regno di Sardegna, rimanendo in vigore anche nel Regno d'Italia?",
+                answer: "Lo Statuto Albertino, una costituzione ottriata (concessa dal sovrano) che istituiva una monarchia costituzionale pura con Parlamento bicamerale."
+            },
+            {
+                id: "storia-fc19",
+                subject: "storia",
+                question: "Cosa stabilivano gli accordi segreti di Plombières del 1858 tra Cavour e Napoleone III?",
+                answer: "L'alleanza difensiva franco-piemontese contro l'Austria, in cambio della cessione di Nizza e Savoia alla Francia e del riordino dell'Italia in una confederazione di quattro Stati."
+            },
+            {
+                id: "storia-fc20",
+                subject: "storia",
+                question: "Cosa dispose papa Pio IX nel 1874 con la formula del 'Non Expedit'?",
+                answer: "Dichiarò inaccettabile che i cattolici italiani partecipassero alle elezioni politiche del Regno d'Italia, sia come candidati che come elettori, in segno di protesta per la presa di Roma."
             }
         ];
 
@@ -744,6 +882,8 @@
                 filtersContainer.querySelector('.arte-btn').classList.add('active');
             } else if (subject === 'romana') {
                 filtersContainer.querySelector('.romana-btn').classList.add('active');
+            } else if (subject === 'storia') {
+                filtersContainer.querySelector('.storia-btn').classList.add('active');
             }
 
             initDeck();
@@ -841,6 +981,10 @@
                 subjectText = 'Arte Romana';
                 badgeClass = 'card-subject-badge romana-badge';
                 cardClass = 'card-face card-face-front romana-card';
+            } else if (currentCard.subject === 'storia') {
+                subjectText = 'Storia Moderna';
+                badgeClass = 'card-subject-badge storia-badge';
+                cardClass = 'card-face card-face-front storia-card';
             } else {
                 subjectText = 'Arte Moderna';
                 badgeClass = 'card-subject-badge arte-badge';

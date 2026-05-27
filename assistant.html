@@ -604,6 +604,19 @@
             cap10_antonini_tardoantico: "summaries/cap10_antonini_tardoantico.md"
         };
 
+        const storiaChapterLinks = {
+            sto1_riforma: "summaries/sto1_riforma.md",
+            sto2_controriforma: "summaries/sto2_controriforma.md",
+            sto3_rivoluzioni_inglesi: "summaries/sto3_rivoluzioni_inglesi.md",
+            sto4_assolutismo_guerre: "summaries/sto4_assolutismo_guerre.md",
+            sto5_illuminismo_riforme: "summaries/sto5_illuminismo_riforme.md",
+            sto6_rivoluzione_americana_francese: "summaries/sto6_rivoluzione_americana_francese.md",
+            sto7_napoleone_restaurazione: "summaries/sto7_napoleone_restaurazione.md",
+            sto8_societa_borghese_liberalismo: "summaries/sto8_societa_borghese_liberalismo.md",
+            sto9_risorgimento_italiano: "summaries/sto9_risorgimento_italiano.md",
+            sto10_unificazione_regno: "summaries/sto10_unificazione_regno.md"
+        };
+
         // Knowledge Base flat paragraphs
         let knowledgeBase = [];
         let isKbReady = false;
@@ -792,6 +805,23 @@
                     })
                     .catch(err => {
                         console.error(`Error loading complete Roman Art text:`, err);
+                    })
+            );
+
+            // 2b. Storia Moderna: load the single complete file from knowledge_base/storia/storia_completo.md
+            const storiaUrl = "knowledge_base/storia/storia_completo.md";
+            fetchPromises.push(
+                fetch(storiaUrl)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Fetch failed for ${storiaUrl}`);
+                        return res.text();
+                    })
+                    .then(mdText => {
+                        const sections = parseSummaryIntoSections('storia', 'storia_completo', 'Storia Moderna (Manuale Completo)', mdText);
+                        knowledgeBase.push(...sections);
+                    })
+                    .catch(err => {
+                        console.error(`Error loading complete Storia Moderna text:`, err);
                     })
             );
 
@@ -1307,6 +1337,9 @@
             } else if (chapterKey === 'canova_completo') {
                 const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
                 return `knowledge_base/storia_arte/canova_completo.md${anchor}`;
+            } else if (chapterKey === 'storia_completo') {
+                const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                return `knowledge_base/storia/storia_completo.md${anchor}`;
             }
 
             if (subject === 'diritto') {
@@ -1320,6 +1353,9 @@
             } else if (subject === 'arte_romana') {
                 const rel = romanaChapterLinks[chapterKey];
                 return rel ? `arte_romana/index.html?open=${rel}` : `arte_romana/index.html`;
+            } else if (subject === 'storia') {
+                const rel = storiaChapterLinks[chapterKey];
+                return rel ? `storia/index.html?open=${rel}` : `storia/index.html`;
             } else {
                 const rel = arteChapterLinks[chapterKey];
                 return rel ? `storia_arte/index.html?open=${rel}` : `storia_arte/index.html`;

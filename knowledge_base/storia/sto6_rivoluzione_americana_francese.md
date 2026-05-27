@@ -1,0 +1,29 @@
+# Studio VI: La Rivoluzione Americana e lo Scoppio della Rivoluzione Francese
+**Autore:** Sintesi Accademica
+**Pagine di riferimento:** 67-75
+
+---
+
+## 1. La Rivoluzione Americana e la nascita degli Stati Uniti
+Le tredici colonie inglesi in Nord America presentano differenze economiche e sociali (Nord cantieristico e puritano; Centro agricolo e multiculturale; Sud schiavista dominato dal latifondo). Le colonie godono di ampia autonomia amministrativa ma sono sottomesse alle tariffe doganali della Corona britannica.
+*   **Le tensioni fiscali:** Dopo la Guerra dei Sette Anni, la Gran Bretagna impone nuove tasse per risanare il debito pubblico: lo *Stamp Act* (tassa di bollo, 1765) e il dazio sul tè. I coloni protestano con lo slogan "No taxation without representation" (nessuna tassa senza rappresentanza in Parlamento). Nel 1770 il *Massacro di Boston* (truppe inglesi che sparano sulla folla) inasprisce lo scontro. Nel 1773, con il *Boston Tea Party*, i coloni gettano in mare le casse di tè delle navi inglesi.
+*   **La guerra d'indipendenza:** Nel 1775 iniziano gli scontri armati. Il 4 luglio 1776 il Congresso di Filadelfia approva la **Dichiarazione d'Indipendenza**, redatta da Thomas Jefferson, fondata sui principi dell'Illuminismo (diritti inalienabili, ricerca della felicità). Sotto la guida di George Washington e con il sostegno militare francese (Lafayette) e spagnolo, i coloni sconfiggono la Gran Bretagna, sancendo l'indipendenza nel *Trattato di Parigi (1783)*. Nel 1787 viene redatta la Costituzione degli Stati Uniti, repubblica federale presidenziale basata sulla divisione dei poteri di Montesquieu.
+
+## 2. La crisi dell'Antico Regime in Francia
+La Francia è afflitta da un debito pubblico insostenibile causato dalle spese militari. Il rovesciamento del sistema fiscale (tassazione di nobiltà e clero) proposto dai ministri delle finanze viene bloccato dai Parlamenti nobiliari.
+*   **La convocazione degli Stati Generali (maggio 1789):** Di fronte allo stallo, Luigi XVI convoca l'assemblea dei tre ordini (Clero, Nobiltà, Terzo Stato) che non si riuniva dal 1614.
+*   **Dall'Assemblea al Giuramento della Pallacorda:** Il Terzo Stato (rappresentante il 98% della popolazione) chiede il voto capitario (per testa) e non per ordine. Al rifiuto del re, i rappresentanti del Terzo Stato si proclamano **Assemblea Nazionale** e giurano nella sala della Pallacorda (20 giugno 1789) di non separarsi prima di aver dato una costituzione alla Francia.
+
+## 3. Lo scoppio della Rivoluzione e le riforme del 1789
+Luigi XVI richiama truppe a Parigi, innescando la reazione popolare:
+*   **La presa della Bastiglia (14 luglio 1789):** Il popolo parigino assalta la fortezza-prigione, simbolo dell'assolutismo regio. Nelle campagne si diffonde la *Grande Paura* (rivolta contadina contro i castelli nobiliari).
+*   **La fine del feudalesimo:** Nella notte del 4 agosto 1789 l'Assemblea Nazionale decreta l'abolizione del regime feudale e dei privilegi nobiliari. Il 26 agosto 1789 approva la **Dichiarazione dei Diritti dell'Uomo e del Cittadino**, che sancisce uguaglianza giuridica, libertà individuali e sovranità nazionale. Il 5 ottobre 1789 una marcia di donne su Versailles costringe il re a trasferirsi a Parigi (Palazzo delle Tuileries).
+
+## 4. La monarchia costituzionale e la frattura rivoluzionaria
+*   **La Costituzione del 1791:** Trasforma la Francia in una monarchia costituzionale con sistema monocamerale e diritto di veto sospensivo per il re. Viene approvata la *Costituzione civile del clero*, che trasforma i sacerdoti in funzionari statali, provocando la frattura tra preti costituzionali e preti "refrattari" fedeli al papa.
+*   **La fuga a Varennes (giugno 1791):** Luigi XVI tenta di fuggire in Austria per raccogliere truppe controrivoluzionarie, ma viene bloccato a Varennes. La fallita fuga distrugge la credibilità della monarchia. L'Assemblea si divide tra l'ala destra moderata (Foglianti, favorevoli al re) e l'ala sinistra radicale (Giacobini e Cordiglieri, repubblicani).
+
+## 5. La Repubblica e il Terrore (1792-1794)
+*   **La guerra e la Convenzione:** Nel 1792 la Francia dichiara guerra ad Austria e Prussia. Le sconfitte iniziali e il sospetto di tradimento del re portano all'assalto delle Tuileries da parte dei sanculotti (agosto 1792). Viene istituita la *Convenzione Nazionale* eletta a suffragio universale, che il 21 settembre 1792 proclama la Repubblica, all'indomani della vittoria francese a Valmy. Luigi XVI viene processato e ghigliottinato nel gennaio 1793.
+*   **La rivolta della Vandea (1793):** Rivolta contadina controrivoluzionaria scoppiata nel nord-ovest della Francia contro la leva obbligatoria, che assume connotazioni monarchiche e cattoliche, repressa brutalmente da Parigi.
+*   **Il Terrore giacobino:** Di fronte alle minacce interne ed esterne, il potere viene accentrato nel *Comitato di Salute Pubblica* dominato da Maximilien Robespierre. Si instaura il periodo del *Terrore* (1793-1794) con l'eliminazione fisica di girondini, moderati (Danton) e radicali (Hébert) tramite il Tribunale Rivoluzionario. La dittatura di Robespierre termina il 9 Termidoro (27 luglio 1794) con il suo arresto ed esecuzione.

@@ -2322,7 +2322,628 @@ const quizDatabase = {
                 explanation: "Nel Medioevo la personificazione della via Traiana su una ruota (sull'Arco di Costantino) o le supplici daciche (sulla Colonna Traiana) vennero interpretate come la vedovella che chiede giustizia a Traiano, ispirando i versi del Purgatorio di Dante."
             }
         ]
+    },
+    sto1_riforma: {
+        subject: "storia",
+        chapterTag: "Studio I",
+        title: "La Riforma Protestante e l'Impero di Carlo V",
+        questions: [
+            {
+                question: "Quale importante decisione fu assunta nei confronti di Martin Lutero durante la Dieta imperiale di Worms nel 1521?",
+                options: [
+                    "Fu nominato consigliere ecclesiastico dell'Elettore di Sassonia.",
+                    "Venne intimato di ritrattare le sue dottrine e, al suo rifiuto, fu bandito dall'Impero.",
+                    "Venne condannato immediatamente al rogo come eretico relapso.",
+                    "Gli fu concesso il libero insegnamento della teologia presso l'università di Wittenberg."
+                ],
+                correctIndex: 1,
+                explanation: "Alla Dieta di Worms (1521), presieduta da Carlo V, Lutero rifiutò di ritrattare le sue tesi. Di conseguenza, l'imperatore emanò l'Editto di Worms, dichiarando Lutero fuorilegge e vietando la lettura e il possesso dei suoi scritti."
+            },
+            {
+                question: "Quale fu l'atteggiamento di Martin Lutero di fronte alla Guerra dei Contadini (1524-1525) guidata da Thomas Müntzer?",
+                options: [
+                    "Sostenne attivamente le rivendicazioni antifeudali dei contadini ritenendole espressione del Vangelo.",
+                    "Rimase neutrale, ritirandosi in preghiera nel castello di Wartburg.",
+                    "Condannò duramente la rivolta, esortando i principi tedeschi alla repressione armata per preservare l'ordine politico voluto da Dio.",
+                    "Propose un compromesso pacifico basato sui Dodici Articoli della Lega di Smalcalda."
+                ],
+                correctIndex: 2,
+                explanation: "Lutero rifiutò strenuamente la politicizzazione del suo messaggio religioso. Nel libretto 'Contro le bande brigantesche e assassine dei contadini', giustificò la spietata repressione da parte dei principi, ritenendo che il potere politico debba difendere l'ordine sociale con la spada."
+            },
+            {
+                question: "Cosa stabilì la Pace di Augusta del 1555 sotto il profilo politico-religioso nell'Impero?",
+                options: [
+                    "L'introduzione della piena libertà di coscienza e tolleranza religiosa per tutti i sudditi dell'impero.",
+                    "Il principio del 'cuius regio eius religio', che obbligava i sudditi a seguire la confessione (cattolica o luterana) del proprio sovrano.",
+                    "La sottomissione dei principi protestanti all'autorità papale in cambio della secolarizzazione dei beni ecclesiastici.",
+                    "Il bando definitivo del luteranesimo e l'adozione esclusiva della confessione calvinista."
+                ],
+                correctIndex: 1,
+                explanation: "La Pace di Augusta (1555) pose fine ai conflitti religiosi in Germania introducendo la formula del 'cuius regio, eius religio'. Solo i principi e i sovrani territoriali potevano scegliere la confessione religiosa (tra cattolicesimo e luteranesimo), mentre i sudditi dissidenti dovevano adeguarsi o emigrare."
+            },
+            {
+                question: "Quale evento drammatico segnò la rottura diplomatica e militare tra l'imperatore Carlo V e papa Clemente VII nel 1527?",
+                options: [
+                    "Il bando papale emesso contro la Spagna con la bolla Exsurge Domine.",
+                    "La firma della Pace di Augusta tra Clemente VII e i principi luterani.",
+                    "Il devastante Sacco di Roma compiuto dai lanzichenecchi imperiali senza paga.",
+                    "La cattura di papa Clemente VII durante la battaglia di Pavia."
+                ],
+                correctIndex: 2,
+                explanation: "Nel maggio 1527, le truppe imperiali (composte in gran parte da mercenari tedeschi, i lanzichenecchi, molti dei quali luterani) rimaste senza soldo assediarono e saccheggiarono barbaramente Roma. Il Papa si rifugiò a Castel Sant'Angelo e fu costretto a capitolare mesi dopo."
+            },
+            {
+                question: "Con quale provvedimento legislativo del 1534 Enrico VIII si autoproclamò capo della Chiesa d'Inghilterra?",
+                options: [
+                    "Il Bill of Rights.",
+                    "La bolla Exsurge Domine.",
+                    "L'Atto di Supremazia (Act of Supremacy).",
+                    "Il Book of Common Prayer."
+                ],
+                correctIndex: 2,
+                explanation: "L'Atto di Supremazia votato dal Parlamento inglese nel 1534 dichiarò Enrico VIII e i suoi successori 'capo supremo' della Chiesa d'Inghilterra (anglicana), consumando lo scisma con la Chiesa di Roma in seguito al rifiuto papale di annullare il matrimonio del re con Caterina d'Aragona."
+            }
+        ]
+    },
+    sto2_controriforma: {
+        subject: "storia",
+        chapterTag: "Studio II",
+        title: "La Controriforma e la Nascita dello Stato Moderno",
+        questions: [
+            {
+                question: "In quale sessione conciliare e con quali decreti il Concilio di Trento (1545-1563) rispose sul piano dottrinale alla Riforma?",
+                options: [
+                    "Accettando la dottrina della giustificazione per sola fede ma mantenendo la gerarchia papale.",
+                    "Ribadendo la validità dei sette sacramenti, il ruolo del clero come intermediario, il culto dei santi e l'autorità della Vulgata.",
+                    "Abolendo il tribunale dell'Inquisizione e autorizzando la traduzione della Bibbia in lingua volgare.",
+                    "Sopprimendo gli ordini religiosi contemplativi a favore di ordini caritativi e scolastici."
+                ],
+                correctIndex: 1,
+                explanation: "Il Concilio di Trento respinse in blocco le tesi teologiche protestanti: riaffermò il valore delle opere oltre alla fede, l'esistenza del Purgatorio, la transustanziazione eucaristica, il celibato ecclesiastico, i sette sacramenti e l'autorità interpretativa della Chiesa e del papa."
+            },
+            {
+                question: "Quale organo fu istituito da papa Paolo III nel 1542 con la bolla 'Licet ab initio' per combattere la diffusione dell'eresia?",
+                options: [
+                    "La Congregazione dell'Indice dei libri proibiti.",
+                    "La Congregazione del Sant'Ufficio (Inquisizione Romana).",
+                    "La Compagnia di Gesù (Gesuiti).",
+                    "Il Consiglio Supremo di Castiglia."
+                ],
+                correctIndex: 1,
+                explanation: "La bolla 'Licet ab initio' (1542) istituì la Congregazione del Sant'Ufficio dell'Inquisizione, una commissione di cardinali dotata di poteri inquisitoriali e di giurisdizione universale per reprimere l'eresia e la dissidenza dottrinale nella penisola italiana."
+            },
+            {
+                question: "Nel contesto dei teorici dello Stato moderno, a chi si deve l'elaborazione del concetto di 'sovranità indivisibile e assoluta' formulato nei 'Sei libri dello Stato' (1576)?",
+                options: [
+                    "Niccolò Machiavelli.",
+                    "Thomas Hobbes.",
+                    "Jean Bodin.",
+                    "Johannes Althusius."
+                ],
+                correctIndex: 2,
+                explanation: "Jean Bodin, durante le guerre di religione francesi, elaborò l'idea che la sovranità debba essere assoluta, perpetua e indivisibile, risiedendo unicamente nel re, come unico strumento per superare le fazioni e garantire la pace sociale."
+            },
+            {
+                question: "Con quale bolla papale e in quale anno fu approvata la Compagnia di Gesù (Gesuiti), fondata da Ignazio di Loyola?",
+                options: [
+                    "Bolla Exsurge Domine del 1520.",
+                    "Bolla Regimini militantis Ecclesiae del 1540 di Paolo III.",
+                    "Bolla Licet ab initio del 1542.",
+                    "Bolla Inter Caetera del 1493."
+                ],
+                correctIndex: 1,
+                explanation: "La Compagnia di Gesù fu ufficialmente approvata da papa Paolo III nel 1540 con la bolla 'Regimini militantis Ecclesiae'. Caratterizzata da una rigida struttura gerarchica e dall'obbedienza assoluta al papa, divenne il braccio operativo della Controriforma nell'istruzione delle élite e nelle missioni mondiali."
+            },
+            {
+                question: "Quale opera del 1589 di Giovanni Botero formalizzò il concetto di 'Ragion di Stato', contrapponendosi al pensiero di Machiavelli?",
+                options: [
+                    "Della Ragion di Stato.",
+                    "Il Principe.",
+                    "Il Leviatano.",
+                    "La Repubblica."
+                ],
+                correctIndex: 0,
+                explanation: "Giovanni Botero scrisse 'Della Ragion di Stato' nel 1589 per proporre un modello di governo in cui l'azione politica del sovrano, pur orientata alla conservazione dello Stato, fosse strettamente subordinata alla morale cattolica e alla religione, superando la separazione machiavelliana tra etica e politica."
+            }
+        ]
+    },
+    sto3_rivoluzioni_inglesi: {
+        subject: "storia",
+        chapterTag: "Studio III",
+        title: "Le Rivoluzioni Inglesi e la Crisi del Seicento",
+        questions: [
+            {
+                question: "Quale drammatico evento del 1649 pose temporaneamente fine alla monarchia in Inghilterra durante la prima rivoluzione?",
+                options: [
+                    "L'esilio volontario di Giacomo II in Francia.",
+                    "La decapitazione pubblica di re Carlo I Stuart e la proclamazione del Commonwealth (Repubblica).",
+                    "L'incoronazione di Oliver Cromwell come Re d'Inghilterra.",
+                    "La firma della Magna Carta da parte degli Stuart."
+                ],
+                correctIndex: 1,
+                explanation: "In seguito alla vittoria del Parlamento nella guerra civile, Carlo I Stuart fu processato dall'Alta Corte di Giustizia con l'accusa di alto tradimento, condannato a morte e decapitato il 30 gennaio 1649. Subito dopo venne abolita la camera dei Lord e proclamata la Repubblica (Commonwealth)."
+            },
+            {
+                question: "Come si chiamava l'esercito parlamentare riorganizzato da Oliver Cromwell caratterizzato da disciplina ferrea, orientamento puritano e promozione per merito?",
+                options: [
+                    "I Lanzichenecchi.",
+                    "I Cavalieri del Re.",
+                    "La New Model Army (Esercito di Nuovo Modello).",
+                    "La Lega di Smalcalda."
+                ],
+                correctIndex: 2,
+                explanation: "La New Model Army, fondata nel 1645 su impulso di Cromwell e Fairfax, si distingueva perché formata da volontari fortemente motivati ideologicamente e religiosamente (puritani/indipendenti) e perché i gradi venivano assegnati per merito e valore sul campo, non per nascita nobiliare."
+            },
+            {
+                question: "Quale programma politico sosteneva il movimento radicale dei Livellatori (Levellers) durante i dibattiti di Putney (1647)?",
+                options: [
+                    "L'abolizione immediata della proprietà privata e la comunione delle terre coltivate.",
+                    "La restaurazione dell'autorità di Carlo I con poteri religiosi limitati.",
+                    "La tolleranza per i soli cattolici e la soppressione della camera dei Comuni.",
+                    "La sovranità popolare, l'estensione del suffragio a tutti i cittadini maschi liberi, l'uguaglianza giuridica e la tolleranza religiosa."
+                ],
+                correctIndex: 3,
+                explanation: "I Levellers, attivi nell'esercito parlamentare, scrissero il 'Patto del Popolo' (An Agreement of the People). Sostenevano l'uguaglianza di fronte alla legge, la sovranità popolare e l'allargamento del suffragio a quasi tutti i maschi adulti, ma non mettevano in discussione la proprietà privata, a differenza dei Diggers (Zappatori)."
+            },
+            {
+                question: "Per quale motivo la rivoluzione del 1688-1689 in Inghilterra fu definita 'Gloriosa' o 'Pacifica'?",
+                options: [
+                    "Perché portò alla firma di un trattato di pace perpetuo con la Francia di Luigi XIV.",
+                    "Perché segnò la cacciata del cattolico Giacomo II Stuart e l'insediamento di Guglielmo d'Orange senza spargimento di sangue sul suolo inglese.",
+                    "Perché la transizione repubblicana guidata da Cromwell ottenne l'approvazione unanime della corte spagnola.",
+                    "Perché re Carlo II abdicò pacificamente a favore del Parlamento inglese."
+                ],
+                correctIndex: 1,
+                explanation: "La Gloriosa Rivoluzione (1688) si compì senza scontri armati sanguinosi in Inghilterra: di fronte allo sbarco di Guglielmo d'Orange, convocato dai leader parlamentari sia Whigs che Tories, il re cattolico Giacomo II Stuart fuggì in Francia, lasciando il trono vacante."
+            },
+            {
+                question: "Quale documento costituzionale del 1689 dovettero giurare Guglielmo d'Orange e Maria Stuart prima di essere incoronati?",
+                options: [
+                    "L'Atto di Supremazia.",
+                    "L'Editto di Nantes.",
+                    "La Dichiarazione dei Diritti (Bill of Rights).",
+                    "Lo Statuto Albertino."
+                ],
+                correctIndex: 2,
+                explanation: "Il Bill of Rights (1689) pose limiti precisi al potere della Corona, vietando al re di sospendere leggi, imporre tasse o mantenere un esercito permanente in tempo di pace senza il consenso del Parlamento, e garantendo la libertà di parola e le libere elezioni parlamentari. Nacque così la prima monarchia parlamentare."
+            }
+        ]
+    },
+    sto4_assolutismo_guerre: {
+        subject: "storia",
+        chapterTag: "Studio IV",
+        title: "L'Assolutismo di Luigi XIV e il Concerto delle Potenze",
+        questions: [
+            {
+                question: "Quali erano i cardini della politica mercantilistica applicata in Francia da Jean-Baptiste Colbert sotto Luigi XIV?",
+                options: [
+                    "La liberalizzazione dei commerci esteri e l'abolizione delle dogane interne.",
+                    "La promozione delle importazioni di manufatti finiti e l'esportazione di materie prime grezze.",
+                    "Il protezionismo doganale, lo sviluppo delle manifatture regie protette dallo Stato e la creazione di compagnie commerciali privilegiate.",
+                    "La tassazione esclusiva della proprietà terriera e l'esenzione fiscale per le attività commerciali."
+                ],
+                correctIndex: 2,
+                explanation: "Il colbertismo (mercantilismo francese) mirava ad accumulare metalli preziosi favorendo le esportazioni e penalizzando le importazioni con alti dazi. Lo Stato finanziava manifatture di lusso (es. arazzi Gobelins) e concedeva monopoli commerciali alle Compagnie delle Indie."
+            },
+            {
+                question: "Con quali trattati di pace si concluse la Guerra di Successione Spagnola (1701-1714) sancendo l'ascesa britannica e la fine del dominio spagnolo in Italia?",
+                options: [
+                    "Pace di Cateau-Cambrésis del 1559.",
+                    "Trattati di Utrecht (1713) e Rastatt (1714).",
+                    "Pace di Vestfalia del 1648.",
+                    "Trattato di Parigi del 1763."
+                ],
+                correctIndex: 1,
+                explanation: "I trattati di Utrecht (1713) e Rastatt (1714) posero fine alla Guerra di Successione Spagnola. Filippo V di Borbone mantenne il trono spagnolo ma rinunciò a unire le corone di Spagna e Francia. L'Austria asburgica ottenne i Paesi Bassi spagnoli, il Ducato di Milano, il Regno di Napoli e la Sardegna, mentre la Gran Bretagna ottenne Gibilterra e l'asiento (monopolio della tratta degli schiavi)."
+            },
+            {
+                question: "Quale conflitto (1756-1763) vide scontrarsi due blocchi (Gran Bretagna e Prussia contro Francia, Austria e Russia) sul suolo europeo e coloniale, venendo definito da alcuni storici come la vera prima guerra mondiale?",
+                options: [
+                    "La Guerra di Successione Polacca.",
+                    "La Guerra di Successione Austriaca.",
+                    "La Guerra dei Sette Anni.",
+                    "La Guerra dei Trent'anni."
+                ],
+                correctIndex: 2,
+                explanation: "La Guerra dei Sette Anni si disputò non solo in Europa, ma soprattutto in Nord America e India tra Gran Bretagna e Francia per il predominio coloniale. Si concluse con la pace di Parigi (1763), che sancì il trionfo dell'impero britannico e la perdita del Canada e dell'India francesi."
+            },
+            {
+                question: "Quale sovrano avviò tra la fine del Seicento e l'inizio del Settecento una radicale opera di modernizzazione e occidentalizzazione forzata della Russia?",
+                options: [
+                    "Pietro I il Grande.",
+                    "Ivan IV il Terribile.",
+                    "Alessandro I.",
+                    "Caterina II la Grande."
+                ],
+                correctIndex: 0,
+                explanation: "Pietro I il Grande della dinastia Romanov avviò riforme per modernizzare l'esercito e la marina russa su modello occidentale. Spostò la capitale a San Pietroburgo (fondata nel 1703), impose costumi europei e istituì la Tavola dei Ranghi per legare la nobiltà al servizio dello Stato."
+            },
+            {
+                question: "Quale editto del 1685, firmato da Luigi XIV, revocò le concessioni religiose dell'Editto di Nantes del 1598, provocando l'esilio di oltre 200.000 ugonotti?",
+                options: [
+                    "L'Editto di Fontainebleau.",
+                    "La Dichiarazione dei Quattro Articoli.",
+                    "L'Atto di Supremazia.",
+                    "L'Editto di tolleranza di Giuseppe II."
+                ],
+                correctIndex: 0,
+                explanation: "Nel 1685, perseguendo l'unificazione religiosa del regno in base al principio 'un solo re, una sola legge, una sola fede', Luigi XIV firmò l'Editto di Fontainebleau. Con esso si dichiarava illegale il culto protestante, costringendo i calvinisti (ugonotti) alla conversione o alla fuga all'estero."
+            }
+        ]
+    },
+    sto5_illuminismo_riforme: {
+        subject: "storia",
+        chapterTag: "Studio V",
+        title: "L'Illuminismo e il Riformismo del Settecento",
+        questions: [
+            {
+                question: "Quale opera monumentale del barone di Montesquieu gettò le basi della teoria politica della separazione dei poteri (legislativo, esecutivo, giudiziario)?",
+                options: [
+                    "Il Contratto Sociale.",
+                    "Lo Spirito delle Leggi (De l'esprit des lois, 1748).",
+                    "Le Lettere Persiane.",
+                    "L'Enciclopedia."
+                ],
+                correctIndex: 1,
+                explanation: "Nello 'Spirito delle Leggi' (1748), Montesquieu analizzò le diverse forme di governo e teorizzò la divisione dei poteri come unica garanzia contro la tirannia e a salvaguardia della libertà politica dei cittadini, indicando nel modello costituzionale inglese l'esempio da seguire."
+            },
+            {
+                question: "Quale Stato italiano del Settecento passò alla storia per aver abolito, per la prima volta al mondo, la pena di morte e la tortura?",
+                options: [
+                    "Il Regno di Sardegna sotto Carlo Emanuele III.",
+                    "La Repubblica di Venezia.",
+                    "Il Granducato di Toscana sotto Pietro Leopoldo d'Asburgo-Lorena (1786).",
+                    "Il Regno di Napoli sotto Carlo di Borbone."
+                ],
+                correctIndex: 2,
+                explanation: "Il Codice Leopoldino (30 novembre 1786), promulgato dal granduca Pietro Leopoldo (futuro imperatore Leopoldo II), recepì i principi dell'opera di Cesare Beccaria 'Dei delitti e delle pene', decretando l'abolizione totale della pena di morte, della tortura e della confisca dei beni."
+            },
+            {
+                question: "Con quale termine si definisce la politica ecclesiastica dell'imperatore Giuseppe II d'Asburgo, volta a subordinare la Chiesa cattolica allo Stato?",
+                options: [
+                    "Giuseppinismo.",
+                    "Giansenismo.",
+                    "Gallicanesimo.",
+                    "Colbertismo."
+                ],
+                correctIndex: 0,
+                explanation: "Il 'Giuseppinismo' indica il programma di riforme religiose attuato da Giuseppe II negli anni '80 del Settecento: soppresse oltre 700 monasteri e conventi di ordini contemplativi (ritenuti socialmente inutili), confiscandone i beni per finanziare clero e istruzione, concesse tolleranza a protestanti ed ebrei con l'Editto di Tolleranza del 1781, e regolò la formazione dei sacerdoti in seminari statali."
+            },
+            {
+                question: "Quale teoria economica settecentesca, elaborata da François Quesnay, considerava la terra e l'agricoltura come le uniche fonti reali di ricchezza nazionale?",
+                options: [
+                    "Il Mercantilismo.",
+                    "La Fisiocrazia.",
+                    "Il Protezionismo.",
+                    "Il Liberismo classico di Adam Smith."
+                ],
+                correctIndex: 1,
+                explanation: "La fisiocrazia (letteralmente 'regno della natura') sosteneva che l'agricoltura fosse l'unico settore produttivo capace di generare un 'prodotto netto', mentre industria e commercio erano attività solo 'sterili' di trasformazione. I fisiocratici invocavano il libero commercio dei prodotti agricoli (laissez-faire) e l'abolizione dei dazi."
+            },
+            {
+                question: "Quale ministro portoghese sotto il regno di Giuseppe I attuò riforme radicali, tra cui la ricostruzione di Lisbona nel 1755 e la prima espulsione dei Gesuiti nel 1759?",
+                options: [
+                    "Il duca di Choiseul.",
+                    "Bernardo Tanucci.",
+                    "Il marchese di Pombal.",
+                    "Wenzel Anton von Kaunitz."
+                ],
+                correctIndex: 2,
+                explanation: "Sebastião José de Carvalho e Melo, marchese di Pombal, guidò il Portogallo con pugno di ferro. Ricostruì Lisbona secondo criteri moderni e antisismici dopo il terremoto del 1755, limitò i poteri dell'Inquisizione, e nel 1759 espulse i Gesuiti dal Portogallo e dalle sue colonie, dando inizio a un'ondata europea di soppressioni dell'ordine."
+            }
+        ]
+    },
+    sto6_rivoluzione_americana_francese: {
+        subject: "storia",
+        chapterTag: "Studio VI",
+        title: "La Rivoluzione Americana e lo Scoppio della Rivoluzione Francese",
+        questions: [
+            {
+                question: "Quale data e quale autore principale caratterizzano l'adozione della Dichiarazione d'Indipendenza delle tredici colonie nordamericane?",
+                options: [
+                    "14 luglio 1789, redatta da George Washington.",
+                    "4 luglio 1776, redatta da Thomas Jefferson.",
+                    "17 settembre 1787, redatta da Benjamin Franklin.",
+                    "5 maggio 1789, redatta da John Adams."
+                ],
+                correctIndex: 1,
+                explanation: "La Dichiarazione d'Indipendenza fu approvata dal Secondo Congresso Continentale a Filadelfia il 4 luglio 1776. Scritta principalmente da Thomas Jefferson, si ispirava ai principi contrattualistici e naturali di John Locke, dichiarando che tutti gli uomini hanno pari diritti alla vita, alla libertà e alla ricerca della felicità."
+            },
+            {
+                question: "Quale soluzione istituzionale fu adottata dalla Convenzione di Filadelfia nella Costituzione degli Stati Uniti del 1787?",
+                options: [
+                    "Una confederazione di Stati sovrani legati solo da un accordo commerciale e doganale.",
+                    "Un impero costituzionale con a capo un sovrano ereditario controllato dal Senato.",
+                    "Una Repubblica presidenziale e federale, con una netta separazione dei poteri (Presidente, Congresso bicamerale, Corte Suprema).",
+                    "Un regime centralizzato e unitario di stampo giacobino diretto da un Comitato di Salute Pubblica."
+                ],
+                correctIndex: 2,
+                explanation: "La Costituzione del 1787 superò la precedente confederazione instabile, istituendo uno Stato federale unitario guidato da un Presidente (potere esecutivo), un Congresso composto da Camera e Senato (potere legislativo) e una Corte Suprema (potere giudiziario), bilanciando i poteri centrali con l'autonomia dei singoli Stati."
+            },
+            {
+                question: "Con quale celebre giuramento i deputati del Terzo Stato si impegnarono a non separarsi fino alla stesura di una Costituzione in Francia nel giugno 1789?",
+                options: [
+                    "Il Giuramento della Pallacorda.",
+                    "La Dichiarazione dei Diritti dell'Uomo e del Cittadino.",
+                    "La Dichiarazione di Pillnitz.",
+                    "L'Atto di Supremazia."
+                ],
+                correctIndex: 0,
+                explanation: "Il 20 giugno 1789, trovando chiusa la sala delle riunioni degli Stati Generali per ordine del Re, i deputati del Terzo Stato si riunirono in una vicina sala adibita al gioco della pallacorda. Lì giurarono solennemente di non sciogliersi finché la Francia non avesse avuto una nuova Costituzione, trasformandosi in Assemblea Nazionale Costituente."
+            },
+            {
+                question: "In quale giorno l'Assemblea Nazionale Costituente approvò la Dichiarazione dei Diritti dell'Uomo e del Cittadino?",
+                options: [
+                    "Il 14 luglio 1789, subito dopo la presa della Bastiglia.",
+                    "Il 26 agosto 1789, dopo aver decretato l'abolizione del regime feudale.",
+                    "Il 21 gennaio 1793, giorno dell'esecuzione di Luigi XVI.",
+                    "Il 9 termidoro dell'anno II (27 luglio 1794)."
+                ],
+                correctIndex: 1,
+                explanation: "La Dichiarazione dei Diritti dell'Uomo e del Cittadino, testo fondamentale che sanciva i principi di libertà personale, uguaglianza giuridica di fronte alla legge, sovranità nazionale e diritto di proprietà, fu solennemente votata il 26 agosto 1789, coronando le deliberazioni d'agosto che avevano demolito l'Antico Regime."
+            },
+            {
+                question: "Quale organo straordinario di governo esercitò un potere dittatoriale durante la fase del 'Terrore' giacobino (1793-1794) guidato da Maximilien de Robespierre?",
+                options: [
+                    "Il Direttorio.",
+                    "Il Comitato di Salute Pubblica.",
+                    "Il Senato Conservatore.",
+                    "L'Assemblea Legislativa."
+                ],
+                correctIndex: 1,
+                explanation: "Istituito nella primavera del 1793 per far fronte alla minaccia militare esterna e alla guerra civile interna (Vandea), il Comitato di Salute Pubblica, dominato da Robespierre e Saint-Just, assunse poteri dittatoriali di emergenza, perseguitando e ghigliottinando migliaia di presunti nemici della rivoluzione tramite la legge dei sospetti."
+            }
+        ]
+    },
+    sto7_napoleone_restaurazione: {
+        subject: "storia",
+        chapterTag: "Studio VII",
+        title: "L'Età Napoleonica e la Restaurazione",
+        questions: [
+            {
+                question: "Con quale importante trattato di pace del 1797 si concluse la prima campagna d'Italia di Napoleone Bonaparte, segnando la fine della Repubblica di Venezia?",
+                options: [
+                    "Pace di Cateau-Cambrésis.",
+                    "Trattato di Campoformio (Campoformido).",
+                    "Trattato di Presburgo.",
+                    "Trattato di Lunéville."
+                ],
+                correctIndex: 1,
+                explanation: "Con il Trattato di Campoformio (ottobre 1797), Napoleone ottenne dall'Austria il riconoscimento delle annessioni francesi in Belgio e della creazione della Repubblica Cisalpina in Italia, ma cedette in cambio i territori della millenaria Repubblica di Venezia all'Austria, suscitando profonda delusione tra i patrioti italiani (tra cui Ugo Foscolo)."
+            },
+            {
+                question: "Quale caposaldo giuridico dell'età napoleonica (emanato nel 1804) confermò l'uguaglianza dei cittadini di fronte alla legge, la laicità dello Stato e la libertà di iniziativa economica?",
+                options: [
+                    "La Dichiarazione d'Indipendenza.",
+                    "Il Codice Civile (Code Civil des Français).",
+                    "La Legge delle Guarentigie.",
+                    "Il Codice Leopoldino."
+                ],
+                correctIndex: 1,
+                explanation: "Il Codice Civile del 1804 (noto come Codice Napoleone) fu il capolavoro normativo dell'età napoleonica. Raccolse ed uniformò le leggi civili eliminando le barriere di ceto dell'Antico Regime e tutelando la proprietà privata e la famiglia nucleare laica, influenzando profondamente la legislazione di tutta l'Europa continentale."
+            },
+            {
+                question: "In quale storica battaglia del 18 giugno 1815 Napoleone Bonaparte subì la definitiva sconfitta militare ad opera delle potenze coalizzate guidate da Wellington e Blücher?",
+                options: [
+                    "Battaglia di Austerlitz.",
+                    "Battaglia di Lipsia (Battaglia delle Nazioni).",
+                    "Battaglia di Waterloo.",
+                    "Battaglia di Borodino."
+                ],
+                correctIndex: 2,
+                explanation: "Dopo essere fuggito dall'esilio dell'isola d'Elba e aver ripreso il potere per cento giorni, Napoleone affrontò la settima coalizione in Belgio. Sconfitto a Waterloo il 18 giugno 1815 ad opera dell'esercito anglo-alleato di Wellington e dei prussiani di Blücher, abdicò definitivamente e fu esiliato nella sperduta isola di Sant'Elena."
+            },
+            {
+                question: "Quali erano i due principi guida fondamentali applicati nel Congresso di Vienna (1814-1815) per ridisegnare la mappa geopolitica europea post-napoleonica?",
+                options: [
+                    "Il principio di nazionalità e l'autodeterminazione dei popoli.",
+                    "Il principio di legittimità (reinsediare i sovrani spodestati da Napoleone) e il principio di equilibrio (evitare che uno Stato sovrastasse gli altri).",
+                    "La democrazia parlamentare e l'annessione forzata delle colonie africane.",
+                    "La laicizzazione dei territori pontifici e la federazione degli Stati tedeschi."
+                ],
+                correctIndex: 1,
+                explanation: "Sotto la regia del cancelliere austriaco Metternich e del ministro francese Talleyrand, il Congresso si resse sul principio di legittimità (restituire i troni ai legittimi regnanti pre-rivoluzionari) e di equilibrio (stabilire confini e pesi bilanciati tra le grandi potenze per prevenire tentativi egemonici)."
+            },
+            {
+                question: "Quale patto politico-religioso, fondato sul principio di intervento militare contro le insurrezioni, fu stipulato nel settembre 1815 da Russia, Austria e Prussia?",
+                options: [
+                    "La Quadruplice Alleanza.",
+                    "La Santa Alleanza.",
+                    "La Società delle Nazioni.",
+                    "La Lega di Cognac."
+                ],
+                correctIndex: 1,
+                explanation: "La Santa Alleanza fu firmata dallo zar Alessandro I di Russia, da Francesco I d'Austria e da Federico Guglielmo III di Prussia. Ispirata a una mistica fratellanza cristiana dei regnanti, si trasformò in uno strumento pratico di alleanza militare per reprimere militarmente qualsiasi moto liberale e rivoluzionario che minacciasse l'ordine restaurato."
+            }
+        ]
+    },
+    sto8_societa_borghese_liberalismo: {
+        subject: "storia",
+        chapterTag: "Studio VIII",
+        title: "La Società Borghese e l'Europa Liberale (1830-1848)",
+        questions: [
+            {
+                question: "Quale importante riforma elettorale fu approvata dal Parlamento britannico nel 1832 per adeguare la rappresentanza politica all'industrializzazione?",
+                options: [
+                    "L'introduzione del suffragio universale maschile e femminile.",
+                    "Il Reform Act (Great Reform Act), che allargò il censo elettorale e ridusse la circoscrizione dei 'borghi putridi' a favore delle città industriali.",
+                    "L'abolizione totale dei dazi doganali sul grano (Corn Laws).",
+                    "Il riconoscimento ufficiale del partito laburista."
+                ],
+                correctIndex: 1,
+                explanation: "Il Reform Act del 1832 allargò il corpo elettorale inglese di oltre il 60% e, soprattutto, ridisegnò i collegi eliminando i 'borghi putridi' (circoscrizioni rurali spopolate ma controllate dai nobili terrieri) a favore di grandi centri industriali come Manchester e Birmingham, cresciuti con la Rivoluzione Industriale."
+            },
+            {
+                question: "Quale re fu costretto ad abdicare durante le 'Tre Giornate Gloriose' del luglio 1830 a Parigi, portando al trono Luigi Filippo d'Orléans?",
+                options: [
+                    "Luigi XVIII.",
+                    "Carlo X.",
+                    "Napoleone II.",
+                    "Luigi XVI."
+                ],
+                correctIndex: 1,
+                explanation: "Nel luglio 1830, il tentativo di re Carlo X Stuart di restaurare l'assolutismo emanando quattro ordinanze liberticide scatenò l'insurrezione parigina delle tre giornate (27-29 luglio). Il re fuggì e la borghesia liberale offrì la corona a Luigi Filippo d'Orléans, proclamato 're dei francesi per volontà della nazione'."
+            },
+            {
+                question: "Quale misura di orientamento sociale, introdotta in Francia nel febbraio 1848 per combattere la disoccupazione operaia, scatenò lo scontro sanguinoso con la borghesia moderata a giugno?",
+                options: [
+                    "L'istituzione degli Ateliers Nationaux (Opifici Nazionali).",
+                    "L'assegnazione gratuita di terre demaniali ai braccianti.",
+                    "La statalizzazione delle banche private di credito.",
+                    "L'introduzione della giornata lavorativa di 14 ore."
+                ],
+                correctIndex: 0,
+                explanation: "Gli Ateliers Nationaux furono creati dal governo provvisorio della Seconda Repubblica (su impulso del socialista Louis Blanc) per impiegare i disoccupati in lavori pubblici a spese dello Stato. La loro chiusura a giugno, decisa dall'Assemblea costituente moderata, scatenò una disperata rivolta operaia repressa nel sangue dall'esercito."
+            },
+            {
+                question: "Con quale decisiva vittoria militare la Prussia di Otto von Bismarck sconfisse la Francia nel 1870, decretando il crollo del Secondo Impero napoleonico?",
+                options: [
+                    "Battaglia di Sadowa.",
+                    "Battaglia di Sedan (1 settembre 1870).",
+                    "Battaglia di Waterloo.",
+                    "Battaglia di Solferino."
+                ],
+                correctIndex: 1,
+                explanation: "Nella battaglia di Sedan (1 settembre 1870), l'esercito prussiano accerchiò e annientò le truppe francesi, catturando lo stesso imperatore Napoleone III. Pochi giorni dopo a Parigi fu proclamata la Terza Repubblica, mentre a Versailles (gennaio 1871) i principi tedeschi proclamarono Guglielmo I imperatore di Germania (Secondo Reich)."
+            },
+            {
+                question: "Quale forma rivoluzionaria di autogoverno operaio e socialista nacque a Parigi nel marzo 1871 in opposizione al governo repubblicano conservatore di Thiers?",
+                options: [
+                    "La Comune di Parigi.",
+                    "Il Comitato di Salute Pubblica.",
+                    "Gli Stati Generali.",
+                    "La Repubblica Romana."
+                ],
+                correctIndex: 0,
+                explanation: "La Comune di Parigi fu un esperimento di democrazia diretta e autogoverno socialista instaurato dalla popolazione parigina insorta contro il governo provvisorio di Adolphe Thiers. Fu soppressa con inaudita ferocia dall'esercito regolare francese durante la 'settimana di sangue' (21-28 maggio 1871), che costò oltre 20.000 vite."
+            }
+        ]
+    },
+    sto9_risorgimento_italiano: {
+        subject: "storia",
+        chapterTag: "Studio IX",
+        title: "Il Risorgimento Italiano e i Moti del 1848",
+        questions: [
+            {
+                question: "Quale fu il limite fondamentale delle prime cospirazioni carbonare in Italia nei moti del 1820-1821 e 1830-1831?",
+                options: [
+                    "L'alleanza diplomatica stretta con la corona spagnola.",
+                    "La segretezza della struttura e dei programmi, che precluse la partecipazione popolare, limitando i moti a militari e intellettuali borghesi.",
+                    "Il rifiuto sistematico dell'intervento militare straniero.",
+                    "L'adesione incondizionata al pensiero politico di Giuseppe Mazzini."
+                ],
+                correctIndex: 1,
+                explanation: "I moti promossi dalla Carboneria e dalle società segrete fallirono principalmente a causa del loro carattere elitario e cospirativo: la mancanza di un programma politico chiaro e pubblico e la mancata mobilitazione delle masse rurali e cittadine lasciarono gli insorti isolati di fronte alla repressione austriaca."
+            },
+            {
+                question: "Quale associazione politica clandestina fondò Giuseppe Mazzini nel 1831, ponendosi come obiettivo un'Italia unita, indipendente e repubblicana?",
+                options: [
+                    "La Carboneria.",
+                    "La Giovine Italia.",
+                    "La Società Nazionale Italiana.",
+                    "Il Partito d'Azione."
+                ],
+                correctIndex: 1,
+                explanation: "Mazzini fondò la Giovine Italia a Marsiglia nel 1831 per superare il modello settario della Carboneria. L'associazione si proponeva di educare il popolo all'insurrezione popolare per dare vita a una Repubblica unitaria, democratica e indipendente, diffondendo apertamente il proprio programma ideologico."
+            },
+            {
+                question: "Quale tesi sosteneva l'abate Vincenzo Gioberti nella sua celebre opera 'Del primato morale e civile degli italiani' (1843), caposaldo del Neoguelfismo?",
+                options: [
+                    "L'unificazione italiana attraverso una rivoluzione repubblicana e anticlericale.",
+                    "Una federazione di Stati italiani sotto la presidenza del Papa, appoggiata militarmente dal Regno di Sardegna.",
+                    "La cessione di tutti i territori italiani all'Impero Asburgico in cambio dell'unione doganale.",
+                    "L'annessione immediata del Regno delle Due Sicilie al Piemonte sabaudo."
+                ],
+                correctIndex: 1,
+                explanation: "Il neoguelfismo di Gioberti proponeva una transizione pacifica all'indipendenza: una confederazione degli Stati italiani esistenti presieduta dal pontefice (allora Pio IX, ritenuto un liberale) ed assistita dalla forza militare sabauda, conciliando il sentimento nazionale con la tradizione cattolica."
+            },
+            {
+                question: "In quale città italiana l'insurrezione del marzo 1848 portò alla cacciata delle truppe austriache del generale Radetzky dopo cinque giorni di aspri combattimenti?",
+                options: [
+                    "Milano (Cinque Giornate di Milano, 18-22 marzo 1848).",
+                    "Roma.",
+                    "Napoli.",
+                    "Torino."
+                ],
+                correctIndex: 0,
+                explanation: "Tra il 18 e il 22 marzo 1848, la popolazione di Milano insorse contro gli austriaci. Dopo cinque giorni di barricate ('Cinque Giornate'), le forze austriache comandate dal feldmaresciallo Radetzky furono costrette ad abbandonare la città e a ritirarsi nel sistema fortificato del Quadrilatero."
+            },
+            {
+                question: "Quale regime democratico nacque a Roma nel febbraio 1849, guidato da un Triumvirato (Mazzini, Armellini, Saffi), prima di essere represso dall'intervento francese?",
+                options: [
+                    "La Repubblica Cisalpina.",
+                    "La Repubblica Romana.",
+                    "La Repubblica Partenopea.",
+                    "Lo Stato Pontificio Liberale."
+                ],
+                correctIndex: 1,
+                explanation: "In seguito alla fuga di papa Pio IX a Gaeta, nel febbraio 1849 un'Assemblea Costituente eletta a suffragio universale proclamò la Repubblica Romana. Retta da un Triumvirato, approvò una costituzione avanzatissima (laicità, suffragio universale, abolizione della pena di morte) e fu difesa strenuamente da Garibaldi contro le truppe francesi inviate da Luigi Napoleone."
+            }
+        ]
+    },
+    sto10_unificazione_regno: {
+        subject: "storia",
+        chapterTag: "Studio X",
+        title: "Cavour, Garibaldi e la Nascita del Regno d'Italia",
+        questions: [
+            {
+                question: "Quale alleanza politica parlamentare interna ('connubio') strinse Camillo Benso conte di Cavour nel 1852 per consolidare la sua maggioranza al governo piemontese?",
+                options: [
+                    "Un accordo di governo con l'ala mazziniana e repubblicana guidata da Garibaldi.",
+                    "L'alleanza tra il centro-sinistro di Urbano Rattazzi e il centro-destro di Cavour stesso.",
+                    "Un patto segreto con i cattolici reazionari fedeli a Pio IX.",
+                    "La coalizione con gli esponenti sabaudi contrari allo Statuto Albertino."
+                ],
+                correctIndex: 1,
+                explanation: "Il 'connubio' (1852) fu l'accordo politico tra la componente moderata della destra (guidata da Cavour) e la sinistra moderata (guidata da Rattazzi). Tagliando fuori le ali estreme (clericali e democratici radicali), garantì a Cavour una solida maggioranza parlamentare per avviare riforme liberiste e una politica estera dinamica."
+            },
+            {
+                question: "Cosa prevedevano gli accordi segreti di Plombières stipulati nel 1858 tra Cavour e l'imperatore francese Napoleone III?",
+                options: [
+                    "L'annessione immediata del Regno delle Due Sicilie alla Francia in cambio della Sardegna.",
+                    "Un'alleanza militare difensiva: la Francia sarebbe intervenuta in aiuto del Piemonte solo in caso di aggressione austriaca, mirando a ridisegnare l'Italia in quattro Stati in cambio di Nizza e Savoia.",
+                    "Il ritiro immediato delle truppe francesi che difendevano lo Stato Pontificio a Roma.",
+                    "La cessione del Ducato di Milano all'Austria in cambio di un corridoio doganale con la Svizzera."
+                ],
+                correctIndex: 1,
+                explanation: "Plombières (1858) sancì l'alleanza franco-piemontese. Napoleone III si impegnò a scendere in guerra a fianco del Regno di Sardegna in caso di attacco dell'Austria. La vittoria avrebbe portato alla creazione di un Regno dell'Alta Italia (sotto i Savoia), un Regno dell'Italia Centrale, un Regno dell'Italia Meridionale e la presidenza papale della confederazione, cedendo alla Francia Nizza e la Savoia."
+            },
+            {
+                question: "Da dove partì, nel maggio 1860, la Spedizione dei Mille organizzata da Giuseppe Garibaldi per liberare il Mezzogiorno borbonico?",
+                options: [
+                    "Dal porto di Marsala.",
+                    "Da Quarto (Genova), a bordo dei piroscafi Piemonte e Lombardo.",
+                    "Dall'isola di Caprera.",
+                    "Dalla foce del Tevere."
+                ],
+                correctIndex: 1,
+                explanation: "La notte tra il 5 e il 6 maggio 1860, Garibaldi e circa mille volontari salparono da Quarto, presso Genova, a bordo di due navi della compagnia Rubattino (il Piemonte e il Lombardo). Sbarcarono a Marsala (Sicilia) l'11 maggio, dando avvio al collasso del Regno delle Due Sicilie."
+            },
+            {
+                question: "In quale giorno e con quale formula Vittorio Emanuele II fu proclamato Re del neonato Regno d'Italia?",
+                options: [
+                    "Il 20 settembre 1870, dopo la breccia di Porta Pia.",
+                    "Il 17 marzo 1861, con legge approvata dal primo Parlamento nazionale a Torino.",
+                    "Il 26 ottobre 1860, in seguito all'incontro di Teano.",
+                    "Il 23 marzo 1849, dopo la battaglia di Novara."
+                ],
+                correctIndex: 1,
+                explanation: "Il 17 marzo 1861, il Parlamento nazionale riunito a Torino approvò la legge n. 4671 con la quale Vittorio Emanuele II assumeva per sé e per i suoi successori il titolo di 'Re d'Italia, per grazia di Dio e volontà della nazione', ufficializzando la nascita dello Stato unitario italiano."
+            },
+            {
+                question: "Quale disposizione emessa da papa Pio IX nel 1874 vietò espressamente ai cattolici italiani di partecipare alla vita politica attiva del Regno d'Italia?",
+                options: [
+                    "La legge delle Guarentigie.",
+                    "La bolla Licet ab initio.",
+                    "Il Non Expedit ('non conviene').",
+                    "Il Syllabus dei modernisti."
+                ],
+                correctIndex: 2,
+                explanation: "Il Non Expedit (1874) fu la reazione pontificia all'annessione forzata di Roma (1870). Papa Pio IX vietò ai cattolici di partecipare alle elezioni politiche del Regno d'Italia sia come candidati che come elettori, innescando una profonda frattura etico-politica tra Chiesa e Stato ('questione romana') sanata solo dai Patti Lateranensi del 1929."
+            }
+        ]
     }
+    
 };
 
 // Global export

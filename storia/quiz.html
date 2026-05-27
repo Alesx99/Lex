@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Historia - Quiz di Autovalutazione</title>
+    <meta name="description" content="Verifica le tue conoscenze di Storia Moderna con i nostri quiz accademici autocorrettivi.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Centralized Quiz Database -->
+    <script src="../js/quiz_db.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Historia</span></h1>
+            <p>Storia Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link active" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Autovalutazione Storica</h2>
+            <div class="hero-divider"></div>
+            <p>Mettiti alla prova con i nostri quiz di Storia Moderna. Seleziona uno dei 10 capitoli per avviare una sessione di 5 domande a risposta multipla con report e commento accademico finale.</p>
+        </section>
+
+        <!-- Dynamic Quiz Area -->
+        <div id="quiz-wrapper">
+            
+            <!-- STEP 1: SELECT TOPIC SCREEN -->
+            <div id="selection-screen" class="quiz-step active">
+                <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                <div class="selection-grid">
+                    <button class="select-btn" onclick="startQuiz('sto1_riforma')">
+                        <span class="btn-chapter">Studio I</span>
+                        <span class="btn-title">La Riforma Protestante e l'Impero di Carlo V</span>
+                        <span class="btn-desc">Lutero, 95 Tesi, Dieta di Worms, Carlo V, Sacco di Roma, Pace di Augusta</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto2_controriforma')">
+                        <span class="btn-chapter">Studio II</span>
+                        <span class="btn-title">La Controriforma e lo Stato Moderno</span>
+                        <span class="btn-desc">Concilio di Trento, Inquisizione, disciplinamento, teorici del potere</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto3_rivoluzioni_inglesi')">
+                        <span class="btn-chapter">Studio III</span>
+                        <span class="btn-title">Le Rivoluzioni Inglesi e la Crisi del Seicento</span>
+                        <span class="btn-desc">Guerra civile, New Model Army, Cromwell, Gloriosa Rivoluzione, Bill of Rights</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto4_assolutismo_guerre')">
+                        <span class="btn-chapter">Studio IV</span>
+                        <span class="btn-title">L'Assolutismo di Luigi XIV e il Concerto delle Potenze</span>
+                        <span class="btn-desc">Versailles, Colbert, guerre di successione, Pietro il Grande, Sette Anni</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto5_illuminismo_riforme')">
+                        <span class="btn-chapter">Studio V</span>
+                        <span class="btn-title">L'Illuminismo e il Riformismo del Settecento</span>
+                        <span class="btn-desc">Locke, Montesquieu, Rousseau, riforme asburgiche e italiane (Toscana, Napoli)</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto6_rivoluzione_americana_francese')">
+                        <span class="btn-chapter">Studio VI</span>
+                        <span class="btn-title">Le Rivoluzioni Americana e Francese</span>
+                        <span class="btn-desc">Guerra d'indipendenza, Stati Generali, Bastiglia, la Convenzione, il Terrore</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto7_napoleone_restaurazione')">
+                        <span class="btn-chapter">Studio VII</span>
+                        <span class="btn-title">L'Età Napoleonica e la Restaurazione</span>
+                        <span class="btn-desc">Campagna d'Italia, Codice Civile 1804, Waterloo, Congresso di Vienna</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto8_societa_borghese_liberalismo')">
+                        <span class="btn-chapter">Studio VIII</span>
+                        <span class="btn-title">La Società Borghese e l'Europa Liberale</span>
+                        <span class="btn-desc">Liberalismo e riforme britanniche, moti del 1830 e 1848, Sedan, Comune</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto9_risorgimento_italiano')">
+                        <span class="btn-chapter">Studio IX</span>
+                        <span class="btn-title">Il Risorgimento Italiano e i Moti del 1848</span>
+                        <span class="btn-desc">Carboneria, Mazzini, Gioberti, Prima Guerra d'Indipendenza, Repubblica Romana</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('sto10_unificazione_regno')">
+                        <span class="btn-chapter">Studio X</span>
+                        <span class="btn-title">Cavour, Garibaldi e la Nascita del Regno d'Italia</span>
+                        <span class="btn-desc">Cavour, Plombières, Mille, proclamazione del Regno (1861), Porta Pia, Guarentigie</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="question-screen" class="quiz-step">
+                <div class="quiz-card-container">
+                    <div class="quiz-card-header">
+                        <span id="quiz-chapter-tag" class="quiz-chapter-tag">Modulo I</span>
+                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 5</span>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="quiz-progress-bar-bg">
+                        <div id="quiz-progress-indicator" class="quiz-progress-indicator" style="width: 0%;"></div>
+                    </div>
+
+                    <!-- Question content -->
+                    <div class="quiz-question-body">
+                        <h3 id="quiz-question-text">Testo della domanda...</h3>
+                        <div id="quiz-options-container" class="quiz-options-grid">
+                            <!-- Injected options go here -->
+                        </div>
+                    </div>
+
+                    <!-- Feedback screen (hidden by default) -->
+                    <div id="quiz-feedback-box" class="quiz-feedback-box">
+                        <div class="feedback-header">
+                            <span id="feedback-icon" class="feedback-icon"></span>
+                            <span id="feedback-title" class="feedback-title">Esatto!</span>
+                        </div>
+                        <p id="feedback-explanation" class="feedback-explanation">Spiegazione accademica...</p>
+                        <button id="next-question-btn" class="btn btn-primary" onclick="nextQuestion()">Prossima Domanda</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: SCORE / RESULT SCREEN -->
+            <div id="result-screen" class="quiz-step">
+                <div class="result-card">
+                    <div class="result-glow-ring">
+                        <span id="result-score-text">0 / 5</span>
+                    </div>
+                    <h3 id="result-title">Risultato</h3>
+                    <p id="result-message" class="result-message">Messaggio personalizzato...</p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Riprova questo Quiz</button>
+                        <button class="btn btn-secondary" onclick="showSelectionScreen()">Seleziona un altro argomento</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // State variables
+        let currentSubject = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Dom Elements
+        const selectionScreen = document.getElementById('selection-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const quizChapterTag = document.getElementById('quiz-chapter-tag');
+        const quizProgressText = document.getElementById('quiz-progress-text');
+        const quizProgressIndicator = document.getElementById('quiz-progress-indicator');
+        const quizQuestionText = document.getElementById('quiz-question-text');
+        const quizOptionsContainer = document.getElementById('quiz-options-container');
+        
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        
+        const resultScoreText = document.getElementById('result-score-text');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+
+        function showSelectionScreen() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            selectionScreen.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz(subjectKey) {
+            currentSubject = subjectKey;
+            const data = quizDatabase[subjectKey];
+            currentQuestions = data.questions;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            quizChapterTag.textContent = data.chapterTag;
+            
+            selectionScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Hide feedback box
+            feedbackBox.classList.remove('open');
+            
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            
+            // Update progress
+            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di 5`;
+            const progressPercent = (currentQuestionIndex / 5) * 100;
+            quizProgressIndicator.style.width = progressPercent + '%';
+
+            // Set question text
+            quizQuestionText.textContent = currentQuestion.question;
+
+            // Render options
+            quizOptionsContainer.innerHTML = '';
+            currentQuestion.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + idx)}</span> <span class="option-text">${option}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                quizOptionsContainer.appendChild(btn);
+            });
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const correctIndex = currentQuestion.correctIndex;
+            const allOptionButtons = quizOptionsContainer.querySelectorAll('.quiz-option-btn');
+
+            // Disable all options to prevent double-clicking
+            allOptionButtons.forEach(btn => btn.disabled = true);
+
+            // Highlight answers
+            if (selectedIndex === correctIndex) {
+                selectedBtn.classList.add('correct');
+                feedbackTitle.textContent = "Esatto!";
+                feedbackTitle.style.color = "#10b981";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="width:24px; height:24px;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+                allOptionButtons[correctIndex].classList.add('correct');
+                feedbackTitle.textContent = "Errato";
+                feedbackTitle.style.color = "#ef4444";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" style="width:24px; height:24px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            }
+
+            // Set explanation
+            feedbackExplanation.innerHTML = currentQuestion.explanation;
+
+            // Show feedback box
+            feedbackBox.classList.add('open');
+
+            // Set next button text
+            if (currentQuestionIndex === 4) {
+                nextQuestionBtn.textContent = "Visualizza Risultato";
+            } else {
+                nextQuestionBtn.textContent = "Prossima Domanda";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex === 4) {
+                showResult();
+            } else {
+                currentQuestionIndex++;
+                showQuestion();
+            }
+        }
+
+        function showResult() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+
+            // Update score progress bar at 100%
+            quizProgressIndicator.style.width = '100%';
+
+            resultScoreText.textContent = `${score} / 5`;
+            resultTitle.textContent = quizDatabase[currentSubject].title;
+
+            // Set custom score message
+            let message = '';
+            if (score === 5) {
+                message = "Eccellente! Conoscenza e comprensione della Storia Moderna impeccabile. Ottima padronanza delle dinamiche storiche, sociali ed economiche.";
+            } else if (score >= 4) {
+                message = "Molto bene! Hai una conoscenza solida degli eventi fondamentali dell'età moderna. Qualche piccola incertezza superabile rileggendo le sintesi.";
+            } else if (score >= 3) {
+                message = "Sufficiente, ma ci sono lacune significative. Si consiglia una rilettura attenta delle sintesi specifiche per consolidare le correlazioni geopolitiche.";
+            } else {
+                message = "Preparazione non sufficiente. Le svolte epocali, i trattati di pace e le riforme civili non sono chiari. Rileggi il capitolo e ripeti il test.";
+            }
+            resultMessage.textContent = message;
+
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            startQuiz(currentSubject);
+        }
+    </script>
+</body>
+</html>
