@@ -33,6 +33,17 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Skip non-GET requests (like POST calls to APIs)
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  // Skip remote third-party APIs (like Gemini, NVIDIA NIM, etc.)
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(response => response || fetch(event.request))
