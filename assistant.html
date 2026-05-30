@@ -1649,7 +1649,10 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
                             model: modelId,
                             messages: [{ role: 'user', content: prompt }],
                             temperature: 0.5,
-                            max_tokens: 1024,
+                            max_tokens: 2048,
+                            reasoning: {
+                                exclude: true
+                            },
                             stream: false
                         })
                     });
