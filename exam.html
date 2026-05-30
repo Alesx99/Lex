@@ -894,6 +894,7 @@
                             <select id="oral-ai-engine" class="form-select" onchange="toggleOralEngineFields()">
                                 <option value="local">IA Locale (Offline - all-MiniLM-L6-v2 ~90MB)</option>
                                 <option value="gemini">Gemini API (Cloud - Richiede Chiave API)</option>
+                                <option value="openrouter">OpenRouter (Cloud - No Proxy)</option>
                                 <option value="ollama">Ollama (Locale - default port 11434)</option>
                                 <option value="lmstudio">LM Studio (Locale - default port 12345)</option>
                             </select>
@@ -1755,6 +1756,10 @@
                     label.textContent = "Chiave API Gemini";
                     input.placeholder = "Inserisci la tua API Key...";
                     input.type = "password";
+                } else if (engine === 'openrouter') {
+                    label.textContent = "Chiave API OpenRouter";
+                    input.placeholder = "sk-or-v1-...";
+                    input.type = "password";
                 } else if (engine === 'ollama') {
                     label.textContent = "Indirizzo Server Ollama";
                     input.placeholder = "es. http://localhost:11434 (lascia vuoto per default)";
@@ -2332,6 +2337,33 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
                     if (!res.ok) throw new Error(`LM Studio server returned ${res.status}`);
                     const data = await res.json();
                     responseJson = JSON.parse(cleanJsonResponse(data.choices[0].message.content));
+
+                } else if (engine === 'openrouter') {
+                    if (!keyInput) throw new Error("Chiave API OpenRouter mancante.");
+                    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${keyInput}`,
+                            'HTTP-Referer': window.location.href,
+                            'X-Title': 'Lex Exam'
+                        },
+                        body: JSON.stringify({
+                            model: 'meta-llama/llama-3.1-8b-instruct',
+                            messages: [{ role: 'user', content: prompt }],
+                            temperature: 0.2,
+                            response_format: { type: 'json_object' }
+                        })
+                    });
+
+                    if (!res.ok) {
+                        const errData = await res.json().catch(() => ({}));
+                        throw new Error(errData?.error?.message || `OpenRouter HTTP ${res.status}`);
+                    }
+
+                    const data = await res.json();
+                    const textResponse = data.choices[0].message.content;
+                    responseJson = JSON.parse(cleanJsonResponse(textResponse));
                 }
                 
                 hideLoadingOverlay();
