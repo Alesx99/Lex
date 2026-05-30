@@ -910,6 +910,24 @@
                         </div>
                     </div>
 
+                    <div class="form-row-grid" id="oral-model-group" style="display: none; margin-top: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Modello LLM (OpenRouter)</label>
+                            <select id="oral-ai-model" class="form-select" onchange="toggleOralCustomModelField()">
+                                <option value="meta-llama/llama-3.1-8b-instruct">Llama 3.1 8B Instruct</option>
+                                <option value="moonshotai/kimi-k2.6">Kimi K2.6 (Free)</option>
+                                <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+                                <option value="deepseek/deepseek-chat">DeepSeek Chat</option>
+                                <option value="custom">Altro (Inserisci ID personalizzato)...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="oral-custom-model-wrapper" style="display: none;">
+                            <label class="form-label">ID Modello Personalizzato</label>
+                            <input type="text" id="oral-ai-custom-model" class="form-input-number" placeholder="Es: mistralai/mixtral-8x7b-instruct">
+                        </div>
+                    </div>
+
                     <button class="btn-start-exam" onclick="startOralExam()">Avvia Colloquio Orale</button>
                 </div>
 
@@ -1747,11 +1765,19 @@
             const group = document.getElementById('oral-credentials-group');
             const label = document.getElementById('oral-credentials-label');
             const input = document.getElementById('oral-ai-key');
+            const modelGroup = document.getElementById('oral-model-group');
             
             if (engine === 'local') {
                 group.style.display = 'none';
+                modelGroup.style.display = 'none';
             } else {
                 group.style.display = 'block';
+                if (engine === 'openrouter') {
+                    modelGroup.style.display = 'flex';
+                } else {
+                    modelGroup.style.display = 'none';
+                }
+
                 if (engine === 'gemini') {
                     label.textContent = "Chiave API Gemini";
                     input.placeholder = "Inserisci la tua API Key...";
@@ -1772,14 +1798,28 @@
             }
         }
 
+        function toggleOralCustomModelField() {
+            const model = document.getElementById('oral-ai-model').value;
+            const customWrapper = document.getElementById('oral-custom-model-wrapper');
+            if (model === 'custom') {
+                customWrapper.style.display = 'block';
+            } else {
+                customWrapper.style.display = 'none';
+            }
+        }
+
         async function startOralExam() {
             const engine = document.getElementById('oral-ai-engine').value;
             const key = document.getElementById('oral-ai-key').value.trim();
             const saveKey = document.getElementById('oral-save-key-checkbox').checked;
+            const model = document.getElementById('oral-ai-model').value;
+            const customModel = document.getElementById('oral-ai-custom-model').value.trim();
             
             if (saveKey) {
                 localStorage.setItem('lex-oral-ai-engine', engine);
                 localStorage.setItem('lex-oral-ai-key', key);
+                localStorage.setItem('lex-oral-ai-model', model);
+                localStorage.setItem('lex-oral-ai-custom-model', customModel);
             } else {
                 localStorage.removeItem('lex-oral-ai-engine');
                 localStorage.removeItem('lex-oral-ai-key');
@@ -1790,6 +1830,9 @@
                 if (!loaded) return;
             } else if (engine === 'gemini' && !key) {
                 alert("Inserisci la chiave API di Gemini per continuare.");
+                return;
+            } else if (engine === 'openrouter' && !key) {
+                alert("Inserisci la chiave API di OpenRouter per continuare.");
                 return;
             }
             
@@ -2340,6 +2383,12 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
 
                 } else if (engine === 'openrouter') {
                     if (!keyInput) throw new Error("Chiave API OpenRouter mancante.");
+                    
+                    let modelId = document.getElementById('oral-ai-model').value;
+                    if (modelId === 'custom') {
+                        modelId = document.getElementById('oral-ai-custom-model').value.trim() || 'meta-llama/llama-3.1-8b-instruct';
+                    }
+
                     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                         method: 'POST',
                         headers: { 
@@ -2349,7 +2398,7 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
                             'X-Title': 'Lex Exam'
                         },
                         body: JSON.stringify({
-                            model: 'meta-llama/llama-3.1-8b-instruct',
+                            model: modelId,
                             messages: [{ role: 'user', content: prompt }],
                             temperature: 0.2,
                             response_format: { type: 'json_object' }
@@ -2510,14 +2559,21 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
         document.addEventListener('DOMContentLoaded', () => {
             const savedEngine = localStorage.getItem('lex-oral-ai-engine') || 'local';
             const savedKey = localStorage.getItem('lex-oral-ai-key') || '';
+            const savedModel = localStorage.getItem('lex-oral-ai-model') || 'meta-llama/llama-3.1-8b-instruct';
+            const savedCustomModel = localStorage.getItem('lex-oral-ai-custom-model') || '';
             
             const engineSelect = document.getElementById('oral-ai-engine');
             const keyInput = document.getElementById('oral-ai-key');
+            const modelSelect = document.getElementById('oral-ai-model');
+            const customModelInput = document.getElementById('oral-ai-custom-model');
             
             if (engineSelect) engineSelect.value = savedEngine;
             if (keyInput) keyInput.value = savedKey;
+            if (modelSelect) modelSelect.value = savedModel;
+            if (customModelInput) customModelInput.value = savedCustomModel;
             
             toggleOralEngineFields();
+            toggleOralCustomModelField();
             populateOralChapters();
         });
 

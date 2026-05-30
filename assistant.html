@@ -473,6 +473,18 @@
                     </div>
                 </div>
 
+                <div class="sidebar-section" id="model-selector-wrapper" style="display: none;">
+                    <h3 class="sidebar-title">Modello LLM</h3>
+                    <select id="chat-model" class="form-select" onchange="toggleCustomModelField(); saveSettings();">
+                        <option value="meta-llama/llama-3.1-8b-instruct">Llama 3.1 8B Instruct</option>
+                        <option value="moonshotai/kimi-k2.6">Kimi K2.6 (Free)</option>
+                        <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+                        <option value="deepseek/deepseek-chat">DeepSeek Chat</option>
+                        <option value="custom">Altro (Inserisci ID personalizzato)...</option>
+                    </select>
+                    <input type="text" id="chat-custom-model" class="form-input" placeholder="Es: mistralai/mixtral-8x7b-instruct" oninput="saveSettings();" style="display: none; margin-top: 0.5rem; padding: 0.6rem; border-radius: 8px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--text-primary); width: 100%;">
+                </div>
+
                 <div class="sidebar-section">
                     <h3 class="sidebar-title">RAG Vettoriale Locale</h3>
                     <div class="model-status-badge">
@@ -701,11 +713,19 @@
             const wrapper = document.getElementById('credentials-wrapper');
             const label = document.getElementById('credentials-label');
             const input = document.getElementById('chat-key');
+            const modelWrapper = document.getElementById('model-selector-wrapper');
 
             if (engine === 'local') {
                 wrapper.style.display = 'none';
+                modelWrapper.style.display = 'none';
             } else {
                 wrapper.style.display = 'flex';
+                if (engine === 'openrouter') {
+                    modelWrapper.style.display = 'flex';
+                } else {
+                    modelWrapper.style.display = 'none';
+                }
+
                 if (engine === 'gemini') {
                     label.textContent = "Chiave API Gemini";
                     input.placeholder = "AIzaSy...";
@@ -730,15 +750,30 @@
             }
         }
 
+        // Toggle custom model field
+        function toggleCustomModelField() {
+            const model = document.getElementById('chat-model').value;
+            const customInput = document.getElementById('chat-custom-model');
+            if (model === 'custom') {
+                customInput.style.display = 'block';
+            } else {
+                customInput.style.display = 'none';
+            }
+        }
+
         // Save preferences
         function saveSettings() {
             const engine = document.getElementById('chat-engine').value;
             const key = document.getElementById('chat-key').value.trim();
             const sysPrompt = document.getElementById('system-prompt').value.trim();
+            const model = document.getElementById('chat-model').value;
+            const customModel = document.getElementById('chat-custom-model').value.trim();
 
             localStorage.setItem('lex-oral-ai-engine', engine);
             localStorage.setItem('lex-oral-ai-key', key);
             localStorage.setItem('lex-assistant-system-prompt', sysPrompt);
+            localStorage.setItem('lex-oral-ai-model', model);
+            localStorage.setItem('lex-oral-ai-custom-model', customModel);
         }
 
         // Load preferences
@@ -746,12 +781,17 @@
             const engine = localStorage.getItem('lex-oral-ai-engine') || 'local';
             const key = localStorage.getItem('lex-oral-ai-key') || '';
             const sysPrompt = localStorage.getItem('lex-assistant-system-prompt') || "Sei un tutor accademico colto ed empatico. Rispondi alle domande degli studenti in modo preciso e dettagliato, basandoti rigorosamente sulle fonti accresciute fornite.";
+            const model = localStorage.getItem('lex-oral-ai-model') || 'meta-llama/llama-3.1-8b-instruct';
+            const customModel = localStorage.getItem('lex-oral-ai-custom-model') || '';
 
             document.getElementById('chat-engine').value = engine;
             document.getElementById('chat-key').value = key;
             document.getElementById('system-prompt').value = sysPrompt;
+            document.getElementById('chat-model').value = model;
+            document.getElementById('chat-custom-model').value = customModel;
 
             toggleCredentialsField();
+            toggleCustomModelField();
         }
 
         // Mobile responsive sidebar
@@ -1592,6 +1632,11 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
                 } else if (engine === 'openrouter') {
                     if (!key) throw new Error("Chiave API OpenRouter mancante. Inseriscila nella barra laterale.");
                     
+                    let modelId = document.getElementById('chat-model').value;
+                    if (modelId === 'custom') {
+                        modelId = document.getElementById('chat-custom-model').value.trim() || 'meta-llama/llama-3.1-8b-instruct';
+                    }
+
                     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                         method: 'POST',
                         headers: { 
@@ -1601,7 +1646,7 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
                             'X-Title': 'Lex Tutor'
                         },
                         body: JSON.stringify({
-                            model: 'meta-llama/llama-3.1-8b-instruct',
+                            model: modelId,
                             messages: [{ role: 'user', content: prompt }],
                             temperature: 0.5,
                             max_tokens: 1024,
