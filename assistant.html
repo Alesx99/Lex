@@ -466,7 +466,10 @@
 
                 <div class="sidebar-section" id="credentials-wrapper">
                     <h3 class="sidebar-title" id="credentials-label">Chiave API Gemini</h3>
-                    <input type="password" id="chat-key" class="form-input" placeholder="Inserisci chiave o URL..." onchange="saveSettings();" style="width: 100%; padding: 0.6rem; border-radius: 8px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--text-primary);">
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="password" id="chat-key" class="form-input" placeholder="Inserisci chiave o URL..." oninput="saveSettings();" style="flex: 1; padding: 0.6rem; border-radius: 8px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--text-primary); width: 0; min-width: 10px;">
+                        <button class="btn btn-secondary" onclick="saveSettings(); alert('Impostazioni e Chiave API salvate con successo!');" style="padding: 0.6rem; font-size: 0.8rem; white-space: nowrap;">Salva</button>
+                    </div>
                 </div>
 
                 <div class="sidebar-section">
@@ -1565,7 +1568,7 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
                             'Authorization': `Bearer ${key}`
                         },
                         body: JSON.stringify({
-                            model: 'meta/llama-3.1-70b-instruct',
+                            model: 'meta/llama-3.1-8b-instruct',
                             messages: [{ role: 'user', content: prompt }],
                             temperature: 0.5,
                             max_tokens: 1024,
