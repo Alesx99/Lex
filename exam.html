@@ -2411,7 +2411,26 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
                     }
 
                     const data = await res.json();
-                    const textResponse = data.choices[0].message.content;
+                    
+                    if (data.error) {
+                        throw new Error(data.error.message || JSON.stringify(data.error));
+                    }
+                    
+                    if (!data.choices || data.choices.length === 0) {
+                        throw new Error("Risposta vuota o non valida da OpenRouter (nessuna opzione restituita).");
+                    }
+                    
+                    const msg = data.choices[0].message;
+                    if (!msg) {
+                        throw new Error("Risposta non valida da OpenRouter (oggetto message mancante).");
+                    }
+                    
+                    const textResponse = msg.content || msg.reasoning_content || msg.reasoning || "";
+                    
+                    if (!textResponse) {
+                        throw new Error("Il modello ha restituito una valutazione vuota o nulla.");
+                    }
+                    
                     responseJson = JSON.parse(cleanJsonResponse(textResponse));
                 }
                 
