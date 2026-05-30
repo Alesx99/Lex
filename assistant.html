@@ -458,6 +458,7 @@
                     <select id="chat-engine" class="form-select" onchange="toggleCredentialsField(); saveSettings();">
                         <option value="local">Ricerca Semantica Locale (Offline)</option>
                         <option value="gemini">Gemini API (Cloud RAG)</option>
+                        <option value="nvidia">NVIDIA NIM (Cloud RAG)</option>
                         <option value="ollama">Ollama (Local Host RAG)</option>
                         <option value="lm-studio">LM Studio (Local Host RAG)</option>
                     </select>
@@ -704,6 +705,10 @@
                 if (engine === 'gemini') {
                     label.textContent = "Chiave API Gemini";
                     input.placeholder = "AIzaSy...";
+                    input.type = "password";
+                } else if (engine === 'nvidia') {
+                    label.textContent = "Chiave API NVIDIA NIM";
+                    input.placeholder = "nvapi-...";
                     input.type = "password";
                 } else if (engine === 'ollama') {
                     label.textContent = "Indirizzo Ollama Host";
@@ -1549,6 +1554,32 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
                     if (!res.ok) throw new Error(`Ollama HTTP ${res.status}`);
                     const data = await res.json();
                     textResponse = data.message?.content || data.response;
+
+                } else if (engine === 'nvidia') {
+                    if (!key) throw new Error("Chiave API NVIDIA NIM mancante. Inseriscila nella barra laterale.");
+                    
+                    const res = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${key}`
+                        },
+                        body: JSON.stringify({
+                            model: 'meta/llama-3.1-70b-instruct',
+                            messages: [{ role: 'user', content: prompt }],
+                            temperature: 0.5,
+                            max_tokens: 1024,
+                            stream: false
+                        })
+                    });
+
+                    if (!res.ok) {
+                        const err = await res.json().catch(() => ({}));
+                        throw new Error(err?.error?.message || `NVIDIA NIM HTTP ${res.status}`);
+                    }
+
+                    const data = await res.json();
+                    textResponse = data.choices[0].message.content;
 
                 } else if (engine === 'lm-studio') {
                     const host = key || 'http://localhost:12345';
