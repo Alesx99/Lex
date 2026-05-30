@@ -1558,7 +1558,7 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
                 } else if (engine === 'nvidia') {
                     if (!key) throw new Error("Chiave API NVIDIA NIM mancante. Inseriscila nella barra laterale.");
                     
-                    const res = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+                    const res = await fetch("https://corsproxy.io/?https://integrate.api.nvidia.com/v1/chat/completions", {
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json',
