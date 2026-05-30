@@ -1,6 +1,6 @@
-# Studio III: Le Rivoluzioni Inglesi e la Crisi del Seicento
+# Studio IV: Le Rivoluzioni Inglesi e la Nascita del Costituzionalismo
 **Autore:** Sintesi Accademica
-**Pagine di riferimento:** 20-40
+**Pagine di riferimento:** 20-23, 37-40, 46-47
 
 ---
 
@@ -29,8 +29,14 @@ Il crollo delle censure e l'entusiasmo rivoluzionario favoriscono la proliferazi
 *   **I Zappatori (Diggers):** Movimento agrario radicale che distrugge recinzioni (*enclosures*) e coltiva le terre comuni, propugnando l'abolizione della proprietà privata.
 *   **Altre sette:** I *Quaccheri* (rifiuto di clero e gerarchie), i *Ranters* (negazione del peccato), i *Quinto-monarchisti* (attesa millenaristica del regno di Cristo).
 
-## 5. La restaurazione e la Gloriosa Rivoluzione (1688)
+## 5. La Restaurazione, la Gloriosa Rivoluzione e il Costituzionalismo Inglese
 Cromwell impone una dittatura militare personale con il titolo di Lord Protettore (1653-1658). In campo commerciale emana l'**Atto di Navigazione** (1651), che riserva alle navi inglesi il commercio nei porti britannici, scatenando guerre commerciali con l'Olanda.
-*   **Il ritorno degli Stuart:** Alla morte di Cromwell (1658) il sistema crolla. Nel 1660 il Parlamento reinsedia **Carlo II Stuart**. Il nuovo re promette il rispetto del Parlamento e delle libertà, ma il successore **Giacomo II**, dichiaratamente cattolico, tenta di ripristinare il cattolicesimo e l'assolutismo.
-*   **La Gloriosa Rivoluzione (1688):** Il Parlamento offre la corona al protestante olandese **Guglielmo III d'Orange**, marito di Maria Stuart. Guglielmo sbarca in Inghilterra e Giacomo II fugge in Francia senza combattere (da qui il termine "gloriosa" o pacifica).
-*   **Il Bill of Rights (1689):** Guglielmo d'Orange firma la dichiarazione dei diritti, atto fondativo della monarchia costituzionale inglese. Sancisce i limiti del potere regio, la libertà di parola del Parlamento e il divieto per il re di sospendere leggi o imporre tasse senza il consenso parlamentare. Nel 1701 l'*Act of Settlement* esclude i cattolici dalla successione al trono a favore del casato di Hannover. Nel 1707 l'unione formale con la Scozia crea il Regno Unito di Gran Bretagna.
+*   **Il ritorno degli Stuart:** Alla morte di Cromwell (1658) il sistema crolla. Nel 1660 il Parlamento reinsedia **Carlo II Stuart**. Sotto il suo regno, il Parlamento impone il **Test Act (1673)**, obbligando chi ricopre cariche pubbliche a giurare fedeltà all'anglicanesimo, escludendo così i cattolici. Nel **1679** viene approvato l'**Habeas Corpus Act**, che garantisce a ogni arrestato il diritto di conoscere i motivi del proprio fermo e di essere rilasciato dietro cauzione in attesa di processo, limitando gli arbitri della Corona.
+*   **La svolta del 1688 (Gloriosa Rivoluzione):** Il successore **Giacomo II Stuart**, cattolico, tenta di ripristinare l'assolutismo regio e abolire i Test Act. Il Parlamento insorge e offre la corona al protestante olandese **Guglielmo III d'Orange**, *statolder* d'Olanda, marito di Maria Stuart (figlia primogenita protestante di Giacomo II). Nel 1688 Guglielmo sbarca in Inghilterra; Giacomo II fugge in Francia senza combattere. Questa transizione pacifica sancisce la nascita di una sovranità a base contrattuale e costituzionale, non più per diritto divino.
+*   **Il Bill of Rights (1689) e l'assetto dinastico:** Guglielmo firma la **Dichiarazione dei Diritti (Bill of Rights)**, atto fondamentale che vieta al sovrano di sospendere le leggi, imporre tasse o mantenere un esercito in tempo di pace senza l'esplicito consenso del Parlamento. L'**Act of Settlement (1701)** esclude definitivamente i cattolici dalla successione al trono (che passerà al casato degli Hannover). Nel 1707 l'unione parlamentare con la Scozia dà vita al **Regno Unito di Gran Bretagna**.
+*   **I caratteri del Costituzionalismo Inglese:** Si definisce per una scarsa \"densità normativa\": manca una costituzione scritta e lo Stato si fonda sulla **Common Law** (diritto giurisprudenziale basato sui precedenti dei giudici). Nelle province, la figura chiave è il **giudice di pace**, esponente della nobiltà locale che amministra la giustizia, riscuote le tasse e mantiene l'ordine come garante del diritto comune, non come dipendente stipendiato dello Stato.
+*   **Il bipartitismo politico:** Si formano due grandi correnti in Parlamento (che in seguito daranno vita ai partiti liberale e conservatore):
+    -   **Whigs:** Esponenti del commercio e della borghesia finanziaria, sostengono la tolleranza religiosa (tranne che per i cattolici) e una sovranità condivisa tra re e Parlamento.
+    -   **Tories:** Espressione dei proprietari terrieri anglicani, difendono le prerogative regie e la Chiesa ufficiale.
+    Sotto Giorgio I Hannover emerge la figura di **Robert Walpole**, che governa manipolando il Parlamento attraverso un sistema clientelare e di corruzione, favorendo gli interessi mercantili e finanziari.
+*   **Il Mercantilismo Inglese:** Più dinamico rispetto al modello protezionistico francese, il mercantilismo inglese punta sull'espansione marittima, il controllo dei commerci tramite gli Atti di Navigazione (1651, 1660) e la fondazione di Compagnie commerciali private (Compagnia delle Indie Orientali e Occidentali) che convogliano i capitali della gentry e dei mercanti.

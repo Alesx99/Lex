@@ -320,68 +320,76 @@ const searchDatabase = [
         navPath: "storia/index.html?open=summaries/sto2_controriforma.md"
     },
     {
-        title: "Le Rivoluzioni Inglesi e la Crisi del Seicento",
+        title: "Guerre di Religione, Guerra dei Trent'anni e Crisi del Seicento",
         subject: "storia",
         chapterTag: "Studio III",
-        description: "Le tensioni politiche e religiose sotto gli Stuart, la guerra civile, la condanna a morte di Carlo I, la repubblica di Cromwell, la Gloriosa Rivoluzione e il Bill of Rights.",
-        keywords: "rivoluzioni inglesi stuart carlo i puritani parlamento guerra civile new model army cromwell livellatori zappatori gloriosa rivoluzione bill of rights costituzionale",
-        navPath: "storia/index.html?open=summaries/sto3_rivoluzioni_inglesi.md"
+        description: "Le guerre di religione in Francia e la politica di Richelieu. La nascita delle Province Unite e della potenza olandese. La Guerra dei Trent'anni (1618-1648) e la Pace di Westfalia. La crisi del Seicento tra trasformazioni agrarie, protoindustria a domicilio, rivolte popolari (Spagna, Catalogna, Portogallo, Masaniello a Napoli) e le Fronde in Francia.",
+        keywords: "guerre religione ugonotti guisa borbone nantes enrico iv richelieu la rochelle grazia papato ragion stato province unite olanda utrecht duca alba farnese economia spagnola bancarotte olivares trentanni boemia praga defenestrazione westfalia munster osnabruck crisi seicento rifeudalizzazione servaggio enclosures gentry farmers protoindustria rivolte croquants nu-pieds bonnets rouges catalogna portogallo masaniello napoli republica napoletana fronda mazzarino conde",
+        navPath: "storia/index.html?open=summaries/sto3_crisi_seicento.md"
+    },
+    {
+        title: "Le Rivoluzioni Inglesi e la Nascita del Costituzionalismo",
+        subject: "storia",
+        chapterTag: "Studio IV",
+        description: "Le tensioni religiose e costituzionali tra la corona Stuart e il Parlamento. Lo scoppio della Guerra Civile (1642), il Commonwealth repubblicano di Oliver Cromwell. La Restaurazione, il Test Act, l'Habeas Corpus e lo spartiacque della Gloriosa Rivoluzione (1688) con il Bill of Rights, l'Act of Settlement, il mercantilismo e la nascita del bipartitismo parlamentare (Whigs/Tories).",
+        keywords: "rivoluzioni inglesi stuart carlo i puritani parlamento guerra civile new model army cromwell livellatori zappatori gloriosa rivoluzione bill of rights test act habeas corpus settlement costituzionalismo common law whigs tories mercantilismo",
+        navPath: "storia/index.html?open=summaries/sto4_rivoluzioni_inglesi.md"
     },
     {
         title: "L'Assolutismo di Luigi XIV e il Concerto delle Potenze",
         subject: "storia",
-        chapterTag: "Studio IV",
+        chapterTag: "Studio V",
         description: "Il regno assolutistico del Re Sole a Versailles, le riforme finanziarie di Colbert, le guerre dinastiche europee del Settecento e l'ascesa russa di Pietro il Grande.",
         keywords: "assolutismo luigi xiv versailles colbertismo successione spagnola utrecht successione polacca successione austriaca sette anni russia pietro grande polonia re sole fontainebleau",
-        navPath: "storia/index.html?open=summaries/sto4_assolutismo_guerre.md"
+        navPath: "storia/index.html?open=summaries/sto5_assolutismo_guerre.md"
     },
     {
         title: "L'Illuminismo e il Riformismo del Settecento",
         subject: "storia",
-        chapterTag: "Studio V",
+        chapterTag: "Studio VI",
         description: "La rivoluzione scientifica e il pensiero illuminista di Montesquieu, Rousseau e Locke. I laboratori del dispotismo illuminato in Europa (Toscana, Napoli, Austria).",
         keywords: "illuminismo montesquieu rousseau locke leopoldo toscana tanucci napoli giuseppe ii asburgo pombal portogallo inghilterra francia stallo fisiocrazia beccaria",
-        navPath: "storia/index.html?open=summaries/sto5_illuminismo_riforme.md"
+        navPath: "storia/index.html?open=summaries/sto6_illuminismo_riforme.md"
     },
     {
         title: "La Rivoluzione Americana e lo Scoppio della Rivoluzione Francese",
         subject: "storia",
-        chapterTag: "Studio VI",
+        chapterTag: "Studio VII",
         description: "L'indipendenza delle colonie americane e la Costituzione USA. La crisi dell'Antico Regime in Francia, la presa della Bastiglia e la dittatura del Terrore di Robespierre.",
         keywords: "rivoluzione americana colonie indipendenza washington costituzione rivoluzione francese stati generali pallacorda bastiglia diritti uomo costituzione clero vandea terrore robespierre",
-        navPath: "storia/index.html?open=summaries/sto6_rivoluzione_americana_francese.md"
+        navPath: "storia/index.html?open=summaries/sto7_rivoluzione_americana_francese.md"
     },
     {
         title: "L'Età Napoleonica e la Restaurazione",
         subject: "storia",
-        chapterTag: "Studio VII",
+        chapterTag: "Studio VIII",
         description: "La discesa di Napoleone Bonaparte in Italia, la riorganizzazione legislativa del Codice Civile del 1804, la sconfitta a Waterloo e il Congresso di Vienna con Metternich.",
         keywords: "direttorio napoleone bonaparte campagna italia campoformio repubbliche sorelle consolato codice civile 1804 impero austerlitz blocco continentale russia waterloo vienna restaurazione metternich",
-        navPath: "storia/index.html?open=summaries/sto7_napoleone_restaurazione.md"
+        navPath: "storia/index.html?open=summaries/sto8_napoleone_restaurazione.md"
     },
     {
         title: "La Società Borghese e l'Europa Liberale (1830-1848)",
         subject: "storia",
-        chapterTag: "Studio VIII",
+        chapterTag: "Studio IX",
         description: "L'espansione industriale e l'avvento dei regimi liberali in Inghilterra e Francia. I moti insurrezionali del 1848, l'ascesa della Prussia di Bismarck e la Comune di Parigi.",
         keywords: "societa borghese rivoluzione industriale liberalismo inghilterra riforme carlo x orleans monarchia luglio 1848 ateliers nationaux napoleone iii reich bismarck comune parigi sedan",
-        navPath: "storia/index.html?open=summaries/sto8_societa_borghese_liberalismo.md"
+        navPath: "storia/index.html?open=summaries/sto9_societa_borghese_liberalismo.md"
     },
     {
         title: "Il Risorgimento Italiano e i Moti Rivoluzionari",
         subject: "storia",
-        chapterTag: "Studio IX",
+        chapterTag: "Studio X",
         description: "L'Italia divisa della Restaurazione, i moti settari della Carboneria, il programma unitario di Mazzini, il federalismo di Gioberti e le rivoluzioni del 1848.",
         keywords: "risorgimento italiano divisione italia carboneria moti 1820 1830 mazzini giovine italia neoguelfismo gioberti balbo d'azeglio 1848 milano cinque giornate venezia manin prima guerra indipendenza republica romana triumvirato",
-        navPath: "storia/index.html?open=summaries/sto9_risorgimento_italiano.md"
+        navPath: "storia/index.html?open=summaries/sto10_risorgimento_italiano.md"
     },
     {
         title: "Cavour, Garibaldi e la Nascita del Regno d'Italia",
         subject: "storia",
-        chapterTag: "Studio X",
+        chapterTag: "Studio XI",
         description: "La politica diplomatica sabauda di Cavour, l'alleanza di Plombières, la Spedizione dei Mille di Garibaldi, la nascita del Regno d'Italia (1861) e la breccia di Porta Pia (1870).",
         keywords: "unificazione italiana cavour connubio crimea plombieres seconda guerra indipendenza magenta solferino villafranca spedizione mille garibaldi teano regno italia guarentigie non expedit porta pia",
-        navPath: "storia/index.html?open=summaries/sto10_unificazione_regno.md"
+        navPath: "storia/index.html?open=summaries/sto11_unificazione_regno.md"
     }
 ];
 

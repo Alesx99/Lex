@@ -2307,7 +2307,6 @@ const quizDatabase = {
                     "La pittura illusionistica impressionista e la prospettiva aerea.",
                     "La modellazione calligrafica della barba e l'inserimento di occhi in pasta vitrea."
                 ],
-                correctIndex: 1,
                 explanation: "I rilievi costantiniani abbandonano il realismo tridimensionale classico a favore di una composizione gerarchica e simbolica (l'imperatore è grande e frontale al centro), inaugurando lo stile dell'arte medievale."
             },
             {
@@ -2447,10 +2446,72 @@ const quizDatabase = {
             }
         ]
     },
-    sto3_rivoluzioni_inglesi: {
+    sto3_crisi_seicento: {
         subject: "storia",
         chapterTag: "Studio III",
-        title: "Le Rivoluzioni Inglesi e la Crisi del Seicento",
+        title: "Guerre di Religione, Guerra dei Trent'anni e Crisi del Seicento",
+        questions: [
+            {
+                question: "Quale pacificazione pose fine nel 1598 alle guerre di religione in Francia tra ugonotti e cattolici, sancendo la libertà di coscienza e concedendo piazzeforti militari ai protestanti?",
+                options: [
+                    "L'Editto di Fontainebleau.",
+                    "L'Editto di Nantes, promulgato da Enrico IV di Borbone.",
+                    "L'Editto di Grazia di Richelieu.",
+                    "La Pace di Osnabrück."
+                ],
+                correctIndex: 1,
+                explanation: "L'Editto di Nantes (1598), firmato da Enrico IV, riconobbe agli ugonotti (calvinisti francesi) la libertà di coscienza e il diritto di praticare il culto in determinate località, concedendo loro circa cento piazzeforti di sicurezza (come La Rochelle). Questo editto segnò un passo storico verso il superamento dell'intolleranza confessionale e l'affermazione dell'autorità regia sopra le fazioni religiose."
+            },
+            {
+                question: "Quale evento scatenò formalmente la Guerra dei Trent'anni il 23 maggio 1618 nella città di Praga?",
+                options: [
+                    "La proclamazione dell'Editto di Restituzione da parte dell'imperatore Ferdinando II.",
+                    "La firma dell'Unione Evangelica guidata da Federico V del Palatinato.",
+                    "La Defenestrazione di Praga: delegati calvinisti boemi gettarono da una finestra del castello imperiale due governatori cattolici.",
+                    "La sconfitta delle truppe boeme nella battaglia della Montagna Bianca."
+                ],
+                correctIndex: 2,
+                explanation: "Il 23 maggio 1618, i nobili protestanti boemi, irritati dalla limitazione della libertà di culto (garantita precedentemente dalle Lettere di Maestà di Rodolfo II) da parte dei rappresentanti del nuovo re Ferdinando II d'Asburgo, fecero irruzione nel castello di Praga e gettarono dalla finestra due governatori imperiali cattolici e un segretario. L'evento aprì la fase boemo-palatina e diede inizio alla Guerra dei Trent'anni."
+            },
+            {
+                question: "In quale celebre trattato diplomatico del 1648 vennero gettate le basi del moderno sistema delle relazioni internazionali in Europa, sancendo la fine dei conflitti religiosi e del sogno egemonico degli Asburgo?",
+                options: [
+                    "La Pace di Lubecca.",
+                    "La Pace di Westfalia, composta dai trattati di Münster e Osnabrück.",
+                    "La Pace dei Pirenei.",
+                    "Il Trattato di Utrecht."
+                ],
+                correctIndex: 1,
+                explanation: "La Pace di Westfalia (1648) pose fine alla Guerra dei Trent'anni. Riconobbe la parità giuridica degli Stati indipendentemente dalla loro grandezza o religione (allargando il 'cuius regio eius religio' al calvinismo), sancì il fallimento del progetto imperiale asburgico di ricattolicizzazione della Germania e vide l'ascesa di nuove potenze come la Svezia e la Prussia, inaugurando l'equilibrio europeo."
+            },
+            {
+                question: "Durante la crisi del Seicento nella penisola iberica, quali regioni si ribellarono contemporaneamente nel 1640 contro la centralizzazione burocratica ed esattoriale tentata dal Conte-Duca di Olivares?",
+                options: [
+                    "La Navarra e l'Andalusia.",
+                    "La Catalogna e il Portogallo, che riuscì a recuperare l'indipendenza sotto la dinastia dei Braganza.",
+                    "I Paesi Bassi del Sud e la Galizia.",
+                    "Il Regno di Valencia e le Asturie."
+                ],
+                correctIndex: 1,
+                explanation: "Il tentativo di Olivares di imporre la 'Union de las Armas' (che obbligava tutte le province a contribuire finanziariamente e militarmente all'esercito spagnolo) scatenò nel 1640 la rivolta dei contadini e dei nobili catalani (guidati da Pau Claris con l'aiuto francese) e la sollevazione del Portogallo. Mentre la Catalogna fu riconquistata nel 1652, il Portogallo ottenne l'indipendenza definitiva proclamando re Giovanni IV di Braganza."
+            },
+            {
+                question: "Quale rivolta scoppiò a Napoli nel luglio 1647, guidata da un giovane pescivendolo e animata dall'ostilità verso il ceto togato e il vicereame spagnolo?",
+                options: [
+                    "La rivolta dei Croquants.",
+                    "La rivolta dei Nu-Pieds.",
+                    "La rivolta di Masaniello (Tommaso Aniello d'Amalfi) e Giulio Genoino, nata dall'imposizione di una gabella sulla frutta fresca.",
+                    "La Fronda parlamentare contro il cardinale Mazzarino."
+                ],
+                correctIndex: 2,
+                explanation: "Il 7 luglio 1647 scoppiò a Napoli una rivolta guidata dal pescivendolo Masaniello e ideata dall'anziano giurista Giulio Genoino. Originata dall'imposizione di una gabella sulla frutta da parte del viceré spagnolo duca d'Arcos, la rivolta prese di mira sia gli spagnoli sia il ceto togato. Portò alla nascita della Real Repubblica Napoletana prima della spietata repressione spagnola del 18 aprile 1648."
+            }
+        ]
+    },
+    sto4_rivoluzioni_inglesi: {
+        subject: "storia",
+        chapterTag: "Studio IV",
+        title: "Le Rivoluzioni Inglesi e la Nascita del Costituzionalismo",
         questions: [
             {
                 question: "Quale drammatico evento del 1649 pose temporaneamente fine alla monarchia in Inghilterra durante la prima rivoluzione?",
@@ -2505,13 +2566,13 @@ const quizDatabase = {
                     "Lo Statuto Albertino."
                 ],
                 correctIndex: 2,
-                explanation: "Il Bill of Rights (1689) pose limiti precisi al potere della Corona, vietando al re di sospendere leggi, imporre tasse o mantenere un esercito permanente in tempo di pace senza il consenso del Parlamento, e garantendo la libertà di parola e le libere elezioni parlamentari. Nacque così la prima monarchia parlamentare."
+                explanation: "Il Bill of Rights (1689) pose limits precisi al potere della Corona, vietando al re di sospendere leggi, imporre tasse o mantenere un esercito permanente in tempo di pace senza il consenso del Parlamento, e garantendo la libertà di parola e le libere elezioni parlamentari. Nacque così la prima monarchia parlamentare."
             }
         ]
     },
-    sto4_assolutismo_guerre: {
+    sto5_assolutismo_guerre: {
         subject: "storia",
-        chapterTag: "Studio IV",
+        chapterTag: "Studio V",
         title: "L'Assolutismo di Luigi XIV e il Concerto delle Potenze",
         questions: [
             {
@@ -2530,7 +2591,7 @@ const quizDatabase = {
                 options: [
                     "Pace di Cateau-Cambrésis del 1559.",
                     "Trattati di Utrecht (1713) e Rastatt (1714).",
-                    "Pace di Vestfalia del 1648.",
+                    "Pace di Westfalia del 1648.",
                     "Trattato di Parigi del 1763."
                 ],
                 correctIndex: 1,
@@ -2571,9 +2632,9 @@ const quizDatabase = {
             }
         ]
     },
-    sto5_illuminismo_riforme: {
+    sto6_illuminismo_riforme: {
         subject: "storia",
-        chapterTag: "Studio V",
+        chapterTag: "Studio VI",
         title: "L'Illuminismo e il Riformismo del Settecento",
         questions: [
             {
@@ -2633,13 +2694,13 @@ const quizDatabase = {
             }
         ]
     },
-    sto6_rivoluzione_americana_francese: {
+    sto7_rivoluzione_americana_francese: {
         subject: "storia",
-        chapterTag: "Studio VI",
+        chapterTag: "Studio VII",
         title: "La Rivoluzione Americana e lo Scoppio della Rivoluzione Francese",
         questions: [
             {
-                question: "Quale data e quale autore principale caratterizzano l'adozione della Dichiarazione d'Indipendenza delle tredici colonie nordamericane?",
+                question: "Quale data e quale autor principale caratterizzano l'adozione della Dichiarazione d'Indipendenza delle tredici colonie nordamericane?",
                 options: [
                     "14 luglio 1789, redatta da George Washington.",
                     "4 luglio 1776, redatta da Thomas Jefferson.",
@@ -2695,9 +2756,9 @@ const quizDatabase = {
             }
         ]
     },
-    sto7_napoleone_restaurazione: {
+    sto8_napoleone_restaurazione: {
         subject: "storia",
-        chapterTag: "Studio VII",
+        chapterTag: "Studio VIII",
         title: "L'Età Napoleonica e la Restaurazione",
         questions: [
             {
@@ -2757,9 +2818,9 @@ const quizDatabase = {
             }
         ]
     },
-    sto8_societa_borghese_liberalismo: {
+    sto9_societa_borghese_liberalismo: {
         subject: "storia",
-        chapterTag: "Studio VIII",
+        chapterTag: "Studio IX",
         title: "La Società Borghese e l'Europa Liberale (1830-1848)",
         questions: [
             {
@@ -2819,10 +2880,10 @@ const quizDatabase = {
             }
         ]
     },
-    sto9_risorgimento_italiano: {
+    sto10_risorgimento_italiano: {
         subject: "storia",
-        chapterTag: "Studio IX",
-        title: "Il Risorgimento Italiano e i Moti del 1848",
+        chapterTag: "Studio X",
+        title: "Il Risorgimento Italiano e i Moti Rivoluzionari",
         questions: [
             {
                 question: "Quale fu il limite fondamentale delle prime cospirazioni carbonare in Italia nei moti del 1820-1821 e 1830-1831?",
@@ -2881,9 +2942,9 @@ const quizDatabase = {
             }
         ]
     },
-    sto10_unificazione_regno: {
+    sto11_unificazione_regno: {
         subject: "storia",
-        chapterTag: "Studio X",
+        chapterTag: "Studio XI",
         title: "Cavour, Garibaldi e la Nascita del Regno d'Italia",
         questions: [
             {
@@ -2943,7 +3004,6 @@ const quizDatabase = {
             }
         ]
     }
-    
 };
 
 // Global export
