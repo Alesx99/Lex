@@ -1611,7 +1611,18 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
             } catch (err) {
                 console.error(err);
                 placeholder.remove();
-                addBotMessage(`<span style="color:var(--accent-romana);">Errore durante l'elaborazione del messaggio: ${escapeHtml(err.message)}</span><br><br>Verifica la configurazione del motore nella barra laterale o la tua connessione internet.`);
+                
+                let errorMsg = `Errore durante l'elaborazione del messaggio: ${escapeHtml(err.message)}`;
+                if (engine === 'nvidia' && window.location.protocol === 'file:') {
+                    errorMsg += `<br><br><span style="color:var(--accent-cyan); font-weight:bold;">Rilevato avvio da file locale (file://):</span><br>` +
+                                `Per ragioni di sicurezza (CORS), le chiamate a NVIDIA NIM tramite il proxy gratuito <strong>corsproxy.io</strong> sono bloccate se la pagina viene aperta direttamente come file locale.<br><br>` +
+                                `<strong>Soluzione semplice:</strong><br>` +
+                                `1. Chiudi questa scheda del browser.<br>` +
+                                `2. Fai doppio clic sul file <strong style="color:var(--accent-cyan);">avvia_server.command</strong> situato nella cartella del progetto (Lex) per avviare il server web locale.<br>` +
+                                `3. L'applicazione si aprirà automaticamente su <code>http://localhost:8000/index.html</code> e l'assistente NVIDIA funzionerà correttamente!`;
+                }
+                
+                addBotMessage(`<span style="color:var(--accent-romana);">${errorMsg}</span><br><br>Verifica la configurazione del motore nella barra laterale o la tua connessione internet.`);
             }
         }
 
