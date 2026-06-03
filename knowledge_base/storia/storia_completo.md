@@ -3865,5 +3865,104 @@ benessere dei dipendenti.
 
 ## Pagina 112
 
+## Pagina 113
+
+### Analisi e Focus: Il Fallimento del Sogno Imperiale di Carlo V
+L'ambizioso disegno di Carlo V d'Asburgo di restaurare una *Monarchia Universale* cristiana (*Restauratio Imperii*) si scontrò con invalicabili barriere strutturali e geopolitiche:
+*   **La frammentazione strutturale dell'Impero:** I domini asburgici non formavano uno Stato centralizzato, bensì una costellazione dinastica di territori autonomi con ordinamenti giuridici, lingue ed economie distinte. Il potere di Carlo era limitato dal negoziato costante con le assemblee dei ceti (*Cortes* spagnole, *Diete* tedesche), gelose delle proprie autonomie.
+*   **Il dissanguamento fiscale:** Per finanziare le continue guerre egemoniche contro la Francia di Francesco I e la minaccia ottomana, l'imperatore dovette gravare la Castiglia di una pressione fiscale intollerabile. Ciò innescò la rivolta dei *Comuneros* (1520-1522), mostrando le frizioni tra il disegno imperiale globale e gli interessi locali spagnoli.
+*   **La frattura confessionale tedesca:** La Riforma luterana offrì ai principi tedeschi uno strumento politico per limitare l'autorità imperiale e incamerare i beni ecclesiastici. La formazione della Lega di Smalcalda cristallizzò l'opposizione armata a Carlo. Con la Pace di Augusta (1555) e il principio del *cuius regio eius religio*, l'imperatore dovette accettare la divisione religiosa dell'Impero, decretando il fallimento del sogno universalistico e spingendolo all'abdicazione.
+
+## Pagina 114
+
+### Analisi e Focus: La Creazione dello Stato Moderno
+La formazione dello *Stato Moderno* tra il XVI e il XVII secolo rappresenta uno dei processi più complessi della prima età moderna, caratterizzato dalla transizione dal policentrismo medievale alla centralizzazione del potere:
+*   **Il monopolio della forza e la burocrazia:** Teorizzato successivamente da Max Weber come "monopolio della violenza legittima", lo Stato moderno si afferma limitando la giustizia privata e gli eserciti signorili a favore di una forza militare regia permanente. Questo apparato richiede una classe di funzionari civili e burocrati professionali (nobiltà di toga) devoti al sovrano.
+*   **Lo Stato fiscale-militare (*Fiscal-Military State*):** La necessità di sostenere guerre d'espansione e di difesa determina una crescita vertiginosa delle spese statali. Per finanziarle, le monarchie strutturano un fisco centralizzato basato su imposte indirette e debito pubblico. La compravendita degli uffici pubblici (*venalità delle cariche*) diviene sia uno strumento di cassa straordinario sia un veicolo di ascesa sociale per la ricca borghesia.
+*   **La sovranità e i suoi limiti corporativi:** Sebbene teorici come Bodin e Hobbes definiscano la sovranità come assoluta e indivisibile (*legibus solutus*), nella pratica il sovrano dovette scendere a costanti compromessi con i "corpi intermedi" (nobili territoriali, parlamenti locali, corporazioni, Chiesa). Lo Stato moderno non fu dunque una macchina burocratica infallibile, bensì un cantiere negoziale in perenne equilibrio tra spinte accentratrici e resistenze autonomistiche.
+
+## Pagina 115
+
+### Analisi e Focus: Il Modello Imperiale di Filippo II e le sue Contraddizioni
+Il regno di Filippo II (1556-1598) rappresenta il consolidamento dell'Impero spagnolo come potenza egemone, ma ne rivela anche i profondi limiti strutturali:
+*   **L'imperialismo burocratico:** A differenza del padre itinerante Carlo V, Filippo scelse una capitale fissa (Madrid) e governò il suo vasto impero attraverso una fitta rete burocratica di Consigli e documenti scritti (*rey papelero*). Questo sistema garantiva controllo ma rallentava enormemente le decisioni politiche e militari.
+*   **La debolezza economica:** L'afflusso massiccio di oro e argento dalle miniere americane si rivelò una risorsa effimera. Invece di stimolare la produzione interna, alimentò l'inflazione (rivoluzione dei prezzi) e la dipendenza dalle importazioni manifatturiere straniere. La nobiltà spagnola considerava il lavoro manuale o mercantile come disonorevole (*limpieza de sangre*), impoverendo il tessuto produttivo.
+*   **Le bancarotte regie:** I costi esorbitanti della flotta militare (Lepanto 1571), la fallimentare spedizione contro l'Inghilterra (Invincibile Armata 1588) e la logorante guerra contro i ribelli nei Paesi Bassi costrinsero la Corona spagnola a dichiarare ripetute bancarotte, colpendo duramente i banchieri europei e bloccando lo sviluppo finanziario del Paese.
+
+## Pagina 116
+
+### Analisi e Focus: La Guerra dei Trent'anni e la Sovranità Vestfaliana
+La Guerra dei Trent'anni (1618-1648) segnò una svolta epocale nell'architettura delle relazioni internazionali europee:
+*   **Dalla confessionalizzazione alla geopolitica:** Iniziata come l'ultimo grande conflitto di religione per la restaurazione cattolica imperiale nei territori tedeschi, la guerra si trasformò in uno scontro di pura potenza. L'intervento della Francia cattolica di Richelieu a fianco delle potenze protestanti contro gli Asburgo d'Austria e di Spagna dimostrò che la "ragion di Stato" aveva ormai soppiantato la solidarietà confessionale.
+*   **Il principio della "Sovranità Vestfaliana":** Le Paci di Münster e Osnabrück (1648) definirono il moderno sistema internazionale basato su Stati sovrani. I punti cardine includono:
+    -   *Eguaglianza giuridica:* Ogni Stato, indipendentemente dalla grandezza, ha pari sovranità.
+    -   *Non-ingerenza:* Riconoscimento del diritto esclusivo dello Stato di legiferare all'interno dei propri confini, superando le ingerenze esterne dell'Impero o del Papato.
+    -   *Equilibrio delle potenze:* Sistema multilaterale volto a impedire che un singolo Stato stabilisca un'egemonia continentale.
+
+## Pagina 117
+
+### Analisi e Focus: Il Dibattito sulla Crisi del Seicento e la Divergenza Europea
+Il Seicento è stato a lungo descritto dalla storiografia come un secolo di "crisi generale", ma la ricerca recente evidenzia profonde asimmetrie geografiche:
+*   **Fattori climatici e demografici:** La "Piccola Era Glaciale" provocò un calo delle temperature globali, con conseguenti carestie ricorrenti, epidemie di peste e contrazione demografica in ampie zone d'Europa.
+*   **La divergenza economica:** La crisi accelerò la divisione strutturale del continente:
+    -   *Il declino del Mediterraneo e dell'Est:* L'Italia e la Spagna vissero una fase di stagnazione economica e rifeudalizzazione. Nell'Europa orientale, i grandi proprietari terrieri istituirono il "secondo servaggio" per legare i contadini alla terra e produrre grano a basso costo per l'esportazione.
+    -   *Il dinamismo del Nord-Ovest:* L'Inghilterra e le Province Unite (Olanda) reagirono modernizzando l'agricoltura (recinzioni, rotazione continua), sviluppando le manifatture a domicilio (protoindustria) e prendendo il controllo delle rotte commerciali globali, ponendo le basi per la transizione al capitalismo industriale.
+
+## Pagina 118
+
+### Analisi e Focus: Il Significato Costituzionale ed Economico della Gloriosa Rivoluzione
+La Gloriosa Rivoluzione del 1688 non rappresentò semplicemente un cambio dinastico pacifico, ma costituì lo spartiacque fondamentale per la nascita del modello costituzionale ed economico britannico:
+*   **Il contrattualismo del *King-in-Parliament*:** Con la fuga di Giacomo II e l'incoronazione di Guglielmo III d'Orange, venne definitivamente sconfitta la dottrina del diritto divino dei re. La sovranità passò a fondarsi su un patto costituzionale formalizzato dal *Bill of Rights* (1689). Il potere sovrano risiedette da quel momento nel Parlamento riunito con il Re (*King-in-Parliament*), segnando la nascita della prima monarchia costituzionale moderna.
+*   **La stabilità dei diritti di proprietà:** Il controllo parlamentare sulle imposte e sul bilancio statale sottrasse al sovrano il potere di confisca arbitraria della ricchezza privata. Questa solida tutela giuridica della proprietà privata favorì gli investimenti agrari e industriali da parte della *gentry* e dei mercanti.
+*   **La rivoluzione finanziaria:** La fondazione della Banca d'Inghilterra (1694) e la creazione del "Debito Nazionale" garantito dal Parlamento permisero allo Stato inglese di raccogliere ingenti capitali a tassi d'interesse bassissimi. La fiducia del mercato nelle istituzioni parlamentari rese la Gran Bretagna una potenza commerciale e coloniale formidabile, creando le precondizioni finanziarie per l'imminente Rivoluzione Industriale.
+
+## Pagina 119
+
+### Analisi e Focus: Il Modello dell'Assolutismo di Luigi XIV e i suoi Limiti
+Il regno di Luigi XIV (1661-1715) rappresenta il massimo esempio storico di monarchia assoluta, ma rivela forti limiti intrinseci:
+*   **Il compromesso con la nobiltà:** Più che abbattere il potere nobiliare, Luigi XIV lo addomesticò. La Reggia di Versailles funse da "gabbia dorata", privando l'aristocrazia del potere politico sul territorio in cambio del mantenimento dei privileges fiscali, giuridici e sociali. Questa immunità fiscale della nobiltà indebolì strutturalmente il fisco francese.
+*   **Il fallimento della politica confessionale:** La revoca dell'Editto di Nantes con l'Editto di Fontainebleau (1685) rispose all'ossessione del re per l'uniformità religiosa ("un solo re, una sola legge, una sola fede"). Tale misura provocò la fuga di oltre 200.000 ugonotti (artigiani, banchieri, professionisti qualificati), arricchendo rivali come la Prussia e l'Inghilterra e impoverendo la manifattura e il commercio francesi.
+*   **Il deficit finanziario sistemico:** Le imponenti spese di corte e le incessanti guerre di espansione logorarono le casse dello Stato. Nonostante il colbertismo (mercantilismo protezionistico) avesse riorganizzato le manifatture regie, la monarchia francese non riuscì a creare un sistema finanziario moderno basato sul debito pubblico garantito da un'assemblea rappresentativa (come in Inghilterra), gettando le premesse per lo stallo fiscale del Settecento.
+
+## Pagina 120
+
+### Analisi e Focus: Dispotismo Illuminato e lo Stallo Francese
+Il Settecento riformatore evidenzia una profonda divergenza nei destini istituzionali delle grandi potenze europee:
+*   **Il laboratorio del Dispotismo Illuminato:** I sovrani di Austria, Prussia, Toscana e Napoli collaborarono con gli intellettuali illuministi per modernizzare le strutture statali. Il loro scopo non era la democrazia, ma l'efficienza: la soppressione dei privilegi ecclesiastici (giurisdizionalismo), la razionalizzazione amministrativa e l'introduzione dei *catasti* per colpire le esenzioni nobiliari. L'apice fu la Toscana di Pietro Leopoldo, che nel 1786 abolì per la prima volta la pena di morte.
+*   **Il paradosso della Francia pre-rivoluzionaria:** Culla culturale dell'Illuminismo, la Francia visse uno stallo istituzionale fatale. I tentativi dei ministri regi (Turgot, Necker, Calonne) di introdurre un'imposta fondiaria universale vennero sistematicamente bloccati dai Parlamenti regionali. Questi ultimi, composti dalla nobiltà di toga, si presentarono demagogicamente come difensori delle libertà contro il dispotismo della Corona, ma in realtà proteggevano l'immunità fiscale aristocratica. Questo blocco impedì la transizione pacifica alle riforme, portando direttamente al deficit finanziario del 1789.
+*   **L'eccezione della Gran Bretagna:** La modernizzazione e l'avvio della Rivoluzione Industriale avvennero senza riforme autoritarie dall'alto. Il controllo parlamentare sulle tasse e sulla spesa pubblica garantiva la sicurezza dei diritti di proprietà e permetteva di assorbire i conflitti sociali all'interno delle istituzioni costituzionali stabili.
+
+## Pagina 121
+
+### Analisi e Focus: La Rottura Costituzionale e Politica delle Rivoluzioni
+La Rivoluzione Americana e la Rivoluzione Francese rappresentano due modalità distinte di rottura radicale con i modelli tradizionali di potere:
+*   **La natura istituzionale della Rivoluzione Americana:** Nata come una rivolta contro l'imposizione fiscale britannica ("No taxation without representation"), la rivoluzione d'oltreoceano si trasformò rapidamente in una straordinaria innovazione costituzionale. Essa produsse il primo esempio moderno di repubblica federale fondato sulla divisione dei poteri (checks and balances), sul costituzionalismo scritto e su una Dichiarazione dei diritti naturali inalienabili. Tuttavia, mantenne intatta la struttura sociale preesistente, comprese le profonde contraddizioni dello schiavismo meridionale.
+*   **La rottura radicale e sociale della Rivoluzione Francese:** A differenza di quella americana, la rivoluzione in Francia fu uno scontro interno radicale contro un ordine consolidato da secoli (l'Antico Regime). Essa non fu solo politica, ma abbatté la struttura sociale feudale, abolendo i ceti e i privilegi aristocratici ed ecclesiastici. Il concetto di "Nazione" passò a definire non più i sudditi del re, ma il corpo collettivo dei cittadini depositari della sovranità.
+*   **Le tensioni interne e la fase del Terrore:** Lo scoppio della guerra esterna e le rivolte controrivoluzionarie (come in Vandea) spinsero la rivoluzione francese verso una deriva dittatoriale ed emergenziale sotto i Giacobini di Robespierre. La dittatura del Comitato di Salute Pubblica giustificò l'uso della violenza e del sospetto sistematico (il Terrore, 1793-1794) in nome della difesa patriottica e della "virtù repubblicana", dimostrando come la ricerca dell'uguaglianza sociale assoluta potesse sfociare nel totalitarismo.
+
+## Pagina 122
+
+### Analisi e Focus: Il Modello dello Stato Napoleonico e la sua Eredità
+La figura di Napoleone Bonaparte rappresenta una sintesi contraddittoria tra l'autoritarismo cesaristico e l'eredità razionalizzatrice della Rivoluzione:
+*   **L'assolutismo amministrativo e lo Stato centralizzato:** Napoleone creò un modello di Stato moderno e centralizzato, imperniato sulla figura del *Prefetto* (il rappresentante del governo centrale in ogni dipartimento). Questo sistema eliminò definitivamente i residui di autonomia feudale e locale, istituendo una burocrazia gerarchica, meritocratica ed efficiente guidata da funzionari di carriera.
+*   **Il Codice Civile del 1804 come pilastro sociale:** Il *Codice Napoleone* fu la vera conquista durevole dell'epoca imperiale. Sancì sul piano giuridico le grandi conquiste del 1789: eguaglianza formale dei cittadini davanti alla legge, laicità dello Stato, libertà economica e soprattutto il diritto inviolabile di proprietà privata. Esso divenne la base giuridica per l'affermazione della moderna società borghese in tutta Europa.
+*   **L'esportazione delle riforme e il risveglio nazionale:** Attraverso le sue campagne militari, Napoleone esportò questo modello amministrativo e giuridico nei territori annessi o controllati (come il Regno d'Italia). Tuttavia, la dura dominazione militare e fiscale francese provocò in molti Paesi (Spagna, Germania, Russia) un forte risveglio patriottico e identitario. I popoli europei usarono contro la Francia lo stesso concetto di "Nazione" in armi appreso dai francesi, decretando il crollo dell'Impero ma diffondendo irreversibilmente le idee liberali e nazionali che avrebbero caratterizzato il secolo successivo.
+
+## Pagina 123
+
+### Analisi e Focus: Il Dibattito Politico e Ideologico del Risorgimento
+Il Risorgimento italiano non fu un processo unitario o privo di conflitti interni, ma si sviluppò attraverso un intenso scontro intellettuale e politico sulle forme e sui modi dell'unificazione:
+*   **La linea repubblicano-democratica di Mazzini:** Giuseppe Mazzini fu il primo a dare una dimensione nazionale al Risorgimento. Con la *Giovine Italia* (1831) rifiutò la segretezza settaria della Carboneria a favore di una propaganda pubblica. Il suo programma ("Dio e Popolo", "Pensiero e Azione") propugnava una repubblica unitaria e democratica da realizzare tramite una rivoluzione dal basso, senza l'aiuto dei re. I fallimenti pratici dei moti mazziniani alienarono tuttavia la borghesia moderata, che temeva il radicalismo sociale e l'instabilità.
+*   **La via neoguelfa e federale di Gioberti:** Vincenzo Gioberti propose un'alternativa moderata volta a conciliare la causa nazionale con il cattolicesimo. Nel suo *Del primato morale e civile degli italiani* (1843), teorizzò una confederazione di Stati sotto la presidenza morale del Papa, difendendo le dinastie regnanti e offrendo una sponda alla borghesia cattolica conservatrice. L'allocuzione *Non semel* di Pio IX nel 1848 dimostrò l'incompatibilità intrinseca tra il papato universale e la causa nazionale, decretando il crollo del neoguelfismo.
+*   **La monarchia sabauda come scelta pragmatica:** Cesare Balbo e Massimo d'Azeglio spostarono l'asse del moderatismo verso il Regno di Sardegna, individuato come l'unico Stato militarmente ed economicamente attrezzato per guidare la confederazione italiana. Il fallimento del 1848 e il mantenimento dello Statuto Albertino da parte di Vittorio Emanuele II convinsero infine gran parte dei patrioti (incluso Giuseppe Garibaldi, che aderì alla Società Nazionale) a confluire pragmaticamente sotto la bandiera sabauda, accantonando l'ideale repubblicano per ottenere l'unificazione.
+
+## Pagina 124
+
+### Analisi e Focus: Il Regno d'Italia e le sue Contraddizioni Post-Unitarie
+La nascita del Regno d'Italia il 17 marzo 1861 realizzò il sogno unitario dei patrioti, ma inaugurò una fase densa di conflitti e squilibri strutturali:
+*   **La "Piemontesizzazione" e il distacco delle masse:** L'unificazione si tradusse nell'estensione acritica delle leggi, del sistema scolastico e del regime doganale e tributario del Regno di Sardegna a tutta la penisola. Vittorio Emanuele II scelse persino di non mutare il proprio numerale (restando secondo e non primo re d'Italia), alimentando la percezione che l'unità fosse un'annessione forzata da parte di Torino. Questa scelta alienò il consenso delle masse popolari, specialmente contadine, escluse dal voto a causa di un suffragio censitario ristrettissimo (circa il 2% della popolazione).
+*   **La Questione Meridionale e il Brigantaggio:** L'abbattimento improvviso delle barriere doganali distrusse la fragile manifattura del Mezzogiorno, mentre l'introduzione della leva militare obbligatoria e della pesante tassa sul macinato provocarono una diffusa disperazione sociale. Tra il 1861 e il 1865 scoppiò nel Sud una sanguinosa rivolta contadina e legittimista, bollata dallo Stato come *Brigantaggio*. La risposta fu una durissima repressione militare guidata dalla *Legge Pica* (1863), che istituì lo stato d'assedio e i tribunali militari, causando migliaia di morti e accentuando la frattura civile ed economica tra Nord e Sud.
+*   **La frattura con il mondo cattolico:** La presa di Roma e la fine del potere temporale dei papi con la breccia di Porta Pia (1870) aprirono una frattura insanabile con la Chiesa. La bolla *Non Expedit* (1874) di Pio IX, vietando ai cattolici di partecipare alla vita elettorale, privò la neonata classe dirigente liberale del sostegno della stragrande maggioranza della popolazione, minando alla base la legittimazione sociale dello Stato unitario.
+
 
 

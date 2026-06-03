@@ -2381,6 +2381,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 2,
                 explanation: "L'Atto di Supremazia votato dal Parlamento inglese nel 1534 dichiarò Enrico VIII e i suoi successori 'capo supremo' della Chiesa d'Inghilterra (anglicana), consumando lo scisma con la Chiesa di Roma in seguito al rifiuto papale di annullare il matrimonio del re con Caterina d'Aragona."
+            },
+            {
+                question: "Quale dinamica politico-religiosa sul suolo tedesco ostacolò in modo determinante la 'Restauratio Imperii' di Carlo V?",
+                options: [
+                    "L'opposizione armata dei cantoni svizzeri guidati da Zwingli.",
+                    "La frammentazione confessionale della Germania con la formazione della Lega di Smalcalda e il successivo principio del 'cuius regio eius religio'.",
+                    "L'alleanza dottrinale tra luterani e anabattisti per la fondazione di una chiesa democratica ed egualitaria.",
+                    "Il rifiuto categorico dei principi cattolici tedeschi di sostenere le guerre imperiali contro i turchi."
+                ],
+                correctIndex: 1,
+                explanation: "Il sogno universalistico di Carlo V naufragò di fronte all'opposizione dei principi luterani tedeschi, riunitisi nella Lega di Smalcalda (1531). La successiva Pace di Augusta (1555) sancì la legittimità della confessione luterana nei singoli territori, distruggendo l'unità religiosa dell'Impero."
             }
         ]
     },
@@ -2426,7 +2437,7 @@ const quizDatabase = {
                 question: "Con quale bolla papale e in quale anno fu approvata la Compagnia di Gesù (Gesuiti), fondata da Ignazio di Loyola?",
                 options: [
                     "Bolla Exsurge Domine del 1520.",
-                    "Bolla Regimini militantis Ecclesiae del 1540 di Paolo III.",
+"Bolla Regimini militantis Ecclesiae del 1540 di Paolo III.",
                     "Bolla Licet ab initio del 1542.",
                     "Bolla Inter Caetera del 1493."
                 ],
@@ -2443,6 +2454,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 0,
                 explanation: "Giovanni Botero scrisse 'Della Ragion di Stato' nel 1589 per proporre un modello di governo in cui l'azione politica del sovrano, pur orientata alla conservazione dello Stato, fosse strettamente subordinata alla morale cattolica e alla religione, superando la separazione machiavelliana tra etica e politica."
+            },
+            {
+                question: "Nel contesto dello sviluppo dello Stato moderno in Francia, quale meccanismo finanziario e burocratico consolidò la 'nobiltà di toga'?",
+                options: [
+                    "La confisca immediata delle terre feudali e la loro redistribuzione alla borghesia agraria.",
+                    "La venalità delle cariche pubbliche, resa ereditaria nel 1604 con l'introduzione della tassa 'Paulette'.",
+                    "La creazione di corti d'appello ecclesiastiche autonome subordinate all'autorità pontificia.",
+                    "La concessione di feudi a vita ai militari distintisi nelle guerre regie."
+                ],
+                correctIndex: 1,
+                explanation: "La venalità delle cariche permise alla monarchia francese di finanziare le casse dello Stato. Con l'introduzione della tassa 'Paulette' (1604), le cariche burocratiche e giudiziarie divennero ereditarie, consolidando un nuovo ceto sociale fedele alla corona: la nobiltà di toga."
             }
         ]
     },
@@ -2460,7 +2482,7 @@ const quizDatabase = {
                     "La Pace di Osnabrück."
                 ],
                 correctIndex: 1,
-                explanation: "L'Editto di Nantes (1598), firmato da Enrico IV, riconobbe agli ugonotti (calvinisti francesi) la libertà di coscienza e il diritto di praticare il culto in determinate località, concedendo loro circa cento piazzeforti di sicurezza (come La Rochelle). Questo editto segnò un passo storico verso il superamento dell'intolleranza confessionale e l'affermazione dell'autorità regia sopra le fazioni religiose."
+                explanation: "L'Editto di Nantes (1598), firmato da Enrico IV, riconobbe agli ugonotti (calvinisti francesi) la libertà di coscienza e il diritto di praticare il culto in determinate località, concedendo loro circa cento piazzeforti di sicurezza (come La Rochelle). Questo editto segnò un passo storico verso il superamento dell'intoleranza confessionale e l'affermazione dell'autorità regia sopra le fazioni religiose."
             },
             {
                 question: "Quale evento scatenò formalmente la Guerra dei Trent'anni il 23 maggio 1618 nella città di Praga?",
@@ -2504,7 +2526,18 @@ const quizDatabase = {
                     "La Fronda parlamentare contro il cardinale Mazzarino."
                 ],
                 correctIndex: 2,
-                explanation: "Il 7 luglio 1647 scoppiò a Napoli una rivolta guidata dal pescivendolo Masaniello e ideata dall'anziano giurista Giulio Genoino. Originata dall'imposizione di una gabella sulla frutta da parte del viceré spagnolo duca d'Arcos, la rivolta prese di mira sia gli spagnoli sia il ceto togato. Portò alla nascita della Real Repubblica Napoletana prima della spietata repressione spagnola del 18 aprile 1648."
+                explanation: "Il 7 luglio 1647 scoppiò a Napoli una rivolta guidata dal pescivendolo Masaniello e ideata dall'anziano giurista Giulio Genoino. Originata dall'imposizione di una gabella sulla frutta da parte del viceré spagnolo duca d'Arcos, la rivolta prese di mira sia gli spagnoli sia il ceto togato. Portò alla nascita della Real Repubblica Napoletana prima della spietata repressione spagnola del 18 aprile 1848."
+            },
+            {
+                question: "Quale principio cardine delle relazioni internazionali moderne fu consacrato dalla Pace di Westfalia del 1648?",
+                options: [
+                    "L'unificazione dei sistemi doganali ed economici degli Stati dell'Europa centrale.",
+                    "Il principio di 'Sovranità Vestfaliana', fondato sulla parità giuridica degli Stati sovrani, la non ingerenza nei loro affari interni e l'equilibrio delle potenze.",
+                    "La subordinazione del potere imperiale alle deliberazioni conciliari del Papa.",
+                    "La costituzione di un esercito permanente europeo per la difesa comune dai turchi."
+                ],
+                correctIndex: 1,
+                explanation: "La Pace di Westfalia (1648) pose fine al sogno universalistico imperiale e inaugurò il moderno sistema internazionale basato su Stati sovrani paritetici che si riconoscono reciprocamente indipendentemente dalla religione, affermando il dovere di non ingerenza e la ricerca di un equilibrio multilaterale."
             }
         ]
     },
@@ -2567,6 +2600,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 2,
                 explanation: "Il Bill of Rights (1689) pose limits precisi al potere della Corona, vietando al re di sospendere leggi, imporre tasse o mantenere un esercito permanente in tempo di pace senza il consenso del Parlamento, e garantendo la libertà di parola e le libere elezioni parlamentari. Nacque così la prima monarchia parlamentare."
+            },
+            {
+                question: "Sotto il profilo economico-istituzionale, in che modo la svolta della Gloriosa Rivoluzione (1688-1689) favorì le precondizioni della Rivoluzione Industriale inglese?",
+                options: [
+                    "Attraverso la statalizzazione totale dei settori tessile e metallurgico.",
+                    "Garantendo la stabilità dei diritti di proprietà privata da parte del Parlamento, introducendo il debito pubblico garantito e fondando la Banca d'Inghilterra.",
+                    "Abolendo ogni forma di tassazione interna ed esternalizzando la spesa pubblica alle colonie.",
+                    "Attuando la redistribuzione paritaria delle terre comuni (open fields) ai contadini poveri."
+                ],
+                correctIndex: 1,
+                explanation: "La nascita della monarchia costituzionale limitò il potere regio e diede al Parlamento il controllo fiscale. Questo stabilizzò i diritti di proprietà e attrasse capitali, favorendo l'avvento della rivoluzione finanziaria (debito pubblico garantito e fondazione della Banca d'Inghilterra nel 1694), stimolo chiave per lo sviluppo industriale."
             }
         ]
     },
@@ -2629,6 +2673,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 0,
                 explanation: "Nel 1685, perseguendo l'unificazione religiosa del regno in base al principio 'un solo re, una sola legge, una sola fede', Luigi XIV firmò l'Editto di Fontainebleau. Con esso si dichiarava illegale il culto protestante, costringendo i calvinisti (ugonotti) alla conversione o alla fuga all'estero."
+            },
+            {
+                question: "Quale grave contraccolpo socio-economico subì la Francia assolutista in seguito all'emanazione dell'Editto di Fontainebleau (1685)?",
+                options: [
+                    "Lo scoppio della rivolta dei Comuneros nelle province meridionali della Castiglia francese.",
+                    "L'esodo di oltre 200.000 ugonotti (spesso artigiani, mercanti e intellettuali) verso i paesi protestanti, con conseguente perdita di capitali e competenze.",
+                    "La perdita immediata del controllo coloniale sui territori del Canada e dell'India.",
+                    "Il fallimento e lo smantellamento immediato di tutte le manifatture regie protette fondate da Colbert."
+                ],
+                correctIndex: 1,
+                explanation: "La revoca dell'Editto di Nantes privò la Francia di una minoranza ugonotta operosa ed economicamente dinamica. L'esilio forzato di artigiani, imprenditori e professionisti qualificati verso Inghilterra, Olanda e Prussia arricchì le potenze rivali e impoverì il tessuto manifatturiero e mercantile francese."
             }
         ]
     },
@@ -2691,6 +2746,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 2,
                 explanation: "Sebastião José de Carvalho e Melo, marchese di Pombal, guidò il Portogallo con pugno di ferro. Ricostruì Lisbona secondo criteri moderni e antisismici dopo il terremoto del 1755, limitò i poteri dell'Inquisizione, e nel 1759 espulse i Gesuiti dal Portogallo e dalle sue colonie, dando inizio a un'ondata europea di soppressioni dell'ordine."
+            },
+            {
+                question: "Per quale motivo la Francia del Settecento, culla dell'Illuminismo, andò incontro a un blocco istituzionale che condusse alla rivoluzione del 1789?",
+                options: [
+                    "A causa dell'invasione militare austriaca che destituì i ministri riformatori della corona.",
+                    "Per l'opposizione sistematica dei Parlamenti nobiliari alle riforme fiscali volte a tassare i ceti privilegiati, bloccando ogni tentativo di risanamento del debito pubblico.",
+                    "A causa dell'adozione precoce del libero scambio che distrusse la fragile manifattura delle corporazioni urbane.",
+                    "Per il rifiuto del sovrano Luigi XVI di convocare gli Stati Generali prima del completamento del catasto regio."
+                ],
+                correctIndex: 1,
+                explanation: "Il paradosso francese risiede nello stallo istituzionale: i Parlamenti (corti di giustizia dominate dalla nobiltà di toga) usarono il loro potere di registrazione delle leggi per bloccare le riforme fiscali proposte da controllori delle finanze come Turgot, Necker e Calonne, che mirarono a erodere i privilegi esentasse dei primi due stati."
             }
         ]
     },
@@ -2753,6 +2819,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 1,
                 explanation: "Istituito nella primavera del 1793 per far fronte alla minaccia militare esterna e alla guerra civile interna (Vandea), il Comitato di Salute Pubblica, dominato da Robespierre e Saint-Just, assunse poteri dittatoriali di emergenza, perseguitando e ghigliottinando migliaia di presunti nemici della rivoluzione tramite la legge dei sospetti."
+            },
+            {
+                question: "Quale differenza storiografica fondamentale distingue la natura della Rivoluzione Americana da quella della Rivoluzione Francese?",
+                options: [
+                    "La Rivoluzione Americana abolì la schiavitù e i privilegi nobiliari fin dalle sue origini, mentre quella Francese mantenne inalterato l'ordine feudale.",
+                    "La Rivoluzione Francese fu una rivolta puramente fiscale condotta dai parlamenti locali, mentre la Rivoluzione Americana scaturì da una mobilitazione operaia e socialista.",
+                    "La Rivoluzione Americana mantenne inalterata la struttura sociale preesistente concentrandosi sull'indipendenza e sulla divisione costituzionale dei poteri, mentre la Rivoluzione Francese operò uno smantellamento radicale dell'Antico Regime a livello sociale, giuridico e civile.",
+                    "La Rivoluzione Francese si concluse con l'adozione di un sistema federale e decentralizzato, mentre quella Americana centralizzò tutti i poteri legislativi ed esecutivi nella figura del Presidente."
+                ],
+                correctIndex: 2,
+                explanation: "La Rivoluzione Americana fue prevalentemente politica e costituzionale: si affrancò dalla madrepatria senza dover distruggere un ordine feudale interno, poiché le colonie non avevano aristocrazia nativa. La Rivoluzione Francese dovette invece abbattere radicalmente le strutture millenarie dell'Antico Regime (feudalità, privilegi di ceto, corporazioni), comportando una drammatica e profonda ristrutturazione sociale e giuridica interna."
             }
         ]
     },
@@ -2815,6 +2892,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 1,
                 explanation: "La Santa Alleanza fu firmata dallo zar Alessandro I di Russia, da Francesco I d'Austria e da Federico Guglielmo III di Prussia. Ispirata a una mistica fratellanza cristiana dei regnanti, si trasformò in uno strumento pratico di alleanza militare per reprimere militarmente qualsiasi moto liberale e rivoluzionario che minacciasse l'ordine restaurato."
+            },
+            {
+                question: "In che modo il Codice Civile (Code Napoléon) del 1804 divenne lo strumento cardine per il consolidamento della società borghese?",
+                options: [
+                    "Ripristinando il potere economico e giurisdizionale delle corporazioni di mestiere medievali.",
+                    "Consacrando l'uguaglianza civile dinanzi alla legge, l'abolizione del feudalesimo, la laicità dello Stato e la tutela della proprietà privata e della famiglia nucleare.",
+                    "Nazionalizzando tutte le proprietà private a favore delle amministrazioni dipartimentali prefettizie.",
+                    "Limitando la libertà di iniziativa economica e subordinando i contratti privati all'autorità ecclesiastica."
+                ],
+                correctIndex: 1,
+                explanation: "Il Codice Civile del 1804 tradusse in norme giuridiche stabili le principali conquiste civili della Rivoluzione: uguaglianza dinanzi alla legge, libertà di coscienza, laicità, abolizione del feudalesimo. Pose la proprietà privata al centro dell'ordinamento giuridico e riorganizzò la famiglia su basi contrattuali e laiche."
             }
         ]
     },
@@ -2939,6 +3027,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 1,
                 explanation: "In seguito alla fuga di papa Pio IX a Gaeta, nel febbraio 1849 un'Assemblea Costituente eletta a suffragio universale proclamò la Repubblica Romana. Retta da un Triumvirato, approvò una costituzione avanzatissima (laicità, suffragio universale, abolizione della pena di morte) e fu difesa strenuamente da Garibaldi contro le truppe francesi inviate da Luigi Napoleone."
+            },
+            {
+                question: "Nel dibattito risorgimentale sul futuro assetto della penisola italiana, in cosa consisteva la proposta del Neoguelfismo formulata da Vincenzo Gioberti?",
+                options: [
+                    "La creazione di una repubblica democratica unitaria incentrata sull'insurrezione delle masse contadine.",
+                    "Una confederazione di Stati sovrani presieduta dal pontefice, appoggiata militarmente e diplomaticamente dal Regno di Sardegna.",
+                    "L'annessione immediata di tutti i territori italiani all'Impero d'Austria sotto forma di possedimenti asburgici autonomi.",
+                    "Un regno unitario governato da una nuova dinastia pontificia eletta direttamente dal Collegio dei Cardinali."
+                ],
+                correctIndex: 1,
+                explanation: "Nell'opera 'Del primato morale e civile degli italiani' (1843), Gioberti teorizzò una soluzione moderata e federale (Neoguelfismo): l'accordo tra i sovrani italiani per dar vita a una confederazione presieduta dal Papa, sfruttando la forza militare dei Savoia. Ciò permise di conciliare il sentimento nazionale con la radicata tradizione cattolica italiana."
             }
         ]
     },
@@ -3001,6 +3100,17 @@ const quizDatabase = {
                 ],
                 correctIndex: 2,
                 explanation: "Il Non Expedit (1874) fu la reazione pontificia all'annessione forzata di Roma (1870). Papa Pio IX vietò ai cattolici di partecipare alle elezioni politiche del Regno d'Italia sia come candidati che come elettori, innescando una profonda frattura etico-politica tra Chiesa e Stato ('questione romana') sanata solo dai Patti Lateranensi del 1929."
+            },
+            {
+                question: "Con quale termine la storiografia definisce l'estensione acritica delle leggi, del sistema scolastico e del regime tributario del Regno di Sardegna a tutto il neonato Regno d'Italia dopo il 1861?",
+                options: [
+                    "Sillabo.",
+                    "Piemontesizzazione.",
+                    "Giurisdizionalismo.",
+                    "Tassazione sul macinato."
+                ],
+                correctIndex: 1,
+                explanation: "La 'piemontesizzazione' indica l'imposizione delle strutture amministrative, legislative, doganali e scolastiche sabaude alle restanti regioni italiane senza tener conto delle specificità locali. Tale processo, unito al mantenimento del numerale 'II' da parte del re Vittorio Emanuele, alimentò l'idea di una conquista sabauda e favorì le tensioni post-unitarie."
             }
         ]
     }
