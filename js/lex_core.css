@@ -280,3 +280,443 @@
 .cloud-sync-section input:focus {
     border-color: var(--accent-gold);
 }
+
+/* ==========================================================================
+   SWEET & ROMANTIC FEATURES: MEMORY GAME, TEMA COCCOLE, TOASTS & EASTER EGGS
+   ========================================================================== */
+
+/* Coccole (Cuddle) Theme override styles */
+body.coccole-theme {
+    --bg-gradient: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%) !important;
+    --bg-card: rgba(255, 255, 255, 0.75) !important;
+    --bg-card-hover: rgba(255, 255, 255, 0.95) !important;
+    --border-color: rgba(255, 182, 193, 0.4) !important;
+    --border-color-hover: rgba(255, 182, 193, 0.7) !important;
+    --text-primary: #5c3a43 !important;
+    --text-secondary: #8c5a6b !important;
+    --text-muted: #b38896 !important;
+    --accent-gold: #ff6b8b !important;
+    --accent-gold-glow: rgba(255, 107, 139, 0.2) !important;
+    --accent-terracotta: #ff8da1 !important;
+    --accent-romana: #e040fb !important;
+    --accent-blue: #f48fb1 !important;
+    --accent-storia: #f48fb1 !important;
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%) !important;
+}
+
+body.coccole-theme header h1 {
+    background: linear-gradient(135deg, #ff4081 30%, #ff8da1 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Background floating heart animations for Cuddle Theme */
+.coccole-bg-heart {
+    position: fixed;
+    bottom: -30px;
+    color: rgba(255, 107, 139, 0.12);
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: coccole-float linear infinite;
+    z-index: -1;
+}
+
+@keyframes coccole-float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-105vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- FALLING HEARTS ANIMATION (EASTER EGG) --- */
+.falling-hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10002;
+    overflow: hidden;
+}
+
+.falling-heart {
+    position: absolute;
+    color: #ff4081;
+    font-size: 1.5rem;
+    user-select: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- LOVE LETTER OVERLAY --- */
+.love-letter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 7, 12, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.love-letter-card {
+    background: rgba(22, 28, 45, 0.85);
+    border: 2px solid var(--accent-gold);
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-left: 2px solid var(--accent-gold);
+    border-right: 2px solid var(--accent-gold);
+    color: var(--text-primary);
+}
+
+.coccole-theme .love-letter-card {
+    background: rgba(255, 240, 245, 0.95);
+    border-color: #ff6b8b;
+    box-shadow: 0 15px 30px rgba(255, 107, 139, 0.2);
+}
+
+.love-letter-card h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--accent-gold);
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+
+.coccole-theme .love-letter-card h2 {
+    color: #ff6b8b;
+}
+
+.love-letter-card p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.love-letter-card .letter-heart {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    animation: heartbeat-anim 1.2s infinite;
+}
+
+@keyframes heartbeat-anim {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.15); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.15); }
+    80% { transform: scale(1); }
+}
+
+.btn-close-letter {
+    display: block;
+    margin: 2rem auto 0 auto;
+    padding: 0.75rem 2rem;
+    background: var(--accent-gold);
+    color: #000 !important;
+    border: none;
+    border-radius: 99px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.coccole-theme .btn-close-letter {
+    background: #ff6b8b;
+    color: #fff !important;
+}
+
+.btn-close-letter:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px var(--accent-gold-glow);
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- MOTIVATIONAL TOAST SYSTEM --- */
+#lex-sweet-toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 10005;
+    pointer-events: none;
+}
+
+.lex-sweet-toast {
+    pointer-events: auto;
+    background: rgba(20, 26, 38, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-left: 4px solid var(--accent-gold);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    min-width: 300px;
+    max-width: 380px;
+    animation: toast-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s;
+}
+
+.coccole-theme .lex-sweet-toast {
+    background: rgba(255, 240, 245, 0.95);
+    border-color: rgba(255, 107, 139, 0.3);
+    border-left-color: #ff6b8b;
+}
+
+@keyframes toast-slide-in {
+    from { transform: translateX(100%) translateY(20px); opacity: 0; }
+    to { transform: translateX(0) translateY(0); opacity: 1; }
+}
+
+.lex-sweet-toast.hide {
+    transform: translateX(120%);
+    opacity: 0;
+}
+
+.lex-sweet-toast .toast-heart {
+    font-size: 1.5rem;
+    animation: heartbeat-anim 1.5s infinite;
+}
+
+.lex-sweet-toast .toast-content {
+    flex: 1;
+}
+
+.lex-sweet-toast .toast-title {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.05em;
+}
+
+.coccole-theme .lex-sweet-toast .toast-title {
+    color: #ff6b8b;
+}
+
+.lex-sweet-toast .toast-body {
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.lex-sweet-toast .toast-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.lex-sweet-toast .toast-close-btn:hover {
+    color: var(--text-primary);
+}
+
+/* Floating heart particle when highlighting */
+.floating-particle {
+    position: absolute;
+    pointer-events: none;
+    animation: float-up-fade 1.2s ease-out forwards;
+    z-index: 10000;
+    font-size: 1.2rem;
+}
+
+@keyframes float-up-fade {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
+}
+
+/* --- PAUSE MEMORY GAME --- */
+#lex-memory-game-wrapper {
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.2rem;
+}
+
+.coccole-theme #lex-memory-game-wrapper {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 107, 139, 0.2);
+}
+
+.lex-memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    max-width: 280px;
+    margin: 1rem auto;
+    perspective: 1000px;
+}
+
+.lex-memory-card {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s;
+    cursor: pointer;
+}
+
+.lex-memory-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.lex-memory-card .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lex-memory-card .card-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--accent-gold);
+    font-size: 1.4rem;
+}
+
+.coccole-theme .lex-memory-card .card-back {
+    background: rgba(255, 107, 139, 0.1);
+    color: #ff6b8b;
+    border-color: rgba(255, 107, 139, 0.2);
+}
+
+.lex-memory-card .card-front {
+    background: rgba(212, 175, 55, 0.15);
+    border: 1.5px solid var(--accent-gold);
+    font-size: 1.6rem;
+    transform: rotateY(180deg);
+}
+
+.coccole-theme .lex-memory-card .card-front {
+    background: rgba(255, 107, 139, 0.15);
+    border-color: #ff6b8b;
+}
+
+.lex-memory-card.matched {
+    animation: card-match-pulse 0.4s ease-out;
+}
+
+@keyframes card-match-pulse {
+    0% { transform: rotateY(180deg) scale(1); }
+    50% { transform: rotateY(180deg) scale(1.1); box-shadow: 0 0 15px var(--accent-gold-glow); }
+    100% { transform: rotateY(180deg) scale(1); }
+}
+
+/* Unlocked coupons style in settings popup */
+.coupons-section {
+    margin-top: 0.8rem;
+    text-align: left;
+}
+
+.coupons-list-container {
+    max-height: 140px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+    padding-right: 2px;
+}
+
+.coupons-list-container::-webkit-scrollbar {
+    width: 4px;
+}
+.coupons-list-container::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.coupon-item {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px dashed var(--border-color);
+    border-radius: 6px;
+    padding: 0.4rem 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.coccole-theme .coupon-item {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 107, 139, 0.3);
+}
+
+.coupon-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.3;
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.coupon-btn {
+    font-size: 0.6rem;
+    background: var(--accent-gold);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 6px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.coccole-theme .coupon-btn {
+    background: #ff6b8b;
+    color: #fff;
+}
+
+.coupon-btn:hover:not(.redeemed) {
+    transform: scale(1.05);
+}
+
+.coupon-btn.redeemed {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+

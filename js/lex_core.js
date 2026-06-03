@@ -34,20 +34,54 @@ const LexCore = {
         this.startSync();
         this.tick();
         this.initTTS();
+
+        // Hook global sweet features
+        window.addEventListener('load', () => this.hookGlobalFeatures());
+        setTimeout(() => this.hookGlobalFeatures(), 600);
+        this.updateBrandName();
     },
 
     // --- THEME LOGIC ---
     applyTheme() {
         if (this.theme === 'light') {
             document.body.classList.add('light-theme');
+            document.body.classList.remove('coccole-theme');
+            this.stopFloatingHeartsBackground();
+        } else if (this.theme === 'coccole') {
+            document.body.classList.add('coccole-theme');
+            document.body.classList.remove('light-theme');
+            this.startFloatingHeartsBackground();
         } else {
             document.body.classList.remove('light-theme');
+            document.body.classList.remove('coccole-theme');
+            this.stopFloatingHeartsBackground();
         }
         this.updateThemeIcons();
+        this.updateBrandName();
     },
 
     toggleTheme() {
-        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        const now = Date.now();
+        if (now - (this.lastThemeClick || 0) < 500) {
+            this.themeClickCount = (this.themeClickCount || 0) + 1;
+            if (this.themeClickCount >= 4) { // 5 consecutive clicks within 500ms intervals
+                this.theme = 'coccole';
+                localStorage.setItem('lex-theme', this.theme);
+                this.applyTheme();
+                this.themeClickCount = 0;
+                alert("💕 Modalità Coccole Attivata! 💕\nI colori si sono addolciti e l'amore è nell'aria!");
+                return;
+            }
+        } else {
+            this.themeClickCount = 0;
+        }
+        this.lastThemeClick = now;
+
+        if (this.theme === 'coccole') {
+            this.theme = 'dark';
+        } else {
+            this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        }
         localStorage.setItem('lex-theme', this.theme);
         this.applyTheme();
     },
@@ -56,8 +90,13 @@ const LexCore = {
         const sun = document.getElementById('sun-icon');
         const moon = document.getElementById('moon-icon');
         if (sun && moon) {
-            sun.style.display = this.theme === 'light' ? 'block' : 'none';
-            moon.style.display = this.theme === 'light' ? 'none' : 'block';
+            if (this.theme === 'coccole') {
+                sun.style.display = 'none';
+                moon.style.display = 'block';
+            } else {
+                sun.style.display = this.theme === 'light' ? 'block' : 'none';
+                moon.style.display = this.theme === 'light' ? 'none' : 'block';
+            }
         }
     },
 
@@ -175,6 +214,13 @@ const LexCore = {
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="pomo-divider"></div>
+                    
+                    <div class="coupons-section">
+                        <span class="backup-title">Bacheca Premi 🎁</span>
+                        <div class="coupons-list-container" id="lex-coupons-list"></div>
+                    </div>
                 </div>
                 
                 <span id="lex-pomo-label" class="pomo-label" style="display: ${this.state === 'idle' ? 'none' : 'block'}">
@@ -194,10 +240,34 @@ const LexCore = {
             
             <div id="lex-break-overlay" class="break-lock-overlay" style="display: ${this.state === 'break' ? 'flex' : 'none'}">
                 <div class="break-content">
-                    <h2>Mente in Riposo</h2>
-                    <p>Lo studio è sospeso per permettere la sedimentazione dei concetti.</p>
+                    <h2>Mente in Riposo 🌸</h2>
                     <div id="lex-break-timer" class="break-timer-big">${this.getDisplayTime()}</div>
-                    <p class="break-quote">"Il riposo non è ozio, ma nutrimento per lo spirito accademico."</p>
+                    
+                    <div id="lex-memory-game-wrapper">
+                        <div id="lex-memory-intro">
+                            <p class="break-quote">"Il riposo non è ozio, ma nutrimento per lo spirito."</p>
+                            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--text-secondary);">Mentre la mente sedimenta i concetti, rilassati con il Memory dell'Amore!</p>
+                            <button id="lex-start-memory-btn" class="btn-close-letter" style="margin-top: 1.2rem;">Gioca al Memory 🎮</button>
+                        </div>
+                        
+                        <div id="lex-memory-board" style="display: none;">
+                            <div class="memory-stats" style="display: flex; justify-content: space-around; margin-bottom: 0.8rem; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary);">
+                                <span>Mosse: <span id="memory-moves">0</span></span>
+                                <span>Coppie: <span id="memory-matches">0</span> / 8</span>
+                            </div>
+                            <div class="lex-memory-grid"></div>
+                        </div>
+                        
+                        <div id="lex-memory-victory" style="display: none;">
+                            <h3 style="color: var(--accent-gold); margin-bottom: 0.5rem; font-size: 1.4rem; animation: heartbeat-anim 1.2s infinite;">Bravissima! 🎉</h3>
+                            <p>Hai risolto il memory in <span id="victory-moves">0</span> mosse!</p>
+                            <div class="unlocked-coupon-card" style="background: rgba(212,175,55,0.1); border: 2px dashed var(--accent-gold); padding: 1rem; border-radius: 12px; margin: 1rem auto; max-width: 280px;">
+                                <div style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--accent-gold);">Hai sbloccato un Coupon d'Amore! 🎁</div>
+                                <div id="unlocked-coupon-text" style="font-size: 0.9rem; font-weight: 700; margin-top: 0.4rem; color: var(--text-primary);"></div>
+                            </div>
+                            <button id="lex-save-coupon-btn" class="btn-close-letter" style="margin-top: 0.5rem;">Salva nei Premi 🎁</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -235,7 +305,11 @@ const LexCore = {
 
         settingsBtn?.addEventListener('click', (e) => {
             e.stopPropagation();
-            settingsPopup.style.display = settingsPopup.style.display === 'none' ? 'block' : 'none';
+            const show = settingsPopup.style.display === 'none';
+            settingsPopup.style.display = show ? 'block' : 'none';
+            if (show) {
+                this.renderCoupons();
+            }
         });
 
         saveBtn?.addEventListener('click', () => {
@@ -254,6 +328,34 @@ const LexCore = {
         document.addEventListener('click', (e) => {
             if (settingsPopup && !settingsPopup.contains(e.target) && e.target !== settingsBtn) {
                 settingsPopup.style.display = 'none';
+            }
+        });
+
+        // Delegate clicks for dynamically rendered memory game buttons
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'lex-start-memory-btn') {
+                const intro = document.getElementById('lex-memory-intro');
+                const board = document.getElementById('lex-memory-board');
+                if (intro) intro.style.display = 'none';
+                if (board) board.style.display = 'block';
+                this.startMemoryGame();
+            }
+            if (e.target && e.target.closest('#lex-save-coupon-btn')) {
+                const textEl = document.getElementById('unlocked-coupon-text');
+                if (textEl) {
+                    const text = textEl.textContent;
+                    const unlocked = JSON.parse(localStorage.getItem('lex-unlocked-coupons')) || [];
+                    unlocked.push({ text, redeemed: false, date: new Date().toLocaleDateString() });
+                    localStorage.setItem('lex-unlocked-coupons', JSON.stringify(unlocked));
+                    this.renderCoupons();
+                    
+                    const victory = document.getElementById('lex-memory-victory');
+                    const intro = document.getElementById('lex-memory-intro');
+                    if (victory) victory.style.display = 'none';
+                    if (intro) intro.style.display = 'block';
+                    
+                    alert("🎁 Coupon salvato con successo nella tua Bacheca dei Premi!");
+                }
             }
         });
 
@@ -810,6 +912,9 @@ const LexCore = {
         this.saveState();
         this.updateUI();
         this.notify();
+        if (type === 'break') {
+            this.resetMemoryGameUI();
+        }
     },
 
     stopTimer() {
@@ -1049,6 +1154,428 @@ const LexCore = {
             playBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
             playBtn.classList.remove('speaking');
         }
+    },
+
+    // --- HOOK GLOBAL LEAVING & HIGHLIGHT ACTIONS ---
+    hookGlobalFeatures() {
+        // A. Hook closeSummary (Trigger motivational toast on summary exit)
+        const originalCloseSummary = window.closeSummary;
+        window.closeSummary = function() {
+            if (originalCloseSummary) originalCloseSummary();
+            LexCore.showMotivationalToast();
+        };
+
+        // B. Hook applyHighlightColor (Trigger heart explosion on paragraph highlight)
+        const originalApplyHighlightColor = window.applyHighlightColor;
+        if (originalApplyHighlightColor) {
+            window.applyHighlightColor = function(color) {
+                originalApplyHighlightColor(color);
+                if (color !== 'clear') {
+                    LexCore.triggerHeartExplosion();
+                    LexCore.showParagraphSuccessToast();
+                }
+            };
+        }
+
+        // C. Hook search inputs for Love Letter Easter Egg
+        const searchInputs = document.querySelectorAll('#global-search-box, #search-box');
+        searchInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                const val = e.target.value.toLowerCase().trim();
+                const loveKeywords = ['ti amo', 'sei speciale', 'sei bellissima', 'amore', 'love', 'alessandra', 'lex'];
+                if (loveKeywords.includes(val)) {
+                    LexCore.triggerLoveLetter();
+                    e.target.value = ''; // Reset input
+                    e.target.blur(); // Remove focus
+                }
+            });
+        });
+
+        // D. Intercept questions in the Chatbot assistant (assistant.html)
+        const originalSendMessage = window.sendMessage;
+        if (originalSendMessage && window.location.pathname.includes('assistant.html')) {
+            window.sendMessage = async function() {
+                const inputField = document.getElementById('chat-user-input');
+                if (inputField) {
+                    const question = inputField.value.trim().toLowerCase();
+                    const triggerKeywords = ['alessio', 'amore', 'fidanzato', 'ti amo', 'love', 'alessandra', 'lex'];
+                    const isTrigger = triggerKeywords.some(keyword => question.includes(keyword));
+                    if (isTrigger) {
+                        if (window.addUserMessage && window.addBotMessage) {
+                            window.addUserMessage(inputField.value.trim());
+                            inputField.value = '';
+                            setTimeout(() => {
+                                const sweetReplies = [
+                                    "Rilevata richiesta ad altissima priorità dal tuo ragazzo! ❤️ Dice che la sua Alessandra (la fantastica Lex) è la studentessa più in gamba, intelligente e bella del mondo, e che la ama all'infinito! Ora concentrati ancora un pochino, ma ricordati che dopo ti aspetta una valanga di coccole! ⚡🥰",
+                                    "Bip-bop! Rilevato il segnale per Lex! 📡 Il tuo Alessio dice che ti ama tantissimo ed è super fiero di come ti stai impegnando su questo studio. Ti manda un bacio gigante! 😘 Non mollare, Ale!",
+                                    "Avviso speciale dal tuo fan numero uno! 🏆 Alessio dice che la sua Lex farà un esame straordinario perché è splendida e preparatissima. Ti ama immensamente, Alessandra! ❤️ Ora fai un bel respiro e continua così!"
+                                ];
+                                const randomReply = sweetReplies[Math.floor(Math.random() * sweetReplies.length)];
+                                window.addBotMessage(randomReply);
+                            }, 800);
+                            return;
+                        }
+                    }
+                }
+                return originalSendMessage.apply(this, arguments);
+            };
+        }
+    },
+
+    // --- SWEET MOTIVATIONAL TOAST ---
+    showMotivationalToast() {
+        const sweetPhrases = [
+            "Sei bravissima, Ale! Un passo alla volta e conquisterai questo esame! 💖",
+            "Fiero di te e del tuo impegno, Lex! Ti meriti un grandissimo bacio 😘",
+            "Prenditi un secondo per respirare, Ale. Stai facendo un ottimo lavoro! 💕",
+            "Anche nei capitoli più difficili, la mia Lex brilla sempre! ✨",
+            "Un piccolo riposo ora e poi si riparte, Alessandra. Sei il mio orgoglio! 🌸",
+            "Studiare è faticoso, ma tu lo fai sembrare una passeggiata, Lex! 👑",
+            "Ricordati che credo in te, sempre! Ti amo all'infinito! ❤️",
+            "Hai completato questa lettura, Ale. Sei un passo più vicina al successo! 🎯",
+            "Il tuo impegno mi riempie il cuore, Lex. Fai una pausa e prendi un caffè! ☕",
+            "Sei la studentessa (e la fidanzata) più splendida del mondo! 🌟"
+        ];
+        
+        const randomPhrase = sweetPhrases[Math.floor(Math.random() * sweetPhrases.length)];
+        
+        let toastContainer = document.getElementById('lex-sweet-toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'lex-sweet-toast-container';
+            document.body.appendChild(toastContainer);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = 'lex-sweet-toast';
+        toast.innerHTML = `
+            <div class="toast-heart">💖</div>
+            <div class="toast-content">
+                <div class="toast-title">Messaggio da Alessio</div>
+                <div class="toast-body">${randomPhrase}</div>
+            </div>
+            <button class="toast-close-btn" style="margin-left: 0.5rem; font-size: 1.1rem; opacity: 0.7; border:none; background:none; cursor:pointer; color:var(--text-muted);">&times;</button>
+        `;
+        
+        toast.querySelector('.toast-close-btn').onclick = () => {
+            toast.classList.add('hide');
+            setTimeout(() => toast.remove(), 300);
+        };
+        
+        toastContainer.appendChild(toast);
+        
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.classList.add('hide');
+                setTimeout(() => toast.remove(), 300);
+            }
+        }, 6000);
+    },
+
+    // --- PARAGRAPH COMPLETED TOAST ---
+    showParagraphSuccessToast() {
+        const messages = [
+            "Ottimo lavoro, Ale! Un altro paragrafo evidenziato! ✨",
+            "Perfetto, Lex! Concetti importanti evidenziati! 📝",
+            "Bravissima, Ale! Stai memorizzando benissimo! 💖",
+            "Fai scorta di questi concetti, Lex! Sei forte! 🌟"
+        ];
+        const randMsg = messages[Math.floor(Math.random() * messages.length)];
+        
+        let toastContainer = document.getElementById('lex-sweet-toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'lex-sweet-toast-container';
+            document.body.appendChild(toastContainer);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = 'lex-sweet-toast';
+        toast.style.minWidth = '240px';
+        toast.style.borderLeftColor = '#10b981'; // Green border for success
+        toast.innerHTML = `
+            <div class="toast-heart">✨</div>
+            <div class="toast-content">
+                <div class="toast-body" style="font-size:0.8rem; margin: 0;">${randMsg}</div>
+            </div>
+        `;
+        toastContainer.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add('hide');
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    },
+
+    // --- HEART EXPLOSION PARTICLES ANIMATION ---
+    triggerHeartExplosion() {
+        const container = document.createElement('div');
+        container.style.position = 'fixed';
+        container.style.top = '0';
+        container.style.left = '0';
+        container.style.width = '100vw';
+        container.style.height = '100vh';
+        container.style.pointerEvents = 'none';
+        container.style.zIndex = '10006';
+        document.body.appendChild(container);
+        
+        // Spawn 15 hearts from the center/bottom
+        for (let i = 0; i < 15; i++) {
+            const heart = document.createElement('div');
+            heart.innerHTML = ['❤️', '💖', '💕', '🌸', '✨'][Math.floor(Math.random() * 5)];
+            heart.style.position = 'absolute';
+            heart.style.left = '50%';
+            heart.style.top = '70%';
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            heart.style.transition = 'all 1s cubic-bezier(0.25, 0.8, 0.25, 1)';
+            container.appendChild(heart);
+            
+            // Random velocities
+            const angle = (Math.random() * Math.PI) - Math.PI; // upward arc
+            const dist = Math.random() * 160 + 60;
+            const tx = Math.cos(angle) * dist;
+            const ty = Math.sin(angle) * dist;
+            
+            setTimeout(() => {
+                heart.style.transform = `translate(${tx}px, ${ty}px) scale(0)`;
+                heart.style.opacity = '0';
+            }, 50);
+        }
+        
+        setTimeout(() => container.remove(), 1100);
+    },
+
+    // --- EASTER EGG: LOVE LETTER OVERLAY ---
+    triggerLoveLetter() {
+        // 1. Rain of hearts
+        const rainContainer = document.createElement('div');
+        rainContainer.id = 'lex-hearts-rain';
+        rainContainer.className = 'falling-hearts-container';
+        document.body.appendChild(rainContainer);
+        
+        const hearts = ['❤️', '💖', '💕', '💗', '💘', '🌸'];
+        const rainInterval = setInterval(() => {
+            if (!document.getElementById('lex-hearts-rain')) {
+                clearInterval(rainInterval);
+                return;
+            }
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = (Math.random() * 100) + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            rainContainer.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 5000);
+        }, 150);
+        
+        // 2. Love Letter Overlay
+        const letterOverlay = document.createElement('div');
+        letterOverlay.id = 'lex-love-letter-overlay';
+        letterOverlay.className = 'love-letter-overlay';
+        letterOverlay.innerHTML = `
+            <div class="love-letter-card">
+                <div class="letter-heart">❤️</div>
+                <h2>Per la mia fantastica Lex</h2>
+                <p>Ciao Alessandra mia,</p>
+                <p>So quanto ti stai impegnando per preparare questo esame e quanto possa sembrare dura. Voglio solo ricordarti che sei incredibilmente intelligente, tenace e speciale. Sono super fiero di te e farò sempre il tifo per te, in ogni esame e in ogni passo della vita.</p>
+                <p>Fai un bel respiro, bevi un goccio d'acqua e prenditi cura di te. Ricordati che ti amo all'infinito! 💕</p>
+                <p style="text-align: right; font-style: italic; font-weight: 600; margin-top: 1.5rem;">— Il tuo Alessio</p>
+                <button class="btn-close-letter" onclick="LexCore.closeLoveLetter()">Torna allo Studio 📚</button>
+            </div>
+        `;
+        document.body.appendChild(letterOverlay);
+        document.body.style.overflow = 'hidden';
+    },
+    
+    closeLoveLetter() {
+        const overlay = document.getElementById('lex-love-letter-overlay');
+        const rain = document.getElementById('lex-hearts-rain');
+        if (overlay) overlay.remove();
+        if (rain) rain.remove();
+        document.body.style.overflow = '';
+    },
+
+    // --- COCCOLE THEME FLOATING BACKGROUND HEARTS ---
+    startFloatingHeartsBackground() {
+        if (document.getElementById('lex-coccole-bg-hearts')) return;
+        const bgContainer = document.createElement('div');
+        bgContainer.id = 'lex-coccole-bg-hearts';
+        bgContainer.style.pointerEvents = 'none';
+        document.body.appendChild(bgContainer);
+        
+        this.coccoleBgInterval = setInterval(() => {
+            if (!document.body.classList.contains('coccole-theme')) {
+                this.stopFloatingHeartsBackground();
+                return;
+            }
+            const heart = document.createElement('div');
+            heart.className = 'coccole-bg-heart';
+            heart.textContent = ['💕', '🌸', '✨', '💖'][Math.floor(Math.random() * 4)];
+            heart.style.left = (Math.random() * 100) + 'vw';
+            heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            heart.style.fontSize = (Math.random() * 0.8 + 0.8) + 'rem';
+            bgContainer.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 12000);
+        }, 1500);
+    },
+
+    stopFloatingHeartsBackground() {
+        const bgContainer = document.getElementById('lex-coccole-bg-hearts');
+        if (bgContainer) bgContainer.remove();
+        if (this.coccoleBgInterval) {
+            clearInterval(this.coccoleBgInterval);
+            this.coccoleBgInterval = null;
+        }
+    },
+
+    // --- TEMA COCCOLE DYNAMIC TITLES ---
+    updateBrandName() {
+        const headerTitle = document.querySelector('header h1, .brand h1');
+        if (headerTitle) {
+            if (document.body.classList.contains('coccole-theme')) {
+                headerTitle.textContent = "Lex dell'Amore 💕";
+            } else {
+                const path = window.location.pathname;
+                if (path.includes('diritto')) headerTitle.textContent = "Lex Patrimoniale";
+                else if (path.includes('storia_arte')) headerTitle.textContent = "Lex Artistica";
+                else if (path.includes('arte_romana')) headerTitle.textContent = "Lex Romana";
+                else if (path.includes('storia')) headerTitle.textContent = "Lex Historia";
+                else headerTitle.textContent = "Lex Studiorum";
+            }
+        }
+    },
+
+    // --- POMODORO MEMORY GAME GAMEPLAY ---
+    resetMemoryGameUI() {
+        const intro = document.getElementById('lex-memory-intro');
+        const board = document.getElementById('lex-memory-board');
+        const victory = document.getElementById('lex-memory-victory');
+        if (intro) intro.style.display = 'block';
+        if (board) board.style.display = 'none';
+        if (victory) victory.style.display = 'none';
+    },
+
+    renderCoupons() {
+        const couponsList = document.getElementById('lex-coupons-list');
+        if (!couponsList) return;
+        
+        const unlocked = JSON.parse(localStorage.getItem('lex-unlocked-coupons')) || [];
+        if (unlocked.length === 0) {
+            couponsList.innerHTML = `<div style="font-size:0.7rem; color:var(--text-muted); text-align:center; padding: 0.5rem 0;">Gioca al Memory durante le pause per sbloccare coupon speciali! 🧸</div>`;
+            return;
+        }
+        
+        couponsList.innerHTML = unlocked.map((c, index) => `
+            <div class="coupon-item">
+                <span class="coupon-title">${c.text}</span>
+                <button class="coupon-btn ${c.redeemed ? 'redeemed' : ''}" onclick="LexCore.redeemCoupon(${index})" ${c.redeemed ? 'disabled' : ''}>
+                    ${c.redeemed ? 'Riscattato' : 'Riscatta'}
+                </button>
+            </div>
+        `).join('');
+    },
+
+    redeemCoupon(index) {
+        const unlocked = JSON.parse(localStorage.getItem('lex-unlocked-coupons')) || [];
+        if (unlocked[index]) {
+            unlocked[index].redeemed = true;
+            localStorage.setItem('lex-unlocked-coupons', JSON.stringify(unlocked));
+            this.renderCoupons();
+            alert(`❤️ Buono Riscattato! ❤️\n"${unlocked[index].text}"\nMostralo ad Alessio per ricevere il tuo premio! 😉`);
+        }
+    },
+
+    startMemoryGame() {
+        const emojis = ['💖', '🧸', '🌸', '☕', '🍕', '🐱', '👑', '🍫'];
+        let cardsData = [...emojis, ...emojis];
+        cardsData.sort(() => Math.random() - 0.5);
+
+        const grid = document.querySelector('.lex-memory-grid');
+        if (!grid) return;
+
+        grid.innerHTML = cardsData.map((emoji, index) => `
+            <div class="lex-memory-card" data-index="${index}" data-emoji="${emoji}">
+                <div class="card-face card-back">❓</div>
+                <div class="card-face card-front">${emoji}</div>
+            </div>
+        `).join('');
+
+        let flippedCards = [];
+        let matchedCount = 0;
+        let movesCount = 0;
+        let isChecking = false;
+
+        const movesEl = document.getElementById('memory-moves');
+        const matchesEl = document.getElementById('memory-matches');
+        if (movesEl) movesEl.textContent = '0';
+        if (matchesEl) matchesEl.textContent = '0';
+
+        const cards = grid.querySelectorAll('.lex-memory-card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (isChecking || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+
+                card.classList.add('flipped');
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    movesCount++;
+                    if (movesEl) movesEl.textContent = movesCount;
+                    isChecking = true;
+
+                    const emoji1 = flippedCards[0].getAttribute('data-emoji');
+                    const emoji2 = flippedCards[1].getAttribute('data-emoji');
+
+                    if (emoji1 === emoji2) {
+                        flippedCards[0].classList.add('matched');
+                        flippedCards[1].classList.add('matched');
+                        matchedCount++;
+                        if (matchesEl) matchesEl.textContent = matchedCount;
+                        flippedCards = [];
+                        isChecking = false;
+
+                        // Particle match animation
+                        LexCore.triggerHeartExplosion();
+
+                        if (matchedCount === 8) {
+                            setTimeout(() => {
+                                const board = document.getElementById('lex-memory-board');
+                                const victoryPanel = document.getElementById('lex-memory-victory');
+                                if (board) board.style.display = 'none';
+                                if (victoryPanel) {
+                                    victoryPanel.style.display = 'block';
+                                    document.getElementById('victory-moves').textContent = movesCount;
+                                    
+                                    const couponPrizes = [
+                                        "Un massaggio rilassante alla schiena di 15 min 💆‍♀️",
+                                        "Una cena speciale preparata con amore da Alessio 🍝",
+                                        "Una colazione servita a letto con pancake caldi 🥞",
+                                        "Un gelato gigante nel nostro posto preferito 🍦",
+                                        "Un abbraccio gigante che dura 5 minuti 🧸",
+                                        "Una maratona di coccole sul divano stasera 🛋️",
+                                        "Un bacio lunghissimo ed extra appassionato 😘",
+                                        "10 minuti di grattini rilassanti sulla testa 💆‍♂️"
+                                    ];
+                                    const randomPrize = couponPrizes[Math.floor(Math.random() * couponPrizes.length)];
+                                    document.getElementById('unlocked-coupon-text').textContent = randomPrize;
+                                }
+                            }, 500);
+                        }
+                    } else {
+                        setTimeout(() => {
+                            flippedCards[0].classList.remove('flipped');
+                            flippedCards[1].classList.remove('flipped');
+                            flippedCards = [];
+                            isChecking = false;
+                        }, 850);
+                    }
+                }
+            });
+        });
     }
 };
 
