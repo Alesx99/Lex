@@ -13,6 +13,16 @@ const LexCore = {
     // Theme State
     theme: localStorage.getItem('lex-theme') || 'dark',
 
+    // Focus Player State
+    focusSound: localStorage.getItem('lex-focus-sound') || 'none',
+    focusVolume: parseFloat(localStorage.getItem('lex-focus-volume') ?? '0.5'),
+    focusAudioCtx: null,
+    focusSourceNode: null,
+    focusGainNode: null,
+    focusPlaying: false,
+    focusLfoNodes: [],
+    focusOscNodes: [],
+
     // TTS State variables
     ttsBlocks: [],
     ttsCurrentIndex: -1,
@@ -230,6 +240,33 @@ const LexCore = {
                     
                     <div class="pomo-divider"></div>
                     
+                    <div class="focus-player-section">
+                        <span class="backup-title">Focus Player 🎧</span>
+                        <div class="setting-row" style="margin-top: 0.4rem;">
+                            <label style="font-size:0.7rem;">Suono Ambientale</label>
+                            <select id="lex-focus-sound" style="width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:6px; color:var(--text-primary); padding:0.4rem; font-size:0.75rem; outline:none; font-family:inherit;">
+                                <option value="none" ${this.focusSound === 'none' ? 'selected' : ''}>Nessuno</option>
+                                <option value="white" ${this.focusSound === 'white' ? 'selected' : ''}>Rumore Bianco</option>
+                                <option value="brown" ${this.focusSound === 'brown' ? 'selected' : ''}>Rumore Marrone</option>
+                                <option value="rain" ${this.focusSound === 'rain' ? 'selected' : ''}>Pioggia Battente</option>
+                                <option value="ocean" ${this.focusSound === 'ocean' ? 'selected' : ''}>Onde del Mare</option>
+                                <option value="drone" ${this.focusSound === 'drone' ? 'selected' : ''}>Drone Ambientale</option>
+                            </select>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.4rem;">
+                            <button id="lex-focus-play-btn" class="backup-btn" style="padding:0.4rem; font-size:0.7rem; display:flex; align-items:center; gap:0.2rem; min-width:65px; justify-content:center;">
+                                <svg id="lex-focus-play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                <span id="lex-focus-play-text">Play</span>
+                            </button>
+                            <div style="flex:1; display:flex; align-items:center; gap:0.4rem;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                <input type="range" id="lex-focus-volume" min="0" max="1" step="0.05" value="${this.focusVolume}" style="flex:1; accent-color:var(--accent-gold); height:4px; border-radius:2px; background:rgba(255,255,255,0.2); cursor:pointer;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pomo-divider"></div>
+                    
                     <div class="coupons-section">
                         <span class="backup-title">Bacheca Premi 🎁</span>
                         <div class="coupons-list-container" id="lex-coupons-list"></div>
@@ -407,6 +444,24 @@ const LexCore = {
                 }
             };
             reader.readAsText(file);
+        });
+
+        // Focus Player listeners
+        const focusSelect = document.getElementById('lex-focus-sound');
+        const focusPlayBtn = document.getElementById('lex-focus-play-btn');
+        const focusVol = document.getElementById('lex-focus-volume');
+        
+        focusSelect?.addEventListener('change', (e) => {
+            this.onFocusSoundChange(e.target.value);
+        });
+        
+        focusPlayBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleFocusPlay();
+        });
+        
+        focusVol?.addEventListener('input', (e) => {
+            this.onFocusVolumeChange(parseFloat(e.target.value));
         });
     },
 
@@ -989,6 +1044,229 @@ const LexCore = {
                 this.updateUI();
             }
         }, 1000);
+    },
+
+    // --- FOCUS SOUND PLAYER LOGIC ---
+    initAudioContext() {
+        if (!this.focusAudioCtx) {
+            this.focusAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            this.focusGainNode = this.focusAudioCtx.createGain();
+            this.focusGainNode.gain.value = this.focusVolume;
+            this.focusGainNode.connect(this.focusAudioCtx.destination);
+        }
+        if (this.focusAudioCtx.state === 'suspended') {
+            this.focusAudioCtx.resume();
+        }
+    },
+
+    createWhiteNoiseNode() {
+        const sampleRate = this.focusAudioCtx.sampleRate;
+        const bufferSize = 2 * sampleRate;
+        const noiseBuffer = this.focusAudioCtx.createBuffer(1, bufferSize, sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+        }
+        const node = this.focusAudioCtx.createBufferSource();
+        node.buffer = noiseBuffer;
+        node.loop = true;
+        return node;
+    },
+    
+    createBrownNoiseNode() {
+        const sampleRate = this.focusAudioCtx.sampleRate;
+        const bufferSize = 2 * sampleRate;
+        const noiseBuffer = this.focusAudioCtx.createBuffer(1, bufferSize, sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        let lastOut = 0.0;
+        for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            output[i] = (lastOut + (0.02 * white)) / 1.02;
+            lastOut = output[i];
+            output[i] *= 3.5; // Compensate for loss of gain
+        }
+        const node = this.focusAudioCtx.createBufferSource();
+        node.buffer = noiseBuffer;
+        node.loop = true;
+        return node;
+    },
+
+    playFocusSound() {
+        this.stopFocusSound();
+        
+        const soundType = this.focusSound;
+        if (soundType === 'none') {
+            return;
+        }
+        
+        this.initAudioContext();
+        
+        if (soundType === 'white') {
+            const node = this.createWhiteNoiseNode();
+            node.connect(this.focusGainNode);
+            node.start();
+            this.focusSourceNode = node;
+        } else if (soundType === 'brown') {
+            const node = this.createBrownNoiseNode();
+            node.connect(this.focusGainNode);
+            node.start();
+            this.focusSourceNode = node;
+        } else if (soundType === 'rain') {
+            const white = this.createWhiteNoiseNode();
+            
+            const hp = this.focusAudioCtx.createBiquadFilter();
+            hp.type = 'highpass';
+            hp.frequency.value = 400;
+            
+            const lp = this.focusAudioCtx.createBiquadFilter();
+            lp.type = 'lowpass';
+            lp.frequency.value = 1500;
+            
+            white.connect(hp);
+            hp.connect(lp);
+            lp.connect(this.focusGainNode);
+            
+            white.start();
+            this.focusSourceNode = white;
+        } else if (soundType === 'ocean') {
+            const brown = this.createBrownNoiseNode();
+            
+            const waveGain = this.focusAudioCtx.createGain();
+            waveGain.gain.value = 0.4;
+            
+            const lfo = this.focusAudioCtx.createOscillator();
+            lfo.frequency.value = 0.08;
+            
+            const lfoGain = this.focusAudioCtx.createGain();
+            lfoGain.gain.value = 0.35;
+            
+            lfo.connect(lfoGain);
+            lfoGain.connect(waveGain.gain);
+            
+            brown.connect(waveGain);
+            waveGain.connect(this.focusGainNode);
+            
+            brown.start();
+            lfo.start();
+            
+            this.focusSourceNode = brown;
+            this.focusLfoNodes.push(lfo);
+        } else if (soundType === 'drone') {
+            const freqs = [65.41, 98.00, 130.81, 164.81, 196.00];
+            
+            const filter = this.focusAudioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 350;
+            filter.connect(this.focusGainNode);
+            
+            freqs.forEach((freq, idx) => {
+                const osc = this.focusAudioCtx.createOscillator();
+                osc.type = 'triangle';
+                osc.frequency.value = freq;
+                
+                const g = this.focusAudioCtx.createGain();
+                g.gain.value = 0.15;
+                
+                const lfo = this.focusAudioCtx.createOscillator();
+                lfo.frequency.value = 0.04 + (idx * 0.015);
+                
+                const lfoGain = this.focusAudioCtx.createGain();
+                lfoGain.gain.value = 0.1;
+                
+                lfo.connect(lfoGain);
+                lfoGain.connect(g.gain);
+                
+                osc.connect(g);
+                g.connect(filter);
+                
+                osc.start();
+                lfo.start();
+                
+                this.focusOscNodes.push(osc);
+                this.focusLfoNodes.push(lfo);
+            });
+        }
+        
+        this.focusPlaying = true;
+        this.updateFocusUI();
+    },
+
+    stopFocusSound() {
+        if (this.focusSourceNode) {
+            try { this.focusSourceNode.stop(); } catch(e){}
+            try { this.focusSourceNode.disconnect(); } catch(e){}
+            this.focusSourceNode = null;
+        }
+        if (this.focusLfoNodes) {
+            this.focusLfoNodes.forEach(node => {
+                try { node.stop(); } catch(e){}
+                try { node.disconnect(); } catch(e){}
+            });
+            this.focusLfoNodes = [];
+        }
+        if (this.focusOscNodes) {
+            this.focusOscNodes.forEach(node => {
+                try { node.stop(); } catch(e){}
+                try { node.disconnect(); } catch(e){}
+            });
+            this.focusOscNodes = [];
+        }
+        this.focusPlaying = false;
+        this.updateFocusUI();
+    },
+
+    toggleFocusPlay() {
+        if (this.focusPlaying) {
+            this.stopFocusSound();
+        } else {
+            if (this.focusSound === 'none') {
+                this.focusSound = 'rain';
+                localStorage.setItem('lex-focus-sound', 'rain');
+                const selectEl = document.getElementById('lex-focus-sound');
+                if (selectEl) selectEl.value = 'rain';
+            }
+            this.playFocusSound();
+        }
+    },
+
+    updateFocusUI() {
+        const playBtn = document.getElementById('lex-focus-play-btn');
+        const playIcon = document.getElementById('lex-focus-play-icon');
+        const playText = document.getElementById('lex-focus-play-text');
+        
+        if (playBtn && playText) {
+            if (this.focusPlaying) {
+                playBtn.classList.add('playing');
+                playText.textContent = 'Pausa';
+                if (playIcon) {
+                    playIcon.innerHTML = `<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>`;
+                }
+            } else {
+                playBtn.classList.remove('playing');
+                playText.textContent = 'Play';
+                if (playIcon) {
+                    playIcon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`;
+                }
+            }
+        }
+    },
+
+    onFocusSoundChange(newSound) {
+        this.focusSound = newSound;
+        localStorage.setItem('lex-focus-sound', newSound);
+        if (newSound === 'none') {
+            this.stopFocusSound();
+        } else {
+            this.playFocusSound();
+        }
+    },
+
+    onFocusVolumeChange(newVol) {
+        this.focusVolume = newVol;
+        localStorage.setItem('lex-focus-volume', newVol);
+        if (this.focusGainNode) {
+            this.focusGainNode.gain.setValueAtTime(newVol, this.focusAudioCtx.currentTime);
+        }
     },
 
     incrementStudyTime(seconds) {

@@ -100,7 +100,7 @@
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.2rem;
-    min-width: 200px;
+    min-width: 260px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     z-index: 2000;
     animation: slideInUp 0.3s ease;
@@ -718,5 +718,53 @@ body.coccole-theme header h1 {
     border: 1px solid var(--border-color);
     color: var(--text-muted);
     cursor: not-allowed;
+}
+
+/* Focus Player Styles */
+.focus-player-section {
+    padding: 0.2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#lex-focus-play-btn.playing {
+    background: var(--accent-green, #10b981);
+    color: #000;
+    border-color: var(--accent-green, #10b981);
+}
+
+.coccole-theme #lex-focus-play-btn.playing {
+    background: #ff6b8b;
+    color: #fff;
+    border-color: #ff6b8b;
+}
+
+#lex-focus-volume {
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+}
+
+#lex-focus-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.coccole-theme #lex-focus-volume::-webkit-slider-thumb {
+    background: #ff6b8b;
+}
+
+#lex-focus-volume::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
 }
 

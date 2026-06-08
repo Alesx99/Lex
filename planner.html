@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pianificatore di Studio - Lex Studiorum</title>
+    <meta name="description" content="Pianifica lo studio dei tuoi esami universitari con un algoritmo intelligente che distribuisce i capitoli da studiare in base al tempo a disposizione e all'intensità di studio.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
+    <script src="js/search_db.js"></script>
+    <style>
+        .planner-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem 3rem 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .back-hub {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.2s;
+            margin-bottom: 0.5rem;
+            align-self: flex-start;
+        }
+
+        .back-hub:hover {
+            color: var(--accent-gold);
+        }
+
+        body.coccole-theme .back-hub:hover {
+            color: #ff6b8b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorative blur shapes -->
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>Pianificatore e Roadmap di Studio Personalizzato</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+            <a href="achievements.html" class="nav-link" id="nav-achievements">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                Traguardi
+            </a>
+            <a href="planner.html" class="nav-link active" id="nav-planner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Pianificatore
+            </a>
+            <a href="assistant.html" class="nav-link" id="nav-assistant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path></svg>
+                Assistente Studio
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="planner-container">
+        <a href="index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Home Portale
+        </a>
+
+        <div class="planner-grid">
+            <!-- Sidebar Configurator -->
+            <aside class="planner-sidebar">
+                <div class="planner-card">
+                    <h3>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                        Configuratore
+                    </h3>
+                    
+                    <div class="planner-input-group">
+                        <label for="planner-exam-select">Esame Target</label>
+                        <select id="planner-exam-select" class="planner-select">
+                            <!-- Dynamic exams populated here -->
+                        </select>
+                    </div>
+
+                    <div class="planner-input-group">
+                        <label for="planner-date">Data Appello</label>
+                        <input type="date" id="planner-date" class="planner-date-picker">
+                    </div>
+
+                    <div class="planner-input-group">
+                        <label>Intensità di Studio</label>
+                        <div class="intensity-selector">
+                            <button class="intensity-btn" id="intensity-light" onclick="setIntensity('light')">Soft</button>
+                            <button class="intensity-btn active" id="intensity-medium" onclick="setIntensity('medium')">Medio</button>
+                            <button class="intensity-btn" id="intensity-intensive" onclick="setIntensity('intensive')">Full</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-generate" onclick="generateAndSaveRoadmap()">Genera Tabella di Marcia</button>
+                </div>
+
+                <div class="planner-card" id="progress-card" style="display: none;">
+                    <h3>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        Progresso Capitoli
+                    </h3>
+                    <div class="progress-section">
+                        <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+                            <span id="progress-chapters-text">0 / 0 completati</span>
+                            <span id="progress-percent-text" style="font-weight:700;">0%</span>
+                        </div>
+                        <div class="planner-progress-bar">
+                            <div class="planner-progress-fill" id="planner-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Timeline Roadmap Column -->
+            <section class="planner-main">
+                <div class="planner-card" style="min-height: 400px;">
+                    <h3 id="roadmap-heading">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        Tabella di Marcia
+                    </h3>
+                    
+                    <div id="roadmap-list" class="roadmap-container">
+                        <!-- Roadmap timeline generated here -->
+                        <div class="roadmap-empty">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            <p>Configura l'esame target, la data dell'appello e l'intensità per generare una roadmap personalizzata giorno per giorno.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Audio Chime Context for Checking Off Days -->
+    <script>
+        let audioCtx = null;
+        function playChime(success = true) {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
+
+                if (success) {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(587.33, now); // D5
+                    osc.frequency.setValueAtTime(880.00, now + 0.08); // A5
+                    gainNode.gain.setValueAtTime(0, now);
+                    gainNode.gain.linearRampToValueAtTime(0.12, now + 0.03);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                } else {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(329.63, now); // E4
+                    gainNode.gain.setValueAtTime(0.08, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                }
+            } catch (err) {
+                console.warn("AudioContext non supportato o bloccato:", err);
+            }
+        }
+    </script>
+
+    <!-- Dynamic Planner Script -->
+    <script>
+        // Default Core Exams
+        const DEFAULT_EXAMS = [
+            { id: "diritto", name: "Diritto dei Beni Culturali", cfu: 9, passed: false, grade: null, date: null, subject: "diritto" },
+            { id: "arte", name: "Storia dell'Arte Moderna", cfu: 12, passed: false, grade: null, date: null, subject: "arte" },
+            { id: "romana", name: "Archeologia e Arte Romana", cfu: 6, passed: false, grade: null, date: null, subject: "romana" },
+            { id: "storia", name: "Storia Moderna", cfu: 6, passed: false, grade: null, date: null, subject: "storia" },
+            { id: "filosofia", name: "Filosofia Estetica", cfu: 6, passed: false, grade: null, date: null, subject: "filosofia" },
+            { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, grade: null, date: null, subject: "letteratura" },
+            { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, grade: null, date: null, subject: "tesi" }
+        ];
+
+        let studyPlan = [];
+        let activeIntensity = 'medium';
+        let currentRoadmap = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStudyPlan();
+            populateExamsDropdown();
+            loadSavedRoadmap();
+            
+            // Set tomorrow as minimum date for date picker
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            const dateInput = document.getElementById('planner-date');
+            if (dateInput) {
+                dateInput.min = tomorrow.toISOString().split('T')[0];
+            }
+            
+            // Auto initialize LexCore
+            if (window.LexCore) {
+                window.LexCore.init();
+            }
+        });
+
+        function loadStudyPlan() {
+            try {
+                const stored = localStorage.getItem('lex-exams-passed');
+                if (stored) {
+                    studyPlan = JSON.parse(stored);
+                } else {
+                    studyPlan = [...DEFAULT_EXAMS];
+                }
+            } catch(e) {
+                console.error("Errore nel caricamento del piano studi:", e);
+                studyPlan = [...DEFAULT_EXAMS];
+            }
+        }
+
+        function populateExamsDropdown() {
+            const select = document.getElementById('planner-exam-select');
+            if (!select) return;
+            select.innerHTML = '';
+
+            // Filter out already passed exams, unless all are passed (in which case show all)
+            let examsToDisplay = studyPlan.filter(e => !e.passed);
+            if (examsToDisplay.length === 0) {
+                examsToDisplay = studyPlan;
+            }
+
+            examsToDisplay.forEach(exam => {
+                const option = document.createElement('option');
+                option.value = exam.id;
+                option.textContent = `${exam.name} (${exam.cfu} CFU)`;
+                select.appendChild(option);
+            });
+        }
+
+        function setIntensity(intensity) {
+            activeIntensity = intensity;
+            document.querySelectorAll('.intensity-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.getElementById(`intensity-${intensity}`);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        function generateAndSaveRoadmap() {
+            const select = document.getElementById('planner-exam-select');
+            const dateInput = document.getElementById('planner-date');
+            
+            if (!select || !select.value) {
+                alert("Seleziona un esame!");
+                return;
+            }
+            if (!dateInput || !dateInput.value) {
+                alert("Seleziona una data per l'appello d'esame!");
+                return;
+            }
+
+            const subjectId = select.value;
+            const examDate = dateInput.value;
+            
+            const roadmap = buildRoadmapData(examDate, subjectId, activeIntensity);
+            if (roadmap) {
+                currentRoadmap = {
+                    subjectId: subjectId,
+                    examDate: examDate,
+                    intensity: activeIntensity,
+                    days: roadmap
+                };
+                saveRoadmapToStorage();
+                renderRoadmap();
+                playChime(true);
+            }
+        }
+
+        function buildRoadmapData(examDate, subjectId, intensity) {
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            const targetDate = new Date(examDate);
+            targetDate.setHours(0,0,0,0);
+            
+            const timeDiff = targetDate - today;
+            const daysAvailable = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            
+            if (daysAvailable <= 0) {
+                alert("La data dell'esame deve essere nel futuro!");
+                return null;
+            }
+            
+            let chapters = [];
+            const exam = studyPlan.find(e => e.id === subjectId || e.subject === subjectId);
+            const subjKey = exam ? (exam.subject || exam.id) : subjectId;
+            
+            let mappedSubj = subjKey;
+            if (subjKey === 'romana') mappedSubj = 'arte_romana';
+            if (subjKey === 'arte') mappedSubj = 'arte';
+            if (subjKey === 'storia') mappedSubj = 'storia';
+            if (subjKey === 'diritto') mappedSubj = 'diritto';
+
+            if (window.searchDatabase) {
+                chapters = window.searchDatabase.filter(item => item.subject === mappedSubj);
+            }
+            
+            // Fallback for custom exams
+            if (chapters.length === 0) {
+                const cfu = exam ? exam.cfu : 6;
+                const numChapters = Math.max(6, cfu * 2);
+                for (let i = 1; i <= numChapters; i++) {
+                    chapters.push({
+                        chapterTag: `Modulo ${i}`,
+                        title: `Studio modulo teorico ${i}`,
+                        navPath: ""
+                    });
+                }
+            }
+            
+            const roadmap = [];
+            let chapterIndex = 0;
+            
+            for (let day = 1; day <= daysAvailable; day++) {
+                const currentDate = new Date(today);
+                currentDate.setDate(today.getDate() + day - 1);
+                const dateString = currentDate.toLocaleDateString('it-IT', { 
+                    weekday: 'short', 
+                    day: 'numeric', 
+                    month: 'short' 
+                });
+                
+                let dayType = "studio";
+                let dayTitle = "";
+                let dayTasks = [];
+                
+                const isLastDay = (day === daysAvailable);
+                const isSecondLastDay = (day === daysAvailable - 1);
+                
+                if (isLastDay) {
+                    dayType = "ripasso";
+                    dayTitle = "Ripasso Generale & Simulazione d'Esame 🎯";
+                    dayTasks = [
+                        { tag: "Simulatore", title: "Completa una simulazione d'esame completa e ripassa le flashcards chiave." }
+                    ];
+                } else if (isSecondLastDay && intensity !== 'intensive') {
+                    dayType = "riposo";
+                    dayTitle = "Giorno di Riposo pre-esame 🌸";
+                    dayTasks = [
+                        { tag: "Riposo", title: "Rilassati e riposa la mente per domani!" }
+                    ];
+                } else {
+                    // Check rest interval
+                    let restInterval = (intensity === 'light') ? 4 : ((intensity === 'medium') ? 6 : 0);
+                    // Check review interval
+                    let reviewInterval = (intensity === 'light') ? 5 : ((intensity === 'medium') ? 8 : 0);
+                    
+                    if (restInterval > 0 && day % restInterval === 0) {
+                        dayType = "riposo";
+                        dayTitle = "Giorno di Riposo 🌸";
+                        dayTasks = [
+                            { tag: "Pausa", title: "Dedica la giornata a te stessa ed effettua piccoli ripassi mentali veloci." }
+                        ];
+                    } else if (reviewInterval > 0 && day % reviewInterval === 0 && chapterIndex > 0) {
+                        dayType = "ripasso";
+                        dayTitle = "Consolidamento & Ripasso Attivo 📝";
+                        dayTasks = [
+                            { tag: "Ripasso", title: "Ripassa i capitoli svolti finora e fai un test nel Simulatore d'Esame." }
+                        ];
+                    }
+                }
+                
+                if (dayType === "studio") {
+                    const remainingChapters = chapters.length - chapterIndex;
+                    if (remainingChapters <= 0) {
+                        dayType = "ripasso";
+                        dayTitle = "Ripasso Concetti e Flashcards 📚";
+                        dayTasks = [
+                            { tag: "Ripasso", title: "Rileggi le sintesi e rispondi alle flashcards per solidificare le conoscenze." }
+                        ];
+                    } else {
+                        // Count remaining study days
+                        let remainingStudyDays = 0;
+                        for (let d = day; d < daysAvailable; d++) {
+                            let testType = "studio";
+                            const isLast = (d === daysAvailable);
+                            const isSecondLast = (d === daysAvailable - 1);
+                            if (isLast) testType = "ripasso";
+                            else if (isSecondLast && intensity !== 'intensive') testType = "riposo";
+                            else {
+                                let rInt = (intensity === 'light') ? 4 : ((intensity === 'medium') ? 6 : 0);
+                                if (rInt > 0 && d % rInt === 0) testType = "riposo";
+                                else {
+                                    let revInt = (intensity === 'light') ? 5 : ((intensity === 'medium') ? 8 : 0);
+                                    if (revInt > 0 && d % revInt === 0) testType = "ripasso";
+                                }
+                            }
+                            if (testType === "studio") remainingStudyDays++;
+                        }
+                        if (remainingStudyDays === 0) remainingStudyDays = 1;
+                        
+                        const chaptersPerDay = Math.ceil(remainingChapters / remainingStudyDays);
+                        const countToAssign = Math.min(chaptersPerDay, remainingChapters);
+                        
+                        dayTitle = `Studio Moduli 📖`;
+                        for (let c = 0; c < countToAssign; c++) {
+                            const ch = chapters[chapterIndex++];
+                            dayTasks.push({
+                                tag: ch.chapterTag,
+                                title: ch.title,
+                                path: ch.navPath
+                            });
+                        }
+                    }
+                }
+                
+                roadmap.push({
+                    dayNumber: day,
+                    dateString: dateString,
+                    type: dayType,
+                    title: dayTitle,
+                    tasks: dayTasks,
+                    completed: false
+                });
+            }
+            return roadmap;
+        }
+
+        function renderRoadmap() {
+            const container = document.getElementById('roadmap-list');
+            const progressCard = document.getElementById('progress-card');
+            const heading = document.getElementById('roadmap-heading');
+            
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!currentRoadmap || !currentRoadmap.days || currentRoadmap.days.length === 0) {
+                container.innerHTML = `
+                    <div class="roadmap-empty">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <p>Configura l'esame target, la data dell'appello e l'intensità per generare una roadmap personalizzata giorno per giorno.</p>
+                    </div>
+                `;
+                if (progressCard) progressCard.style.display = 'none';
+                return;
+            }
+
+            const exam = studyPlan.find(e => e.id === currentRoadmap.subjectId);
+            const examName = exam ? exam.name : currentRoadmap.subjectId;
+            if (heading) {
+                heading.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Roadmap: ${examName}
+                `;
+            }
+
+            // Prefill selection inputs
+            const select = document.getElementById('planner-exam-select');
+            const dateInput = document.getElementById('planner-date');
+            if (select) select.value = currentRoadmap.subjectId;
+            if (dateInput) dateInput.value = currentRoadmap.examDate;
+            setIntensity(currentRoadmap.intensity);
+
+            if (progressCard) progressCard.style.display = 'block';
+
+            currentRoadmap.days.forEach((day, index) => {
+                const card = document.createElement('div');
+                card.className = `roadmap-day-card ${day.completed ? 'completed' : ''} ${day.type === 'riposo' ? 'rest-day' : ''}`;
+                
+                let tasksHTML = '';
+                day.tasks.forEach(t => {
+                    if (t.path) {
+                        tasksHTML += `
+                            <div class="roadmap-day-sub">
+                                <strong>${t.tag}:</strong> <a href="${t.path}" style="color:var(--accent-gold); text-decoration:underline;">${t.title}</a>
+                            </div>
+                        `;
+                    } else {
+                        tasksHTML += `
+                            <div class="roadmap-day-sub">
+                                <strong>${t.tag}:</strong> ${t.title}
+                            </div>
+                        `;
+                    }
+                });
+
+                card.innerHTML = `
+                    <div class="roadmap-day-info">
+                        <div class="roadmap-day-number">Giorno ${day.dayNumber} - ${day.dateString}</div>
+                        <div class="roadmap-day-title">${day.title}</div>
+                        ${tasksHTML}
+                    </div>
+                    <div class="roadmap-checkbox-wrapper">
+                        <div class="roadmap-checkbox" onclick="toggleDayComplete(${index})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            updateProgressBar();
+        }
+
+        function toggleDayComplete(index) {
+            if (!currentRoadmap || !currentRoadmap.days[index]) return;
+            const completed = !currentRoadmap.days[index].completed;
+            currentRoadmap.days[index].completed = completed;
+            
+            saveRoadmapToStorage();
+            renderRoadmap();
+            playChime(completed);
+        }
+
+        function updateProgressBar() {
+            if (!currentRoadmap || !currentRoadmap.days) return;
+            
+            const total = currentRoadmap.days.length;
+            const completed = currentRoadmap.days.filter(d => d.completed).length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            const fill = document.getElementById('planner-progress-fill');
+            const percentText = document.getElementById('progress-percent-text');
+            const chaptersText = document.getElementById('progress-chapters-text');
+            
+            if (fill) fill.style.width = `${percent}%`;
+            if (percentText) percentText.textContent = `${percent}%`;
+            if (chaptersText) chaptersText.textContent = `${completed} / ${total} giorni completati`;
+        }
+
+        function saveRoadmapToStorage() {
+            try {
+                localStorage.setItem('lex-study-planner-roadmap', JSON.stringify(currentRoadmap));
+            } catch(e) {
+                console.error("Errore nel salvataggio della roadmap:", e);
+            }
+        }
+
+        function loadSavedRoadmap() {
+            try {
+                const stored = localStorage.getItem('lex-study-planner-roadmap');
+                if (stored) {
+                    currentRoadmap = JSON.parse(stored);
+                    renderRoadmap();
+                }
+            } catch(e) {
+                console.error("Errore nel caricamento della roadmap salvata:", e);
+            }
+        }
+    </script>
+</body>
+</html>
