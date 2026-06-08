@@ -863,7 +863,8 @@ const LexCore = {
         ];
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
-            if ((key.startsWith('notes-') || key.startsWith('highlight-') || key.startsWith('lex-')) && !sensitiveKeys.includes(key)) {
+            // Backup all notes, highlights, achievements, planner roadmaps, coupons and other page states, excluding cloud credentials
+            if (!sensitiveKeys.includes(key)) {
                 data[key] = localStorage.getItem(key);
             }
         }
@@ -1002,7 +1003,9 @@ const LexCore = {
             const syncablePrefixes = [
                 'notes-', 'highlight-', 'lex-quiz-stats', 'lex-custom-connections', 'lex-srs-',
                 'lex-study-seconds', 'lex-night-study-seconds', 'lex-study-streak', 'lex-exams-passed', 'lex-achievements-completed',
-                'lex-flashcards-completed'
+                'lex-flashcards-completed', 'lex-study-planner-roadmap', 'lex-roadmap-completed-days',
+                'lex-unlocked-coupons', 'lex-visited-pages', 'lex-theme', 'lex-grad-target-cfu', 'lex-grad-thesis-bonus',
+                'lex-sanctuary-unlocked', 'lex-coupon-redeemed-'
             ];
             const shouldSync = syncablePrefixes.some(prefix => key.startsWith(prefix));
             
