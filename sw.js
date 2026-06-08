@@ -1,7 +1,8 @@
-const CACHE_NAME = 'lex-cache-v4';
+const CACHE_NAME = 'lex-cache-v5';
 const ASSETS = [
   './',
   './index.html',
+  './achievements.html',
   './style.css',
   './js/search_db.js',
   './js/quiz_db.js',

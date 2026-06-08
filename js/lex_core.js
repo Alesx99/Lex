@@ -35,6 +35,19 @@ const LexCore = {
         this.tick();
         this.initTTS();
 
+        // Track visited pages for achievements
+        try {
+            let pageName = window.location.pathname.split('/').pop() || 'index.html';
+            if (!pageName) pageName = 'index.html';
+            const visited = JSON.parse(localStorage.getItem('lex-visited-pages') || '[]');
+            if (!visited.includes(pageName)) {
+                visited.push(pageName);
+                localStorage.setItem('lex-visited-pages', JSON.stringify(visited));
+            }
+        } catch(e) {
+            console.error("Errore tracciamento pagine visitate:", e);
+        }
+
         // Hook global sweet features
         window.addEventListener('load', () => this.hookGlobalFeatures());
         setTimeout(() => this.hookGlobalFeatures(), 600);
@@ -881,7 +894,11 @@ const LexCore = {
             originalSetItem.apply(this, arguments);
             if (self.isRestoring) return;
             
-            const syncablePrefixes = ['notes-', 'highlight-', 'lex-quiz-stats', 'lex-custom-connections', 'lex-srs-'];
+            const syncablePrefixes = [
+                'notes-', 'highlight-', 'lex-quiz-stats', 'lex-custom-connections', 'lex-srs-',
+                'lex-study-seconds', 'lex-night-study-seconds', 'lex-study-streak', 'lex-exams-passed', 'lex-achievements-completed',
+                'lex-flashcards-completed'
+            ];
             const shouldSync = syncablePrefixes.some(prefix => key.startsWith(prefix));
             
             const sensitiveKeys = [
@@ -966,9 +983,59 @@ const LexCore = {
                     alert('Pausa terminata! Sei pronto a riprendere?');
                 }
             } else {
+                if (this.state === 'work') {
+                    this.incrementStudyTime(1);
+                }
                 this.updateUI();
             }
         }, 1000);
+    },
+
+    incrementStudyTime(seconds) {
+        try {
+            let totalSec = parseInt(localStorage.getItem('lex-study-seconds') || '0');
+            totalSec += seconds;
+            localStorage.setItem('lex-study-seconds', totalSec);
+
+            const nowHour = new Date().getHours();
+            if (nowHour >= 0 && nowHour < 5) {
+                let nightSec = parseInt(localStorage.getItem('lex-night-study-seconds') || '0');
+                nightSec += seconds;
+                localStorage.setItem('lex-night-study-seconds', nightSec);
+            }
+
+            this.updateStudyStreak();
+        } catch(e) {
+            console.error("Errore aggiornamento tempo studio:", e);
+        }
+    },
+
+    updateStudyStreak() {
+        try {
+            const todayStr = new Date().toISOString().split('T')[0];
+            const lastStudyDate = localStorage.getItem('lex-last-study-date');
+            let streak = parseInt(localStorage.getItem('lex-study-streak') || '0');
+
+            if (!lastStudyDate) {
+                localStorage.setItem('lex-last-study-date', todayStr);
+                localStorage.setItem('lex-study-streak', '1');
+            } else if (lastStudyDate !== todayStr) {
+                const lastDate = new Date(lastStudyDate);
+                const todayDate = new Date(todayStr);
+                const diffTime = Math.abs(todayDate - lastDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 1) {
+                    streak += 1;
+                    localStorage.setItem('lex-study-streak', streak.toString());
+                } else if (diffDays > 1) {
+                    localStorage.setItem('lex-study-streak', '1');
+                }
+                localStorage.setItem('lex-last-study-date', todayStr);
+            }
+        } catch(e) {
+            console.error("Errore aggiornamento streak studio:", e);
+        }
     },
 
     startSync() {

@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traguardi & Laurea - Lex Studiorum</title>
+    <meta name="description" content="Monitora il tuo percorso verso la laurea con il piano studi interattivo, calcola la media ponderata e sblocca trofei completando le sidequest di studio.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet Reference -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
+    <style>
+        .achievements-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 2rem auto 4rem auto;
+        }
+
+        /* Graduation Progress Banner */
+        .graduation-banner {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(200, 90, 50, 0.08) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .graduation-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+        }
+
+        .grad-left {
+            flex: 1;
+        }
+
+        .grad-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .grad-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grad-progress-wrapper {
+            margin-top: 1rem;
+        }
+
+        .grad-progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .grad-cfu-count {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .grad-progress-bar-bg {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 99px;
+            height: 14px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .grad-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-terracotta));
+            border-radius: 99px;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1);
+            box-shadow: 0 0 12px var(--accent-gold-glow);
+        }
+
+        .grad-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.8rem;
+            min-width: 260px;
+            text-align: center;
+        }
+
+        .laurea-score-big {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-shadow: 0 0 15px var(--accent-gold-glow);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .laurea-score-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Stats Blocks */
+        .academic-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        @media (max-width: 900px) {
+            .academic-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .academic-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-val {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Two columns layout for Study Plan and Sidequests */
+        .dashboard-columns {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .column-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Study Plan / Exam Grid */
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .exam-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exam-card:hover {
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+            border-color: var(--border-color-hover);
+        }
+
+        .exam-card.passed::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .exam-card.subject-diritto.passed::before { background: var(--accent-gold); }
+        .exam-card.subject-arte.passed::before { background: var(--accent-terracotta); }
+        .exam-card.subject-romana.passed::before { background: var(--accent-romana); }
+        .exam-card.subject-storia.passed::before { background: var(--accent-blue); }
+        .exam-card.subject-custom.passed::before { background: var(--accent-cyan); }
+        .exam-card.subject-filosofia.passed::before { background: var(--accent-purple); }
+        .exam-card.subject-letteratura.passed::before { background: var(--accent-green); }
+
+        .exam-card.passed {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .exam-card.subject-diritto.passed:hover { box-shadow: 0 10px 25px var(--accent-gold-glow); }
+        .exam-card.subject-arte.passed:hover { box-shadow: 0 10px 25px var(--accent-terracotta-glow); }
+        .exam-card.subject-romana.passed:hover { box-shadow: 0 10px 25px var(--accent-romana-glow); }
+        .exam-card.subject-storia.passed:hover { box-shadow: 0 10px 25px var(--accent-storia-glow); }
+        .exam-card.subject-custom.passed:hover { box-shadow: 0 10px 25px rgba(6, 182, 212, 0.25); }
+
+        .exam-card.locked {
+            opacity: 0.5;
+            border-style: dashed;
+        }
+
+        .exam-card.locked:hover {
+            opacity: 0.8;
+        }
+
+        .exam-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .exam-cfu {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .exam-card.passed .exam-cfu {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .exam-trophy {
+            width: 22px;
+            height: 22px;
+            color: var(--text-muted);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .exam-card.passed .exam-trophy {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 5px var(--accent-gold-glow));
+        }
+
+        .exam-card:hover .exam-trophy {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .exam-name {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 0.6rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .exam-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        .exam-grade {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .exam-card.passed .exam-grade {
+            color: var(--accent-gold);
+            font-size: 1.05rem;
+        }
+
+        .exam-status-text {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        .exam-card.passed .exam-status-text {
+            color: var(--accent-green);
+        }
+
+        /* Sidequests List */
+        .sidequests-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .quest-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .quest-card:hover {
+            transform: translateX(4px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .quest-card.completed {
+            border-color: rgba(16, 185, 129, 0.2);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.02) 0%, rgba(22, 28, 45, 0.4) 100%);
+        }
+
+        .quest-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .quest-card.completed .quest-icon-wrapper {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .quest-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 0;
+        }
+
+        .quest-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .quest-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .quest-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .quest-progress-bg {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            height: 6px;
+            width: 100%;
+            border-radius: 99px;
+            overflow: hidden;
+            margin-top: 0.2rem;
+        }
+
+        .quest-progress-bar {
+            height: 100%;
+            background: var(--text-muted);
+            border-radius: 99px;
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .quest-card.completed .quest-progress-bar {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .quest-status-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .quest-card.completed .quest-status-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .quest-card.in-progress .quest-status-badge {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Buttons & Actions */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+            outline: none;
+        }
+
+        .btn-action-primary {
+            background: var(--accent-gold);
+            color: #0b0f19;
+            border: none;
+        }
+
+        .btn-action-primary:hover {
+            background: #e5c158;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-action-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-action-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Modal Overlays */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(8, 11, 17, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-box {
+            background: rgba(18, 24, 38, 0.95);
+            border: 1px solid var(--border-color-hover);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-overlay.open .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .form-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 0.6rem 0.8rem;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .form-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-checkbox-row input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-gold);
+            cursor: pointer;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.8rem;
+            margin-top: 1.8rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.2rem;
+        }
+
+        /* Thesis Configurator */
+        .thesis-config-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .thesis-slider-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .thesis-slider {
+            flex-grow: 1;
+            accent-color: var(--accent-gold);
+            cursor: pointer;
+        }
+
+        .thesis-val-badge {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .target-cfu-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 0.8rem;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorative blur shapes -->
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>I tuoi Traguardi Accademici verso la Laurea</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+            <a href="achievements.html" class="nav-link active" id="nav-achievements">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                Traguardi
+            </a>
+            <a href="assistant.html" class="nav-link" id="nav-assistant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path></svg>
+                Assistente Studio
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="achievements-container">
+
+        <a href="index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Home Portale
+        </a>
+
+        <!-- Graduation Progress Banner -->
+        <section class="graduation-banner">
+            <div class="grad-left">
+                <h2 class="grad-title">Proiezione di Laurea 🎓</h2>
+                <p class="grad-subtitle">Tieni traccia del tuo piano di studi accademico. Ottieni i crediti formativi (CFU) completando le simulazioni d'esame o registrandoli manualmente.</p>
+                <div class="grad-progress-wrapper">
+                    <div class="grad-progress-info">
+                        <span>Progresso Crediti Universitari</span>
+                        <span class="grad-cfu-count" id="progress-cfu-text">0 / 180 CFU (0%)</span>
+                    </div>
+                    <div class="grad-progress-bar-bg">
+                        <div class="grad-progress-bar" id="progress-cfu-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="grad-right">
+                <div class="laurea-score-big" id="laurea-projection-value">--</div>
+                <div class="laurea-score-label">Voto di Laurea Stimato</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;" id="laurea-bonus-notice">(incluso bonus tesi)</div>
+            </div>
+        </section>
+
+        <!-- Academic stats grid -->
+        <section class="academic-stats">
+            <div class="stat-card">
+                <div class="stat-val" id="stat-weighted-average">0.00</div>
+                <div class="stat-label">Media Ponderata</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val" id="stat-arithmetic-average">0.00</div>
+                <div class="stat-label">Media Aritmetica</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val" id="stat-exams-ratio">0 / 0</div>
+                <div class="stat-label">Esami Superati</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val" id="stat-study-time">0h 0m</div>
+                <div class="stat-label">Tempo di Studio</div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Split Columns -->
+        <div class="dashboard-columns">
+            
+            <!-- Left Column: Study Plan Trophies -->
+            <section class="column-section">
+                <div class="section-header">
+                    <h3 class="section-title">Piano di Studi & Trofei</h3>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-action btn-action-secondary" style="padding: 0.5rem 0.9rem;" onclick="openAddExamModal()" title="Aggiungi Esame al Piano Studi">
+                            + Aggiungi Esame
+                        </button>
+                    </div>
+                </div>
+
+                <div class="exams-grid" id="exams-trophy-grid">
+                    <!-- Dynamic Exam Cards go here -->
+                </div>
+            </section>
+
+            <!-- Right Column: Configurations and Sidequests -->
+            <section class="column-section">
+                
+                <!-- Configurator panel -->
+                <div class="thesis-config-card">
+                    <h4 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                        Parametri di Calcolo
+                    </h4>
+                    
+                    <div class="form-group" style="margin-bottom: 0.6rem;">
+                        <div class="thesis-slider-row">
+                            <label>Punti Bonus Tesi / Laurea</label>
+                            <span class="thesis-val-badge" id="thesis-bonus-badge">4</span>
+                        </div>
+                        <input type="range" class="thesis-slider" id="thesis-bonus-slider" min="0" max="11" value="4" oninput="updateThesisSliderVal()">
+                    </div>
+
+                    <div class="target-cfu-row">
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); font-weight:600;">Obiettivo Laurea</label>
+                        <select id="target-cfu-select" class="form-input" style="padding: 0.3rem 0.6rem; font-size: 0.85rem; background:rgba(0,0,0,0.2);" onchange="updateTargetCFU()">
+                            <option value="180" selected>Triennale (180 CFU)</option>
+                            <option value="120">Magistrale (120 CFU)</option>
+                            <option value="60">Master / Altro (60 CFU)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Sidequests Panel -->
+                <div class="section-header">
+                    <h3 class="section-title">Sidequests di Studio</h3>
+                </div>
+
+                <div class="sidequests-list" id="sidequests-container">
+                    <!-- Dynamic Sidequests go here -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Modal for adding custom exam -->
+    <div id="add-exam-overlay" class="modal-overlay" onclick="closeAddExamModalOnOutsideClick(event)">
+        <div class="modal-box">
+            <button class="modal-close-btn" onclick="closeAddExamModal()">&times;</button>
+            <h3 class="modal-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" style="color:var(--accent-gold);"><path d="M12 22v-6M9 19h6M12 16h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8z"/></svg>
+                Nuovo Esame Accademico
+            </h3>
+            
+            <div class="form-group">
+                <label for="exam-input-name">Nome dell'Esame</label>
+                <input type="text" id="exam-input-name" class="form-input" placeholder="Es. Museologia, Informatica...">
+            </div>
+            
+            <div class="form-group">
+                <label for="exam-input-cfu">Crediti Formativi (CFU)</label>
+                <input type="number" id="exam-input-cfu" class="form-input" min="1" max="30" value="6">
+            </div>
+
+            <label class="form-checkbox-row">
+                <input type="checkbox" id="exam-input-passed" onchange="toggleAddModalGradeField()">
+                <span>Segna come già superato</span>
+            </label>
+
+            <div class="form-group" id="add-modal-grade-group" style="display: none;">
+                <label for="exam-input-grade">Voto Conseguito</label>
+                <select id="exam-input-grade" class="form-input">
+                    <option value="31">30 e Lode</option>
+                    <option value="30">30</option>
+                    <option value="29">29</option>
+                    <option value="28">28</option>
+                    <option value="27">27</option>
+                    <option value="26">26</option>
+                    <option value="25">25</option>
+                    <option value="24">24</option>
+                    <option value="23">23</option>
+                    <option value="22">22</option>
+                    <option value="21">21</option>
+                    <option value="20">20</option>
+                    <option value="19">19</option>
+                    <option value="18" selected>18</option>
+                </select>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-action btn-action-secondary" onclick="closeAddExamModal()">Annulla</button>
+                <button class="btn-action btn-action-primary" onclick="submitAddExam()">Salva Esame</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for editing existing exam -->
+    <div id="edit-exam-overlay" class="modal-overlay" onclick="closeEditExamModalOnOutsideClick(event)">
+        <div class="modal-box">
+            <button class="modal-close-btn" onclick="closeEditExamModal()">&times;</button>
+            <h3 class="modal-title" id="edit-modal-title">Modifica Esame</h3>
+            
+            <input type="hidden" id="edit-exam-id">
+
+            <div class="form-group">
+                <label for="edit-exam-name">Nome dell'Esame</label>
+                <input type="text" id="edit-exam-name" class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="edit-exam-cfu">Crediti Formativi (CFU)</label>
+                <input type="number" id="edit-exam-cfu" class="form-input" min="1" max="30">
+            </div>
+
+            <label class="form-checkbox-row">
+                <input type="checkbox" id="edit-exam-passed" onchange="toggleEditModalGradeField()">
+                <span>Superato</span>
+            </label>
+
+            <div class="form-group" id="edit-modal-grade-group">
+                <label for="edit-exam-grade">Voto Conseguito</label>
+                <select id="edit-exam-grade" class="form-input">
+                    <option value="31">30 e Lode</option>
+                    <option value="30">30</option>
+                    <option value="29">29</option>
+                    <option value="28">28</option>
+                    <option value="27">27</option>
+                    <option value="26">26</option>
+                    <option value="25">25</option>
+                    <option value="24">24</option>
+                    <option value="23">23</option>
+                    <option value="22">22</option>
+                    <option value="21">21</option>
+                    <option value="20">20</option>
+                    <option value="19">19</option>
+                    <option value="18">18</option>
+                </select>
+            </div>
+
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button class="btn-action btn-action-secondary" style="border-color: #ef4444; color: #f87171;" id="edit-modal-delete-btn" onclick="deleteExam()">
+                    Elimina Esame
+                </button>
+                <div style="display: flex; gap: 0.8rem;">
+                    <button class="btn-action btn-action-secondary" onclick="closeEditExamModal()">Annulla</button>
+                    <button class="btn-action btn-action-primary" onclick="submitEditExam()">Salva Modifiche</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Audio synthesizing context for reward chime -->
+    <script>
+        let audioCtx = null;
+        function playChime(success = true) {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (success) {
+                    // Success reward sound: ascending arpeggio
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+                    
+                    gainNode.gain.setValueAtTime(0, now);
+                    gainNode.gain.linearRampToValueAtTime(0.15, now + 0.05);
+                    gainNode.gain.linearRampToValueAtTime(0.15, now + 0.35);
+                    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+
+                    osc.start(now);
+                    osc.stop(now + 0.6);
+                } else {
+                    // Simple interface toggle sound
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(440, now);
+                    gainNode.gain.setValueAtTime(0.1, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                    
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                }
+            } catch (err) {
+                console.warn("Audio Context non supportato o bloccato:", err);
+            }
+        }
+    </script>
+
+    <!-- Main Logic Script -->
+    <script>
+        // Default Core Exams
+        const DEFAULT_EXAMS = [
+            { id: "diritto", name: "Diritto dei Beni Culturali", cfu: 9, passed: false, grade: null, date: null, subject: "diritto" },
+            { id: "arte", name: "Storia dell'Arte Moderna", cfu: 12, passed: false, grade: null, date: null, subject: "arte" },
+            { id: "romana", name: "Archeologia e Arte Romana", cfu: 6, passed: false, grade: null, date: null, subject: "romana" },
+            { id: "storia", name: "Storia Moderna", cfu: 6, passed: false, grade: null, date: null, subject: "storia" },
+            { id: "filosofia", name: "Filosofia Estetica", cfu: 6, passed: false, grade: null, date: null, subject: "filosofia" },
+            { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, grade: null, date: null, subject: "letteratura" },
+            { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, grade: null, date: null, subject: "tesi" }
+        ];
+
+        // State Variables
+        let studyPlan = [];
+        let targetCFU = 180;
+        let thesisBonus = 4;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load Thesis slider & Target cfu settings
+            const savedTarget = localStorage.getItem('lex-grad-target-cfu');
+            if (savedTarget) {
+                targetCFU = parseInt(savedTarget);
+                document.getElementById('target-cfu-select').value = targetCFU.toString();
+            }
+            const savedBonus = localStorage.getItem('lex-grad-thesis-bonus');
+            if (savedBonus) {
+                thesisBonus = parseInt(savedBonus);
+                document.getElementById('thesis-bonus-slider').value = thesisBonus.toString();
+                document.getElementById('thesis-bonus-badge').textContent = thesisBonus.toString();
+            }
+
+            // Load study plan
+            loadStudyPlan();
+
+            // Auto-check for exam.html simulation stats to unlock exams
+            autoUnlockExamsFromStats();
+
+            // Render UI
+            updateDashboard();
+        });
+
+        function loadStudyPlan() {
+            try {
+                const stored = localStorage.getItem('lex-exams-passed');
+                if (stored) {
+                    studyPlan = JSON.parse(stored);
+                } else {
+                    studyPlan = [...DEFAULT_EXAMS];
+                    saveStudyPlan();
+                }
+            } catch(e) {
+                console.error("Errore nel caricamento del piano studi:", e);
+                studyPlan = [...DEFAULT_EXAMS];
+            }
+        }
+
+        function saveStudyPlan() {
+            try {
+                localStorage.setItem('lex-exams-passed', JSON.stringify(studyPlan));
+            } catch(e) {
+                console.error("Errore nel salvataggio del piano studi:", e);
+            }
+        }
+
+        // Checks lex-quiz-stats for scores >= 18 to unlock the 4 hub subjects
+        function autoUnlockExamsFromStats() {
+            try {
+                const storedStats = localStorage.getItem('lex-quiz-stats');
+                if (!storedStats) return;
+                
+                const stats = JSON.parse(storedStats);
+                let changed = false;
+
+                // Subjects map: key in stat -> id in studyPlan
+                const subjectKeys = {
+                    'diritto': 'diritto',
+                    'arte': 'arte',
+                    'romana': 'romana',
+                    'storia': 'storia'
+                };
+
+                Object.keys(subjectKeys).forEach(statKey => {
+                    const examId = subjectKeys[statKey];
+                    // Find max score for this subject
+                    const subjectSims = stats.filter(s => s.subject === statKey && s.score >= 18);
+                    
+                    if (subjectSims.length > 0) {
+                        const maxScore = Math.max(...subjectSims.map(s => s.score));
+                        const exam = studyPlan.find(e => e.id === examId);
+                        
+                        if (exam && !exam.passed) {
+                            exam.passed = true;
+                            // Ensure 30 e Lode mapping if LLM returned > 30 or we match 30
+                            exam.grade = maxScore >= 30 ? 31 : maxScore; 
+                            exam.date = subjectSims[0].date || new Date().toISOString().split('T')[0];
+                            changed = true;
+                            console.log(`Auto-sbloccato l'esame ${exam.name} con voto ${maxScore}`);
+                        }
+                    }
+                });
+
+                if (changed) {
+                    saveStudyPlan();
+                }
+            } catch(e) {
+                console.error("Errore nell'auto-sblocco esami:", e);
+            }
+        }
+
+        function updateDashboard() {
+            // Recalculate metrics
+            let totalCFUConseguite = 0;
+            let totalWeightedSum = 0;
+            let cfuForAverageSum = 0;
+            let totalExamsCount = studyPlan.length;
+            let passedExamsCount = 0;
+            let arithmeticSum = 0;
+
+            studyPlan.forEach(e => {
+                if (e.passed) {
+                    passedExamsCount++;
+                    totalCFUConseguite += e.cfu;
+                    
+                    // The thesis / Prova Finale does not count towards the grade average in Italy usually,
+                    // but we check if it has a grade. If it has a grade and is not the thesis id, or if we just average everything.
+                    // Standard: ID 'tesi' is excluded from grade average computation (it has no grade, just pass/fail).
+                    if (e.grade && e.id !== 'tesi') {
+                        // Grade 31 represents 30 e Lode. In averages it counts as 30 (or 30, let's count it as 30 as standard in Italy).
+                        const gradeVal = e.grade === 31 ? 30 : e.grade;
+                        totalWeightedSum += (gradeVal * e.cfu);
+                        cfuForAverageSum += e.cfu;
+                        arithmeticSum += gradeVal;
+                    }
+                }
+            });
+
+            // Calculate Averages
+            const weightedAverage = cfuForAverageSum > 0 ? (totalWeightedSum / cfuForAverageSum) : 0;
+            const arithmeticAverage = passedExamsCount > 0 && (passedExamsCount - (studyPlan.some(e => e.id === 'tesi' && e.passed) ? 1 : 0)) > 0 
+                ? (arithmeticSum / (passedExamsCount - (studyPlan.some(e => e.id === 'tesi' && e.passed) ? 1 : 0))) 
+                : 0;
+
+            // Estimated graduation grade: (weighted average / 30) * 110 = weighted average * 11 / 3
+            // plus thesis bonus points
+            let estimatedGraduationGrade = 0;
+            if (weightedAverage > 0) {
+                estimatedGraduationGrade = Math.round((weightedAverage * 11 / 3) + thesisBonus);
+                if (estimatedGraduationGrade > 110) estimatedGraduationGrade = 110; // Cap at 110
+            }
+
+            // Update DOM Metrics
+            document.getElementById('stat-weighted-average').textContent = weightedAverage > 0 ? weightedAverage.toFixed(2) : "0.00";
+            document.getElementById('stat-arithmetic-average').textContent = arithmeticAverage > 0 ? arithmeticAverage.toFixed(2) : "0.00";
+            document.getElementById('stat-exams-ratio').textContent = `${passedExamsCount} / ${totalExamsCount}`;
+            
+            // Format study seconds
+            const studySeconds = parseInt(localStorage.getItem('lex-study-seconds') || '0');
+            const studyHours = Math.floor(studySeconds / 3600);
+            const studyMins = Math.floor((studySeconds % 3600) / 60);
+            document.getElementById('stat-study-time').textContent = `${studyHours}h ${studyMins}m`;
+
+            // Graduation value projection
+            if (weightedAverage > 0) {
+                document.getElementById('laurea-projection-value').textContent = estimatedGraduationGrade === 110 ? "110 / 110" : `${estimatedGraduationGrade} / 110`;
+            } else {
+                document.getElementById('laurea-projection-value').textContent = "--";
+            }
+
+            // Graduation progress bar
+            const cfuPercent = Math.min(100, Math.round((totalCFUConseguite / targetCFU) * 100));
+            document.getElementById('progress-cfu-text').textContent = `${totalCFUConseguite} / ${targetCFU} CFU (${cfuPercent}%)`;
+            document.getElementById('progress-cfu-bar').style.width = cfuPercent + '%';
+
+            // Render Exam Cards
+            renderExamCards();
+
+            // Render Sidequests
+            renderSidequests(passedExamsCount, studySeconds, weightedAverage);
+        }
+
+        function renderExamCards() {
+            const grid = document.getElementById('exams-trophy-grid');
+            grid.innerHTML = '';
+
+            studyPlan.forEach(e => {
+                const card = document.createElement('div');
+                card.className = `exam-card subject-${e.subject || 'custom'} ${e.passed ? 'passed' : 'locked'}`;
+                card.onclick = () => openEditExamModal(e.id);
+
+                let gradeText = "--";
+                if (e.passed) {
+                    if (e.grade === 31) gradeText = "30L";
+                    else if (e.grade) gradeText = e.grade.toString();
+                    else gradeText = "Idoneo";
+                }
+
+                card.innerHTML = `
+                    <div class="exam-top">
+                        <span class="exam-cfu">${e.cfu} CFU</span>
+                        <svg class="exam-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                            <path d="M4 22h16"></path>
+                            <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+                            <path d="M12 2a6 6 0 0 0-6 6v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V8a6 6 0 0 0-6-6z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="exam-name">${e.name}</h4>
+                    <div class="exam-bottom">
+                        <span class="exam-status-text">${e.passed ? 'Superato' : 'Da superare'}</span>
+                        <span class="exam-grade">${gradeText}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderSidequests(passedExamsCount, studySeconds, weightedAverage) {
+            const container = document.getElementById('sidequests-container');
+            container.innerHTML = '';
+
+            // Fetch statistics
+            let uniqueSrsCount = 0;
+            try {
+                uniqueSrsCount = Object.keys(localStorage).filter(k => k.startsWith('lex-srs-')).length;
+            } catch(e){}
+
+            let flashcardReviewsTotal = 0;
+            try {
+                flashcardReviewsTotal = parseInt(localStorage.getItem('lex-flashcards-completed') || '0');
+            } catch(e){}
+
+            let totalQuizSessions = 0;
+            let maxQuizScore = 0;
+            try {
+                const storedQuiz = localStorage.getItem('lex-quiz-stats');
+                if (storedQuiz) {
+                    const stats = JSON.parse(storedQuiz);
+                    totalQuizSessions = stats.length;
+                    maxQuizScore = stats.length > 0 ? Math.max(...stats.map(s => s.score)) : 0;
+                }
+            } catch(e){}
+
+            // Night study time
+            const nightSeconds = parseInt(localStorage.getItem('lex-night-study-seconds') || '0');
+
+            // Visited pages count
+            let visitedPagesCount = 1;
+            try {
+                const visited = JSON.parse(localStorage.getItem('lex-visited-pages') || '[]');
+                visitedPagesCount = Math.max(1, visited.length);
+            } catch(e){}
+
+            // Study streak
+            const studyStreak = parseInt(localStorage.getItem('lex-study-streak') || '0');
+
+            // Achievements List configurations
+            const sidequests = [
+                {
+                    id: "pioneer_hub",
+                    name: "Pioniere del Hub 🗺️",
+                    desc: "Visita tutte le sezioni principali del portale accademico.",
+                    current: visitedPagesCount,
+                    target: 6, // index, connections, flashcards, exam, assistant, achievements
+                    type: "count"
+                },
+                {
+                    id: "study_1h",
+                    name: "Pioniere dello Studio ⏱️",
+                    desc: "Accumula 1 ora di studio attivo con il timer Pomodoro.",
+                    current: studySeconds,
+                    target: 3600,
+                    type: "time"
+                },
+                {
+                    id: "study_10h",
+                    name: "Mente Instancabile 📚",
+                    desc: "Accumula 10 ore complessive di studio attivo.",
+                    current: studySeconds,
+                    target: 36000,
+                    type: "time"
+                },
+                {
+                    id: "flashcard_50",
+                    name: "Campione del Ripasso 🧠",
+                    desc: "Esegui 50 valutazioni di flashcard in Active Recall.",
+                    current: flashcardReviewsTotal,
+                    target: 50,
+                    type: "count"
+                },
+                {
+                    id: "flashcard_250",
+                    name: "Mente d'Acciaio 💾",
+                    desc: "Esegui 250 valutazioni complessive di flashcard.",
+                    current: flashcardReviewsTotal,
+                    target: 250,
+                    type: "count"
+                },
+                {
+                    id: "exam_passed_1",
+                    name: "Primo Appello 📄",
+                    desc: "Ottieni un voto sufficiente (>=18) in una simulazione d'esame.",
+                    current: maxQuizScore >= 18 ? 1 : 0,
+                    target: 1,
+                    type: "binary"
+                },
+                {
+                    id: "exam_lode",
+                    name: "Perfezionista Accademico 🌟",
+                    desc: "Ottieni 30 o 30 e Lode in una simulazione scritta o orale.",
+                    current: maxQuizScore >= 30 ? 1 : 0,
+                    target: 1,
+                    type: "binary"
+                },
+                {
+                    id: "night_owl",
+                    name: "Gufo Reale 🦉",
+                    desc: "Studia per 15 minuti dopo la mezzanotte (tra le 00:00 e le 05:00).",
+                    current: nightSeconds,
+                    target: 900,
+                    type: "time"
+                },
+                {
+                    id: "study_streak_3",
+                    name: "Costanza Accademica 🔥",
+                    desc: "Mantieni una striscia di studio giornaliera di 3 giorni.",
+                    current: studyStreak,
+                    target: 3,
+                    type: "count"
+                }
+            ];
+
+            let completedList = [];
+            try {
+                completedList = JSON.parse(localStorage.getItem('lex-achievements-completed') || '[]');
+            } catch(e){}
+
+            let newlyCompleted = false;
+
+            sidequests.forEach(q => {
+                const percent = Math.min(100, Math.round((q.current / q.target) * 100));
+                const isDone = q.current >= q.target;
+
+                // Check if it's newly completed to trigger sound chime
+                if (isDone && !completedList.includes(q.id)) {
+                    completedList.push(q.id);
+                    newlyCompleted = true;
+                }
+
+                const card = document.createElement('div');
+                card.className = `quest-card ${isDone ? 'completed' : 'in-progress'}`;
+
+                // Icon selection based on type
+                let iconSvg = '';
+                if (isDone) {
+                    iconSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+                } else {
+                    iconSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
+                }
+
+                let progressText = "";
+                if (q.type === 'time') {
+                    const curHours = Math.floor(q.current / 3600);
+                    const curMins = Math.floor((q.current % 3600) / 60);
+                    const tarHours = Math.floor(q.target / 3600);
+                    progressText = `${curHours}h ${curMins}m / ${tarHours}h`;
+                } else if (q.type === 'binary') {
+                    progressText = isDone ? "Sbloccato" : "Non sbloccato";
+                } else {
+                    progressText = `${q.current} / ${q.target}`;
+                }
+
+                card.innerHTML = `
+                    <div class="quest-icon-wrapper">
+                        ${iconSvg}
+                    </div>
+                    <div class="quest-info">
+                        <div class="quest-header-row">
+                            <span class="quest-name">${q.name}</span>
+                            <span class="quest-status-badge">${isDone ? 'Completata' : progressText}</span>
+                        </div>
+                        <span class="quest-desc">${q.desc}</span>
+                        ${!isDone && q.type !== 'binary' ? `
+                            <div class="quest-progress-bg">
+                                <div class="quest-progress-bar" style="width: ${percent}%;"></div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (newlyCompleted) {
+                localStorage.setItem('lex-achievements-completed', JSON.stringify(completedList));
+                playChime(true);
+            }
+        }
+
+        // Target CFU adjustment
+        function updateTargetCFU() {
+            targetCFU = parseInt(document.getElementById('target-cfu-select').value);
+            localStorage.setItem('lex-grad-target-cfu', targetCFU.toString());
+            playChime(false);
+            updateDashboard();
+        }
+
+        // Thesis slider adjustments
+        function updateThesisSliderVal() {
+            thesisBonus = parseInt(document.getElementById('thesis-bonus-slider').value);
+            document.getElementById('thesis-bonus-badge').textContent = thesisBonus.toString();
+            localStorage.setItem('lex-grad-thesis-bonus', thesisBonus.toString());
+            updateDashboard();
+        }
+
+        // Modal triggers: Add Exam
+        function openAddExamModal() {
+            document.getElementById('exam-input-name').value = '';
+            document.getElementById('exam-input-cfu').value = '6';
+            document.getElementById('exam-input-passed').checked = false;
+            document.getElementById('add-modal-grade-group').style.display = 'none';
+            document.getElementById('add-exam-overlay').classList.add('open');
+        }
+
+        function closeAddExamModal() {
+            document.getElementById('add-exam-overlay').classList.remove('open');
+        }
+
+        function closeAddExamModalOnOutsideClick(event) {
+            if (event.target.id === 'add-exam-overlay') {
+                closeAddExamModal();
+            }
+        }
+
+        function toggleAddModalGradeField() {
+            const passed = document.getElementById('exam-input-passed').checked;
+            document.getElementById('add-modal-grade-group').style.display = passed ? 'block' : 'none';
+        }
+
+        function submitAddExam() {
+            const name = document.getElementById('exam-input-name').value.trim();
+            const cfu = parseInt(document.getElementById('exam-input-cfu').value);
+            const passed = document.getElementById('exam-input-passed').checked;
+            let grade = null;
+
+            if (!name) {
+                alert("Inserisci un nome valido per l'esame.");
+                return;
+            }
+
+            if (isNaN(cfu) || cfu <= 0) {
+                alert("Inserisci crediti formativi (CFU) validi.");
+                return;
+            }
+
+            if (passed) {
+                grade = parseInt(document.getElementById('exam-input-grade').value);
+            }
+
+            // Create unique ID
+            const id = 'custom-' + Date.now();
+            studyPlan.push({
+                id: id,
+                name: name,
+                cfu: cfu,
+                passed: passed,
+                grade: grade,
+                date: passed ? new Date().toISOString().split('T')[0] : null,
+                subject: 'custom'
+            });
+
+            saveStudyPlan();
+            closeAddExamModal();
+            playChime(true);
+            updateDashboard();
+        }
+
+        // Modal triggers: Edit/Toggle Exam
+        function openEditExamModal(examId) {
+            const exam = studyPlan.find(e => e.id === examId);
+            if (!exam) return;
+
+            document.getElementById('edit-exam-id').value = exam.id;
+            document.getElementById('edit-exam-name').value = exam.name;
+            document.getElementById('edit-exam-cfu').value = exam.cfu.toString();
+            document.getElementById('edit-exam-passed').checked = exam.passed;
+            
+            if (exam.passed && exam.grade) {
+                document.getElementById('edit-exam-grade').value = exam.grade.toString();
+            } else {
+                document.getElementById('edit-exam-grade').value = '18';
+            }
+
+            // Lock name editing for core hub exams to maintain coherence
+            const isCore = ['diritto', 'arte', 'romana', 'storia', 'filosofia', 'letteratura', 'tesi'].includes(exam.id);
+            document.getElementById('edit-exam-name').disabled = isCore;
+            document.getElementById('edit-exam-cfu').disabled = isCore;
+            
+            // Do not show Delete button for core exams
+            document.getElementById('edit-modal-delete-btn').style.display = isCore ? 'none' : 'block';
+
+            document.getElementById('edit-modal-title').textContent = isCore ? `Registra Esame: ${exam.name}` : "Modifica Esame Personalizzato";
+            
+            toggleEditModalGradeField();
+            document.getElementById('edit-exam-overlay').classList.add('open');
+        }
+
+        function closeEditExamModal() {
+            document.getElementById('edit-exam-overlay').classList.remove('open');
+        }
+
+        function closeEditExamModalOnOutsideClick(event) {
+            if (event.target.id === 'edit-exam-overlay') {
+                closeEditExamModal();
+            }
+        }
+
+        function toggleEditModalGradeField() {
+            const passed = document.getElementById('edit-exam-passed').checked;
+            document.getElementById('edit-modal-grade-group').style.display = passed ? 'block' : 'none';
+        }
+
+        function submitEditExam() {
+            const id = document.getElementById('edit-exam-id').value;
+            const exam = studyPlan.find(e => e.id === id);
+            if (!exam) return;
+
+            const name = document.getElementById('edit-exam-name').value.trim();
+            const cfu = parseInt(document.getElementById('edit-exam-cfu').value);
+            const passed = document.getElementById('edit-exam-passed').checked;
+            let grade = null;
+
+            if (!name) {
+                alert("L'esame deve avere un nome.");
+                return;
+            }
+
+            if (passed) {
+                grade = parseInt(document.getElementById('edit-exam-grade').value);
+            }
+
+            exam.name = name;
+            exam.cfu = cfu;
+            exam.passed = passed;
+            exam.grade = grade;
+            if (passed && !exam.date) {
+                exam.date = new Date().toISOString().split('T')[0];
+            } else if (!passed) {
+                exam.date = null;
+            }
+
+            saveStudyPlan();
+            closeEditExamModal();
+            playChime(true);
+            updateDashboard();
+        }
+
+        function deleteExam() {
+            const id = document.getElementById('edit-exam-id').value;
+            const isCore = ['diritto', 'arte', 'romana', 'storia', 'filosofia', 'letteratura', 'tesi'].includes(id);
+            if (isCore) return;
+
+            if (confirm("Sei sicuro di voler rimuovere questo esame dal piano di studi?")) {
+                studyPlan = studyPlan.filter(e => e.id !== id);
+                saveStudyPlan();
+                closeEditExamModal();
+                playChime(false);
+                updateDashboard();
+            }
+        }
+    </script>
+</body>
+</html>
