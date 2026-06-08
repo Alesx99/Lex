@@ -14,14 +14,19 @@ const LexCore = {
     theme: localStorage.getItem('lex-theme') || 'dark',
 
     // Focus Player State
-    focusSound: localStorage.getItem('lex-focus-sound') || 'none',
-    focusVolume: parseFloat(localStorage.getItem('lex-focus-volume') ?? '0.5'),
     focusAudioCtx: null,
-    focusSourceNode: null,
     focusGainNode: null,
+    focusAnalyser: null,
     focusPlaying: false,
     focusLfoNodes: [],
     focusOscNodes: [],
+    focusMixer: {
+        white: { active: false, volume: 0.3, sourceNode: null, gainNode: null },
+        brown: { active: false, volume: 0.3, sourceNode: null, gainNode: null },
+        rain: { active: false, volume: 0.4, sourceNode: null, gainNode: null },
+        ocean: { active: false, volume: 0.4, sourceNode: null, gainNode: null },
+        drone: { active: false, volume: 0.5, sourceNode: null, gainNode: null }
+    },
 
     // TTS State variables
     ttsBlocks: [],
@@ -35,6 +40,7 @@ const LexCore = {
     isRestoring: false,
 
     init() {
+        this.loadMixerConfig();
         this.applyTheme();
         this.renderUI();
         this.attachListeners();
@@ -241,28 +247,59 @@ const LexCore = {
                     <div class="pomo-divider"></div>
                     
                     <div class="focus-player-section">
-                        <span class="backup-title">Focus Player 🎧</span>
-                        <div class="setting-row" style="margin-top: 0.4rem;">
-                            <label style="font-size:0.7rem;">Suono Ambientale</label>
-                            <select id="lex-focus-sound" style="width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:6px; color:var(--text-primary); padding:0.4rem; font-size:0.75rem; outline:none; font-family:inherit;">
-                                <option value="none" ${this.focusSound === 'none' ? 'selected' : ''}>Nessuno</option>
-                                <option value="white" ${this.focusSound === 'white' ? 'selected' : ''}>Rumore Bianco</option>
-                                <option value="brown" ${this.focusSound === 'brown' ? 'selected' : ''}>Rumore Marrone</option>
-                                <option value="rain" ${this.focusSound === 'rain' ? 'selected' : ''}>Pioggia Battente</option>
-                                <option value="ocean" ${this.focusSound === 'ocean' ? 'selected' : ''}>Onde del Mare</option>
-                                <option value="drone" ${this.focusSound === 'drone' ? 'selected' : ''}>Drone Ambientale</option>
-                            </select>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.4rem;">
-                            <button id="lex-focus-play-btn" class="backup-btn" style="padding:0.4rem; font-size:0.7rem; display:flex; align-items:center; gap:0.2rem; min-width:65px; justify-content:center;">
-                                <svg id="lex-focus-play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                                <span id="lex-focus-play-text">Play</span>
-                            </button>
-                            <div style="flex:1; display:flex; align-items:center; gap:0.4rem;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                                <input type="range" id="lex-focus-volume" min="0" max="1" step="0.05" value="${this.focusVolume}" style="flex:1; accent-color:var(--accent-gold); height:4px; border-radius:2px; background:rgba(255,255,255,0.2); cursor:pointer;">
+                        <span class="backup-title">Focus Player Mixer 🎧</span>
+                        <div class="mixer-channels" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.4rem;">
+                            <!-- White Noise -->
+                            <div class="mixer-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+                                <label style="font-size:0.7rem; flex:1; display:flex; align-items:center; gap:0.3rem; margin:0; cursor:pointer;">
+                                    <input type="checkbox" id="mix-white-chk" ${this.focusMixer.white.active ? 'checked' : ''} style="width:12px; height:12px; accent-color:var(--accent-gold);">
+                                    Rumore Bianco
+                                </label>
+                                <input type="range" id="mix-white-vol" min="0" max="1" step="0.05" value="${this.focusMixer.white.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
+                            </div>
+                            <!-- Brown Noise -->
+                            <div class="mixer-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+                                <label style="font-size:0.7rem; flex:1; display:flex; align-items:center; gap:0.3rem; margin:0; cursor:pointer;">
+                                    <input type="checkbox" id="mix-brown-chk" ${this.focusMixer.brown.active ? 'checked' : ''} style="width:12px; height:12px; accent-color:var(--accent-gold);">
+                                    Rumore Marrone
+                                </label>
+                                <input type="range" id="mix-brown-vol" min="0" max="1" step="0.05" value="${this.focusMixer.brown.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
+                            </div>
+                            <!-- Rain -->
+                            <div class="mixer-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+                                <label style="font-size:0.7rem; flex:1; display:flex; align-items:center; gap:0.3rem; margin:0; cursor:pointer;">
+                                    <input type="checkbox" id="mix-rain-chk" ${this.focusMixer.rain.active ? 'checked' : ''} style="width:12px; height:12px; accent-color:var(--accent-gold);">
+                                    Pioggia Battente
+                                </label>
+                                <input type="range" id="mix-rain-vol" min="0" max="1" step="0.05" value="${this.focusMixer.rain.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
+                            </div>
+                            <!-- Ocean -->
+                            <div class="mixer-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+                                <label style="font-size:0.7rem; flex:1; display:flex; align-items:center; gap:0.3rem; margin:0; cursor:pointer;">
+                                    <input type="checkbox" id="mix-ocean-chk" ${this.focusMixer.ocean.active ? 'checked' : ''} style="width:12px; height:12px; accent-color:var(--accent-gold);">
+                                    Onde del Mare
+                                </label>
+                                <input type="range" id="mix-ocean-vol" min="0" max="1" step="0.05" value="${this.focusMixer.ocean.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
+                            </div>
+                            <!-- Drone -->
+                            <div class="mixer-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+                                <label style="font-size:0.7rem; flex:1; display:flex; align-items:center; gap:0.3rem; margin:0; cursor:pointer;">
+                                    <input type="checkbox" id="mix-drone-chk" ${this.focusMixer.drone.active ? 'checked' : ''} style="width:12px; height:12px; accent-color:var(--accent-gold);">
+                                    Drone Ambientale
+                                </label>
+                                <input type="range" id="mix-drone-vol" min="0" max="1" step="0.05" value="${this.focusMixer.drone.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
                             </div>
                         </div>
+                        <div style="display:flex; align-items:center; gap:0.4rem; margin-top:0.6rem;">
+                            <button id="lex-focus-play-btn" class="backup-btn" style="padding:0.4rem; font-size:0.7rem; display:flex; align-items:center; gap:0.2rem; flex:1; justify-content:center;">
+                                <svg id="lex-focus-play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                <span id="lex-focus-play-text">Avvia Mixer</span>
+                            </button>
+                            <button id="lex-focus-reset-btn" class="backup-btn" style="padding:0.4rem; font-size:0.7rem; color:var(--text-muted); width:35px; justify-content:center;" title="Spegni Tutto">
+                                ✕
+                            </button>
+                        </div>
+                        <canvas id="lex-focus-visualizer" width="240" height="25" style="width:100%; height:25px; background:rgba(0,0,0,0.25); border-radius:6px; margin-top:0.5rem; border:1px solid var(--border-color); display:none; pointer-events:none;"></canvas>
                     </div>
                     
                     <div class="pomo-divider"></div>
@@ -446,22 +483,35 @@ const LexCore = {
             reader.readAsText(file);
         });
 
-        // Focus Player listeners
-        const focusSelect = document.getElementById('lex-focus-sound');
-        const focusPlayBtn = document.getElementById('lex-focus-play-btn');
-        const focusVol = document.getElementById('lex-focus-volume');
-        
-        focusSelect?.addEventListener('change', (e) => {
-            this.onFocusSoundChange(e.target.value);
+        // Focus Player Mixer listeners
+        const chs = ['white', 'brown', 'rain', 'ocean', 'drone'];
+        chs.forEach(key => {
+            const chk = document.getElementById(`mix-${key}-chk`);
+            const vol = document.getElementById(`mix-${key}-vol`);
+            
+            chk?.addEventListener('change', (e) => {
+                this.toggleMixerChannel(key, e.target.checked);
+            });
+            vol?.addEventListener('input', (e) => {
+                const val = parseFloat(e.target.value);
+                this.focusMixer[key].volume = val;
+                this.saveMixerConfig();
+                if (this.focusPlaying && this.focusMixer[key].gainNode) {
+                    this.focusMixer[key].gainNode.gain.setValueAtTime(val, this.focusAudioCtx.currentTime);
+                }
+            });
         });
         
+        const focusPlayBtn = document.getElementById('lex-focus-play-btn');
         focusPlayBtn?.addEventListener('click', (e) => {
             e.stopPropagation();
             this.toggleFocusPlay();
         });
         
-        focusVol?.addEventListener('input', (e) => {
-            this.onFocusVolumeChange(parseFloat(e.target.value));
+        const focusResetBtn = document.getElementById('lex-focus-reset-btn');
+        focusResetBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.resetFocusMixer();
         });
     },
 
@@ -1047,12 +1097,50 @@ const LexCore = {
     },
 
     // --- FOCUS SOUND PLAYER LOGIC ---
+    // --- FOCUS SOUND PLAYER LOGIC ---
+    loadMixerConfig() {
+        try {
+            const stored = localStorage.getItem('lex-mixer-config');
+            if (stored) {
+                const config = JSON.parse(stored);
+                Object.keys(config).forEach(key => {
+                    if (this.focusMixer[key]) {
+                        this.focusMixer[key].active = !!config[key].active;
+                        this.focusMixer[key].volume = parseFloat(config[key].volume ?? '0.4');
+                    }
+                });
+            }
+        } catch(e) {
+            console.error("Errore caricamento mixer config:", e);
+        }
+    },
+
+    saveMixerConfig() {
+        try {
+            const config = {};
+            Object.keys(this.focusMixer).forEach(key => {
+                config[key] = {
+                    active: this.focusMixer[key].active,
+                    volume: this.focusMixer[key].volume
+                };
+            });
+            localStorage.setItem('lex-mixer-config', JSON.stringify(config));
+        } catch(e) {
+            console.error("Errore salvataggio mixer config:", e);
+        }
+    },
+
     initAudioContext() {
         if (!this.focusAudioCtx) {
             this.focusAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
             this.focusGainNode = this.focusAudioCtx.createGain();
-            this.focusGainNode.gain.value = this.focusVolume;
-            this.focusGainNode.connect(this.focusAudioCtx.destination);
+            this.focusGainNode.gain.value = 1.0; // Master volume
+            
+            this.focusAnalyser = this.focusAudioCtx.createAnalyser();
+            this.focusAnalyser.fftSize = 64;
+            
+            this.focusGainNode.connect(this.focusAnalyser);
+            this.focusAnalyser.connect(this.focusAudioCtx.destination);
         }
         if (this.focusAudioCtx.state === 'suspended') {
             this.focusAudioCtx.resume();
@@ -1091,112 +1179,124 @@ const LexCore = {
         return node;
     },
 
-    playFocusSound() {
-        this.stopFocusSound();
-        
-        const soundType = this.focusSound;
-        if (soundType === 'none') {
-            return;
-        }
-        
-        this.initAudioContext();
-        
-        if (soundType === 'white') {
+    createChannelSource(channelKey) {
+        if (channelKey === 'white') {
             const node = this.createWhiteNoiseNode();
-            node.connect(this.focusGainNode);
-            node.start();
-            this.focusSourceNode = node;
-        } else if (soundType === 'brown') {
+            return { source: node, lastNode: node };
+        } else if (channelKey === 'brown') {
             const node = this.createBrownNoiseNode();
-            node.connect(this.focusGainNode);
-            node.start();
-            this.focusSourceNode = node;
-        } else if (soundType === 'rain') {
+            return { source: node, lastNode: node };
+        } else if (channelKey === 'rain') {
             const white = this.createWhiteNoiseNode();
-            
             const hp = this.focusAudioCtx.createBiquadFilter();
             hp.type = 'highpass';
-            hp.frequency.value = 400;
-            
+            hp.frequency.value = 450;
             const lp = this.focusAudioCtx.createBiquadFilter();
             lp.type = 'lowpass';
-            lp.frequency.value = 1500;
-            
+            lp.frequency.value = 1400;
             white.connect(hp);
             hp.connect(lp);
-            lp.connect(this.focusGainNode);
-            
-            white.start();
-            this.focusSourceNode = white;
-        } else if (soundType === 'ocean') {
+            return { source: white, lastNode: lp };
+        } else if (channelKey === 'ocean') {
             const brown = this.createBrownNoiseNode();
-            
             const waveGain = this.focusAudioCtx.createGain();
             waveGain.gain.value = 0.4;
-            
             const lfo = this.focusAudioCtx.createOscillator();
             lfo.frequency.value = 0.08;
-            
             const lfoGain = this.focusAudioCtx.createGain();
             lfoGain.gain.value = 0.35;
-            
             lfo.connect(lfoGain);
             lfoGain.connect(waveGain.gain);
-            
             brown.connect(waveGain);
-            waveGain.connect(this.focusGainNode);
-            
-            brown.start();
             lfo.start();
-            
-            this.focusSourceNode = brown;
             this.focusLfoNodes.push(lfo);
-        } else if (soundType === 'drone') {
+            return { source: brown, lastNode: waveGain };
+        } else if (channelKey === 'drone') {
             const freqs = [65.41, 98.00, 130.81, 164.81, 196.00];
-            
             const filter = this.focusAudioCtx.createBiquadFilter();
             filter.type = 'lowpass';
             filter.frequency.value = 350;
-            filter.connect(this.focusGainNode);
+            
+            const outputGain = this.focusAudioCtx.createGain();
+            outputGain.gain.value = 0.6;
+            filter.connect(outputGain);
             
             freqs.forEach((freq, idx) => {
                 const osc = this.focusAudioCtx.createOscillator();
                 osc.type = 'triangle';
                 osc.frequency.value = freq;
-                
                 const g = this.focusAudioCtx.createGain();
-                g.gain.value = 0.15;
+                g.gain.value = 0.12;
                 
                 const lfo = this.focusAudioCtx.createOscillator();
                 lfo.frequency.value = 0.04 + (idx * 0.015);
-                
                 const lfoGain = this.focusAudioCtx.createGain();
-                lfoGain.gain.value = 0.1;
+                lfoGain.gain.value = 0.08;
                 
                 lfo.connect(lfoGain);
                 lfoGain.connect(g.gain);
                 
                 osc.connect(g);
                 g.connect(filter);
-                
                 osc.start();
                 lfo.start();
                 
                 this.focusOscNodes.push(osc);
                 this.focusLfoNodes.push(lfo);
             });
+            return { source: null, lastNode: outputGain };
         }
+    },
+
+    playFocusMixer() {
+        this.stopFocusSound();
+        this.initAudioContext();
         
-        this.focusPlaying = true;
-        this.updateFocusUI();
+        let hasActive = false;
+        Object.keys(this.focusMixer).forEach(key => {
+            const ch = this.focusMixer[key];
+            if (ch.active) {
+                hasActive = true;
+                const sourceObj = this.createChannelSource(key);
+                ch.gainNode = this.focusAudioCtx.createGain();
+                ch.gainNode.gain.value = ch.volume;
+                
+                sourceObj.lastNode.connect(ch.gainNode);
+                ch.gainNode.connect(this.focusGainNode);
+                
+                if (sourceObj.source) {
+                    sourceObj.source.start();
+                    ch.sourceNode = sourceObj.source;
+                } else {
+                    ch.sourceNode = true;
+                }
+            }
+        });
+        
+        if (hasActive) {
+            this.focusPlaying = true;
+            this.updateFocusUI();
+            this.startVisualizer();
+        } else {
+            this.focusPlaying = false;
+            this.updateFocusUI();
+        }
     },
 
     stopFocusSound() {
-        if (this.focusSourceNode) {
-            try { this.focusSourceNode.stop(); } catch(e){}
-            try { this.focusSourceNode.disconnect(); } catch(e){}
-            this.focusSourceNode = null;
-        }
+        Object.keys(this.focusMixer).forEach(key => {
+            const ch = this.focusMixer[key];
+            if (ch.sourceNode && ch.sourceNode !== true) {
+                try { ch.sourceNode.stop(); } catch(e){}
+                try { ch.sourceNode.disconnect(); } catch(e){}
+            }
+            if (ch.gainNode) {
+                try { ch.gainNode.disconnect(); } catch(e){}
+            }
+            ch.sourceNode = null;
+            ch.gainNode = null;
+        });
+        
         if (this.focusLfoNodes) {
             this.focusLfoNodes.forEach(node => {
                 try { node.stop(); } catch(e){}
@@ -1215,17 +1315,67 @@ const LexCore = {
         this.updateFocusUI();
     },
 
+    resetFocusMixer() {
+        this.stopFocusSound();
+        Object.keys(this.focusMixer).forEach(key => {
+            this.focusMixer[key].active = false;
+            const chk = document.getElementById(`mix-${key}-chk`);
+            if (chk) chk.checked = false;
+        });
+        this.saveMixerConfig();
+    },
+
+    toggleMixerChannel(key, active) {
+        this.focusMixer[key].active = active;
+        this.saveMixerConfig();
+        
+        if (this.focusPlaying) {
+            if (active) {
+                this.initAudioContext();
+                const ch = this.focusMixer[key];
+                const sourceObj = this.createChannelSource(key);
+                ch.gainNode = this.focusAudioCtx.createGain();
+                ch.gainNode.gain.value = ch.volume;
+                sourceObj.lastNode.connect(ch.gainNode);
+                ch.gainNode.connect(this.focusGainNode);
+                if (sourceObj.source) {
+                    sourceObj.source.start();
+                    ch.sourceNode = sourceObj.source;
+                } else {
+                    ch.sourceNode = true;
+                }
+            } else {
+                const ch = this.focusMixer[key];
+                if (ch.sourceNode && ch.sourceNode !== true) {
+                    try { ch.sourceNode.stop(); } catch(e){}
+                    try { ch.sourceNode.disconnect(); } catch(e){}
+                }
+                if (ch.gainNode) {
+                    try { ch.gainNode.disconnect(); } catch(e){}
+                }
+                ch.sourceNode = null;
+                ch.gainNode = null;
+            }
+            // Check if any remain active
+            let activeCount = Object.values(this.focusMixer).filter(ch => ch.active).length;
+            if (activeCount === 0) {
+                this.stopFocusSound();
+            }
+        }
+    },
+
     toggleFocusPlay() {
         if (this.focusPlaying) {
             this.stopFocusSound();
         } else {
-            if (this.focusSound === 'none') {
-                this.focusSound = 'rain';
-                localStorage.setItem('lex-focus-sound', 'rain');
-                const selectEl = document.getElementById('lex-focus-sound');
-                if (selectEl) selectEl.value = 'rain';
+            let activeCount = Object.values(this.focusMixer).filter(ch => ch.active).length;
+            if (activeCount === 0) {
+                this.focusMixer.rain.active = true;
+                const chk = document.getElementById('mix-rain-chk');
+                if (chk) chk.checked = true;
+                this.saveMixerConfig();
             }
-            this.playFocusSound();
+            this.playFocusMixer();
         }
     },
 
@@ -1243,30 +1393,60 @@ const LexCore = {
                 }
             } else {
                 playBtn.classList.remove('playing');
-                playText.textContent = 'Play';
+                playText.textContent = 'Avvia Mixer';
                 if (playIcon) {
                     playIcon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`;
                 }
+                const canvas = document.getElementById('lex-focus-visualizer');
+                if (canvas) canvas.style.display = 'none';
             }
         }
     },
 
-    onFocusSoundChange(newSound) {
-        this.focusSound = newSound;
-        localStorage.setItem('lex-focus-sound', newSound);
-        if (newSound === 'none') {
-            this.stopFocusSound();
-        } else {
-            this.playFocusSound();
-        }
-    },
-
-    onFocusVolumeChange(newVol) {
-        this.focusVolume = newVol;
-        localStorage.setItem('lex-focus-volume', newVol);
-        if (this.focusGainNode) {
-            this.focusGainNode.gain.setValueAtTime(newVol, this.focusAudioCtx.currentTime);
-        }
+    startVisualizer() {
+        const canvas = document.getElementById('lex-focus-visualizer');
+        if (!canvas) return;
+        canvas.style.display = 'block';
+        const ctx = canvas.getContext('2d');
+        const bufferLength = this.focusAnalyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+        
+        const draw = () => {
+            if (!this.focusPlaying) {
+                canvas.style.display = 'none';
+                return;
+            }
+            requestAnimationFrame(draw);
+            
+            this.focusAnalyser.getByteTimeDomainData(dataArray);
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = document.body.classList.contains('coccole-theme') ? '#ff6b8b' : '#d4af37';
+            ctx.beginPath();
+            
+            const sliceWidth = canvas.width / bufferLength;
+            let x = 0;
+            
+            for (let i = 0; i < bufferLength; i++) {
+                const v = dataArray[i] / 128.0;
+                const y = (v * canvas.height) / 2;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                x += sliceWidth;
+            }
+            
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+        };
+        
+        draw();
     },
 
     incrementStudyTime(seconds) {

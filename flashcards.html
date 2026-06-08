@@ -1167,7 +1167,25 @@
 
         // Initialize on load
         document.addEventListener('DOMContentLoaded', () => {
-            setFilter('tutte');
+            const urlParams = new URLSearchParams(window.location.search);
+            const subjectParam = urlParams.get('subject');
+            const srsParam = urlParams.get('srs');
+            
+            if (srsParam !== null) {
+                srsToggle.checked = (srsParam === '1' || srsParam === 'true');
+            }
+            
+            if (subjectParam) {
+                // Check if subject is one of the supported ones, else default to tutte
+                const validSubjects = ['diritto', 'arte', 'romana', 'storia'];
+                if (validSubjects.includes(subjectParam)) {
+                    setFilter(subjectParam);
+                } else {
+                    setFilter('tutte');
+                }
+            } else {
+                setFilter('tutte');
+            }
         });
     </script>
 </body>

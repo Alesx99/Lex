@@ -1278,6 +1278,9 @@
             // Study streak
             const studyStreak = parseInt(localStorage.getItem('lex-study-streak') || '0');
 
+            // Roadmap completed days
+            const completedRoadmapDays = parseInt(localStorage.getItem('lex-roadmap-completed-days') || '0');
+
             // Achievements List configurations
             const sidequests = [
                 {
@@ -1350,6 +1353,14 @@
                     desc: "Mantieni una striscia di studio giornaliera di 3 giorni.",
                     current: studyStreak,
                     target: 3,
+                    type: "count"
+                },
+                {
+                    id: "roadmap_completed_5",
+                    name: "Costanza di Marcia 📅",
+                    desc: "Completa 5 giorni di studio pianificati nella tua roadmap.",
+                    current: completedRoadmapDays,
+                    target: 5,
                     type: "count"
                 }
             ];

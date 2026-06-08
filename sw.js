@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v6';
+const CACHE_NAME = 'lex-cache-v7';
 const ASSETS = [
   './',
   './index.html',
