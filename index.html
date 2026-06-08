@@ -249,7 +249,78 @@
     <!-- Footer -->
     <footer>
         <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+        <span id="secret-portal-rune" title="Frammento antico">Φ</span>
     </footer>
+
+    <!-- Secret Portal CSS & HTML Modal -->
+    <style>
+        #secret-portal-rune {
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            opacity: 0.15;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+            display: inline-block;
+            user-select: none;
+        }
+        #secret-portal-rune:hover {
+            opacity: 0.9 !important;
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px var(--accent-gold-glow);
+            transform: scale(1.2);
+        }
+        body.coccole-theme #secret-portal-rune:hover {
+            color: #ff6b8b;
+            text-shadow: 0 0 10px rgba(255, 107, 139, 0.5);
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+        /* Style adjustments for Coccole Theme in the modal */
+        body.coccole-theme #secret-portal-overlay .secret-modal-card {
+            background: rgba(255, 240, 245, 0.95) !important;
+            border-color: rgba(255, 107, 139, 0.2) !important;
+            box-shadow: 0 20px 40px rgba(255, 107, 139, 0.15) !important;
+        }
+        body.coccole-theme #secret-portal-overlay .secret-modal-title {
+            color: #ff6b8b !important;
+        }
+        body.coccole-theme #secret-portal-overlay .secret-modal-btn {
+            background: #ff6b8b !important;
+            color: #fff !important;
+        }
+        body.coccole-theme #secret-portal-input {
+            border-color: rgba(255, 107, 139, 0.2) !important;
+            color: #ff6b8b !important;
+        }
+        body.coccole-theme #secret-portal-input::placeholder {
+            color: rgba(255, 107, 139, 0.5) !important;
+        }
+    </style>
+
+    <div id="secret-portal-overlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(5,7,12,0.92); backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); z-index:11000; align-items:center; justify-content:center; animation:fadeIn 0.5s ease;">
+        <div class="secret-modal-card" style="background:rgba(22, 28, 45, 0.85); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:2.5rem; max-width:440px; width:90%; box-shadow: 0 20px 50px rgba(0,0,0,0.6); position:relative; text-align:center; color:var(--text-primary);">
+            <span style="font-size:3rem; display:block; margin-bottom:1rem;">🏛️</span>
+            <h2 style="font-family:var(--font-serif); font-size:1.8rem; color:var(--accent-gold); margin-bottom:1rem;" class="secret-modal-title">Il Portale di Atena</h2>
+            <p style="font-size:0.9rem; line-height:1.6; color:var(--text-secondary); margin-bottom:1.5rem;">
+                "Io sono il cerchio che racchiude l'universo, la porta del tempio che non ha serratura. Digita il mio nome per varcare la soglia."
+            </p>
+            <div style="margin-bottom:1.5rem;">
+                <input type="text" id="secret-portal-input" placeholder="Parola d'ordine..." style="background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:8px; padding:0.6rem 1rem; color:#fff; font-size:0.95rem; width:100%; outline:none; text-align:center; transition:all 0.2s;">
+            </div>
+            <div style="display:flex; gap:0.5rem; justify-content:center;">
+                <button onclick="checkSecretPortalWord()" class="secret-modal-btn" style="background:var(--accent-gold); color:#000; border:none; border-radius:8px; padding:0.6rem 1.5rem; font-weight:700; cursor:pointer; font-size:0.9rem; transition:all 0.2s;">Accedi</button>
+                <button onclick="closeSecretPortalModal()" style="background:rgba(255,255,255,0.05); color:var(--text-primary); border:1px solid var(--border-color); border-radius:8px; padding:0.6rem 1.2rem; cursor:pointer; font-size:0.9rem;">Chiudi</button>
+            </div>
+            <p id="secret-portal-error" style="color:#ff6b8b; font-size:0.8rem; margin-top:0.8rem; display:none;"></p>
+        </div>
+    </div>
 
     <!-- Centralized Search Database -->
     <script src="js/search_db.js"></script>
@@ -462,6 +533,63 @@
                     overlay.style.display = 'none';
                 }
             });
+
+            // --- SECRET PORTAL EASTER EGG ---
+            const rune = document.getElementById('secret-portal-rune');
+            const portalOverlay = document.getElementById('secret-portal-overlay');
+            const portalInput = document.getElementById('secret-portal-input');
+            const portalError = document.getElementById('secret-portal-error');
+
+            if (rune) {
+                rune.addEventListener('click', () => {
+                    if (portalOverlay) {
+                        portalOverlay.style.display = 'flex';
+                        if (portalInput) {
+                            portalInput.value = '';
+                            portalInput.focus();
+                        }
+                        if (portalError) portalError.style.display = 'none';
+                    }
+                });
+            }
+
+            window.closeSecretPortalModal = function() {
+                if (portalOverlay) {
+                    portalOverlay.style.display = 'none';
+                }
+            };
+
+            window.checkSecretPortalWord = function() {
+                if (!portalInput || !portalError) return;
+                const word = portalInput.value.toLowerCase().trim();
+                
+                if (word === 'pantheon') {
+                    portalError.style.display = 'none';
+                    // starry exit zoom transition
+                    document.body.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    document.body.style.opacity = '0';
+                    document.body.style.transform = 'scale(0.96) rotate(-0.5deg)';
+                    setTimeout(() => {
+                        window.location.href = 'secret_puzzle.html';
+                    }, 800);
+                } else {
+                    portalError.textContent = 'Codice errato. La password svanisce nel silenzio...';
+                    portalError.style.display = 'block';
+                    const card = portalOverlay.querySelector('.secret-modal-card');
+                    if (card) {
+                        card.classList.add('shake');
+                        setTimeout(() => card.classList.remove('shake'), 400);
+                    }
+                }
+            };
+
+            if (portalInput) {
+                portalInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        checkSecretPortalWord();
+                    }
+                });
+            }
 
             // Register Service Worker for PWA
             if ('serviceWorker' in navigator) {
