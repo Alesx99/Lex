@@ -14,6 +14,8 @@
     <script src="js/lex_core.js"></script>
     <!-- Centralized Quiz Database -->
     <script src="js/quiz_db.js"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Specific Styles for Exam Simulator */
         .exam-container {
@@ -1074,6 +1076,30 @@
                     </div>
                 </div>
 
+                <!-- Detailed Report Card & Radar Chart -->
+                <div class="detailed-report-section" style="margin-top: 2.5rem; border-top: 1px solid var(--border-color); padding-top: 2rem; margin-bottom: 2rem;">
+                    <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">Pagella Dettagliata & Analisi</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem; align-items: center;">
+                        <!-- Radar Canvas -->
+                        <div style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 16px; padding: 1rem; display: flex; justify-content: center; align-items: center; min-height: 280px; position: relative;">
+                            <canvas id="examRadarChart" style="max-height: 260px; max-width: 260px;"></canvas>
+                        </div>
+                        <!-- Diagnostics / Stats -->
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem;">
+                                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); font-weight: 700; letter-spacing: 0.05em;">Tempo di Risposta Medio</div>
+                                <div id="diag-avg-speed" style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--accent-gold); margin-top: 0.2rem;">0s</div>
+                                <div id="diag-speed-by-subject" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4;">Dettaglio per materia: ...</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem;">
+                                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); font-weight: 700; letter-spacing: 0.05em;">Frequenza "Indovinate" (Uncertainty)</div>
+                                <div id="diag-guessing-freq" style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--accent-terracotta); margin-top: 0.2rem;">0%</div>
+                                <div id="diag-guessing-desc" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4;">Nessun sospetto di risposta a caso. Ottima sicurezza concettuale!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Chapter Review Recommendations -->
                 <div class="recommendations-section">
                     <h3 class="recommendations-title">Sintesi Raccomandate per il Ripasso</h3>
@@ -1164,7 +1190,8 @@
         let currentQuestionIndex = 0;
         let selectedOptionIdx = -1;
         let score = 0;
-        let userResponses = []; // Track: {question, correctIndex, selectedIndex, subject, moduleKey}
+        let userResponses = []; // Track: {question, correctIndex, selectedIndex, subject, moduleKey, isCorrect, timeSpent}
+        let questionLoadedTime = 0;
         
         let examTimerDuration = 60; // default 60s per question
         let timerInterval = null;
@@ -1402,6 +1429,7 @@
         function showQuestion() {
             // Reset state
             selectedOptionIdx = -1;
+            questionLoadedTime = Date.now();
             nextBtn.textContent = (currentQuestionIndex === examQuestions.length - 1) ? "Completa Esame" : "Invia e Continua";
             nextBtn.disabled = true;
 
@@ -1498,6 +1526,7 @@
             
             const q = examQuestions[currentQuestionIndex];
             const isCorrect = (selectedOptionIdx === q.correctIndex);
+            const timeSpent = Math.max(1, Math.round((Date.now() - questionLoadedTime) / 1000));
 
             if (isCorrect) {
                 score++;
@@ -1511,7 +1540,8 @@
                 subject: q.subject,
                 moduleKey: q.moduleKey,
                 isCorrect: isCorrect,
-                timedOut: isTimeout && selectedOptionIdx === -1
+                timedOut: isTimeout && selectedOptionIdx === -1,
+                timeSpent: timeSpent
             });
 
             // Move to next question or show report
@@ -1653,6 +1683,133 @@
             const stoPercent = storiaCount > 0 ? Math.round((storiaCorrect / storiaCount) * 100) : 0;
             document.getElementById('stat-storia-text').textContent = storiaCount > 0 ? `${storiaCorrect} / ${storiaCount} (${stoPercent}%)` : "N/A";
             document.getElementById('stat-storia-bar').style.width = stoPercent + '%';
+
+            // Speed and guessing calculation
+            let totalSpeed = 0;
+            let totalAnswered = 0;
+            let guessCount = 0;
+            
+            const speedBySubject = {
+                diritto: { sum: 0, count: 0 },
+                arte: { sum: 0, count: 0 },
+                arte_romana: { sum: 0, count: 0 },
+                storia: { sum: 0, count: 0 }
+            };
+            const guessesBySubject = { diritto: 0, arte: 0, arte_romana: 0, storia: 0 };
+
+            userResponses.forEach(resp => {
+                const tSpent = resp.timeSpent || 0;
+                totalSpeed += tSpent;
+                totalAnswered++;
+
+                const sub = resp.subject === 'diritto' ? 'diritto' : (resp.subject === 'arte_romana' ? 'arte_romana' : (resp.subject === 'storia' ? 'storia' : 'arte'));
+                
+                if (speedBySubject[sub]) {
+                    speedBySubject[sub].sum += tSpent;
+                    speedBySubject[sub].count++;
+                }
+
+                // Guessing check: answered in <= 4 seconds and incorrect
+                if (tSpent <= 4 && !resp.isCorrect && !resp.timedOut) {
+                    guessCount++;
+                    guessesBySubject[sub]++;
+                }
+            });
+
+            const avgSpeed = totalAnswered > 0 ? Math.round(totalSpeed / totalAnswered) : 0;
+            const guessingFreq = totalAnswered > 0 ? Math.round((guessCount / totalAnswered) * 100) : 0;
+
+            document.getElementById('diag-avg-speed').textContent = `${avgSpeed}s`;
+            
+            let speedDetails = [];
+            if (speedBySubject.diritto.count > 0) speedDetails.push(`Diritto: ${Math.round(speedBySubject.diritto.sum / speedBySubject.diritto.count)}s`);
+            if (speedBySubject.arte.count > 0) speedDetails.push(`Arte Mod.: ${Math.round(speedBySubject.arte.sum / speedBySubject.arte.count)}s`);
+            if (speedBySubject.arte_romana.count > 0) speedDetails.push(`Arte Rom.: ${Math.round(speedBySubject.arte_romana.sum / speedBySubject.arte_romana.count)}s`);
+            if (speedBySubject.storia.count > 0) speedDetails.push(`Storia Mod.: ${Math.round(speedBySubject.storia.sum / speedBySubject.storia.count)}s`);
+            document.getElementById('diag-speed-by-subject').textContent = speedDetails.length > 0 ? `Dettaglio per materia: ${speedDetails.join(', ')}` : 'Nessun dettaglio.';
+
+            document.getElementById('diag-guessing-freq').textContent = `${guessingFreq}%`;
+            
+            let guessingDesc = '';
+            if (guessingFreq === 0) {
+                guessingDesc = 'Nessun sospetto di risposta a caso. Ottima sicurezza concettuale!';
+            } else if (guessingFreq <= 15) {
+                guessingDesc = 'Bassa frequenza di risposte affrettate. Ti prendi il giusto tempo per pensare.';
+            } else if (guessingFreq <= 35) {
+                guessingDesc = 'Frequenza moderata. Tendi a rispondere d\'impulso in alcune domande difficili.';
+            } else {
+                const worstSubjects = Object.keys(guessesBySubject).filter(k => guessesBySubject[k] > 0);
+                const subLabels = worstSubjects.map(s => s === 'diritto' ? 'Diritto' : (s === 'arte_romana' ? 'Arte Rom.' : (s === 'storia' ? 'Storia Mod.' : 'Arte Mod.')));
+                guessingDesc = `Alta probabilità di risposte a caso (${guessingFreq}%). Ti consigliamo di leggere con più calma, specialmente in: ${subLabels.join(', ')}.`;
+            }
+            document.getElementById('diag-guessing-desc').textContent = guessingDesc;
+
+            // Radar Chart performance
+            const pctDiritto = dirittoCount > 0 ? Math.round((dirittoCorrect / dirittoCount) * 100) : 0;
+            const pctArte = arteCount > 0 ? Math.round((arteCorrect / arteCount) * 100) : 0;
+            const pctRomana = romanaCount > 0 ? Math.round((romanaCorrect / romanaCount) * 100) : 0;
+            const pctStoria = storiaCount > 0 ? Math.round((storiaCorrect / storiaCount) * 100) : 0;
+
+            const radarData = [pctDiritto, pctArte, pctRomana, pctStoria];
+
+            // Render Radar Chart
+            const ctxRadar = document.getElementById('examRadarChart').getContext('2d');
+            if (window.activeExamRadar) {
+                window.activeExamRadar.destroy();
+            }
+
+            const isCoccole = document.body.classList.contains('coccole-theme');
+            const primaryColor = isCoccole ? '#ff6b8b' : '#d4af37';
+            const primaryGlow = isCoccole ? 'rgba(255, 107, 139, 0.2)' : 'rgba(212, 175, 55, 0.2)';
+            
+            window.activeExamRadar = new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Diritto', 'Arte Moderna', 'Arte Romana', 'Storia Moderna'],
+                    datasets: [{
+                        label: 'Risposte Corrette (%)',
+                        data: radarData,
+                        backgroundColor: primaryGlow,
+                        borderColor: primaryColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: primaryColor,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: primaryColor
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                display: false,
+                                stepSize: 25
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.08)'
+                            },
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.08)'
+                            },
+                            pointLabels: {
+                                color: '#9ca3af',
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 10,
+                                    weight: '600'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
 
             // Generate review recommendations
             const recList = document.getElementById('recommendations-list');

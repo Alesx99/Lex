@@ -900,4 +900,23 @@ body.coccole-theme header h1 {
     background: linear-gradient(90deg, #ff6b8b 0%, #ff8da1 100%);
 }
 
+/* Pomodoro Plant Companion visual styles */
+.pomo-plant-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    margin-right: 0.3rem;
+    animation: floating-plant-companion 3s ease-in-out infinite;
+}
+
+@keyframes floating-plant-companion {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
 

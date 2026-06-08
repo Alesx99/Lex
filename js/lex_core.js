@@ -314,6 +314,9 @@ const LexCore = {
                     ${this.state === 'work' ? 'Studio' : 'Pausa'}
                 </span>
                 
+                <div id="lex-pomo-plant-wrapper" class="pomo-plant-wrapper" style="display: flex; align-items: center; justify-content: center;" title="La tua piantina dello studio: cresce mentre studi!">
+                    <span id="lex-pomo-plant-emoji" style="font-size: 1.15rem; transition: all 0.3s;">🌱</span>
+                </div>
                 <span id="lex-pomo-timer" class="pomo-timer-display">${this.getDisplayTime()}</span>
                 
                 <button id="lex-pomo-start" class="pomo-btn" title="Avvia/Stop">
@@ -1005,7 +1008,7 @@ const LexCore = {
                 'lex-study-seconds', 'lex-night-study-seconds', 'lex-study-streak', 'lex-exams-passed', 'lex-achievements-completed',
                 'lex-flashcards-completed', 'lex-study-planner-roadmap', 'lex-roadmap-completed-days',
                 'lex-unlocked-coupons', 'lex-visited-pages', 'lex-theme', 'lex-grad-target-cfu', 'lex-grad-thesis-bonus',
-                'lex-sanctuary-unlocked', 'lex-coupon-redeemed-'
+                'lex-sanctuary-unlocked', 'lex-coupon-redeemed-', 'lex-study-daily-log', 'lex-pomo-flowers'
             ];
             const shouldSync = syncablePrefixes.some(prefix => key.startsWith(prefix));
             
@@ -1076,6 +1079,43 @@ const LexCore = {
             else c.classList.remove('on-break');
         }
         if (s) s.innerHTML = this.getStartIcon();
+        this.updatePlantDisplay();
+    },
+
+    updatePlantDisplay() {
+        const plantWrapper = document.getElementById('lex-pomo-plant-wrapper');
+        const plantEmoji = document.getElementById('lex-pomo-plant-emoji');
+        if (!plantEmoji || !plantWrapper) return;
+
+        if (this.state === 'idle') {
+            plantEmoji.textContent = '🌱';
+            plantWrapper.setAttribute('title', 'La tua piantina dello studio: cresce mentre studi!');
+        } else if (this.state === 'break') {
+            plantEmoji.textContent = '🌺';
+            plantWrapper.setAttribute('title', 'Fiore sbocciato! Congratulazioni!');
+        } else if (this.state === 'work') {
+            const total = this.workTime * 60;
+            const remaining = Math.max(0, Math.floor((this.endTime - Date.now()) / 1000));
+            const elapsed = total - remaining;
+            const pct = elapsed / total;
+
+            if (pct < 0.25) {
+                plantEmoji.textContent = '🌱'; // Seed
+                plantWrapper.setAttribute('title', 'Semino piantato... concentrati per farlo germogliare!');
+            } else if (pct < 0.50) {
+                plantEmoji.textContent = '🌿'; // Sprout
+                plantWrapper.setAttribute('title', 'Sta germogliando! Continua così!');
+            } else if (pct < 0.75) {
+                plantEmoji.textContent = '🪴'; // Potted Sprout
+                plantWrapper.setAttribute('title', 'La piantina sta crescendo forte!');
+            } else if (pct < 1.0) {
+                plantEmoji.textContent = '🌸'; // Bud
+                plantWrapper.setAttribute('title', 'Quasi sbocciata! Manca poco!');
+            } else {
+                plantEmoji.textContent = '🌺'; // Bloomed Flower
+                plantWrapper.setAttribute('title', 'Fiore sbocciato! Lavoro fantastico!');
+            }
+        }
     },
 
     tick() {
@@ -1084,6 +1124,14 @@ const LexCore = {
             const now = Date.now();
             if (now >= this.endTime) {
                 if (this.state === 'work') {
+                    // Save bloomed flower
+                    try {
+                        let flowers = parseInt(localStorage.getItem('lex-pomo-flowers') || '0');
+                        flowers++;
+                        localStorage.setItem('lex-pomo-flowers', flowers.toString());
+                    } catch(e) {
+                        console.error("Errore salvataggio fiore:", e);
+                    }
                     this.startTimer('break', this.breakTime);
                     alert('Sessione di studio completata! Inizia la pausa.');
                 } else {
@@ -1457,6 +1505,17 @@ const LexCore = {
             let totalSec = parseInt(localStorage.getItem('lex-study-seconds') || '0');
             totalSec += seconds;
             localStorage.setItem('lex-study-seconds', totalSec);
+
+            // Update daily study log
+            const todayStr = new Date().toISOString().split('T')[0];
+            let dailyLog = {};
+            try {
+                dailyLog = JSON.parse(localStorage.getItem('lex-study-daily-log') || '{}');
+            } catch(e) {
+                dailyLog = {};
+            }
+            dailyLog[todayStr] = (dailyLog[todayStr] || 0) + seconds;
+            localStorage.setItem('lex-study-daily-log', JSON.stringify(dailyLog));
 
             const nowHour = new Date().getHours();
             if (nowHour >= 0 && nowHour < 5) {

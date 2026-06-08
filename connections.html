@@ -193,6 +193,212 @@
             stroke-dasharray: none;
         }
 
+        /* Free-form Map View */
+        .connections-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .connections-tabs .tab-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.8rem 1.8rem;
+            border-radius: 99px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .connections-tabs .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b29024 100%);
+            color: #080b11;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px var(--accent-gold-glow);
+        }
+        
+        .coccole-theme .connections-tabs .tab-btn.active {
+            background: linear-gradient(135deg, #ff6b8b 0%, #ff8da1 100%);
+            color: #fff;
+            border-color: #ff6b8b;
+            box-shadow: 0 0 15px rgba(255,107,139,0.3);
+        }
+
+        #free-map-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            background: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-color: rgba(10, 15, 28, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            margin-bottom: 4rem;
+            display: none; /* Hidden by default */
+        }
+
+        #free-map-toolbar {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            display: flex;
+            gap: 0.6rem;
+            background: rgba(10, 15, 28, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .toolbar-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .toolbar-btn.active-action {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: #22d3ee;
+            color: #22d3ee;
+        }
+
+        #free-connections-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .free-node-card {
+            position: absolute;
+            width: 200px;
+            background: rgba(20, 26, 40, 0.85);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            cursor: grab;
+            user-select: none;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .free-node-card:active {
+            cursor: grabbing;
+        }
+
+        .free-node-card.selected-for-link {
+            border-color: #22d3ee !important;
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+        }
+
+        .free-node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-color, var(--accent-gold));
+            margin-bottom: 0.3rem;
+            pointer-events: none;
+        }
+
+        .free-node-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            pointer-events: none;
+        }
+
+        .free-node-edit-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+            pointer-events: auto; /* Allow clicking the edit button inside draggable card */
+        }
+
+        .free-node-edit-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .free-link-line {
+            fill: none;
+            stroke: var(--text-muted);
+            stroke-width: 1.5;
+            stroke-dasharray: 4;
+            opacity: 0.5;
+        }
+
+        .free-link-line.active-link {
+            stroke-width: 2.5;
+            stroke-dasharray: 0;
+            opacity: 0.8;
+            stroke: var(--accent-gold);
+        }
+
+        .coccole-theme .free-link-line.active-link {
+            stroke: #ff6b8b;
+        }
+
+        /* Color choices grid in modal */
+        .color-choices {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .color-choice {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .color-choice:hover {
+            transform: scale(1.1);
+        }
+
+        .color-choice.selected {
+            border-color: #fff;
+            transform: scale(1.15);
+        }
+
         /* Panel explaining connections */
         .info-panel {
             background: rgba(18, 25, 41, 0.8);
@@ -429,8 +635,14 @@
             Torna alla Home
         </a>
 
+        <!-- Mode Tabs -->
+        <div class="connections-tabs">
+            <button id="tab-standard-map" class="tab-btn active" onclick="switchMapView('standard')">Mappa Trans-Disciplinare</button>
+            <button id="tab-free-map" class="tab-btn" onclick="switchMapView('free')">Lavagna Concettuale Libera 🎨</button>
+        </div>
+
         <!-- Mode Controls floating bar -->
-        <div class="edit-mode-controls">
+        <div class="edit-mode-controls" id="standard-map-controls">
             <button id="toggle-edit-mode-btn" class="edit-btn" onclick="toggleEditMode()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                 Personalizza Relazioni
@@ -458,7 +670,29 @@
             </div>
         </div>
 
-        <div class="connections-container">
+        <!-- FREE-FORM MIND MAP BOARD -->
+        <div id="free-map-container">
+            <div id="free-map-toolbar">
+                <button class="toolbar-btn" onclick="addFreeNode()" title="Crea un nuovo nodo sulla lavagna">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Aggiungi Nodo
+                </button>
+                <button id="btn-free-link-mode" class="toolbar-btn" onclick="toggleFreeLinkMode()" title="Entra in modalità collegamento tra nodi">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    Collega Nodi
+                </button>
+                <button class="toolbar-btn" style="color: #ef4444;" onclick="clearFreeMap()" title="Elimina tutti i nodi personalizzati">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    Pulisci Lavagna
+                </button>
+            </div>
+            
+            <svg id="free-connections-svg">
+                <!-- Links drawn dynamically in JS -->
+            </svg>
+        </div>
+
+        <div class="connections-container" id="connections-columns-view">
             <!-- SVG Line Canvas -->
             <svg id="connections-svg"></svg>
 
@@ -1103,8 +1337,387 @@
                 });
             });
 
-            window.addEventListener('resize', drawLines);
+            window.addEventListener('resize', () => {
+                drawLines();
+                drawFreeLines();
+            });
             setTimeout(drawLines, 200);
+
+            // --- FREE-FORM MAP SYSTEM ---
+            window.currentMapView = 'standard';
+            window.freeNodes = [];
+            window.freeLinks = [];
+            window.freeLinkMode = false;
+            window.selectedFreeStartNode = null;
+            window.editingFreeNodeId = null;
+            window.selectedColorChoice = '#d4af37';
+
+            window.switchMapView = function(view) {
+                window.currentMapView = view;
+                const tabStd = document.getElementById('tab-standard-map');
+                const tabFree = document.getElementById('tab-free-map');
+                const stdControls = document.getElementById('standard-map-controls');
+                const stdColumns = document.getElementById('connections-columns-view');
+                const stdPanel = document.getElementById('explanatory-panel');
+                const freeContainer = document.getElementById('free-map-container');
+
+                if (view === 'standard') {
+                    tabStd.classList.add('active');
+                    tabFree.classList.remove('active');
+                    stdControls.style.display = 'flex';
+                    stdColumns.style.display = 'grid';
+                    stdPanel.style.display = 'flex';
+                    freeContainer.style.display = 'none';
+                    drawLines();
+                } else {
+                    tabStd.classList.remove('active');
+                    tabFree.classList.add('active');
+                    stdControls.style.display = 'none';
+                    stdColumns.style.display = 'none';
+                    stdPanel.style.display = 'none';
+                    freeContainer.style.display = 'block';
+                    loadFreeMapData();
+                }
+            };
+
+            function loadFreeMapData() {
+                try {
+                    const storedNodes = localStorage.getItem('lex-free-nodes');
+                    const storedLinks = localStorage.getItem('lex-free-links');
+                    
+                    if (storedNodes) {
+                        window.freeNodes = JSON.parse(storedNodes);
+                    } else {
+                        // Demo starting nodes
+                        window.freeNodes = [
+                            { id: 'free-node-1', title: 'Costituzione Italiana (Art. 9)', subtitle: 'Diritto dei Beni Culturali', x: 150, y: 220, color: '#d4af37', notes: 'Tutela il patrimonio storico ed artistico della Nazione. Rappresenta la stella polare della legislazione italiana.' },
+                            { id: 'free-node-2', title: 'Antonio Canova', subtitle: 'Storia dell\'Arte Moderna', x: 450, y: 150, color: '#ff6b8b', notes: 'Celebre scultore neoclassico. Svolse un ruolo fondamentale nel 1815 per il recupero delle opere d\'arte asportate dalle truppe napoleoniche.' },
+                            { id: 'free-node-3', title: 'Spoliazioni Napoleoniche', subtitle: 'Storia Moderna / Studio VIII', x: 450, y: 350, color: '#22d3ee', notes: 'Enorme trasferimento coatto di beni culturali dall\'Italia a Parigi. Stimolò la coscienza di tutela e legame col territorio.' }
+                        ];
+                        localStorage.setItem('lex-free-nodes', JSON.stringify(window.freeNodes));
+                    }
+
+                    if (storedLinks) {
+                        window.freeLinks = JSON.parse(storedLinks);
+                    } else {
+                        window.freeLinks = [
+                            { from: 'free-node-2', to: 'free-node-3' },
+                            { from: 'free-node-1', to: 'free-node-3' }
+                        ];
+                        localStorage.setItem('lex-free-links', JSON.stringify(window.freeLinks));
+                    }
+                } catch(e) {
+                    console.error("Errore lettura lavagna libera:", e);
+                }
+
+                renderFreeNodes();
+                drawFreeLines();
+            }
+
+            function renderFreeNodes() {
+                const container = document.getElementById('free-map-container');
+                const existingCards = container.querySelectorAll('.free-node-card');
+                existingCards.forEach(c => c.remove());
+
+                window.freeNodes.forEach(node => {
+                    const card = document.createElement('div');
+                    card.className = 'free-node-card';
+                    card.id = node.id;
+                    card.style.left = node.x + 'px';
+                    card.style.top = node.y + 'px';
+                    card.style.setProperty('--accent-color', node.color);
+
+                    card.innerHTML = `
+                        <div class="free-node-header" style="color: ${node.color};">
+                            <span>${node.subtitle || 'Nota'}</span>
+                            <button class="free-node-edit-btn" onclick="openFreeNodeModal('${node.id}', event)" title="Modifica dettagli">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </button>
+                        </div>
+                        <div class="free-node-title">${node.title}</div>
+                    `;
+
+                    // Drag event setup
+                    setupNodeDrag(card, node);
+                    
+                    // Click selection for connecting
+                    card.addEventListener('click', (e) => {
+                        if (e.target.closest('.free-node-edit-btn')) return;
+                        if (window.freeLinkMode) {
+                            handleFreeLinkSelection(node.id);
+                        }
+                    });
+
+                    container.appendChild(card);
+                });
+            }
+
+            function setupNodeDrag(card, node) {
+                let startX, startY;
+                let initialLeft, initialTop;
+                
+                const onDragStart = (e) => {
+                    if (e.target.closest('.free-node-edit-btn')) return;
+                    if (window.freeLinkMode) return;
+                    
+                    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+                    
+                    startX = clientX;
+                    startY = clientY;
+                    initialLeft = card.offsetLeft;
+                    initialTop = card.offsetTop;
+                    
+                    document.addEventListener('mousemove', onDragging);
+                    document.addEventListener('touchmove', onDragging, { passive: false });
+                    document.addEventListener('mouseup', onDragEnd);
+                    document.addEventListener('touchend', onDragEnd);
+                };
+
+                const onDragging = (e) => {
+                    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+                    
+                    const dx = clientX - startX;
+                    const dy = clientY - startY;
+                    
+                    const container = document.getElementById('free-map-container');
+                    const maxLeft = container.offsetWidth - card.offsetWidth;
+                    const maxTop = container.offsetHeight - card.offsetHeight;
+                    
+                    let newLeft = Math.max(0, Math.min(initialLeft + dx, maxLeft));
+                    let newTop = Math.max(0, Math.min(initialTop + dy, maxTop));
+                    
+                    card.style.left = newLeft + 'px';
+                    card.style.top = newTop + 'px';
+                    
+                    node.x = newLeft;
+                    node.y = newTop;
+                    
+                    drawFreeLines();
+                    
+                    if (e.type === 'touchmove') e.preventDefault();
+                };
+
+                const onDragEnd = () => {
+                    document.removeEventListener('mousemove', onDragging);
+                    document.removeEventListener('touchmove', onDragging);
+                    document.removeEventListener('mouseup', onDragEnd);
+                    document.removeEventListener('touchend', onDragEnd);
+                    
+                    localStorage.setItem('lex-free-nodes', JSON.stringify(window.freeNodes));
+                };
+
+                card.addEventListener('mousedown', onDragStart);
+                card.addEventListener('touchstart', onDragStart, { passive: true });
+            }
+
+            window.addFreeNode = function() {
+                const container = document.getElementById('free-map-container');
+                const x = Math.round(container.offsetWidth / 2 - 100);
+                const y = Math.round(container.offsetHeight / 2 - 40);
+                const newId = 'free-node-' + Date.now();
+                
+                const newNode = {
+                    id: newId,
+                    title: 'Nuovo Concetto',
+                    subtitle: 'Tag Materia',
+                    x: x,
+                    y: y,
+                    color: '#d4af37',
+                    notes: ''
+                };
+                
+                window.freeNodes.push(newNode);
+                localStorage.setItem('lex-free-nodes', JSON.stringify(window.freeNodes));
+                
+                renderFreeNodes();
+                drawFreeLines();
+                
+                window.openFreeNodeModal(newId);
+            };
+
+            window.toggleFreeLinkMode = function() {
+                window.freeLinkMode = !window.freeLinkMode;
+                const btn = document.getElementById('btn-free-link-mode');
+                
+                if (window.selectedFreeStartNode) {
+                    const el = document.getElementById(window.selectedFreeStartNode);
+                    if (el) el.classList.remove('selected-for-link');
+                    window.selectedFreeStartNode = null;
+                }
+
+                if (window.freeLinkMode) {
+                    btn.classList.add('active-action');
+                    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Annulla`;
+                } else {
+                    btn.classList.remove('active-action');
+                    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> Collega Nodi`;
+                }
+            };
+
+            function handleFreeLinkSelection(nodeId) {
+                if (!window.selectedFreeStartNode) {
+                    window.selectedFreeStartNode = nodeId;
+                    document.getElementById(nodeId).classList.add('selected-for-link');
+                } else {
+                    if (window.selectedFreeStartNode === nodeId) {
+                        document.getElementById(nodeId).classList.remove('selected-for-link');
+                        window.selectedFreeStartNode = null;
+                        return;
+                    }
+                    
+                    const exists = window.freeLinks.some(l => 
+                        (l.from === window.selectedFreeStartNode && l.to === nodeId) ||
+                        (l.from === nodeId && l.to === window.selectedFreeStartNode)
+                    );
+                    
+                    if (!exists) {
+                        window.freeLinks.push({
+                            from: window.selectedFreeStartNode,
+                            to: nodeId
+                        });
+                        localStorage.setItem('lex-free-links', JSON.stringify(window.freeLinks));
+                        drawFreeLines();
+                    }
+                    
+                    document.getElementById(window.selectedFreeStartNode).classList.remove('selected-for-link');
+                    window.selectedFreeStartNode = null;
+                    window.toggleFreeLinkMode();
+                }
+            }
+
+            window.drawFreeLines = function() {
+                if (window.currentMapView !== 'free') return;
+                const svg = document.getElementById('free-connections-svg');
+                if (!svg) return;
+                svg.innerHTML = '';
+
+                window.freeLinks.forEach(link => {
+                    const fromEl = document.getElementById(link.from);
+                    const toEl = document.getElementById(link.to);
+
+                    if (fromEl && toEl) {
+                        const fromX = fromEl.offsetLeft + fromEl.offsetWidth / 2;
+                        const fromY = fromEl.offsetTop + fromEl.offsetHeight / 2;
+                        const toX = toEl.offsetLeft + toEl.offsetWidth / 2;
+                        const toY = toEl.offsetTop + toEl.offsetHeight / 2;
+
+                        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        
+                        const dx = toX - fromX;
+                        const dy = toY - fromY;
+                        const controlOffset = dx / 2;
+                        const d = `M ${fromX} ${fromY} C ${fromX + controlOffset} ${fromY}, ${toX - controlOffset} ${toY}, ${toX} ${toY}`;
+                        
+                        path.setAttribute('d', d);
+                        path.setAttribute('class', 'free-link-line active-link');
+                        path.style.stroke = fromEl.style.getPropertyValue('--accent-color') || 'var(--accent-gold)';
+                        
+                        path.addEventListener('dblclick', () => {
+                            if (confirm("Vuoi eliminare questo collegamento concettuale?")) {
+                                window.freeLinks = window.freeLinks.filter(l => l !== link);
+                                localStorage.setItem('lex-free-links', JSON.stringify(window.freeLinks));
+                                drawFreeLines();
+                            }
+                        });
+                        
+                        svg.appendChild(path);
+                    }
+                });
+            };
+
+            window.openFreeNodeModal = function(nodeId, event) {
+                if (event) event.stopPropagation();
+                
+                const node = window.freeNodes.find(n => n.id === nodeId);
+                if (!node) return;
+
+                window.editingFreeNodeId = nodeId;
+                
+                document.getElementById('free-node-title-input').value = node.title;
+                document.getElementById('free-node-subtitle-input').value = node.subtitle || '';
+                document.getElementById('free-node-notes-input').value = node.notes || '';
+                
+                window.selectedColorChoice = node.color || '#d4af37';
+                const choices = document.querySelectorAll('#free-color-choices .color-choice');
+                choices.forEach(c => {
+                    if (c.getAttribute('data-color') === window.selectedColorChoice) {
+                        c.classList.add('selected');
+                    } else {
+                        c.classList.remove('selected');
+                    }
+                });
+
+                document.getElementById('free-node-modal').style.display = 'flex';
+            };
+
+            window.closeFreeNodeModal = function() {
+                document.getElementById('free-node-modal').style.display = 'none';
+                window.editingFreeNodeId = null;
+            };
+
+            window.selectFreeNodeColor = function(element) {
+                const color = element.getAttribute('data-color');
+                window.selectedColorChoice = color;
+                
+                const choices = document.querySelectorAll('#free-color-choices .color-choice');
+                choices.forEach(c => c.classList.remove('selected'));
+                element.classList.add('selected');
+            };
+
+            window.saveFreeNode = function() {
+                const title = document.getElementById('free-node-title-input').value.trim();
+                const subtitle = document.getElementById('free-node-subtitle-input').value.trim();
+                const notes = document.getElementById('free-node-notes-input').value.trim();
+
+                if (!title) {
+                    alert("Il titolo del nodo è obbligatorio.");
+                    return;
+                }
+
+                const node = window.freeNodes.find(n => n.id === window.editingFreeNodeId);
+                if (node) {
+                    node.title = title;
+                    node.subtitle = subtitle;
+                    node.notes = notes;
+                    node.color = window.selectedColorChoice;
+                    
+                    localStorage.setItem('lex-free-nodes', JSON.stringify(window.freeNodes));
+                    
+                    renderFreeNodes();
+                    drawFreeLines();
+                    window.closeFreeNodeModal();
+                }
+            };
+
+            window.deleteFreeNode = function() {
+                if (confirm("Sei sicuro di voler eliminare questo nodo concettuale e tutti i suoi collegamenti?")) {
+                    const id = window.editingFreeNodeId;
+                    
+                    window.freeLinks = window.freeLinks.filter(l => l.from !== id && l.to !== id);
+                    localStorage.setItem('lex-free-links', JSON.stringify(window.freeLinks));
+                    
+                    window.freeNodes = window.freeNodes.filter(n => n.id !== id);
+                    localStorage.setItem('lex-free-nodes', JSON.stringify(window.freeNodes));
+                    
+                    renderFreeNodes();
+                    drawFreeLines();
+                    window.closeFreeNodeModal();
+                }
+            };
+
+            window.clearFreeMap = function() {
+                if (confirm("Sei sicuro di voler ripulire completamente la lavagna libera? Tutti i nodi creati andranno persi.")) {
+                    window.freeNodes = [];
+                    window.freeLinks = [];
+                    localStorage.removeItem('lex-free-nodes');
+                    localStorage.removeItem('lex-free-links');
+                    
+                    renderFreeNodes();
+                    drawFreeLines();
+                }
+            };
         });
     </script>
 
@@ -1127,6 +1740,48 @@
             <div style="display:flex; justify-content:flex-end; gap:1rem;">
                 <button class="btn btn-secondary" onclick="closeCustomConnModal()">Annulla</button>
                 <button class="btn btn-primary" onclick="saveCustomConnection()">Salva Collegamento</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Glassmorphic Modal for Editing Free-form Node -->
+    <div id="free-node-modal" class="modal" style="display: none; align-items:center; justify-content:center; z-index: 10000; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(8,11,17,0.75); backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px);">
+        <div class="modal-content" style="max-width: 500px; width: 90%; background:rgba(22,28,45,0.9); border:1px solid var(--border-color); border-radius:20px; padding:2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.5);">
+            <h3 style="font-family: var(--font-serif); font-size:1.5rem; color:var(--accent-gold); margin-bottom:0.5rem;" id="free-modal-title">Modifica Nodo Concettuale</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">Personalizza i dettagli, il colore e le note di studio di questo nodo.</p>
+            
+            <div class="form-group" style="margin-bottom:1.2rem;">
+                <label class="form-label" style="font-size:0.8rem; text-transform:uppercase; font-weight:600; color:var(--text-primary);">Titolo del Nodo</label>
+                <input type="text" id="free-node-title-input" class="form-input-number" style="width:100%; padding:0.8rem; margin-top:0.4rem; background:rgba(10,15,28,0.8); border:1px solid var(--border-color); border-radius:8px; color:var(--text-primary);" placeholder="es. Brunelleschi e la Prospettiva">
+            </div>
+            
+            <div class="form-group" style="margin-bottom:1.2rem;">
+                <label class="form-label" style="font-size:0.8rem; text-transform:uppercase; font-weight:600; color:var(--text-primary);">Sottotitolo / Tag</label>
+                <input type="text" id="free-node-subtitle-input" class="form-input-number" style="width:100%; padding:0.8rem; margin-top:0.4rem; background:rgba(10,15,28,0.8); border:1px solid var(--border-color); border-radius:8px; color:var(--text-primary);" placeholder="es. Storia dell'Arte / Studio I">
+            </div>
+
+            <div class="form-group" style="margin-bottom:1.2rem;">
+                <label class="form-label" style="font-size:0.8rem; text-transform:uppercase; font-weight:600; color:var(--text-primary);">Colore Distintivo</label>
+                <div class="color-choices" id="free-color-choices">
+                    <div class="color-choice" data-color="#d4af37" style="background: #d4af37;" onclick="selectFreeNodeColor(this)"></div>
+                    <div class="color-choice" data-color="#c85a32" style="background: #c85a32;" onclick="selectFreeNodeColor(this)"></div>
+                    <div class="color-choice" data-color="#ff6b8b" style="background: #ff6b8b;" onclick="selectFreeNodeColor(this)"></div>
+                    <div class="color-choice" data-color="#22d3ee" style="background: #22d3ee;" onclick="selectFreeNodeColor(this)"></div>
+                    <div class="color-choice" data-color="#10b981" style="background: #10b981;" onclick="selectFreeNodeColor(this)"></div>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-bottom:1.5rem;">
+                <label class="form-label" style="font-size:0.8rem; text-transform:uppercase; font-weight:600; color:var(--text-primary);">Note di Studio / Riassunto</label>
+                <textarea id="free-node-notes-input" rows="4" style="width:100%; padding:0.8rem; margin-top:0.4rem; background:rgba(10,15,28,0.8); border:1px solid var(--border-color); border-radius:8px; color:var(--text-primary); font-family:inherit; resize:vertical; line-height:1.4;" placeholder="Scrivi qui appunti, definizioni o sintesi concettuali per questo nodo..."></textarea>
+            </div>
+            
+            <div style="display:flex; justify-content:space-between; gap:1rem;">
+                <button class="btn btn-secondary" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #ef4444;" onclick="deleteFreeNode()">Elimina Nodo</button>
+                <div style="display:flex; gap:1rem;">
+                    <button class="btn btn-secondary" onclick="closeFreeNodeModal()">Annulla</button>
+                    <button class="btn btn-primary" onclick="saveFreeNode()">Salva Dettagli</button>
+                </div>
             </div>
         </div>
     </div>
