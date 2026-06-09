@@ -25,8 +25,15 @@ const LexCore = {
         brown: { active: false, volume: 0.3, sourceNode: null, gainNode: null },
         rain: { active: false, volume: 0.4, sourceNode: null, gainNode: null },
         ocean: { active: false, volume: 0.4, sourceNode: null, gainNode: null },
-        drone: { active: false, volume: 0.5, sourceNode: null, gainNode: null }
+        drone: { active: false, volume: 0.5, sourceNode: null, gainNode: null },
+        melody_sweet: { active: false, volume: 0.4, sourceNode: null, gainNode: null },
+        melody_8bit: { active: false, volume: 0.3, sourceNode: null, gainNode: null }
     },
+
+    // Sequencer State
+    melodyInterval: null,
+    melodyStep: 0,
+    melodyTempo: 120,
 
     // TTS State variables
     ttsBlocks: [],
@@ -290,6 +297,22 @@ const LexCore = {
                                 </label>
                                 <input type="range" id="mix-drone-vol" min="0" max="1" step="0.05" value="${this.focusMixer.drone.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
                             </div>
+                            <!-- Melody Sweet -->
+                            <div class="mixer-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+                                <label style="font-size:0.7rem; flex:1; display:flex; align-items:center; gap:0.3rem; margin:0; cursor:pointer;">
+                                    <input type="checkbox" id="mix-melody_sweet-chk" ${this.focusMixer.melody_sweet.active ? 'checked' : ''} style="width:12px; height:12px; accent-color:var(--accent-gold);">
+                                    Piano di Studio 🎹
+                                </label>
+                                <input type="range" id="mix-melody_sweet-vol" min="0" max="1" step="0.05" value="${this.focusMixer.melody_sweet.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
+                            </div>
+                            <!-- Melody 8bit -->
+                            <div class="mixer-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+                                <label style="font-size:0.7rem; flex:1; display:flex; align-items:center; gap:0.3rem; margin:0; cursor:pointer;">
+                                    <input type="checkbox" id="mix-melody_8bit-chk" ${this.focusMixer.melody_8bit.active ? 'checked' : ''} style="width:12px; height:12px; accent-color:var(--accent-gold);">
+                                    Nostalgia 8-bit 🎮
+                                </label>
+                                <input type="range" id="mix-melody_8bit-vol" min="0" max="1" step="0.05" value="${this.focusMixer.melody_8bit.volume}" style="width:80px; accent-color:var(--accent-gold); height:3px; cursor:pointer;">
+                            </div>
                         </div>
                         <div style="display:flex; align-items:center; gap:0.4rem; margin-top:0.6rem;">
                             <button id="lex-focus-play-btn" class="backup-btn" style="padding:0.4rem; font-size:0.7rem; display:flex; align-items:center; gap:0.2rem; flex:1; justify-content:center;">
@@ -488,7 +511,7 @@ const LexCore = {
         });
 
         // Focus Player Mixer listeners
-        const chs = ['white', 'brown', 'rain', 'ocean', 'drone'];
+        const chs = ['white', 'brown', 'rain', 'ocean', 'drone', 'melody_sweet', 'melody_8bit'];
         chs.forEach(key => {
             const chk = document.getElementById(`mix-${key}-chk`);
             const vol = document.getElementById(`mix-${key}-vol`);
@@ -1297,7 +1320,81 @@ const LexCore = {
                 this.focusLfoNodes.push(lfo);
             });
             return { source: null, lastNode: outputGain };
+        } else if (channelKey === 'melody_sweet' || channelKey === 'melody_8bit') {
+            const node = this.focusAudioCtx.createGain();
+            node.gain.value = 1.0;
+            // The actual sound is generated in the sequencer loop
+            return { source: null, lastNode: node };
         }
+    },
+
+    // --- SEQUENCER LOGIC ---
+    startMelodySequencer() {
+        if (this.melodyInterval) return;
+        this.melodyStep = 0;
+        const stepDuration = 60 / this.melodyTempo / 2; // 8th notes
+        
+        this.melodyInterval = setInterval(() => {
+            if (!this.focusPlaying) return;
+            
+            const now = this.focusAudioCtx.currentTime;
+            
+            if (this.focusMixer.melody_sweet.active) {
+                this.playSweetStep(this.melodyStep, now);
+            }
+            if (this.focusMixer.melody_8bit.active) {
+                this.play8bitStep(this.melodyStep, now);
+            }
+            
+            this.melodyStep = (this.melodyStep + 1) % 32;
+        }, stepDuration * 1000);
+    },
+
+    stopMelodySequencer() {
+        clearInterval(this.melodyInterval);
+        this.melodyInterval = null;
+    },
+
+    playSweetStep(step, time) {
+        // Pentatonic major scale arpeggios
+        const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // C4, D4, E4, G4, A4, C5
+        const pattern = [0, 2, 4, 3, 5, 4, 2, 1];
+        if (step % 4 === 0) {
+            const noteIdx = pattern[(step / 4) % pattern.length];
+            this.playSynthNote(notes[noteIdx], time, 'triangle', 0.15, this.focusMixer.melody_sweet.gainNode);
+        }
+    },
+
+    play8bitStep(step, time) {
+        // Retro game-like melody
+        const notes = [130.81, 164.81, 196.00, 261.63, 329.63, 392.00]; // C3...G4
+        const melody = [0, null, 2, 3, 4, null, 3, 5, 0, 2, 4, 3, null, 1, 0, null];
+        if (step % 2 === 0) {
+            const idx = (step / 2) % melody.length;
+            const note = melody[idx];
+            if (note !== null) {
+                this.playSynthNote(notes[note], time, 'square', 0.1, this.focusMixer.melody_8bit.gainNode);
+            }
+        }
+    },
+
+    playSynthNote(freq, time, type, duration, targetNode) {
+        if (!targetNode) return;
+        const osc = this.focusAudioCtx.createOscillator();
+        const env = this.focusAudioCtx.createGain();
+        
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, time);
+        
+        env.gain.setValueAtTime(0, time);
+        env.gain.linearRampToValueAtTime(0.2, time + 0.05);
+        env.gain.exponentialRampToValueAtTime(0.001, time + duration);
+        
+        osc.connect(env);
+        env.connect(targetNode);
+        
+        osc.start(time);
+        osc.stop(time + duration);
     },
 
     playFocusMixer() {
@@ -1329,6 +1426,7 @@ const LexCore = {
             this.focusPlaying = true;
             this.updateFocusUI();
             this.startVisualizer();
+            this.startMelodySequencer();
         } else {
             this.focusPlaying = false;
             this.updateFocusUI();
@@ -1336,6 +1434,7 @@ const LexCore = {
     },
 
     stopFocusSound() {
+        this.stopMelodySequencer();
         Object.keys(this.focusMixer).forEach(key => {
             const ch = this.focusMixer[key];
             if (ch.sourceNode && ch.sourceNode !== true) {
