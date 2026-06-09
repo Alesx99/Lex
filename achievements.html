@@ -346,6 +346,19 @@
         .exam-card.subject-custom.passed::before { background: var(--accent-cyan); }
         .exam-card.subject-filosofia.passed::before { background: var(--accent-purple); }
         .exam-card.subject-letteratura.passed::before { background: var(--accent-green); }
+        .exam-card.subject-geografia.passed::before { background: #14b8a6; }
+        .exam-card.subject-medievale.passed::before { background: #f59e0b; }
+        .exam-card.subject-greca.passed::before { background: #8b5cf6; }
+        .exam-card.subject-latina.passed::before { background: #ec4899; }
+        .exam-card.subject-codicologia.passed::before { background: #6366f1; }
+        .exam-card.subject-cristiana.passed::before { background: #f97316; }
+        .exam-card.subject-contemporanea.passed::before { background: #06b6d4; }
+        .exam-card.subject-museologia.passed::before { background: #84cc16; }
+        .exam-card.subject-restauro.passed::before { background: #e11d48; }
+        .exam-card.subject-inglese.passed::before { background: #3b82f6; }
+        .exam-card.subject-laboratorio.passed::before { background: #10b981; }
+        .exam-card.subject-idoneo.passed::before { background: #10b981; }
+        .exam-card.subject-tesi.passed::before { background: var(--accent-gold); }
 
         .exam-card.passed {
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -356,6 +369,13 @@
         .exam-card.subject-romana.passed:hover { box-shadow: 0 10px 25px var(--accent-romana-glow); }
         .exam-card.subject-storia.passed:hover { box-shadow: 0 10px 25px var(--accent-storia-glow); }
         .exam-card.subject-custom.passed:hover { box-shadow: 0 10px 25px rgba(6, 182, 212, 0.25); }
+        .exam-card.subject-geografia.passed:hover { box-shadow: 0 10px 25px rgba(20, 184, 166, 0.25); }
+        .exam-card.subject-medievale.passed:hover { box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25); }
+        .exam-card.subject-greca.passed:hover { box-shadow: 0 10px 25px rgba(139, 92, 246, 0.25); }
+        .exam-card.subject-latina.passed:hover { box-shadow: 0 10px 25px rgba(236, 72, 153, 0.25); }
+        .exam-card.subject-cristiana.passed:hover { box-shadow: 0 10px 25px rgba(249, 115, 22, 0.25); }
+        .exam-card.subject-contemporanea.passed:hover { box-shadow: 0 10px 25px rgba(6, 182, 212, 0.25); }
+        .exam-card.subject-tesi.passed:hover { box-shadow: 0 10px 25px var(--accent-gold-glow); }
 
         .exam-card.locked {
             opacity: 0.5;
@@ -444,6 +464,126 @@
 
         .exam-card.passed .exam-status-text {
             color: var(--accent-green);
+        }
+
+        /* Year Section Headers */
+        .year-section {
+            margin-bottom: 2rem;
+        }
+
+        .year-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.06) 0%, rgba(200, 90, 50, 0.04) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .year-header:hover {
+            border-color: var(--border-color-hover);
+            transform: translateY(-1px);
+        }
+
+        .year-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .year-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-terracotta));
+            color: #0b0f19;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .year-info h4 {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 0.15rem 0;
+        }
+
+        .year-info span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .year-header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .year-progress-mini {
+            width: 120px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 99px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .year-progress-mini-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-terracotta));
+            border-radius: 99px;
+            transition: width 0.8s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .year-cfu-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .year-toggle-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .year-section.collapsed .year-toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .year-exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+        }
+
+        .year-section.collapsed .year-exams-grid {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .year-progress-mini {
+                width: 80px;
+            }
         }
 
         /* Sidequests List */
@@ -919,8 +1059,8 @@
                     </div>
                 </div>
 
-                <div class="exams-grid" id="exams-trophy-grid">
-                    <!-- Dynamic Exam Cards go here -->
+                <div id="exams-trophy-grid">
+                    <!-- Dynamic Year Sections with Exam Cards go here -->
                 </div>
             </section>
 
@@ -1130,13 +1270,40 @@
     <script>
         // Default Core Exams
         const DEFAULT_EXAMS = [
-            { id: "diritto", name: "Diritto dei Beni Culturali", cfu: 9, passed: false, grade: null, date: null, subject: "diritto" },
-            { id: "arte", name: "Storia dell'Arte Moderna", cfu: 12, passed: false, grade: null, date: null, subject: "arte" },
-            { id: "romana", name: "Archeologia e Arte Romana", cfu: 6, passed: false, grade: null, date: null, subject: "romana" },
-            { id: "storia", name: "Storia Moderna", cfu: 6, passed: false, grade: null, date: null, subject: "storia" },
-            { id: "filosofia", name: "Filosofia Estetica", cfu: 6, passed: false, grade: null, date: null, subject: "filosofia" },
-            { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, grade: null, date: null, subject: "letteratura" },
-            { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, grade: null, date: null, subject: "tesi" }
+            // ── PRIMO ANNO (60 CFU) ──
+            { id: "letteratura", name: "Letteratura Italiana", cfu: 12, passed: true, grade: 23, date: null, subject: "letteratura", year: 1, gradeType: "voto" },
+            { id: "cultura-greca", name: "Cultura Greca", cfu: 9, passed: false, grade: null, date: null, subject: "greca", year: 1, gradeType: "voto" },
+            { id: "storia-medievale", name: "Storia Medievale", cfu: 9, passed: true, grade: 25, date: null, subject: "medievale", year: 1, gradeType: "voto" },
+            { id: "arte-romana", name: "Archeologia e Arte Romana", cfu: 9, passed: false, grade: null, date: null, subject: "romana", year: 1, gradeType: "voto" },
+            { id: "geografia", name: "Geografia", cfu: 12, passed: true, grade: 25, date: null, subject: "geografia", year: 1, gradeType: "voto" },
+            { id: "arte-medievale", name: "Arte Medievale", cfu: 9, passed: false, grade: null, date: null, subject: "medievale", year: 1, gradeType: "voto" },
+            // ── SECONDO ANNO (60 CFU) ──
+            { id: "storia-moderna", name: "Storia Moderna", cfu: 9, passed: true, grade: 24, date: null, subject: "storia", year: 2, gradeType: "voto" },
+            { id: "letteratura-latina", name: "Letteratura Latina", cfu: 12, passed: false, grade: null, date: null, subject: "latina", year: 2, gradeType: "voto" },
+            { id: "codicologia", name: "Codicologia", cfu: 9, passed: false, grade: null, date: null, subject: "codicologia", year: 2, gradeType: "voto" },
+            { id: "arte-moderna", name: "Storia dell'Arte Moderna", cfu: 9, passed: false, grade: null, date: null, subject: "arte", year: 2, gradeType: "voto" },
+            { id: "cristiana", name: "Archeologia Cristiana", cfu: 6, passed: true, grade: 21, date: null, subject: "cristiana", year: 2, gradeType: "voto" },
+            { id: "diritto", name: "Diritto dei Beni Culturali", cfu: 6, passed: false, grade: null, date: null, subject: "diritto", year: 2, gradeType: "voto" },
+            { id: "laboratorio", name: "Laboratorio", cfu: 3, passed: true, grade: null, date: null, subject: "laboratorio", year: 2, gradeType: "idoneo" },
+            { id: "inglese-2", name: "Inglese (2° anno)", cfu: 3, passed: false, grade: null, date: null, subject: "inglese", year: 2, gradeType: "idoneo" },
+            { id: "crediti-scelta-2", name: "Crediti a Scelta (2° anno)", cfu: 3, passed: true, grade: null, date: null, subject: "idoneo", year: 2, gradeType: "idoneo" },
+            // ── TERZO ANNO (60 CFU) ──
+            { id: "storia-contemporanea", name: "Storia Contemporanea", cfu: 9, passed: false, grade: null, date: null, subject: "contemporanea", year: 3, gradeType: "voto" },
+            { id: "arte-contemporanea", name: "Storia dell'Arte Contemporanea", cfu: 9, passed: false, grade: null, date: null, subject: "contemporanea", year: 3, gradeType: "voto" },
+            { id: "museologia", name: "Museologia", cfu: 9, passed: false, grade: null, date: null, subject: "museologia", year: 3, gradeType: "voto" },
+            { id: "restauro", name: "Storia e Tecnica del Restauro", cfu: 6, passed: false, grade: null, date: null, subject: "restauro", year: 3, gradeType: "voto" },
+            { id: "inglese-3", name: "Inglese (3° anno)", cfu: 3, passed: false, grade: null, date: null, subject: "inglese", year: 3, gradeType: "idoneo" },
+            { id: "insegnamento-scelta", name: "Insegnamento a Scelta", cfu: 9, passed: false, grade: null, date: null, subject: "custom", year: 3, gradeType: "voto" },
+            { id: "crediti-scelta-3", name: "Crediti a Scelta (3° anno)", cfu: 9, passed: false, grade: null, date: null, subject: "idoneo", year: 3, gradeType: "idoneo" },
+            { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, grade: null, date: null, subject: "tesi", year: 3, gradeType: "idoneo" }
+        ];
+
+        const CORE_EXAM_IDS = [
+            'letteratura', 'cultura-greca', 'storia-medievale', 'arte-romana', 'geografia', 'arte-medievale',
+            'storia-moderna', 'letteratura-latina', 'codicologia', 'arte-moderna', 'cristiana', 'diritto',
+            'laboratorio', 'inglese-2', 'crediti-scelta-2',
+            'storia-contemporanea', 'arte-contemporanea', 'museologia', 'restauro', 'inglese-3',
+            'insegnamento-scelta', 'crediti-scelta-3', 'tesi'
         ];
 
         // State Variables
@@ -1219,14 +1386,49 @@
             try {
                 const stored = localStorage.getItem('lex-exams-passed');
                 if (stored) {
-                    studyPlan = JSON.parse(stored);
+                    const parsed = JSON.parse(stored);
+                    // Migration: check if data uses old format (no 'year' field)
+                    const needsMigration = parsed.length > 0 && parsed[0].year === undefined;
+                    if (needsMigration) {
+                        console.log('Migrating study plan to new 3-year format...');
+                        studyPlan = DEFAULT_EXAMS.map(def => {
+                            const copy = { ...def };
+                            // Try to find matching old exam by ID to preserve grade data
+                            const oldExam = parsed.find(o => o.id === def.id);
+                            if (oldExam && oldExam.passed) {
+                                copy.passed = true;
+                                copy.grade = oldExam.grade;
+                                copy.date = oldExam.date;
+                            }
+                            return copy;
+                        });
+                        // Also preserve any custom exams the user had added
+                        const customExams = parsed.filter(o => o.id.startsWith('custom-'));
+                        customExams.forEach(ce => {
+                            ce.year = 0; // Custom exams go to a special "Extra" group
+                            ce.gradeType = ce.gradeType || 'voto';
+                            studyPlan.push(ce);
+                        });
+                        saveStudyPlan();
+                    } else {
+                        studyPlan = parsed;
+                        // Ensure any new default exams not yet in stored data get added
+                        let added = false;
+                        DEFAULT_EXAMS.forEach(def => {
+                            if (!studyPlan.find(e => e.id === def.id)) {
+                                studyPlan.push({ ...def });
+                                added = true;
+                            }
+                        });
+                        if (added) saveStudyPlan();
+                    }
                 } else {
-                    studyPlan = [...DEFAULT_EXAMS];
+                    studyPlan = DEFAULT_EXAMS.map(d => ({ ...d }));
                     saveStudyPlan();
                 }
             } catch(e) {
                 console.error("Errore nel caricamento del piano studi:", e);
-                studyPlan = [...DEFAULT_EXAMS];
+                studyPlan = DEFAULT_EXAMS.map(d => ({ ...d }));
             }
         }
 
@@ -1238,7 +1440,7 @@
             }
         }
 
-        // Checks lex-quiz-stats for scores >= 18 to unlock the 4 hub subjects
+        // Checks lex-quiz-stats for scores >= 18 to unlock hub subjects
         function autoUnlockExamsFromStats() {
             try {
                 const storedStats = localStorage.getItem('lex-quiz-stats');
@@ -1247,17 +1449,16 @@
                 const stats = JSON.parse(storedStats);
                 let changed = false;
 
-                // Subjects map: key in stat -> id in studyPlan
+                // Subjects map: key in stat -> id in studyPlan (updated for new IDs)
                 const subjectKeys = {
                     'diritto': 'diritto',
-                    'arte': 'arte',
-                    'romana': 'romana',
-                    'storia': 'storia'
+                    'arte': 'arte-moderna',
+                    'romana': 'arte-romana',
+                    'storia': 'storia-moderna'
                 };
 
                 Object.keys(subjectKeys).forEach(statKey => {
                     const examId = subjectKeys[statKey];
-                    // Find max score for this subject
                     const subjectSims = stats.filter(s => s.subject === statKey && s.score >= 18);
                     
                     if (subjectSims.length > 0) {
@@ -1266,7 +1467,6 @@
                         
                         if (exam && !exam.passed) {
                             exam.passed = true;
-                            // Ensure 30 e Lode mapping if LLM returned > 30 or we match 30
                             exam.grade = maxScore >= 30 ? 31 : maxScore; 
                             exam.date = subjectSims[0].date || new Date().toISOString().split('T')[0];
                             changed = true;
@@ -1291,30 +1491,27 @@
             let totalExamsCount = studyPlan.length;
             let passedExamsCount = 0;
             let arithmeticSum = 0;
+            let gradedExamsCount = 0;
 
             studyPlan.forEach(e => {
                 if (e.passed) {
                     passedExamsCount++;
                     totalCFUConseguite += e.cfu;
                     
-                    // The thesis / Prova Finale does not count towards the grade average in Italy usually,
-                    // but we check if it has a grade. If it has a grade and is not the thesis id, or if we just average everything.
-                    // Standard: ID 'tesi' is excluded from grade average computation (it has no grade, just pass/fail).
-                    if (e.grade && e.id !== 'tesi') {
-                        // Grade 31 represents 30 e Lode. In averages it counts as 30 (or 30, let's count it as 30 as standard in Italy).
+                    // Only include exams with gradeType 'voto' and a numeric grade in averages
+                    if (e.grade && e.gradeType === 'voto') {
                         const gradeVal = e.grade === 31 ? 30 : e.grade;
                         totalWeightedSum += (gradeVal * e.cfu);
                         cfuForAverageSum += e.cfu;
                         arithmeticSum += gradeVal;
+                        gradedExamsCount++;
                     }
                 }
             });
 
             // Calculate Averages
             const weightedAverage = cfuForAverageSum > 0 ? (totalWeightedSum / cfuForAverageSum) : 0;
-            const arithmeticAverage = passedExamsCount > 0 && (passedExamsCount - (studyPlan.some(e => e.id === 'tesi' && e.passed) ? 1 : 0)) > 0 
-                ? (arithmeticSum / (passedExamsCount - (studyPlan.some(e => e.id === 'tesi' && e.passed) ? 1 : 0))) 
-                : 0;
+            const arithmeticAverage = gradedExamsCount > 0 ? (arithmeticSum / gradedExamsCount) : 0;
 
             // Estimated graduation grade: (weighted average / 30) * 110 = weighted average * 11 / 3
             // plus thesis bonus points
@@ -1358,37 +1555,107 @@
             const grid = document.getElementById('exams-trophy-grid');
             grid.innerHTML = '';
 
-            studyPlan.forEach(e => {
-                const card = document.createElement('div');
-                card.className = `exam-card subject-${e.subject || 'custom'} ${e.passed ? 'passed' : 'locked'}`;
-                card.onclick = () => openEditExamModal(e.id);
+            const yearLabels = {
+                1: { title: 'Primo Anno', targetCfu: 60 },
+                2: { title: 'Secondo Anno', targetCfu: 60 },
+                3: { title: 'Terzo Anno', targetCfu: 60 },
+                0: { title: 'Esami Extra', targetCfu: 0 }
+            };
 
-                let gradeText = "--";
-                if (e.passed) {
-                    if (e.grade === 31) gradeText = "30L";
-                    else if (e.grade) gradeText = e.grade.toString();
-                    else gradeText = "Idoneo";
-                }
+            // Collect years present in studyPlan
+            const yearsPresent = [...new Set(studyPlan.map(e => e.year || 0))].sort((a, b) => {
+                if (a === 0) return 1;
+                if (b === 0) return -1;
+                return a - b;
+            });
 
-                card.innerHTML = `
-                    <div class="exam-top">
-                        <span class="exam-cfu">${e.cfu} CFU</span>
-                        <svg class="exam-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                            <path d="M4 22h16"></path>
-                            <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
-                            <path d="M12 2a6 6 0 0 0-6 6v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V8a6 6 0 0 0-6-6z"></path>
+            yearsPresent.forEach(year => {
+                const yearExams = studyPlan.filter(e => (e.year || 0) === year);
+                if (yearExams.length === 0) return;
+
+                const info = yearLabels[year] || { title: `Anno ${year}`, targetCfu: 60 };
+                const yearCfuPassed = yearExams.filter(e => e.passed).reduce((sum, e) => sum + e.cfu, 0);
+                const yearCfuTotal = yearExams.reduce((sum, e) => sum + e.cfu, 0);
+                const yearPercent = yearCfuTotal > 0 ? Math.round((yearCfuPassed / yearCfuTotal) * 100) : 0;
+                const yearPassed = yearExams.filter(e => e.passed).length;
+
+                // Year section wrapper
+                const section = document.createElement('div');
+                section.className = 'year-section';
+                section.id = `year-section-${year}`;
+
+                // Year header
+                const header = document.createElement('div');
+                header.className = 'year-header';
+                header.onclick = () => toggleYearSection(year);
+
+                header.innerHTML = `
+                    <div class="year-header-left">
+                        <div class="year-badge">${year === 0 ? '★' : year}</div>
+                        <div class="year-info">
+                            <h4>${info.title}</h4>
+                            <span>${yearPassed} / ${yearExams.length} esami — ${yearCfuPassed} / ${yearCfuTotal} CFU</span>
+                        </div>
+                    </div>
+                    <div class="year-header-right">
+                        <div class="year-progress-mini">
+                            <div class="year-progress-mini-bar" style="width: ${yearPercent}%"></div>
+                        </div>
+                        <span class="year-cfu-label">${yearPercent}%</span>
+                        <svg class="year-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
-                    <h4 class="exam-name">${e.name}</h4>
-                    <div class="exam-bottom">
-                        <span class="exam-status-text">${e.passed ? 'Superato' : 'Da superare'}</span>
-                        <span class="exam-grade">${gradeText}</span>
-                    </div>
                 `;
-                grid.appendChild(card);
+
+                section.appendChild(header);
+
+                // Exams grid for this year
+                const yearGrid = document.createElement('div');
+                yearGrid.className = 'year-exams-grid';
+
+                yearExams.forEach(e => {
+                    const card = document.createElement('div');
+                    card.className = `exam-card subject-${e.subject || 'custom'} ${e.passed ? 'passed' : 'locked'}`;
+                    card.onclick = () => openEditExamModal(e.id);
+
+                    let gradeText = "--";
+                    if (e.passed) {
+                        if (e.grade === 31) gradeText = "30L";
+                        else if (e.grade) gradeText = e.grade.toString();
+                        else gradeText = "Idoneo";
+                    }
+
+                    card.innerHTML = `
+                        <div class="exam-top">
+                            <span class="exam-cfu">${e.cfu} CFU</span>
+                            <svg class="exam-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                <path d="M4 22h16"></path>
+                                <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+                                <path d="M12 2a6 6 0 0 0-6 6v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V8a6 6 0 0 0-6-6z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="exam-name">${e.name}</h4>
+                        <div class="exam-bottom">
+                            <span class="exam-status-text">${e.passed ? 'Superato' : 'Da superare'}</span>
+                            <span class="exam-grade">${gradeText}</span>
+                        </div>
+                    `;
+                    yearGrid.appendChild(card);
+                });
+
+                section.appendChild(yearGrid);
+                grid.appendChild(section);
             });
+        }
+
+        function toggleYearSection(year) {
+            const section = document.getElementById(`year-section-${year}`);
+            if (section) {
+                section.classList.toggle('collapsed');
+            }
         }
 
         function renderSidequests(passedExamsCount, studySeconds, weightedAverage) {
@@ -1663,7 +1930,9 @@
                 passed: passed,
                 grade: grade,
                 date: passed ? new Date().toISOString().split('T')[0] : null,
-                subject: 'custom'
+                subject: 'custom',
+                year: 0,
+                gradeType: 'voto'
             });
 
             saveStudyPlan();
@@ -1689,16 +1958,23 @@
             }
 
             // Lock name editing for core hub exams to maintain coherence
-            const isCore = ['diritto', 'arte', 'romana', 'storia', 'filosofia', 'letteratura', 'tesi'].includes(exam.id);
+            const isCore = CORE_EXAM_IDS.includes(exam.id);
             document.getElementById('edit-exam-name').disabled = isCore;
             document.getElementById('edit-exam-cfu').disabled = isCore;
             
             // Do not show Delete button for core exams
             document.getElementById('edit-modal-delete-btn').style.display = isCore ? 'none' : 'block';
 
+            // For idoneo-type exams, hide the grade field entirely
+            const isIdoneo = exam.gradeType === 'idoneo';
+            document.getElementById('edit-modal-grade-group').style.display = (exam.passed && !isIdoneo) ? 'block' : 'none';
+            if (isIdoneo) {
+                document.getElementById('edit-exam-grade').value = '0';
+            }
+
             document.getElementById('edit-modal-title').textContent = isCore ? `Registra Esame: ${exam.name}` : "Modifica Esame Personalizzato";
             
-            toggleEditModalGradeField();
+            if (!isIdoneo) toggleEditModalGradeField();
             document.getElementById('edit-exam-overlay').classList.add('open');
         }
 
@@ -1732,7 +2008,7 @@
                 return;
             }
 
-            if (passed) {
+            if (passed && exam.gradeType !== 'idoneo') {
                 grade = parseInt(document.getElementById('edit-exam-grade').value);
             }
 
@@ -1754,7 +2030,7 @@
 
         function deleteExam() {
             const id = document.getElementById('edit-exam-id').value;
-            const isCore = ['diritto', 'arte', 'romana', 'storia', 'filosofia', 'letteratura', 'tesi'].includes(id);
+            const isCore = CORE_EXAM_IDS.includes(id);
             if (isCore) return;
 
             if (confirm("Sei sicuro di voler rimuovere questo esame dal piano di studi?")) {
