@@ -137,7 +137,372 @@ const Minigames = {
         'fact-fiction': { title: "Sentenza o Bufala?", start: () => Minigames.startFactFiction() },
         'treasure': { title: "L'Impiccato", start: () => Minigames.startTreasure() },
         'tris': { title: "Tris Accademico", start: () => Minigames.startTris() },
-        'memory': { title: "Memory dell'Amore", start: () => Minigames.startMemory() }
+        'memory': { title: "Memory Visivo", start: () => Minigames.startMemory() },
+        '2048': { title: "2048 Accademico", start: () => Minigames.start2048() },
+        'snake': { title: "Lex Snake", start: () => Minigames.startSnake() },
+        'lexle': { title: "Lexle", start: () => Minigames.startLexle() },
+        'clicker': { title: "Caffè Clicker", start: () => Minigames.startClicker() }
+    },
+
+    // --- 2048 ACCADEMICO ---
+    g2048Grid: [],
+    g2048Levels: {
+        2: "Matricola", 4: "Fuoricorso", 8: "Triennale", 16: "Magistrale", 
+        32: "Master", 64: "Dottorando", 128: "Ricercatore", 256: "Assistente",
+        512: "Professore", 1024: "Preside", 2048: "Rettore"
+    },
+
+    start2048() {
+        this.g2048Grid = Array(16).fill(0);
+        this.addRandomTile2048();
+        this.addRandomTile2048();
+        this.render2048();
+        this.setup2048Controls();
+    },
+
+    addRandomTile2048() {
+        const empty = this.g2048Grid.map((v, i) => v === 0 ? i : null).filter(i => i !== null);
+        if (empty.length > 0) {
+            const idx = empty[Math.floor(Math.random() * empty.length)];
+            this.g2048Grid[idx] = Math.random() < 0.9 ? 2 : 4;
+        }
+    },
+
+    render2048() {
+        const html = `
+            <div style="text-align: center; margin-bottom: 1rem; color: var(--text-secondary);">Unisci i tasselli per salire di grado!</div>
+            <div class="g2048-grid">
+                ${this.g2048Grid.map(v => `
+                    <div class="g2048-cell" data-val="${v}">${v > 0 ? this.g2048Levels[v] || v : ''}</div>
+                `).join('')}
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 150px; margin: 1.5rem auto 0;">
+                <div></div><button class="btn-action" onclick="Minigames.move2048('up')">↑</button><div></div>
+                <button class="btn-action" onclick="Minigames.move2048('left')">←</button>
+                <button class="btn-action" onclick="Minigames.move2048('down')">↓</button>
+                <button class="btn-action" onclick="Minigames.move2048('right')">→</button>
+            </div>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+    },
+
+    setup2048Controls() {
+        const handler = (e) => {
+            if (!document.querySelector('.g2048-grid')) return;
+            if (e.key === 'ArrowUp') this.move2048('up');
+            if (e.key === 'ArrowDown') this.move2048('down');
+            if (e.key === 'ArrowLeft') this.move2048('left');
+            if (e.key === 'ArrowRight') this.move2048('right');
+        };
+        window.removeEventListener('keydown', this._2048KeyHandler);
+        this._2048KeyHandler = handler;
+        window.addEventListener('keydown', handler);
+    },
+
+    move2048(dir) {
+        let moved = false;
+        const size = 4;
+        
+        const getLine = (i) => {
+            if (dir === 'left' || dir === 'right') return this.g2048Grid.slice(i * size, (i + 1) * size);
+            return [this.g2048Grid[i], this.g2048Grid[i+size], this.g2048Grid[i+size*2], this.g2048Grid[i+size*3]];
+        };
+
+        const setLine = (i, line) => {
+            if (dir === 'left' || dir === 'right') {
+                for (let j = 0; j < size; j++) this.g2048Grid[i * size + j] = line[j];
+            } else {
+                for (let j = 0; j < size; j++) this.g2048Grid[i + j * size] = line[j];
+            }
+        };
+
+        for (let i = 0; i < size; i++) {
+            let line = getLine(i);
+            if (dir === 'right' || dir === 'down') line.reverse();
+            
+            // Slide
+            let nonZero = line.filter(v => v !== 0);
+            let newLine = [];
+            for (let j = 0; j < nonZero.length; j++) {
+                if (nonZero[j] === nonZero[j+1]) {
+                    const combined = nonZero[j] * 2;
+                    newLine.push(combined);
+                    this.addPoints(Math.floor(combined / 10));
+                    j++;
+                    if (combined === 2048) this.showResult(true, "Rettore Magnifico!", 50);
+                } else {
+                    newLine.push(nonZero[j]);
+                }
+            }
+            while (newLine.length < size) newLine.push(0);
+            
+            if (dir === 'right' || dir === 'down') newLine.reverse();
+            if (JSON.stringify(getLine(i)) !== JSON.stringify(newLine)) moved = true;
+            setLine(i, newLine);
+        }
+
+        if (moved) {
+            this.addRandomTile2048();
+            this.render2048();
+            if (this.g2048Grid.every(v => v !== 0)) {
+                // Check if any moves possible, if not game over
+            }
+        }
+    },
+
+    // --- LEX SNAKE ---
+    snakeBody: [],
+    snakeDir: { x: 0, y: -1 },
+    snakeFood: { x: 5, y: 5 },
+    snakeInterval: null,
+    snakeGridSize: 20,
+
+    startSnake() {
+        this.snakeBody = [{x: 10, y: 15}, {x: 10, y: 16}, {x: 10, y: 17}];
+        this.snakeDir = { x: 0, y: -1 };
+        this.scoreAccumulator = 0;
+        this.renderSnake();
+        this.setupSnakeControls();
+        
+        clearInterval(this.snakeInterval);
+        this.snakeInterval = setInterval(() => this.moveSnake(), 150);
+    },
+
+    renderSnake() {
+        const html = `
+            <div style="text-align: center; margin-bottom: 0.5rem; font-weight: 700; color: var(--accent-gold);">Punti: ${this.scoreAccumulator}</div>
+            <canvas id="snake-canvas" width="300" height="300" style="background: #000; border: 2px solid var(--border-color); border-radius: 8px; display: block; margin: 0 auto;"></canvas>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 150px; margin: 1rem auto 0;">
+                <div></div><button class="btn-action" onclick="Minigames.setSnakeDir(0, -1)">↑</button><div></div>
+                <button class="btn-action" onclick="Minigames.setSnakeDir(-1, 0)">←</button>
+                <button class="btn-action" onclick="Minigames.setSnakeDir(0, 1)">↓</button>
+                <button class="btn-action" onclick="Minigames.setSnakeDir(1, 0)">→</button>
+            </div>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+        this.drawSnake();
+    },
+
+    setSnakeDir(x, y) {
+        if (x !== 0 && this.snakeDir.x === 0) this.snakeDir = { x, y };
+        if (y !== 0 && this.snakeDir.y === 0) this.snakeDir = { x, y };
+    },
+
+    setupSnakeControls() {
+        const handler = (e) => {
+            if (!document.getElementById('snake-canvas')) return;
+            if (e.key === 'ArrowUp') this.setSnakeDir(0, -1);
+            if (e.key === 'ArrowDown') this.setSnakeDir(0, 1);
+            if (e.key === 'ArrowLeft') this.setSnakeDir(-1, 0);
+            if (e.key === 'ArrowRight') this.setSnakeDir(1, 0);
+        };
+        window.removeEventListener('keydown', this._snakeKeyHandler);
+        this._snakeKeyHandler = handler;
+        window.addEventListener('keydown', handler);
+    },
+
+    moveSnake() {
+        const head = { x: this.snakeBody[0].x + this.snakeDir.x, y: this.snakeBody[0].y + this.snakeDir.y };
+        
+        // Wall collision
+        if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || this.snakeBody.some(b => b.x === head.x && b.y === head.y)) {
+            clearInterval(this.snakeInterval);
+            return this.showResult(false, "Collisione!", this.scoreAccumulator);
+        }
+
+        this.snakeBody.unshift(head);
+
+        if (head.x === this.snakeFood.x && head.y === this.snakeFood.y) {
+            this.scoreAccumulator++;
+            this.addPoints(1);
+            this.snakeFood = { x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) };
+        } else {
+            this.snakeBody.pop();
+        }
+        this.drawSnake();
+    },
+
+    drawSnake() {
+        const canvas = document.getElementById('snake-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const s = 15; // cell size
+
+        ctx.clearRect(0, 0, 300, 300);
+        
+        // Food
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(this.snakeFood.x * s, this.snakeFood.y * s, s, s);
+
+        // Body
+        ctx.fillStyle = '#d4af37';
+        this.snakeBody.forEach((b, i) => {
+            if (i === 0) ctx.fillStyle = '#f59e0b';
+            else ctx.fillStyle = '#d4af37';
+            ctx.fillRect(b.x * s, b.y * s, s - 1, s - 1);
+        });
+    },
+
+    // --- LEXLE (WORDLE) ---
+    lexleTarget: '',
+    lexleGuesses: [],
+    lexleCurrentGuess: '',
+
+    startLexle() {
+        const words = ["ESAME", "LIBRO", "LAURE", "CORSO", "FONTE", "FORO", "STUDI", "LEGGE", "MUSEO", "ARTE", "PUNTO", "TESTO", "CLASSE", "SITO", "AULA"];
+        this.lexleTarget = words[Math.floor(Math.random() * words.length)].padEnd(5, 'X').substring(0, 5).toUpperCase();
+        this.lexleGuesses = [];
+        this.lexleCurrentGuess = '';
+        this.renderLexle();
+        this.setupLexleControls();
+    },
+
+    renderLexle() {
+        const html = `
+            <div class="lexle-grid">
+                ${Array(6).fill(0).map((_, r) => `
+                    <div class="lexle-row">
+                        ${Array(5).fill(0).map((_, c) => {
+                            const guess = this.lexleGuesses[r];
+                            let char = '';
+                            let status = '';
+                            if (guess) {
+                                char = guess[c];
+                                status = this.getLexleLetterStatus(guess, c);
+                            } else if (r === this.lexleGuesses.length) {
+                                char = this.lexleCurrentGuess[c] || '';
+                            }
+                            return `<div class="lexle-letter ${status}">${char}</div>`;
+                        }).join('')}
+                    </div>
+                `).join('')}
+            </div>
+            <div id="lexle-keyboard" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; max-width: 350px; margin: 0 auto;">
+                ${"QWERTYUIOPASDFGHJKLZXCVBNM".split('').map(l => `
+                    <button class="btn-action" style="padding: 0.5rem; min-width: 30px;" onclick="Minigames.handleLexleInput('${l}')">${l}</button>
+                `).join('')}
+                <button class="btn-action" style="padding: 0.5rem; min-width: 60px; background: #ef4444;" onclick="Minigames.handleLexleInput('BACKSPACE')">DEL</button>
+                <button class="btn-action" style="padding: 0.5rem; min-width: 60px; background: var(--accent-green);" onclick="Minigames.handleLexleInput('ENTER')">INVIO</button>
+            </div>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+    },
+
+    getLexleLetterStatus(guess, i) {
+        const char = guess[i];
+        if (char === this.lexleTarget[i]) return 'correct';
+        if (this.lexleTarget.includes(char)) return 'present';
+        return 'absent';
+    },
+
+    handleLexleInput(key) {
+        if (key === 'ENTER') {
+            if (this.lexleCurrentGuess.length === 5) {
+                this.lexleGuesses.push(this.lexleCurrentGuess);
+                const win = this.lexleCurrentGuess === this.lexleTarget;
+                this.lexleCurrentGuess = '';
+                this.renderLexle();
+                if (win) {
+                    const pts = [50, 40, 30, 20, 15, 10][this.lexleGuesses.length - 1];
+                    this.showResult(true, "Genio del Lessico!", pts);
+                } else if (this.lexleGuesses.length === 6) {
+                    this.showResult(false, `Parola era: ${this.lexleTarget}`, 0);
+                }
+            }
+        } else if (key === 'BACKSPACE') {
+            this.lexleCurrentGuess = this.lexleCurrentGuess.slice(0, -1);
+            this.renderLexle();
+        } else if (this.lexleCurrentGuess.length < 5 && /^[A-Z]$/.test(key)) {
+            this.lexleCurrentGuess += key;
+            this.renderLexle();
+        }
+    },
+
+    setupLexleControls() {
+        const handler = (e) => {
+            if (!document.querySelector('.lexle-grid')) return;
+            const key = e.key.toUpperCase();
+            if (key === 'ENTER' || key === 'BACKSPACE' || /^[A-Z]$/.test(key)) {
+                this.handleLexleInput(key);
+            }
+        };
+        window.removeEventListener('keydown', this._lexleKeyHandler);
+        this._lexleKeyHandler = handler;
+        window.addEventListener('keydown', handler);
+    },
+
+    // --- CAFFÈ CLICKER ---
+    clickerGocce: 0,
+    clickerMulti: 1,
+    clickerAuto: 0,
+    clickerInterval: null,
+
+    startClicker() {
+        this.clickerGocce = parseInt(localStorage.getItem('lex-clicker-gocce')) || 0;
+        this.clickerMulti = 1;
+        this.clickerAuto = 0;
+        this.renderClicker();
+        
+        clearInterval(this.clickerInterval);
+        this.clickerInterval = setInterval(() => {
+            if (this.clickerAuto > 0) {
+                this.clickerGocce += this.clickerAuto;
+                this.updateClickerUI();
+            }
+        }, 1000);
+    },
+
+    renderClicker() {
+        const html = `
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">Gocce di Caffeina</div>
+                <div id="clicker-count" style="font-size: 2.5rem; font-weight: 800; color: var(--accent-gold);">${this.clickerGocce}</div>
+            </div>
+            <div class="clicker-btn" onclick="Minigames.handleClicker()">☕</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%;">
+                <button class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('multi')">Espresso Doppio (+1/click)<br>Costo: 50</button>
+                <button class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('auto')">Studente Insonne (+2/sec)<br>Costo: 200</button>
+            </div>
+            <button class="btn-action btn-action-primary" style="margin-top: 1rem; width: 100%;" onclick="Minigames.convertGocce()">Converti 1000 Gocce in 5 LP</button>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+    },
+
+    handleClicker() {
+        this.clickerGocce += this.clickerMulti;
+        this.updateClickerUI();
+        // Visual feedback
+        const btn = document.querySelector('.clicker-btn');
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => btn.style.transform = '', 50);
+    },
+
+    updateClickerUI() {
+        const el = document.getElementById('clicker-count');
+        if (el) el.textContent = Math.floor(this.clickerGocce);
+        localStorage.setItem('lex-clicker-gocce', this.clickerGocce);
+    },
+
+    buyClicker(type) {
+        if (type === 'multi' && this.clickerGocce >= 50) {
+            this.clickerGocce -= 50;
+            this.clickerMulti++;
+        } else if (type === 'auto' && this.clickerGocce >= 200) {
+            this.clickerGocce -= 200;
+            this.clickerAuto += 2;
+        }
+        this.updateClickerUI();
+    },
+
+    convertGocce() {
+        if (this.clickerGocce >= 1000) {
+            this.clickerGocce -= 1000;
+            this.addPoints(5);
+            this.updateClickerUI();
+            LexCore.showToast("Caffeina convertita in Lex Points!", "success");
+        } else {
+            LexCore.showToast("Caffeina insufficiente!", "error");
+        }
     },
 
     // --- TRIS (TIC-TAC-TOE) ---
