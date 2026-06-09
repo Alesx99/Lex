@@ -229,7 +229,7 @@ const searchDatabase = [
         description: "La storiografia dell'arte romana da Winckelmann a Wickhoff e Riegl. Lo storicismo marxista di Bianchi Bandinelli e le letture semantiche di Hölscher e Zanker.",
         keywords: "arte romana storiografia winckelmann scuola vienna wickhoff riegl kunstwollen bianchi bandinelli senatoria plebea holscher zanker",
         navPath: "arte_romana/index.html?open=summaries/cap1_introduzione.md"
-    },
+    // ARTE ROMANA
     {
         title: "Origini di Roma e influenza etrusca",
         subject: "arte_romana",
@@ -237,6 +237,14 @@ const searchDatabase = [
         description: "I riti etruschi di fondazione, lo sviluppo delle Mura Serviane e l'architettura etrusco-italica del Tempio di Giove Ottimo Massimo sul Campidoglio. Area sacra di Sant'Omobono.",
         keywords: "origini roma fondazione etrusca mura serviane giove ottimo massimo campidoglio sant omobono minerva ercole tessera hospitalis",
         navPath: "arte_romana/index.html?open=summaries/cap2_fondazione.md"
+    },
+    {
+        title: "Approfondimento: Origini e la Grande Roma dei Tarquini",
+        subject: "arte_romana",
+        chapterTag: "Studio II-bis",
+        description: "Focus sulle leggende di fondazione, le capanne del Palatino, le tombe principesche, la Cloaca Maxima, il Campo Marzio e il Tempio di Cerere.",
+        keywords: "leggende roma capanne palatino tombe principesche tarquini cloaca maxima campus martius cerere amazzone esquilino mater matuta",
+        navPath: "arte_romana/index.html?open=summaries/approfondimento_origini.md"
     },
     {
         title: "L'età repubblicana tra V e III secolo a.C.",
