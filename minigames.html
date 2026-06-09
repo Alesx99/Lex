@@ -313,6 +313,24 @@
             </div>
         </div>
 
+        <div id="svago-header-container">
+             <h2 class="year-header" style="margin-top: 3rem; margin-bottom: 1.5rem; border: none;">Area Svago</h2>
+             <p style="color: var(--text-secondary); margin-top: -1rem; margin-bottom: 2rem;">Rilassati durante le pause studio con questi classici.</p>
+        </div>
+
+        <div id="svago-container" class="subjects-grid">
+            <div class="subject-card" onclick="Minigames.openGame('tris')" style="border-color: rgba(59, 130, 246, 0.3);">
+                <div class="subject-icon">❌</div>
+                <h3 style="font-family: var(--font-serif); margin-bottom: 0.5rem; color: var(--text-primary);">Tris Accademico</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Sfida l'IA nel gioco più antico del mondo. Chi vincerà?</p>
+            </div>
+            <div class="subject-card" onclick="Minigames.openGame('memory')" style="border-color: rgba(16, 185, 129, 0.3);">
+                <div class="subject-icon">🧩</div>
+                <h3 style="font-family: var(--font-serif); margin-bottom: 0.5rem; color: var(--text-primary);">Memory Visivo</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Allena la memoria e sblocca coupon per il tuo relax.</p>
+            </div>
+        </div>
+
         <!-- Games Grid (Specific to a subject) -->
         <div id="games-container" class="games-grid">
             <div class="game-card" onclick="Minigames.openGame('quiz')">

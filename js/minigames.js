@@ -135,7 +135,113 @@ const Minigames = {
     games: {
         'quiz': { title: "Sfida a Quiz", start: () => Minigames.startQuiz() },
         'fact-fiction': { title: "Sentenza o Bufala?", start: () => Minigames.startFactFiction() },
-        'treasure': { title: "L'Impiccato", start: () => Minigames.startTreasure() }
+        'treasure': { title: "L'Impiccato", start: () => Minigames.startTreasure() },
+        'tris': { title: "Tris Accademico", start: () => Minigames.startTris() },
+        'memory': { title: "Memory dell'Amore", start: () => Minigames.startMemory() }
+    },
+
+    // --- TRIS (TIC-TAC-TOE) ---
+    trisBoard: Array(9).fill(null),
+    trisTurn: 'X',
+
+    startTris() {
+        this.trisBoard = Array(9).fill(null);
+        this.trisTurn = 'X';
+        this.renderTris();
+    },
+
+    renderTris() {
+        const html = `
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem;">Sfida l'IA: tu sei X. Allinea tre simboli per vincere!</p>
+            <div class="tris-grid">
+                ${this.trisBoard.map((cell, i) => `
+                    <div class="tris-cell ${cell ? 'filled' : ''}" onclick="Minigames.handleTrisClick(${i})">${cell || ''}</div>
+                `).join('')}
+            </div>
+            <style>
+                .tris-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 240px; margin: 0 auto; }
+                .tris-cell { aspect-ratio: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+                .tris-cell:hover:not(.filled) { background: rgba(212, 175, 55, 0.1); border-color: var(--accent-gold); }
+                .tris-cell.filled { cursor: default; }
+            </style>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+    },
+
+    handleTrisClick(idx) {
+        if (this.trisBoard[idx] || this.trisTurn !== 'X') return;
+        
+        this.trisBoard[idx] = 'X';
+        this.renderTris();
+        
+        if (this.checkTrisWin('X')) return this.showResult(true, "Vittoria!", 5);
+        if (this.trisBoard.every(c => c)) return this.showResult(true, "Pareggio!", 2);
+        
+        this.trisTurn = 'O';
+        setTimeout(() => this.trisAIMove(), 500);
+    },
+
+    trisAIMove() {
+        const empty = this.trisBoard.map((c, i) => c === null ? i : null).filter(i => i !== null);
+        if (empty.length === 0) return;
+        
+        const move = empty[Math.floor(Math.random() * empty.length)];
+        this.trisBoard[move] = 'O';
+        this.trisTurn = 'X';
+        this.renderTris();
+        
+        if (this.checkTrisWin('O')) return this.showResult(false, "Sconfitta!", 0);
+        if (this.trisBoard.every(c => c)) return this.showResult(true, "Pareggio!", 2);
+    },
+
+    checkTrisWin(p) {
+        const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        return wins.some(w => w.every(i => this.trisBoard[i] === p));
+    },
+
+    // --- MEMORY ---
+    startMemory() {
+        const html = `
+            <div id="lex-memory-game-wrapper" style="width: 100%;">
+                <div id="lex-memory-intro">
+                    <p style="margin-bottom: 2rem; text-align: center; color: var(--text-secondary);">Allena la memoria visiva. Trova tutte le coppie il più velocemente possibile.</p>
+                    <button id="lex-start-memory-btn" class="btn-action btn-action-primary" style="width: 100%; height: 60px; font-size: 1.1rem;" onclick="Minigames.initMemory()">Avvia Memory 🎮</button>
+                </div>
+                <div id="lex-memory-board" style="display: none;">
+                    <div class="memory-stats" style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-weight: 700; color: var(--accent-gold); background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px;">
+                        <span>MOSSE: <span id="memory-moves">0</span></span>
+                        <span>MATCH: <span id="memory-matches">0</span> / 8</span>
+                    </div>
+                    <div class="lex-memory-grid"></div>
+                </div>
+            </div>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+    },
+
+    initMemory() {
+        document.getElementById('lex-memory-intro').style.display = 'none';
+        document.getElementById('lex-memory-board').style.display = 'block';
+        
+        if (typeof LexCore !== 'undefined' && LexCore.startMemoryGame) {
+            // Check if victory logic is already wrapped
+            if (!LexCore._isMemoryWrapped) {
+                const originalVictory = LexCore.startMemoryGame;
+                LexCore.startMemoryGame = function() {
+                    originalVictory.apply(LexCore);
+                    
+                    const checkVictory = setInterval(() => {
+                        const matches = document.getElementById('memory-matches');
+                        if (matches && matches.textContent === '8') {
+                            clearInterval(checkVictory);
+                            setTimeout(() => Minigames.showResult(true, "Memoria di Ferro!", 15), 800);
+                        }
+                    }, 1000);
+                };
+                LexCore._isMemoryWrapped = true;
+            }
+            LexCore.startMemoryGame();
+        }
     },
 
     // --- TIMERS & UTILS ---

@@ -1828,6 +1828,38 @@
                     current: (JSON.parse(localStorage.getItem('lex-minigame-achievements')) || {}).fact_checker ? 1 : 0,
                     target: 1,
                     type: "binary"
+                },
+                {
+                    id: "lp_1000",
+                    name: "Risparmiatore di Punti 🪙",
+                    desc: "Accumula i tuoi primi 1.000 Lex Points nelle arene.",
+                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
+                    target: 1000,
+                    type: "count"
+                },
+                {
+                    id: "lp_5000",
+                    name: "Gladiatore della Mente 🛡️",
+                    desc: "Accumula 5.000 Lex Points complessivi.",
+                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
+                    target: 5000,
+                    type: "count"
+                },
+                {
+                    id: "lp_25000",
+                    name: "Leggenda della Lex Arena 🏛️",
+                    desc: "Accumula 25.000 Lex Points complessivi.",
+                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
+                    target: 25000,
+                    type: "count"
+                },
+                {
+                    id: "lp_100000",
+                    name: "Semidio Accademico ⚡",
+                    desc: "Raggiungi l'incredibile traguardo di 100.000 Lex Points.",
+                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
+                    target: 100000,
+                    type: "count"
                 }
             ];
 
