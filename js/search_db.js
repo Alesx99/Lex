@@ -229,7 +229,7 @@ const searchDatabase = [
         description: "La storiografia dell'arte romana da Winckelmann a Wickhoff e Riegl. Lo storicismo marxista di Bianchi Bandinelli e le letture semantiche di Hölscher e Zanker.",
         keywords: "arte romana storiografia winckelmann scuola vienna wickhoff riegl kunstwollen bianchi bandinelli senatoria plebea holscher zanker",
         navPath: "arte_romana/index.html?open=summaries/cap1_introduzione.md"
-    // ARTE ROMANA
+    },
     {
         title: "Origini di Roma e influenza etrusca",
         subject: "arte_romana",
@@ -317,6 +317,46 @@ const searchDatabase = [
         description: "Evoluzione iconografica della Lupa Capitolina dall'antichità al Rinascimento (aggiunta dei gemelli del Pollaiolo) fino all'uso propagandistico in età moderna e contemporanea.",
         keywords: "lupa capitolina gemelli romolo remo mito etrusca datazione radiocarbonio carruba medioevo siena giustizia rinascimento pollaiolo sisto iv propaganda fascismo pop",
         navPath: "arte_romana/index.html?open=summaries/approfondimento_lupa.md"
+    },
+    {
+        title: "Approfondimento: Il Foro, il Comitium e le Basiliche",
+        subject: "arte_romana",
+        chapterTag: "Studio XII",
+        description: "Focus sull'evoluzione dello spazio politico romano: la trasformazione del Comitium circolare (modello greco), i Rostra, i Moeniana e l'invenzione della Basilica Civile.",
+        keywords: "foro romano comitium circolare ekklesiasterion curia hostilia rostra moeniana basilica civile porcia emilia sempronia",
+        navPath: "arte_romana/index.html?open=summaries/approfondimento_foro_basiliche.md"
+    },
+    {
+        title: "Approfondimento: Santuari Laziali e Opus Caementicium",
+        subject: "arte_romana",
+        chapterTag: "Studio XIII",
+        description: "La rivoluzione architettonica tardo-repubblicana. L'uso dell'opus caementicium nei santuari a terrazze scenografici di Palestrina (Fortuna Primigenia) e Tivoli.",
+        keywords: "santuari scenografici laziali opus caementicium cementizio pozzolana palestrina praeneste fortuna primigenia pozzo sortes tivoli hercules victor",
+        navPath: "arte_romana/index.html?open=summaries/approfondimento_santuari_laziali.md"
+    },
+    {
+        title: "Approfondimento: Il Ritratto Romano",
+        subject: "arte_romana",
+        chapterTag: "Studio XIV",
+        description: "Lo scontro e l'integrazione tra il ritratto tipologico greco-ellenistico e il verismo fisiognomico patrizio. Analisi dei ritratti di Pompeo, Cesare e Cicerone.",
+        keywords: "ritratto romano tipologico fisiognomico ius imaginum maschere funerarie verismo patrizio pompeo anastolè alessandro magno cesare cicerone",
+        navPath: "arte_romana/index.html?open=summaries/approfondimento_ritratto_romano.md"
+    },
+    {
+        title: "Approfondimento: Campo Marzio e Teatro di Pompeo",
+        subject: "arte_romana",
+        chapterTag: "Studio XV",
+        description: "La monumentalizzazione del Campo Marzio tra Tarda Repubblica e Augusto: il primo teatro stabile in muratura di Pompeo, i Saepta e il progetto di Augusto.",
+        keywords: "campo marzio teatro di pompeo muratura venus victrix porticus pompeiana saepta iulia horologium augusti ara pacis mausoleo",
+        navPath: "arte_romana/index.html?open=summaries/approfondimento_campo_marzio.md"
+    },
+    {
+        title: "Approfondimento: Dante e la Colonna Traiana",
+        subject: "arte_romana",
+        chapterTag: "Studio XVI",
+        description: "La Colonna Traiana e la sua fortuna medievale. La leggenda di Papa Gregorio Magno, la vedovella e il battesimo di Traiano ripresa da Dante nel Purgatorio.",
+        keywords: "colonna traiana dante alighieri purgatorio x gregorio magno vedova vedovella giubileo boni rilievo coclide",
+        navPath: "arte_romana/index.html?open=summaries/approfondimento_dante_traiano.md"
     },
     // STORIA MODERNA
     {
