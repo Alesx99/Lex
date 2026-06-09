@@ -1681,21 +1681,10 @@ const LexCore = {
                 focusSec += seconds;
                 localStorage.setItem('lex-focus-study-seconds', focusSec);
             }
-        } catch(e) {
-            console.error("Errore incremento tempo studio:", e);
-        }
-    },
-
-            const nowHour = new Date().getHours();
-            if (nowHour >= 0 && nowHour < 5) {
-                let nightSec = parseInt(localStorage.getItem('lex-night-study-seconds') || '0');
-                nightSec += seconds;
-                localStorage.setItem('lex-night-study-seconds', nightSec);
-            }
 
             this.updateStudyStreak();
         } catch(e) {
-            console.error("Errore aggiornamento tempo studio:", e);
+            console.error("Errore incremento tempo studio:", e);
         }
     },
 
