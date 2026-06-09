@@ -327,6 +327,7 @@ function setupDragAndDrop() {
     const list = document.getElementById('timeline-list');
     let draggedItem = null;
 
+    // --- MOUSE EVENTS ---
     list.addEventListener('dragstart', (e) => {
         draggedItem = e.target;
         e.dataTransfer.effectAllowed = 'move';
@@ -349,6 +350,41 @@ function setupDragAndDrop() {
             const rect = target.getBoundingClientRect();
             const next = (e.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
             list.insertBefore(draggedItem, next ? target.nextSibling : target);
+        }
+    });
+
+    // --- TOUCH EVENTS (Tablet/Mobile support) ---
+    list.addEventListener('touchstart', (e) => {
+        const target = e.target.closest('.timeline-item');
+        if (target) {
+            draggedItem = target;
+            draggedItem.style.opacity = '0.5';
+            draggedItem.style.background = 'rgba(212, 175, 55, 0.2)';
+            // Prevent scrolling while dragging
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    list.addEventListener('touchmove', (e) => {
+        if (!draggedItem) return;
+        e.preventDefault(); // Prevent scrolling
+
+        const touch = e.touches[0];
+        const target = document.elementFromPoint(touch.clientX, touch.clientY);
+        const itemUnderTouch = target ? target.closest('.timeline-item') : null;
+
+        if (itemUnderTouch && itemUnderTouch !== draggedItem) {
+            const rect = itemUnderTouch.getBoundingClientRect();
+            const next = (touch.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
+            list.insertBefore(draggedItem, next ? itemUnderTouch.nextSibling : itemUnderTouch);
+        }
+    }, { passive: false });
+
+    list.addEventListener('touchend', (e) => {
+        if (draggedItem) {
+            draggedItem.style.opacity = '1';
+            draggedItem.style.background = '';
+            draggedItem = null;
         }
     });
 }
