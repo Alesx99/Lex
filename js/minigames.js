@@ -1,6 +1,6 @@
 /**
- * LEX MINIGAMES ENGINE v3
- * High interactivity, timers, combos, Hangman, and fixed modal UI.
+ * LEX MINIGAMES ENGINE v4
+ * Subject-based Arenas, Enigma Unlocks, and Dynamic Game Generation.
  */
 
 const Minigames = {
@@ -11,6 +11,9 @@ const Minigames = {
     currentQuestionIndex: 0,
     scoreAccumulator: 0,
     currentPool: [],
+    
+    currentSubject: null,
+    subjectUnlocks: JSON.parse(localStorage.getItem('lex-arena-unlocks')) || {},
 
     // Hangman state
     hangmanWord: '',
@@ -18,9 +21,30 @@ const Minigames = {
     hangmanMistakes: 0,
     hangmanMaxMistakes: 5,
 
+    // Subject Enigmas
+    enigmas: {
+        'diritto': {
+            text: "Custodisco le regole del bello, ma non sono un artista. Parlo per commi e difendo il passato. Chi sono?",
+            answers: ["codice", "diritto", "legge", "codice dei beni culturali"]
+        },
+        'arte_romana': {
+            text: "Costruisco con la calce ciò che i Greci facevano col marmo. Copro grandi spazi senza usare colonne. Chi sono?",
+            answers: ["calcestruzzo", "romani", "opus caementicium", "cemento"]
+        },
+        'arte': {
+            text: "Tra luce e ombra scolpisco la tela. Con i colori in tubetto ho catturato l'istante. Chi sono?",
+            answers: ["pittore", "impressionista", "arte", "artista", "colore"]
+        },
+        'storia': {
+            text: "Scandisco il tempo di re e rivoluzioni. Insegno il passato per farvi capire il presente. Chi sono?",
+            answers: ["storia", "storico", "tempo"]
+        }
+    },
+
     init() {
         this.updatePointsUI();
-        console.log("Minigames Engine v3 Ready");
+        this.renderSubjectLocks();
+        console.log("Minigames Engine v4 Ready");
     },
 
     updatePointsUI() {
@@ -34,28 +58,84 @@ const Minigames = {
         this.updatePointsUI();
     },
 
-    // --- GAME MAPPING ---
-    games: {
-        'chronos': {
-            title: "Chronos Lex",
-            start: () => Minigames.startChronos()
-        },
-        'dilemma': {
-            title: "Il Dilemma del Curatore",
-            start: () => Minigames.startDilemma()
-        },
-        'treasure': {
-            title: "Caccia al Tesoro",
-            start: () => Minigames.startTreasure()
-        },
-        'fact-fiction': {
-            title: "Sentenza o Bufala?",
-            start: () => Minigames.startFactFiction()
-        },
-        'memory': {
-            title: "Memory dell'Amore",
-            start: () => Minigames.startMemory()
+    renderSubjectLocks() {
+        Object.keys(this.enigmas).forEach(sub => {
+            const card = document.getElementById(`subj-${sub}`);
+            if (card) {
+                if (this.subjectUnlocks[sub]) {
+                    card.classList.remove('locked');
+                } else {
+                    card.classList.add('locked');
+                }
+            }
+        });
+    },
+
+    openSubject(subId) {
+        if (!this.subjectUnlocks[subId]) {
+            this.currentSubject = subId;
+            document.getElementById('enigma-text').textContent = `"${this.enigmas[subId].text}"`;
+            document.getElementById('enigma-input').value = '';
+            document.getElementById('enigma-error').style.display = 'none';
+            document.getElementById('enigma-modal-overlay').classList.add('open');
+        } else {
+            this.showArena(subId);
         }
+    },
+
+    checkEnigma() {
+        const input = document.getElementById('enigma-input').value.toLowerCase().trim();
+        const validAnswers = this.enigmas[this.currentSubject].answers;
+        
+        const isCorrect = validAnswers.some(ans => input.includes(ans));
+        
+        if (isCorrect) {
+            this.subjectUnlocks[this.currentSubject] = true;
+            localStorage.setItem('lex-arena-unlocks', JSON.stringify(this.subjectUnlocks));
+            this.renderSubjectLocks();
+            document.getElementById('enigma-modal-overlay').classList.remove('open');
+            this.showArena(this.currentSubject);
+            this.triggerConfetti();
+            if (typeof playChime !== 'undefined') playChime(true);
+        } else {
+            document.getElementById('enigma-error').style.display = 'block';
+            if (typeof playChime !== 'undefined') playChime(false);
+            const box = document.querySelector('#enigma-modal-overlay .modal-box');
+            if (box) {
+                box.style.animation = 'none';
+                void box.offsetWidth;
+                box.style.animation = 'shake 0.4s ease-in-out';
+            }
+        }
+    },
+
+    showArena(subId) {
+        this.currentSubject = subId;
+        document.getElementById('subjects-container').style.display = 'none';
+        document.getElementById('games-container').style.display = 'grid';
+        document.getElementById('back-to-subjects').classList.remove('hidden');
+        
+        const titles = {
+            'diritto': 'Arena di Diritto',
+            'arte_romana': 'Arena Romana',
+            'arte': 'Arena dell\'Arte',
+            'storia': 'Arena della Storia'
+        };
+        document.getElementById('arena-title').textContent = titles[subId] || 'Arena';
+    },
+
+    showSubjects() {
+        document.getElementById('subjects-container').style.display = 'grid';
+        document.getElementById('games-container').style.display = 'none';
+        document.getElementById('back-to-subjects').classList.add('hidden');
+        document.getElementById('arena-title').textContent = 'Mappa delle Arene';
+    },
+
+    // --- DYNAMIC GAME ROUTING ---
+    games: {
+        'quiz': { title: "Sfida a Quiz", start: () => Minigames.startQuiz() },
+        'fact-fiction': { title: "Sentenza o Bufala?", start: () => Minigames.startFactFiction() },
+        'treasure': { title: "L'Impiccato", start: () => Minigames.startTreasure() }
     },
 
     // --- TIMERS & UTILS ---
@@ -82,7 +162,6 @@ const Minigames = {
         const tUI = document.getElementById('game-timer-bar');
         const tText = document.getElementById('game-timer-text');
         if (tUI && tText) {
-            // Assume initial time was stored in data attr or we just calc percentage based on known max
             const max = tUI.getAttribute('data-max') || 15;
             const pct = (this.timeRemaining / max) * 100;
             tUI.style.width = `${pct}%`;
@@ -112,118 +191,51 @@ const Minigames = {
         `;
     },
 
-    // --- CHRONOS LEX ---
-    startChronos() {
-        const pool = [
-            { year: 1909, text: "Legge Rosadi" },
-            { year: 1939, text: "Leggi Bottai" },
-            { year: 1948, text: "Costituzione (Art. 9)" },
-            { year: 1975, text: "Istituzione Ministero" },
-            { year: 1999, text: "Testo Unico Beni Culturali" },
-            { year: 2004, text: "Codice Urbani" },
-            { year: 2014, text: "Riforma Franceschini" },
-            { year: 1820, text: "Editto Doria" },
-            { year: 1902, text: "Editto Pacca" }
-        ];
+    // --- DYNAMIC QUIZ (from quiz_db.js) ---
+    startQuiz() {
+        if (!window.quizDatabase) return alert("Database Quiz non caricato.");
         
-        const selected = pool.sort(() => Math.random() - 0.5).slice(0, 5);
-        this.currentPool = [...selected].sort(() => Math.random() - 0.5);
-
-        const html = `
-            ${this.getTimerHTML(45)}
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 1rem;">Trascina per ordinare dal più antico al più recente.</p>
-            <div id="timeline-list" class="timeline-list">
-                ${this.currentPool.map(e => `
-                    <div class="timeline-item" draggable="true" data-year="${e.year}">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <span class="drag-handle" style="font-size: 1.2rem;">☰</span>
-                            <span style="font-weight: 500;">${e.text}</span>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-            <button class="btn-action btn-action-primary" style="width: 100%; margin-top: 1.5rem;" onclick="Minigames.checkChronos()">Verifica Linea Temporale</button>
-        `;
-        
-        document.getElementById('game-content').innerHTML = html;
-        setupDragAndDrop();
-        this.startTimer(45, () => this.showResult(false, "Tempo Scaduto!", 0));
-    },
-
-    checkChronos() {
-        this.stopTimer();
-        const items = Array.from(document.querySelectorAll('.timeline-item'));
-        const years = items.map(item => parseInt(item.getAttribute('data-year')));
-        const isSorted = years.every((v, i, a) => !i || a[i-1] <= v);
-
-        if (isSorted) {
-            const timeBonus = Math.floor(this.timeRemaining / 2);
-            const totalPts = 20 + timeBonus;
-            this.showResult(true, `Cronologia Perfetta!`, totalPts);
-            this.unlockAchievement('time_lord');
-        } else {
-            this.showResult(false, `Paradosso Temporale! Ordine Errato`, 0);
-        }
-    },
-
-    // --- IL DILEMMA DEL CURATORE ---
-    startDilemma() {
-        this.currentPool = [
-            {
-                text: "Durante uno scavo per la fibra ottica, una ditta trova un'anfora romana. Cosa dice il Codice?",
-                options: [
-                    "La ditta può tenerla se è in un terreno privato.",
-                    "Fermare i lavori, denunciare entro 24h e conservare il reperto.",
-                    "Il sindaco deve decidere se il reperto è di interesse culturale."
-                ],
-                correct: 1
-            },
-            {
-                text: "Un antiquario vuole vendere all'estero un quadro del 1850 di autore ignoto.",
-                options: [
-                    "Nessun vincolo, l'autore è ignoto.",
-                    "Serve sempre l'attestato di libera circolazione se supera i 13.500€.",
-                    "Serve sempre e comunque per ogni opera con più di 70 anni."
-                ],
-                correct: 1
-            },
-            {
-                text: "Vuoi restaurare la facciata del tuo palazzo notificato del '600.",
-                options: [
-                    "Basta l'autorizzazione del Comune (SCIA).",
-                    "Serve l'autorizzazione preventiva della Soprintendenza.",
-                    "I privati non possono restaurare beni vincolati, deve farlo lo Stato."
-                ],
-                correct: 1
+        let subjectQuestions = [];
+        Object.values(window.quizDatabase).forEach(chapter => {
+            if (chapter.subject === this.currentSubject) {
+                subjectQuestions = subjectQuestions.concat(chapter.questions);
             }
-        ].sort(() => Math.random() - 0.5);
+        });
 
+        if (subjectQuestions.length === 0) {
+            // Fallback questions if subject is empty
+            subjectQuestions = [
+                { question: "Domanda segreta dell'arena. Scegli la via della virtù.", options: ["La via", "La verità", "La vita"], correctIndex: 1 }
+            ];
+        }
+
+        // Pick 3 random questions
+        this.currentPool = subjectQuestions.sort(() => Math.random() - 0.5).slice(0, 3);
         this.currentQuestionIndex = 0;
         this.scoreAccumulator = 0;
         this.comboMultiplier = 1;
-        this.renderNextDilemma();
+        this.renderNextQuiz();
     },
 
-    renderNextDilemma() {
+    renderNextQuiz() {
         if (this.currentQuestionIndex >= this.currentPool.length) {
-            this.showResult(true, "Dilemmi Risolti!", this.scoreAccumulator);
-            this.unlockAchievement('curator_master');
+            this.showResult(true, "Sfida Superata!", this.scoreAccumulator);
             return;
         }
 
-        const s = this.currentPool[this.currentQuestionIndex];
+        const q = this.currentPool[this.currentQuestionIndex];
         const html = `
-            ${this.getTimerHTML(15)}
+            ${this.getTimerHTML(20)}
             <div style="display:flex; justify-content:space-between; color:var(--accent-gold); font-weight:700; margin-bottom:1rem;">
-                <span>Caso ${this.currentQuestionIndex + 1} di ${this.currentPool.length}</span>
+                <span>Domanda ${this.currentQuestionIndex + 1} di ${this.currentPool.length}</span>
                 <span>Combo: x${this.comboMultiplier}</span>
             </div>
-            <div class="game-prompt-card" style="margin-bottom: 1.5rem;">
-                <p>${s.text}</p>
+            <div class="game-prompt-card" style="margin-bottom: 1.5rem; text-align: left;">
+                <p>${q.question}</p>
             </div>
             <div class="game-options-grid">
-                ${s.options.map((opt, i) => `
-                    <button class="game-option-btn" onclick="Minigames.answerDilemma(${i})">
+                ${q.options.map((opt, i) => `
+                    <button class="game-option-btn" onclick="Minigames.answerQuiz(${i}, ${q.correctIndex})">
                         <span class="opt-index">${String.fromCharCode(65 + i)}</span>
                         <span>${opt}</span>
                     </button>
@@ -231,55 +243,124 @@ const Minigames = {
             </div>
         `;
         document.getElementById('game-content').innerHTML = html;
-        this.startTimer(15, () => this.answerDilemma(-1)); // -1 means timeout
+        this.startTimer(20, () => this.answerQuiz(-1, q.correctIndex)); 
     },
 
-    answerDilemma(idx) {
+    answerQuiz(idx, correct) {
         this.stopTimer();
-        const s = this.currentPool[this.currentQuestionIndex];
         
-        if (idx === s.correct) {
+        if (idx === correct) {
             const basePts = 10;
             this.scoreAccumulator += (basePts * this.comboMultiplier);
             this.comboMultiplier++;
             this.currentQuestionIndex++;
-            this.renderNextDilemma();
+            this.renderNextQuiz();
         } else {
-            // Wrong answer ends the run
-            this.showResult(false, idx === -1 ? "Tempo Scaduto!" : "Decisione Fatale!", this.scoreAccumulator);
-            // Give partial points if they got some right
-            if (this.scoreAccumulator > 0) {
-                this.addPoints(this.scoreAccumulator);
-            }
+            this.showResult(false, idx === -1 ? "Tempo Scaduto!" : "Risposta Errata!", this.scoreAccumulator);
+            if (this.scoreAccumulator > 0) this.addPoints(this.scoreAccumulator);
         }
     },
 
-    // --- CACCIA AL TESORO (Hangman Style) ---
-    startTreasure() {
-        const pool = [
-            { prompt: "Facoltà dello Stato di acquistare il bene allo stesso prezzo stabilito in un atto di compravendita tra privati.", answer: "PRELAZIONE" },
-            { prompt: "Atto con cui si dichiara l'interesse culturale di un bene di proprietà privata.", answer: "NOTIFICA" },
-            { prompt: "Rimozione di un bene pubblico dal regime del demanio per permetterne l'alienazione.", answer: "SDEMANIALIZZAZIONE" },
-            { prompt: "Il divieto di costruire o modificare un'area per proteggere una prospettiva o la luce di un monumento.", answer: "VINCOLO" }
-        ];
-        const t = pool[Math.floor(Math.random() * pool.length)];
+    // --- DYNAMIC FACT OR FICTION ---
+    startFactFiction() {
+        if (!window.quizDatabase) return;
+
+        let subjectQuestions = [];
+        Object.values(window.quizDatabase).forEach(chapter => {
+            if (chapter.subject === this.currentSubject) {
+                subjectQuestions = subjectQuestions.concat(chapter.questions);
+            }
+        });
+
+        // Generate Facts: taking correct answers as True, random other options as False
+        let facts = [];
+        subjectQuestions.forEach(q => {
+            facts.push({ text: q.options[q.correctIndex], correct: true });
+            const wrongOptions = q.options.filter((o, i) => i !== q.correctIndex);
+            if (wrongOptions.length > 0) {
+                facts.push({ text: wrongOptions[Math.floor(Math.random() * wrongOptions.length)], correct: false });
+            }
+        });
+
+        if (facts.length === 0) facts = [{text: "L'acqua è bagnata.", correct: true}, {text: "Il fuoco è freddo.", correct: false}];
+
+        this.currentPool = facts.sort(() => Math.random() - 0.5).slice(0, 5);
+        this.currentQuestionIndex = 0;
+        this.scoreAccumulator = 0;
+        this.renderNextFact();
+    },
+
+    renderNextFact() {
+        if (this.currentQuestionIndex >= this.currentPool.length) {
+            this.showResult(true, "Debunker Infallibile!", this.scoreAccumulator + 10);
+            return;
+        }
+
+        const f = this.currentPool[this.currentQuestionIndex];
+        const html = `
+            ${this.getTimerHTML(10)}
+            <div style="text-align: center; margin-bottom: 0.5rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Affermazione ${this.currentQuestionIndex + 1} di ${this.currentPool.length}
+            </div>
+            <div class="game-prompt-card" style="font-size: 1.2rem; padding: 2rem; margin-bottom: 2rem; border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(212,175,55,0.1);">
+                "${f.text}"
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%;">
+                <button class="btn-action" style="background: var(--accent-green); height: 80px; font-size: 1.2rem; font-weight: 700; border-radius: 16px;" onclick="Minigames.answerFact(${true})">VERO</button>
+                <button class="btn-action" style="background: var(--accent-romana); height: 80px; font-size: 1.2rem; font-weight: 700; border-radius: 16px;" onclick="Minigames.answerFact(${false})">FALSO</button>
+            </div>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+        this.startTimer(10, () => this.answerFact(null));
+    },
+
+    answerFact(guess) {
+        this.stopTimer();
+        const f = this.currentPool[this.currentQuestionIndex];
         
-        this.hangmanWord = t.answer;
+        if (guess === f.correct) {
+            this.scoreAccumulator += 5;
+            this.currentQuestionIndex++;
+            this.renderNextFact();
+        } else {
+            this.showResult(false, guess === null ? "Troppo Lento!" : "Bufala Inghiottita!", this.scoreAccumulator);
+            if (this.scoreAccumulator > 0) this.addPoints(this.scoreAccumulator);
+        }
+    },
+
+    // --- DYNAMIC HANGMAN (from glossary_db.js) ---
+    startTreasure() {
+        if (!window.glossaryDatabase) return;
+        
+        let terms = Object.keys(window.glossaryDatabase).filter(key => window.glossaryDatabase[key].domain === this.currentSubject);
+        
+        if (terms.length === 0) {
+             // Fallback to all if specific subject empty
+             terms = Object.keys(window.glossaryDatabase);
+        }
+
+        const selectedTermKey = terms[Math.floor(Math.random() * terms.length)];
+        const termData = window.glossaryDatabase[selectedTermKey];
+        
+        // Clean up word for hangman (only letters, no parenthesis)
+        let cleanWord = termData.term.split('(')[0].trim().toUpperCase();
+        // Remove accents
+        cleanWord = cleanWord.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        this.hangmanWord = cleanWord;
         this.hangmanGuessed = [];
         this.hangmanMistakes = 0;
         
-        this.renderHangman(t.prompt);
+        this.renderHangman(termData.definition);
     },
 
     renderHangman(prompt) {
-        // Build word display
         const displayWord = this.hangmanWord.split('').map(char => {
-            if (char === ' ') return '&nbsp;&nbsp;';
+            if (char === ' ' || char === "'" || char === "-") return char;
             return this.hangmanGuessed.includes(char) ? char : '_';
         }).join(' ');
 
-        // Keyboard
-        const alphabet = "ABCDEFGHILMNOPQRSTUVZ".split('');
+        const alphabet = "ABCDEFGHILMNOPQRSTUVZKYJWX".split('');
         const kbHTML = alphabet.map(letter => {
             const isGuessed = this.hangmanGuessed.includes(letter);
             const isWrong = isGuessed && !this.hangmanWord.includes(letter);
@@ -292,11 +373,11 @@ const Minigames = {
         }).join('');
 
         const html = `
-            <div class="game-prompt-card" style="margin-bottom: 1.5rem; font-style: italic;">
+            <div class="game-prompt-card" style="margin-bottom: 1.5rem; font-style: italic; font-size: 0.95rem; text-align: left;">
                 "${prompt}"
             </div>
             <div style="text-align: center; margin-bottom: 1.5rem;">
-                <div style="font-size: 2.5rem; font-family: monospace; letter-spacing: 0.2em; font-weight: 700; color: var(--accent-gold); margin-bottom: 1rem;">
+                <div style="font-size: 2rem; font-family: monospace; letter-spacing: 0.2em; font-weight: 700; color: var(--accent-gold); margin-bottom: 1rem; flex-wrap: wrap;">
                     ${displayWord}
                 </div>
                 <div style="color: #ef4444; font-weight: 700; font-size: 0.9rem;">
@@ -309,13 +390,12 @@ const Minigames = {
         `;
         document.getElementById('game-content').innerHTML = html;
         
-        // Add specific hangman CSS if not present
         if (!document.getElementById('hangman-css')) {
             const style = document.createElement('style');
             style.id = 'hangman-css';
             style.innerHTML = `
-                .hangman-keyboard { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
-                .hangman-key { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: white; border-radius: 8px; width: 40px; height: 40px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+                .hangman-keyboard { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+                .hangman-key { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: white; border-radius: 8px; width: 35px; height: 35px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
                 .hangman-key:hover:not(:disabled) { background: var(--accent-gold); color: black; }
                 .hangman-key.wrong { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; opacity: 0.5; }
                 .hangman-key.right { background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #10b981; }
@@ -333,8 +413,6 @@ const Minigames = {
         if (!this.hangmanWord.includes(letter)) {
             this.hangmanMistakes++;
             if (typeof playChime !== 'undefined') playChime(false);
-        } else {
-            // Little tick sound for correct letter (optional)
         }
 
         if (this.hangmanMistakes >= this.hangmanMaxMistakes) {
@@ -345,107 +423,10 @@ const Minigames = {
     },
 
     checkHangmanWin() {
-        const isWin = this.hangmanWord.replace(/ /g, '').split('').every(char => this.hangmanGuessed.includes(char));
+        const wordChars = this.hangmanWord.replace(/[ '-]/g, '').split('');
+        const isWin = wordChars.every(char => this.hangmanGuessed.includes(char));
         if (isWin) {
             this.showResult(true, "Tesoro Dissotterrato!", 25);
-            this.unlockAchievement('treasure_hunter');
-        }
-    },
-
-    // --- SENTENZA O BUFALA (Rapid Fire) ---
-    startFactFiction() {
-        this.currentPool = [
-            { text: "L'Articolo 9 della Costituzione tutela anche l'ambiente e la biodiversità dal 2022.", correct: true },
-            { text: "Le cose immobili pubbliche con più di 70 anni sono protette automaticamente (ope legis).", correct: true },
-            { text: "Il proprietario di un bene notificato può distruggerlo liberamente.", correct: false },
-            { text: "L'esportazione definitiva di beni culturali è sempre vietata.", correct: false },
-            { text: "L'Art Bonus è un credito d'imposta del 65% per erogazioni liberali a sostegno della cultura.", correct: true },
-            { text: "Le Regioni possono legiferare sulla tutela dei beni culturali indipendentemente dallo Stato.", correct: false }
-        ].sort(() => Math.random() - 0.5).slice(0, 5); // 5 facts streak
-
-        this.currentQuestionIndex = 0;
-        this.scoreAccumulator = 0;
-        this.renderNextFact();
-    },
-
-    renderNextFact() {
-        if (this.currentQuestionIndex >= this.currentPool.length) {
-            this.showResult(true, "Debunker Infallibile!", this.scoreAccumulator + 10); // +10 bonus for completing
-            this.unlockAchievement('fact_checker');
-            return;
-        }
-
-        const f = this.currentPool[this.currentQuestionIndex];
-        const html = `
-            ${this.getTimerHTML(8)}
-            <div style="text-align: center; margin-bottom: 0.5rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
-                Fatto ${this.currentQuestionIndex + 1} di 5
-            </div>
-            <div class="game-prompt-card" style="font-size: 1.4rem; padding: 3rem; margin-bottom: 2rem; border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(212,175,55,0.1);">
-                "${f.text}"
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%;">
-                <button class="btn-action" style="background: var(--accent-green); height: 80px; font-size: 1.2rem; font-weight: 700; border-radius: 16px;" onclick="Minigames.answerFact(${true})">VERO</button>
-                <button class="btn-action" style="background: var(--accent-romana); height: 80px; font-size: 1.2rem; font-weight: 700; border-radius: 16px;" onclick="Minigames.answerFact(${false})">FALSO</button>
-            </div>
-        `;
-        document.getElementById('game-content').innerHTML = html;
-        this.startTimer(8, () => this.answerFact(null)); // null means timeout
-    },
-
-    answerFact(guess) {
-        this.stopTimer();
-        const f = this.currentPool[this.currentQuestionIndex];
-        
-        if (guess === f.correct) {
-            this.scoreAccumulator += 5;
-            this.currentQuestionIndex++;
-            this.renderNextFact();
-        } else {
-            this.showResult(false, guess === null ? "Troppo Lento!" : "Bufala Inghiottita!", this.scoreAccumulator);
-            if (this.scoreAccumulator > 0) this.addPoints(this.scoreAccumulator);
-        }
-    },
-
-    // --- MEMORY ---
-    startMemory() {
-        const html = `
-            <div id="lex-memory-game-wrapper" style="width: 100%;">
-                <div id="lex-memory-intro">
-                    <p style="margin-bottom: 2rem; text-align: center; color: var(--text-secondary);">Allena la memoria visiva. Trova tutte le coppie il più velocemente possibile.</p>
-                    <button id="lex-start-memory-btn" class="btn-action btn-action-primary" style="width: 100%; height: 60px; font-size: 1.1rem;" onclick="Minigames.initMemory()">Avvia Memory 🎮</button>
-                </div>
-                <div id="lex-memory-board" style="display: none;">
-                    <div class="memory-stats" style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-weight: 700; color: var(--accent-gold); background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px;">
-                        <span>MOSSE: <span id="memory-moves">0</span></span>
-                        <span>MATCH: <span id="memory-matches">0</span> / 8</span>
-                    </div>
-                    <div class="lex-memory-grid"></div>
-                </div>
-            </div>
-        `;
-        document.getElementById('game-content').innerHTML = html;
-    },
-
-    initMemory() {
-        document.getElementById('lex-memory-intro').style.display = 'none';
-        document.getElementById('lex-memory-board').style.display = 'block';
-        
-        if (typeof LexCore !== 'undefined' && LexCore.startMemoryGame) {
-            const originalVictory = LexCore.startMemoryGame;
-            LexCore.startMemoryGame = function() {
-                originalVictory.apply(LexCore);
-                
-                const checkVictory = setInterval(() => {
-                    const matches = document.getElementById('memory-matches');
-                    if (matches && matches.textContent === '8') {
-                        clearInterval(checkVictory);
-                        // Using a small timeout to let the card flip animation finish
-                        setTimeout(() => Minigames.showResult(true, "Memoria di Ferro!", 15), 800);
-                    }
-                }, 1000);
-            };
-            LexCore.startMemoryGame();
         }
     },
 
@@ -473,23 +454,12 @@ const Minigames = {
             this.triggerConfetti();
         } else {
             if (typeof playChime !== 'undefined') playChime(false);
-            // Slight shake effect on modal
             const box = document.querySelector('.game-modal');
             if (box) {
                 box.style.animation = 'none';
-                void box.offsetWidth; // trigger reflow
+                void box.offsetWidth;
                 box.style.animation = 'shake 0.4s ease-in-out';
             }
-        }
-    },
-
-    unlockAchievement(id) {
-        let achievements = JSON.parse(localStorage.getItem('lex-minigame-achievements')) || {};
-        achievements[id] = true;
-        localStorage.setItem('lex-minigame-achievements', JSON.stringify(achievements));
-        
-        if (typeof LexCore !== 'undefined' && LexCore.showToast) {
-            LexCore.showToast(`🏆 Traguardo Sbloccato!`, 'success');
         }
     },
 
@@ -524,18 +494,14 @@ const Minigames = {
     }
 };
 
-// Global Functions for UI
 window.openGame = function(gameId) {
     const game = Minigames.games[gameId];
     if (!game) return;
 
     document.getElementById('game-result-container').classList.add('hidden');
     document.getElementById('game-title').textContent = game.title;
-    
-    // Open modal first
     document.getElementById('game-modal-overlay').classList.add('open');
     
-    // Start game logic
     game.start();
 };
 
@@ -544,80 +510,6 @@ window.closeGameModal = function() {
     document.getElementById('game-modal-overlay').classList.remove('open');
 };
 
-// Expose Minigames globally
 window.Minigames = Minigames;
-
-// Setup drag and drop for Chronos
-function setupDragAndDrop() {
-    const list = document.getElementById('timeline-list');
-    if (!list) return;
-    let draggedItem = null;
-
-    // --- MOUSE EVENTS ---
-    list.addEventListener('dragstart', (e) => {
-        draggedItem = e.target.closest('.timeline-item');
-        if (draggedItem) {
-            e.dataTransfer.effectAllowed = 'move';
-            draggedItem.style.opacity = '0.4';
-            draggedItem.style.transform = 'scale(0.98)';
-        }
-    });
-
-    list.addEventListener('dragend', (e) => {
-        if (draggedItem) {
-            draggedItem.style.opacity = '1';
-            draggedItem.style.transform = 'scale(1)';
-        }
-    });
-
-    list.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-    });
-
-    list.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const target = e.target.closest('.timeline-item');
-        if (target && target !== draggedItem) {
-            const rect = target.getBoundingClientRect();
-            const next = (e.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
-            list.insertBefore(draggedItem, next ? target.nextSibling : target);
-        }
-    });
-
-    // --- TOUCH EVENTS ---
-    list.addEventListener('touchstart', (e) => {
-        const target = e.target.closest('.timeline-item');
-        if (target) {
-            draggedItem = target;
-            draggedItem.style.opacity = '0.5';
-            draggedItem.style.background = 'rgba(212, 175, 55, 0.2)';
-            e.preventDefault();
-        }
-    }, { passive: false });
-
-    list.addEventListener('touchmove', (e) => {
-        if (!draggedItem) return;
-        e.preventDefault();
-
-        const touch = e.touches[0];
-        const target = document.elementFromPoint(touch.clientX, touch.clientY);
-        const itemUnderTouch = target ? target.closest('.timeline-item') : null;
-
-        if (itemUnderTouch && itemUnderTouch !== draggedItem) {
-            const rect = itemUnderTouch.getBoundingClientRect();
-            const next = (touch.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
-            list.insertBefore(draggedItem, next ? itemUnderTouch.nextSibling : itemUnderTouch);
-        }
-    }, { passive: false });
-
-    list.addEventListener('touchend', (e) => {
-        if (draggedItem) {
-            draggedItem.style.opacity = '1';
-            draggedItem.style.background = '';
-            draggedItem = null;
-        }
-    });
-}
 
 document.addEventListener('DOMContentLoaded', () => Minigames.init());
