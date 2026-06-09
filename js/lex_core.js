@@ -50,6 +50,7 @@ const LexCore = {
         this.startSync();
         this.tick();
         this.initTTS();
+        this.injectUpdateButtons();
 
         // Track visited pages for achievements
         try {
@@ -2163,6 +2164,66 @@ const LexCore = {
                 }
             });
         });
+    },
+
+    // --- PWA UPDATE LOGIC ---
+    injectUpdateButtons() {
+        // Run after a short delay to ensure DOM is ready
+        setTimeout(() => {
+            const footer = document.querySelector('footer');
+            if (footer && !document.getElementById('pwa-update-btn')) {
+                const btn = document.createElement('button');
+                btn.id = 'pwa-update-btn';
+                btn.className = 'pwa-update-btn';
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/>
+                    </svg>
+                    Verifica Aggiornamenti
+                `;
+                btn.onclick = () => this.forceUpdatePWA();
+                footer.appendChild(btn);
+            }
+        }, 1000);
+    },
+
+    async forceUpdatePWA() {
+        const btn = document.getElementById('pwa-update-btn');
+        if (btn) btn.classList.add('loading');
+
+        try {
+            if ('serviceWorker' in navigator) {
+                const regs = await navigator.serviceWorker.getRegistrations();
+                
+                // 1. Clear Caches
+                const cacheNames = await caches.keys();
+                await Promise.all(cacheNames.map(name => caches.delete(name)));
+                
+                // 2. Unregister all SW
+                for (let reg of regs) {
+                    await reg.unregister();
+                }
+
+                // 3. Clear session storage (optional but safe)
+                // sessionStorage.clear();
+
+                // Show success toast if available
+                if (this.showToast) {
+                    this.showToast("Aggiornamento forzato avviato. Ricaricamento...", "success");
+                }
+
+                // 4. Force hard reload
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 1000);
+            } else {
+                window.location.reload(true);
+            }
+        } catch (err) {
+            console.error("Errore durante l'aggiornamento PWA:", err);
+            if (btn) btn.classList.remove('loading');
+            alert("Errore durante l'aggiornamento. Prova a ricaricare manualmente.");
+        }
     }
 };
 

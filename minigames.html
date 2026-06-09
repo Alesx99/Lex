@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigiochi - Lex Studiorum</title>
+    <meta name="description" content="Allena la tua mente con i minigiochi didattici di Lex Studiorum: sfide di cronologia, logica giuridica e memoria.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
+    <script src="js/quiz_db.js"></script>
+    <script src="js/glossary_db.js"></script>
+    <style>
+        .minigames-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+            border-color: var(--border-color-hover);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+        }
+
+        .game-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .game-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .game-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .play-btn {
+            background: var(--accent-gold);
+            color: #0b0f19;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .game-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        /* Modal specific for games */
+        .game-modal {
+            max-width: 800px !important;
+            width: 95% !important;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        /* Chronos Lex Styles */
+        .timeline-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: grab;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .timeline-item:active { cursor: grabbing; }
+
+        /* Sentenza o Bufala Styles */
+        .fact-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        /* Dilemma Styles */
+        .scenario-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            border-left: 4px solid var(--accent-gold);
+        }
+        .option-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 10px;
+            color: var(--text-primary);
+            text-align: left;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--accent-gold); }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <header>
+        <div class="header-main">
+            <h1>Palestra della Mente</h1>
+            <p>Sfida te stesso con i minigiochi accademici di Lex Studiorum</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link">Home Portale</a>
+            <a href="achievements.html" class="nav-link">Traguardi</a>
+            <a href="exam.html" class="nav-link">Simulatore</a>
+            <a href="minigames.html" class="nav-link active">Minigiochi</a>
+        </nav>
+    </header>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+        <div class="minigames-grid">
+            <!-- Chronos Lex -->
+            <div class="game-card" onclick="openGame('chronos')">
+                <div class="game-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <h3>Chronos Lex</h3>
+                <p>Ordina cronologicamente leggi, eventi e opere d'arte. Diventa il signore del tempo accademico.</p>
+                <div class="game-footer">
+                    <span class="game-status">Nuovo</span>
+                    <button class="play-btn">Gioca</button>
+                </div>
+            </div>
+
+            <!-- Il Dilemma del Curatore -->
+            <div class="game-card" onclick="openGame('dilemma')">
+                <div class="game-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3>Il Dilemma del Curatore</h3>
+                <p>Affronta scenari critici e prendi decisioni basate sul Codice dei Beni Culturali. Salva il patrimonio!</p>
+                <div class="game-footer">
+                    <span class="game-status">Nuovo</span>
+                    <button class="play-btn">Gioca</button>
+                </div>
+            </div>
+
+            <!-- Caccia al Tesoro -->
+            <div class="game-card" onclick="openGame('treasure')">
+                <div class="game-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <h3>Caccia al Tesoro</h3>
+                <p>Trova il termine o l'opera misteriosa navigando nella knowledge base. Velocità e intuito.</p>
+                <div class="game-footer">
+                    <span class="game-status">Nuovo</span>
+                    <button class="play-btn">Gioca</button>
+                </div>
+            </div>
+
+            <!-- Sentenza o Bufala? -->
+            <div class="game-card" onclick="openGame('fact-fiction')">
+                <div class="game-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                </div>
+                <h3>Sentenza o Bufala?</h3>
+                <p>Distingui le verità storiche e giuridiche dalle fake news accademiche. Non farti ingannare!</p>
+                <div class="game-footer">
+                    <span class="game-status">Nuovo</span>
+                    <button class="play-btn">Gioca</button>
+                </div>
+            </div>
+
+            <!-- Memory -->
+            <div class="game-card" onclick="openGame('memory')">
+                <div class="game-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line></svg>
+                </div>
+                <h3>Memory dell'Amore</h3>
+                <p>Il classico gioco della memoria. Rilassati e sblocca coupon speciali durante le pause di studio.</p>
+                <div class="game-footer">
+                    <span class="game-status">Sbloccato</span>
+                    <button class="play-btn">Gioca</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Game Modal Overlay -->
+    <div id="game-modal-overlay" class="modal-overlay">
+        <div class="modal-box game-modal">
+            <button class="modal-close-btn" onclick="closeGameModal()">&times;</button>
+            <h2 id="game-title" class="modal-title">Titolo Gioco</h2>
+            <div id="game-content" class="game-container">
+                <!-- Game content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/minigames.js"></script>
+</body>
+</html>

@@ -919,4 +919,63 @@ body.coccole-theme header h1 {
     50% { transform: translateY(-2px); }
 }
 
+/* --- PWA UPDATE BUTTON --- */
+.pwa-update-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.35rem 0.9rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+    user-select: none;
+}
+
+.pwa-update-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.pwa-update-btn:active {
+    transform: translateY(0);
+}
+
+.pwa-update-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.pwa-update-btn.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.pwa-update-btn.loading svg {
+    animation: spin-update 1s infinite linear;
+}
+
+@keyframes spin-update {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+
 
