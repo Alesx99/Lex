@@ -221,6 +221,14 @@ const searchDatabase = [
         keywords: "postimpressionismo post-impressionismo paul cezanne scomposizione geometria giocatori carte montagna sainte victoire taches georges seurat divisionismo pointillisme pointillismo grande jatte michel eugene chevreul paul gauguin cloisonnisme sintetismo da dove veniamo chi siamo vincent van gogh notte stellata mangiatori patate espressionismo pennellata materica",
         navPath: "storia_arte/index.html?open=summaries/postimpressionismo_10.md"
     },
+    {
+        title: "Approfondimento: L'Iconografia della Lupa",
+        subject: "arte",
+        chapterTag: "Studio X-bis",
+        description: "Evoluzione iconografica della Lupa Capitolina dall'antichità al Rinascimento (aggiunta dei gemelli del Pollaiolo) fino all'uso propagandistico in età moderna e contemporanea.",
+        keywords: "lupa capitolina gemelli romolo remo mito etrusca datazione radiocarbonio carruba medioevo siena giustizia rinascimento pollaiolo sisto iv propaganda fascismo pop",
+        navPath: "storia_arte/index.html?open=summaries/approfondimento_lupa.md"
+    },
     // ARTE ROMANA
     {
         title: "Introduzione metodologica e storiografica",
