@@ -262,6 +262,9 @@
         });
 
         function openSummary(chapterTag, filePath) {
+            if (typeof LexCore !== 'undefined' && LexCore.trackChapterRead) {
+                LexCore.trackChapterRead(filePath);
+            } 
             modalChapterTag.textContent = chapterTag;
             modalChapterTitle.textContent = "Caricamento sintesi...";
             markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
@@ -486,6 +489,9 @@
 
             // Debounced save
             textarea.oninput = () => {
+                if (typeof LexCore !== 'undefined' && LexCore.trackNoteTaken) {
+                    LexCore.trackNoteTaken();
+                } 
                 status.textContent = "Salvataggio...";
                 clearTimeout(notesTimeout);
                 

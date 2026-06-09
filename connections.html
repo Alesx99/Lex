@@ -1326,6 +1326,11 @@
                 });
 
                 node.addEventListener('click', () => {
+                    // Track node view for achievements
+                    if (typeof LexCore !== 'undefined' && LexCore.trackConnectionNode) {
+                        LexCore.trackConnectionNode();
+                    }
+
                     if (window.isEditMode) {
                         handleNodeClickInEditMode(node);
                     } else {

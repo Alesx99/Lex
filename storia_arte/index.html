@@ -246,7 +246,7 @@
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="openSummary('Studio VI', 'summaries/barocco_6.md')">Leggi Sintesi</button>
-                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
                     <a class="btn btn-secondary" href="summaries/barocco_6.md" target="_blank" title="Visualizza Markdown raw">MD</a>
                 </div>
             </article>
@@ -267,7 +267,7 @@
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="openSummary('Studio VII', 'summaries/neoclassicismo_7.md')">Leggi Sintesi</button>
-                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
                     <a class="btn btn-secondary" href="summaries/neoclassicismo_7.md" target="_blank" title="Visualizza Markdown raw">MD</a>
                 </div>
             </article>
@@ -288,7 +288,7 @@
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="openSummary('Studio VIII', 'summaries/romanticismo_realismo_8.md')">Leggi Sintesi</button>
-                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
                     <a class="btn btn-secondary" href="summaries/romanticismo_realismo_8.md" target="_blank" title="Visualizza Markdown raw">MD</a>
                 </div>
             </article>
@@ -309,7 +309,7 @@
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="openSummary('Studio IX', 'summaries/impressionismo_9.md')">Leggi Sintesi</button>
-                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
                     <a class="btn btn-secondary" href="summaries/impressionismo_9.md" target="_blank" title="Visualizza Markdown raw">MD</a>
                 </div>
             </article>
@@ -330,7 +330,7 @@
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="openSummary('Studio X', 'summaries/postimpressionismo_10.md')">Leggi Sintesi</button>
-                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale">PDF</a>
+                    <a class="btn btn-secondary" href="Canova.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
                     <a class="btn btn-secondary" href="summaries/postimpressionismo_10.md" target="_blank" title="Visualizza Markdown raw">MD</a>
                 </div>
             </article>
@@ -435,6 +435,9 @@
         });
 
         function openSummary(chapterTag, filePath) {
+            if (typeof LexCore !== 'undefined' && LexCore.trackChapterRead) {
+                LexCore.trackChapterRead(filePath);
+            } 
             modalChapterTag.textContent = chapterTag;
             modalChapterTitle.textContent = "Caricamento sintesi...";
             markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
@@ -691,6 +694,9 @@
 
             // Debounced save
             textarea.oninput = () => {
+                if (typeof LexCore !== 'undefined' && LexCore.trackNoteTaken) {
+                    LexCore.trackNoteTaken();
+                } 
                 status.textContent = "Salvataggio...";
                 clearTimeout(notesTimeout);
                 

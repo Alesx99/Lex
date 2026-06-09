@@ -1501,6 +1501,40 @@ const LexCore = {
         draw();
     },
 
+    trackNoteTaken() {
+        let count = parseInt(localStorage.getItem('lex-notes-count') || '0');
+        count++;
+        localStorage.setItem('lex-notes-count', count);
+    },
+
+    trackSearch() {
+        let count = parseInt(localStorage.getItem('lex-search-queries-count') || '0');
+        count++;
+        localStorage.setItem('lex-search-queries-count', count);
+    },
+
+    trackChapterRead(chapterId) {
+        try {
+            const read = JSON.parse(localStorage.getItem('lex-unique-chapters-read') || '[]');
+            if (!read.includes(chapterId)) {
+                read.push(chapterId);
+                localStorage.setItem('lex-unique-chapters-read', JSON.stringify(read));
+            }
+        } catch(e){}
+    },
+
+    trackPdfView() {
+        let count = parseInt(localStorage.getItem('lex-pdf-views-count') || '0');
+        count++;
+        localStorage.setItem('lex-pdf-views-count', count);
+    },
+
+    trackConnectionNode() {
+        let count = parseInt(localStorage.getItem('lex-connections-nodes-count') || '0');
+        count++;
+        localStorage.setItem('lex-connections-nodes-count', count);
+    },
+
     incrementStudyTime(seconds) {
         try {
             let totalSec = parseInt(localStorage.getItem('lex-study-seconds') || '0');
@@ -1508,7 +1542,8 @@ const LexCore = {
             localStorage.setItem('lex-study-seconds', totalSec);
 
             // Update daily study log
-            const todayStr = new Date().toISOString().split('T')[0];
+            const now = new Date();
+            const todayStr = now.toISOString().split('T')[0];
             let dailyLog = {};
             try {
                 dailyLog = JSON.parse(localStorage.getItem('lex-study-daily-log') || '{}');
@@ -1517,6 +1552,40 @@ const LexCore = {
             }
             dailyLog[todayStr] = (dailyLog[todayStr] || 0) + seconds;
             localStorage.setItem('lex-study-daily-log', JSON.stringify(dailyLog));
+
+            // Night study (00:00 - 05:00)
+            const hour = now.getHours();
+            if (hour >= 0 && hour < 5) {
+                let nightSec = parseInt(localStorage.getItem('lex-night-study-seconds') || '0');
+                nightSec += seconds;
+                localStorage.setItem('lex-night-study-seconds', nightSec);
+            }
+
+            // Early morning study (before 08:30)
+            if (hour < 8 || (hour === 8 && now.getMinutes() < 30)) {
+                let earlySec = parseInt(localStorage.getItem('lex-early-study-seconds') || '0');
+                earlySec += seconds;
+                localStorage.setItem('lex-early-study-seconds', earlySec);
+            }
+
+            // Weekend study (Saturday = 6, Sunday = 0)
+            const day = now.getDay();
+            if (day === 0 || day === 6) {
+                let weekendSec = parseInt(localStorage.getItem('lex-weekend-study-seconds') || '0');
+                weekendSec += seconds;
+                localStorage.setItem('lex-weekend-study-seconds', weekendSec);
+            }
+
+            // Check for focus player (Sinfonia Notturna)
+            if (this.focusPlaying) {
+                let focusSec = parseInt(localStorage.getItem('lex-focus-study-seconds') || '0');
+                focusSec += seconds;
+                localStorage.setItem('lex-focus-study-seconds', focusSec);
+            }
+        } catch(e) {
+            console.error("Errore incremento tempo studio:", e);
+        }
+    },
 
             const nowHour = new Date().getHours();
             if (nowHour >= 0 && nowHour < 5) {

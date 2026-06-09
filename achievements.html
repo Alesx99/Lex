@@ -1707,6 +1707,20 @@
             // Fetch plant companion flowers
             const pomoFlowers = parseInt(localStorage.getItem('lex-pomo-flowers') || '0');
 
+            // NEW METRICS
+            const earlySeconds = parseInt(localStorage.getItem('lex-early-study-seconds') || '0');
+            const weekendSeconds = parseInt(localStorage.getItem('lex-weekend-study-seconds') || '0');
+            const focusSeconds = parseInt(localStorage.getItem('lex-focus-study-seconds') || '0');
+            const notesCount = parseInt(localStorage.getItem('lex-notes-count') || '0');
+            const searchCount = parseInt(localStorage.getItem('lex-search-queries-count') || '0');
+            const pdfCount = parseInt(localStorage.getItem('lex-pdf-views-count') || '0');
+            const nodesCount = parseInt(localStorage.getItem('lex-connections-nodes-count') || '0');
+            const lexPoints = parseInt(localStorage.getItem('lex-total-points') || '0');
+            let readChaptersCount = 0;
+            try {
+                readChaptersCount = JSON.parse(localStorage.getItem('lex-unique-chapters-read') || '[]').length;
+            } catch(e){}
+
             // Achievements List configurations
             const sidequests = [
                 {
@@ -1714,7 +1728,7 @@
                     name: "Pioniere del Hub 🗺️",
                     desc: "Visita tutte le sezioni principali del portale accademico.",
                     current: visitedPagesCount,
-                    target: 6, // index, connections, flashcards, exam, assistant, achievements
+                    target: 6,
                     type: "count"
                 },
                 {
@@ -1734,25 +1748,161 @@
                     type: "time"
                 },
                 {
+                    id: "study_50h",
+                    name: "Resistenza Accademica 🏋️",
+                    desc: "Accumula 50 ore complessive di studio attivo.",
+                    current: studySeconds,
+                    target: 180000,
+                    type: "time"
+                },
+                {
+                    id: "study_100h",
+                    name: "Veterano delle Sintesi 🎖️",
+                    desc: "Accumula 100 ore complessive di studio. Metà strada per la laurea?",
+                    current: studySeconds,
+                    target: 360000,
+                    type: "time"
+                },
+                {
+                    id: "study_500h",
+                    name: "Dottore di Ricerca Honoris Causa 🎓",
+                    desc: "Accumula 500 ore di studio attivo sul portale. Leggenda vera.",
+                    current: studySeconds,
+                    target: 1800000,
+                    type: "time"
+                },
+                {
+                    id: "early_bird",
+                    name: "Alba Accademica 🌅",
+                    desc: "Studia per 20 minuti prima delle 08:30 del mattino.",
+                    current: earlySeconds,
+                    target: 1200,
+                    type: "time"
+                },
+                {
+                    id: "weekend_warrior",
+                    name: "Guerriero del Weekend 🗡️",
+                    desc: "Accumula 1 ora di studio totale tra sabato e domenica.",
+                    current: weekendSeconds,
+                    target: 3600,
+                    type: "time"
+                },
+                {
+                    id: "night_owl",
+                    name: "Gufo Reale 🦉",
+                    desc: "Studia per 15 minuti dopo la mezzanotte.",
+                    current: nightSeconds,
+                    target: 900,
+                    type: "time"
+                },
+                {
+                    id: "night_symphony",
+                    name: "Sinfonia Notturna 🌙",
+                    desc: "Studia per 30 minuti con il Focus Mixer attivo.",
+                    current: focusSeconds,
+                    target: 1800,
+                    type: "time"
+                },
+                {
+                    id: "study_streak_3",
+                    name: "Costanza Accademica 🔥",
+                    desc: "Mantieni una striscia di studio di 3 giorni.",
+                    current: studyStreak,
+                    target: 3,
+                    type: "count"
+                },
+                {
+                    id: "study_streak_10",
+                    name: "Ritmo Inarrestabile ⚡",
+                    desc: "Mantieni una striscia di studio di 10 giorni.",
+                    current: studyStreak,
+                    target: 10,
+                    type: "count"
+                },
+                {
+                    id: "study_streak_30",
+                    name: "Monaco dello Studio 🧘",
+                    desc: "Mantieni una striscia di studio di 30 giorni consecutivi.",
+                    current: studyStreak,
+                    target: 30,
+                    type: "count"
+                },
+                {
+                    id: "scribe_10",
+                    name: "Scriba Instancabile ✍️",
+                    desc: "Prendi appunti in almeno 10 capitoli diversi.",
+                    current: notesCount,
+                    target: 10,
+                    type: "count"
+                },
+                {
+                    id: "scribe_50",
+                    name: "Ammanuense Moderno 📜",
+                    desc: "Prendi appunti in 50 capitoli diversi della knowledge base.",
+                    current: notesCount,
+                    target: 50,
+                    type: "count"
+                },
+                {
+                    id: "researcher_50",
+                    name: "Dottore di Ricerca 🔎",
+                    desc: "Esegui 50 ricerche nella barra globale.",
+                    current: searchCount,
+                    target: 50,
+                    type: "count"
+                },
+                {
+                    id: "cartographer_20",
+                    name: "Cartografo del Sapere 🕸️",
+                    desc: "Visualizza 20 nodi diversi nella mappa delle connessioni.",
+                    current: nodesCount,
+                    target: 20,
+                    type: "count"
+                },
+                {
+                    id: "library_mouse",
+                    name: "Topo di Biblioteca 📚",
+                    desc: "Apri o scarica 5 manuali PDF originali.",
+                    current: pdfCount,
+                    target: 5,
+                    type: "count"
+                },
+                {
+                    id: "summary_devourer_20",
+                    name: "Divoratore di Sintesi 📖",
+                    desc: "Leggi fino in fondo almeno 20 capitoli unici.",
+                    current: readChaptersCount,
+                    target: 20,
+                    type: "count"
+                },
+                {
+                    id: "summary_devourer_100",
+                    name: "Onniscienza Accademica 🔮",
+                    desc: "Leggi fino in fondo 100 capitoli unici del portale.",
+                    current: readChaptersCount,
+                    target: 100,
+                    type: "count"
+                },
+                {
                     id: "flashcard_50",
                     name: "Campione del Ripasso 🧠",
-                    desc: "Esegui 50 valutazioni di flashcard in Active Recall.",
+                    desc: "Esegui 50 valutazioni di flashcard.",
                     current: flashcardReviewsTotal,
                     target: 50,
                     type: "count"
                 },
                 {
-                    id: "flashcard_250",
-                    name: "Mente d'Acciaio 💾",
-                    desc: "Esegui 250 valutazioni complessive di flashcard.",
+                    id: "flashcard_500",
+                    name: "Memoria Prodigiosa 💾",
+                    desc: "Esegui 500 valutazioni di flashcard complessive.",
                     current: flashcardReviewsTotal,
-                    target: 250,
+                    target: 500,
                     type: "count"
                 },
                 {
                     id: "exam_passed_1",
                     name: "Primo Appello 📄",
-                    desc: "Ottieni un voto sufficiente (>=18) in una simulazione d'esame.",
+                    desc: "Ottieni un voto sufficiente in una simulazione d'esame.",
                     current: maxQuizScore >= 18 ? 1 : 0,
                     target: 1,
                     type: "binary"
@@ -1760,106 +1910,105 @@
                 {
                     id: "exam_lode",
                     name: "Perfezionista Accademico 🌟",
-                    desc: "Ottieni 30 o 30 e Lode in una simulazione scritta o orale.",
+                    desc: "Ottieni 30 o 30 e Lode in una simulazione.",
                     current: maxQuizScore >= 30 ? 1 : 0,
                     target: 1,
                     type: "binary"
                 },
                 {
-                    id: "night_owl",
-                    name: "Gufo Reale 🦉",
-                    desc: "Studia per 15 minuti dopo la mezzanotte (tra le 00:00 e le 05:00).",
-                    current: nightSeconds,
-                    target: 900,
-                    type: "time"
-                },
-                {
-                    id: "study_streak_3",
-                    name: "Costanza Accademica 🔥",
-                    desc: "Mantieni una striscia di studio giornaliera di 3 giorni.",
-                    current: studyStreak,
-                    target: 3,
-                    type: "count"
-                },
-                {
                     id: "roadmap_completed_5",
                     name: "Costanza di Marcia 📅",
-                    desc: "Completa 5 giorni di studio pianificati nella tua roadmap.",
+                    desc: "Completa 5 giorni di studio pianificati nella roadmap.",
                     current: completedRoadmapDays,
                     target: 5,
                     type: "count"
                 },
                 {
                     id: "pomo_flowers_5",
-                    name: "Pollice Verde Accademico 🌸",
-                    desc: "Fai sbocciare 5 fiori completando le sessioni di studio del Pomodoro.",
+                    name: "Pollice Verde 🌸",
+                    desc: "Fai sbocciare 5 fiori con le sessioni Pomodoro.",
                     current: pomoFlowers,
                     target: 5,
                     type: "count"
                 },
                 {
-                    id: "minigame_time_lord",
-                    name: "Signore del Tempo ⏳",
-                    desc: "Ordina correttamente la storia del diritto in Chronos Lex.",
-                    current: (JSON.parse(localStorage.getItem('lex-minigame-achievements')) || {}).time_lord ? 1 : 0,
-                    target: 1,
-                    type: "binary"
-                },
-                {
-                    id: "minigame_curator",
-                    name: "Curatore Esperto 🏛️",
-                    desc: "Risolvi correttamente un dilemma del curatore.",
-                    current: (JSON.parse(localStorage.getItem('lex-minigame-achievements')) || {}).curator_master ? 1 : 0,
-                    target: 1,
-                    type: "binary"
-                },
-                {
-                    id: "minigame_treasure",
-                    name: "Cacciatore di Tesori 🔍",
-                    desc: "Trova il termine misterioso nella caccia al tesoro.",
-                    current: (JSON.parse(localStorage.getItem('lex-minigame-achievements')) || {}).treasure_hunter ? 1 : 0,
-                    target: 1,
-                    type: "binary"
-                },
-                {
-                    id: "minigame_fact",
-                    name: "Debunker Accademico ✅",
-                    desc: "Distingui correttamente tra sentenza e bufala.",
-                    current: (JSON.parse(localStorage.getItem('lex-minigame-achievements')) || {}).fact_checker ? 1 : 0,
-                    target: 1,
-                    type: "binary"
+                    id: "pomo_flowers_50",
+                    name: "Giardino di Epicuro 🎋",
+                    desc: "Fai sbocciare 50 fiori completando le sessioni di studio.",
+                    current: pomoFlowers,
+                    target: 50,
+                    type: "count"
                 },
                 {
                     id: "lp_1000",
                     name: "Risparmiatore di Punti 🪙",
-                    desc: "Accumula i tuoi primi 1.000 Lex Points nelle arene.",
-                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
+                    desc: "Accumula 1.000 Lex Points nelle arene.",
+                    current: lexPoints,
                     target: 1000,
                     type: "count"
                 },
                 {
-                    id: "lp_5000",
+                    id: "lp_10000",
                     name: "Gladiatore della Mente 🛡️",
-                    desc: "Accumula 5.000 Lex Points complessivi.",
-                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
-                    target: 5000,
-                    type: "count"
-                },
-                {
-                    id: "lp_25000",
-                    name: "Leggenda della Lex Arena 🏛️",
-                    desc: "Accumula 25.000 Lex Points complessivi.",
-                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
-                    target: 25000,
+                    desc: "Accumula 10.000 Lex Points complessivi.",
+                    current: lexPoints,
+                    target: 10000,
                     type: "count"
                 },
                 {
                     id: "lp_100000",
                     name: "Semidio Accademico ⚡",
                     desc: "Raggiungi l'incredibile traguardo di 100.000 Lex Points.",
-                    current: parseInt(localStorage.getItem('lex-total-points') || '0'),
+                    current: lexPoints,
                     target: 100000,
                     type: "count"
+                },
+                {
+                    id: "lp_1000000",
+                    name: "Divinità della Conoscenza 🔱",
+                    desc: "Raggiungi 1.000.000 di Lex Points. Il portale è tuo.",
+                    current: lexPoints,
+                    target: 1000000,
+                    type: "count"
+                },
+                {
+                    id: "master_diritto",
+                    name: "Magistrato del Patrimonio 🏛️",
+                    desc: "Ottieni 30 in una simulazione di Diritto dei Beni Culturali.",
+                    current: (() => {
+                        try {
+                            const stats = JSON.parse(localStorage.getItem('lex-quiz-stats') || '[]');
+                            return stats.some(s => s.subject === 'diritto' && s.score >= 30) ? 1 : 0;
+                        } catch(e){ return 0; }
+                    })(),
+                    target: 1,
+                    type: "binary"
+                },
+                {
+                    id: "master_romana",
+                    name: "Archeologo Imperiale 🏺",
+                    desc: "Ottieni 30 in una simulazione di Arte Romana.",
+                    current: (() => {
+                        try {
+                            const stats = JSON.parse(localStorage.getItem('lex-quiz-stats') || '[]');
+                            return stats.some(s => s.subject === 'arte_romana' && s.score >= 30) ? 1 : 0;
+                        } catch(e){ return 0; }
+                    })(),
+                    target: 1,
+                    type: "binary"
+                },
+                {
+                    id: "master_storia",
+                    name: "Custode della Memoria 📜",
+                    desc: "Ottieni 30 in una simulazione di Storia Moderna.",
+                    current: (() => {
+                        try {
+                            const stats = JSON.parse(localStorage.getItem('lex-quiz-stats') || '[]');
+                            return stats.some(s => s.subject === 'storia' && s.score >= 30) ? 1 : 0;
+                        } catch(e){ return 0; }
+                    })(),
+                    target: 1,
+                    type: "binary"
                 }
             ];
 

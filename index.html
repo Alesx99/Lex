@@ -573,6 +573,11 @@
                 searchTimeout = setTimeout(async () => {
                     const results = fuse.search(query).map(r => r.item);
 
+                    // Track search for achievements
+                    if (typeof LexCore !== 'undefined' && LexCore.trackSearch) {
+                        LexCore.trackSearch();
+                    }
+
                     resultsList.innerHTML = '';
                     overlay.style.display = 'block';
 
