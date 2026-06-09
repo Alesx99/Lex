@@ -326,54 +326,122 @@ main {
     color: inherit;
 }
 
-/* Glow Borders for Active Subjects */
-.subject-card.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    transition: transform var(--transition-speed) ease;
+/* YEAR HEADERS */
+.year-header {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    margin: 4rem 0 2rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    animation: fadeInUp 0.8s ease-out;
 }
 
-.subject-card.active-diritto::before {
-    background: var(--accent-gold);
+/* CUSTOM BADGES */
+.status-badge.grade-badge {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-.subject-card.active-arte::before {
-    background: var(--accent-terracotta);
+.status-badge.todo-badge {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
 }
 
-.subject-card.active-romana::before {
-    background: var(--accent-romana);
-}
+/* SUBJECT CARD ACCENTS */
+.subject-card.active-letteratura-ita::before { background: #e11d48; }
+.subject-card.active-greca::before { background: #0ea5e9; }
+.subject-card.active-medievale::before { background: #7c2d12; }
+.subject-card.active-geografia::before { background: #10b981; }
+.subject-card.active-arte-medievale::before { background: #8b5cf6; }
+.subject-card.active-letteratura-lat::before { background: #be185d; }
+.subject-card.active-codicologia::before { background: #4b5563; }
+.subject-card.active-arte-moderna::before { background: #c85a32; }
+.subject-card.active-cristiana::before { background: #f59e0b; }
+.subject-card.active-laboratorio::before { background: #6366f1; }
+.subject-card.active-inglese::before { background: #3b82f6; }
+.subject-card.active-storia-contemp::before { background: #dc2626; }
+.subject-card.active-arte-contemp::before { background: #ec4899; }
+.subject-card.active-museologia::before { background: #06b6d4; }
+.subject-card.active-restauro::before { background: #14b8a6; }
+.subject-card.active-tesi::before { background: #ffffff; }
 
-.subject-card.active-storia::before {
-    background: var(--accent-blue);
-}
+/* Glow Effects */
+.subject-card.active-letteratura-ita:hover { box-shadow: 0 15px 35px rgba(225, 29, 72, 0.2); }
+.subject-card.active-greca:hover { box-shadow: 0 15px 35px rgba(14, 165, 233, 0.2); }
+.subject-card.active-medievale:hover { box-shadow: 0 15px 35px rgba(124, 45, 18, 0.2); }
+.subject-card.active-geografia:hover { box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2); }
+.subject-card.active-arte-medievale:hover { box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2); }
+.subject-card.active-letteratura-lat:hover { box-shadow: 0 15px 35px rgba(190, 24, 93, 0.2); }
+.subject-card.active-codicologia:hover { box-shadow: 0 15px 35px rgba(75, 85, 99, 0.2); }
+.subject-card.active-arte-moderna:hover { box-shadow: 0 15px 35px rgba(200, 90, 50, 0.2); }
+.subject-card.active-cristiana:hover { box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2); }
+.subject-card.active-laboratorio:hover { box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2); }
+.subject-card.active-inglese:hover { box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2); }
+.subject-card.active-storia-contemp:hover { box-shadow: 0 15px 35px rgba(220, 38, 38, 0.2); }
+.subject-card.active-arte-contemp:hover { box-shadow: 0 15px 35px rgba(236, 72, 153, 0.2); }
+.subject-card.active-museologia:hover { box-shadow: 0 15px 35px rgba(6, 182, 212, 0.2); }
+.subject-card.active-restauro:hover { box-shadow: 0 15px 35px rgba(20, 184, 166, 0.2); }
+.subject-card.active-tesi:hover { box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1); }
 
-.subject-card.active:hover {
-    transform: translateY(-8px);
-    border-color: var(--border-color-hover);
-    background: var(--bg-card-hover);
-}
+/* Hover Titles */
+.subject-card.active-letteratura-ita:hover h2 { color: #e11d48; }
+.subject-card.active-greca:hover h2 { color: #0ea5e9; }
+.subject-card.active-medievale:hover h2 { color: #7c2d12; }
+.subject-card.active-geografia:hover h2 { color: #10b981; }
+.subject-card.active-arte-medievale:hover h2 { color: #8b5cf6; }
+.subject-card.active-letteratura-lat:hover h2 { color: #be185d; }
+.subject-card.active-codicologia:hover h2 { color: #4b5563; }
+.subject-card.active-arte-moderna:hover h2 { color: #c85a32; }
+.subject-card.active-cristiana:hover h2 { color: #f59e0b; }
+.subject-card.active-laboratorio:hover h2 { color: #6366f1; }
+.subject-card.active-inglese:hover h2 { color: #3b82f6; }
+.subject-card.active-storia-contemp:hover h2 { color: #dc2626; }
+.subject-card.active-arte-contemp:hover h2 { color: #ec4899; }
+.subject-card.active-museologia:hover h2 { color: #06b6d4; }
+.subject-card.active-restauro:hover h2 { color: #14b8a6; }
+.subject-card.active-tesi:hover h2 { color: #ffffff; }
 
-.subject-card.active-diritto:hover {
-    box-shadow: 0 15px 35px var(--accent-gold-glow);
-}
+/* Icon Hovers */
+.subject-card.active-letteratura-ita:hover .subject-icon { color: #e11d48; border-color: #e11d48; background: rgba(225, 29, 72, 0.1); }
+.subject-card.active-greca:hover .subject-icon { color: #0ea5e9; border-color: #0ea5e9; background: rgba(14, 165, 233, 0.1); }
+.subject-card.active-medievale:hover .subject-icon { color: #7c2d12; border-color: #7c2d12; background: rgba(124, 45, 18, 0.1); }
+.subject-card.active-geografia:hover .subject-icon { color: #10b981; border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
+.subject-card.active-arte-medievale:hover .subject-icon { color: #8b5cf6; border-color: #8b5cf6; background: rgba(139, 92, 246, 0.1); }
+.subject-card.active-letteratura-lat:hover .subject-icon { color: #be185d; border-color: #be185d; background: rgba(190, 24, 93, 0.1); }
+.subject-card.active-codicologia:hover .subject-icon { color: #4b5563; border-color: #4b5563; background: rgba(75, 85, 99, 0.1); }
+.subject-card.active-arte-moderna:hover .subject-icon { color: #c85a32; border-color: #c85a32; background: rgba(200, 90, 50, 0.1); }
+.subject-card.active-cristiana:hover .subject-icon { color: #f59e0b; border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+.subject-card.active-laboratorio:hover .subject-icon { color: #6366f1; border-color: #6366f1; background: rgba(99, 102, 241, 0.1); }
+.subject-card.active-inglese:hover .subject-icon { color: #3b82f6; border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+.subject-card.active-storia-contemp:hover .subject-icon { color: #dc2626; border-color: #dc2626; background: rgba(220, 38, 38, 0.1); }
+.subject-card.active-arte-contemp:hover .subject-icon { color: #ec4899; border-color: #ec4899; background: rgba(236, 72, 153, 0.1); }
+.subject-card.active-museologia:hover .subject-icon { color: #06b6d4; border-color: #06b6d4; background: rgba(6, 182, 212, 0.1); }
+.subject-card.active-restauro:hover .subject-icon { color: #14b8a6; border-color: #14b8a6; background: rgba(20, 184, 166, 0.1); }
+.subject-card.active-tesi:hover .subject-icon { color: #ffffff; border-color: #ffffff; background: rgba(255, 255, 255, 0.1); }
 
-.subject-card.active-arte:hover {
-    box-shadow: 0 15px 35px var(--accent-terracotta-glow);
-}
+/* Footer Link Colors */
+.subject-card.active-letteratura-ita .card-footer { color: #e11d48; }
+.subject-card.active-greca .card-footer { color: #0ea5e9; }
+.subject-card.active-medievale .card-footer { color: #7c2d12; }
+.subject-card.active-geografia .card-footer { color: #10b981; }
+.subject-card.active-arte-medievale .card-footer { color: #8b5cf6; }
+.subject-card.active-letteratura-lat .card-footer { color: #be185d; }
+.subject-card.active-codicologia .card-footer { color: #4b5563; }
+.subject-card.active-arte-moderna .card-footer { color: #c85a32; }
+.subject-card.active-cristiana .card-footer { color: #f59e0b; }
+.subject-card.active-laboratorio .card-footer { color: #6366f1; }
+.subject-card.active-inglese .card-footer { color: #3b82f6; }
+.subject-card.active-storia-contemp .card-footer { color: #dc2626; }
+.subject-card.active-arte-contemp .card-footer { color: #ec4899; }
+.subject-card.active-museologia .card-footer { color: #06b6d4; }
+.subject-card.active-restauro .card-footer { color: #14b8a6; }
+.subject-card.active-tesi .card-footer { color: #ffffff; }
 
-.subject-card.active-romana:hover {
-    box-shadow: 0 15px 35px var(--accent-romana-glow);
-}
-
-.subject-card.active-storia:hover {
-    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.35);
-}
 
 /* Subject Meta (Top info) */
 .card-top {

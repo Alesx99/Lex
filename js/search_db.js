@@ -390,6 +390,127 @@ const searchDatabase = [
         description: "La politica diplomatica sabauda di Cavour, l'alleanza di Plombières, la Spedizione dei Mille di Garibaldi, la nascita del Regno d'Italia (1861) e la breccia di Porta Pia (1870).",
         keywords: "unificazione italiana cavour connubio crimea plombieres seconda guerra indipendenza magenta solferino villafranca spedizione mille garibaldi teano regno italia guarentigie non expedit porta pia",
         navPath: "storia/index.html?open=summaries/sto11_unificazione_regno.md"
+    },
+    // NUOVI MODULI - PIANO DI STUDI
+    {
+        title: "Letteratura Italiana: Movimenti e Classici",
+        subject: "letteratura_italiana",
+        chapterTag: "Intro",
+        description: "Studio dei movimenti letterari italiani e dei relativi classici.",
+        keywords: "letteratura italiana classici movimenti",
+        navPath: "letteratura_italiana/index.html"
+    },
+    {
+        title: "Cultura Greca: Civiltà e Letteratura",
+        subject: "cultura_greca",
+        chapterTag: "Intro",
+        description: "Approfondimento sulla civiltà greca, letteratura e istituzioni.",
+        keywords: "cultura greca civiltà letteratura",
+        navPath: "cultura_greca/index.html"
+    },
+    {
+        title: "Storia Medievale: Politica e Società",
+        subject: "storia_medievale",
+        chapterTag: "Intro",
+        description: "Analisi delle strutture politiche e sociali del Medioevo.",
+        keywords: "storia medievale politica società",
+        navPath: "storia_medievale/index.html"
+    },
+    {
+        title: "Geografia: Dinamiche Territoriali",
+        subject: "geografia",
+        chapterTag: "Intro",
+        description: "Studio dei processi territoriali e demografici globali.",
+        keywords: "geografia territorio demografia",
+        navPath: "geografia/index.html"
+    },
+    {
+        title: "Arte Medievale: Dal Bizantino al Gotico",
+        subject: "arte_medievale",
+        chapterTag: "Intro",
+        description: "Sviluppo artistico dall'arte bizantina al gotico internazionale.",
+        keywords: "arte medievale bizantino gotico",
+        navPath: "arte_medievale/index.html"
+    },
+    {
+        title: "Letteratura Latina: Generi e Autori",
+        subject: "letteratura_latina",
+        chapterTag: "Intro",
+        description: "Studio dei generi letterari e dei massimi esponenti della latinità.",
+        keywords: "letteratura latina classici autori",
+        navPath: "letteratura_latina/index.html"
+    },
+    {
+        title: "Codicologia: Archeologia del Libro",
+        subject: "codicologia",
+        chapterTag: "Intro",
+        description: "Studio del libro manoscritto: materiali e tecniche.",
+        keywords: "codicologia libro manoscritto archeologia",
+        navPath: "codicologia/index.html"
+    },
+    {
+        title: "Archeologia Cristiana",
+        subject: "cristiana",
+        chapterTag: "Intro",
+        description: "Sviluppo dell'arte e dell'architettura cristiana.",
+        keywords: "cristiana archeologia paleocristiana",
+        navPath: "cristiana/index.html"
+    },
+    {
+        title: "Inglese Accademico",
+        subject: "inglese",
+        chapterTag: "Intro",
+        description: "Competenze linguistiche per l'ambito storico-artistico.",
+        keywords: "inglese lingua accademico",
+        navPath: "inglese/index.html"
+    },
+    {
+        title: "Storia Contemporanea: XX e XXI secolo",
+        subject: "storia_contemporanea",
+        chapterTag: "Intro",
+        description: "Le grandi trasformazioni del mondo contemporaneo.",
+        keywords: "storia contemporanea novecento globalizzazione",
+        navPath: "storia_contemporanea/index.html"
+    },
+    {
+        title: "Arte Contemporanea: Avanguardie e Oggi",
+        subject: "arte_contemporanea",
+        chapterTag: "Intro",
+        description: "Dalle avanguardie storiche alle installazioni multimediali.",
+        keywords: "arte contemporanea avanguardie multimedia",
+        navPath: "arte_contemporanea/index.html"
+    },
+    {
+        title: "Museologia: Gestione e Allestimento",
+        subject: "museologia",
+        chapterTag: "Intro",
+        description: "Storia del collezionismo e gestione delle istituzioni museali.",
+        keywords: "museologia musei collezionismo allestimento",
+        navPath: "museologia/index.html"
+    },
+    {
+        title: "Restauro: Teoria e Tecnica",
+        subject: "restauro",
+        chapterTag: "Intro",
+        description: "Teoria del restauro e tecniche di conservazione.",
+        keywords: "restauro conservazione brandi tecnica",
+        navPath: "restauro/index.html"
+    },
+    {
+        title: "Laboratorio: Attività Pratiche",
+        subject: "laboratorio",
+        chapterTag: "Intro",
+        description: "Attività pratiche e seminari integrativi.",
+        keywords: "laboratorio pratica seminario",
+        navPath: "laboratorio/index.html"
+    },
+    {
+        title: "Tesi di Laurea: Ricerca e Redazione",
+        subject: "tesi",
+        chapterTag: "Intro",
+        description: "Spazio di lavoro per la ricerca e redazione finale.",
+        keywords: "tesi laurea ricerca redazione",
+        navPath: "tesi/index.html"
     }
 ];
 

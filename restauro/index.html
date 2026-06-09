@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex - Teoria e Tecnica del Restauro</title>
+    <meta name="description" content="Piattaforma interattiva di studio sul Diritto dei Beni Culturali e del Paesaggio in Italia. Sintesi accademiche, relazioni concettuali e testi originali.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Centralized Glossary Database -->
+    <script src="../js/glossary_db.js"></script>
+    <style>
+        /* Extra styles specific to index page */
+        .search-container {
+            max-width: 600px;
+            margin: -2rem auto 3rem auto;
+            position: relative;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            background: rgba(13, 20, 35, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-gold);
+            background: rgba(13, 20, 35, 0.8);
+            box-shadow: 0 0 25px rgba(20, 184, 166, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition-fast);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-gold);
+        }
+
+        /* Filter counters */
+        .results-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Teoria e Tecnica del Restauro</h1>
+            <p>Modulo di Studio Accademico</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link active" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+        
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Teoria e Tecnica del Restauro</h2>
+            <div class="hero-divider"></div>
+            <p>Conservare la memoria: tecniche e teoria del restauro.</p>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-input" placeholder="Cerca capitolo, autore o parole chiave (es. tutela, prelezione, sanzioni)...">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+
+        <div id="results-info" class="results-count">Visualizzati 1 di 1 capitoli</div>
+
+        
+        <div class="subject-section-wrapper" id="section-main">
+            <h2 class="section-category-title" style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--accent-gold); margin: 2rem 0 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Indice dei Capitoli
+            </h2>
+            <div class="dashboard-grid">
+                <article class="chapter-card" data-chapter="1" data-search="introduzione capitolo 1">
+                    <div class="card-header">
+                        <span class="chapter-num">Capitolo I</span>
+                        <span class="reading-time">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            ~5 min lett.
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Introduzione al corso</h3>
+                        <div class="author">Autore: <span>Redazione Lex</span></div>
+                        <p class="description">Panoramica generale del modulo di Teoria e Tecnica del Restauro. Concetti fondamentali e obiettivi formativi.</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="openSummary('Capitolo I', 'summaries/cap1.md')">Leggi Sintesi</button>
+                        <a class="btn btn-secondary" href="summaries/cap1.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Capitolo I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Titolo del Capitolo</h3>
+                </div>
+                <div class="modal-controls">
+                    <!-- Print Button -->
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <!-- Close Button -->
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Reading Progress Bar -->
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <!-- Split Container for Body and Notes -->
+            <div class="modal-content-split">
+                <!-- Modal Body Text -->
+                <div class="modal-body" id="modal-body-content">
+                    <div class="markdown-content" id="markdown-view">
+                        <!-- Rendered markdown goes here -->
+                    </div>
+                </div>
+                <!-- Study Notepad Panel -->
+                <div class="modal-notes-panel" id="modal-notes-panel">
+                    <div class="notes-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span>Appunti di Studio</span>
+                    </div>
+                    <textarea id="notes-textarea" placeholder="Scrivi qui i tuoi appunti per questo capitolo... Verranno salvati automaticamente in locale."></textarea>
+                    <div class="notes-status" id="notes-status">Nessuna modifica.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche del Diritto dei Beni Culturali. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Realtime Search and Filter
+        const searchBox = document.getElementById('search-box');
+        const cards = document.querySelectorAll('.chapter-card');
+        const resultsInfo = document.getElementById('results-info');
+
+        searchBox.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-search');
+                if (searchData.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide section wrappers based on whether they contain visible cards
+            document.querySelectorAll('.subject-section-wrapper').forEach(wrapper => {
+                const hasVisibleCards = Array.from(wrapper.querySelectorAll('.chapter-card')).some(card => card.style.display === 'flex');
+                if (hasVisibleCards || query.length === 0) {
+                    wrapper.style.display = 'block';
+                } else {
+                    wrapper.style.display = 'none';
+                }
+            });
+
+            if (query.length > 0) {
+                resultsInfo.style.display = 'block';
+                resultsInfo.textContent = `Trovati ${visibleCount} di ${cards.length} capitoli per "${query}"`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+        });
+
+        // Markdown Reader Mechanism
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(212,175,55,0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            // Add spin animation to CSS
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+
+            // Reset reading progress
+            progressIndicator.style.width = '0%';
+
+            // Fetch and parse markdown
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("Errore nel caricamento del file.");
+                    return response.text();
+                })
+                .then(text => {
+                    // Extract Chapter title from the first header
+                    const firstHeaderMatch = text.match(/^#\s+(.+)$/m);
+                    if (firstHeaderMatch) {
+                        modalChapterTitle.textContent = firstHeaderMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = chapterTag;
+                    }
+                    
+                    // Render markdown using Marked
+                    markdownView.innerHTML = marked.parse(text);
+
+                    // Initialize features after render
+                    setTimeout(() => {
+                        injectGlossaryTooltips(markdownView);
+                        initializeParagraphs(filePath);
+                        initializeNotepad(filePath);
+                    }, 50);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore";
+                    markdownView.innerHTML = `<div style="color:#ef4444; text-align:center; padding: 2rem;">
+                        <p>Impossibile caricare la sintesi. Verifica che il file esista localmente.</p>
+                        <p style="font-size:0.85rem; margin-top:0.5rem; opacity:0.7;">${err.message}</p>
+                    </div>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto'; // Release background scroll
+            const palette = document.getElementById('highlight-palette');
+            if (palette) palette.style.display = 'none';
+        }
+
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeSummary();
+            }
+        });
+
+        // Close on Escape key press
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('open')) {
+                closeSummary();
+            }
+        });
+
+        // Track scroll progress in modal body
+        modalBodyContent.addEventListener('scroll', function() {
+            const scrollTop = modalBodyContent.scrollTop;
+            const scrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (scrollHeight > 0) {
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressIndicator.style.width = scrollPercent + '%';
+            } else {
+                progressIndicator.style.width = '0%';
+            }
+        });
+
+        // Open summary from URL query parameter if present
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const openPath = params.get('open');
+            if (openPath) {
+                const btns = document.querySelectorAll('button[onclick]');
+                for (const btn of btns) {
+                    const onclickStr = btn.getAttribute('onclick');
+                    if (onclickStr && onclickStr.includes(openPath)) {
+                        // Delay click slightly to allow smooth transition
+                        setTimeout(() => btn.click(), 100);
+                        break;
+                    }
+                }
+            }
+        });
+
+        // GLOSSARY TOOLTIPS INJECTOR
+        function injectGlossaryTooltips(container) {
+            if (!window.glossaryDatabase) return;
+            
+            const terms = Object.keys(window.glossaryDatabase);
+            if (terms.length === 0) return;
+            
+            // Sort terms by length descending, so longer phrases are matched first
+            terms.sort((a, b) => b.length - a.length);
+            
+            const walker = document.createTreeWalker(
+                container,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(node) {
+                        const parent = node.parentNode.tagName.toLowerCase();
+                        if (parent === 'a' || parent === 'code' || parent === 'pre' || parent === 'button' || parent === 'script' || parent === 'style' || parent === 'span' && node.parentNode.classList.contains('glossary-term')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+            
+            const nodesToReplace = [];
+            while (walker.nextNode()) {
+                nodesToReplace.push(walker.currentNode);
+            }
+            
+            nodesToReplace.forEach(node => {
+                let text = node.nodeValue;
+                let replaced = false;
+                
+                for (const term of terms) {
+                    const termMeta = window.glossaryDatabase[term];
+                    const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                    let regexStr = '\\b(' + escapedTerm + ')(i|e|a|o)?\\b';
+                    
+                    if (term.includes("'")) {
+                        regexStr = '(' + escapedTerm + ')';
+                    }
+                    
+                    const regex = new RegExp(regexStr, 'gi');
+                    
+                    if (regex.test(text)) {
+                        const span = document.createElement('span');
+                        span.innerHTML = text.replace(regex, (match) => {
+                            return `<span class="glossary-term" data-term="${term}">${match}<span class="glossary-tooltip"><strong>${termMeta.term}</strong>: ${termMeta.definition}</span></span>`;
+                        });
+                        
+                        node.parentNode.replaceChild(span, node);
+                        replaced = true;
+                        break; 
+                    }
+                }
+            });
+        }
+
+        // PARAGRAPH HIGHLIGHTS
+        let activeParagraphIndex = -1;
+        let activeFilePath = '';
+
+        function initializeParagraphs(filePath) {
+            activeFilePath = filePath;
+            const paragraphs = markdownView.querySelectorAll('p');
+            const palette = document.getElementById('highlight-palette');
+
+            paragraphs.forEach((p, index) => {
+                // Load saved highlight color
+                const savedColor = localStorage.getItem(`highlight-${filePath}-${index}`);
+                if (savedColor) {
+                    p.className = `highlighted-${savedColor}`;
+                }
+
+                // Click handler to open palette
+                p.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    activeParagraphIndex = index;
+                    
+                    const pRect = p.getBoundingClientRect();
+                    const bodyRect = document.body.getBoundingClientRect();
+                    
+                    // Position the palette
+                    const top = pRect.top - bodyRect.top - 40;
+                    const left = pRect.left + (pRect.width / 2) - 60;
+                    
+                    palette.style.top = `${top}px`;
+                    palette.style.left = `${left}px`;
+                    palette.style.display = 'flex';
+                });
+            });
+        }
+
+        function applyHighlightColor(color) {
+            const palette = document.getElementById('highlight-palette');
+            palette.style.display = 'none';
+
+            if (activeParagraphIndex === -1 || !activeFilePath) return;
+
+            const paragraphs = markdownView.querySelectorAll('p');
+            const p = paragraphs[activeParagraphIndex];
+
+            if (color === 'clear') {
+                p.className = '';
+                localStorage.removeItem(`highlight-${activeFilePath}-${activeParagraphIndex}`);
+            } else {
+                p.className = `highlighted-${color}`;
+                localStorage.setItem(`highlight-${activeFilePath}-${activeParagraphIndex}`, color);
+            }
+
+            activeParagraphIndex = -1;
+        }
+
+        // Close palette when clicking anywhere else
+        document.addEventListener('click', (e) => {
+            const palette = document.getElementById('highlight-palette');
+            if (palette && !palette.contains(e.target)) {
+                palette.style.display = 'none';
+            }
+        });
+
+        // STUDY NOTEPAD INITIALIZER
+        let notesTimeout = null;
+
+        function initializeNotepad(filePath) {
+            const textarea = document.getElementById('notes-textarea');
+            const status = document.getElementById('notes-status');
+            
+            const savedNotes = localStorage.getItem(`notes-${filePath}`);
+            textarea.value = savedNotes || '';
+            status.textContent = "Nessuna modifica.";
+
+            // Debounced save
+            textarea.oninput = () => {
+                status.textContent = "Salvataggio...";
+                clearTimeout(notesTimeout);
+                
+                notesTimeout = setTimeout(() => {
+                    try {
+                        localStorage.setItem(`notes-${filePath}`, textarea.value);
+                        status.textContent = "Modifiche salvate.";
+                    } catch (err) {
+                        status.textContent = "Errore salvataggio.";
+                        console.error(err);
+                    }
+                }, 600);
+            };
+        }
+    </script>
+
+    <!-- Floating Paragraph Highlighter Palette -->
+    <div id="highlight-palette" class="highlight-palette" style="display: none;">
+        <button class="palette-color-btn color-yellow" onclick="applyHighlightColor('yellow')" title="Evidenzia in Giallo"></button>
+        <button class="palette-color-btn color-green" onclick="applyHighlightColor('green')" title="Evidenzia in Verde"></button>
+        <button class="palette-color-btn color-red" onclick="applyHighlightColor('red')" title="Evidenzia in Rosso"></button>
+        <button class="palette-color-btn color-clear" onclick="applyHighlightColor('clear')" title="Rimuovi Evidenziazione">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+
+    <!-- Reading Mode Controls -->
+    <div id="reading-controls" class="reading-controls" style="display: none;">
+        <button id="font-size-btn" class="reader-btn" title="Aumenta Font">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        </button>
+        <button id="dyslexic-btn" class="reader-btn" title="Font Alta Leggibilità">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+        </button>
+    </div>
+
+    <script>
+        // READING MODE LOGIC
+        const fontSizeBtn = document.getElementById('font-size-btn');
+        const dyslexicBtn = document.getElementById('dyslexic-btn');
+        const readingControls = document.getElementById('reading-controls');
+        
+        fontSizeBtn.addEventListener('click', () => {
+            markdownView.classList.toggle('large-font');
+            fontSizeBtn.classList.toggle('active');
+        });
+
+        dyslexicBtn.addEventListener('click', () => {
+            markdownView.classList.toggle('dyslexic-font');
+            dyslexicBtn.classList.toggle('active');
+        });
+
+        // Show reading controls only when summary is open
+        const originalOpenSummary = window.openSummary;
+        window.openSummary = function(title, path) {
+            originalOpenSummary(title, path);
+            readingControls.style.display = 'flex';
+            markdownView.classList.add('reading-content');
+        };
+
+        const originalCloseSummary = window.closeSummary;
+        window.closeSummary = function() {
+            originalCloseSummary();
+            readingControls.style.display = 'none';
+        };
+    </script>
+</body>
+</html>
