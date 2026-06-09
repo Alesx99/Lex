@@ -491,23 +491,23 @@ const Minigames = {
                 easing: 'cubic-bezier(0, .9, .57, 1)'
             }).onfinish = () => p.remove();
         }
+    },
+
+    openGame(gameId) {
+        const game = this.games[gameId];
+        if (!game) return;
+
+        document.getElementById('game-result-container').classList.add('hidden');
+        document.getElementById('game-title').textContent = game.title;
+        document.getElementById('game-modal-overlay').classList.add('open');
+        
+        game.start();
+    },
+
+    closeGameModal() {
+        this.stopTimer();
+        document.getElementById('game-modal-overlay').classList.remove('open');
     }
-};
-
-window.openGame = function(gameId) {
-    const game = Minigames.games[gameId];
-    if (!game) return;
-
-    document.getElementById('game-result-container').classList.add('hidden');
-    document.getElementById('game-title').textContent = game.title;
-    document.getElementById('game-modal-overlay').classList.add('open');
-    
-    game.start();
-};
-
-window.closeGameModal = function() {
-    Minigames.stopTimer();
-    document.getElementById('game-modal-overlay').classList.remove('open');
 };
 
 window.Minigames = Minigames;
