@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Chronologia - Linea del Tempo Interattiva</title>
+    <meta name="description" content="Esplora la storia, l'arte e il diritto in ordine cronologico e sfida te stesso con il gioco di ordinamento temporale.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
+    <script src="js/timeline_db.js"></script>
+    <style>
+        /* Timeline Layout Styles */
+        .timeline-layout-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            width: 100%;
+        }
+
+        .view-toggle-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .view-toggle-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.8rem 1.8rem;
+            border-radius: 99px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .view-toggle-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b29024 100%);
+            color: #080b11;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px var(--accent-gold-glow);
+        }
+
+        body.coccole-theme .view-toggle-btn.active {
+            background: linear-gradient(135deg, #ff6b8b 0%, #ff8da1 100%);
+            color: #fff;
+            border-color: #ff6b8b;
+            box-shadow: 0 0 15px rgba(255,107,139,0.3);
+        }
+
+        /* Timeline Dashboard Controls */
+        .timeline-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            margin-bottom: 3rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .filter-chip:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+
+        .filter-chip.active[data-subject="all"] { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(212, 175, 55, 0.1); }
+        .filter-chip.active[data-subject="storia"] { border-color: var(--accent-storia); color: #60a5fa; background: rgba(59, 130, 246, 0.1); }
+        .filter-chip.active[data-subject="arte"] { border-color: var(--accent-terracotta); color: #f97316; background: rgba(200, 90, 50, 0.1); }
+        .filter-chip.active[data-subject="romana"] { border-color: var(--accent-romana); color: #f87171; background: rgba(169, 50, 38, 0.1); }
+        .filter-chip.active[data-subject="diritto"] { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(212, 175, 55, 0.1); }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .timeline-search-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1rem 0.6rem 2.2rem;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .timeline-search-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .search-wrapper svg {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* The Visual Timeline */
+        .visual-timeline {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .visual-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 7.5px;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-gold) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border-radius: 99px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.5rem;
+            top: 5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #080b11;
+            border: 4px solid var(--accent-gold);
+            z-index: 2;
+            box-shadow: 0 0 10px var(--accent-gold-glow);
+            transition: transform 0.2s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+        }
+
+        .timeline-item[data-subject="storia"] .timeline-dot { border-color: var(--accent-storia); box-shadow: 0 0 10px var(--accent-storia-glow); }
+        .timeline-item[data-subject="arte"] .timeline-dot { border-color: var(--accent-terracotta); box-shadow: 0 0 10px var(--accent-terracotta-glow); }
+        .timeline-item[data-subject="romana"] .timeline-dot { border-color: var(--accent-romana); box-shadow: 0 0 10px var(--accent-romana-glow); }
+        .timeline-item[data-subject="diritto"] .timeline-dot { border-color: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold-glow); }
+
+        .timeline-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateX(5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: var(--bg-card-hover);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-year {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .timeline-item[data-subject="storia"] .timeline-year { color: #60a5fa; }
+        .timeline-item[data-subject="arte"] .timeline-year { color: #f97316; }
+        .timeline-item[data-subject="romana"] .timeline-year { color: #f87171; }
+        .timeline-item[data-subject="diritto"] .timeline-year { color: var(--accent-gold); }
+
+        .timeline-subject-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .timeline-item[data-subject="storia"] .timeline-subject-badge { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3); }
+        .timeline-item[data-subject="arte"] .timeline-subject-badge { background: rgba(200, 90, 50, 0.15); color: #f97316; border-color: rgba(200, 90, 50, 0.3); }
+        .timeline-item[data-subject="romana"] .timeline-subject-badge { background: rgba(169, 50, 38, 0.15); color: #f87171; border-color: rgba(169, 50, 38, 0.3); }
+        .timeline-item[data-subject="diritto"] .timeline-subject-badge { background: rgba(212, 175, 55, 0.15); color: var(--accent-gold); border-color: rgba(212, 175, 55, 0.3); }
+
+        .timeline-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-read-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .timeline-card:hover .timeline-read-btn {
+            color: var(--accent-gold);
+        }
+
+        .timeline-read-btn svg {
+            transition: transform 0.2s;
+        }
+
+        .timeline-card:hover .timeline-read-btn svg {
+            transform: translateX(3px);
+        }
+
+        /* --- CHRONOLOGY MINIGAME STYLES --- */
+        .game-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            display: none;
+        }
+
+        .game-intro h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+
+        .game-intro p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .game-instructions-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 1.2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        /* Sorting List container */
+        .sorting-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .sortable-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
+            text-align: left;
+            position: relative;
+        }
+
+        .sortable-card:active {
+            cursor: grabbing;
+            transform: scale(1.02);
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .sortable-card.dragging {
+            opacity: 0.4;
+            border-style: dashed;
+        }
+
+        .card-drag-handle {
+            color: var(--text-muted);
+            cursor: grab;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .sortable-card-info {
+            flex-grow: 1;
+        }
+
+        .sortable-card-info h4 {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .sortable-card-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Sorting Action buttons inside cards for mobile/accessiblity */
+        .card-sorting-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-left: 1rem;
+        }
+
+        .sort-arrow-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sort-arrow-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+
+        /* Verification colors */
+        .sortable-card.correct-pos {
+            border-color: var(--accent-green) !important;
+            background: rgba(16, 185, 129, 0.05);
+        }
+        .sortable-card.incorrect-pos {
+            border-color: var(--accent-romana) !important;
+            background: rgba(169, 50, 38, 0.05);
+            animation: shake 0.3s ease-in-out;
+        }
+
+        .game-controls-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-action-primary {
+            background: var(--accent-gold);
+            color: #0b0f19;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            transition: all 0.2s;
+        }
+
+        .btn-action-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-action-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-action-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .points-badge {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hidden { display: none !important; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Particle Canvas for success animation */
+        #game-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10005;
+        }
+    </style>
+</head>
+<body>
+    <div class="blur-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+    <canvas id="game-canvas"></canvas>
+
+    <header>
+        <div class="header-main">
+            <h1>Lex Chronologia</h1>
+            <p>La linea del tempo accademica. Collega date, ordina eventi e allena la memoria.</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">Home Portale</a>
+            <a href="connections.html" class="nav-link" id="nav-connections">Mappa Trans-Disciplinare</a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">Flashcards Hub</a>
+            <a href="exam.html" class="nav-link" id="nav-exam">Simulatore d'Esame</a>
+            <a href="achievements.html" class="nav-link" id="nav-achievements">Traguardi</a>
+            <a href="analytics.html" class="nav-link" id="nav-analytics">Statistiche</a>
+            <a href="planner.html" class="nav-link" id="nav-planner">Pianificatore</a>
+            <a href="assistant.html" class="nav-link" id="nav-assistant">Assistente Studio</a>
+            <a href="minigames.html" class="nav-link" id="nav-minigames">Minigiochi</a>
+        </nav>
+    </header>
+
+    <main style="max-width: 1100px; padding-top: 1rem;">
+        <a href="index.html" class="back-hub" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-secondary); margin-bottom: 2rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Home
+        </a>
+
+        <div class="timeline-layout-container">
+            <!-- View toggles -->
+            <div class="view-toggle-container">
+                <button id="toggle-view-timeline" class="view-toggle-btn active" onclick="switchView('timeline')">Linea del Tempo</button>
+                <button id="toggle-view-challenge" class="view-toggle-btn" onclick="switchView('challenge')">Sfida Cronologica 🏆</button>
+            </div>
+
+            <!-- VIEW 1: INTERACTIVE TIMELINE -->
+            <div id="timeline-view-panel">
+                <!-- Filter Dashboard -->
+                <div class="timeline-controls">
+                    <div class="filter-group" id="timeline-filters">
+                        <button class="filter-chip active" data-subject="all" onclick="filterTimeline('all')">Tutti gli Eventi</button>
+                        <button class="filter-chip" data-subject="storia" onclick="filterTimeline('storia')">Storia Moderna</button>
+                        <button class="filter-chip" data-subject="arte" onclick="filterTimeline('arte')">Storia dell'Arte</button>
+                        <button class="filter-chip" data-subject="romana" onclick="filterTimeline('romana')">Arte Romana</button>
+                        <button class="filter-chip" data-subject="diritto" onclick="filterTimeline('diritto')">Diritto Beni Culturali</button>
+                    </div>
+                    <div class="search-wrapper">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="timeline-search" class="timeline-search-input" placeholder="Cerca eventi o anni..." oninput="handleSearch()">
+                    </div>
+                </div>
+
+                <!-- Visual Timeline Container -->
+                <div class="visual-timeline" id="timeline-events-container">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- VIEW 2: CHRONOLOGY CHALLENGE -->
+            <div id="challenge-view-panel" class="game-panel">
+                <!-- Welcome/Intro Panel -->
+                <div id="game-intro-panel" class="game-intro">
+                    <div class="points-badge">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>Lex Points Guadagnati: <span id="challenge-user-points">0</span></span>
+                    </div>
+                    <h3>Sfida di Ordinamento Temporale</h3>
+                    <p>Metti alla prova il tuo senso della cronologia! Ti verranno presentati 5 eventi a sorpresa estratti dai programmi di studio di Storia, Arte e Diritto. Ordinali dal meno recente (in alto) al più recente (in basso).</p>
+                    <div class="game-instructions-card">
+                        <strong>Come si gioca:</strong><br>
+                        - Trascina le tessere tenendole premute e spostale nel posto corretto, oppure usa le frecce su/giù per riordinarle.<br>
+                        - Una volta completato l'ordinamento, clicca su "Verifica Risposta" per ricevere +15 Lex Points!
+                    </div>
+                    <button class="btn-action-primary" onclick="startNewChallenge()">Inizia la Sfida</button>
+                </div>
+
+                <!-- Active Game Panel -->
+                <div id="game-active-panel" class="hidden">
+                    <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent-gold);">Ordina gli eventi</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem;">Ordina dal meno recente (sopra) al più recente (sotto)</p>
+                    
+                    <div class="sorting-list" id="sorting-list-container">
+                        <!-- Loaded dynamically -->
+                    </div>
+
+                    <div class="game-controls-row">
+                        <button id="btn-verify" class="btn-action-primary" onclick="verifyChallenge()">Verifica Risposta</button>
+                        <button id="btn-next" class="btn-action-primary hidden" onclick="startNewChallenge()">Prossima Sfida ➔</button>
+                        <button id="btn-retry" class="btn-action-secondary hidden" onclick="resetAnswers()">Riprova</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Timeline Logic -->
+    <script>
+        // Set the active links in the header navigation
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.global-nav .nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'timeline.html') {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // Initialize variables
+        let activeSubject = 'all';
+        let searchQuery = '';
+        let currentChallengeEvents = [];
+        let gameScore = parseInt(localStorage.getItem('lex-total-points') || '0');
+
+        // Update score display in game intro if element exists
+        const scoreEl = document.getElementById('challenge-user-points');
+        if (scoreEl) scoreEl.textContent = gameScore;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTimeline();
+            // Sync Lex Theme
+            if (typeof LexCore !== 'undefined' && LexCore.applyTheme) {
+                LexCore.applyTheme();
+            }
+        });
+
+        // Switch panel view between Timeline and Minigame Challenge
+        function switchView(view) {
+            const timelineTab = document.getElementById('toggle-view-timeline');
+            const challengeTab = document.getElementById('toggle-view-challenge');
+            const timelineView = document.getElementById('timeline-view-panel');
+            const challengeView = document.getElementById('challenge-view-panel');
+
+            if (view === 'timeline') {
+                timelineTab.classList.add('active');
+                challengeTab.classList.remove('active');
+                timelineView.style.display = 'block';
+                challengeView.style.display = 'none';
+            } else {
+                timelineTab.classList.remove('active');
+                challengeTab.classList.add('active');
+                timelineView.style.display = 'none';
+                challengeView.style.display = 'block';
+                // Sync points
+                gameScore = parseInt(localStorage.getItem('lex-total-points') || '0');
+                if (scoreEl) scoreEl.textContent = gameScore;
+            }
+        }
+
+        // Render the visual timeline events list
+        function renderTimeline() {
+            const container = document.getElementById('timeline-events-container');
+            container.innerHTML = '';
+
+            // Sort database chronologically
+            const sortedEvents = [...timelineDatabase].sort((a, b) => a.year - b.year);
+
+            // Filter events
+            const filteredEvents = sortedEvents.filter(event => {
+                const matchesSubject = activeSubject === 'all' || event.subject === activeSubject || (activeSubject === 'romana' && event.subject === 'romana');
+                const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      String(event.year).includes(searchQuery);
+                return matchesSubject && matchesSearch;
+            });
+
+            if (filteredEvents.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding: 3rem; color: var(--text-muted);">Nessun evento corrispondente ai filtri impostati.</div>`;
+                return;
+            }
+
+            filteredEvents.forEach((event, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'timeline-item';
+                itemDiv.setAttribute('data-subject', event.subject);
+                itemDiv.style.animationDelay = `${index * 0.05}s`;
+
+                // Year format (supporting BCE negative years)
+                const displayYear = event.year < 0 ? `${Math.abs(event.year)} a.C.` : `${event.year} d.C.`;
+
+                itemDiv.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-year">${displayYear}</span>
+                            <span class="timeline-subject-badge">${event.subjectLabel}</span>
+                        </div>
+                        <h4 class="timeline-title">${event.title}</h4>
+                        <p class="timeline-desc">${event.description}</p>
+                        <a href="${event.link}" class="timeline-read-btn">
+                            Leggi Sintesi
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+
+        // Filtering timeline
+        function filterTimeline(subject) {
+            activeSubject = subject;
+            const chips = document.querySelectorAll('#timeline-filters .filter-chip');
+            chips.forEach(chip => {
+                if (chip.getAttribute('data-subject') === subject) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+            renderTimeline();
+        }
+
+        // Search trigger
+        function handleSearch() {
+            searchQuery = document.getElementById('timeline-search').value;
+            renderTimeline();
+        }
+
+        // --- GAME PLAY LOGIC ---
+        function startNewChallenge() {
+            document.getElementById('game-intro-panel').classList.add('hidden');
+            document.getElementById('game-active-panel').classList.remove('hidden');
+            
+            // Clean up old classes and buttons
+            document.getElementById('btn-verify').classList.remove('hidden');
+            document.getElementById('btn-next').classList.add('hidden');
+            document.getElementById('btn-retry').classList.add('hidden');
+
+            // Select 5 random events from the database
+            const shuffledDb = [...timelineDatabase].sort(() => Math.random() - 0.5);
+            currentChallengeEvents = shuffledDb.slice(0, 5);
+
+            // Shuffled version for the player
+            const playerShuffled = [...currentChallengeEvents].sort(() => Math.random() - 0.5);
+
+            renderSortableCards(playerShuffled);
+        }
+
+        function renderSortableCards(events) {
+            const listContainer = document.getElementById('sorting-list-container');
+            listContainer.innerHTML = '';
+
+            events.forEach((event, idx) => {
+                const card = document.createElement('div');
+                card.className = 'sortable-card';
+                card.setAttribute('draggable', 'true');
+                card.setAttribute('data-id', event.id);
+                
+                card.innerHTML = `
+                    <div class="card-drag-handle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </div>
+                    <div class="sortable-card-info">
+                        <span class="timeline-subject-badge" style="margin-bottom:0.4rem; display:inline-block;">${event.subjectLabel}</span>
+                        <h4>${event.title}</h4>
+                        <p>${event.description}</p>
+                    </div>
+                    <div class="card-sorting-arrows">
+                        <button class="sort-arrow-btn" onclick="moveCard(${idx}, -1)" title="Sposta Su">▲</button>
+                        <button class="sort-arrow-btn" onclick="moveCard(${idx}, 1)" title="Sposta Giù">▼</button>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+
+            // Re-init drag events
+            initDragAndDrop();
+        }
+
+        // Support clicking arrows to rearrange cards (essential for mobile & accessibility)
+        function moveCard(index, direction) {
+            const listContainer = document.getElementById('sorting-list-container');
+            const cards = Array.from(listContainer.children);
+            const targetIndex = index + direction;
+
+            if (targetIndex < 0 || targetIndex >= cards.length) return;
+
+            // Reorder events array based on DOM positions
+            const events = cards.map(c => {
+                const id = c.getAttribute('data-id');
+                return timelineDatabase.find(e => e.id === id);
+            });
+
+            // Swap
+            const temp = events[index];
+            events[index] = events[targetIndex];
+            events[targetIndex] = temp;
+
+            renderSortableCards(events);
+        }
+
+        // Drag & Drop handlers
+        function initDragAndDrop() {
+            const listContainer = document.getElementById('sorting-list-container');
+            const cards = listContainer.querySelectorAll('.sortable-card');
+
+            cards.forEach(card => {
+                card.addEventListener('dragstart', () => {
+                    card.classList.add('dragging');
+                });
+
+                card.addEventListener('dragend', () => {
+                    card.classList.remove('dragging');
+                });
+            });
+
+            listContainer.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                const afterElement = getDragAfterElement(listContainer, e.clientY);
+                const draggingCard = document.querySelector('.dragging');
+                if (draggingCard) {
+                    if (afterElement == null) {
+                        listContainer.appendChild(draggingCard);
+                    } else {
+                        listContainer.insertBefore(draggingCard, afterElement);
+                    }
+                }
+            });
+        }
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.sortable-card:not(.dragging)')];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // Verification of sorting
+        function verifyChallenge() {
+            const listContainer = document.getElementById('sorting-list-container');
+            const cards = Array.from(listContainer.querySelectorAll('.sortable-card'));
+
+            // Get events list sorted by player's arrangement
+            const playerOrderedEvents = cards.map(card => {
+                const id = card.getAttribute('data-id');
+                return timelineDatabase.find(e => e.id === id);
+            });
+
+            // Get standard sorted order of the selected subset
+            const correctSortedEvents = [...currentChallengeEvents].sort((a, b) => a.year - b.year);
+
+            let allCorrect = true;
+
+            // Highlight correct/incorrect positions
+            playerOrderedEvents.forEach((event, idx) => {
+                const card = cards[idx];
+                // Check if card is in the exact right chronological index
+                if (event.id === correctSortedEvents[idx].id) {
+                    card.classList.add('correct-pos');
+                    card.classList.remove('incorrect-pos');
+                    // Reveal the year badge inside correct cards for positive reinforcement
+                    const displayYear = event.year < 0 ? `${Math.abs(event.year)} a.C.` : `${event.year} d.C.`;
+                    if (!card.querySelector('.revealed-year')) {
+                        const titleEl = card.querySelector('h4');
+                        titleEl.insertAdjacentHTML('afterend', `<span class="revealed-year" style="color:var(--accent-green); font-weight:700; font-size:0.85rem; display:block; margin: 0.2rem 0;">📅 Risolto: ${displayYear}</span>`);
+                    }
+                } else {
+                    card.classList.add('incorrect-pos');
+                    card.classList.remove('correct-pos');
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                // Award points
+                gameScore += 15;
+                localStorage.setItem('lex-total-points', gameScore);
+                
+                // Show congratulations inside alert/toast
+                if (typeof LexCore !== 'undefined' && LexCore.showParagraphSuccessToast) {
+                    LexCore.showParagraphSuccessToast();
+                    LexCore.triggerHeartExplosion();
+                } else {
+                    alert("Complimenti! Ordine cronologico perfetto!");
+                }
+
+                // Trigger confetti splash
+                triggerConfetti();
+
+                // UI adjustments
+                document.getElementById('btn-verify').classList.add('hidden');
+                document.getElementById('btn-next').classList.remove('hidden');
+                document.getElementById('btn-retry').classList.add('hidden');
+            } else {
+                if (typeof LexCore !== 'undefined' && LexCore.showToast) {
+                    LexCore.showToast("C'è qualche errore nell'ordine temporale. Riprova!", "error");
+                }
+                
+                document.getElementById('btn-verify').classList.add('hidden');
+                document.getElementById('btn-retry').classList.remove('hidden');
+            }
+        }
+
+        // Reset elements styles to retry
+        function resetAnswers() {
+            const listContainer = document.getElementById('sorting-list-container');
+            const cards = listContainer.querySelectorAll('.sortable-card');
+            cards.forEach(card => {
+                card.classList.remove('correct-pos', 'incorrect-pos');
+                const revYear = card.querySelector('.revealed-year');
+                if (revYear) revYear.remove();
+            });
+
+            document.getElementById('btn-verify').classList.remove('hidden');
+            document.getElementById('btn-retry').classList.add('hidden');
+        }
+
+        // Confetti Canvas Emitter for Premium feel
+        function triggerConfetti() {
+            const canvas = document.getElementById('game-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const colors = ['#d4af37', '#60a5fa', '#f97316', '#f87171', '#10b981', '#a855f7'];
+            const particles = [];
+
+            for (let i = 0; i < 120; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: canvas.height + Math.random() * 50,
+                    size: Math.random() * 6 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedX: Math.random() * 6 - 3,
+                    speedY: -(Math.random() * 15 + 8),
+                    gravity: 0.35,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: Math.random() * 10 - 5
+                });
+            }
+
+            function animateConfetti() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+
+                particles.forEach(p => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.speedY += p.gravity;
+                    p.rotation += p.rotationSpeed;
+
+                    if (p.y < canvas.height + 20) {
+                        alive = true;
+                    }
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+                });
+
+                if (alive) {
+                    requestAnimationFrame(animateConfetti);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animateConfetti();
+        }
+
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('game-canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
