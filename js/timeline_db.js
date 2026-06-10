@@ -280,6 +280,24 @@ const timelineDatabase = [
         link: "arte_romana/index.html?open=summaries/cap2_fondazione.md"
     },
     {
+        id: "rom_tarquinio_prisco_616",
+        year: -616,
+        title: "Inizio del regno di Tarquinio Prisco",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "Inizio del regno del primo sovrano etrusco di Roma, che introduce tecniche edilizie, sistemi di drenaggio e decorazioni fittili di diretta influenza etrusca.",
+        link: "arte_romana/index.html?open=summaries/cap2_fondazione.md"
+    },
+    {
+        id: "rom_templi_omobono_arcaici_580",
+        year: -580,
+        title: "Primi templi dell'Area Sacra di Sant'Omobono",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "Costruzione dei primi templi arcaici affiancati nel Foro Boario (antico porto fluviale), testimonianza dello sviluppo urbanistico ed economico sotto la monarchia.",
+        link: "arte_romana/index.html?open=summaries/cap2_fondazione.md"
+    },
+    {
         id: "rom_muraserviane_cappellaccio_550",
         year: -550,
         title: "Prima fase delle Mura Serviane",
@@ -296,6 +314,15 @@ const timelineDatabase = [
         subjectLabel: "Arte Romana",
         description: "Realizzazione delle statue acroteriali tardo-arcaiche in terracotta di Minerva ed Ercole, a riflesso dell'ideologia monarchica di Servio Tullio.",
         link: "arte_romana/index.html?open=summaries/cap2_fondazione.md"
+    },
+    {
+        id: "rom_domus_atrio_palatino_530",
+        year: -530,
+        title: "Domus ad atrio del Palatino (Domus 3)",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "Costruzione della più antica casa ad atrio documentata sul Palatino, fondamentale per ricostruire l'evoluzione dell'architettura domestica romana.",
+        link: "arte_romana/index.html?open=summaries/cap5_tardo_repubblica.md"
     },
     {
         id: "rom_tempio_giove_509",
@@ -332,6 +359,24 @@ const timelineDatabase = [
         subjectLabel: "Arte Romana",
         description: "Erezione del tempio dei Dioscuri per celebrare la vittoria romana al Lago Regillo contro la Lega Latina.",
         link: "arte_romana/index.html?open=summaries/cap3_repubblica.md"
+    },
+    {
+        id: "rom_battaglia_cuma_474",
+        year: -474,
+        title: "Disfatta etrusca nella Battaglia di Cuma",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "La sconfitta della flotta etrusca contro Ierone di Siracusa segna la fine dell'egemonia etrusca sul Tirreno e ridefinisce i contatti culturali nel Lazio.",
+        link: "arte_romana/index.html?open=summaries/cap3_repubblica.md"
+    },
+    {
+        id: "rom_invasione_galli_396",
+        year: -396,
+        title: "Invasione dei Galli e sacco di Roma",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "Il saccheggio ad opera dei Galli di Brenno devasta la città, provocando gravi danni ai templi dell'area arcaica e spingendo alla successiva ricostruzione difensiva.",
+        link: "arte_romana/index.html?open=summaries/cap2_fondazione.md"
     },
     {
         id: "rom_muraserviane_tufo_378",
@@ -388,12 +433,48 @@ const timelineDatabase = [
         link: "arte_romana/index.html?open=summaries/cap3_repubblica.md"
     },
     {
+        id: "rom_colonia_cosa_273",
+        year: -273,
+        title: "Fondazione della colonia latina di Cosa",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "Fondazione della colonia latina in Etruria su impianto ortogonale e dotata di un monumentale arx, pietra miliare dell'urbanistica militare romana.",
+        link: "arte_romana/index.html?open=summaries/cap3_repubblica.md"
+    },
+    {
+        id: "rom_vittoria_taranto_272",
+        year: -272,
+        title: "Resa di Taranto e conquista della Magna Grecia",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "La caduta di Taranto unifica la penisola sotto Roma ed avvia un massiccio afflusso di artisti, artigiani e influssi culturali greci nell'Urbe.",
+        link: "arte_romana/index.html?open=summaries/cap3_repubblica.md"
+    },
+    {
+        id: "rom_trionfo_marcello_212",
+        year: -212,
+        title: "Trionfo di M. Claudio Marcello su Siracusa",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "Marcello porta a Roma un immenso bottino di sculture e pitture greche dopo la presa di Siracusa, destando l'ammirazione estetica dei Romani.",
+        link: "arte_romana/index.html?open=summaries/cap1_introduzione.md"
+    },
+    {
         id: "rom_porticus_aemilia_193",
         year: -193,
         title: "Costruzione della Porticus Aemilia",
         subject: "romana",
         subjectLabel: "Arte Romana",
         description: "Edificazione della colossale struttura di smistamento merci all'Emporium, pietra miliare dell'uso dell'opus caementicium e della pozzolana.",
+        link: "arte_romana/index.html?open=summaries/cap4_ellenismo.md"
+    },
+    {
+        id: "rom_basilica_aemilia_179",
+        year: -179,
+        title: "Edificazione della prima Basilica Emilia",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "M. Fulvio Nobiliore e M. Emilio Lepido edificano la prima grande basilica civile nel Foro Romano, introducendo la tipologia monumentale della basilica a Roma.",
         link: "arte_romana/index.html?open=summaries/cap4_ellenismo.md"
     },
     {
@@ -476,6 +557,15 @@ const timelineDatabase = [
         subjectLabel: "Arte Romana",
         description: "Introduzione della decorazione parietale che sfonda la parete dipingendo colonne, podi e vedute prospettiche su giardini e città.",
         link: "arte_romana/index.html?open=summaries/cap5_tardo_repubblica.md"
+    },
+    {
+        id: "rom_incendio_capitolio_83",
+        year: -83,
+        title: "Incendio del Tempio di Giove Capitolino",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "Un rovinoso incendio devasta il Tempio di Giove Capitolino sul Campidoglio, rendendo necessaria una ricostruzione monumentale inaugurata nel 69 a.C.",
+        link: "arte_romana/index.html?open=summaries/cap3_repubblica.md"
     },
     {
         id: "rom_teatro_pompeo_55",
@@ -736,6 +826,15 @@ const timelineDatabase = [
         subject: "romana",
         subjectLabel: "Arte Romana",
         description: "Creazione del busto celebrativo a valenza cosmica e divina. Commodo vi è raffigurato con la leontè, la clava e i pomi delle Esperidi.",
+        link: "arte_romana/index.html?open=summaries/cap10_antonini_tardoantico.md"
+    },
+    {
+        id: "rom_mura_aureliane_probo_279",
+        year: 279,
+        title: "Completamento delle Mura Aureliane",
+        subject: "romana",
+        subjectLabel: "Arte Romana",
+        description: "L'imperatore Probo completa la monumentale cinta difensiva di Roma contro le invasioni barbariche, terminando i lavori avviati da Aureliano.",
         link: "arte_romana/index.html?open=summaries/cap10_antonini_tardoantico.md"
     },
     {
