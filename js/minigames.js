@@ -146,6 +146,7 @@ const Minigames = {
 
     // --- 2048 ACCADEMICO ---
     g2048Grid: [],
+    g2048MergedIndices: [],
     g2048Levels: {
         2: "Matricola", 4: "Fuoricorso", 8: "Triennale", 16: "Magistrale", 
         32: "Master", 64: "Dottorando", 128: "Ricercatore", 256: "Assistente",
@@ -154,6 +155,7 @@ const Minigames = {
 
     start2048() {
         this.g2048Grid = Array(16).fill(0);
+        this.g2048MergedIndices = [];
         this.addRandomTile2048();
         this.addRandomTile2048();
         this.render2048();
@@ -172,9 +174,13 @@ const Minigames = {
         const html = `
             <div style="text-align: center; margin-bottom: 1rem; color: var(--text-secondary);">Unisci i tasselli per salire di grado!</div>
             <div class="g2048-grid">
-                ${this.g2048Grid.map(v => `
-                    <div class="g2048-cell" data-val="${v}">${v > 0 ? this.g2048Levels[v] || v : ''}</div>
-                `).join('')}
+                ${this.g2048Grid.map((v, index) => {
+                    const isMerged = this.g2048MergedIndices.includes(index);
+                    const classes = ['g2048-cell'];
+                    if (v > 0) classes.push('filled');
+                    if (isMerged) classes.push('pop');
+                    return `<div class="${classes.join(' ')}" data-val="${v}">${v > 0 ? this.g2048Levels[v] || v : ''}</div>`;
+                }).join('')}
             </div>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 150px; margin: 1.5rem auto 0;">
                 <div></div><button class="btn-action" onclick="Minigames.move2048('up')">↑</button><div></div>
@@ -184,6 +190,23 @@ const Minigames = {
             </div>
         `;
         document.getElementById('game-content').innerHTML = html;
+
+        // Inietta stili CSS per l'animazione di merge
+        if (!document.getElementById('g2048-style')) {
+            const style = document.createElement('style');
+            style.id = 'g2048-style';
+            style.innerHTML = `
+                @keyframes mergePop {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.15); box-shadow: 0 0 20px var(--accent-gold); }
+                    100% { transform: scale(1); }
+                }
+                .g2048-cell.pop {
+                    animation: mergePop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+                }
+            `;
+            document.head.appendChild(style);
+        }
     },
 
     setup2048Controls() {
@@ -202,31 +225,48 @@ const Minigames = {
     move2048(dir) {
         let moved = false;
         const size = 4;
+        this.g2048MergedIndices = [];
         
         const getLine = (i) => {
             if (dir === 'left' || dir === 'right') return this.g2048Grid.slice(i * size, (i + 1) * size);
             return [this.g2048Grid[i], this.g2048Grid[i+size], this.g2048Grid[i+size*2], this.g2048Grid[i+size*3]];
         };
 
-        const setLine = (i, line) => {
+        const setLine = (i, line, mergedPositions) => {
             if (dir === 'left' || dir === 'right') {
-                for (let j = 0; j < size; j++) this.g2048Grid[i * size + j] = line[j];
+                for (let j = 0; j < size; j++) {
+                    this.g2048Grid[i * size + j] = line[j];
+                    if (mergedPositions.includes(j)) {
+                        this.g2048MergedIndices.push(i * size + j);
+                    }
+                }
             } else {
-                for (let j = 0; j < size; j++) this.g2048Grid[i + j * size] = line[j];
+                for (let j = 0; j < size; j++) {
+                    this.g2048Grid[i + j * size] = line[j];
+                    if (mergedPositions.includes(j)) {
+                        this.g2048MergedIndices.push(i + j * size);
+                    }
+                }
             }
         };
 
         for (let i = 0; i < size; i++) {
             let line = getLine(i);
-            if (dir === 'right' || dir === 'down') line.reverse();
+            let reversed = false;
+            if (dir === 'right' || dir === 'down') {
+                line.reverse();
+                reversed = true;
+            }
             
             // Slide
             let nonZero = line.filter(v => v !== 0);
             let newLine = [];
+            let mergedPositions = [];
             for (let j = 0; j < nonZero.length; j++) {
-                if (nonZero[j] === nonZero[j+1]) {
+                if (j < nonZero.length - 1 && nonZero[j] === nonZero[j+1]) {
                     const combined = nonZero[j] * 2;
                     newLine.push(combined);
+                    mergedPositions.push(newLine.length - 1);
                     this.addPoints(Math.floor(combined / 10));
                     j++;
                     if (combined === 2048) this.showResult(true, "Rettore Magnifico!", 50);
@@ -236,17 +276,18 @@ const Minigames = {
             }
             while (newLine.length < size) newLine.push(0);
             
-            if (dir === 'right' || dir === 'down') newLine.reverse();
+            if (reversed) {
+                newLine.reverse();
+                mergedPositions = mergedPositions.map(pos => size - 1 - pos);
+            }
+            
             if (JSON.stringify(getLine(i)) !== JSON.stringify(newLine)) moved = true;
-            setLine(i, newLine);
+            setLine(i, newLine, mergedPositions);
         }
 
         if (moved) {
             this.addRandomTile2048();
             this.render2048();
-            if (this.g2048Grid.every(v => v !== 0)) {
-                // Check if any moves possible, if not game over
-            }
         }
     },
 
@@ -257,6 +298,8 @@ const Minigames = {
     snakeInterval: null,
     snakeGridSize: 20,
 
+    snakeAnimationId: null,
+
     startSnake() {
         this.snakeBody = [{x: 10, y: 15}, {x: 10, y: 16}, {x: 10, y: 17}];
         this.snakeDir = { x: 0, y: -1 };
@@ -265,7 +308,17 @@ const Minigames = {
         this.setupSnakeControls();
         
         clearInterval(this.snakeInterval);
+        cancelAnimationFrame(this.snakeAnimationId);
+        
         this.snakeInterval = setInterval(() => this.moveSnake(), 150);
+        
+        const renderLoop = () => {
+            if (document.getElementById('snake-canvas')) {
+                this.drawSnake();
+                this.snakeAnimationId = requestAnimationFrame(renderLoop);
+            }
+        };
+        this.snakeAnimationId = requestAnimationFrame(renderLoop);
     },
 
     renderSnake() {
@@ -280,7 +333,6 @@ const Minigames = {
             </div>
         `;
         document.getElementById('game-content').innerHTML = html;
-        this.drawSnake();
     },
 
     setSnakeDir(x, y) {
@@ -307,6 +359,7 @@ const Minigames = {
         // Wall collision
         if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || this.snakeBody.some(b => b.x === head.x && b.y === head.y)) {
             clearInterval(this.snakeInterval);
+            cancelAnimationFrame(this.snakeAnimationId);
             return this.showResult(false, "Collisione!", this.scoreAccumulator);
         }
 
@@ -319,7 +372,6 @@ const Minigames = {
         } else {
             this.snakeBody.pop();
         }
-        this.drawSnake();
     },
 
     drawSnake() {
@@ -329,18 +381,60 @@ const Minigames = {
         const s = 15; // cell size
 
         ctx.clearRect(0, 0, 300, 300);
-        
-        // Food
-        ctx.fillStyle = '#ef4444';
-        ctx.fillRect(this.snakeFood.x * s, this.snakeFood.y * s, s, s);
 
-        // Body
-        ctx.fillStyle = '#d4af37';
+        // Draw backdrop coordinate grid (semi-transparent gold lines every cell)
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.07)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 300; i += s) {
+            // Vertical lines
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i, 300);
+            ctx.stroke();
+
+            // Horizontal lines
+            ctx.beginPath();
+            ctx.moveTo(0, i);
+            ctx.lineTo(300, i);
+            ctx.stroke();
+        }
+        
+        // Save ctx state for glowing elements
+        ctx.save();
+
+        // Pulsing food shadow
+        const pulse = 8 + Math.sin(Date.now() / 150) * 4;
+        ctx.shadowBlur = pulse;
+        ctx.shadowColor = '#ef4444';
+        ctx.fillStyle = '#ef4444';
+        // Rounded food
+        ctx.beginPath();
+        ctx.arc(this.snakeFood.x * s + s/2, this.snakeFood.y * s + s/2, s/2 - 1, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Snake Body & Head with neon glow
         this.snakeBody.forEach((b, i) => {
-            if (i === 0) ctx.fillStyle = '#f59e0b';
-            else ctx.fillStyle = '#d4af37';
-            ctx.fillRect(b.x * s, b.y * s, s - 1, s - 1);
+            if (i === 0) {
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#f59e0b';
+                ctx.fillStyle = '#f59e0b';
+            } else {
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = '#d4af37';
+                ctx.fillStyle = '#d4af37';
+            }
+            // Draw slightly rounded segments
+            ctx.beginPath();
+            const radius = 3; // rounded corner radius
+            const x = b.x * s + 0.5;
+            const y = b.y * s + 0.5;
+            const w = s - 1;
+            const h = s - 1;
+            ctx.roundRect ? ctx.roundRect(x, y, w, h, radius) : ctx.rect(x, y, w, h);
+            ctx.fill();
         });
+
+        ctx.restore();
     },
 
     // --- LEXLE (WORDLE) ---
@@ -377,15 +471,42 @@ const Minigames = {
                     </div>
                 `).join('')}
             </div>
-            <div id="lexle-keyboard" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; max-width: 350px; margin: 0 auto;">
-                ${"QWERTYUIOPASDFGHJKLZXCVBNM".split('').map(l => `
-                    <button class="btn-action" style="padding: 0.5rem; min-width: 30px;" onclick="Minigames.handleLexleInput('${l}')">${l}</button>
-                `).join('')}
+            <div id="lexle-keyboard" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; max-width: 350px; margin: 0 auto 1.5rem;">
+                ${"QWERTYUIOPASDFGHJKLZXCVBNM".split('').map(l => {
+                    const status = this.getLexleKeyStatus(l);
+                    let styleAttr = 'padding: 0.5rem; min-width: 30px; transition: all 0.2s;';
+                    if (status === 'correct') {
+                        styleAttr += ' background: var(--accent-green) !important; border-color: var(--accent-green) !important; color: #fff;';
+                    } else if (status === 'present') {
+                        styleAttr += ' background: var(--accent-gold) !important; border-color: var(--accent-gold) !important; color: #000;';
+                    } else if (status === 'absent') {
+                        styleAttr += ' background: rgba(255,255,255,0.05) !important; border-color: transparent !important; opacity: 0.4;';
+                    }
+                    return `<button class="btn-action" style="${styleAttr}" onclick="Minigames.handleLexleInput('${l}')">${l}</button>`;
+                }).join('')}
                 <button class="btn-action" style="padding: 0.5rem; min-width: 60px; background: #ef4444;" onclick="Minigames.handleLexleInput('BACKSPACE')">DEL</button>
                 <button class="btn-action" style="padding: 0.5rem; min-width: 60px; background: var(--accent-green);" onclick="Minigames.handleLexleInput('ENTER')">INVIO</button>
             </div>
         `;
         document.getElementById('game-content').innerHTML = html;
+    },
+
+    getLexleKeyStatus(char) {
+        let status = '';
+        for (const guess of this.lexleGuesses) {
+            for (let i = 0; i < 5; i++) {
+                if (guess[i] === char) {
+                    if (this.lexleTarget[i] === char) {
+                        return 'correct'; // Priorità massima: indovinata in posizione esatta
+                    } else if (this.lexleTarget.includes(char)) {
+                        status = 'present';
+                    } else if (status !== 'present') {
+                        status = 'absent';
+                    }
+                }
+            }
+        }
+        return status;
     },
 
     getLexleLetterStatus(guess, i) {
@@ -435,33 +556,49 @@ const Minigames = {
     clickerGocce: 0,
     clickerMulti: 1,
     clickerAuto: 0,
+    clickerDeptCount: 0,
+    clickerCafeCount: 0,
     clickerInterval: null,
 
     startClicker() {
         this.clickerGocce = parseInt(localStorage.getItem('lex-clicker-gocce')) || 0;
-        this.clickerMulti = 1;
-        this.clickerAuto = 0;
+        this.clickerMulti = parseInt(localStorage.getItem('lex-clicker-multi')) || 1;
+        this.clickerAuto = parseInt(localStorage.getItem('lex-clicker-auto')) || 0;
+        this.clickerDeptCount = parseInt(localStorage.getItem('lex-clicker-dept-count')) || 0;
+        this.clickerCafeCount = parseInt(localStorage.getItem('lex-clicker-cafe-count')) || 0;
         this.renderClicker();
         
         clearInterval(this.clickerInterval);
         this.clickerInterval = setInterval(() => {
-            if (this.clickerAuto > 0) {
-                this.clickerGocce += this.clickerAuto;
+            const cps = this.clickerAuto + (this.clickerDeptCount * 8) + (this.clickerCafeCount * 30);
+            if (cps > 0) {
+                this.clickerGocce += cps;
                 this.updateClickerUI();
             }
         }, 1000);
     },
 
     renderClicker() {
+        const costMulti = 50 * this.clickerMulti;
+        const costAuto = 200 * (1 + (this.clickerAuto / 2));
+        const costDept = 800 * (1 + this.clickerDeptCount);
+        const costCafe = 3000 * (1 + this.clickerCafeCount);
+        const cps = this.clickerAuto + (this.clickerDeptCount * 8) + (this.clickerCafeCount * 30);
+
         const html = `
             <div style="text-align: center; margin-bottom: 1rem;">
                 <div style="font-size: 0.9rem; color: var(--text-secondary);">Gocce di Caffeina</div>
-                <div id="clicker-count" style="font-size: 2.5rem; font-weight: 800; color: var(--accent-gold);">${this.clickerGocce}</div>
+                <div id="clicker-count" style="font-size: 2.5rem; font-weight: 800; color: var(--accent-gold);">${Math.floor(this.clickerGocce)}</div>
+                <div id="clicker-cps" style="font-size: 0.85rem; color: var(--accent-green); margin-top: 0.25rem;">+${cps}/sec</div>
             </div>
             <div class="clicker-btn" onclick="Minigames.handleClicker()">☕</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 1rem;">
+                <button id="clicker-btn-multi" class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('multi')">Espresso Doppio (+1/click)<br>Costo: ${costMulti}</button>
+                <button id="clicker-btn-auto" class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('auto')">Studente Insonne (+2/sec)<br>Costo: ${costAuto}</button>
+            </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%;">
-                <button class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('multi')">Espresso Doppio (+1/click)<br>Costo: 50</button>
-                <button class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('auto')">Studente Insonne (+2/sec)<br>Costo: 200</button>
+                <button id="clicker-btn-dept" class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('dept')">Macchinetta Dipartimento (+8/sec)<br>Costo: ${costDept}</button>
+                <button id="clicker-btn-cafe" class="btn-action" style="font-size: 0.75rem; padding: 0.5rem;" onclick="Minigames.buyClicker('cafe')">Caffetteria Univ. (+30/sec)<br>Costo: ${costCafe}</button>
             </div>
             <button class="btn-action btn-action-primary" style="margin-top: 1rem; width: 100%;" onclick="Minigames.convertGocce()">Converti 1000 Gocce in 5 LP</button>
         `;
@@ -480,16 +617,55 @@ const Minigames = {
     updateClickerUI() {
         const el = document.getElementById('clicker-count');
         if (el) el.textContent = Math.floor(this.clickerGocce);
+        
+        const cpsEl = document.getElementById('clicker-cps');
+        const cps = this.clickerAuto + (this.clickerDeptCount * 8) + (this.clickerCafeCount * 30);
+        if (cpsEl) cpsEl.textContent = `+${cps}/sec`;
+
+        const costMulti = 50 * this.clickerMulti;
+        const costAuto = 200 * (1 + (this.clickerAuto / 2));
+        const costDept = 800 * (1 + this.clickerDeptCount);
+        const costCafe = 3000 * (1 + this.clickerCafeCount);
+
+        const btnMulti = document.getElementById('clicker-btn-multi');
+        if (btnMulti) btnMulti.innerHTML = `Espresso Doppio (+1/click)<br>Costo: ${costMulti}`;
+
+        const btnAuto = document.getElementById('clicker-btn-auto');
+        if (btnAuto) btnAuto.innerHTML = `Studente Insonne (+2/sec)<br>Costo: ${costAuto}`;
+
+        const btnDept = document.getElementById('clicker-btn-dept');
+        if (btnDept) btnDept.innerHTML = `Macchinetta Dipartimento (+8/sec)<br>Costo: ${costDept}`;
+
+        const btnCafe = document.getElementById('clicker-btn-cafe');
+        if (btnCafe) btnCafe.innerHTML = `Caffetteria Univ. (+30/sec)<br>Costo: ${costCafe}`;
+
         localStorage.setItem('lex-clicker-gocce', this.clickerGocce);
+        localStorage.setItem('lex-clicker-multi', this.clickerMulti);
+        localStorage.setItem('lex-clicker-auto', this.clickerAuto);
+        localStorage.setItem('lex-clicker-dept-count', this.clickerDeptCount);
+        localStorage.setItem('lex-clicker-cafe-count', this.clickerCafeCount);
     },
 
     buyClicker(type) {
-        if (type === 'multi' && this.clickerGocce >= 50) {
-            this.clickerGocce -= 50;
+        const costMulti = 50 * this.clickerMulti;
+        const costAuto = 200 * (1 + (this.clickerAuto / 2));
+        const costDept = 800 * (1 + this.clickerDeptCount);
+        const costCafe = 3000 * (1 + this.clickerCafeCount);
+
+        if (type === 'multi' && this.clickerGocce >= costMulti) {
+            this.clickerGocce -= costMulti;
             this.clickerMulti++;
-        } else if (type === 'auto' && this.clickerGocce >= 200) {
-            this.clickerGocce -= 200;
+        } else if (type === 'auto' && this.clickerGocce >= costAuto) {
+            this.clickerGocce -= costAuto;
             this.clickerAuto += 2;
+        } else if (type === 'dept' && this.clickerGocce >= costDept) {
+            this.clickerGocce -= costDept;
+            this.clickerDeptCount++;
+        } else if (type === 'cafe' && this.clickerGocce >= costCafe) {
+            this.clickerGocce -= costCafe;
+            this.clickerCafeCount++;
+        } else {
+            return; // Non abbastanza gocce
         }
         this.updateClickerUI();
     },
@@ -550,7 +726,51 @@ const Minigames = {
         const empty = this.trisBoard.map((c, i) => c === null ? i : null).filter(i => i !== null);
         if (empty.length === 0) return;
         
-        const move = empty[Math.floor(Math.random() * empty.length)];
+        let move = null;
+        const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+        // 1. Can AI win?
+        for (const w of wins) {
+            const cells = w.map(i => this.trisBoard[i]);
+            const oCount = cells.filter(c => c === 'O').length;
+            const nullCount = cells.filter(c => c === null).length;
+            if (oCount === 2 && nullCount === 1) {
+                move = w.find(i => this.trisBoard[i] === null);
+                break;
+            }
+        }
+
+        // 2. Can player win in their next turn? If so, block them
+        if (move === null) {
+            for (const w of wins) {
+                const cells = w.map(i => this.trisBoard[i]);
+                const xCount = cells.filter(c => c === 'X').length;
+                const nullCount = cells.filter(c => c === null).length;
+                if (xCount === 2 && nullCount === 1) {
+                    move = w.find(i => this.trisBoard[i] === null);
+                    break;
+                }
+            }
+        }
+
+        // 3. Take center if empty
+        if (move === null && this.trisBoard[4] === null) {
+            move = 4;
+        }
+
+        // 4. Take a corner if empty
+        if (move === null) {
+            const corners = [0, 2, 6, 8].filter(i => this.trisBoard[i] === null);
+            if (corners.length > 0) {
+                move = corners[Math.floor(Math.random() * corners.length)];
+            }
+        }
+
+        // 5. Take any empty spot
+        if (move === null) {
+            move = empty[Math.floor(Math.random() * empty.length)];
+        }
+
         this.trisBoard[move] = 'O';
         this.trisTurn = 'X';
         this.renderTris();
