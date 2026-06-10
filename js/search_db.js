@@ -279,6 +279,14 @@ const searchDatabase = [
         navPath: "arte_romana/index.html?open=summaries/cap6_augusto_ara_pacis.md"
     },
     {
+        title: "Approfondimento: L'Apparato Decorativo dell'Ara Pacis",
+        subject: "arte_romana",
+        chapterTag: "Studio VI-bis",
+        description: "Focus specifico sull'iconografia e il messaggio ideologico dei rilievi dell'Ara Pacis: il fregio dell'acanto, la rigenerazione naturale, i pannelli mitologici (Enea, Tellus, Roma) e la processione imperiale.",
+        keywords: "ara pacis augustae rilievi allegorie miti acanto cigni apollinei palingenesi enea numa lupercale tellus pax dea roma bucrani ghirlande festoni",
+        navPath: "arte_romana/index.html?open=summaries/approfondimento_ara_pacis.md"
+    },
+    {
         title: "Foro di Augusto e Giulio-Claudi",
         subject: "arte_romana",
         chapterTag: "Studio VII",
