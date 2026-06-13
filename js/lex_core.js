@@ -2826,14 +2826,15 @@ const LexCore = {
     },
 
     // ── EE Dispaccio del Corriere (5 capitoli Storia nella sessione) ─
-    _storiaChaptersThisSession: 0,
     _initDispaccioTracker() {
         const origTrack = this.trackChapterRead.bind(this);
         this.trackChapterRead = (chapterId) => {
             origTrack(chapterId);
-            if (chapterId && chapterId.includes('storia')) {
-                this._storiaChaptersThisSession++;
-                if (this._storiaChaptersThisSession === 5 && !this.isEggUnlocked('ee-dispaccio')) {
+            if (chapterId && (chapterId.includes('storia') || window.location.pathname.includes('storia'))) {
+                let count = parseInt(sessionStorage.getItem('lex-storia-chapters-count') || '0');
+                count++;
+                sessionStorage.setItem('lex-storia-chapters-count', count.toString());
+                if (count === 5 && !this.isEggUnlocked('ee-dispaccio')) {
                     setTimeout(() => this.triggerDispaccio(), 800);
                 }
             }
