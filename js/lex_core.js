@@ -58,6 +58,7 @@ const LexCore = {
         this.tick();
         this.initTTS();
         this.injectUpdateButtons();
+        this.injectFooterSecretLink();
 
         // Track visited pages for achievements
         try {
@@ -2401,6 +2402,39 @@ const LexCore = {
             if (btn) btn.classList.remove('loading');
             alert("Errore durante l'aggiornamento. Prova a ricaricare manualmente.");
         }
+    },
+
+    injectFooterSecretLink() {
+        setTimeout(() => {
+            const footer = document.querySelector('footer');
+            if (footer && !document.getElementById('lex-footer-secrets-btn')) {
+                const isSubFolder = window.location.pathname.split('/').some(segment => [
+                    'diritto', 'storia', 'arte_romana', 'storia_arte', 'cristiana', 'codicologia', 
+                    'restauro', 'museologia', 'tesi', 'inglese', 'geografia', 'letteratura_italiana', 
+                    'letteratura_latina', 'cultura_greca', 'laboratorio', 'arte_medievale', 
+                    'arte_contemporanea', 'storia_medievale', 'storia_contemporanea'
+                ].includes(segment));
+                const prefix = isSubFolder ? '../' : '';
+
+                const link = document.createElement('a');
+                link.id = 'lex-footer-secrets-btn';
+                link.href = prefix + 'easter_eggs.html';
+                link.className = 'lex-footer-secrets-btn';
+                link.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; vertical-align:middle;">
+                        <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                    </svg>
+                    Galleria dei Segreti 🗝️
+                `;
+
+                const pwaBtn = document.getElementById('pwa-update-btn');
+                if (pwaBtn) {
+                    footer.insertBefore(link, pwaBtn);
+                } else {
+                    footer.appendChild(link);
+                }
+            }
+        }, 1000);
     },
 
     // ═══════════════════════════════════════════════════════════════

@@ -2,14 +2,18 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Librorum Prohibitorum - Lex Studiorum</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=IM+Fell+English+SC&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-    <!-- Lex Core References -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="js/lex_core.css">
-    <script src="js/lex_core.js"></script>
+    <meta http-equiv="refresh" content="2;url=segreti.html">
+    <title>Accesso Proibito - Lex Studiorum</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                LexCore.unlockEasterEgg('ee-index-prohibitorum');
+            }
+            setTimeout(() => {
+                window.location.replace("segreti.html");
+            }, 1200);
+        });
+    </script>
     <style>
         body {
             background: #090604;
@@ -20,163 +24,48 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 2rem;
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        /* Burnt Parchment Card */
-        .index-parchment {
-            background: radial-gradient(circle, #ecd5b1 60%, #b29367 90%, #3e270f 100%);
-            border: 4px solid #5a3c1c;
-            box-shadow: 0 0 60px rgba(0,0,0,0.8), inset 0 0 80px rgba(90, 60, 28, 0.4);
-            max-width: 650px;
-            width: 100%;
-            padding: 4rem 3rem;
-            border-radius: 6px;
             text-align: center;
-            color: #1a0f07;
-            position: relative;
-            animation: parchment-fade-in 1.2s ease-out;
         }
-
-        /* Burn Marks (SVG masks/pseudo-elements) */
-        .index-parchment::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border: 2px dashed rgba(62, 39, 15, 0.5);
-            border-radius: 8px;
-            pointer-events: none;
-        }
-
-        .parchment-burn {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #090604;
-            border: 2px solid #3e270f;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #090604;
-        }
-        .burn-top-left { top: -20px; left: 40px; width: 60px; height: 30px; border-radius: 40%; }
-        .burn-bottom-right { bottom: -15px; right: 80px; width: 70px; height: 35px; border-radius: 30%; }
-
-        .parchment-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-            color: #4c1106;
-            border-bottom: 2px double #4c1106;
-            padding-bottom: 0.8rem;
-        }
-
-        .parchment-subtitle {
-            font-family: 'IM Fell English SC', serif;
-            font-size: 1.1rem;
-            letter-spacing: 0.15em;
-            color: #5c4327;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-        }
-
-        .heresy-list {
-            text-align: left;
-            margin: 2rem auto;
+        .message-box {
             max-width: 500px;
-            list-style: none;
-            padding: 0;
+            padding: 2.5rem;
+            background: #110c08;
+            border: 1px solid #3e270f;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
-
-        .heresy-item {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1.2rem;
+        h1 {
+            color: #cc1111;
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        p {
             font-size: 1.05rem;
             line-height: 1.5;
+            margin-bottom: 0.5rem;
         }
-
-        .heresy-item::before {
-            content: '❌';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 0.9rem;
+        .spinner {
+            margin: 1.5rem auto 0 auto;
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(220, 209, 196, 0.1);
+            border-top-color: #cc1111;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
-
-        .heresy-item strong {
-            color: #4c1106;
-        }
-
-        .parchment-footer {
-            margin-top: 3rem;
-            border-top: 1px solid rgba(90, 60, 28, 0.2);
-            padding-top: 1.5rem;
-            font-size: 0.9rem;
-            color: #5c4327;
-            font-style: italic;
-        }
-
-        .btn-hub-return {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.8rem 2rem;
-            background: #4c1106;
-            color: #ecd5b1;
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            border-radius: 4px;
-            transition: background 0.2s, transform 0.2s;
-            border: 1px solid #1a0f07;
-        }
-
-        .btn-hub-return:hover {
-            background: #6a1a0b;
-            transform: translateY(-1px);
-        }
-
-        @keyframes parchment-fade-in {
-            from { opacity: 0; transform: scale(0.95) rotate(-1deg); }
-            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="index-parchment">
-        <div class="parchment-burn burn-top-left"></div>
-        <div class="parchment-burn burn-bottom-right"></div>
-        
-        <h1 class="parchment-title">Index Librorum Prohibitorum</h1>
-        <div class="parchment-subtitle">Stanze della Biblioteca Vietate ai Profani</div>
-        
-        <p style="font-size: 1.15rem; line-height: 1.6; font-style: italic;">
-            "Sotto il severo giudizio dell'Ammanuense, i seguenti concetti e condotte sono dichiarati eretici ed inseriti nell'Indice dei Libri Proibiti. Chiunque si accosti a tali scritti è condannato al ripasso perpetuo."
-        </p>
-        
-        <ul class="heresy-list">
-            <li class="heresy-item"><strong>Eresia del "Pianificatore Vuoto":</strong> Creare roadmap d'esame e poi non aprire nemmeno un capitolo.</li>
-            <li class="heresy-item"><strong>Eresia della "Copia Maldestra":</strong> Studiare la Codicologia saltando le formule del restauro.</li>
-            <li class="heresy-item"><strong>Eresia del "Pretore Corrotto":</strong> Provare a corrompere il Pretore Romano con l'Art Bonus.</li>
-            <li class="heresy-item"><strong>Eresia dei "Creatori Superbi":</strong> Seguire i profili social degli autori per scovare le risposte del quiz. (Contatti: <a href="https://github.com/Alesx99" target="_blank" style="color:#4c1106; font-weight:700; text-decoration:underline;">Alesx99 on GitHub</a>)</li>
-        </ul>
-        
-        <div class="parchment-footer">
-            Dato in Roma, Anno di Grazia 2026 · Lex Studiorum Curator
-        </div>
-        
-        <a href="index.html" class="btn-hub-return">Ritorna alla Luce della Home</a>
+    <div class="message-box">
+        <h1>Accesso Proibito 🏛️</h1>
+        <p>Stai tentando di accedere ad una sezione riservata della biblioteca...</p>
+        <p style="font-size: 0.9rem; color: #b29367;">Reindirizzamento all'Indice dei Libri Proibiti in corso.</p>
+        <div class="spinner"></div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
-                LexCore.unlockEasterEgg('ee-index-prohibitorum');
-            }
-        });
-    </script>
 </body>
 </html>

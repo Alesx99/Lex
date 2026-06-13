@@ -919,6 +919,51 @@ body.coccole-theme header h1 {
     50% { transform: translateY(-2px); }
 }
 
+/* --- DYNAMIC SECRETS BUTTON --- */
+.lex-footer-secrets-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--accent-gold);
+    padding: 0.35rem 0.9rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    user-select: none;
+    text-decoration: none;
+}
+
+.lex-footer-secrets-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+
+.lex-footer-secrets-btn:active {
+    transform: translateY(0);
+}
+
+body.coccole-theme .lex-footer-secrets-btn {
+    color: #ff6b8b;
+    border-color: rgba(255, 107, 139, 0.2);
+}
+
+body.coccole-theme .lex-footer-secrets-btn:hover {
+    background: rgba(255, 107, 139, 0.1);
+    border-color: #ff6b8b;
+    box-shadow: 0 4px 12px rgba(255, 107, 139, 0.2);
+}
+
 /* --- PWA UPDATE BUTTON --- */
 .pwa-update-btn {
     background: rgba(255, 255, 255, 0.03);
