@@ -658,6 +658,7 @@
                     setTimeout(() => {
                         injectGlossaryTooltips(markdownView);
                         initializeParagraphs(filePath);
+                        initializeInteractiveQuizzes(markdownView);
                         initializeNotepad(filePath);
                     }, 50);
                 })
@@ -894,6 +895,105 @@
                 }, 600);
             };
         }
+
+        // INITIALIZE INTERACTIVE QUIZZES
+        function initializeInteractiveQuizzes(container) {
+            const listElements = container.querySelectorAll('ul');
+            listElements.forEach(ul => {
+                const listItems = ul.querySelectorAll('li');
+                if (listItems.length < 2) return;
+
+                // Find the list item that indicates the correct answer
+                let answerItem = null;
+                let correctAnswerKey = '';
+                
+                listItems.forEach(li => {
+                    const text = li.textContent.trim().toLowerCase();
+                    if (text.includes('risposta corretta') || text.startsWith('risposta:')) {
+                        answerItem = li;
+                        const match = text.match(/risposta\s+corretta:\s*([a-d])/i);
+                        if (match) {
+                            correctAnswerKey = match[1].toLowerCase();
+                        }
+                    }
+                });
+
+                if (!answerItem || !correctAnswerKey) return;
+
+                // Create interactive quiz wrapper
+                const quizBox = document.createElement('div');
+                quizBox.className = 'interactive-quiz-container';
+
+                // Find question header (usually the paragraph immediately preceding the ul)
+                let questionPara = ul.previousElementSibling;
+                // If it is not a paragraph, try to look further up
+                while (questionPara && questionPara.tagName !== 'P' && questionPara.tagName !== 'H4' && questionPara.tagName !== 'H3') {
+                    questionPara = questionPara.previousElementSibling;
+                }
+
+                if (questionPara) {
+                    const qTitle = document.createElement('div');
+                    qTitle.className = 'interactive-quiz-question';
+                    qTitle.innerHTML = questionPara.innerHTML;
+                    quizBox.appendChild(qTitle);
+                    questionPara.style.display = 'none'; // hide original paragraph
+                }
+
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'interactive-quiz-options';
+
+                const optionElements = [];
+                listItems.forEach(li => {
+                    if (li === answerItem) return; // skip the correct answer explanation
+                    
+                    const text = li.textContent.trim();
+                    const matchLetter = text.match(/^([a-d])\)/i);
+                    const optionLetter = matchLetter ? matchLetter[1].toLowerCase() : '';
+
+                    const opt = document.createElement('li');
+                    opt.className = 'interactive-quiz-option';
+                    opt.textContent = text;
+                    opt.dataset.letter = optionLetter;
+                    
+                    opt.addEventListener('click', () => {
+                        // Prevent clicking multiple times
+                        if (optionsList.dataset.answered === 'true') return;
+                        optionsList.dataset.answered = 'true';
+
+                        if (optionLetter === correctAnswerKey) {
+                            opt.classList.add('correct');
+                            feedback.textContent = "Corretto! Ottimo lavoro.";
+                            feedback.style.color = "#4ade80";
+                        } else {
+                            opt.classList.add('incorrect');
+                            // Highlight the correct one
+                            optionElements.forEach(el => {
+                                if (el.dataset.letter === correctAnswerKey) {
+                                    el.classList.add('correct');
+                                }
+                            });
+                            feedback.textContent = `Errato. La risposta corretta era: ${correctAnswerKey.toUpperCase()}`;
+                            feedback.style.color = "#f87171";
+                        }
+                        feedback.style.display = 'block';
+                    });
+
+                    optionsList.appendChild(opt);
+                    optionElements.push(opt);
+                });
+
+                quizBox.appendChild(optionsList);
+
+                // Feedback box
+                const feedback = document.createElement('div');
+                feedback.className = 'interactive-quiz-feedback';
+                quizBox.appendChild(feedback);
+
+                // Replace the original ul with our quiz box
+                ul.parentNode.replaceChild(quizBox, ul);
+            });
+        }
+
 
     </script>
 
