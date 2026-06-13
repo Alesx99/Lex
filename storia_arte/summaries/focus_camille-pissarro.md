@@ -1,29 +1,25 @@
 # Focus Artista: Camille Pissarro (1830 – 1903)
 
 *   **Periodo/Movimento**: Impressionismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Unico pittore a partecipare a tutte e otto le mostre impressioniste, fu mentore di Cézanne e Gauguin ed esplorò paesaggi rurali e urbani.
 
 ### 2. Metodologia e Stile
-*   **Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.**: Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.
-*   **Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.**: Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.
-*   **Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.**: Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.
+*   **Struttura Solida**: Mantiene un disegno strutturato sotto la stesura impressionista.
+*   **Atmosfere Urbane**: Celebre per i dipinti delle grandi strade parigine viste dall'alto.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *I tetti rossi*
-Rappresenta uno dei cardini dello studio di Camille Pissarro. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Boulevard Montmartre di notte*
-Rappresenta uno dei cardini dello studio di Camille Pissarro. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Boulevard Montmartre*
+Serie di dipinti che ritrae il viale parigino a diverse ore del giorno e stagioni, registrando la folla e la pioggia.
 
 
 ---
@@ -36,14 +32,14 @@ Rappresenta uno dei cardini dello studio di Camille Pissarro. L'analisi si conce
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Camille Pissarro?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Camille Pissarro?**
 * a) 1500 – 1550.
 * b) 1830 – 1903.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

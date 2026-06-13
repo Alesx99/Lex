@@ -1,26 +1,25 @@
 # Focus Artista: Giovanni della Robbia (1469 – 1529)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Figlio di Andrea, portò la terracotta invetriata verso accesi effetti policromi e composizioni molto complesse.
+### 1. Profilo e Contributo Critico
+Figlio di Andrea, portò la terracotta invetriata verso la fase tardiva, caratterizzata da un uso esuberante e spettacolare del colore e da composizioni complesse.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Esuberanza Cromatica**: Uso saturo di smalti gialli, verdi, viola e rossi.
+*   **Composizioni Scenografiche**: Rilievi complessi e affollati di personaggi.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Lavabo della Sagrestia di Santa Maria Novella*
-Rappresenta uno dei cardini dello studio di Giovanni della Robbia. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave
+Lavabo di Santa Maria Novella: Grande manufatto inserito nella sagrestia, con un paesaggio dipinto a smalto incorniciato da colonne e festoni ceramici.
 
 
 ---
@@ -33,14 +32,14 @@ Rappresenta uno dei cardini dello studio di Giovanni della Robbia. L'analisi si 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Giovanni della Robbia?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Giovanni della Robbia?**
 * a) 1500 – 1550.
 * b) 1469 – 1529.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

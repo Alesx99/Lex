@@ -1,29 +1,26 @@
 # Focus Artista: Guido Reni (1575 – 1642)
 
 *   **Periodo/Movimento**: Barocco
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Esponente del classicismo barocco bolognese, ricercò una grazia incorporea e un ideale di bellezza pura ispirata a Raffaello.
 
 ### 2. Metodologia e Stile
-*   **Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.**: Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.
-*   **Poetica del 'bel composto'**:  fusione integrata di scultura, pittura e architettura in un'unica scenografia.
-*   **Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).**: Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).
+*   **Bellezza Ideale**: Volti idealizzati, colli allungati e sguardi rivolti al cielo carichi di grazia spirituale.
+*   **Disegno Purista**: Rifiuta il naturalismo caravaggesco a favore di contorni nitidi e colori pastello freddi.
+*   **Grazia Raffaellesca**: Rianima lo stile solare del Rinascimento Maturo.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *L'Aurora (Palazzo Pallavicini-Rospigliosi)*
-Rappresenta uno dei cardini dello studio di Guido Reni. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Strage degli innocenti*
-Rappresenta uno dei cardini dello studio di Guido Reni. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *L'Aurora*
+Affresco a Palazzo Pallavicini-Rospigliosi a Roma. Il carro del Sole è preceduto dall'Aurora in volo, circondato dalle Ore che danzano tenendosi per mano in una composizione di eccezionale armonia classica.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Guido Reni. L'analisi si concentra s
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Guido Reni?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Guido Reni?**
 * a) 1500 – 1550.
 * b) 1575 – 1642.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

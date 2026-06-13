@@ -1,26 +1,25 @@
 # Focus Artista: Andrea Pozzo (1642 – 1709)
 
 *   **Periodo/Movimento**: Barocco
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Gesuita e maestro di prospettiva e quadratura, creò la più spettacolare finta architettura dipinta su soffitto piatto del Seicento.
 
 ### 2. Metodologia e Stile
-*   **Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.**: Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.
-*   **Poetica del 'bel composto'**:  fusione integrata di scultura, pittura e architettura in un'unica scenografia.
-*   **Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).**: Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).
+*   **Quadratura Estrema**: Disegna un finto tempio classico colonnato che si innalza sopra le pareti reali della chiesa.
+*   **Punto di Vista Unico**: La prospettiva funziona perfettamente solo posizionandosi su un cerchio giallo sul pavimento.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Gloria di sant'Ignazio (chiesa di Sant'Ignazio a Roma)*
-Rappresenta uno dei cardini dello studio di Andrea Pozzo. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Gloria di sant'Ignazio*
+Soffitto piatto della chiesa di Sant'Ignazio a Roma, sfondato verso un cielo infinito in cui il santo sale circondato da angeli e dalle allegorie dei quattro continenti.
 
 
 ---
@@ -33,14 +32,14 @@ Rappresenta uno dei cardini dello studio di Andrea Pozzo. L'analisi si concentra
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Andrea Pozzo?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Andrea Pozzo?**
 * a) 1500 – 1550.
 * b) 1642 – 1709.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

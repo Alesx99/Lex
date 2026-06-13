@@ -1,29 +1,26 @@
 # Focus Artista: Jean-Auguste-Dominique Ingres (1780 – 1867)
 
 *   **Periodo/Movimento**: Neoclassicismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Custode del classicismo accademico e del disegno purista francese, unì forme neoclassiche a suggestioni esotiche.
+### 1. Profilo e Contributo Critico
+Custode del classicismo accademico e del disegno purista francese, unì forme neoclassiche a suggestioni esotiche e allungamenti sinuosi.
 
 ### 2. Metodologia e Stile
-*   **Recupero del classicismo greco e romano in opposizione agli eccessi decorativi del Barocco e del Rococò.**: Recupero del classicismo greco e romano in opposizione agli eccessi decorativi del Barocco e del Rococò.
-*   **Bello ideale winckelmanniano caratterizzato da nobile semplicità, quieta grandezza ed equilibrio etico.**: Bello ideale winckelmanniano caratterizzato da nobile semplicità, quieta grandezza ed equilibrio etico.
-*   **Primato del disegno nitido, contorni puliti e colori puri e ordinati.**: Primato del disegno nitido, contorni puliti e colori puri e ordinati.
+*   **Primato del Disegno**: Linea di contorno sinuosa di straordinaria precisione formale.
+*   **Linearismo Sensuale**: Deforma leggermente le proporzioni anatomiche per accentuare l'eleganza delle curve.
+*   **Finitura Smaltata**: Colori stesi con precisione cristallina senza pennellate visibili.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *La grande odalisca*
-Rappresenta uno dei cardini dello studio di Jean-Auguste-Dominique Ingres. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *L'apoteosi di Omero*
-Rappresenta uno dei cardini dello studio di Jean-Auguste-Dominique Ingres. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Nudo femminile sdraiato in un interno esotico. Ingres allunga la schiena della donna di tre vertebre per conferirle una linea sinuosa ed elegantissima, circondata da dettagli preziosi di tessuti e fumi.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Jean-Auguste-Dominique Ingres. L'ana
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Jean-Auguste-Dominique Ingres?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Jean-Auguste-Dominique Ingres?**
 * a) 1500 – 1550.
 * b) 1780 – 1867.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

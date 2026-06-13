@@ -1,29 +1,29 @@
 # Focus Artista: Ercole de' Roberti (1451 – 1496)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Esponente della scuola di Ferrara, noto per il dinamismo drammatico e l'espressività concitata delle sue figure.
+### 1. Profilo e Contributo Critico
+Terzo grande maestro della scuola di Ferrara, si distingue per uno stile dinamico, drammatico e carico di pathos espressivo.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Pathos ed Espressione**: Volti contratti dal dolore e gesti drammatici di straordinaria intensità emotiva.
+*   **Dinamismo Lineare**: Figure slanciate catturate in movimenti rapidi e nervosi.
+*   **Campiture Smaltate**: Uso di colori splendidi e lucidi tipici della tradizione ferrarese.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Storie di san Vincenzo Ferrer*
-Rappresenta uno dei cardini dello studio di Ercole de' Roberti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Predella caratterizzata da scene concitate ambientate in scenografie classiche fantastiche rovinose.
 
 ### 🖼️ Opera Chiave: *Pala Portuense*
-Rappresenta uno dei cardini dello studio di Ercole de' Roberti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Sacra conversazione monumentale caratterizzata da un alto trono ottagonale decorato da bassorilievi e aperto su vedute marine esterne.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Ercole de' Roberti. L'analisi si con
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Ercole de' Roberti?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Ercole de' Roberti?**
 * a) 1500 – 1550.
 * b) 1451 – 1496.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

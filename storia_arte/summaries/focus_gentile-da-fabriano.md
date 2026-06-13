@@ -1,29 +1,29 @@
 # Focus Artista: Gentile da Fabriano (1370 – 1427)
 
 *   **Periodo/Movimento**: Gotico Internazionale
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Massimo esponente del Gotico Internazionale in Italia, caratterizzato da estrema eleganza lineare, ricchezza decorativa e uso abbondante dell'oro.
+### 1. Profilo e Contributo Critico
+Capostipite del tardogotico italiano, incarnò l'ideale cortese fondendo il realismo minuto dei dettagli naturalistici con una sontuosità decorativa che faceva largo uso dell'oro zecchino, punzonato e lavorato a rilievo.
 
 ### 2. Metodologia e Stile
-*   **Linea sinuosa, fluida ed elegante, che definisce sagome flessuose senza preoccuparsi del rigore prospettico.**: Linea sinuosa, fluida ed elegante, che definisce sagome flessuose senza preoccuparsi del rigore prospettico.
-*   **Ricchezza decorativa estrema**:  motivi floreali, trame dorate, armature lucenti e ambientazioni cortesi.
-*   **Un gusto fiabesco e idealizzato per soggetti sia sacri che profani, con disinteresse per il realismo spaziale.**: Un gusto fiabesco e idealizzato per soggetti sia sacri che profani, con disinteresse per il realismo spaziale.
+*   **Sinfonia Lineare**: Le figure sono descritte da curve eleganti e ritmiche, prive di un reale peso plastico ma dotate di grazia aristocratica.
+*   **Naturalismo Analitico**: Disegna piante, animali, tessuti e dettagli fisionomici con l'accuratezza di un miniaturista francese.
+*   **Uso dell'Oro come Luce**: L'oro non è uno sfondo piatto medievale, ma reagisce alla luce reale grazie a complesse punzonature.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Adorazione dei Magi*
-Rappresenta uno dei cardini dello studio di Gentile da Fabriano. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Pala d'altare del 1423 in cui il corteo dei Magi è descritto come una sfilata cortese di cavalieri esotici, cani, falconi e ghepardi. La luce divina della stella guida è resa con inserti metallici dorati che brillano tridimensionalmente.
 
 ### 🖼️ Opera Chiave: *Polittico Quaratesi*
-Rappresenta uno dei cardini dello studio di Gentile da Fabriano. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Opera della maturità che mostra un'inedita apertura verso la volumetria toscana, mantenendo intatta la preziosità cromatica e la dolcezza dei volti.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Gentile da Fabriano. L'analisi si co
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Gentile da Fabriano?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Gentile da Fabriano?**
 * a) 1500 – 1550.
 * b) 1370 – 1427.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

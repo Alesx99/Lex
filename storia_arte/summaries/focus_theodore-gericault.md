@@ -1,29 +1,26 @@
 # Focus Artista: Théodore Géricault (1791 – 1824)
 
 *   **Periodo/Movimento**: Romanticismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Iniziatore del Romanticismo francese, ruppe con il rigore neoclassico per esplorare la follia, il dramma reale della storia e la morte.
 
 ### 2. Metodologia e Stile
-*   **Primato del sentimento, dell'emozione interiore e della fantasia individuale.**: Primato del sentimento, dell'emozione interiore e della fantasia individuale.
-*   **Sentimento del Sublime**:  la piccolezza dell'uomo di fronte a una natura infinitamente grande o tempestosa.
-*   **Attenzione alla storia contemporanea, con composizioni dinamiche e uso emotivo del colore.**: Attenzione alla storia contemporanea, con composizioni dinamiche e uso emotivo del colore.
+*   **Realismo Drammatico**: Rifiuto di soggetti mitologici a favore della cronaca contemporanea cruda.
+*   **Composizione Piramidale Dinamica**: Dispone le figure lungo diagonali instabili che esprimono sforzo e disperazione.
+*   **Chiaroscuro Caravaggesco**: Luci calde e ombre fonde per accrescere il senso di tragedia.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *La zattera della Medusa*
-Rappresenta uno dei cardini dello studio di Théodore Géricault. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *La serie dei monomaniaci*
-Rappresenta uno dei cardini dello studio di Théodore Géricault. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grande tela del 1819 che ritrae i naufraghi della fregata francese abbandonati su una zattera. La composizione culmina in due piramidi: una di corpi sofferenti e morti in basso, l'altra di speranza che si protende verso la nave in lontananza.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Théodore Géricault. L'analisi si c
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Théodore Géricault?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Théodore Géricault?**
 * a) 1500 – 1550.
 * b) 1791 – 1824.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

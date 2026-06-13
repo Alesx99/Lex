@@ -1,26 +1,26 @@
 # Focus Artista: Giovanni da Modena (1379 – 1455)
 
 *   **Periodo/Movimento**: Gotico Internazionale
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Pittore emiliano noto per il tono espressivo, drammatico e talvolta grottesco dei suoi affreschi.
+### 1. Profilo e Contributo Critico
+Pittore emiliano caratterizzato da uno stile espressivo, popolaresco e drammatico, distante dalle raffinatezze aristocratiche cortesi dei contemporanei.
 
 ### 2. Metodologia e Stile
-*   **Linea sinuosa, fluida ed elegante, che definisce sagome flessuose senza preoccuparsi del rigore prospettico.**: Linea sinuosa, fluida ed elegante, che definisce sagome flessuose senza preoccuparsi del rigore prospettico.
-*   **Ricchezza decorativa estrema**:  motivi floreali, trame dorate, armature lucenti e ambientazioni cortesi.
-*   **Un gusto fiabesco e idealizzato per soggetti sia sacri che profani, con disinteresse per il realismo spaziale.**: Un gusto fiabesco e idealizzato per soggetti sia sacri che profani, con disinteresse per il realismo spaziale.
+*   **Espressionismo Popolare**: I volti mostrano smorfie di dolore, terrore o rabbia, accentuando il carattere comunicativo dell'arte.
+*   **Drammaticità Narrativa**: Scene concitate e dinamiche con una forte carica emotiva.
+*   **Fantasia Grottesca**: Rappresentazione dettagliata e fantasiosa di demoni e tormenti infernali.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Affreschi della Cappella Bolognini in San Petronio*
-Rappresenta uno dei cardini dello studio di Giovanni da Modena. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Ciclo che illustra il Paradiso e l'Inferno. L'Inferno è dominato da una gigantesca figura di Lucifero che divora i peccatori, dipinta con un realismo grottesco e spaventoso.
 
 
 ---
@@ -33,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Giovanni da Modena. L'analisi si con
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Giovanni da Modena?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Giovanni da Modena?**
 * a) 1500 – 1550.
 * b) 1379 – 1455.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

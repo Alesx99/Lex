@@ -1,29 +1,26 @@
 # Focus Artista: Pierre-Auguste Renoir (1841 – 1919)
 
 *   **Periodo/Movimento**: Impressionismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Esponente dell'Impressionismo dedito alla resa della gioia di vivere parigina, della luce filtrata dal fogliame e della morbidezza carnale.
+### 1. Profilo e Contributo Critico
+Esponente dell'Impressionismo dedito alla resa della gioia di vivere parigina, della luce filtrata dal fogliame e della morbidezza carnale del nudo.
 
 ### 2. Metodologia e Stile
-*   **Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.**: Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.
-*   **Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.**: Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.
-*   **Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.**: Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.
+*   **Gioia di Vivere (Joie de Vivre)**: Soggetti festosi, balli, caffè e gite in barca della borghesia parigina.
+*   **Luce Filtrata**: Resa delle ombre colorate e delle macchie di luce solare che filtrano attraverso le foglie sugli abiti e sulla pelle.
+*   **Pennellata Liquida**: Colori caldi, morbidi e stesura fluida del colore.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Bal au moulin de la Galette*
-Rappresenta uno dei cardini dello studio di Pierre-Auguste Renoir. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *La colazione dei canottieri*
-Rappresenta uno dei cardini dello studio di Pierre-Auguste Renoir. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Capolavoro impressionista del 1876. Una folla danzante all'aperto è descritta in un vortice di luci e ombre colorate mobili filtrate dagli alberi, trasmettendo un senso di felice vitalità.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Pierre-Auguste Renoir. L'analisi si 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Pierre-Auguste Renoir?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Pierre-Auguste Renoir?**
 * a) 1500 – 1550.
 * b) 1841 – 1919.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

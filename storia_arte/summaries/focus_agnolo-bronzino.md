@@ -1,29 +1,29 @@
 # Focus Artista: Agnolo Bronzino (1503 – 1572)
 
 *   **Periodo/Movimento**: Manierismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Allievo del Pontormo, celebre per i suoi ritratti di corte dei Medici algidi, aristocratici, levigati e dalla raffinata freddezza metallica.
 
 ### 2. Metodologia e Stile
-*   **Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.**: Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.
-*   **Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.**: Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.
-*   **Cromatismo insolito con colori acidi, cangianti e contrastanti.**: Cromatismo insolito con colori acidi, cangianti e contrastanti.
+*   **Ritrattistica Aristocratica**: Personaggi distaccati, impassibili, che esprimono il loro status sociale tramite abiti lussuosi resi nei minimi dettagli.
+*   **Superfici Smaltate**: Stesura del colore lucida, priva di pennellate visibili, che fa sembrare la pelle come marmo o porcellana.
+*   **Allegorie Intellettualistiche**: Composizioni mitologiche dense di simboli filosofici complessi.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Ritratto di Eleonora di Toledo col figlio Giovanni*
-Rappresenta uno dei cardini dello studio di Agnolo Bronzino. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+La duchessa indossa un celebre abito in broccato broccato descritto con precisione millimetrica. Il volto è immobile e regale, immerso in uno sfondo azzurro cupo.
 
 ### 🖼️ Opera Chiave: *Allegoria del trionfo di Venere*
-Rappresenta uno dei cardini dello studio di Agnolo Bronzino. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tavola complessa ricca di nudi levigati che simboleggiano i piaceri e le insidie dell'amore.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Agnolo Bronzino. L'analisi si concen
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Agnolo Bronzino?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Agnolo Bronzino?**
 * a) 1500 – 1550.
 * b) 1503 – 1572.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

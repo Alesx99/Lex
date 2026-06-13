@@ -1,29 +1,26 @@
 # Focus Artista: Andrea del Sarto (1486 – 1530)
 
 *   **Periodo/Movimento**: Manierismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Maestro fiorentino 'senza errori', unì la perfezione classica di Raffaello e lo sfumato di Leonardo, avviando i germi del Manierismo.
 
 ### 2. Metodologia e Stile
-*   **Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.**: Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.
-*   **Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.**: Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.
-*   **Cromatismo insolito con colori acidi, cangianti e contrastanti.**: Cromatismo insolito con colori acidi, cangianti e contrastanti.
+*   **Perfezione Formale**: Disegno e panneggi privi di imperfezioni anatomiche.
+*   **Sfumato Atmosferico**: Transizioni morbide di chiaroscuro.
+*   **Tonalità Calde e Fredde**: Introduce accordi cromatici complessi che faranno scuola.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Madonna delle Arpie*
-Rappresenta uno dei cardini dello studio di Andrea del Sarto. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Affreschi del Chiostrino dei Voti*
-Rappresenta uno dei cardini dello studio di Andrea del Sarto. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Pala d'altare in cui la Vergine col Bambino poggia su un piedistallo decorato con arpie scolpite, avvolta da una luce morbida e circondata da San Francesco e San Giovanni Evangelista.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Andrea del Sarto. L'analisi si conce
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Andrea del Sarto?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Andrea del Sarto?**
 * a) 1500 – 1550.
 * b) 1486 – 1530.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

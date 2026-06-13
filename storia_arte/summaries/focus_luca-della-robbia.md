@@ -1,29 +1,29 @@
 # Focus Artista: Luca della Robbia (1400 – 1482)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Scultore e ceramista, inventore della tecnica della terracotta invetriata che rese le sculture policrome lucide e resistenti.
+### 1. Profilo e Contributo Critico
+Scultore e ceramista fiorentino, inventò la tecnica della terracotta invetriata (ceramica smaltata protetta da ossidi metallici) garantendo brillantezza cromatica ed impermeabilità.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Invenzione dell'Invetriatura**: Applica smalti lucidi (bianco per le figure, azzurro per gli sfondi) su rilievi in argilla cotta.
+*   **Classicismo Sereno**: Sculture caratterizzate da un'armonia dolce, volti idealizzati ma umani e composizioni equilibrate.
+*   **Resistenza e Colore**: Permetteva di collocare sculture colorate all'esterno degli edifici, resistendo alle intemperie.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Cantoria del Duomo di Firenze*
-Rappresenta uno dei cardini dello studio di Luca della Robbia. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Rilievo marmoreo con fanciulli danzanti e cantanti, caratterizzato da un'estrema freschezza vitale e compostezza classica.
 
 ### 🖼️ Opera Chiave: *Madonne in terracotta invetriata*
-Rappresenta uno dei cardini dello studio di Luca della Robbia. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Rilievi devozionali policromi in cui il bianco puro delle figure si staglia contro fondali azzurro cobalto, incorniciati da ghirlande di frutta.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Luca della Robbia. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Luca della Robbia?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Luca della Robbia?**
 * a) 1500 – 1550.
 * b) 1400 – 1482.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

@@ -1,32 +1,29 @@
 # Focus Artista: Raffaello Sanzio (1483 – 1520)
 
 *   **Periodo/Movimento**: Rinascimento Maturo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Incarnò l'ideale rinascimentale di grazia, armonia e sintesi classica, unendo il dinamismo michelangiolesco allo sfumato leonardesco.
+### 1. Profilo e Contributo Critico
+Maestro supremo di grazia, armonia e sintesi classica. Seppe assimilare le scoperte di Leonardo (lo sfumato) e Michelangelo (il dinamismo anatomico) fondendole in un linguaggio solare e perfetto.
 
 ### 2. Metodologia e Stile
-*   **Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).**: Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).
-*   **Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.**: Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.
-*   **Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).**: Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).
+*   **Grazia e Armonia**: Composizioni equilibrate, prive di tensioni drammatiche eccessive, basate su geometrie circolari e piramidali dolci.
+*   **Sintesi Classica**: Rappresentazione del bello ideale umano, dove la perfezione formale si unisce alla spontaneità naturale.
+*   **Spazialità Architettonica**: Integrazione perfetta delle figure umane in maestose architetture di respiro classico.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Lo Sposalizio della Vergine*
-Rappresenta uno dei cardini dello studio di Raffaello Sanzio. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tavola del 1504. Raffaello riprende il modello del Perugino ma unifica la scena stringendo il cerchio dei personaggi e inserendo un tempio a pianta centrale perfettamente scorciato e curvo sullo sfondo.
 
-### 🖼️ Opera Chiave: *La Scuola di Atene (Stanze Vaticane)*
-Rappresenta uno dei cardini dello studio di Raffaello Sanzio. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Madonna del Cardellino*
-Rappresenta uno dei cardini dello studio di Raffaello Sanzio. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *La Scuola di Atene*
+Affresco nelle Stanze Vaticane. I grandi filosofi dell'antichità (con i volti dei contemporanei, tra cui Leonardo, Michelangelo e se stesso) sono disposti sotto una grandiosa basilica voltata a botte ispirata ai progetti di Bramante per San Pietro.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Raffaello Sanzio. L'analisi si conce
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Raffaello Sanzio?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Raffaello Sanzio?**
 * a) 1500 – 1550.
 * b) 1483 – 1520.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

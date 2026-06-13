@@ -1,32 +1,29 @@
 # Focus Artista: Andrea Palladio (1508 – 1580)
 
 *   **Periodo/Movimento**: Rinascimento Veneto
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Architetto vicentino di impatto mondiale, codificò il classicismo rinascimentale nei Quattro libri dell'architettura e nelle ville venete.
+### 1. Profilo e Contributo Critico
+Architetto vicentino di impatto mondiale, codificò il classicismo rinascimentale nei Quattro libri dell'architettura e nelle celebri ville venete.
 
 ### 2. Metodologia e Stile
-*   **Colorito tonale**:  le forme sono costruite stendendo direttamente il colore, definendo i volumi con la luce calda.
-*   **Integrazione e fusione intima tra i personaggi umani e il paesaggio naturale circostante.**: Integrazione e fusione intima tra i personaggi umani e il paesaggio naturale circostante.
-*   **Stile tardo con stesura materica e disgregata (Tiziano) in cui i contorni sfumano del tutto.**: Stile tardo con stesura materica e disgregata (Tiziano) in cui i contorni sfumano del tutto.
+*   **Simmetria Proporzionale**: Progetti basati su proporzioni matematiche musicali e geometriche simmetriche.
+*   **Il Tempio Classico applicato alla Villa**: Introduce per la prima volta l'uso del pronao classico (timpanato con colonne) nelle residenze di campagna.
+*   **Integrazione Paesaggistica**: Le ville sono progettate in armonia con l'ambiente agricolo veneto circostante.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Villa Capra detta La Rotonda*
-Rappresenta uno dei cardini dello studio di Andrea Palladio. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Villa Almerico Capra detta La Rotonda*
+Residenza vicino Vicenza a pianta perfettamente quadrata, con una cupola centrale e quattro facciate identiche precedute da altrettanti pronai classici ionici.
 
 ### 🖼️ Opera Chiave: *Basilica Palladiana*
-Rappresenta uno dei cardini dello studio di Andrea Palladio. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Teatro Olimpico di Vicenza*
-Rappresenta uno dei cardini dello studio di Andrea Palladio. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Ristrutturazione del palazzo pubblico di Vicenza tramite una spettacolare loggia a serliane marmoree ripetute.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Andrea Palladio. L'analisi si concen
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Andrea Palladio?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Andrea Palladio?**
 * a) 1500 – 1550.
 * b) 1508 – 1580.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

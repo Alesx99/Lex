@@ -1,29 +1,29 @@
 # Focus Artista: Cosmè Tura (1430 – 1495)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Fondatore della scuola ferrarese, caratterizzato da uno stile espressionista, angoloso, con figure metalliche ed estremamente tese.
+### 1. Profilo e Contributo Critico
+Capostipite della scuola ferrarese (Officina Ferrarese), creò uno stile di fortissima originalità caratterizzato da figure tese, spigolose e metalliche.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Linearismo Tagliente**: Linee dure che scolpiscono contorni tormentati e muscolature contratte.
+*   **Materia Minerale**: I corpi, i panneggi e le rocce sembrano scolpiti nel bronzo, nel ferro o nel marmo lucido.
+*   **Colorismo Espressionista**: Uso di tinte acide e contrastanti stese con campiture smaltate.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *San Giorgio e la principessa*
-Rappresenta uno dei cardini dello studio di Cosmè Tura. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Ante dell'organo del Duomo di Ferrara. San Giorgio sul cavallo impennato colpisce il drago con una tensione muscolare estrema, mentre la principessa fugge terrorizzata con un panneggio tormentato dal vento.
 
 ### 🖼️ Opera Chiave: *Polittico Roverella*
-Rappresenta uno dei cardini dello studio di Cosmè Tura. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grande pala d'altare monumentale arricchita da decorazioni plastiche fantastiche e volti scavati e sofferenti.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Cosmè Tura. L'analisi si concentra 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Cosmè Tura?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Cosmè Tura?**
 * a) 1500 – 1550.
 * b) 1430 – 1495.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

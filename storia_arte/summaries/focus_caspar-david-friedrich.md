@@ -1,32 +1,26 @@
 # Focus Artista: Caspar David Friedrich (1774 – 1840)
 
 *   **Periodo/Movimento**: Romanticismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Pittore tedesco simbolo del Sublime romantico e del rapporto mistico tra l'uomo e la natura infinita (Rückenfigur).
+### 1. Profilo e Contributo Critico
+Pittore tedesco simbolo del Sublime romantico e del rapporto mistico e contemplativo tra l'uomo e la natura infinita.
 
 ### 2. Metodologia e Stile
-*   **Primato del sentimento, dell'emozione interiore e della fantasia individuale.**: Primato del sentimento, dell'emozione interiore e della fantasia individuale.
-*   **Sentimento del Sublime**:  la piccolezza dell'uomo di fronte a una natura infinitamente grande o tempestosa.
-*   **Attenzione alla storia contemporanea, con composizioni dinamiche e uso emotivo del colore.**: Attenzione alla storia contemporanea, con composizioni dinamiche e uso emotivo del colore.
+*   **La Rückenfigur**: Disegna un personaggio di spalle in primo piano, spingendo lo spettatore a immedesimarsi e a contemplare il paesaggio infinito.
+*   **Natura Religiosa**: Il paesaggio (nebbie, mari di ghiaccio, foreste) assume un valore sacro e divino.
+*   **Simmetria Malinconica**: Composizioni silenziose, ordinate e simmetriche dai toni freddi.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Il viandante sul mare di nebbia*
-Rappresenta uno dei cardini dello studio di Caspar David Friedrich. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Monaco in riva al mare*
-Rappresenta uno dei cardini dello studio di Caspar David Friedrich. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Le scogliere di gesso di Rügen*
-Rappresenta uno dei cardini dello studio di Caspar David Friedrich. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Un uomo di spalle contempla da una roccia un immenso mare di nebbia da cui emergono cime rocciose, capolavoro del sentimento del Sublime romantico.
 
 
 ---
@@ -39,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Caspar David Friedrich. L'analisi si
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Caspar David Friedrich?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Caspar David Friedrich?**
 * a) 1500 – 1550.
 * b) 1774 – 1840.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

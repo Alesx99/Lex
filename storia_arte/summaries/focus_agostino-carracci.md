@@ -1,29 +1,25 @@
 # Focus Artista: Agostino Carracci (1557 – 1602)
 
 *   **Periodo/Movimento**: Barocco
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Teorico dell'Accademia degli Incamminati, noto per le sue eccezionali doti di incisore e il rigore disegnativo.
 
 ### 2. Metodologia e Stile
-*   **Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.**: Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.
-*   **Poetica del 'bel composto'**:  fusione integrata di scultura, pittura e architettura in un'unica scenografia.
-*   **Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).**: Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).
+*   **Incisione di Precisione**: Diffuse i capolavori del Rinascimento tramite stampe di altissima qualità.
+*   **Rigore Disegnativo**: Maestro del disegno anatomico pulito e accademico.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Comunione di san Girolamo*
-Rappresenta uno dei cardini dello studio di Agostino Carracci. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Incisioni della Galleria Farnese*
-Rappresenta uno dei cardini dello studio di Agostino Carracci. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grande tela classica caratterizzata da una composizione solenne ed equilibrata che farà da modello per Domenichino.
 
 
 ---
@@ -36,14 +32,14 @@ Rappresenta uno dei cardini dello studio di Agostino Carracci. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Agostino Carracci?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Agostino Carracci?**
 * a) 1500 – 1550.
 * b) 1557 – 1602.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

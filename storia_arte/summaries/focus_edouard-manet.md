@@ -1,32 +1,29 @@
 # Focus Artista: Édouard Manet (1832 – 1883)
 
 *   **Periodo/Movimento**: Impressionismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Precursore e guida intellettuale dell'Impressionismo, scosse il mondo accademico eliminando il chiaroscuro a favore di campiture di colore piatte.
 
 ### 2. Metodologia e Stile
-*   **Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.**: Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.
-*   **Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.**: Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.
-*   **Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.**: Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.
+*   **Abolizione della Prospettiva Tradizionale**: Figure bidimensionali appiattite dalla luce frontale.
+*   **Uso di Colori Puri**: Rifiuta lo sfumato accademico accostando direttamente tonalità brillanti senza mezzitoni.
+*   **Scandalo dei Soggetti**: Ritrae scene di vita contemporanea parigina senza idealizzazioni morali o mitologiche.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Colazione sull'erba (Déjeuner sur l'herbe)*
-Rappresenta uno dei cardini dello studio di Édouard Manet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Colazione sull'erba*
+Presentato al Salon des Refusés del 1863. Una donna nuda siede con due dandy vestiti all'aperto, capolavoro che cita Giorgione e Raffaello ma scandalizzò per il realismo contemporaneo e l'assenza di chiaroscuro.
 
 ### 🖼️ Opera Chiave: *Olympia*
-Rappresenta uno dei cardini dello studio di Édouard Manet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Il bar delle Folies-Bergère*
-Rappresenta uno dei cardini dello studio di Édouard Manet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Nudo di una cortigiana parigina che fissa spudoratamente lo spettatore, ispirato alla Venere di Tiziano ma dipinto con forti contrasti grafici piatti.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Édouard Manet. L'analisi si concent
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Édouard Manet?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Édouard Manet?**
 * a) 1500 – 1550.
 * b) 1832 – 1883.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

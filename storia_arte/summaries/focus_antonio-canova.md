@@ -1,32 +1,29 @@
 # Focus Artista: Antonio Canova (1757 – 1822)
 
 *   **Periodo/Movimento**: Neoclassicismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Scultore neoclassico per eccellenza, noto per la levigatezza vitale del marmo finita a cera e per la ricerca della 'bellezza ideale'.
 
 ### 2. Metodologia e Stile
-*   **Recupero del classicismo greco e romano in opposizione agli eccessi decorativi del Barocco e del Rococò.**: Recupero del classicismo greco e romano in opposizione agli eccessi decorativi del Barocco e del Rococò.
-*   **Bello ideale winckelmanniano caratterizzato da nobile semplicità, quieta grandezza ed equilibrio etico.**: Bello ideale winckelmanniano caratterizzato da nobile semplicità, quieta grandezza ed equilibrio etico.
-*   **Primato del disegno nitido, contorni puliti e colori puri e ordinati.**: Primato del disegno nitido, contorni puliti e colori puri e ordinati.
+*   **La Cera Finale**: Applicava una miscela di cera colorata per togliere la freddezza al marmo bianco e simulare la pelle viva.
+*   **Composizione Prospettica**: Sculture visibili da più angolazioni, con linee di forza geometriche specchiate.
+*   **Sublime Neoclassico**: Cattura l'attimo di quiete prima o dopo l'azione drammatica.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Amore e Psiche giacenti*
-Rappresenta uno dei cardini dello studio di Antonio Canova. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Gruppo marmoreo capolavoro. I corpi dei giovani si incrociano disegnando una X prospettica, bloccati nell'istante che precede il bacio vitale, con ali e arti in perfetta armonia lineare.
 
 ### 🖼️ Opera Chiave: *Monumento funerario a Maria Cristina d'Austria*
-Rappresenta uno dei cardini dello studio di Antonio Canova. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Paolina Borghese come Venere Vincitrice*
-Rappresenta uno dei cardini dello studio di Antonio Canova. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Piramide grigia classica in marmo in cui sfila un corteo funebre di figure velate, simbolo della morte inevitabile e della memoria che unisce i vivi e i defunti.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Antonio Canova. L'analisi si concent
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Antonio Canova?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Antonio Canova?**
 * a) 1500 – 1550.
 * b) 1757 – 1822.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

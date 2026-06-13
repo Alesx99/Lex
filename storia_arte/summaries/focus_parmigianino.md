@@ -1,29 +1,29 @@
 # Focus Artista: Parmigianino (1503 – 1540)
 
 *   **Periodo/Movimento**: Manierismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Rappresentante del Manierismo emiliano, caratterizzato dall'estremo allungamento delle proporzioni per ricercare un'eleganza astratta.
+### 1. Profilo e Contributo Critico
+Rappresentante del Manierismo emiliano, caratterizzato dall'estremo allungamento delle proporzioni per ricercare un'eleganza astratta e aristocratica.
 
 ### 2. Metodologia e Stile
-*   **Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.**: Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.
-*   **Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.**: Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.
-*   **Cromatismo insolito con colori acidi, cangianti e contrastanti.**: Cromatismo insolito con colori acidi, cangianti e contrastanti.
+*   **Allungamento Proporzionale**: Arti, colli e dita allungati per superare la verosimiglianza a favore di un canone di grazia filiforme.
+*   **Spazialità Instabile**: Sfondi deformati ed elementi architettonici misteriosi.
+*   **Linee Sinuose**: Curve continue che collegano le figure in un andamento armonioso astratto.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Madonna dal collo lungo*
-Rappresenta uno dei cardini dello studio di Parmigianino. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tavola capolavoro. La Vergine ha un collo e dita eccezionalmente allungati, il Bambino disteso sembra scivolare dalle sue ginocchia e una colonna senza capitello si staglia solitaria sullo sfondo sfocato.
 
 ### 🖼️ Opera Chiave: *Autoritratto entro uno specchio convesso*
-Rappresenta uno dei cardini dello studio di Parmigianino. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Dipinto su una tavoletta emisferica che riproduce fedelmente la distorsione ottica dello specchio, con la mano in primo piano ingigantita.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Parmigianino. L'analisi si concentra
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Parmigianino?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Parmigianino?**
 * a) 1500 – 1550.
 * b) 1503 – 1540.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

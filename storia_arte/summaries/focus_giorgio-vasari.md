@@ -1,29 +1,29 @@
 # Focus Artista: Giorgio Vasari (1511 – 1574)
 
 *   **Periodo/Movimento**: Manierismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Pittore, architetto e storico dell'arte, celebre per aver scritto Le Vite, prima vera opera di storiografia artistica.
 
 ### 2. Metodologia e Stile
-*   **Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.**: Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.
-*   **Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.**: Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.
-*   **Cromatismo insolito con colori acidi, cangianti e contrastanti.**: Cromatismo insolito con colori acidi, cangianti e contrastanti.
+*   **Storiografia Artistica**: Inventa il concetto di Rinascimento suddiviso in tre età evolutive culminanti in Michelangelo.
+*   **Manierismo Cortese**: Pittore prolifico al servizio di Cosimo I de' Medici.
+*   **Grandi Cantieri**: Architetto monumentale ed efficiente organizzatore.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Le Vite de' più eccellenti pittori, scultori, e architettori*
-Rappresenta uno dei cardini dello studio di Giorgio Vasari. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Le Vite*
+Trattato biografico fondamentale per la ricostruzione della storia dell'arte italiana.
 
 ### 🖼️ Opera Chiave: *Palazzo degli Uffizi*
-Rappresenta uno dei cardini dello studio di Giorgio Vasari. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grandioso complesso a U destinato agli uffici amministrativi fiorentini, con un lungo porticato a serliane.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Giorgio Vasari. L'analisi si concent
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Giorgio Vasari?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Giorgio Vasari?**
 * a) 1500 – 1550.
 * b) 1511 – 1574.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

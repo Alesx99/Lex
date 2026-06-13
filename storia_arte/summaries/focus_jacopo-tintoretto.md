@@ -1,32 +1,29 @@
 # Focus Artista: Jacopo Tintoretto (1518 – 1594)
 
 *   **Periodo/Movimento**: Rinascimento Veneto
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Esponente del tardo Rinascimento veneto, noto per il drammatismo visionario delle luci, i forti contrasti chiaroscurali e le composizioni dinamiche.
+### 1. Profilo e Contributo Critico
+Esponente del tardo Rinascimento veneto, noto per il drammatismo visionario delle luci, i forti contrasti chiaroscurali e le composizioni dinamiche asimmetriche.
 
 ### 2. Metodologia e Stile
-*   **Colorito tonale**:  le forme sono costruite stendendo direttamente il colore, definendo i volumi con la luce calda.
-*   **Integrazione e fusione intima tra i personaggi umani e il paesaggio naturale circostante.**: Integrazione e fusione intima tra i personaggi umani e il paesaggio naturale circostante.
-*   **Stile tardo con stesura materica e disgregata (Tiziano) in cui i contorni sfumano del tutto.**: Stile tardo con stesura materica e disgregata (Tiziano) in cui i contorni sfumano del tutto.
+*   **Luce Spettrale**: Luci radenti e lampi luminosi improvvisi che squarciano scene ambientate in penombre drammatiche.
+*   **Asimmetria Compositiva**: Dispone le figure lungo diagonali audaci, sfondando lo spazio prospettico tradizionale.
+*   **Pennellata Rapida**: Stesura del colore rapidissima, grafica ed espressionista (disegno con la luce).
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Il miracolo dello schiavo*
-Rappresenta uno dei cardini dello studio di Jacopo Tintoretto. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grande tela del 1548 in cui San Marco scende dal cielo in un volo scorciato a salvare uno schiavo, circondato da una folla concitata dipinta con forti scorci e colori accesi.
 
-### 🖼️ Opera Chiave: *Ritrovamento del corpo di san Marco*
-Rappresenta uno dei cardini dello studio di Jacopo Tintoretto. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Ciclo della Scuola Grande di San Rocco*
-Rappresenta uno dei cardini dello studio di Jacopo Tintoretto. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Ultima Cena (San Giorgio Maggiore)*
+Composizione diagonale dominata da una luce divina e spettrale che proviene dall'aureola di Cristo e da una lampada ad olio, con angeli fatti di puro fumo luminoso.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Jacopo Tintoretto. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Jacopo Tintoretto?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Jacopo Tintoretto?**
 * a) 1500 – 1550.
 * b) 1518 – 1594.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

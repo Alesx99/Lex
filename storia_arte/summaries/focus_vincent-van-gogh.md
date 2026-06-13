@@ -1,35 +1,29 @@
 # Focus Artista: Vincent van Gogh (1853 – 1890)
 
 *   **Periodo/Movimento**: Post-Impressionismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Genio tormentato, caricò il colore e la pennellata materica di una fortissima valenza emotiva e psicologica, ponendosi come padre dell'Espressionismo.
 
 ### 2. Metodologia e Stile
-*   **Superamento della transitorietà ottica impressionista per ricercare una solidità strutturale permanente.**: Superamento della transitorietà ottica impressionista per ricercare una solidità strutturale permanente.
-*   **Scomposizione geometrica razionale (Cézanne) o scomposizione scientifica a puntini (Pointillisme di Seurat).**: Scomposizione geometrica razionale (Cézanne) o scomposizione scientifica a puntini (Pointillisme di Seurat).
-*   **Uso soggettivo ed espressionista del colore e della linea per esprimere tensioni interiori (Van Gogh, Gauguin).**: Uso soggettivo ed espressionista del colore e della linea per esprimere tensioni interiori (Van Gogh, Gauguin).
+*   **Colore Soggettivo ed Emotivo**: Usa i colori non per descrivere la realtà ma per trasmettere i suoi tormenti e passioni interiori.
+*   **Pennellata Materica e Dinamica**: Stende il colore con tratti spessi, spiraliformi e in forte movimento sulla tela.
+*   **Empatia con gli Umili**: Ritrae con calore e rispetto contadini, minatori e oggetti semplici quotidiani.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *La notte stellata*
-Rappresenta uno dei cardini dello studio di Vincent van Gogh. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Dipinto del 1889. Il cielo notturno si trasforma in un vortice di spirali luminose gialle e azzurre sopra un cipresso scuro a forma di fiamma e un villaggio silenzioso, capolavoro di espressione emotiva.
 
 ### 🖼️ Opera Chiave: *I mangiatori di patate*
-Rappresenta uno dei cardini dello studio di Vincent van Gogh. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Girasoli*
-Rappresenta uno dei cardini dello studio di Vincent van Gogh. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Campo di grano con volo di corvi*
-Rappresenta uno dei cardini dello studio di Vincent van Gogh. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Opera giovanile realista caratterizzata da toni cupi e volti scavati di contadini che consumano il pasto sotto una lampada ad olio.
 
 
 ---
@@ -42,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Vincent van Gogh. L'analisi si conce
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Vincent van Gogh?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Vincent van Gogh?**
 * a) 1500 – 1550.
 * b) 1853 – 1890.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

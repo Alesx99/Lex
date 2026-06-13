@@ -1,29 +1,29 @@
 # Focus Artista: Melozzo da Forlì (1438 – 1494)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Maestro di prospettiva, celebre per gli scorci dal basso di angeli e figure celesti.
+### 1. Profilo e Contributo Critico
+Pittore e architetto, fu uno dei massimi maestri di prospettiva della penisola, celebre per aver codificato lo scorcio 'da sott'in su' per le figure celesti dipinte sulle volte.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Scorcio Verticale**: Dipinge figure umane viste dal basso verso l'alto con perfetta proporzione anatomica.
+*   **Solennità Spaziale**: Architetture monumentali classiche scorciate con precisione scientifica.
+*   **Luce Purificatrice**: Risente della luce chiara di Piero della Francesca.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Sisto IV nomina il Platina prefetto della biblioteca*
-Rappresenta uno dei cardini dello studio di Melozzo da Forlì. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Affresco staccato in cui la scena si svolge sotto una grandiosa loggia rinascimentale scorciata in prospettiva, con ritratti solenni e geometrici dei nipoti del Papa.
 
 ### 🖼️ Opera Chiave: *Angeli musicanti*
-Rappresenta uno dei cardini dello studio di Melozzo da Forlì. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Frammenti di affresco della volta dei Santi Apostoli a Roma, con angeli monumentali scorciati dal basso carichi di grazia.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Melozzo da Forlì. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Melozzo da Forlì?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Melozzo da Forlì?**
 * a) 1500 – 1550.
 * b) 1438 – 1494.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

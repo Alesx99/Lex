@@ -1,29 +1,29 @@
 # Focus Artista: Lorenzo Ghiberti (1378 – 1455)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Scultore e orafo, noto per la transizione fluida tra l'eleganza gotica e la prospettiva rinascimentale.
+### 1. Profilo e Contributo Critico
+Scultore e orafo fiorentino, vinse il celebre concorso del 1401 per la porta del Battistero. Rappresenta la cerniera tra l'eleganza gotica e la nuova spazialità rinascimentale.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Fusione degli Stili**: Unisce il linearismo gotico alla nuova prospettiva scientifica e all'anatomia classica.
+*   **Maestria dell'Oreficeria**: Dettagli cesellati con precisione millimetrica nella fusione in bronzo dorato.
+*   **Prospettiva Graduata**: Nei rilievi schiaccia gradualmente lo spessore delle figure man mano che si allontanano nello sfondo.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Porta della Mandorla*
-Rappresenta uno dei cardini dello studio di Lorenzo Ghiberti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Porta del Paradiso*
+Capolavoro in bronzo dorato per il Battistero di Firenze. Nei 10 riquadri con storie dell'Antico Testamento applica una rigorosa prospettiva brunelleschiana fondendola con una grazia classica.
 
-### 🖼️ Opera Chiave: *Porta del Paradiso del Battistero di Firenze*
-Rappresenta uno dei cardini dello studio di Lorenzo Ghiberti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Sacrificio di Isacco*
+Formella bronzea con cui vinse il concorso del 1401, caratterizzata da un nudo classico di Isacco e da un andamento sinuoso delle figure.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Lorenzo Ghiberti. L'analisi si conce
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Lorenzo Ghiberti?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Lorenzo Ghiberti?**
 * a) 1500 – 1550.
 * b) 1378 – 1455.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

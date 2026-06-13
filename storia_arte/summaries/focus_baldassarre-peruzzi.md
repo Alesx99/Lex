@@ -1,29 +1,26 @@
 # Focus Artista: Baldassarre Peruzzi (1481 – 1536)
 
 *   **Periodo/Movimento**: Manierismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Architetto e pittore senese, attivo a Roma, noto per l'uso scenografico della prospettiva e il rigore distributivo.
 
 ### 2. Metodologia e Stile
-*   **Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.**: Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.
-*   **Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.**: Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.
-*   **Cromatismo insolito con colori acidi, cangianti e contrastanti.**: Cromatismo insolito con colori acidi, cangianti e contrastanti.
+*   **Prospettiva Scenografica**: Fonde pittura e architettura per sfondare pareti piane.
+*   **Classicismo Elegante**: Rielabora i modelli antichi con grazia e licenza manierista.
+*   **Piante Complesse**: Disegno di ville e palazzi integrati a giardini prospettici.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Villa Farnesina*
-Rappresenta uno dei cardini dello studio di Baldassarre Peruzzi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Palazzo Massimo alle Colonne*
-Rappresenta uno dei cardini dello studio di Baldassarre Peruzzi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Palazzetto romano celebre per la decorazione ad affresco della Loggia di Galatea e per la Sala delle Prospettive, dove dipinse vedute romane fittizie dietro un finto colonnato.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Baldassarre Peruzzi. L'analisi si co
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Baldassarre Peruzzi?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Baldassarre Peruzzi?**
 * a) 1500 – 1550.
 * b) 1481 – 1536.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

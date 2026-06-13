@@ -1,29 +1,26 @@
 # Focus Artista: Benvenuto Cellini (1500 – 1571)
 
 *   **Periodo/Movimento**: Manierismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Scultore e orafo fiorentino celebre per la sua Vita autobiografica e la superba padronanza tecnica della fusione in bronzo.
 
 ### 2. Metodologia e Stile
-*   **Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.**: Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.
-*   **Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.**: Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.
-*   **Cromatismo insolito con colori acidi, cangianti e contrastanti.**: Cromatismo insolito con colori acidi, cangianti e contrastanti.
+*   **Virtuosismo Tecnico**: Fusione a cera persa di sculture complesse ricche di dettagli cesellati.
+*   **Tensione Erodica**: Figure atletiche in pose dinamiche e slanciate.
+*   **Oreficeria Monumentale**: Tratta la scultura monumentale con la cura miniaturistica dell'oro.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Perseo con la testa di Medusa*
-Rappresenta uno dei cardini dello studio di Benvenuto Cellini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Saliera di Francesco I*
-Rappresenta uno dei cardini dello studio di Benvenuto Cellini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Statua bronzea in Piazza della Signoria a Firenze. Perseo poggia trionfante sul corpo deformato di Medusa, sollevando la testa recisa con dettagli realistici di sangue in bronzo colato.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Benvenuto Cellini. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Benvenuto Cellini?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Benvenuto Cellini?**
 * a) 1500 – 1550.
 * b) 1500 – 1571.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

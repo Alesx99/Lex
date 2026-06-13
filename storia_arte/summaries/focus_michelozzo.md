@@ -1,49 +1,49 @@
-# Focus Artista: Michelozzo di Bartolomeo (1396 – 1472)
+# Focus Artista: Michelozzo (1396 – 1472)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Architetto e scultore, collaboratore di Donatello, definì il modello del palazzo signorile rinascimentale fiorentino.
+### 1. Profilo e Contributo Critico
+Architetto e scultore fiorentino, fu il collaboratore prediletto di Donatello e l'architetto di fiducia di Cosimo il Vecchio de' Medici, definendo lo standard del palazzo rinascimentale.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Classicismo Moderato**: Rielabora i modelli classici di Brunelleschi in formule più sobrie ed eleganti, adatte alla committenza borghese.
+*   **Il Palazzo Mediceo**: Crea il prototipo del palazzo signorile fiorentino, con facciata a bugnato digradante e cortile interno.
+*   **Collaborazione con Donatello**: Lavora come scultore e bronzista in sodalizio, curando le strutture architettoniche dei monumenti.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Palazzo Medici Riccardi*
-Rappresenta uno dei cardini dello studio di Michelozzo di Bartolomeo. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Costruito a Firenze dal 1444. Presenta tre piani digradanti (bugnato rustico al piano terra, liscio al primo, specchiato al secondo) coronati da un imponente cornicione classico.
 
-### 🖼️ Opera Chiave: *Convento di San Marco (Biblioteca)*
-Rappresenta uno dei cardini dello studio di Michelozzo di Bartolomeo. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Biblioteca del Convento di San Marco*
+Spazio basilicale a tre navate divise da colonne ioniche chiare, modello di razionalità e armonia per lo studio umanistico.
 
 
 ---
 
 ## Quiz di Autovalutazione
 
-**1. A quale movimento o periodo artistico appartiene l'opera di Michelozzo di Bartolomeo?**
+**1. A quale movimento o periodo artistico appartiene l'opera di Michelozzo?**
 * a) Gotico Internazionale.
 * b) Primo Rinascimento.
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Michelozzo di Bartolomeo?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Michelozzo?**
 * a) 1500 – 1550.
 * b) 1396 – 1472.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

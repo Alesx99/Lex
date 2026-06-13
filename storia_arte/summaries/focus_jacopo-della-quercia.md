@@ -1,32 +1,29 @@
 # Focus Artista: Jacopo della Quercia (1374 – 1438)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Scultore senese, fonde la linearità del gotico con una possente volumetria plastica che anticipa Michelangelo.
+### 1. Profilo e Contributo Critico
+Scultore senese, elaborò uno stile originale caratterizzato da una potente forza plastica ed espressiva che influenzò direttamente Michelangelo Buonarroti.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Energia Plastica**: Figure vigorose e piene di forza fisica, modellate con panneggi pesanti che accentuano il movimento.
+*   **Sintesi Espressiva**: Concentrazione sul volto e sul gesto drammatico, tralasciando il dettaglio minuto.
+*   **Ponte verso il Futuro**: La sua scultura supera il gotico non tramite regole prospettiche rigide, ma per pura volumetria fisica.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Monumento funebre a Ilaria del Carretto*
-Rappresenta uno dei cardini dello studio di Jacopo della Quercia. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Sarcofago in marmo nella cattedrale di Lucca. La figura addormentata di Ilaria unisce la dolcezza del ritratto alla grazia dei panneggi gotici, sorretta da putti classici reggifestone.
 
-### 🖼️ Opera Chiave: *Fonte Gaia a Siena*
-Rappresenta uno dei cardini dello studio di Jacopo della Quercia. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Portale di San Petronio*
-Rappresenta uno dei cardini dello studio di Jacopo della Quercia. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Portale di San Petronio a Bologna*
+Rilievi in pietra d'Istria con storie della Genesi, caratterizzati da figure nude e muscolose cariche di una tensione drammatica primordiale.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Jacopo della Quercia. L'analisi si c
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Jacopo della Quercia?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Jacopo della Quercia?**
 * a) 1500 – 1550.
 * b) 1374 – 1438.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

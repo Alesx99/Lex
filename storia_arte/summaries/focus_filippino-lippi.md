@@ -1,29 +1,29 @@
 # Focus Artista: Filippino Lippi (1457 – 1504)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Figlio di Filippo Lippi e allievo di Botticelli, evolse lo stile verso tensioni dinamiche e dettagli archeologici che anticipano il Manierismo.
+### 1. Profilo e Contributo Critico
+Figlio di Filippo Lippi e allievo di Botticelli, evolse lo stile quattrocentesco verso una sensibilità inquieta, ricca di dettagli archeologici fantastici che anticipa il Manierismo.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Inquietudine Lineare**: Panneggi tormentati e linee spezzate che tolgono armonia classica alle scene.
+*   **Archeologia Fantastica**: Architetture romane riprodotte con accumuli decorativi bizzarri e misteriosi.
+*   **Chiaroscuro Espressivo**: Uso di ombre profonde per aumentare il mistero.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Affreschi della Cappella Carafa*
-Rappresenta uno dei cardini dello studio di Filippino Lippi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Affreschi della Cappella Carafa (Roma)*
+Storie di San Tommaso d'Aquino, caratterizzate da una spazialità dinamica e da un trionfo di decorazioni grottesche e classiche all'antica.
 
 ### 🖼️ Opera Chiave: *Pala degli Otto*
-Rappresenta uno dei cardini dello studio di Filippino Lippi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Sacra conversazione con una luce radente e sguardi malinconici.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Filippino Lippi. L'analisi si concen
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Filippino Lippi?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Filippino Lippi?**
 * a) 1500 – 1550.
 * b) 1457 – 1504.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

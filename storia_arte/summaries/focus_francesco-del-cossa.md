@@ -1,26 +1,26 @@
 # Focus Artista: Francesco del Cossa (1436 – 1478)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Pittore ferrarese, unì la tensione plastica di Tura ad un maggiore senso della luce e del rigore monumentale prospettico.
+### 1. Profilo e Contributo Critico
+Pittore ferrarese, temperò l'asprezza metallica di Cosmè Tura con un solido senso dello spazio monumentale derivato da Piero della Francesca.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Sintesi Spaziale**: Figure solide inserite in architetture prospettiche chiare e luminose.
+*   **Naturalismo Quotidiano**: Grande attenzione ai dettagli realistici e alle attività umane quotidiane.
+*   **Disegno Vigoro**: Mantiene la forza plastica ferrarese ma con passaggi cromatici più morbidi.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Mese di Marzo e Aprile nel Salone dei Mesi di Palazzo Schifanoia*
-Rappresenta uno dei cardini dello studio di Francesco del Cossa. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Mesi di Marzo e Aprile (Palazzo Schifanoia)*
+Affreschi del Salone dei Mesi a Ferrara. Cossa descrive la vita di corte di Borso d'Este e i lavori agricoli in scene piene di luce e dettagli realistici.
 
 
 ---
@@ -33,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Francesco del Cossa. L'analisi si co
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Francesco del Cossa?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Francesco del Cossa?**
 * a) 1500 – 1550.
 * b) 1436 – 1478.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

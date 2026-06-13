@@ -1,32 +1,26 @@
 # Focus Artista: Eugène Delacroix (1798 – 1863)
 
 *   **Periodo/Movimento**: Romanticismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Leader della scuola romantica francese, basò la pittura sul colore vibrante e su composizioni dinamiche di forte impegno civile.
+### 1. Profilo e Contributo Critico
+Leader della scuola romantica francese, basò la pittura sul colore vibrante, su composizioni dinamiche e su soggetti di forte impegno civile ed emotivo.
 
 ### 2. Metodologia e Stile
-*   **Primato del sentimento, dell'emozione interiore e della fantasia individuale.**: Primato del sentimento, dell'emozione interiore e della fantasia individuale.
-*   **Sentimento del Sublime**:  la piccolezza dell'uomo di fronte a una natura infinitamente grande o tempestosa.
-*   **Attenzione alla storia contemporanea, con composizioni dinamiche e uso emotivo del colore.**: Attenzione alla storia contemporanea, con composizioni dinamiche e uso emotivo del colore.
+*   **Preminenza del Colore**: Rifiuta il disegno nitido di Ingres stendendo il colore per macchie e pennellate cariche di vibrazioni luminose.
+*   **Pathos ed Impegno Civile**: Rappresentazione di lotte per la libertà e tragedie storiche con partecipazione emotiva.
+*   **Esotismo Romantico**: Dipinti ispirati ai viaggi in Marocco, ricchi di luci sature ed atmosfere orientali.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *La Libertà che guida il popolo*
-Rappresenta uno dei cardini dello studio di Eugène Delacroix. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *La barca di Dante*
-Rappresenta uno dei cardini dello studio di Eugène Delacroix. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Massacro di Scio*
-Rappresenta uno dei cardini dello studio di Eugène Delacroix. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Celebre tela del 1830. La Libertà è personificata da una donna a seno scoperto che sventola il tricolore francese guidando una folla di popolani e borghesi sulle barricate, sopra una catasta di cadaveri.
 
 
 ---
@@ -39,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Eugène Delacroix. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Eugène Delacroix?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Eugène Delacroix?**
 * a) 1500 – 1550.
 * b) 1798 – 1863.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

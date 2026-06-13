@@ -1,29 +1,26 @@
 # Focus Artista: Artemisia Gentileschi (1593 – 1653)
 
 *   **Periodo/Movimento**: Barocco
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Celebre pittrice caravaggesca, prima donna ammessa all'Accademia delle Arti del Disegno di Firenze, nota per la forza drammatica delle sue eroine.
 
 ### 2. Metodologia e Stile
-*   **Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.**: Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.
-*   **Poetica del 'bel composto'**:  fusione integrata di scultura, pittura e architettura in un'unica scenografia.
-*   **Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).**: Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).
+*   **Caravaggismo Drammatico**: Uso intenso della luce caravaggesca e del naturalismo nei dettagli fisici.
+*   **Eroine Combattive**: Predilige soggetti biblici di donne forti (Giuditta, Susanna) che affrontano la violenza maschile.
+*   **Realismo della Carne**: Resa plastica dei corpi e del sangue con una concretezza sconvolgente.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Giuditta che decapita Oloferne*
-Rappresenta uno dei cardini dello studio di Artemisia Gentileschi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Autoritratto come allegoria della Pittura*
-Rappresenta uno dei cardini dello studio di Artemisia Gentileschi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tavola capolavoro. Giuditta, aiutata dall'ancella, taglia con decisione la testa al generale assiro bloccato sul letto. Il sangue zampilla realisticamente macchiando le lenzuola, illuminato da una luce radente caravaggesca.
 
 
 ---
@@ -36,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Artemisia Gentileschi. L'analisi si 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Artemisia Gentileschi?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Artemisia Gentileschi?**
 * a) 1500 – 1550.
 * b) 1593 – 1653.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

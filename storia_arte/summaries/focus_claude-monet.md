@@ -1,35 +1,29 @@
 # Focus Artista: Claude Monet (1840 – 1926)
 
 *   **Periodo/Movimento**: Impressionismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Padre dell'Impressionismo en plein air, dedicò la vita allo studio della percezione dell'attimo luminoso e alle variazioni della luce in serie pittoriche.
 
 ### 2. Metodologia e Stile
-*   **Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.**: Pittura all'aria aperta (en plein air) per catturare gli effetti atmosferici e l'istantanea fuggevolezza della luce.
-*   **Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.**: Accostamento di colori puri direttamente sulla tela, abolizione del nero e uso di ombre colorate.
-*   **Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.**: Inquadrature asimmetriche e dinamiche di derivazione fotografica e giapponese.
+*   **Pittura En Plein Air**: Lavora esclusivamente all'aria aperta di fronte al soggetto reale.
+*   **Scomposizione Cromatica**: Piccoli tocchi accostati di colore puro che l'occhio dello spettatore ricompone a distanza.
+*   **Le Serie Pittoriche**: Dipinge lo stesso soggetto a diverse ore del giorno per registrare il cambiamento della luce (Cattedrali, Ninfee).
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Impressione, sole nascente*
-Rappresenta uno dei cardini dello studio di Claude Monet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *La serie delle Cattedrali di Rouen*
-Rappresenta uno dei cardini dello studio di Claude Monet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *I covoni*
-Rappresenta uno dei cardini dello studio di Claude Monet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Dipinto del 1872 che diede il nome al movimento. La veduta del porto di Le Havre è evocata con veloci tocchi azzurri e arancioni che descrivono la nebbia e il riflesso solare sull'acqua.
 
 ### 🖼️ Opera Chiave: *Le Ninfee*
-Rappresenta uno dei cardini dello studio di Claude Monet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Ciclo monumentale tardivo in cui lo spazio si dissolve quasi del tutto in riflessi d'acqua, vegetazione e pura luce cromatica.
 
 
 ---
@@ -42,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Claude Monet. L'analisi si concentra
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Claude Monet?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Claude Monet?**
 * a) 1500 – 1550.
 * b) 1840 – 1926.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

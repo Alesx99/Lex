@@ -1,32 +1,26 @@
 # Focus Artista: Giambologna (1529 – 1608)
 
 *   **Periodo/Movimento**: Manierismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Scultore fiammingo attivo a Firenze, maestro della linea serpentinata e della scultura visibile da molteplici punti di vista.
 
 ### 2. Metodologia e Stile
-*   **Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.**: Rottura delle regole classiche rinascimentali di armonia, simmetria e verosimiglianza.
-*   **Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.**: Uso della linea serpentinata con proporzioni allungate all'estremo per un'eleganza sofisticata.
-*   **Cromatismo insolito con colori acidi, cangianti e contrastanti.**: Cromatismo insolito con colori acidi, cangianti e contrastanti.
+*   **Linea Serpentinata**: Composizione a spirale che spinge lo spettatore a girare intorno alla scultura.
+*   **Assenza di Punto di Vista Privilegiato**: L'opera è progettata per funzionare perfettamente da ogni angolazione.
+*   **Tensione Dinamica**: Corpi intrecciati in sforzi fisici intensi.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Ratto delle Sabine*
-Rappresenta uno dei cardini dello studio di Giambologna. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Mercurio volante*
-Rappresenta uno dei cardini dello studio di Giambologna. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Ercole e il Centauro*
-Rappresenta uno dei cardini dello studio di Giambologna. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Gruppo marmoreo nella Loggia dei Lanzi. Tre corpi (un giovane che rapisce una donna sollevandola da terra, mentre un vecchio soccombe in basso) sono intrecciati in una vertiginosa spirale plastica ascendente.
 
 
 ---
@@ -39,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Giambologna. L'analisi si concentra 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Giambologna?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Giambologna?**
 * a) 1500 – 1550.
 * b) 1529 – 1608.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

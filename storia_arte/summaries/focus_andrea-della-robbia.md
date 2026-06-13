@@ -1,26 +1,26 @@
 # Focus Artista: Andrea della Robbia (1435 – 1525)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Nipote di Luca, diffuse su larghissima scala la produzione di terrecotte invetriate arricchendo i dettagli espressivi.
+### 1. Profilo e Contributo Critico
+Nipote di Luca, ereditò la bottega di famiglia portando la terracotta invetriata ad una diffusione capillare in tutta la Toscana, arricchendo lo stile di sfumature sentimentali.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Espansione Produttiva**: Organizzazione della bottega per produrre opere seriali ad alta qualità.
+*   **Espressività Sentimentale**: Volti più dolci, patetici e ricchi di sfumature emotive rispetto al rigore di Luca.
+*   **Policromia Dettagliata**: Introduce nuovi colori negli smalti per rendere realistici frutti, foglie e incarnati.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *I Putti dello Spedale degli Innocenti*
-Rappresenta uno dei cardini dello studio di Andrea della Robbia. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tondi ceramici azzurri inseriti nei pennacchi del portico di Brunelleschi. Raffigurano neonati in fasce, ciascuno con una posa e un'espressione unica, simbolo dell'accoglienza dell'orfanotrofio.
 
 
 ---
@@ -33,14 +33,14 @@ Rappresenta uno dei cardini dello studio di Andrea della Robbia. L'analisi si co
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Andrea della Robbia?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Andrea della Robbia?**
 * a) 1500 – 1550.
 * b) 1435 – 1525.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

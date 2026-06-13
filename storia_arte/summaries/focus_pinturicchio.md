@@ -1,49 +1,49 @@
-# Focus Artista: Pinturicchio (Bernardino di Betto) (1454 – 1513)
+# Focus Artista: Pinturicchio (1454 – 1513)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Pittore umbro, noto per la ricchezza decorativa e l'uso di dettagli in rilievo dorato nelle sue narrazioni storiche.
+### 1. Profilo e Contributo Critico
+Pittore umbro, si distinse per una pittura decorativa fastosa, ricca di ori, stucchi a rilievo e colori vivaci adatta a celebrare la committenza papale.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Fasto Decorativo**: Inserisce stucchi dorati a rilievo sulla superficie dipinta per catturare la luce.
+*   **Narrativa Chiara**: Scene affollate ma ben leggibili, ricche di dettagli aneddotici.
+*   **Paesaggio Umbro**: Sfondi collinari infiniti derivati dall'influenza del Perugino.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Appartamento Borgia in Vaticano*
-Rappresenta uno dei cardini dello studio di Pinturicchio (Bernardino di Betto). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Libreria Piccolomini nel Duomo di Siena*
+Ciclo di affreschi che illustra la vita di papa Pio II, caratterizzato da colori incredibilmente brillanti, costumi sontuosi e prospettiche campate dipinte.
 
-### 🖼️ Opera Chiave: *Libreria Piccolomini a Siena*
-Rappresenta uno dei cardini dello studio di Pinturicchio (Bernardino di Betto). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Appartamento Borgia in Vaticano*
+Decorazione delle sale papali ricca di allegorie e simboli egizi dorati.
 
 
 ---
 
 ## Quiz di Autovalutazione
 
-**1. A quale movimento o periodo artistico appartiene l'opera di Pinturicchio (Bernardino di Betto)?**
+**1. A quale movimento o periodo artistico appartiene l'opera di Pinturicchio?**
 * a) Gotico Internazionale.
 * b) Secondo Quattrocento.
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Pinturicchio (Bernardino di Betto)?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Pinturicchio?**
 * a) 1500 – 1550.
 * b) 1454 – 1513.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

@@ -1,32 +1,29 @@
 # Focus Artista: Gustave Courbet (1819 – 1877)
 
 *   **Periodo/Movimento**: Realismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Padre del Realismo pittorico, rifiutò i soggetti storici e ideali per ritrarre con dignità monumentale la verità quotidiana e i lavoratori.
+### 1. Profilo e Contributo Critico
+Padre del Realismo pittorico, rifiutò i soggetti storici e ideali per ritrarre con dignità monumentale la verità quotidiana dei lavoratori e della provincia.
 
 ### 2. Metodologia e Stile
-*   **Rifiuto totale di soggetti mitologici, accademici o storici idealizzati.**: Rifiuto totale di soggetti mitologici, accademici o storici idealizzati.
-*   **Raffigurazione scientifica e veritiera della realtà quotidiana, della povertà e del lavoro contadino.**: Raffigurazione scientifica e veritiera della realtà quotidiana, della povertà e del lavoro contadino.
-*   **Resa pittorica sincera e immediata, senza edulcorazioni estetiche.**: Resa pittorica sincera e immediata, senza edulcorazioni estetiche.
+*   **Rifiuto dell'Idealizzazione**: Ritrae corpi imperfetti, abiti logori e fatiche reali senza alcun sentimentalismo patetico.
+*   **Dignità Monumentale**: Dipinge scene ordinarie di paese su tele di gigantesche dimensioni, riservate tradizionalmente alla pittura storica papale o reale.
+*   **Pittura Materica**: Stende il colore con la spatola creando spessori densi e fisici.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Gli spaccapietre*
-Rappresenta uno dei cardini dello studio di Gustave Courbet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tavola del 1849 che ritrae due lavoratori di spalle intenti a spaccare pietre sul ciglio della strada, capolavoro di denuncia sociale del Realismo.
 
 ### 🖼️ Opera Chiave: *Un funerale a Ornans*
-Rappresenta uno dei cardini dello studio di Gustave Courbet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *L'atelier del pittore*
-Rappresenta uno dei cardini dello studio di Gustave Courbet. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Enorme tela che ritrae un banale funerale di provincia a cui assiste una folla di paesani in nero, disposti senza gerarchia classica intorno alla fossa scavata nella terra.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Gustave Courbet. L'analisi si concen
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Gustave Courbet?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Gustave Courbet?**
 * a) 1500 – 1550.
 * b) 1819 – 1877.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

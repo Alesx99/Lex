@@ -1,32 +1,29 @@
 # Focus Artista: Paul Cézanne (1839 – 1906)
 
 *   **Periodo/Movimento**: Post-Impressionismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Superò l'Impressionismo ricercando la solidità delle forme attraverso la scomposizione geometrica in cilindri, coni e sfere, preparando la strada al Cubismo.
 
 ### 2. Metodologia e Stile
-*   **Superamento della transitorietà ottica impressionista per ricercare una solidità strutturale permanente.**: Superamento della transitorietà ottica impressionista per ricercare una solidità strutturale permanente.
-*   **Scomposizione geometrica razionale (Cézanne) o scomposizione scientifica a puntini (Pointillisme di Seurat).**: Scomposizione geometrica razionale (Cézanne) o scomposizione scientifica a puntini (Pointillisme di Seurat).
-*   **Uso soggettivo ed espressionista del colore e della linea per esprimere tensioni interiori (Van Gogh, Gauguin).**: Uso soggettivo ed espressionista del colore e della linea per esprimere tensioni interiori (Van Gogh, Gauguin).
+*   **Riduzione Geometrica**: Ricostruzione dello spazio riducendo le forme naturali a volumi geometrici puri.
+*   **Colore Costruttivo**: Il colore definisce la struttura e i piani dello spazio senza disegno di contorno.
+*   **Molteplicità dei Punti di Vista**: Dipinge oggetti visti da diverse angolazioni all'interno dello stesso quadro.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *I giocatori di carte*
-Rappresenta uno dei cardini dello studio di Paul Cézanne. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tavola del 1890-1895. Due contadini seduti al tavolo sono dipinti con forme solide e monumentali che sembrano sculture lignee, bloccati in una rigida simmetria.
 
 ### 🖼️ Opera Chiave: *La montagna Sainte-Victoire*
-Rappresenta uno dei cardini dello studio di Paul Cézanne. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Le grandi bagnanti*
-Rappresenta uno dei cardini dello studio di Paul Cézanne. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Serie di dipinti in cui la montagna e la vallata circostante si dissolvono in campiture geometriche accostate (taches), capolavoro di astrazione formale.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Paul Cézanne. L'analisi si concentr
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Paul Cézanne?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Paul Cézanne?**
 * a) 1500 – 1550.
 * b) 1839 – 1906.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

@@ -1,32 +1,29 @@
 # Focus Artista: Pisanello (Antonio Pisano) (1395 – 1455)
 
 *   **Periodo/Movimento**: Gotico Internazionale
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Celebre pittore e medaglista, noto per la precisione quasi scientifica nel ritrarre animali e per lo stile tardogotico raffinato e fiabesco.
+### 1. Profilo e Contributo Critico
+Pittore e il più grande medaglista del Rinascimento, noto per i suoi disegni naturalistici di straordinaria precisione anatomica e per le atmosfere fiabesche e cavalleresche.
 
 ### 2. Metodologia e Stile
-*   **Linea sinuosa, fluida ed elegante, che definisce sagome flessuose senza preoccuparsi del rigore prospettico.**: Linea sinuosa, fluida ed elegante, che definisce sagome flessuose senza preoccuparsi del rigore prospettico.
-*   **Ricchezza decorativa estrema**:  motivi floreali, trame dorate, armature lucenti e ambientazioni cortesi.
-*   **Un gusto fiabesco e idealizzato per soggetti sia sacri che profani, con disinteresse per il realismo spaziale.**: Un gusto fiabesco e idealizzato per soggetti sia sacri che profani, con disinteresse per il realismo spaziale.
+*   **Osservazione del Vero**: I suoi taccuini (Codice Vallardi) testimoniano uno studio dal vero di animali, impiccati e costumi con rigore quasi scientifico.
+*   **Spazio Tardogotico**: Rifiuta la prospettiva lineare a favore di uno spazio cumulativo, dove le figure sono sovrapposte in altezza per dare il senso della profondità.
+*   **La Medaglistica**: Rianimò l'antica arte della medaglia ritrattistica in bronzo fuso, fondando la ritrattistica celebrativa moderna.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *San Giorgio e la principessa*
-Rappresenta uno dei cardini dello studio di Pisanello (Antonio Pisano). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Affresco in Sant'Anastasia a Verona. San Giorgio è colto nel momento di montare a cavallo in un'atmosfera sospesa e malinconica, circondato da una città fantastica e da macabri impiccati sullo sfondo.
 
 ### 🖼️ Opera Chiave: *Visione di san Eustachio*
-Rappresenta uno dei cardini dello studio di Pisanello (Antonio Pisano). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Medaglia di Giovanni VIII Paleologo*
-Rappresenta uno dei cardini dello studio di Pisanello (Antonio Pisano). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Dipinto tavoletta in cui il santo cacciatore incontra un cervo con il crocifisso tra le corna, immerso in una foresta buia popolata da una miriade di animali ritratti con precisione miniaturistica.
 
 
 ---
@@ -39,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Pisanello (Antonio Pisano). L'analis
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Pisanello (Antonio Pisano)?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Pisanello (Antonio Pisano)?**
 * a) 1500 – 1550.
 * b) 1395 – 1455.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

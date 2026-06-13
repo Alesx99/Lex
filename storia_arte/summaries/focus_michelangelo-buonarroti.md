@@ -1,35 +1,32 @@
 # Focus Artista: Michelangelo Buonarroti (1475 – 1564)
 
 *   **Periodo/Movimento**: Rinascimento Maturo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Scultore, pittore e architetto, pose il nudo umano maschile al centro dell'universo espressivo, caratterizzato da titanismo anatomico e dalla poetica del non-finito.
+### 1. Profilo e Contributo Critico
+Gigante della scultura, pittura e architettura. Considerò lo studio del nudo umano maschile l'unico vero mezzo per esprimere la grandezza di Dio e la tragedia dell'esistenza umana.
 
 ### 2. Metodologia e Stile
-*   **Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).**: Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).
-*   **Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.**: Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.
-*   **Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).**: Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).
+*   **Titanismo e Terribilità**: Figure monumentali, dotate di muscolature possenti e contratte cariche di energia trattenuta ed espressioni intense.
+*   **Via di Levare**: La scultura intesa come liberazione della figura racchiusa all'interno del blocco di marmo, lasciando talvolta parti incompiute (non-finito).
+*   **Disegno Plastico**: In pittura usa una linea di contorno netta e colori cangianti per far apparire i dipinti come sculture a tutto tondo.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *La Pietà di San Pietro*
-Rappresenta uno dei cardini dello studio di Michelangelo Buonarroti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
 ### 🖼️ Opera Chiave: *Il David*
-Rappresenta uno dei cardini dello studio di Michelangelo Buonarroti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Monumento civile eretto a Firenze nel 1504. David è colto prima della battaglia, con i muscoli tesi, lo sguardo corrucciato e la concentrazione psicologica dell'eroe umanista che affronta il caos.
 
 ### 🖼️ Opera Chiave: *Volta della Cappella Sistina*
-Rappresenta uno dei cardini dello studio di Michelangelo Buonarroti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Gigantesco ciclo di affreschi (1508-1512) incentrato sulla Genesi, popolato da Ignudi monumentali e scene di eccezionale forza plastica (Creazione di Adamo).
 
-### 🖼️ Opera Chiave: *Giudizio Universale*
-Rappresenta uno dei cardini dello studio di Michelangelo Buonarroti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *Il Giudizio Universale*
+Affresco sulla parete dell'altare della Sistina (1536-1541), caratterizzato da uno spazio vorticoso privo di prospettiva geometrica, dove una folla di corpi nudi ed angeli sorge e cade intorno al gesto terribile del Cristo Giudice.
 
 
 ---
@@ -42,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Michelangelo Buonarroti. L'analisi s
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Michelangelo Buonarroti?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Michelangelo Buonarroti?**
 * a) 1500 – 1550.
 * b) 1475 – 1564.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

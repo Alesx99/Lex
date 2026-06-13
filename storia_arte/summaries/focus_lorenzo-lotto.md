@@ -1,29 +1,29 @@
 # Focus Artista: Lorenzo Lotto (1480 – 1556)
 
 *   **Periodo/Movimento**: Rinascimento Veneto
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Pittore veneziano originale e anticonformista, operò fuori dalla laguna esprimendo un'acuta sensibilità psicologica e toni inquieti.
 
 ### 2. Metodologia e Stile
-*   **Colorito tonale**:  le forme sono costruite stendendo direttamente il colore, definendo i volumi con la luce calda.
-*   **Integrazione e fusione intima tra i personaggi umani e il paesaggio naturale circostante.**: Integrazione e fusione intima tra i personaggi umani e il paesaggio naturale circostante.
-*   **Stile tardo con stesura materica e disgregata (Tiziano) in cui i contorni sfumano del tutto.**: Stile tardo con stesura materica e disgregata (Tiziano) in cui i contorni sfumano del tutto.
+*   **Introspezione Psicologica**: Ritratti carichi di tensione emotiva, sguardi malinconici o inquieti e gesti complessi.
+*   **Luce Tagliente**: Rifiuta il tonalismo morbido veneziano a favore di luci fredde e ombre nette.
+*   **Colori Acidi**: Uso di accostamenti cromatici freddi e vivaci in contrasto.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Pala di San Bernardino*
-Rappresenta uno dei cardini dello studio di Lorenzo Lotto. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Sacra conversazione in cui la Vergine è in trono all'aperto sotto un tendone verde mosso dal vento, circondata da santi espressivi e da un angelo in primo piano che scrive in una posa scorciata.
 
 ### 🖼️ Opera Chiave: *Ritratto di giovane con lucerna*
-Rappresenta uno dei cardini dello studio di Lorenzo Lotto. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Volto pallido e intensamente espressivo di tre quarti, con una lucerna accesa nello sfondo scuro simbolo della fugacità della vita.
 
 
 ---
@@ -36,14 +36,14 @@ Rappresenta uno dei cardini dello studio di Lorenzo Lotto. L'analisi si concentr
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Lorenzo Lotto?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Lorenzo Lotto?**
 * a) 1500 – 1550.
 * b) 1480 – 1556.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

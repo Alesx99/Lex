@@ -1,32 +1,32 @@
 # Focus Artista: Leonardo da Vinci (1452 – 1519)
 
 *   **Periodo/Movimento**: Rinascimento Maturo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Genio universale, introdusse lo 'sfumato' e la 'prospettiva aerea', basando l'arte sulla comprensione scientifica dei fenomeni naturali e dei moti dell'animo.
+### 1. Profilo e Contributo Critico
+Genio universale incarnante l'uomo del Rinascimento. Scienziato e pittore, basò la sua arte sulla comprensione dei fenomeni naturali e sull'espressione ottica e psicologica della realtà.
 
 ### 2. Metodologia e Stile
-*   **Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).**: Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).
-*   **Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.**: Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.
-*   **Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).**: Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).
+*   **Lo Sfumato**: Tecnica pittorica che elimina i contorni netti delle figure sfumandole dolcemente nell'ombra, imitando la reale percezione visiva dell'occhio umano.
+*   **La Prospettiva Aerea**: Resa della profondità atmosferica dipingendo le montagne lontane più chiare, sfocate e tendenti all'azzurro a causa dell'umidità dell'aria.
+*   **I Moti dell'Animo**: Rappresentazione visiva delle reazioni psicologiche e dei sentimenti dei personaggi attraverso i gesti, le posture e le espressioni del volto.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Vergine delle Rocce*
-Rappresenta uno dei cardini dello studio di Leonardo da Vinci. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ Opera Chiave: *La Vergine delle Rocce*
+Dipinto caratterizzato da una complessa disposizione piramidale dei personaggi inseriti in una grotta umida e ombrosa, capolavoro di sfumato e luce filtrata.
 
 ### 🖼️ Opera Chiave: *Il Cenacolo*
-Rappresenta uno dei cardini dello studio di Leonardo da Vinci. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Affresco nel refettorio di Santa Maria delle Grazie a Milano. Nel momento in cui Cristo annuncia il tradimento, Leonardo descrive le reazioni emotive degli apostoli raggruppati a tre a tre, in una dinamica drammatica guidata dalla prospettiva centrica.
 
 ### 🖼️ Opera Chiave: *La Gioconda*
-Rappresenta uno dei cardini dello studio di Leonardo da Vinci. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Celebre ritratto di Monna Lisa, con il misterioso sorriso sfumato e un paesaggio primordiale sullo sfondo fuso tramite prospettiva aerea.
 
 
 ---
@@ -39,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Leonardo da Vinci. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Leonardo da Vinci?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Leonardo da Vinci?**
 * a) 1500 – 1550.
 * b) 1452 – 1519.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*
