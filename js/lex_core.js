@@ -108,6 +108,7 @@ const LexCore = {
                 this.theme = 'coccole';
                 localStorage.setItem('lex-theme', this.theme);
                 this.applyTheme();
+                this.unlockEasterEgg('ee-coccole');
                 this.themeClickCount = 0;
                 alert("💕 Modalità Coccole Attivata! 💕\nI colori si sono addolciti e l'amore è nell'aria!");
                 return;
@@ -3001,13 +3002,16 @@ const LexCore = {
     trackTimelineClick(eventId, eventData) {
         if (!this._timelineClickMap[eventId]) this._timelineClickMap[eventId] = 0;
         this._timelineClickMap[eventId]++;
-        if (this._timelineClickMap[eventId] === 5 && !this.isEggUnlocked('ee-macchina-tempo')) {
+        if (this._timelineClickMap[eventId] === 5) {
+            this._timelineClickMap[eventId] = 0;
             this.triggerMacchinaDelTempo(eventData);
         }
     },
 
     triggerMacchinaDelTempo(eventData) {
         this.unlockEasterEgg('ee-macchina-tempo');
+        const existing = document.getElementById('lex-macchina-overlay');
+        if (existing) existing.remove();
         const overlay = document.createElement('div');
         overlay.id = 'lex-macchina-overlay';
         overlay.className = 'macchina-overlay';
