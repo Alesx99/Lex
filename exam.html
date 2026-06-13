@@ -961,10 +961,12 @@
             </div>
 
             <!-- STEP 2: ACTIVE QUESTION SCREEN -->
-            <div id="exam-active-screen" class="exam-active-card" style="display: none;">
+            <div id="exam-active-screen" class="exam-active-card" style="display: none; position: relative;">
+                <canvas id="pecunia-coins-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000;"></canvas>
                 <div class="exam-header">
                     <span class="exam-meta" id="exam-subject-tag">Materia: Diritto</span>
                     <span class="exam-meta" id="exam-progress-tag">Domanda 1 di 20</span>
+                    <span class="exam-meta" id="exam-coins-tag" style="cursor: pointer; user-select: none;" onclick="handleCoinsClick()">🪙 Punti: <span id="exam-points-val">100</span></span>
                 </div>
 
                 <!-- Timer Bar -->
@@ -1268,6 +1270,102 @@
             } catch (e) {
                 console.log("Audio synthesized alert blocked or unsupported: ", e);
             }
+        }
+
+        let coinsClicks = 0;
+        let lastCoinsClickTime = 0;
+        window.handleCoinsClick = function() {
+            const q = examQuestions[currentQuestionIndex];
+            if (!q) return;
+            const text = q.question.toLowerCase();
+            const isFiscal = text.includes('fisco') || text.includes('tassa') || text.includes('impost') || text.includes('tribut') || text.includes('pecunia') || text.includes('vespasiano');
+            if (!isFiscal) {
+                const pointsVal = document.getElementById('exam-points-val');
+                if (pointsVal) {
+                    pointsVal.style.color = '#ff6b6b';
+                    setTimeout(() => pointsVal.style.color = '', 300);
+                }
+                return;
+            }
+
+            const now = Date.now();
+            if (now - lastCoinsClickTime < 1000) {
+                coinsClicks++;
+            } else {
+                coinsClicks = 1;
+            }
+            lastCoinsClickTime = now;
+
+            const pointsVal = document.getElementById('exam-points-val');
+            if (pointsVal) {
+                pointsVal.textContent = parseInt(pointsVal.textContent) + 10;
+                pointsVal.style.color = '#ffd700';
+                setTimeout(() => pointsVal.style.color = '', 300);
+            }
+
+            if (coinsClicks >= 5) {
+                coinsClicks = 0;
+                if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                    LexCore.unlockEasterEgg('ee-pecunia-non-olet');
+                }
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(1000, ctx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(1500, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+                    osc.start(); osc.stop(ctx.currentTime + 0.5);
+                } catch(e) {}
+                startCoinsDrop();
+            }
+        };
+
+        function startCoinsDrop() {
+            const canvas = document.getElementById('pecunia-coins-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+
+            let coins = Array.from({ length: 40 }, () => ({
+                x: Math.random() * canvas.width,
+                y: -Math.random() * 50 - 10,
+                r: Math.random() * 5 + 4,
+                vy: Math.random() * 3 + 2,
+                vx: Math.random() * 2 - 1,
+                rot: Math.random() * Math.PI,
+                rotSpeed: Math.random() * 0.2 - 0.1
+            }));
+
+            function anim() {
+                let active = false;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                coins.forEach(c => {
+                    if (c.y < canvas.height) {
+                        active = true;
+                        c.y += c.vy;
+                        c.x += c.vx;
+                        c.rot += c.rotSpeed;
+                        
+                        ctx.save();
+                        ctx.translate(c.x, c.y);
+                        ctx.rotate(c.rot);
+                        ctx.beginPath();
+                        ctx.ellipse(0, 0, c.r, c.r * 0.6, 0, 0, Math.PI * 2);
+                        ctx.fillStyle = '#ffd700';
+                        ctx.shadowBlur = 4;
+                        ctx.shadowColor = '#ffd700';
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                });
+                if (active) requestAnimationFrame(anim);
+                else ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            anim();
         }
 
         // Link capitoli diritto → sintesi (12 capitoli × 5 domande)

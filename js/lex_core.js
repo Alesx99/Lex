@@ -440,6 +440,10 @@ const LexCore = {
                 localStorage.setItem('lex-pomo-break', b);
                 settingsPopup.style.display = 'none';
                 this.updateUI();
+
+                if (b === 14) {
+                    this.triggerClessidraRomantica();
+                }
             }
         });
 
@@ -1108,6 +1112,17 @@ const LexCore = {
             else c.classList.remove('on-break');
         }
         if (s) s.innerHTML = this.getStartIcon();
+
+        // Clessidra Romantica active check
+        if (this.breakTime === 14) {
+            document.body.classList.add('clessidra-romantica-active');
+            if (this.state === 'break') {
+                this.startClessidraRomanticaHearts();
+            }
+        } else {
+            document.body.classList.remove('clessidra-romantica-active');
+        }
+
         this.updatePlantDisplay();
     },
 
@@ -2642,6 +2657,12 @@ const LexCore = {
         if (window.location.pathname.includes('cristiana')) {
             this._checkCampanile();
         }
+        // Nuovi Easter Eggs
+        this.initBackgroundInkBlot();
+        this.initDamnatioMemoriaeWatcher();
+        this.initMouseTopolinoTracker();
+        this.initAlchimistaWatcher();
+        this.initScismaIconoclasta();
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -2657,6 +2678,9 @@ const LexCore = {
         { id:'ee-coccole',           cat:'amore',       icon:'🌸', name:'Modalità Coccole',               hint:'Il pulsante tema nasconde un\'opzione rosa e dolcissima...',                       desc:'Clicca il pulsante tema 3 volte fino ad attivare la modalità coccole.', page:'*' },
         { id:'ee-toast-motivazionale',cat:'amore',      icon:'✨', name:'Toast Motivazionale',            hint:'Studiare e poi chiudere una sintesi ha la sua piccola ricompensa...',              desc:'Chiudi una sintesi dopo averla letta.', page:'*' },
         { id:'ee-memory-game',       cat:'amore',       icon:'🎮', name:'Memory Game Nascosto',           hint:'Il Pomodoro nasconde qualcosa di ludico nelle sue pause...',                      desc:'Trova il Memory Game nel pannello Pomodoro della barra laterale.', page:'*' },
+        { id:'ee-frecce-cupido',     cat:'amore',       icon:'🏹', name:'Le Frecce di Cupido',            hint:'Unire i concetti giusti può far scoccare la scintilla...',                         desc:'Collega i nodi "Alessio" (o "Lex") e "Alessandra" nella lavagna di Connections.', page:'connections.html' },
+        { id:'ee-clessidra-romantica',cat:'amore',      icon:'⏳', name:'Tempo d\'Amore',                 hint:'Il tempo si ferma per chi si ama... letteralmente.',                               desc:'Imposta il timer di pausa esattamente a 14 minuti.', page:'*' },
+        { id:'ee-serenata-retro',    cat:'amore',       icon:'🎶', name:'La Serenata del Bot',            hint:'Chiedi una melodia per il tuo cuore all\'assistente...',                           desc:'Chiedi all\'assistente "cantami una canzone" o "dedicami una serenata".', page:'assistant.html' },
         // ── Categoria: Scriptorium ──
         { id:'ee-colofone',          cat:'scriptorium', icon:'✦',  name:'Il Colofone del Copista',        hint:'"Explicit liber"... cosa succede quando si chiude davvero un\'opera?',             desc:'Completa tutti e 12 i capitoli di Codicologia.', page:'codicologia/index.html' },
         { id:'ee-manoscritto',       cat:'scriptorium', icon:'📜', name:'Il Manoscritto Perduto',         hint:'La fortuna sorride a chi apre la porta giusta nel momento giusto...',              desc:'Con l\'1% di probabilità ad ogni apertura della home, un frammento di pergamena appare.', page:'index.html' },
@@ -2665,6 +2689,10 @@ const LexCore = {
         { id:'ee-codex-aureus',      cat:'scriptorium', icon:'🏅', name:'Codex Aureus — Auctor Perfectus',hint:'La perfezione accademica viene premiata con l\'oro...',                           desc:'Rispondi correttamente a 10 domande consecutive senza errori.', page:'*' },
         { id:'ee-scriptore',         cat:'scriptorium', icon:'🔍', name:'Lo Scriptore Segreto',           hint:'Un capitolo non catalogato attende chi cerca nel posto giusto...',                desc:'Cerca la parola esatta "scriptorium" nel motore di ricerca della home.', page:'index.html' },
         { id:'ee-laus-deo',          cat:'scriptorium', icon:'🔴', name:'Timbro LAUS DEO',                hint:'"Laus Deo" — solo un voto eccellente merita questo sigillo antico...',            desc:'Completa una simulazione d\'esame con punteggio ≥ 90%.', page:'exam.html' },
+        { id:'ee-inchiostro-rovesciato',cat:'scriptorium',icon:'✒️', name:'Macchia di Inchiostro',           hint:'Anche il miglior copista può commettere un errore maldestro sulla pergamena.',     desc:'Fai click 7 volte sullo sfondo vuoto di qualsiasi pagina di sintesi.', page:'*' },
+        { id:'ee-damnatio-memoriae', cat:'scriptorium', icon:'🏛️', name:'Damnatio Memoriae',              hint:'Cancellare la storia per riscriverla da capo.',                                    desc:'Seleziona un testo in una sintesi e premi Canc o Backspace sulla tastiera.', page:'*' },
+        { id:'ee-topolino-biblioteca',cat:'scriptorium',icon:'🐭', name:'Il Topo d\'Archivio',              hint:'Un piccolo ospite rosicchia i volumi più antichi nel silenzio della notte.',       desc:'Muovi il cursore sui bordi dello schermo per 30 secondi senza cliccare.', page:'*' },
+        { id:'ee-index-prohibitorum',cat:'scriptorium', icon:'🔥', name:'L\'Indice dei Libri Proibiti',   hint:'Ci sono stanze della biblioteca in cui è vietato l\'accesso... ma l\'indirizzo è palese.',desc:'Forza l\'URL inserendo manualmente segreti.html o prohibited.html.', page:'*' },
         // ── Categoria: Materie ──
         { id:'ee-dedica-augusto',    cat:'materie',     icon:'🏛️', name:'La Dedica dell\'Augusto',        hint:'"Tres faciunt collegium" — cosa succede se premi tre volte?',                    desc:'Clicca 3 volte di fila sul titolo del capitolo nella sintesi di Arte Romana.', page:'arte_romana/index.html' },
         { id:'ee-sentenza-pretore',  cat:'materie',     icon:'⚖️', name:'La Sentenza del Pretore',        hint:'Il diritto romano non perdona gli ignoranti... né li premia senza fatica.',       desc:'Nel quiz di Diritto, sbaglia 3 risposte di fila, poi rispondi correttamente 3 volte.', page:'exam.html' },
@@ -2678,6 +2706,11 @@ const LexCore = {
         { id:'ee-macchina-tempo',    cat:'materie',     icon:'⏱️', name:'La Macchina del Tempo',          hint:'"Il tempo non è una freccia ma un labirinto" — insisti su un evento...',        desc:'Clicca 5 volte sullo stesso evento nella Timeline storica.', page:'timeline.html' },
         { id:'ee-monaco',            cat:'materie',     icon:'🔔', name:'Il Promemoria del Monaco',       hint:'"Ora prima. Laus Deo." — il monaco approva chi studia all\'alba.',               desc:'Genera una roadmap nel Planner con data dell\'esame molto vicina (≤ 3 giorni).', page:'planner.html' },
         { id:'ee-wax-tablet',        cat:'materie',     icon:'🗿', name:'High Score Leggendario',         hint:'"Victor ex aequo" — batti il tuo stesso record con stile.',                      desc:'Batti il tuo record precedente nei minigame di oltre il 20%.', page:'minigames.html' },
+        { id:'ee-scisma-iconoclasta',cat:'materie',     icon:'⛪', name:'La Crisi Iconoclasta',           hint:'Distruggi le immagini per salvare lo spirito.',                                    desc:'Fai doppio click su un\'immagine nei capitoli di Arte Cristiana o Bizantina.', page:'*' },
+        { id:'ee-pecunia-non-olet',  cat:'materie',     icon:'🪙', name:'Il Tesoro di Vespasiano',        hint:'L\'oro non ha odore, specialmente sotto l\'esame del Pretore.',                   desc:'Durante una domanda fiscale sul Diritto Romano, clicca ripetutamente sulle monete/punti.', page:'exam.html' },
+        { id:'ee-ghigliottina',      cat:'materie',     icon:'⚔️', name:'Il Taglio della Storia',         hint:'A Versailles le teste cadono velocemente... interrompi il flusso.',               desc:'Nella Linea del Tempo, trascina lo slider dall\'anno 1789 al 1793 velocemente.', page:'timeline.html' },
+        { id:'ee-notte-stellata',    cat:'materie',     icon:'🌌', name:'Il Delirio di Van Gogh',         hint:'La follia creativa deforma la realtà della pagina.',                               desc:'Apri la pagina Analytics dopo aver studiato tra le 02:00 e le 05:00 del mattino.', page:'analytics.html' },
+        { id:'ee-alchimista',        cat:'materie',     icon:'🧪', name:'La Pietra Filosofale',           hint:'Trasmutare il piombo in oro richiede la giusta combinazione di elementi.',        desc:'Seleziona consecutivamente le parole "Corpo", "Anima" e "Spirito" in un testo.', page:'*' },
     ],
 
     unlockEasterEgg(id) {
@@ -3099,8 +3132,311 @@ const LexCore = {
         document.body.appendChild(overlay);
     },
 
-};
+    // ── EE-INK-BLOT: Macchia di inchiostro ───────────────────────────
+    initBackgroundInkBlot() {
+        let clicks = 0;
+        let lastClickTime = 0;
+        document.addEventListener('click', (e) => {
+            const now = Date.now();
+            // Evita click su bottoni, link, input o immagini
+            if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input') || e.target.closest('img') || e.target.closest('textarea') || e.target.closest('#lex-pomo-container')) {
+                clicks = 0;
+                return;
+            }
+            if (now - lastClickTime < 1000) {
+                clicks++;
+            } else {
+                clicks = 1;
+            }
+            lastClickTime = now;
+            if (clicks === 7) {
+                clicks = 0;
+                this.triggerInkBlot(e.clientX, e.clientY);
+            }
+        });
+    },
 
+    triggerInkBlot(x, y) {
+        if (document.getElementById('lex-ink-blot-overlay')) return;
+        this.unlockEasterEgg('ee-inchiostro-rovesciato');
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-ink-blot-overlay';
+        overlay.className = 'ink-blot-overlay';
+        overlay.innerHTML = `
+            <div class="ink-blot-spot" style="left: ${x}px; top: ${y}px;"></div>
+            <div class="ink-blot-text">Maledictus textus... pulisci la pergamena!</div>
+        `;
+        document.body.appendChild(overlay);
+        
+        // Sound effect (splash)
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const bufferSize = ctx.sampleRate * 0.4;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(300, ctx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 0.3);
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            noise.start();
+        } catch(e) {}
+
+        setTimeout(() => {
+            overlay.classList.add('fade-out');
+            setTimeout(() => overlay.remove(), 1000);
+        }, 4000);
+    },
+
+    // ── EE-DAMNATIO-MEMORIAE: Censura ──────────────────────────────
+    initDamnatioMemoriaeWatcher() {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+                const sel = window.getSelection();
+                if (sel && sel.toString().trim().length > 0) {
+                    // Evitiamo di censurare negli input/textarea di chat o impostazioni
+                    if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+                        return;
+                    }
+                    const range = sel.getRangeAt(0);
+                    const rects = range.getClientRects();
+                    if (rects.length === 0) return;
+                    
+                    e.preventDefault();
+                    this.unlockEasterEgg('ee-damnatio-memoriae');
+                    
+                    // Crea barre di censura nere sopra ogni rettangolo della selezione
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    const scrollX = window.scrollX || window.pageXOffset;
+                    for (let i = 0; i < rects.length; i++) {
+                        const r = rects[i];
+                        const bar = document.createElement('div');
+                        bar.className = 'censor-blackout';
+                        bar.style.position = 'absolute';
+                        bar.style.top = (r.top + scrollY) + 'px';
+                        bar.style.left = (r.left + scrollX) + 'px';
+                        bar.style.width = r.width + 'px';
+                        bar.style.height = r.height + 'px';
+                        document.body.appendChild(bar);
+                    }
+
+                    // Timbro Damnatio Memoriae
+                    const stamp = document.createElement('div');
+                    stamp.className = 'damnatio-stamp-popup';
+                    stamp.textContent = 'DAMNATIO MEMORIAE';
+                    document.body.appendChild(stamp);
+                    
+                    // Sound effect (stamp hit)
+                    try {
+                        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.frequency.setValueAtTime(80, ctx.currentTime);
+                        osc.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 0.15);
+                        gain.gain.setValueAtTime(0.4, ctx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                        osc.start(); osc.stop(ctx.currentTime + 0.15);
+                    } catch(e) {}
+
+                    setTimeout(() => stamp.classList.add('visible'), 50);
+                    setTimeout(() => {
+                        stamp.classList.remove('visible');
+                        setTimeout(() => stamp.remove(), 400);
+                    }, 3000);
+                    
+                    sel.removeAllRanges();
+                }
+            }
+        });
+    },
+
+    // ── EE-TOPOLINO: Topo d'archivio ─────────────────────────────────
+    initMouseTopolinoTracker() {
+        let edgeTime = 0;
+        let lastMove = Date.now();
+        let trackerInterval = null;
+
+        const onMouseMove = (e) => {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            const isNearEdge = (x <= 15 || y <= 15 || x >= w - 15 || y >= h - 15);
+            if (isNearEdge) {
+                if (!trackerInterval) {
+                    trackerInterval = setInterval(() => {
+                        edgeTime += 200;
+                        if (edgeTime >= 30000) { // 30s
+                            clearInterval(trackerInterval);
+                            trackerInterval = null;
+                            edgeTime = 0;
+                            this.spawnTopolino();
+                        }
+                    }, 200);
+                }
+            } else {
+                if (trackerInterval) {
+                    clearInterval(trackerInterval);
+                    trackerInterval = null;
+                }
+                edgeTime = 0;
+            }
+        };
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('click', () => {
+            if (trackerInterval) {
+                clearInterval(trackerInterval);
+                trackerInterval = null;
+            }
+            edgeTime = 0;
+        });
+    },
+
+    spawnTopolino() {
+        if (document.getElementById('lex-topolino-sprite')) return;
+        this.unlockEasterEgg('ee-topolino-biblioteca');
+        const mouse = document.createElement('div');
+        mouse.id = 'lex-topolino-sprite';
+        mouse.className = 'topolino-sprite';
+        mouse.innerHTML = `🐀`;
+        document.body.appendChild(mouse);
+
+        // Sound effect (squeak)
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(3000, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(3500, ctx.currentTime + 0.1);
+            osc.frequency.linearRampToValueAtTime(3000, ctx.currentTime + 0.2);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+            osc.start(); osc.stop(ctx.currentTime + 0.2);
+        } catch(e) {}
+
+        setTimeout(() => mouse.remove(), 4000);
+    },
+
+    // ── EE-ALCHIMISTA: Selezione Corpo, Anima, Spirito ─────────────────
+    _alchemistWordState: [],
+    initAlchimistaWatcher() {
+        document.addEventListener('selectionchange', () => {
+            const sel = window.getSelection()?.toString().trim().toLowerCase();
+            if (!sel) return;
+            
+            const expectedWords = ['corpo', 'anima', 'spirito'];
+            const nextIdx = this._alchemistWordState.length;
+            if (sel === expectedWords[nextIdx]) {
+                this._alchemistWordState.push(sel);
+                if (this._alchemistWordState.length === 3) {
+                    this._alchemistWordState = [];
+                    this.triggerAlchimista();
+                }
+            } else if (sel === expectedWords[0]) {
+                this._alchemistWordState = [sel];
+            } else if (!expectedWords.includes(sel)) {
+                this._alchemistWordState = [];
+            }
+        });
+    },
+
+    triggerAlchimista() {
+        this.unlockEasterEgg('ee-alchimista');
+        document.body.classList.add('alchemist-glow-active');
+        
+        // Sound effect (magic sparkle chime)
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const freqs = [523.25, 659.25, 783.99, 1046.50];
+            freqs.forEach((f, idx) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.frequency.setValueAtTime(f, ctx.currentTime + idx * 0.15);
+                gain.gain.setValueAtTime(0, ctx.currentTime + idx * 0.15);
+                gain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + idx * 0.15 + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.15 + 0.6);
+                osc.start(ctx.currentTime + idx * 0.15);
+                osc.stop(ctx.currentTime + idx * 0.15 + 0.6);
+            });
+        } catch(e) {}
+
+        setTimeout(() => {
+            document.body.classList.remove('alchemist-glow-active');
+        }, 10000);
+    },
+
+    // ── EE-SCISMA-ICONOCLASTA: Glitch su immagini ─────────────────────
+    initScismaIconoclasta() {
+        document.addEventListener('dblclick', (e) => {
+            if (e.target.tagName === 'IMG' && (window.location.pathname.includes('cristiana') || window.location.pathname.includes('bizantina') || window.location.pathname.includes('storia_arte'))) {
+                const img = e.target;
+                if (img.classList.contains('iconoclast-glitched')) return;
+                
+                this.unlockEasterEgg('ee-scisma-iconoclasta');
+                img.classList.add('iconoclast-glitched');
+                
+                // Sound effect (static glitch/crash)
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, ctx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(40, ctx.currentTime + 0.4);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                    osc.start(); osc.stop(ctx.currentTime + 0.4);
+                } catch(e) {}
+            }
+        });
+    },
+
+    // ── EE-CLESSIDRA-ROMANTICA: Pause a 14 minuti ────────────────────
+    triggerClessidraRomantica() {
+        this.unlockEasterEgg('ee-clessidra-romantica');
+        this.startClessidraRomanticaHearts();
+    },
+
+    _clessidraRomanticaInterval: null,
+    startClessidraRomanticaHearts() {
+        if (this._clessidraRomanticaInterval) return;
+        this._clessidraRomanticaInterval = setInterval(() => {
+            if (this.state === 'break' && this.breakTime === 14) {
+                const overlay = document.getElementById('lex-break-overlay');
+                if (overlay && overlay.style.display !== 'none') {
+                    const heart = document.createElement('div');
+                    heart.className = 'falling-heart-timer';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = (Math.random() * 80 + 10) + '%';
+                    heart.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    overlay.appendChild(heart);
+                    setTimeout(() => heart.remove(), 5000);
+                }
+            } else {
+                clearInterval(this._clessidraRomanticaInterval);
+                this._clessidraRomanticaInterval = null;
+            }
+        }, 400);
+    },
+
+};
 
 // Auto-init
 if (document.readyState === 'loading') {

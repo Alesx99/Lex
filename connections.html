@@ -1589,6 +1589,25 @@
                         localStorage.setItem('lex-free-links', JSON.stringify(window.freeLinks));
                         drawFreeLines();
 
+                        // Check for ee-frecce-cupido
+                        const nodeA = window.freeNodes.find(n => n.id === window.selectedFreeStartNode);
+                        const nodeB = window.freeNodes.find(n => n.id === nodeId);
+                        if (nodeA && nodeB) {
+                            const tA = nodeA.title.trim().toLowerCase();
+                            const tB = nodeB.title.trim().toLowerCase();
+                            const matchAlessio = (tA === 'alessio' || tA === 'lex' || tB === 'alessio' || tB === 'lex');
+                            const matchAlessandra = (tA === 'alessandra' || tB === 'alessandra');
+                            if (matchAlessio && matchAlessandra) {
+                                if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                                    LexCore.unlockEasterEgg('ee-frecce-cupido');
+                                    const elA = document.getElementById(nodeA.id);
+                                    const elB = document.getElementById(nodeB.id);
+                                    if (elA) elA.classList.add('heart-pulse');
+                                    if (elB) elB.classList.add('heart-pulse');
+                                }
+                            }
+                        }
+
                         if (typeof LexCore !== 'undefined' && LexCore.trackConnectionLink) {
                             LexCore.trackConnectionLink();
                         }
@@ -1624,8 +1643,24 @@
                         const d = `M ${fromX} ${fromY} C ${fromX + controlOffset} ${fromY}, ${toX - controlOffset} ${toY}, ${toX} ${toY}`;
                         
                         path.setAttribute('d', d);
-                        path.setAttribute('class', 'free-link-line active-link');
-                        path.style.stroke = fromEl.style.getPropertyValue('--accent-color') || 'var(--accent-gold)';
+                        
+                        const nodeFrom = window.freeNodes.find(n => n.id === link.from);
+                        const nodeTo = window.freeNodes.find(n => n.id === link.to);
+                        let isCupid = false;
+                        if (nodeFrom && nodeTo) {
+                            const tA = nodeFrom.title.trim().toLowerCase();
+                            const tB = nodeTo.title.trim().toLowerCase();
+                            const matchAlessio = (tA === 'alessio' || tA === 'lex' || tB === 'alessio' || tB === 'lex');
+                            const matchAlessandra = (tA === 'alessandra' || tB === 'alessandra');
+                            if (matchAlessio && matchAlessandra) {
+                                isCupid = true;
+                                fromEl.classList.add('heart-pulse');
+                                toEl.classList.add('heart-pulse');
+                            }
+                        }
+                        
+                        path.setAttribute('class', isCupid ? 'free-link-line active-link cupid-arrow-line' : 'free-link-line active-link');
+                        path.style.stroke = isCupid ? '#ffd700' : (fromEl.style.getPropertyValue('--accent-color') || 'var(--accent-gold)');
                         
                         path.addEventListener('dblclick', () => {
                             if (confirm("Vuoi eliminare questo collegamento concettuale?")) {

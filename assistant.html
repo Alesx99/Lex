@@ -1305,14 +1305,39 @@
             addUserMessage(question);
 
             // --- EE Oracolo di Delfi ---
-            const normalizedQ = question.toLowerCase().trim();
-            if (normalizedQ === 'chi sono?' || normalizedQ === 'cosa farò?' || normalizedQ === 'chi sono' || normalizedQ === 'cosa faro' || normalizedQ === 'cosa faro?') {
+            const normalizedQ = question.toLowerCase().trim().replace(/[?.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            if (normalizedQ === 'chi sono' || normalizedQ === 'cosa faro') {
                 if (typeof LexCore !== 'undefined' && LexCore.triggerOracoloDelfi) {
                     setTimeout(() => {
                         LexCore.triggerOracoloDelfi((html) => addBotMessage(html));
                     }, 500);
                     return;
                 }
+            }
+
+            // --- EE Serenata Retro ---
+            if (normalizedQ === 'cantami una canzone' || normalizedQ === 'dedicami una serenata') {
+                if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                    LexCore.unlockEasterEgg('ee-serenata-retro');
+                }
+                setTimeout(() => {
+                    const serenadeHtml = `
+                        <div class="retro-serenata-wrapper">
+                            <div class="pixel-notes">🎵 🎶 👾 🎶 🎵</div>
+                            <p class="serenata-text">
+                                <em>"Nel codice del cuore c'è un nesso profondo,<br>
+                                tra file di dati che girano il mondo.<br>
+                                Alessio ed Alessandra, segnale sicuro,<br>
+                                di un legame sincero, lucente e puro.<br>
+                                Niente 404, nessuna eccezione,<br>
+                                l'amore è stampato nella nostra sessione!"</em>
+                            </p>
+                            <div class="pixel-hearts">💖 👾 💖</div>
+                        </div>
+                    `;
+                    addBotMessage(serenadeHtml);
+                }, 500);
+                return;
             }
 
             // Retrieve top RAG context paragraphs

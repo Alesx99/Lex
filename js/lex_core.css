@@ -1749,5 +1749,297 @@ body.scriptorium-mode {
 }
 .waxtablet-close:hover { background: #422409; }
 
+/* ═══════════════════════════════════════════════════════════════
+   12 NUOVI EASTER EGG — STILI E ANIMAZIONI
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── EE-CUPIDO: Mappa Relazioni ── */
+.cupid-arrow-line {
+    stroke-dasharray: 8 4;
+    animation: dash-move 2s linear infinite;
+    filter: drop-shadow(0 0 4px #ffd700);
+}
+.heart-pulse {
+    animation: heart-pulse-anim 0.8s ease-in-out infinite alternate !important;
+    border-color: #ff3366 !important;
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.4) !important;
+}
+@keyframes dash-move {
+    to { stroke-dashoffset: -20; }
+}
+@keyframes heart-pulse-anim {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+/* ── EE-CLESSIDRA-ROMANTICA: Timer Pausa 14min ── */
+.clessidra-romantica-active #lex-pomo-container {
+    border-color: #ff3388 !important;
+    background: rgba(255, 51, 136, 0.08) !important;
+    box-shadow: 0 0 15px rgba(255, 51, 136, 0.3) !important;
+}
+.clessidra-romantica-active #lex-pomo-timer,
+.clessidra-romantica-active .pomo-label {
+    color: #ff3388 !important;
+}
+.clessidra-romantica-active #lex-break-overlay {
+    background: radial-gradient(circle, rgba(40,10,25,0.98) 60%, rgba(10,5,12,0.99) 100%) !important;
+}
+.clessidra-romantica-active .break-timer-big {
+    color: #ff3388 !important;
+    text-shadow: 0 0 15px rgba(255, 51, 136, 0.5);
+}
+.falling-heart-timer {
+    position: absolute;
+    top: -2rem;
+    pointer-events: none;
+    user-select: none;
+    z-index: 999;
+    animation: heart-fall linear forwards;
+}
+@keyframes heart-fall {
+    to {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ── EE-SERENATA-RETRO: Chatbot ── */
+.retro-serenata-wrapper {
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid #ff3366;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-family: monospace;
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.25);
+    animation: block-appear 0.4s ease-out;
+}
+.pixel-notes {
+    font-size: 1.2rem;
+    color: #ffd700;
+    margin-bottom: 0.8rem;
+    animation: float-notes 1.5s ease-in-out infinite alternate;
+}
+.pixel-hearts {
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    animation: heart-pulse-anim 0.5s ease-in-out infinite alternate;
+}
+.serenata-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ffd2df;
+}
+@keyframes float-notes {
+    from { transform: translateY(0); }
+    to { transform: translateY(-4px); }
+}
+
+/* ── EE-INK-BLOT: Macchia Inchiostro ── */
+.ink-blot-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s;
+}
+.ink-blot-overlay.fade-out { opacity: 0; }
+.ink-blot-spot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #0c0813 0%, #030206 70%, transparent 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: expand-blot 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.ink-blot-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #ecd5b1;
+    font-style: italic;
+    text-shadow: 0 2px 10px #000;
+    z-index: 100000;
+    animation: scale-up 0.5s ease-out 1.5s both;
+}
+@keyframes expand-blot {
+    to { width: 300vmax; height: 300vmax; }
+}
+@keyframes scale-up {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ── EE-DAMNATIO: Censura Romana ── */
+.censor-blackout {
+    background: #000000;
+    box-shadow: 0 0 3px #000;
+    z-index: 9998;
+    pointer-events: none;
+    animation: draw-censor 0.2s ease-out forwards;
+}
+.damnatio-stamp-popup {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+    border: 4px double #cc1111;
+    background: rgba(20, 5, 5, 0.95);
+    color: #ff3333;
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    padding: 1rem 2.5rem;
+    border-radius: 6px;
+    box-shadow: 0 0 30px rgba(204, 17, 17, 0.6);
+    z-index: 20005;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.damnatio-stamp-popup.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(-5deg);
+}
+@keyframes draw-censor {
+    from { transform: scaleX(0); transform-origin: left; }
+    to { transform: scaleX(1); transform-origin: left; }
+}
+
+/* ── EE-TOPOLINO: Topo d'archivio ── */
+.topolino-sprite {
+    position: fixed;
+    bottom: 0px;
+    left: -50px;
+    font-size: 2.5rem;
+    z-index: 99998;
+    pointer-events: none;
+    animation: scurry-mouse 4s linear forwards;
+}
+@keyframes scurry-mouse {
+    0% { left: -50px; transform: scaleX(1); }
+    40% { left: 40%; transform: scaleX(1) translateY(0); }
+    45% { left: 40%; transform: scaleX(-1) translateY(-5px); }
+    50% { left: 40%; transform: scaleX(1) translateY(0); }
+    100% { left: 105%; transform: scaleX(1); }
+}
+
+/* ── EE-ALCHIMISTA: Glow Ambrato ── */
+.alchemist-glow-active {
+    transition: filter 1s ease-in-out;
+    filter: sepia(0.65) saturate(1.4) contrast(0.95) hue-rotate(-10deg);
+}
+.alchemist-glow-active::after {
+    content: '';
+    position: fixed; inset: 0;
+    box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.25);
+    pointer-events: none;
+    z-index: 99999;
+}
+
+/* ── EE-ICONOCLASTA: Glitch immagine ── */
+.iconoclast-glitched {
+    filter: grayscale(1) contrast(3) !important;
+    animation: iconoclast-shake 0.4s steps(2) infinite alternate;
+}
+@keyframes iconoclast-shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(0px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(2px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* ── EE-GHIGLIOTTINA: Timelapsed Flash ── */
+.ghigliottina-overlay {
+    position: fixed; inset: 0;
+    background: rgba(169, 50, 38, 0.35);
+    z-index: 99999;
+    pointer-events: none;
+    animation: flash-red 0.15s ease-out 3 alternate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s;
+}
+.ghigliottina-overlay.fade-out { opacity: 0; }
+.ghigliottina-blade-container {
+    width: 200px;
+    height: 300px;
+    border: 4px solid #fff;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0,0,0,0.6);
+}
+.ghigliottina-blade {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(135deg, #bbb 45%, #666 50%, #fff 55%);
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 80%);
+    position: absolute;
+    top: -80px;
+    animation: drop-blade 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045) 0.2s forwards;
+}
+.ghigliottina-text {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 2rem;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    opacity: 0;
+    animation: scale-up 0.5s ease-out 0.6s forwards;
+}
+@keyframes flash-red {
+    from { background: rgba(0,0,0,0.6); }
+    to { background: rgba(204, 17, 17, 0.95); }
+}
+@keyframes drop-blade {
+    to { top: 220px; }
+}
+
+/* ── EE-VAN-GOGH: Grafico Distorto ── */
+.notte-stellata-active {
+    background: #020b1e !important;
+    color: #f7e098 !important;
+}
+.notte-stellata-active .chart-container {
+    background: radial-gradient(circle, #081d45 0%, #030e24 100%) !important;
+    border-color: #f0c040 !important;
+}
+.starry-night-spiral-svg {
+    animation: starry-rotate 20s linear infinite;
+}
+.starry-spiral-line {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: starry-draw 4s ease-out forwards;
+}
+.starry-sun {
+    animation: starry-glow 2s ease-in-out infinite alternate;
+}
+@keyframes starry-rotate {
+    to { transform: rotate(360deg); }
+}
+@keyframes starry-draw {
+    to { stroke-dashoffset: 0; }
+}
+@keyframes starry-glow {
+    from { r: 8; opacity: 0.7; }
+    to { r: 12; opacity: 1; }
+}
+
 
 
