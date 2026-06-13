@@ -38,6 +38,10 @@ const Minigames = {
         'storia': {
             text: "Scandisco il tempo di re e rivoluzioni. Insegno il passato per farvi capire il presente. Chi sono?",
             answers: ["storia", "storico", "tempo"]
+        },
+        'codicologia': {
+            text: "Studio la carne e le ossa dei libri antichi, la pergamena e la rilegatura, ma non leggo le storie che raccontano. Chi sono?",
+            answers: ["codicologia", "codicologo", "manoscritto", "libro", "pergamena"]
         }
     },
 
@@ -119,7 +123,8 @@ const Minigames = {
             'diritto': 'Arena di Diritto',
             'arte_romana': 'Arena Romana',
             'arte': 'Arena dell\'Arte',
-            'storia': 'Arena della Storia'
+            'storia': 'Arena della Storia',
+            'codicologia': 'Arena di Codicologia'
         };
         document.getElementById('arena-title').textContent = titles[subId] || 'Arena';
     },
