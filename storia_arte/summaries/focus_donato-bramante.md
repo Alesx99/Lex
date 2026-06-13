@@ -1,52 +1,51 @@
 # Focus Artista: Donato Bramante (1444 – 1514)
 
 *   **Periodo/Movimento**: Rinascimento Maturo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Architetto e pittore, teorizzò e realizzò lo spazio centrico monumentale a Milano e Roma, avviando la ricostruzione di San Pietro.
+### 1. Profilo e Contributo Critico
+Donato Bramante è l'architetto che ha definito il linguaggio dell'architettura monumentale del Rinascimento Maturo. Formatosi nella Urbino di Federico da Montefeltro (a contatto con la pittura prospettica di Piero della Francesca e l'architettura di Laurana), opera una sintesi straordinaria tra la prospettiva illusionistica applicata allo spazio costruito e lo studio strutturale della monumentalità classica romana (ispirata al Pantheon e alle terme). Attivo prima a Milano presso gli Sforza e poi a Roma sotto papa Giulio II, avvia il gigantesco cantiere di ricostruzione della Basilica di San Pietro.
 
 ### 2. Metodologia e Stile
-*   **Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).**: Monumentalità espressiva e perfetto equilibrio classico delle proporzioni (Raffaello).
-*   **Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.**: Introduzione dello sfumato leonardesco e della prospettiva aerea per fondere le figure con l'atmosfera circostante.
-*   **Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).**: Studio visivo dinamico e drammatico dell'anatomia e la poetica del non-finito (Michelangelo).
+*   **Prospettiva Illusionistica**: Bramante usa la pittura e la prospettiva per espandere virtualmente lo spazio architettonico reale (come nel finto coro di San Satiro), ingannando l'occhio dello spettatore per superare i limiti fisici del cantiere.
+*   **Lo Spazio Centrico Proporzionato**: Predilige le piante centrali (circolari, quadrate o a croce greca) simmetriche e coronate da cupole emisferiche, che simboleggiano la perfezione divina e l'armonia dell'universo umanistico.
+*   **La Struttura Muraria Plastica**: Bramante modella le pareti come masse scultoree, alternando nicchie concave e pilastri convessi per creare profondità chiaroscurale e un dinamismo spaziale solenne.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
-### 🖼️ Opera Chiave: *Tempietto di San Pietro in Montorio*
-Rappresenta uno dei cardini dello studio di Donato Bramante. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+### 🖼️ *Santa Maria presso San Satiro* (Milano, 1482-1486)
+*   **La Falsa Prospettiva**: Bramante si trovò di fronte all'impossibilità di costruire un presbiterio reale a causa del limite della strada retrostante (disponendo di soli 97 centimetri di profondità).
+*   **L'Illusione Ottica**: Progettò una finta volta a botte a lacunari in stucco prospettico che simula una profonda navata absidata di oltre 4 metri. Lo spettatore posto al centro della navata percepisce uno spazio solenne e profondo del tutto inesistente.
 
-### 🖼️ Opera Chiave: *Santa Maria presso San Satiro (falsa prospettiva)*
-Rappresenta uno dei cardini dello studio di Donato Bramante. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
-### 🖼️ Opera Chiave: *Progetto per la Basilica di San Pietro*
-Rappresenta uno dei cardini dello studio di Donato Bramante. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
-
+### 🖼️ *Tempietto di San Pietro in Montorio* (Roma, 1502)
+Considerato il manifesto del Neoclassicismo rinascimentale.
+*   **Il Martirio di Pietro**: Un tempietto periptero circolare circondato da 16 colonne tuscaniche (ispirato ai templi romani di Vesta ed Ercole).
+*   **Significato Simbolico**: La pianta circolare simboleggia l'eternità dell'anima e la centralità storica e spirituale del martirio del primo Papa. L'edificio unisce l'ordine dorico/tuscanico romano alla rigida armonia modulare rinascimentale.
 
 ---
 
 ## Quiz di Autovalutazione
 
-**1. A quale movimento o periodo artistico appartiene l'opera di Donato Bramante?**
-* a) Gotico Internazionale.
-* b) Rinascimento Maturo.
-* c) Rinascimento Maturo.
+**1. Quale espediente ingegnoso ideò Bramante a Santa Maria presso San Satiro a Milano?**
+* a) Una cupola autoportante a doppia calotta.
+* b) Un finto coro prospettico in stucco profondo 97 centimetri che simula una navata absidata.
+* c) Un colonnato ellittico sproporzionato.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Donato Bramante?**
-* a) 1500 – 1550.
-* b) 1444 – 1514.
-* c) 1780 – 1830.
+**2. A quale antico modello architettonico si ispira il Tempietto di San Pietro in Montorio?**
+* a) Alla Basilica di Massenzio.
+* b) Ai templi circolari romani peripteri (Vesta ed Ercole).
+* c) Alle catacombe paleocristiane.
 * *Risposta corretta: b*
 
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
+**3. Quale tipo di pianta architettonica predilige Bramante per esprimere l'armonia divina?**
+* a) La pianta a croce latina a tre navate asimmetriche.
+* b) La pianta centrale simmetrica (circolare o a croce greca).
+* c) La pianta basilicale paleocristiana.
 * *Risposta corretta: b*
