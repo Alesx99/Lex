@@ -313,6 +313,100 @@
         .unlocked .secret-category {
             color: var(--accent-purple);
         }
+
+        /* Riddle Overlay */
+        .riddle-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 11, 17, 0.98);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        .riddle-card {
+            background: linear-gradient(160deg, #181c26 0%, #0d1017 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 28px;
+            padding: 3.5rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), 0 20px 40px rgba(0, 0, 0, 0.5);
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .riddle-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .riddle-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+        .riddle-text {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-style: italic;
+            color: #e2e8f0;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(212, 175, 55, 0.2);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        .riddle-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 14px;
+            padding: 1rem;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+        .riddle-input:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+        .riddle-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-terracotta) 100%);
+            color: #0b0f19;
+            border: none;
+            border-radius: 14px;
+            padding: 1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .riddle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        .riddle-error {
+            color: #ef4444;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.8rem;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -513,10 +607,56 @@
                 });
             });
 
+            // Riddle logic
+            const riddleOverlay = document.getElementById('riddle-overlay');
+            const riddleInput = document.getElementById('riddle-input');
+            const riddleSubmit = document.getElementById('riddle-submit-btn');
+            const riddleError = document.getElementById('riddle-error');
+
+            const isGalleryUnlocked = localStorage.getItem('lex-gallery-unlocked') === 'true';
+
+            if (isGalleryUnlocked) {
+                riddleOverlay.style.display = 'none';
+            } else {
+                riddleOverlay.style.display = 'flex';
+            }
+
+            function checkRiddleAnswer() {
+                const answer = riddleInput.value.toLowerCase().trim();
+                const validAnswers = ['libro', 'manoscritto', 'codice', 'codex'];
+                
+                if (validAnswers.includes(answer)) {
+                    localStorage.setItem('lex-gallery-unlocked', 'true');
+                    riddleOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        riddleOverlay.style.display = 'none';
+                        renderGallery();
+                    }, 500);
+                    if (typeof playChime !== 'undefined') playChime(true);
+                } else {
+                    riddleError.style.display = 'block';
+                    riddleInput.style.borderColor = '#ef4444';
+                    riddleInput.style.animation = 'shake 0.3s ease-in-out';
+                    setTimeout(() => { riddleInput.style.animation = ''; }, 300);
+                    if (typeof playChime !== 'undefined') playChime(false);
+                }
+            }
+
+            riddleSubmit.addEventListener('click', checkRiddleAnswer);
+            riddleInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') checkRiddleAnswer();
+            });
+
             // Reset action
             btnReset.addEventListener('click', () => {
                 if (confirm('Sei sicuro di voler resettare tutti gli Easter Egg sbloccati? I tuoi progressi nei segreti andranno persi.')) {
                     localStorage.removeItem('lex-ee-unlocked');
+                    localStorage.removeItem('lex-gallery-unlocked');
+                    riddleInput.value = '';
+                    riddleError.style.display = 'none';
+                    riddleInput.style.borderColor = '';
+                    riddleOverlay.style.opacity = '1';
+                    riddleOverlay.style.display = 'flex';
                     renderGallery();
                     alert('Progressi azzerati. Buona caccia ai segreti!');
                 }
@@ -526,5 +666,23 @@
             setTimeout(renderGallery, 100);
         });
     </script>
+
+    <!-- Riddle Overlay -->
+    <div id="riddle-overlay" class="riddle-overlay">
+        <div class="riddle-card">
+            <span class="riddle-icon">🔑</span>
+            <h2 class="riddle-title">Sigillo del Custode</h2>
+            <p class="riddle-text">
+                "Nacqui sulla pelle o nell'acqua,<br>
+                Fui solcato dal piombo e bagnato dal fiele,<br>
+                Racchiuso tra assi di legno e vestito di cuoio.<br>
+                Nel silenzio parlo a chi sa ascoltare.<br>
+                Chi sono?"
+            </p>
+            <input type="text" id="riddle-input" class="riddle-input" placeholder="Inserisci la risposta..." autocomplete="off">
+            <button id="riddle-submit-btn" class="riddle-btn">Infrangi il Sigillo</button>
+            <div id="riddle-error" class="riddle-error">La parola non apre il portale. Riprova, studioso.</div>
+        </div>
+    </div>
 </body>
 </html>
