@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Art - Dizionario Enciclopedico degli Artisti</title>
+    <meta name="description" content="Enciclopedia e dizionario completo degli oltre 90 artisti di Storia dell'Arte Moderna. Filtri per movimenti artistici e schede di consulto.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Artists Database -->
+    <script src="js/artists_db.js"></script>
+    <style>
+        .dizionario-header {
+            margin-bottom: 2rem;
+            animation: fade-in-up 0.6s ease-out both;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            animation: fade-in-up 0.8s ease-out 0.1s both;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.45rem 1rem;
+            font-size: 0.82rem;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-artist-focus);
+            color: #ffffff;
+            border-color: var(--accent-artist-focus);
+            box-shadow: 0 0 12px var(--accent-artist-focus-glow);
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        /* Glassmorphism Card for Artists */
+        .artist-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all var(--transition-normal);
+        }
+
+        .artist-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-artist-focus);
+            box-shadow: 0 8px 25px var(--accent-artist-focus-glow);
+            background: var(--bg-surface-hover);
+        }
+
+        .artist-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .artist-years {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .artist-period {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-artist-focus);
+            background: rgba(139, 92, 246, 0.06);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .artist-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .artist-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .artist-works {
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.8rem;
+            margin-top: auto;
+        }
+
+        .works-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .works-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .work-item {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .work-item::before {
+            content: "•";
+            color: var(--accent-artist-focus);
+            font-style: normal;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: -1rem auto 2rem auto;
+            position: relative;
+            animation: fade-in-up 0.6s ease-out both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3.5rem;
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-artist-focus);
+            background: rgba(20, 20, 25, 0.8);
+            box-shadow: 0 0 25px var(--accent-artist-focus-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-artist-focus);
+        }
+
+        .results-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Art</span></h1>
+            <p>Dizionario degli Artisti</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="dizionario.html" class="nav-link active" id="nav-dizionario">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Dizionario Artisti
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main style="padding: 2rem 2rem 4rem 2rem; max-width: 1400px; margin: 0 auto; width: 100%;">
+        <!-- Return Link to Gallery -->
+        <a href="index.html" class="back-hub" style="margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; transition: var(--transition-fast);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna alla Galleria Studi
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="dizionario-header" style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 0.8rem;">Dizionario Enciclopedico degli Artisti</h2>
+            <div class="hero-divider" style="width: 80px; height: 3px; background: var(--accent-artist-focus); margin: 0.5rem auto 1.5rem auto; border-radius: 99px;"></div>
+            <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 1.05rem;">Consulta le biografie artistiche, gli stili e le opere celebri di tutti gli oltre 90 artisti indicizzati nei manuali Cricco Di Teodoro.</p>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="artist-search" class="search-input" placeholder="Cerca artista, movimento o opera (es. Botticelli, Barocco, David)...">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-container" id="filter-bar">
+            <button class="filter-btn active" data-filter="all">Tutti</button>
+            <button class="filter-btn" data-filter="Gotico Internazionale">Gotico Internazionale</button>
+            <button class="filter-btn" data-filter="Primo Rinascimento">Primo Rinascimento</button>
+            <button class="filter-btn" data-filter="Secondo Quattrocento">Secondo Quattrocento</button>
+            <button class="filter-btn" data-filter="Rinascimento Maturo">Rinascimento Maturo</button>
+            <button class="filter-btn" data-filter="Rinascimento Veneto">Rinascimento Veneto</button>
+            <button class="filter-btn" data-filter="Manierismo">Manierismo</button>
+            <button class="filter-btn" data-filter="Barocco">Barocco</button>
+            <button class="filter-btn" data-filter="Neoclassicismo">Neoclassicismo</button>
+            <button class="filter-btn" data-filter="Romanticismo">Romanticismo</button>
+            <button class="filter-btn" data-filter="Realismo">Realismo</button>
+            <button class="filter-btn" data-filter="Impressionismo">Impressionismo</button>
+            <button class="filter-btn" data-filter="Post-Impressionismo">Post-Impressionismo</button>
+        </div>
+
+        <!-- Count Results Info -->
+        <div class="results-count" id="count-info">Caricamento database artisti...</div>
+
+        <!-- Dictionary Cards Grid -->
+        <section class="artists-grid" id="artists-grid">
+            <!-- Dynamic Injection -->
+        </section>
+    </main>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. &copy; 2026</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('artists-grid');
+            const searchInput = document.getElementById('artist-search');
+            const filterBar = document.getElementById('filter-bar');
+            const countInfo = document.getElementById('count-info');
+
+            let activeFilter = 'all';
+            let searchQuery = '';
+
+            // Render Function
+            function renderArtists() {
+                const db = window.artistsDatabase || [];
+                grid.innerHTML = '';
+                
+                const filtered = db.filter(artist => {
+                    const matchesFilter = activeFilter === 'all' || artist.period === activeFilter;
+                    const matchesSearch = artist.name.toLowerCase().includes(searchQuery) ||
+                                          artist.period.toLowerCase().includes(searchQuery) ||
+                                          artist.desc.toLowerCase().includes(searchQuery) ||
+                                          artist.works.some(w => w.toLowerCase().includes(searchQuery));
+                    return matchesFilter && matchesSearch;
+                });
+
+                filtered.forEach(artist => {
+                    const card = document.createElement('article');
+                    card.className = 'artist-card';
+                    
+                    const worksHtml = artist.works.map(w => `<span class="work-item">${w}</span>`).join('');
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="artist-meta">
+                                <span class="artist-period">${artist.period}</span>
+                                <span class="artist-years">${artist.years}</span>
+                            </div>
+                            <h3>${artist.name}</h3>
+                            <p class="artist-desc">${artist.desc}</p>
+                        </div>
+                        <div class="artist-works" style="display: flex; flex-direction: column; gap: 1rem; margin-top: auto;">
+                            <div>
+                                <div class="works-label">Opere di Riferimento</div>
+                                <div class="works-list">
+                                    ${worksHtml}
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="window.location.href='index.html?open=summaries/focus_${artist.id}.md'" style="margin-top: 0.5rem; width: 100%;">Leggi Riassunto Completo</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                // Update count text
+                if (searchQuery.length > 0 || activeFilter !== 'all') {
+                    countInfo.textContent = `Trovati ${filtered.length} di ${db.length} artisti corrispondenti ai filtri`;
+                } else {
+                    countInfo.textContent = `Visualizzati tutti i ${db.length} artisti indicizzati nei manuali`;
+                }
+            }
+
+            // Search Trigger
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                renderArtists();
+            });
+
+            // Filter Click Trigger
+            filterBar.addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-btn')) {
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    activeFilter = e.target.getAttribute('data-filter');
+                    renderArtists();
+                }
+            });
+
+            // Initial Render
+            renderArtists();
+
+            // Light/Dark Theme Sync with Lex Core
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+
+            function updateThemeIcons(theme) {
+                if (theme === 'light') {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                } else {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                }
+            }
+
+            // Detect initial state
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            if (currentTheme === 'light') {
+                document.body.classList.add('light-theme');
+                updateThemeIcons('light');
+            } else {
+                updateThemeIcons('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-theme');
+                const theme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+                localStorage.setItem('theme', theme);
+                updateThemeIcons(theme);
+            });
+        });
+    </script>
+</body>
+</html>
