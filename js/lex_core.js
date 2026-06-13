@@ -1035,7 +1035,8 @@ const LexCore = {
                 'lex-study-seconds', 'lex-night-study-seconds', 'lex-study-streak', 'lex-exams-passed', 'lex-achievements-completed',
                 'lex-flashcards-completed', 'lex-study-planner-roadmap', 'lex-roadmap-completed-days',
                 'lex-unlocked-coupons', 'lex-visited-pages', 'lex-theme', 'lex-grad-target-cfu', 'lex-grad-thesis-bonus',
-                'lex-sanctuary-unlocked', 'lex-coupon-redeemed-', 'lex-study-daily-log', 'lex-pomo-flowers'
+                'lex-sanctuary-unlocked', 'lex-coupon-redeemed-', 'lex-study-daily-log', 'lex-pomo-flowers',
+                'lex-ee-unlocked', 'lex-gallery-unlocked', 'lex-game-record-'
             ];
             const shouldSync = syncablePrefixes.some(prefix => key.startsWith(prefix));
             
