@@ -492,6 +492,132 @@
             // Hide overlay by default
             overlay.style.display = 'none';
 
+            // --- DYNAMIC EXAM STATUS & GRADE SYNC ---
+            function syncAndRenderDashboardCards() {
+                const DEFAULT_EXAMS = [
+                    { id: "letteratura", gradeType: "voto", passed: true, grade: 23 },
+                    { id: "cultura-greca", gradeType: "voto", passed: false, grade: null },
+                    { id: "storia-medievale", gradeType: "voto", passed: true, grade: 25 },
+                    { id: "arte-romana", gradeType: "voto", passed: false, grade: null },
+                    { id: "geografia", gradeType: "voto", passed: true, grade: 25 },
+                    { id: "arte-medievale", gradeType: "voto", passed: false, grade: null },
+                    { id: "storia-moderna", gradeType: "voto", passed: true, grade: 24 },
+                    { id: "letteratura-latina", gradeType: "voto", passed: false, grade: null },
+                    { id: "codicologia", gradeType: "voto", passed: false, grade: null },
+                    { id: "arte-moderna", gradeType: "voto", passed: false, grade: null },
+                    { id: "cristiana", gradeType: "voto", passed: true, grade: 21 },
+                    { id: "diritto", gradeType: "voto", passed: false, grade: null },
+                    { id: "laboratorio", gradeType: "idoneo", passed: true, grade: null },
+                    { id: "inglese-2", gradeType: "idoneo", passed: false, grade: null },
+                    { id: "crediti-scelta-2", gradeType: "idoneo", passed: true, grade: null },
+                    { id: "storia-contemporanea", gradeType: "voto", passed: false, grade: null },
+                    { id: "arte-contemporanea", gradeType: "voto", passed: false, grade: null },
+                    { id: "museologia", gradeType: "voto", passed: false, grade: null },
+                    { id: "restauro", gradeType: "voto", passed: false, grade: null },
+                    { id: "inglese-3", gradeType: "idoneo", passed: false, grade: null },
+                    { id: "insegnamento-scelta", gradeType: "voto", passed: false, grade: null },
+                    { id: "crediti-scelta-3", gradeType: "idoneo", passed: false, grade: null },
+                    { id: "tesi", gradeType: "idoneo", passed: false, grade: null }
+                ];
+
+                let studyPlan = [];
+                try {
+                    const storedExams = localStorage.getItem('lex-exams-passed');
+                    if (storedExams) {
+                        studyPlan = JSON.parse(storedExams);
+                    } else {
+                        studyPlan = DEFAULT_EXAMS;
+                    }
+                } catch(e) {
+                    studyPlan = DEFAULT_EXAMS;
+                }
+
+                // Sync from lex-quiz-stats if present
+                try {
+                    const storedStats = localStorage.getItem('lex-quiz-stats');
+                    if (storedStats) {
+                        const stats = JSON.parse(storedStats);
+                        let changed = false;
+                        const subjectKeys = {
+                            'diritto': 'diritto',
+                            'arte': 'arte-moderna',
+                            'romana': 'arte-romana',
+                            'storia': 'storia-moderna',
+                            'codicologia': 'codicologia'
+                        };
+
+                        Object.keys(subjectKeys).forEach(statKey => {
+                            const examId = subjectKeys[statKey];
+                            const subjectSims = stats.filter(s => s.subject === statKey && s.score >= 18);
+                            if (subjectSims.length > 0) {
+                                const maxScore = Math.max(...subjectSims.map(s => s.score));
+                                const exam = studyPlan.find(e => e.id === examId);
+                                if (exam && !exam.passed) {
+                                    exam.passed = true;
+                                    exam.grade = maxScore >= 30 ? 31 : maxScore;
+                                    changed = true;
+                                }
+                            }
+                        });
+
+                        if (changed) {
+                            localStorage.setItem('lex-exams-passed', JSON.stringify(studyPlan));
+                        }
+                    }
+                } catch(e) {
+                    console.error("Error auto-unlocking exams from stats on homepage:", e);
+                }
+
+                // Map UI card IDs to studyPlan IDs
+                const cardMap = {
+                    'card-letteratura-ita': 'letteratura',
+                    'card-greca': 'cultura-greca',
+                    'card-medievale': 'storia-medievale',
+                    'card-romana': 'arte-romana',
+                    'card-geografia': 'geografia',
+                    'card-arte-medievale': 'arte-medievale',
+                    'card-storia-mod': 'storia-moderna',
+                    'card-letteratura-lat': 'letteratura-latina',
+                    'card-codicologia': 'codicologia',
+                    'card-arte-mod': 'arte-moderna',
+                    'card-cristiana': 'cristiana',
+                    'card-diritto-mod': 'diritto',
+                    'card-laboratorio': 'laboratorio',
+                    'card-inglese-2': 'inglese-2',
+                    'card-storia-cont': 'storia-contemporanea',
+                    'card-arte-cont': 'arte-contemporanea',
+                    'card-museologia': 'museologia',
+                    'card-restauro': 'restauro',
+                    'card-tesi': 'tesi'
+                };
+
+                Object.keys(cardMap).forEach(cardId => {
+                    const examId = cardMap[cardId];
+                    const exam = studyPlan.find(e => e.id === examId);
+                    const cardEl = document.getElementById(cardId);
+                    if (!cardEl || !exam) return;
+
+                    const badgeEl = cardEl.querySelector('.status-badge');
+                    if (badgeEl) {
+                        if (exam.passed) {
+                            badgeEl.className = 'status-badge grade-badge';
+                            if (exam.gradeType === 'idoneo') {
+                                badgeEl.textContent = 'Idoneo';
+                            } else if (exam.grade) {
+                                badgeEl.textContent = `Voto: ${exam.grade === 31 ? '30 e Lode' : exam.grade}`;
+                            } else {
+                                badgeEl.textContent = 'Superato';
+                            }
+                        } else {
+                            badgeEl.className = 'status-badge todo-badge';
+                            badgeEl.textContent = 'Da Fare';
+                        }
+                    }
+                });
+            }
+
+            syncAndRenderDashboardCards();
+
             // --- FUZZY SEARCH WITH FUSE.JS ---
             const fuse = new Fuse(searchDatabase, {
                 keys: ['title', 'keywords', 'description'],
