@@ -978,4 +978,450 @@ footer {
 }
 
 
+/* ==========================================================================
+   EASTER EGGS — 7 SEGRETI DELLO SCRIPTORIUM
+   ========================================================================== */
+
+/* ── EE #1: Colofone del Copista ── */
+.colofone-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 20000;
+    display: flex; align-items: center; justify-content: center;
+    animation: colofone-fadein 0.8s ease forwards;
+}
+@keyframes colofone-fadein {
+    from { opacity: 0; } to { opacity: 1; }
+}
+.colofone-card {
+    background: linear-gradient(160deg, #2a1f0e 0%, #1a1208 100%);
+    border: 2px solid #c9a84c;
+    border-radius: 4px;
+    padding: 3.5rem 3rem;
+    max-width: 560px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 60px rgba(201,168,76,0.3), inset 0 0 40px rgba(0,0,0,0.5);
+    animation: colofone-appear 0.6s 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes colofone-appear {
+    from { transform: scale(0.8) rotate(-1deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.colofone-card::before {
+    content: '';
+    position: absolute; inset: 8px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px;
+    pointer-events: none;
+}
+.colofone-ornament {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+    display: block;
+    animation: colofone-glow 2s ease-in-out infinite alternate;
+}
+@keyframes colofone-glow {
+    from { filter: drop-shadow(0 0 6px #c9a84c); }
+    to   { filter: drop-shadow(0 0 20px #f0c040); }
+}
+.colofone-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    color: #c9a84c;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+.colofone-text {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    color: #e8d9b0;
+    line-height: 1.9;
+    font-style: italic;
+    margin-bottom: 1.8rem;
+}
+.colofone-sub {
+    font-size: 0.78rem;
+    color: #9a8050;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+.colofone-close {
+    background: transparent;
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    padding: 0.6rem 2rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.colofone-close:hover {
+    background: rgba(201,168,76,0.15);
+    box-shadow: 0 0 12px rgba(201,168,76,0.3);
+}
+
+/* ── EE #2: Manoscritto Perduto ── */
+.manoscritto-fragment {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 180px;
+    background: linear-gradient(145deg, #f5e6c8, #e8d5a8);
+    border: 1px solid #b8925a;
+    border-radius: 2px 8px 4px 6px;
+    padding: 1rem 0.9rem;
+    z-index: 9999;
+    cursor: pointer;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.4), -2px -2px 6px rgba(0,0,0,0.2);
+    animation: fragment-appear 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    transform-origin: bottom right;
+    filter: sepia(0.3);
+}
+@keyframes fragment-appear {
+    from { transform: scale(0.5) rotate(5deg); opacity: 0; }
+    to   { transform: scale(1) rotate(-2deg); opacity: 1; }
+}
+.manoscritto-fragment::before {
+    content: '';
+    position: absolute;
+    top: -4px; right: -4px;
+    width: 24px; height: 24px;
+    background: linear-gradient(225deg, #c8a878 50%, transparent 50%);
+    border-radius: 0 0 0 4px;
+}
+.manoscritto-fragment p {
+    font-family: Georgia, serif;
+    font-size: 0.68rem;
+    color: #3a2510;
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0 0 0.5rem;
+}
+.manoscritto-fragment .mf-label {
+    font-size: 0.55rem;
+    color: #7a5530;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    text-align: right;
+    margin: 0;
+    font-style: normal;
+}
+.manoscritto-fragment:hover {
+    transform: scale(1.04) rotate(-1deg);
+    box-shadow: 6px 6px 18px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+}
+
+/* Manoscritto full page */
+.manoscritto-page-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 20001;
+    display: flex; align-items: center; justify-content: center;
+    animation: colofone-fadein 0.5s ease forwards;
+}
+.manoscritto-page-card {
+    background: linear-gradient(150deg, #f7ecd5 0%, #ede0c0 60%, #e8d5a8 100%);
+    max-width: 580px; width: 92%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 3px 10px 6px 8px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    box-shadow: 8px 8px 40px rgba(0,0,0,0.6), -4px -4px 20px rgba(0,0,0,0.3);
+    filter: sepia(0.2);
+    animation: colofone-appear 0.5s ease forwards;
+}
+.manoscritto-page-card h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    color: #3a2510;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #b8925a;
+    padding-bottom: 1rem;
+}
+.manoscritto-page-card p {
+    font-family: Georgia, serif;
+    font-size: 0.95rem;
+    color: #3a2510;
+    line-height: 1.9;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+.manoscritto-page-card .mp-attribution {
+    text-align: right;
+    font-size: 0.78rem;
+    color: #7a5530;
+    font-style: normal;
+    margin-top: 1.5rem;
+    border-top: 1px solid #b8925a;
+    padding-top: 0.8rem;
+}
+.manoscritto-close-btn {
+    display: block;
+    margin: 1.5rem auto 0;
+    background: #3a2510;
+    color: #e8d5a8;
+    border: none;
+    padding: 0.6rem 2rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.manoscritto-close-btn:hover { background: #5a3820; }
+
+/* ── EE #3: Konami — Scriptorium Mode ── */
+.scriptorium-banner {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: linear-gradient(90deg, #1a0f00, #2a1f0e, #1a0f00);
+    border-bottom: 2px solid #c9a84c;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    z-index: 30000;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: #c9a84c;
+    letter-spacing: 0.2em;
+    animation: scriptorium-slide 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes scriptorium-slide {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+body.scriptorium-mode * {
+    font-family: 'Courier New', monospace !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    word-spacing: -0.4em !important;
+}
+body.scriptorium-mode p,
+body.scriptorium-mode span,
+body.scriptorium-mode h1,
+body.scriptorium-mode h2,
+body.scriptorium-mode h3,
+body.scriptorium-mode li {
+    font-family: 'Courier New', monospace !important;
+    color: #c9a84c !important;
+}
+body.scriptorium-mode {
+    background: #0e0a04 !important;
+    filter: sepia(0.5) contrast(1.1);
+}
+
+/* ── EE #4: Fantasma della Biblioteca ── */
+.ghost-biblioteca {
+    position: fixed;
+    right: -200px; bottom: 60px;
+    width: 160px;
+    pointer-events: none;
+    z-index: 25000;
+    opacity: 0;
+    animation: ghost-haunt 4s ease forwards;
+}
+@keyframes ghost-haunt {
+    0%   { right: -200px; opacity: 0; }
+    15%  { right: 20px;   opacity: 0.85; }
+    75%  { right: 20px;   opacity: 0.85; }
+    90%  { right: -30px;  opacity: 0.4; }
+    100% { right: -200px; opacity: 0; }
+}
+.ghost-card {
+    background: rgba(20,10,30,0.92);
+    border: 1px solid rgba(160,120,220,0.4);
+    border-radius: 12px;
+    padding: 1rem 0.9rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px rgba(160,120,220,0.2);
+}
+.ghost-emoji {
+    font-size: 2.5rem;
+    display: block;
+    text-align: center;
+    animation: ghost-bob 2s ease-in-out infinite;
+}
+@keyframes ghost-bob {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+}
+.ghost-quote {
+    font-family: Georgia, serif;
+    font-size: 0.7rem;
+    color: rgba(200,180,240,0.9);
+    font-style: italic;
+    line-height: 1.5;
+    margin-top: 0.6rem;
+    text-align: center;
+}
+
+/* ── EE #5: Codex Aureus — Auctor Perfectus ── */
+.codex-aureus-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 20000;
+    display: flex; align-items: center; justify-content: center;
+    animation: colofone-fadein 0.4s ease forwards;
+}
+.codex-aureus-card {
+    background: linear-gradient(145deg, #1a1208, #0e0a04);
+    border: 2px solid #f0c040;
+    border-radius: 50%;
+    width: 320px; height: 320px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(240,192,64,0.5), inset 0 0 40px rgba(0,0,0,0.6);
+    animation: codex-zoom 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes codex-zoom {
+    from { transform: scale(0) rotate(-10deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.gold-leaf {
+    position: absolute;
+    width: 10px; height: 10px;
+    background: #f0c040;
+    border-radius: 50% 0 50% 0;
+    pointer-events: none;
+    animation: gold-settle var(--dur) ease forwards;
+    top: var(--start-y);
+    left: var(--start-x);
+}
+@keyframes gold-settle {
+    0%   { transform: translateY(-60px) rotate(0deg) scale(1); opacity: 1; }
+    80%  { opacity: 0.8; }
+    100% { transform: translateY(var(--end-y)) rotate(var(--rot)) scale(0.3); opacity: 0; }
+}
+.codex-aureus-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem;
+    color: #f0c040;
+    text-shadow: 0 0 20px rgba(240,192,64,0.6);
+    z-index: 1;
+    line-height: 1.2;
+}
+.codex-aureus-sub {
+    font-size: 0.75rem;
+    color: #c9a84c;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    z-index: 1;
+}
+.codex-aureus-medal {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+    z-index: 1;
+    animation: medal-spin 0.8s ease;
+}
+@keyframes medal-spin {
+    from { transform: rotateY(180deg) scale(0.5); }
+    to   { transform: rotateY(0deg) scale(1); }
+}
+
+/* ── EE #6: Scriptorium risultato speciale ── */
+.search-scriptorium-result {
+    background: linear-gradient(135deg, rgba(42,31,14,0.95), rgba(26,18,8,0.98));
+    border: 1px solid #c9a84c;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 0.5rem 0;
+    font-family: Georgia, serif;
+    animation: scriptorium-res-in 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes scriptorium-res-in {
+    from { transform: scale(0.95); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+.search-scriptorium-result h3 {
+    color: #f0c040;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+.search-scriptorium-result p {
+    color: #e8d9b0;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0;
+}
+.search-scriptorium-result .sr-sign {
+    text-align: right;
+    font-size: 0.72rem;
+    color: #9a8050;
+    margin-top: 0.8rem;
+    font-style: normal;
+    letter-spacing: 0.06em;
+}
+
+/* ── EE #7: Timbro LAUS DEO ── */
+.laus-deo-stamp {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-12deg) scale(0);
+    z-index: 30000;
+    pointer-events: none;
+    animation: stamp-drop 0.5s 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards,
+               stamp-fade 0.6s 3s ease forwards;
+}
+@keyframes stamp-drop {
+    0%   { transform: translate(-50%, -120%) rotate(-12deg) scale(2); opacity: 0; }
+    60%  { transform: translate(-50%, -50%) rotate(-12deg) scale(0.95); opacity: 1; }
+    80%  { transform: translate(-50%, -50%) rotate(-12deg) scale(1.04); }
+    100% { transform: translate(-50%, -50%) rotate(-12deg) scale(1); opacity: 1; }
+}
+@keyframes stamp-fade {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+.laus-deo-inner {
+    border: 4px solid #cc1111;
+    border-radius: 8px;
+    padding: 1.2rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 0 0 2px rgba(204,17,17,0.3),
+                0 0 30px rgba(204,17,17,0.25),
+                inset 0 0 20px rgba(204,17,17,0.1);
+    position: relative;
+}
+.laus-deo-inner::before,
+.laus-deo-inner::after {
+    content: '✦';
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    color: rgba(204,17,17,0.6);
+    font-size: 1rem;
+}
+.laus-deo-inner::before { left: 0.5rem; }
+.laus-deo-inner::after  { right: 0.5rem; }
+.laus-deo-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #cc1111;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(204,17,17,0.4);
+    display: block;
+}
+.laus-deo-sub {
+    font-family: Georgia, serif;
+    font-size: 0.7rem;
+    color: rgba(204,17,17,0.7);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.3rem;
+}
+
 

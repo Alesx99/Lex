@@ -1583,6 +1583,11 @@
                 score++;
             }
 
+            // ── EE #5: Codex Aureus streak tracking ──
+            if (typeof LexCore !== 'undefined' && LexCore.trackQuizStreak) {
+                LexCore.trackQuizStreak(isCorrect);
+            }
+
             // Save details for diagnostics
             userResponses.push({
                 question: q.question,
@@ -1614,6 +1619,11 @@
             
             document.getElementById('report-percent-text').textContent = `${percent}%`;
             document.getElementById('report-score-text').textContent = `${score} / ${total}`;
+
+            // ── EE #7: LAUS DEO — timbro per esame ≥ 90% ──
+            if (percent >= 90 && typeof LexCore !== 'undefined' && LexCore.triggerLausDeo) {
+                setTimeout(() => LexCore.triggerLausDeo(), 600);
+            }
 
             // Adjust ring glow based on score
             const ring = document.getElementById('report-score-glow');

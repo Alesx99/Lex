@@ -1273,6 +1273,11 @@
             
             saveCardSRS(currentCard.id, srs);
 
+            // ── EE #5: Codex Aureus streak tracking ──
+            if (typeof LexCore !== 'undefined' && LexCore.trackQuizStreak) {
+                LexCore.trackQuizStreak(quality >= 3);
+            }
+
             // Increment total flashcards completed count
             try {
                 let flashcardCount = parseInt(localStorage.getItem('lex-flashcards-completed') || '0');

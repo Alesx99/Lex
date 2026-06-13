@@ -76,7 +76,10 @@ const LexCore = {
         window.addEventListener('load', () => this.hookGlobalFeatures());
         setTimeout(() => this.hookGlobalFeatures(), 600);
         this.updateBrandName();
+        // Init hidden easter eggs
+        this.initEasterEggs();
     },
+
 
     // --- THEME LOGIC ---
     applyTheme() {
@@ -2381,7 +2384,256 @@ const LexCore = {
             if (btn) btn.classList.remove('loading');
             alert("Errore durante l'aggiornamento. Prova a ricaricare manualmente.");
         }
-    }
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // EASTER EGGS — 7 SEGRETI DELLO SCRIPTORIUM
+    // ═══════════════════════════════════════════════════════════════
+
+    // ── EE #1: Colofone del Copista ─────────────────────────────────
+    checkColofone() {
+        try {
+            const read = JSON.parse(localStorage.getItem('lex-unique-chapters-read') || '[]');
+            const codicologiaChapters = [
+                'codicologia/summaries/cap1.md','codicologia/summaries/cap2.md',
+                'codicologia/summaries/cap3.md','codicologia/summaries/cap4.md',
+                'codicologia/summaries/cap5.md','codicologia/summaries/cap6.md',
+                'codicologia/summaries/cap7.md','codicologia/summaries/cap8.md',
+                'codicologia/summaries/cap9.md','codicologia/summaries/cap10.md',
+                'codicologia/summaries/cap11.md','codicologia/summaries/cap12.md',
+            ];
+            const allRead = codicologiaChapters.every(c => read.includes(c));
+            const alreadyShown = localStorage.getItem('lex-colofone-shown');
+            if (allRead && !alreadyShown) {
+                localStorage.setItem('lex-colofone-shown', '1');
+                setTimeout(() => this.triggerColofone(), 800);
+            }
+        } catch(e){}
+    },
+
+    triggerColofone() {
+        if (document.getElementById('lex-colofone-overlay')) return;
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-colofone-overlay';
+        overlay.className = 'colofone-overlay';
+        overlay.innerHTML = `
+            <div class="colofone-card">
+                <span class="colofone-ornament">✦</span>
+                <div class="colofone-title">Explicit Liber Codicologiae</div>
+                <p class="colofone-text">
+                    "Explicit liber feliciter. Finivi, deo gratias.<br>
+                    Qui scripsit scribat, semper cum Domino vivat."
+                </p>
+                <p class="colofone-text" style="font-size:0.88rem; margin-bottom:1rem;">
+                    Hai completato tutti e dodici i capitoli dello scriptorium.<br>
+                    La tua conoscenza del manoscritto è ora integra.
+                </p>
+                <div class="colofone-sub">Codicologia · Anno Domini MMXXVI · Lex Studiorum</div>
+                <button class="colofone-close" onclick="document.getElementById('lex-colofone-overlay').remove()">Chiudi il Codice ✦</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    },
+
+    // ── EE #2: Manoscritto Perduto ──────────────────────────────────
+    MANOSCRITTO_TEXTS: [
+        {
+            title: 'Frammento Ritrovato — Plinio il Vecchio, Naturalis Historia',
+            text: '"Nusquam est qui ubique est." Chi è ovunque non è da nessuna parte. Così anche la conoscenza, dispersa senza ordine, si perde come inchiostro sulla pergamena bagnata.',
+            source: 'Plinio il Vecchio, Naturalis Historia, Libro II, I sec. d.C.'
+        },
+        {
+            title: 'Colofone Apocrifo — Scriptorium di Montecassino',
+            text: '"Finis adest operis, mercedem posco laboris. Sit mihi pro pena sancta futura quies." Giunto al termine dell\'opera, chiedo il compenso della fatica. Sia per me, in cambio della pena, il riposo eterno.',
+            source: 'Colofone anonimo, Montecassino, XI sec.'
+        },
+        {
+            title: 'Nota Marginale — Codex Bembo, Biblioteca Marciana',
+            text: '"Scripsi et non paenituit." Ho scritto e non me ne sono pentito. Il copista lascia qui la sua unica firma, nascosta ai margini del tempo.',
+            source: 'Nota marginale, XV sec., Venezia'
+        },
+        {
+            title: 'Frammento di Papiro — Biblioteca di Alessandria',
+            text: '"Πάντες ἄνθρωποι τοῦ εἰδέναι ὀρέγονται φύσει." Tutti gli uomini per natura desiderano conoscere. Così iniziava ogni giornata nello scriptorium.',
+            source: 'Aristotele, Metafisica, Libro I · IV sec. a.C.'
+        },
+    ],
+
+    tryManoscrittoPerso() {
+        if (Math.random() > 0.01) return; // 1% di probabilità
+        if (sessionStorage.getItem('lex-manoscritto-shown')) return;
+        sessionStorage.setItem('lex-manoscritto-shown', '1');
+        const chosen = this.MANOSCRITTO_TEXTS[Math.floor(Math.random() * this.MANOSCRITTO_TEXTS.length)];
+        const frag = document.createElement('div');
+        frag.className = 'manoscritto-fragment';
+        frag.id = 'lex-manoscritto-frag';
+        frag.innerHTML = `<p>${chosen.text.substring(0, 90)}…</p><span class="mf-label">📜 Manoscritto Ritrovato</span>`;
+        frag.addEventListener('click', () => this.openManoscritto(chosen));
+        document.body.appendChild(frag);
+        setTimeout(() => frag.remove(), 20000);
+    },
+
+    openManoscritto(data) {
+        document.getElementById('lex-manoscritto-frag')?.remove();
+        const overlay = document.createElement('div');
+        overlay.className = 'manoscritto-page-overlay';
+        overlay.id = 'lex-manoscritto-overlay';
+        overlay.innerHTML = `
+            <div class="manoscritto-page-card">
+                <h2>📜 ${data.title}</h2>
+                <p>${data.text}</p>
+                <div class="mp-attribution">${data.source}</div>
+                <button class="manoscritto-close-btn" onclick="document.getElementById('lex-manoscritto-overlay').remove()">Riporre il Frammento</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    },
+
+    // ── EE #3: Konami — Scriptorium Mode ────────────────────────────
+    _konamiSequence: ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'],
+    _konamiProgress: 0,
+
+    initKonami() {
+        document.addEventListener('keydown', (e) => {
+            const expected = this._konamiSequence[this._konamiProgress];
+            if (e.key === expected) {
+                this._konamiProgress++;
+                if (this._konamiProgress === this._konamiSequence.length) {
+                    this._konamiProgress = 0;
+                    this.triggerScriptoriumMode();
+                }
+            } else {
+                this._konamiProgress = 0;
+                if (e.key === this._konamiSequence[0]) this._konamiProgress = 1;
+            }
+        });
+    },
+
+    triggerScriptoriumMode() {
+        if (document.body.classList.contains('scriptorium-mode')) return;
+        const banner = document.createElement('div');
+        banner.className = 'scriptorium-banner';
+        banner.id = 'lex-scriptorium-banner';
+        banner.textContent = '✦ BENEDICTUS · QUI · LEGIT · ET · AUDIT · VERBA · SCRIPTURAE · HUIUS ✦';
+        document.body.appendChild(banner);
+        document.body.classList.add('scriptorium-mode');
+        setTimeout(() => {
+            document.body.classList.remove('scriptorium-mode');
+            document.getElementById('lex-scriptorium-banner')?.remove();
+        }, 10000);
+    },
+
+    // ── EE #4: Fantasma della Biblioteca ────────────────────────────
+    GHOST_QUOTES: [
+        '"Habent sua fata libelli." I libri hanno il loro destino. — Terenziano Mauro',
+        '"Una biblioteca è il luogo in cui le generazioni morti si parlano con quelle vive." — Carlyle',
+        '"I manoscritti non bruciano." — Michail Bulgakov, Il Maestro e Margherita',
+        '"Scribitur ad narrandum, non ad probandum." Si scrive per narrare, non per dimostrare. — Quintiliano',
+    ],
+
+    initGhostBiblioteca() {
+        const checkTime = () => {
+            const now = new Date();
+            if (now.getHours() === 23 && now.getMinutes() === 59) {
+                if (!document.getElementById('lex-ghost')) {
+                    this.triggerGhost();
+                }
+            }
+        };
+        setInterval(checkTime, 30000);
+        checkTime();
+    },
+
+    triggerGhost() {
+        const quote = this.GHOST_QUOTES[Math.floor(Math.random() * this.GHOST_QUOTES.length)];
+        const ghost = document.createElement('div');
+        ghost.className = 'ghost-biblioteca';
+        ghost.id = 'lex-ghost';
+        ghost.innerHTML = `
+            <div class="ghost-card">
+                <span class="ghost-emoji">👻</span>
+                <p class="ghost-quote">${quote}</p>
+            </div>
+        `;
+        document.body.appendChild(ghost);
+        setTimeout(() => ghost.remove(), 4500);
+    },
+
+    // ── EE #5: Codex Aureus — Auctor Perfectus ──────────────────────
+    _quizStreak: 0,
+
+    trackQuizStreak(isCorrect) {
+        if (isCorrect) {
+            this._quizStreak++;
+            if (this._quizStreak === 10) {
+                this._quizStreak = 0;
+                this.triggerCodexAureus();
+            }
+        } else {
+            this._quizStreak = 0;
+        }
+    },
+
+    triggerCodexAureus() {
+        if (document.getElementById('lex-codex-aureus')) return;
+        const overlay = document.createElement('div');
+        overlay.className = 'codex-aureus-overlay';
+        overlay.id = 'lex-codex-aureus';
+        overlay.innerHTML = `
+            <div class="codex-aureus-card" id="lex-codex-aureus-card">
+                <span class="codex-aureus-medal">🏅</span>
+                <div class="codex-aureus-title">Auctor<br>Perfectus</div>
+                <div class="codex-aureus-sub">X Risposte Corrette · Codex Aureus</div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        // Gold leaf rain
+        const card = document.getElementById('lex-codex-aureus-card');
+        for (let i = 0; i < 28; i++) {
+            const leaf = document.createElement('div');
+            leaf.className = 'gold-leaf';
+            leaf.style.setProperty('--start-x', (Math.random() * 100) + '%');
+            leaf.style.setProperty('--start-y', '0');
+            leaf.style.setProperty('--end-y', (Math.random() * 200 + 80) + 'px');
+            leaf.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
+            leaf.style.setProperty('--dur', (Math.random() * 1.5 + 0.8) + 's');
+            leaf.style.animationDelay = (Math.random() * 0.5) + 's';
+            card.appendChild(leaf);
+        }
+        overlay.addEventListener('click', () => overlay.remove());
+        setTimeout(() => overlay.remove(), 4000);
+    },
+
+    // ── EE #7: Timbro LAUS DEO ──────────────────────────────────────
+    triggerLausDeo() {
+        if (document.getElementById('lex-laus-deo')) return;
+        const stamp = document.createElement('div');
+        stamp.className = 'laus-deo-stamp';
+        stamp.id = 'lex-laus-deo';
+        stamp.innerHTML = `
+            <div class="laus-deo-inner">
+                <span class="laus-deo-title">LAUS · DEO</span>
+                <span class="laus-deo-sub">Excellentia Academica · ≥ 90%</span>
+            </div>
+        `;
+        document.body.appendChild(stamp);
+        setTimeout(() => stamp.remove(), 4000);
+    },
+
+    // ── Inizializzazione Globale EE ──────────────────────────────────
+    initEasterEggs() {
+        this.initKonami();
+        this.initGhostBiblioteca();
+        // Manoscritto: solo sulla home (index.html)
+        if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/Lex/')) {
+            setTimeout(() => this.tryManoscrittoPerso(), 3000);
+        }
+        // Colofone: su tutte le pagine di codicologia
+        if (window.location.pathname.includes('codicologia')) {
+            setTimeout(() => this.checkColofone(), 1500);
+        }
+    },
+
 };
 
 // Auto-init

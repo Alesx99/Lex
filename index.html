@@ -589,6 +589,24 @@
                     resultsList.innerHTML = '';
                     overlay.style.display = 'block';
 
+                    // ── EE #6: Lo Scriptore Segreto ──
+                    if (query === 'scriptorium') {
+                        countText.textContent = '📜 Capitolo Apocrifo — Dallo Scriptorium';
+                        resultsList.innerHTML = `
+                            <div class="search-scriptorium-result">
+                                <h3>✦ Capitolo XIII (Apocrifo): La Vita dello Scriba</h3>
+                                <p>
+                                    "Lo scriba medievale si alzava all'alba, inginocchiandosi in preghiera prima ancora di toccare calamo e inchiostro. La sua giornata era scandita dall'Opus Dei: tra un'ora canonica e l'altra, vergava pergamene con inchiostro di fuliggine o di noce di galla. Le dita, screpolate e annerite, tradivano anni di dedizione silenziosa. Quando sbagliava una lettera, raschiava la pergamena con il coltellino (cultellus) e correggeva senza lasciare tracce. Raramente firmava: preferiva nascondersi in note marginali come «ora finita est scriptura» o «deo gratias». La sua vera firma era l'opera stessa."
+                                </p>
+                                <p>
+                                    Fra Anselmo di Tours annotò nel 1142: <em>"Chi copia i libri non copia le parole, ma preserva il tempo stesso dall'oblio."</em> Un copista anonimo di Bobbio rispose, nei margini dello stesso codice, 40 anni dopo: <em>"Dici bene, frate. Ma le dita mi dolgono."</em>
+                                </p>
+                                <div class="sr-sign">SECRETUM SCRIPTORII · Trovato solo da chi cerca nel posto giusto · Lex Studiorum</div>
+                            </div>
+                        `;
+                        return;
+                    }
+
                     if (results.length === 0) {
                         // Trigger async full-text fallback search
                         resultsList.innerHTML = `<div class="no-results-msg" id="fulltext-loader">
