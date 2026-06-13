@@ -1140,6 +1140,29 @@ const Minigames = {
             this.addPoints(pts);
         }
 
+        // Record tracking for Wax Tablet EE (ee-wax-tablet)
+        if (success && this.currentGameId) {
+            const currentScore = Math.max(pts, this.scoreAccumulator || 0);
+            if (currentScore >= 10) {
+                const recordKey = `lex-game-record-${this.currentGameId}`;
+                const oldRecord = parseInt(localStorage.getItem(recordKey)) || 0;
+                if (oldRecord > 0 && currentScore >= oldRecord * 1.2) {
+                    if (typeof LexCore !== 'undefined' && LexCore.triggerWaxTablet) {
+                        LexCore.triggerWaxTablet('Victor Academicus', currentScore);
+                    }
+                }
+                if (currentScore > oldRecord) {
+                    localStorage.setItem(recordKey, currentScore.toString());
+                }
+            } else {
+                const recordKey = `lex-game-record-${this.currentGameId}`;
+                const oldRecord = parseInt(localStorage.getItem(recordKey)) || 0;
+                if (currentScore > oldRecord) {
+                    localStorage.setItem(recordKey, currentScore.toString());
+                }
+            }
+        }
+
         if (success) {
             if (typeof playChime !== 'undefined') playChime(true);
             this.triggerConfetti();
@@ -1188,6 +1211,7 @@ const Minigames = {
         const game = this.games[gameId];
         if (!game) return;
 
+        this.currentGameId = gameId;
         document.getElementById('game-result-container').classList.add('hidden');
         document.getElementById('game-title').textContent = game.title;
         document.getElementById('game-modal-overlay').classList.add('open');

@@ -669,7 +669,7 @@
 
                 itemDiv.innerHTML = `
                     <div class="timeline-dot"></div>
-                    <div class="timeline-card">
+                    <div class="timeline-card" onclick="if(typeof LexCore!=='undefined'&&LexCore.trackTimelineClick){LexCore.trackTimelineClick('${event.year}-${index}', {year:'${displayYear}', title:'${event.title.replace(/'/g, '\\\'')}'})}">
                         <div class="timeline-card-header">
                             <span class="timeline-year">${displayYear}</span>
                             <span class="timeline-subject-badge">${event.subjectLabel}</span>

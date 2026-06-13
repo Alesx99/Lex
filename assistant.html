@@ -1304,6 +1304,17 @@
             // Add user message to UI
             addUserMessage(question);
 
+            // --- EE Oracolo di Delfi ---
+            const normalizedQ = question.toLowerCase().trim();
+            if (normalizedQ === 'chi sono?' || normalizedQ === 'cosa farò?' || normalizedQ === 'chi sono' || normalizedQ === 'cosa faro' || normalizedQ === 'cosa faro?') {
+                if (typeof LexCore !== 'undefined' && LexCore.triggerOracoloDelfi) {
+                    setTimeout(() => {
+                        LexCore.triggerOracoloDelfi((html) => addBotMessage(html));
+                    }, 500);
+                    return;
+                }
+            }
+
             // Retrieve top RAG context paragraphs
             const contextSections = await retrieveContext(question);
 

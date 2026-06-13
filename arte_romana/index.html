@@ -543,7 +543,6 @@
             </div>
         </div>
     </div>
-
     <!-- Web Footer -->
     <footer>
         <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Archeologia e Arte Romana. &copy; 2026</p>
@@ -621,10 +620,9 @@
             // Reset reading progress
             progressIndicator.style.width = '0%';
 
-            // Fetch and parse markdown
             fetch(filePath)
                 .then(response => {
-                    if (!response.ok) throw new Error("Errore nel caricamento del file.");
+                    if (!response.ok) throw new Error("Errore caricamento file.");
                     return response.text();
                 })
                 .then(text => {
@@ -634,11 +632,7 @@
                     } else {
                         modalChapterTitle.textContent = chapterTag;
                     }
-                    
-                    // Render markdown using Marked
                     markdownView.innerHTML = marked.parse(text);
-
-                    // Initialize features after render
                     setTimeout(() => {
                         injectGlossaryTooltips(markdownView);
                         initializeParagraphs(filePath);
@@ -716,15 +710,32 @@
                 }
                 openSummary(chapterTag, openPath);
             }
+
+            // Triple click listener on modal-chapter-title
+            let titleClickCount = 0;
+            let titleClickTimeout = null;
+            if (modalChapterTitle) {
+                modalChapterTitle.addEventListener('click', () => {
+                    titleClickCount++;
+                    clearTimeout(titleClickTimeout);
+                    titleClickTimeout = setTimeout(() => {
+                        titleClickCount = 0;
+                    }, 1000);
+                    if (titleClickCount === 3) {
+                        titleClickCount = 0;
+                        if (typeof LexCore !== 'undefined' && LexCore.triggerDedicaAugusto) {
+                            LexCore.triggerDedicaAugusto();
+                        }
+                    }
+                });
+            }
         });
 
         // GLOSSARY TOOLTIPS INJECTOR
         function injectGlossaryTooltips(container) {
             if (!window.glossaryDatabase) return;
-            
             const terms = Object.keys(window.glossaryDatabase);
             if (terms.length === 0) return;
-            
             terms.sort((a, b) => b.length - a.length);
             
             const walker = document.createTreeWalker(
@@ -749,16 +760,13 @@
             nodesToReplace.forEach(node => {
                 let text = node.nodeValue;
                 let replaced = false;
-                
                 for (const term of terms) {
                     const termMeta = window.glossaryDatabase[term];
                     const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                     let regexStr = '\\b(' + escapedTerm + ')(i|e|a|o)?\\b';
-                    
                     if (term.includes("'")) {
                         regexStr = '(' + escapedTerm + ')';
                     }
-                    
                     const regex = new RegExp(regexStr, 'gi');
                     
                     if (regex.test(text)) {
@@ -766,7 +774,6 @@
                         span.innerHTML = text.replace(regex, (match) => {
                             return `<span class="glossary-term" data-term="${term}">${match}<span class="glossary-tooltip"><strong>${termMeta.term}</strong>: ${termMeta.definition}</span></span>`;
                         });
-                        
                         node.parentNode.replaceChild(span, node);
                         replaced = true;
                         break; 
@@ -863,7 +870,6 @@
                 }, 600);
             };
         }
-
     </script>
 
     <!-- Floating Paragraph Highlighter Palette -->

@@ -607,6 +607,13 @@
                         return;
                     }
 
+                    // ── EE Critico d'Arte Ubriaco ──
+                    if (query === 'bellissimo') {
+                        if (typeof LexCore !== 'undefined' && LexCore.triggerCriticoUbriaco) {
+                            LexCore.triggerCriticoUbriaco();
+                        }
+                    }
+
                     if (results.length === 0) {
                         // Trigger async full-text fallback search
                         resultsList.innerHTML = `<div class="no-results-msg" id="fulltext-loader">

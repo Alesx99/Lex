@@ -1224,6 +1224,9 @@
         let timeRemaining = 60;
         let examStartTime = 0;
         
+        let rightStreak = 0;
+        let wrongStreak = 0;
+        
         // Dom Elements
         const setupScreen = document.getElementById('setup-screen');
         const activeScreen = document.getElementById('exam-active-screen');
@@ -1581,6 +1584,32 @@
 
             if (isCorrect) {
                 score++;
+            }
+
+            // Streak tracking for Sentenza del Pretore (ee-sentenza-pretore) - Diritto subject only
+            if (q.subject === 'diritto') {
+                if (isCorrect) {
+                    rightStreak++;
+                    wrongStreak = 0;
+                    if (rightStreak === 3) {
+                        rightStreak = 0;
+                        if (typeof LexCore !== 'undefined' && LexCore.triggerSentenzaPretore) {
+                            LexCore.triggerSentenzaPretore(true);
+                        }
+                    }
+                } else {
+                    wrongStreak++;
+                    rightStreak = 0;
+                    if (wrongStreak === 3) {
+                        wrongStreak = 0;
+                        if (typeof LexCore !== 'undefined' && LexCore.triggerSentenzaPretore) {
+                            LexCore.triggerSentenzaPretore(false);
+                        }
+                    }
+                }
+            } else {
+                rightStreak = 0;
+                wrongStreak = 0;
             }
 
             // ── EE #5: Codex Aureus streak tracking ──

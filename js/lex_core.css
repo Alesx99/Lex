@@ -1424,4 +1424,330 @@ body.scriptorium-mode {
     margin-top: 0.3rem;
 }
 
+/* ── EE: Dedica dell'Augusto (Scalpello) ── */
+.epigraphic-overlay {
+    position: fixed; inset: 0;
+    background: rgba(8, 11, 17, 0.92);
+    z-index: 20002;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(10px);
+}
+.epigraphic-stone {
+    background: linear-gradient(135deg, #d3c2b0 0%, #a89a8c 100%);
+    border: 8px double #5a5046;
+    border-radius: 4px;
+    padding: 3.5rem 3rem;
+    width: 90%; max-width: 520px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    position: relative;
+    color: #2c251e;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+.epigraphic-text {
+    font-size: 1.8rem;
+    letter-spacing: 0.18em;
+    line-height: 2;
+    margin: 1.5rem 0;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.4), -1px -1px 1px rgba(0,0,0,0.7);
+    border-bottom: 2px dashed rgba(44,37,30,0.2);
+    padding-bottom: 1.5rem;
+}
+.epigraphic-sub {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #4a3e35;
+}
+.epigraphic-close {
+    background: #2c251e;
+    color: #d3c2b0;
+    border: none;
+    padding: 0.6rem 1.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.epigraphic-close:hover { background: #453b30; }
+
+/* ── EE: Sentenza del Pretore ── */
+.pretore-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 20003;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(5px);
+}
+.pretore-card {
+    background: #100a0a;
+    border: 3px double #cc1111;
+    border-radius: 12px;
+    padding: 2.5rem;
+    max-width: 450px; width: 90%;
+    text-align: center;
+    color: #ff3333;
+    box-shadow: 0 0 40px rgba(204,17,17,0.4);
+    animation: stamp-drop 0.4s ease forwards;
+}
+.pretore-card.absolutus {
+    background: #0a100a;
+    border-color: #11cc11;
+    color: #33ff33;
+    box-shadow: 0 0 40px rgba(17,204,17,0.4);
+}
+.pretore-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+}
+.pretore-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+.pretore-close {
+    background: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.pretore-close:hover { background: rgba(255,255,255,0.05); }
+
+/* ── EE: Critico Ubriaco ── */
+.critico-overlay {
+    position: fixed; inset: 0;
+    background: rgba(5,7,12,0.9);
+    z-index: 20004;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(12px);
+}
+.critico-card {
+    background: rgba(22, 28, 45, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 580px; width: 90%;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    animation: colofone-appear 0.5s ease both;
+}
+.critico-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+.critico-ornament { font-size: 2rem; }
+.critico-meta { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+.critico-quote {
+    font-family: Georgia, serif; font-style: italic; font-size: 1.15rem; line-height: 1.8;
+    color: #e8d9b0; margin-bottom: 1.5rem;
+}
+.critico-firma { font-size: 0.9rem; text-align: right; color: var(--text-secondary); margin-bottom: 2rem; }
+.critico-close {
+    display: block; width: 100%; padding: 0.75rem;
+    background: var(--accent-gold); color: #000; border: none; border-radius: 99px;
+    font-weight: 700; cursor: pointer; transition: all 0.2s;
+}
+.critico-close:hover { transform: scale(1.02); }
+
+/* ── EE: Dispaccio del Corriere ── */
+.dispaccio-overlay {
+    position: fixed; inset: 0;
+    background: rgba(4,6,10,0.94);
+    z-index: 20005;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+}
+.dispaccio-card {
+    background: linear-gradient(150deg, #f7ebd5 0%, #ede0c0 100%);
+    border: 1px solid #c8a878;
+    border-radius: 4px;
+    padding: 3rem 2.5rem;
+    max-width: 550px; width: 92%;
+    box-shadow: 8px 8px 30px rgba(0,0,0,0.6);
+    position: relative;
+    color: #2c1a0c;
+    font-family: Georgia, serif;
+}
+.dispaccio-seal {
+    font-size: 2.5rem; text-align: center; margin-bottom: 1rem;
+    animation: pulse 1.5s infinite;
+}
+.dispaccio-header {
+    font-size: 0.75rem; text-align: center; letter-spacing: 0.15em;
+    text-transform: uppercase; border-bottom: 1.5px solid #2c1a0c;
+    padding-bottom: 0.8rem; margin-bottom: 1.5rem; font-weight: 700;
+}
+.dispaccio-body p { line-height: 1.7; margin-bottom: 0.8rem; font-size: 0.92rem; }
+.dispaccio-close {
+    display: block; margin: 1.8rem auto 0; background: #2c1a0c; color: #f7ebd5;
+    border: none; padding: 0.5rem 1.8rem; border-radius: 20px;
+    font-size: 0.8rem; cursor: pointer; transition: background 0.2s;
+}
+.dispaccio-close:hover { background: #4a2c15; }
+
+/* ── EE: Voce del Campanile ── */
+.campanile-toast {
+    position: fixed; top: 2rem; left: 50%; transform: translateX(-50%) translateY(-30px);
+    opacity: 0; background: rgba(13,18,30,0.92); border: 1.5px solid #c9a84c;
+    padding: 0.8rem 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 20006;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.campanile-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+.campanile-bell { font-size: 2rem; animation: heartbeat-anim 1.5s infinite; }
+.campanile-hora { font-family: 'Playfair Display', Georgia, serif; color: #f0c040; font-size: 1.1rem; font-weight: 700; }
+.campanile-sub { font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ── EE: Consiglio del Professore ── */
+.professore-overlay {
+    position: fixed; inset: 0;
+    background: rgba(8,11,17,0.88);
+    z-index: 20007;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+}
+.professore-card {
+    background: rgba(22, 28, 45, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 480px; width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+    animation: colofone-appear 0.4s ease both;
+}
+.professore-card.prof-warning { border-left: 5px solid #ef4444; }
+.professore-card.prof-success { border-left: 5px solid #10b981; }
+.prof-emoji { font-size: 3.5rem; margin-bottom: 1rem; }
+.prof-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+.prof-text { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1.8rem; font-style: italic; }
+.prof-close {
+    background: var(--accent-gold); color: #000; border: none; padding: 0.6rem 2rem;
+    border-radius: 20px; font-weight: 700; cursor: pointer; transition: transform 0.2s;
+}
+.prof-close:hover { transform: scale(1.03); }
+
+/* ── EE: Costellazione ── */
+.costellazione-overlay {
+    position: fixed; inset: 0;
+    background: rgba(5,7,12,0.92);
+    z-index: 20008;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(10px);
+}
+.costellazione-card {
+    background: #0b0f19;
+    border: 1px solid rgba(240,192,64,0.3);
+    border-radius: 24px;
+    padding: 2.5rem;
+    width: 90%; max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(240,192,64,0.25);
+    animation: scaleIn 0.5s ease both;
+}
+.costellazione-title { font-family: 'Playfair Display', Georgia, serif; color: #f0c040; font-size: 1.5rem; letter-spacing: 0.1em; margin-top: 1rem; }
+.costellazione-sub { font-size: 0.85rem; color: var(--text-secondary); margin: 0.5rem 0 1.5rem 0; }
+.costellazione-close {
+    background: transparent; border: 1px solid #f0c040; color: #f0c040;
+    padding: 0.5rem 1.5rem; border-radius: 20px; cursor: pointer; transition: all 0.2s;
+}
+.costellazione-close:hover { background: rgba(240,192,64,0.1); }
+
+/* ── EE: Macchina del Tempo ── */
+.macchina-overlay {
+    position: fixed; inset: 0;
+    background: #000;
+    z-index: 20009;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+}
+.macchina-vortex {
+    position: absolute; inset: -50%;
+    background: radial-gradient(circle, transparent 20%, rgba(59, 130, 246, 0.4) 60%, #000 90%);
+    animation: vortex-spin 6s linear infinite;
+    pointer-events: none;
+}
+@keyframes vortex-spin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+.macchina-card {
+    background: rgba(10, 15, 30, 0.9);
+    border: 2px solid var(--accent-blue);
+    border-radius: 24px;
+    padding: 3rem;
+    width: 90%; max-width: 500px;
+    text-align: center;
+    z-index: 1;
+    box-shadow: 0 0 60px rgba(59, 130, 246, 0.5);
+    animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.macchina-year { font-size: 3.5rem; font-family: var(--font-serif); color: var(--accent-blue); font-weight: 800; text-shadow: 0 0 20px rgba(59,130,246,0.5); margin-bottom: 0.5rem; }
+.macchina-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary); }
+.macchina-text { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 2rem; }
+.macchina-close {
+    background: var(--accent-blue); color: #fff; border: none; padding: 0.6rem 2rem;
+    border-radius: 20px; font-weight: 700; cursor: pointer; transition: background 0.2s;
+}
+.macchina-close:hover { background: #2563eb; }
+
+/* ── EE: Promemoria del Monaco ── */
+.monaco-toast {
+    position: fixed; bottom: 2rem; left: 2rem;
+    background: rgba(15,10,5,0.96); border: 1px solid #c9a84c; border-left: 4px solid #c9a84c;
+    border-radius: 12px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.9rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 20010; opacity: 0; transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 320px;
+}
+.monaco-toast.visible { opacity: 1; transform: translateY(0); }
+.monaco-icon { font-size: 1.8rem; animation: heartbeat-anim 2s infinite; }
+.monaco-text { font-size: 0.85rem; line-height: 1.4; color: #e8d9b0; }
+.monaco-text strong { color: #f0c040; display: block; margin-bottom: 0.1rem; }
+
+/* ── EE: Tabula Victoriae ── */
+.waxtablet-overlay {
+    position: fixed; inset: 0;
+    background: rgba(5,7,12,0.92);
+    z-index: 20011;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(10px);
+}
+.waxtablet-card {
+    background: linear-gradient(135deg, #7c5835 0%, #4a2c11 100%);
+    border: 12px solid #2a1605;
+    border-radius: 6px;
+    padding: 3rem 2rem;
+    width: 90%; max-width: 440px;
+    text-align: center;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.8), 0 20px 40px rgba(0,0,0,0.6);
+    color: #e5b982;
+    font-family: Georgia, serif;
+    animation: stamp-drop 0.5s ease both;
+}
+.waxtablet-title { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 1px solid rgba(229,185,130,0.3); padding-bottom: 0.8rem; margin-bottom: 1.5rem; font-weight: 700; }
+.waxtablet-score { font-size: 4rem; font-weight: 800; font-family: var(--font-serif); margin-bottom: 0.5rem; text-shadow: 2px 2px 2px #000; }
+.waxtablet-name { font-size: 1.2rem; font-style: italic; margin-bottom: 1.5rem; }
+.waxtablet-sub { font-size: 0.75rem; color: #a47c50; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.8rem; }
+.waxtablet-close {
+    background: #2a1605; color: #e5b982; border: 1px solid #e5b982; padding: 0.5rem 1.8rem;
+    border-radius: 4px; font-size: 0.8rem; cursor: pointer; text-transform: uppercase; font-weight: 600;
+}
+.waxtablet-close:hover { background: #422409; }
+
+
 

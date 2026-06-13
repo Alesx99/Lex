@@ -1588,6 +1588,10 @@
                         });
                         localStorage.setItem('lex-free-links', JSON.stringify(window.freeLinks));
                         drawFreeLines();
+
+                        if (typeof LexCore !== 'undefined' && LexCore.trackConnectionLink) {
+                            LexCore.trackConnectionLink();
+                        }
                     }
                     
                     document.getElementById(window.selectedFreeStartNode).classList.remove('selected-for-link');

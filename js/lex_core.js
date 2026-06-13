@@ -2632,9 +2632,469 @@ const LexCore = {
         if (window.location.pathname.includes('codicologia')) {
             setTimeout(() => this.checkColofone(), 1500);
         }
+        // Dispaccio: traccio le aperture di capitoli di Storia
+        if (window.location.pathname.includes('storia')) {
+            this._initDispaccioTracker();
+        }
+        // Campanile: pagine di Arte Cristiana
+        if (window.location.pathname.includes('cristiana')) {
+            this._checkCampanile();
+        }
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // EASTER EGG REGISTRY — SISTEMA LOCK/UNLOCK GLOBALE
+    // ═══════════════════════════════════════════════════════════════
+
+    EE_REGISTRY: [
+        // ── Categoria: Amore & Romantico ──
+        { id:'ee-portale-atena',     cat:'amore',       icon:'Φ',  name:'Il Portale di Atena',           hint:'Un antico simbolo greco si nasconde in fondo alla pagina principale...',           desc:'Clicca il simbolo Φ nel footer della home e inserisci la parola d\'ordine "pantheon".', page:'index.html' },
+        { id:'ee-lettera-amore',     cat:'amore',       icon:'❤️', name:'La Lettera d\'Amore',            hint:'Le parole più dolci sbloccano qualcosa di inaspettato nella ricerca...',           desc:'Digita "ti amo", "amore", "alessandra" o "lex" nel motore di ricerca.', page:'index.html' },
+        { id:'ee-chatbot-romantico', cat:'amore',       icon:'💬', name:'Il Chatbot Romantico',           hint:'L\'assistente IA cela una sorpresa per chi fa le domande giuste...',               desc:'Chiedi all\'assistente qualcosa che contenga "alessio", "amore" o "fidanzato".', page:'assistant.html' },
+        { id:'ee-cuori-highlight',   cat:'amore',       icon:'💖', name:'Esplosione di Cuori',            hint:'Evidenziare è un atto d\'amore — prova a sottolineare qualcosa...',                desc:'Evidenzia un paragrafo con qualsiasi colore nelle sintesi dei capitoli.', page:'*' },
+        { id:'ee-coccole',           cat:'amore',       icon:'🌸', name:'Modalità Coccole',               hint:'Il pulsante tema nasconde un\'opzione rosa e dolcissima...',                       desc:'Clicca il pulsante tema 3 volte fino ad attivare la modalità coccole.', page:'*' },
+        { id:'ee-toast-motivazionale',cat:'amore',      icon:'✨', name:'Toast Motivazionale',            hint:'Studiare e poi chiudere una sintesi ha la sua piccola ricompensa...',              desc:'Chiudi una sintesi dopo averla letta.', page:'*' },
+        { id:'ee-memory-game',       cat:'amore',       icon:'🎮', name:'Memory Game Nascosto',           hint:'Il Pomodoro nasconde qualcosa di ludico nelle sue pause...',                      desc:'Trova il Memory Game nel pannello Pomodoro della barra laterale.', page:'*' },
+        // ── Categoria: Scriptorium ──
+        { id:'ee-colofone',          cat:'scriptorium', icon:'✦',  name:'Il Colofone del Copista',        hint:'"Explicit liber"... cosa succede quando si chiude davvero un\'opera?',             desc:'Completa tutti e 12 i capitoli di Codicologia.', page:'codicologia/index.html' },
+        { id:'ee-manoscritto',       cat:'scriptorium', icon:'📜', name:'Il Manoscritto Perduto',         hint:'La fortuna sorride a chi apre la porta giusta nel momento giusto...',              desc:'Con l\'1% di probabilità ad ogni apertura della home, un frammento di pergamena appare.', page:'index.html' },
+        { id:'ee-konami',            cat:'scriptorium', icon:'🎹', name:'Sequenza Konami del Copista',    hint:'Una celebre sequenza di tasti trasforma l\'interfaccia in uno scriptorium...',     desc:'Digita ↑↑↓↓←→←→BA da tastiera su qualsiasi pagina.', page:'*' },
+        { id:'ee-fantasma',          cat:'scriptorium', icon:'👻', name:'Il Fantasma della Biblioteca',   hint:'"I manoscritti non bruciano" — ma appaiono ad un\'ora molto precisa...',           desc:'Apri la piattaforma alle 23:59.', page:'*' },
+        { id:'ee-codex-aureus',      cat:'scriptorium', icon:'🏅', name:'Codex Aureus — Auctor Perfectus',hint:'La perfezione accademica viene premiata con l\'oro...',                           desc:'Rispondi correttamente a 10 domande consecutive senza errori.', page:'*' },
+        { id:'ee-scriptore',         cat:'scriptorium', icon:'🔍', name:'Lo Scriptore Segreto',           hint:'Un capitolo non catalogato attende chi cerca nel posto giusto...',                desc:'Cerca la parola esatta "scriptorium" nel motore di ricerca della home.', page:'index.html' },
+        { id:'ee-laus-deo',          cat:'scriptorium', icon:'🔴', name:'Timbro LAUS DEO',                hint:'"Laus Deo" — solo un voto eccellente merita questo sigillo antico...',            desc:'Completa una simulazione d\'esame con punteggio ≥ 90%.', page:'exam.html' },
+        // ── Categoria: Materie ──
+        { id:'ee-dedica-augusto',    cat:'materie',     icon:'🏛️', name:'La Dedica dell\'Augusto',        hint:'"Tres faciunt collegium" — cosa succede se premi tre volte?',                    desc:'Clicca 3 volte di fila sul titolo del capitolo nella sintesi di Arte Romana.', page:'arte_romana/index.html' },
+        { id:'ee-sentenza-pretore',  cat:'materie',     icon:'⚖️', name:'La Sentenza del Pretore',        hint:'Il diritto romano non perdona gli ignoranti... né li premia senza fatica.',       desc:'Nel quiz di Diritto, sbaglia 3 risposte di fila, poi rispondi correttamente 3 volte.', page:'exam.html' },
+        { id:'ee-critico-ubriaco',   cat:'materie',     icon:'🎨', name:'Il Critico d\'Arte Ubriaco',     hint:'"Bellissimo!" dicevano i critici dell\'800... prova a dirlo anche tu.',           desc:'Cerca la parola "bellissimo" nel motore di ricerca della home.', page:'index.html' },
+        { id:'ee-dispaccio',         cat:'materie',     icon:'📜', name:'Il Dispaccio del Corriere',      hint:'Versailles ha una missione urgente per chi studia la Storia Moderna...',          desc:'Apri 5 capitoli di Storia Moderna nella stessa sessione.', page:'storia/*' },
+        { id:'ee-oracolo',           cat:'materie',     icon:'🏺', name:'L\'Oracolo di Delfi',            hint:'"Conosci te stesso" — ma chi sei davvero? Chiedi all\'assistente...',             desc:'Digita "chi sono?" o "cosa farò?" nell\'assistente AI.', page:'assistant.html' },
+        { id:'ee-campanile',         cat:'materie',     icon:'⛪', name:'La Voce del Campanile',          hint:'"Ora est et nunc tempus" — l\'ora piena ha il suo suono segreto...',             desc:'Apri un capitolo di Arte Cristiana all\'ora esatta (es. 15:00, 16:00...).', page:'cristiana/index.html' },
+        { id:'ee-professore',        cat:'materie',     icon:'🎓', name:'Il Consiglio del Professore',    hint:'"Sapere è potere, ma non sapere ha le sue conseguenze..." — controlla le analytics.', desc:'Visita la pagina Analytics con readiness < 40% o > 95%.', page:'analytics.html' },
+        { id:'ee-costellazione',     cat:'materie',     icon:'⭐', name:'La Costellazione — Nexus Sapientiae', hint:'"Nexus Sapientiae" — sette è il numero perfetto nel cielo accademico...',   desc:'Collega 7 o più nodi nella mappa trans-disciplinare di Connections.', page:'connections.html' },
+        { id:'ee-custos-memoriae',   cat:'materie',     icon:'🏆', name:'Custos Memoriae',                hint:'Un badge che non compare nella lista... esiste solo per i più completi.',         desc:'Sblocca tutti gli altri achievement nella pagina Traguardi.', page:'achievements.html' },
+        { id:'ee-macchina-tempo',    cat:'materie',     icon:'⏱️', name:'La Macchina del Tempo',          hint:'"Il tempo non è una freccia ma un labirinto" — insisti su un evento...',        desc:'Clicca 5 volte sullo stesso evento nella Timeline storica.', page:'timeline.html' },
+        { id:'ee-monaco',            cat:'materie',     icon:'🔔', name:'Il Promemoria del Monaco',       hint:'"Ora prima. Laus Deo." — il monaco approva chi studia all\'alba.',               desc:'Genera una roadmap nel Planner con data dell\'esame molto vicina (≤ 3 giorni).', page:'planner.html' },
+        { id:'ee-wax-tablet',        cat:'materie',     icon:'🗿', name:'High Score Leggendario',         hint:'"Victor ex aequo" — batti il tuo stesso record con stile.',                      desc:'Batti il tuo record precedente nei minigame di oltre il 20%.', page:'minigames.html' },
+    ],
+
+    unlockEasterEgg(id) {
+        try {
+            const unlocked = JSON.parse(localStorage.getItem('lex-ee-unlocked') || '[]');
+            if (!unlocked.includes(id)) {
+                unlocked.push(id);
+                localStorage.setItem('lex-ee-unlocked', JSON.stringify(unlocked));
+                const egg = this.EE_REGISTRY.find(e => e.id === id);
+                if (egg) this._showEEUnlockToast(egg);
+            }
+        } catch(e) {}
+    },
+
+    getUnlockedEggs() {
+        try {
+            return JSON.parse(localStorage.getItem('lex-ee-unlocked') || '[]');
+        } catch(e) { return []; }
+    },
+
+    isEggUnlocked(id) {
+        return this.getUnlockedEggs().includes(id);
+    },
+
+    _showEEUnlockToast(egg) {
+        const existing = document.getElementById('lex-ee-unlock-toast');
+        if (existing) existing.remove();
+        const toast = document.createElement('div');
+        toast.id = 'lex-ee-unlock-toast';
+        toast.className = 'ee-unlock-toast';
+        toast.innerHTML = `
+            <div class="ee-unlock-icon">${egg.icon}</div>
+            <div class="ee-unlock-text">
+                <div class="ee-unlock-title">🔓 Segreto Sbloccato!</div>
+                <div class="ee-unlock-name">${egg.name}</div>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.add('visible'), 50);
+        setTimeout(() => {
+            toast.classList.remove('visible');
+            setTimeout(() => toast.remove(), 400);
+        }, 3500);
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // 12 NUOVI EASTER EGG — MATERIE
+    // ═══════════════════════════════════════════════════════════════
+
+    // ── EE Dedica dell'Augusto (Arte Romana, triple click titolo) ──
+    triggerDedicaAugusto() {
+        if (document.getElementById('lex-epigraphic-overlay')) return;
+        this.unlockEasterEgg('ee-dedica-augusto');
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-epigraphic-overlay';
+        overlay.className = 'epigraphic-overlay';
+        overlay.innerHTML = `
+            <div class="epigraphic-stone">
+                <div class="epigraphic-text" id="epigraphic-incised"></div>
+                <div class="epigraphic-sub">Inscritto nel marmo · Lex Studiorum</div>
+                <button class="epigraphic-close" onclick="document.getElementById('lex-epigraphic-overlay').remove()">Congedare l'Imperatore</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const txt = "IMP · CAESAR · DIVI · F · AVGVSTVS · PONTIF · MAX";
+        let idx = 0;
+        const target = document.getElementById('epigraphic-incised');
+        
+        function playChiselTick() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.frequency.value = 1200 + Math.random() * 400;
+                osc.type = 'triangle';
+                gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+                osc.start(); osc.stop(ctx.currentTime + 0.08);
+            } catch(e) {}
+        }
+
+        const interval = setInterval(() => {
+            if (idx >= txt.length) {
+                clearInterval(interval);
+                return;
+            }
+            const char = txt[idx++];
+            target.textContent += char;
+            if (char !== ' ') {
+                playChiselTick();
+            }
+        }, 120);
+    },
+
+    // ── EE Sentenza del Pretore (Diritto, streak wrong/right) ────────
+    triggerSentenzaPretore(isAbsolutus) {
+        const id = 'lex-pretore-overlay';
+        if (document.getElementById(id)) return;
+        this.unlockEasterEgg('ee-sentenza-pretore');
+        const overlay = document.createElement('div');
+        overlay.id = id;
+        overlay.className = 'pretore-overlay';
+        overlay.innerHTML = `
+            <div class="pretore-card ${isAbsolutus ? 'absolutus' : ''}">
+                <div class="pretore-title">${isAbsolutus ? 'ABSOLUTUS EST' : 'IN VINCULA DUCTUS EST'}</div>
+                <p class="pretore-text">
+                    ${isAbsolutus 
+                        ? 'La giuria ha deliberato. Con tre risposte esatte consecutive avete riscattato il vostro onore. Siete assolto da ogni accusa accademica.' 
+                        : 'La legge delle XII Tavole è chiara. Con tre risposte errate di fila avete dimostrato grave ignoranza del diritto dei beni culturali. Siete condotto in catene.'
+                    }
+                </p>
+                <button class="pretore-close" onclick="document.getElementById('lex-pretore-overlay').remove()">Ritorna al Quiz</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    },
+
+    // ── EE Critico d'Arte Ubriaco (ricerca "bellissimo") ────────────
+    triggerCriticoUbriaco() {
+        if (document.getElementById('lex-critico-overlay')) return;
+        this.unlockEasterEgg('ee-critico-ubriaco');
+        const CRITICHE = [
+            { autore: 'Isidoro Bramante-Frasca', anno: 1847, testo: '"È un\'opera di sublime e celestiale fattura, elevata com\'è al di sopra di qualsiasi umana comprensione, benché il pittore sia certamente morto di fame e probabilmente non avesse pagato l\'affitto da quattro anni. La luce! L\'ombra! Il chiaroscuro! In sostanza: bellissimo."' },
+            { autore: 'Edmondo De Caravelli', anno: 1863, testo: '"Questa tela trasuda un\'anima che piange lacrime di gloria e gloria di lacrime. Il colore è colore. La forma è forma. Eppure è qualcosa di più: è una forma di colore e un colore di forma. Ho pianto. Ho riso. Ho pranzato. Bellissimo."' },
+            { autore: 'Celestino Artefice', anno: 1891, testo: '"Come osare criticare ciò che supera la critica stessa? Il pennello ha danzato sulla tela come un cigno ubriaco di esistenza. Non so cosa significhi, ma ho detto \'bellissimo\' a voce così alta che mi hanno buttato fuori dalla galleria."' },
+        ];
+        const c = CRITICHE[Math.floor(Math.random() * CRITICHE.length)];
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-critico-overlay';
+        overlay.className = 'critico-overlay';
+        overlay.innerHTML = `
+            <div class="critico-card">
+                <div class="critico-header">
+                    <span class="critico-ornament">🎨</span>
+                    <div class="critico-meta">Critica d'Arte · ${c.anno}</div>
+                </div>
+                <blockquote class="critico-quote">${c.testo}</blockquote>
+                <div class="critico-firma">— ${c.autore}, <em>Bollettino delle Arti Sublime</em></div>
+                <button class="critico-close" onclick="document.getElementById('lex-critico-overlay').remove()">Chiudi la Galleria</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 12000);
+    },
+
+    // ── EE Dispaccio del Corriere (5 capitoli Storia nella sessione) ─
+    _storiaChaptersThisSession: 0,
+    _initDispaccioTracker() {
+        const origTrack = this.trackChapterRead.bind(this);
+        this.trackChapterRead = (chapterId) => {
+            origTrack(chapterId);
+            if (chapterId && chapterId.includes('storia')) {
+                this._storiaChaptersThisSession++;
+                if (this._storiaChaptersThisSession === 5 && !this.isEggUnlocked('ee-dispaccio')) {
+                    setTimeout(() => this.triggerDispaccio(), 800);
+                }
+            }
+        };
+    },
+
+    triggerDispaccio() {
+        if (document.getElementById('lex-dispaccio-overlay')) return;
+        this.unlockEasterEgg('ee-dispaccio');
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-dispaccio-overlay';
+        overlay.className = 'dispaccio-overlay';
+        overlay.innerHTML = `
+            <div class="dispaccio-card">
+                <div class="dispaccio-seal">🔴</div>
+                <div class="dispaccio-header">DISPACCIO URGENTE — VERSAILLES, Anno di Grazia 1789</div>
+                <div class="dispaccio-body">
+                    <p>Da: <em>Monsieur le Ministre des Archives Secrètes de Sa Majesté</em></p>
+                    <p>A: Lo Studente Diligente della Materia di Storia Moderna</p>
+                    <p>Oggetto: <strong>Rapporto di Ricognizione — Cinque Missioni Completate</strong></p>
+                    <p style="margin-top:1rem; font-style:italic;">"Avete letto con diligenza i cinque dispacci che vi erano stati affidati. La Corona vi ha osservato con approvazione. Ricordate: la Rivoluzione Francese (1789), il Congresso di Vienna (1815), le Unificazioni (1848-1871) e le Guerre Mondiali (1914–1945) sono le pietre angolari di ogni analisi storica degna di tal nome. Continuate il servizio alla conoscenza."</p>
+                    <p style="text-align:right; margin-top:1rem;">— Firmato con sigillo reale</p>
+                </div>
+                <button class="dispaccio-close" onclick="document.getElementById('lex-dispaccio-overlay').remove()">Chiudere il Dispaccio</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    },
+
+    // ── EE Oracolo di Delfi (assistant chat) ─────────────────────────
+    ORACOLO_RESPONSES: [
+        '"Chi sei tu?" chiede lo studente. Risponde l\'oracolo: <em>"Sei colui che legge quando gli altri dormono, e che dorme quando gli esami incombono. Sei la domanda e la risposta, il codice e il copista. La tua stella è il frammento di una biblioteca mai bruciata."</em>',
+        '"Cosa farò?" implora il pellegrino. L\'oracolo tace tre volte, poi parla: <em>"Porterai il peso dei libri come Atlante portava il mondo. Ma il tuo peso illuminerà, non schiaccerà. Un esame ti attende. Un altro ancora. E poi la laurea, come la primavera dopo il lungo inverno dello studio."</em>',
+        'La Pizia si alza dalla sua sede, le pupille dilatate: <em>"Non cercare il futuro nei miei fumi. Il futuro è nelle sintesi che non hai ancora letto, nelle flashcard che hai rimandato, nelle simulazioni che temi. Vai. Studia. Il destino aiuta chi si prepara."</em>',
+    ],
+    triggerOracoloDelfi(addBotFn) {
+        this.unlockEasterEgg('ee-oracolo');
+        const r = this.ORACOLO_RESPONSES[Math.floor(Math.random() * this.ORACOLO_RESPONSES.length)];
+        if (addBotFn) {
+            addBotFn(`<div style="font-family:Georgia,serif; font-style:italic; border-left:3px solid #c9a84c; padding-left:1rem; color:var(--accent-gold);">🏺 <strong>L'Oracolo di Delfi risponde:</strong><br><br>${r}</div>`);
+        }
+    },
+
+    // ── EE Voce del Campanile (ora piena, pagine cristiana) ──────────
+    _checkCampanile() {
+        const now = new Date();
+        if (now.getMinutes() === 0 && now.getSeconds() < 30) {
+            if (sessionStorage.getItem('lex-campanile-played')) return;
+            sessionStorage.setItem('lex-campanile-played', '1');
+            setTimeout(() => this.triggerCampanile(now.getHours()), 1000);
+        }
+    },
+
+    triggerCampanile(hour) {
+        this.unlockEasterEgg('ee-campanile');
+        const HORAE = {1:'Prima',2:'Secunda',3:'Tertia',4:'Quarta',5:'Quinta',6:'Sexta',7:'Septima',8:'Octava',9:'Nona',10:'Decima',11:'Undecima',12:'Duodecima',13:'Tertia (post meridiem)',14:'Quarta (post meridiem)',15:'Nona (post meridiem)',16:'Quarta decima',17:'Quinta decima',18:'Sexta decima',19:'Septima decima',20:'Octava decima',21:'Nona decima',22:'Vicesima secunda',23:'Vicesima tertia',0:'Vigilia Noctis'};
+        const horaName = HORAE[hour] || 'Hora Incognita';
+        // Suono campana via Web Audio
+        this._playCampanaBell(hour);
+        // Toast animato
+        const toast = document.createElement('div');
+        toast.className = 'campanile-toast';
+        toast.id = 'lex-campanile-toast';
+        toast.innerHTML = `<span class="campanile-bell">🔔</span><div><div class="campanile-hora">Hora ${horaName}</div><div class="campanile-sub">Anno Domini MMXXVI · Lex Studiorum</div></div>`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.add('visible'), 50);
+        setTimeout(() => { toast.classList.remove('visible'); setTimeout(() => toast.remove(), 500); }, 4000);
+    },
+
+    _playCampanaBell(times) {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const ringCount = Math.min(times, 4) || 1;
+            for (let i = 0; i < ringCount; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.frequency.value = 523.25;
+                osc.type = 'sine';
+                const t = ctx.currentTime + i * 0.9;
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.25, t + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
+                osc.start(t); osc.stop(t + 0.8);
+            }
+        } catch(e) {}
+    },
+
+    // ── EE Consiglio del Professore (analytics readiness) ─────────────
+    triggerConsiglioProf(prob) {
+        if (document.getElementById('lex-professore-overlay')) return;
+        this.unlockEasterEgg('ee-professore');
+        const isLow = prob < 40;
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-professore-overlay';
+        overlay.className = 'professore-overlay';
+        overlay.innerHTML = `
+            <div class="professore-card ${isLow ? 'prof-warning' : 'prof-success'}">
+                <div class="prof-emoji">${isLow ? '👨‍🏫' : '🎓'}</div>
+                <div class="prof-title">${isLow ? 'Il Professore scuote la testa...' : 'Il Professore si alza in piedi!'}</div>
+                <p class="prof-text">${isLow 
+                    ? '"Non è ancora il momento di presentarsi all\'esame, caro studente. Torno in cattedra quando avrete letto almeno qualche altro capitolo. Arrivederci."' 
+                    : '"Straordinario! Raramente vedo una preparazione così solida. Se continuate così, otterrete la lode. Forse anche un dottorato. Forse." *applaude lentamente*'
+                }</p>
+                <button class="prof-close" onclick="document.getElementById('lex-professore-overlay').remove()">Congedare il Professore</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 8000);
+    },
+
+    // ── EE Costellazione (7+ nodi in connections) ────────────────────
+    _sessionLinks: 0,
+    trackConnectionLink() {
+        this._sessionLinks++;
+        if (this._sessionLinks === 7 && !this.isEggUnlocked('ee-costellazione')) {
+            setTimeout(() => this.triggerCostellazione(), 500);
+        }
+    },
+
+    triggerCostellazione() {
+        this.unlockEasterEgg('ee-costellazione');
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-costellazione-overlay';
+        overlay.className = 'costellazione-overlay';
+        overlay.innerHTML = `
+            <div class="costellazione-card">
+                <canvas id="costellazione-canvas" width="320" height="200"></canvas>
+                <div class="costellazione-title">✦ Nexus Sapientiae ✦</div>
+                <div class="costellazione-sub">Hai tracciato la costellazione della conoscenza</div>
+                <button onclick="document.getElementById('lex-costellazione-overlay').remove()" class="costellazione-close">Chiudere il Firmamento</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        // Anima la costellazione su canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('costellazione-canvas');
+            if (!canvas) return;
+            const ctx2 = canvas.getContext('2d');
+            const stars = Array.from({length:12}, () => ({ x: Math.random()*300+10, y: Math.random()*180+10, r: Math.random()*2+1 }));
+            ctx2.fillStyle = '#0b0f19';
+            ctx2.fillRect(0,0,320,200);
+            let drawn = 0;
+            const interval = setInterval(() => {
+                if (drawn >= stars.length) { clearInterval(interval); return; }
+                const s = stars[drawn++];
+                ctx2.beginPath();
+                ctx2.arc(s.x, s.y, s.r, 0, Math.PI*2);
+                ctx2.fillStyle = '#f0c040';
+                ctx2.shadowBlur = 8; ctx2.shadowColor = '#f0c040';
+                ctx2.fill();
+                if (drawn > 1) {
+                    ctx2.beginPath();
+                    ctx2.moveTo(stars[drawn-2].x, stars[drawn-2].y);
+                    ctx2.lineTo(s.x, s.y);
+                    ctx2.strokeStyle = 'rgba(240,192,64,0.3)'; ctx2.lineWidth = 0.8;
+                    ctx2.stroke();
+                }
+            }, 180);
+        }, 200);
+        setTimeout(() => document.getElementById('lex-costellazione-overlay')?.remove(), 10000);
+    },
+
+    // ── EE Macchina del Tempo (5 click stesso evento timeline) ──────
+    _timelineClickMap: {},
+    trackTimelineClick(eventId, eventData) {
+        if (!this._timelineClickMap[eventId]) this._timelineClickMap[eventId] = 0;
+        this._timelineClickMap[eventId]++;
+        if (this._timelineClickMap[eventId] === 5 && !this.isEggUnlocked('ee-macchina-tempo')) {
+            this.triggerMacchinaDelTempo(eventData);
+        }
+    },
+
+    triggerMacchinaDelTempo(eventData) {
+        this.unlockEasterEgg('ee-macchina-tempo');
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-macchina-overlay';
+        overlay.className = 'macchina-overlay';
+        const anno = eventData?.year || eventData?.date || '???';
+        const titolo = eventData?.title || 'Evento Storico';
+        overlay.innerHTML = `
+            <div class="macchina-vortex" id="lex-macchina-vortex"></div>
+            <div class="macchina-card">
+                <div class="macchina-year">${anno}</div>
+                <div class="macchina-title">⏱️ Sei tornato nell\'anno ${anno}</div>
+                <p class="macchina-text">Benvenuto. Intorno a te: <strong>${titolo}</strong>. L\'aria odora di polvere da sparo, inchiostro fresco e incertezza storica. Nessuno sa ancora come andrà a finire. Solo tu sì — hai studiato le sintesi.</p>
+                <button class="macchina-close" onclick="document.getElementById('lex-macchina-overlay').remove()">Tornare al Presente</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 10000);
+    },
+
+    // ── EE Promemoria Monaco (planner, esame vicinissimo ≤ 3 giorni) ─
+    triggerPromemoriaMonaco() {
+        if (document.getElementById('lex-monaco-toast')) return;
+        this.unlockEasterEgg('ee-monaco');
+        const toast = document.createElement('div');
+        toast.id = 'lex-monaco-toast';
+        toast.className = 'monaco-toast';
+        toast.innerHTML = `
+            <div class="monaco-icon">🔔</div>
+            <div class="monaco-text">
+                <strong>Ora Prima. Laus Deo.</strong><br>
+                <span>Il monaco approva il tuo spirito ascetico.<br>"In hoc signo vinces" — studia con fede.</span>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.add('visible'), 50);
+        setTimeout(() => { toast.classList.remove('visible'); setTimeout(() => toast.remove(), 500); }, 5000);
+    },
+
+    // ── EE Wax Tablet (minigame, batti record di >20%) ──────────────
+    triggerWaxTablet(playerName, score) {
+        if (document.getElementById('lex-waxtablet-overlay')) return;
+        this.unlockEasterEgg('ee-wax-tablet');
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-waxtablet-overlay';
+        overlay.className = 'waxtablet-overlay';
+        overlay.innerHTML = `
+            <div class="waxtablet-card">
+                <div class="waxtablet-title">TABULA VICTORIAE</div>
+                <div class="waxtablet-score">${score}</div>
+                <div class="waxtablet-name">${playerName || 'Victor Academicus'}</div>
+                <div class="waxtablet-sub">Record leggendario inciso nella cera · Lex Studiorum</div>
+                <button class="waxtablet-close" onclick="document.getElementById('lex-waxtablet-overlay').remove()">Suggellare il Record</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 8000);
+    },
+
+    // ── EE Custos Memoriae (tutti gli achievement) ──────────────────
+    checkCustosMemoriae() {
+        try {
+            const completed = JSON.parse(localStorage.getItem('lex-achievements-completed') || '[]');
+            // Controlla se ci sono almeno 15 achievement completati
+            if (completed.length >= 15 && !this.isEggUnlocked('ee-custos-memoriae')) {
+                this.unlockEasterEgg('ee-custos-memoriae');
+                setTimeout(() => this.triggerCustosMemoriae(), 1000);
+            }
+        } catch(e) {}
+    },
+
+    triggerCustosMemoriae() {
+        if (document.getElementById('lex-custos-overlay')) return;
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-custos-overlay';
+        overlay.className = 'colofone-overlay';
+        overlay.innerHTML = `
+            <div class="colofone-card" style="border-color:#f0c040; box-shadow: 0 0 80px rgba(240,192,64,0.4);">
+                <span class="colofone-ornament" style="font-size:3rem;">🏆</span>
+                <div class="colofone-title" style="color:#f0c040;">Custos Memoriae</div>
+                <p class="colofone-text">"Qui custodisce la memoria custodisce la civiltà stessa. Hai completato il ciclo degli achievement, dimostrandoti non solo studioso, ma guardiano del sapere accademico."</p>
+                <div class="colofone-sub">Badge Segreto · Sbloccato · Lex Studiorum</div>
+                <button class="colofone-close" style="border-color:#f0c040; color:#f0c040;" onclick="document.getElementById('lex-custos-overlay').remove()">Ricevere il Titolo ✦</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
     },
 
 };
+
 
 // Auto-init
 if (document.readyState === 'loading') {

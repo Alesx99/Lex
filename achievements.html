@@ -1009,6 +1009,9 @@
                 <div class="laurea-score-big" id="laurea-projection-value">--</div>
                 <div class="laurea-score-label">Voto di Laurea Stimato</div>
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;" id="laurea-bonus-notice">(incluso bonus tesi)</div>
+                <a href="easter_eggs.html" style="margin-top: 1.2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 0.5rem 1rem; border-radius: 20px; transition: all 0.3s ease; background: rgba(212, 175, 55, 0.05);">
+                    🔑 Galleria dei Segreti
+                </a>
             </div>
         </section>
 
@@ -1342,6 +1345,10 @@
             // Render UI
             updateDashboard();
             renderStudyHeatmap();
+
+            if (typeof LexCore !== 'undefined' && LexCore.checkCustosMemoriae) {
+                LexCore.checkCustosMemoriae();
+            }
         });
 
         function renderStudyHeatmap() {
@@ -2079,6 +2086,9 @@
             if (newlyCompleted) {
                 localStorage.setItem('lex-achievements-completed', JSON.stringify(completedList));
                 playChime(true);
+                if (typeof LexCore !== 'undefined' && LexCore.checkCustosMemoriae) {
+                    LexCore.checkCustosMemoriae();
+                }
             }
         }
 
