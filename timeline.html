@@ -96,6 +96,7 @@
         .filter-chip.active[data-subject="arte"] { border-color: var(--accent-terracotta); color: #f97316; background: rgba(200, 90, 50, 0.1); }
         .filter-chip.active[data-subject="romana"] { border-color: var(--accent-romana); color: var(--accent-romana); background: rgba(212, 175, 55, 0.1); }
         .filter-chip.active[data-subject="diritto"] { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(212, 175, 55, 0.1); }
+        .filter-chip.active[data-subject="codicologia"] { border-color: #6b7280; color: #9ca3af; background: rgba(107, 114, 128, 0.1); }
 
         .search-wrapper {
             position: relative;
@@ -174,6 +175,7 @@
         .timeline-item[data-subject="arte"] .timeline-dot { border-color: var(--accent-terracotta); box-shadow: 0 0 10px var(--accent-terracotta-glow); }
         .timeline-item[data-subject="romana"] .timeline-dot { border-color: var(--accent-romana); box-shadow: 0 0 10px var(--accent-romana-glow); }
         .timeline-item[data-subject="diritto"] .timeline-dot { border-color: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold-glow); }
+        .timeline-item[data-subject="codicologia"] .timeline-dot { border-color: #6b7280; box-shadow: 0 0 10px rgba(107, 114, 128, 0.5); }
 
         .timeline-card {
             background: var(--bg-card);
@@ -209,6 +211,7 @@
         .timeline-item[data-subject="arte"] .timeline-year { color: #f97316; }
         .timeline-item[data-subject="romana"] .timeline-year { color: var(--accent-romana); }
         .timeline-item[data-subject="diritto"] .timeline-year { color: var(--accent-gold); }
+        .timeline-item[data-subject="codicologia"] .timeline-year { color: #9ca3af; }
 
         .timeline-subject-badge {
             font-size: 0.7rem;
@@ -224,6 +227,7 @@
         .timeline-item[data-subject="arte"] .timeline-subject-badge { background: rgba(200, 90, 50, 0.15); color: #f97316; border-color: rgba(200, 90, 50, 0.3); }
         .timeline-item[data-subject="romana"] .timeline-subject-badge { background: rgba(212, 175, 55, 0.15); color: var(--accent-romana); border-color: rgba(212, 175, 55, 0.3); }
         .timeline-item[data-subject="diritto"] .timeline-subject-badge { background: rgba(212, 175, 55, 0.15); color: var(--accent-gold); border-color: rgba(212, 175, 55, 0.3); }
+        .timeline-item[data-subject="codicologia"] .timeline-subject-badge { background: rgba(107, 114, 128, 0.15); color: #9ca3af; border-color: rgba(107, 114, 128, 0.3); }
 
         .timeline-title {
             font-family: var(--font-serif);
@@ -523,6 +527,7 @@
                         <button class="filter-chip" data-subject="arte" onclick="filterTimeline('arte')">Storia dell'Arte</button>
                         <button class="filter-chip" data-subject="romana" onclick="filterTimeline('romana')">Arte Romana</button>
                         <button class="filter-chip" data-subject="diritto" onclick="filterTimeline('diritto')">Diritto Beni Culturali</button>
+                        <button class="filter-chip" data-subject="codicologia" onclick="filterTimeline('codicologia')">Codicologia</button>
                     </div>
                     <div class="search-wrapper">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>

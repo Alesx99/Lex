@@ -513,6 +513,102 @@ const searchDatabase = [
         navPath: "codicologia/index.html"
     },
     {
+        title: "Codicologia Cap. I: Codicologia e Paleografia",
+        subject: "codicologia",
+        chapterTag: "Cap. I",
+        description: "Definizione della materia, evoluzione metodologica (Samaran, Dain) e differenze con la Paleografia.",
+        keywords: "codicologia dain samaran paleografia metodo quantitativo bozzolo ornato",
+        navPath: "codicologia/index.html?open=summaries/cap1.md"
+    },
+    {
+        title: "Codicologia Cap. II: I Supporti (Papiro e Pergamena)",
+        subject: "codicologia",
+        chapterTag: "Cap. II",
+        description: "Studio del papiro (fabbricazione, volumen) e della pergamena (preparazione, lato pelo/carne, costi).",
+        keywords: "supporti scrittura papiro pergamena caudex volumen pergamo calcinatura pelo carne",
+        navPath: "codicologia/index.html?open=summaries/cap2.md"
+    },
+    {
+        title: "Codicologia Cap. III: La Carta e le Filigrane",
+        subject: "codicologia",
+        chapterTag: "Cap. III",
+        description: "L'invenzione cinese e araba, l'arrivo a Fabriano e le innovazioni. Studio delle filigrane e Briquet.",
+        keywords: "carta filigrana watermark cina arabi fabriano pila magli collatura briquet datazione",
+        navPath: "codicologia/index.html?open=summaries/cap3.md"
+    },
+    {
+        title: "Codicologia Cap. IV: Fascicolazione e Numerazione",
+        subject: "codicologia",
+        chapterTag: "Cap. IV",
+        description: "Allestimento del fascicolo (quaternioni). La Regola di Gregory, richiami, segnature, fogliazione e paginazione.",
+        keywords: "struttura codice fascicolo gregory quaternione richiamo segnatura fogliazione paginazione",
+        navPath: "codicologia/index.html?open=summaries/cap4.md"
+    },
+    {
+        title: "Codicologia Cap. V: L'Allestimento della Pagina",
+        subject: "codicologia",
+        chapterTag: "Cap. V",
+        description: "Metodi di foratura (pricking) e rigatura (ruling). La tabula ad rigandum e la regola del below top line.",
+        keywords: "allestimento pagina foratura rigatura secco colore piombo tabula ad rigandum below top line",
+        navPath: "codicologia/index.html?open=summaries/cap5.md"
+    },
+    {
+        title: "Codicologia Cap. VI: La Copia e la Pecia",
+        subject: "codicologia",
+        chapterTag: "Cap. VI",
+        description: "Strumenti di copia, scriptoria monastici, colofoni e la rivoluzione delle università col sistema della pecia.",
+        keywords: "copia scriptoria amanuensi calamo inchiostro colofone universita pecia exemplar stazionari",
+        navPath: "codicologia/index.html?open=summaries/cap6.md"
+    },
+    {
+        title: "Codicologia Cap. VII: Decorazione e Miniatura",
+        subject: "codicologia",
+        chapterTag: "Cap. VII",
+        description: "Tecniche pittoriche, doratura, tipi di lettere iniziali (campite, zoomorfe, istoriate) e capolavori.",
+        keywords: "decorazione miniatura pigmento doratura foglia oro iniziale zoomorfa istoriata quedlinburg",
+        navPath: "codicologia/index.html?open=summaries/cap7.md"
+    },
+    {
+        title: "Codicologia Cap. VIII: La Legatura (Bookbinding)",
+        subject: "codicologia",
+        chapterTag: "Cap. VIII",
+        description: "Anatomia della legatura (assi, piatti, nervi, capitelli, fermagli). Tipologie storiche (bizantina, gotica, Canevari).",
+        keywords: "legatura bookbinding assi piatti dorso nervi capitelli borchie fermagli bizantina Canevari",
+        navPath: "codicologia/index.html?open=summaries/cap8.md"
+    },
+    {
+        title: "Codicologia Cap. IX: Storia delle Biblioteche e Cataloghi",
+        subject: "codicologia",
+        chapterTag: "Cap. IX",
+        description: "Evoluzione delle biblioteche (Alessandria, Cesarea, Montecassino, Vaticana, Petrarca). Inventari vs cataloghi.",
+        keywords: "biblioteche catalogazione conservazione alessandria cesarea montecassino vaticana petrarca inventario",
+        navPath: "codicologia/index.html?open=summaries/cap9.md"
+    },
+    {
+        title: "Codicologia Cap. X: I Manoscritti Palinsesti",
+        subject: "codicologia",
+        chapterTag: "Cap. X",
+        description: "Causa e metodo dei palinsesti (scarsità pergamena, riscrittura). Scoperte storiche (Angelo Mai) e decifrazione multispettrale.",
+        keywords: "palinsesto cancellazione riscrittura cicerone de re publica angelo mai gaio spettroscopia multispettrale codex rescriptus",
+        navPath: "codicologia/index.html?open=summaries/cap10.md"
+    },
+    {
+        title: "Codicologia Cap. XI: La Catalogazione dei Manoscritti",
+        subject: "codicologia",
+        chapterTag: "Cap. XI",
+        description: "La scheda codicologica: descrizione esterna (supporto, rigatura, legatura) e interna (incipit, explicit, note di possesso).",
+        keywords: "catalogazione scheda codicologica segnatura descrizione esterna interna incipit explicit manus online digita vaticana",
+        navPath: "codicologia/index.html?open=summaries/cap11.md"
+    },
+    {
+        title: "Codicologia Cap. XII: Scritture e Centri Scrittori",
+        subject: "codicologia",
+        chapterTag: "Cap. XII",
+        description: "Pluralismo grafico in Italia. La scrittura Beneventana (regole, ti, interrogativo) e Montecassino sotto l'abate Desiderio.",
+        keywords: "scritture centri scrittori beneventana desiderio montecassino barese ligatura ti interrogativo",
+        navPath: "codicologia/index.html?open=summaries/cap12.md"
+    },
+    {
         title: "Archeologia Cristiana",
         subject: "cristiana",
         chapterTag: "Intro",

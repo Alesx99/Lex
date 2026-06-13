@@ -256,7 +256,8 @@
                 "romana-ara-pacis", "romana-rilievo-storico", "romana-pantheon", 
                 "romana-arco-costantino", "romana-patrizia-plebea"
             ],
-            storia: Array.from({length: 28}, (_, i) => `storia-fc${i+1}`)
+            storia: Array.from({length: 28}, (_, i) => `storia-fc${i+1}`),
+            codicologia: Array.from({length: 15}, (_, i) => `codicologia-fc${i+1}`)
         };
 
         function getDueFlashcardsCount(subjectId) {
@@ -286,6 +287,7 @@
             { id: "arte", name: "Storia dell'Arte Moderna", cfu: 12, passed: false, grade: null, date: null, subject: "arte" },
             { id: "romana", name: "Archeologia e Arte Romana", cfu: 6, passed: false, grade: null, date: null, subject: "romana" },
             { id: "storia", name: "Storia Moderna", cfu: 6, passed: false, grade: null, date: null, subject: "storia" },
+            { id: "codicologia", name: "Codicologia", cfu: 9, passed: false, grade: null, date: null, subject: "codicologia" },
             { id: "filosofia", name: "Filosofia Estetica", cfu: 6, passed: false, grade: null, date: null, subject: "filosofia" },
             { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, grade: null, date: null, subject: "letteratura" },
             { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, grade: null, date: null, subject: "tesi" }
@@ -411,6 +413,7 @@
             if (subjKey === 'arte') mappedSubj = 'arte';
             if (subjKey === 'storia') mappedSubj = 'storia';
             if (subjKey === 'diritto') mappedSubj = 'diritto';
+            if (subjKey === 'codicologia') mappedSubj = 'codicologia';
 
             if (window.searchDatabase) {
                 chapters = window.searchDatabase.filter(item => item.subject === mappedSubj);

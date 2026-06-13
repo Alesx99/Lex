@@ -82,6 +82,22 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
+        .filter-btn.active.codicologia-btn {
+            background: rgba(75, 85, 99, 0.15);
+            border-color: #4b5563;
+            box-shadow: 0 4px 15px rgba(75, 85, 99, 0.15);
+        }
+
+        .card-face-front.codicologia-card {
+            border-top: 5px solid #4b5563;
+        }
+
+        .codicologia-badge {
+            background: rgba(75, 85, 99, 0.1);
+            color: #4b5563;
+            border: 1px solid rgba(75, 85, 99, 0.2);
+        }
+
         /* 3D Flashcard Design */
         .flashcard-3d-scene {
             width: 100%;
@@ -431,6 +447,7 @@
                 <button class="filter-btn arte-btn" onclick="setFilter('arte')">Storia dell'Arte Moderna</button>
                 <button class="filter-btn romana-btn" onclick="setFilter('romana')">Arte Romana</button>
                 <button class="filter-btn storia-btn" onclick="setFilter('storia')">Storia Moderna</button>
+                <button class="filter-btn codicologia-btn" onclick="setFilter('codicologia')">Codicologia</button>
             </div>
 
             <!-- SRS Mode Toggle -->
@@ -946,6 +963,97 @@
                 subject: "storia",
                 question: "Quale ordinanza costituzionale del 1701 regolò la successione dinastica inglese?",
                 answer: "L'Act of Settlement, che escluse definitivamente i cattolici Stuart dalla successione al trono inglese, stabilendo che la corona sarebbe passata alla dinastia protestante degli Hannover."
+            },
+            // CODICOLOGIA
+            {
+                id: "codicologia-fc1",
+                subject: "codicologia",
+                question: "Chi ha coniato il termine 'codicologia' e in quale anno?",
+                answer: "Il termine fu coniato da Charles Samaran nei corsi del 1934-35, ma venne pubblicato ufficialmente per la prima volta da Alphonse Dain nel 1949 nel suo saggio 'Les Manuscrits'."
+            },
+            {
+                id: "codicologia-fc2",
+                subject: "codicologia",
+                question: "Cos'è la 'codicologia quantitativa' e chi ne sono i padri fondatori?",
+                answer: "È l'approccio statistico-scientifico al manoscritto visto come prodotto sociale seriale. I padri fondatori sono gli italiani Carla Bozzolo ed Ezio Ornato con il manifesto del 1982 'Pour une codicologie expérimentale'."
+            },
+            {
+                id: "codicologia-fc3",
+                subject: "codicologia",
+                question: "Qual è l'origine etimologica della parola 'codice'?",
+                answer: "Deriva dal latino arcaico 'caudex' (tronco d'albero), che indicava l'aggregato di tavolette lignee cerate unite lungo un lato (come descritto da Seneca nel De brevitate vitae)."
+            },
+            {
+                id: "codicologia-fc4",
+                subject: "codicologia",
+                question: "Quali sono le principali fasi di lavorazione della pergamena?",
+                answer: "1) Calcinatura (bagno in acqua e calce spenta); 2) Spellatura e depilazione (con coltello a mezzaluna); 3) Tensione su un telaio circolare o rettangolare; 4) Levigatura finale con pietra pomice."
+            },
+            {
+                id: "codicologia-fc5",
+                subject: "codicologia",
+                question: "In cosa differiscono il 'lato pelo' e il 'lato carne' di una pergamena?",
+                answer: "Il lato pelo (esterno) mantiene le tracce dei follicoli piliferi ed è più scuro e ruvido. Il lato carne (interno) è più chiaro (candido), liscio e vellutato."
+            },
+            {
+                id: "codicologia-fc6",
+                subject: "codicologia",
+                question: "Cos'è la 'Regola di Gregory' nella fascicolazione?",
+                answer: "È la norma per cui all'apertura del codice i fogli affrontati devono presentare lo stesso lato della pelle (carne con carne, pelo con pelo) per evitare scompensi cromatici."
+            },
+            {
+                id: "codicologia-fc7",
+                subject: "codicologia",
+                question: "Quali innovazioni tecnologiche ha introdotto Fabriano nella produzione della carta nel XIII secolo?",
+                answer: "1) La pila a magli multipli idraulica per sfibrare gli stracci; 2) La collatura con gelatina animale (scarti di macello) contro muffe e insetti; 3) L'invenzione della filigrana."
+            },
+            {
+                id: "codicologia-fc8",
+                subject: "codicologia",
+                question: "Che cos'è la 'filigrana' e a cosa serve?",
+                answer: "È un disegno in trasparenza ottenuto cucendo un filo metallico sagomato sul setaccio della forma. Serve come marchio di fabbrica e consente la datazione e localizzazione del foglio."
+            },
+            {
+                id: "codicologia-fc9",
+                subject: "codicologia",
+                question: "Cos'è il repertorio Briquet?",
+                answer: "È l'opera monumentale di Charles-Moïse Briquet del 1907 ('Les Filigranes') che raccoglie e cataloga ben 16.112 filigrane dal 1282 al 1600 per la datazione dei codici."
+            },
+            {
+                id: "codicologia-fc10",
+                subject: "codicologia",
+                question: "Cos'è la 'foratura' (pricking) e a cosa serve?",
+                answer: "È la realizzazione di piccoli fori nei margini del foglio mediante stilo, compasso o rotella, usati come punti di allineamento per tracciare le linee di rigatura."
+            },
+            {
+                id: "codicologia-fc11",
+                subject: "codicologia",
+                question: "In cosa consiste la regola del 'below top line' (dopo il 1220)?",
+                answer: "È la prassi di iniziare a scrivere il testo sotto la prima linea orizzontale di rigatura (appendendo le lettere), invece che sopra di essa. È un marker cronologico fondamentale."
+            },
+            {
+                id: "codicologia-fc12",
+                subject: "codicologia",
+                question: "Cos'è il 'sistema della pecia' universitario?",
+                answer: "Era il metodo di affitto a pece (fascicoli sciolti) di un codice ufficiale (exemplar) custodito dagli stazionari per permettere la trascrizione simultanea a studenti e copisti."
+            },
+            {
+                id: "codicologia-fc13",
+                subject: "codicologia",
+                question: "Cos'è il 'colofone' in un codice manoscritto?",
+                answer: "È la sottoscrizione finale in cui il copista riporta il proprio nome, il luogo, la data di completamento e, spesso, formule di ringraziamento o riflessioni sulla fatica."
+            },
+            {
+                id: "codicologia-fc14",
+                subject: "codicologia",
+                question: "Quali sono gli stili decorativi principali delle lettere iniziali miniate?",
+                answer: "Iniziale campita (sfondo uniforme), zoomorfa (animali), fitomorfa (motivi vegetali), antropomorfa/iconografica (figura umana) e istoriata (con scene narrative del testo)."
+            },
+            {
+                id: "codicologia-fc15",
+                subject: "codicologia",
+                question: "Quali sono le parti strutturali principali di una legatura medievale?",
+                answer: "Assi (lignei) o quadranti (cartone), nervi (corde trasversali per cucire i fascicoli), capitelli (rinforzi colorati al dorso), fermagli (chiusure) e borchie/bulloni (metallo protettivo)."
             }
         ];
 
@@ -1093,6 +1201,10 @@
                 subjectText = 'Storia Moderna';
                 badgeClass = 'card-subject-badge storia-badge';
                 cardClass = 'card-face card-face-front storia-card';
+            } else if (currentCard.subject === 'codicologia') {
+                subjectText = 'Codicologia';
+                badgeClass = 'card-subject-badge codicologia-badge';
+                cardClass = 'card-face card-face-front codicologia-card';
             } else {
                 subjectText = 'Arte Moderna';
                 badgeClass = 'card-subject-badge arte-badge';

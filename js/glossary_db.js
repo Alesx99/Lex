@@ -135,6 +135,48 @@ const glossaryDatabase = {
         term: "Basilica Civile",
         definition: "Grande spazio coperto a pianta rettangolare scandito da navate colonnate. Nell'architettura romana fungeva da centro amministrativo, tribunale e luogo di scambi commerciali, ispirando successivamente le basiliche paleocristiane.",
         domain: "arte_romana"
+    },
+
+    // TERMINI DI CODICOLOGIA
+    "codicologia": {
+        term: "Codicologia",
+        definition: "Studio scientifico del libro manoscritto come oggetto materiale e archeologico. Analizza i supporti, i fascicoli, la rigatura, la scrittura, la decorazione e la legatura, ricostruendo la storia fisica e la provenienza del manufatto.",
+        domain: "codicologia"
+    },
+    "pergamena": {
+        term: "Pergamena",
+        definition: "Supporto scrittorio ricavato da pelli di animali (pecora, capra, vitello) trattate con calce, rase, tese sotto tensione su telaio e levigate. Presenta un lato pelo (più scuro e ruvido) e un lato carne (più chiaro e liscio).",
+        domain: "codicologia"
+    },
+    "filigrana": {
+        term: "Filigrana",
+        definition: "Marchio di fabbrica impresso nei fogli di carta medievale e moderna, visibile solo in controluce. Ottenuto cucendo un sottile filo metallico sagomato sulla forma. Fondamentale per datare e localizzare la carta.",
+        domain: "codicologia"
+    },
+    "regola di Gregory": {
+        term: "Regola di Gregory",
+        definition: "Norma empirica secondo cui i bifogli di pergamena di un fascicolo devono essere disposti in modo che le pagine affrontate all'apertura presentino lo stesso lato della pelle (lato pelo di fronte a lato pelo, lato carne di fronte a lato carne) per omogeneità cromatica.",
+        domain: "codicologia"
+    },
+    "colofone": {
+        term: "Colofone (o Sottoscrizione)",
+        definition: "Nota o formula posta dal copista alla fine del manoscritto, contenente il proprio nome, la data e il luogo del completamento del lavoro, spesso uniti a preghiere o riflessioni personali.",
+        domain: "codicologia"
+    },
+    "pecia": {
+        term: "Sistema della Pecia",
+        definition: "Metodo di riproduzione dei libri di testo nelle università medievali. Un exemplar ufficiale veniva diviso in fascicoli sciolti (peciae) affittati dagli stazionari a più copisti contemporaneamente per accelerare la trascrizione.",
+        domain: "codicologia"
+    },
+    "rigatura": {
+        term: "Rigatura",
+        definition: "Insieme di linee orizzontali e verticali tracciate sulla pagina bianca per guidare la scrittura. Poteva essere a secco (solco inciso con uno stilo) o a colore (inchiostro diluito o mina di piombo).",
+        domain: "codicologia"
+    },
+    "legatura": {
+        term: "Legatura",
+        definition: "Copertina protettiva esterna del codice. Composta da piatti (lignei o in cartone), nervi di cucitura sul dorso, capitelli di rinforzo, chiusure metalliche (fermogli) e borchie protettive (bulloni).",
+        domain: "codicologia"
     }
 };
 

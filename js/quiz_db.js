@@ -3113,7 +3113,504 @@ const quizDatabase = {
                 explanation: "La 'piemontesizzazione' indica l'imposizione delle strutture amministrative, legislative, doganali e scolastiche sabaude alle restanti regioni italiane senza tener conto delle specificità locali. Tale processo, unito al mantenimento del numerale 'II' da parte del re Vittorio Emanuele, alimentò l'idea di una conquista sabauda e favorì le tensioni post-unitarie."
             }
         ]
+    },
+
+    // ===============================================================
+    // CODICOLOGIA — 9 Capitoli x 3 Domande = 27 Domande
+    // ===============================================================
+
+    cod_cap1_intro: {
+        subject: "codicologia",
+        chapterTag: "Cap. I",
+        title: "Codicologia e Paleografia",
+        questions: [
+            {
+                question: "Chi ha coniato per primo il termine 'codicologia' in una pubblicazione scientifica del 1949?",
+                options: [
+                    "Charles Samaran",
+                    "Alphonse Dain",
+                    "Jean Mallon",
+                    "Caspar René Gregory"
+                ],
+                correctIndex: 1,
+                explanation: "Alphonse Dain ha pubblicato per la prima volta il termine nel suo celebre saggio 'Les Manuscrits' del 1949, anche se Charles Samaran ne rivendicò l'uso accademico fin dai suoi corsi degli anni 1934-1935."
+            },
+            {
+                question: "Quale manifesto scientifico del 1982 segna la nascita della 'codicologia quantitativa'?",
+                options: [
+                    "'L'archéologie du livre' di Albert Gumbert",
+                    "'Pour une codicologie expérimentale' di Carla Bozzolo ed Ezio Ornato",
+                    "'Les Filigranes' di Charles-Moïse Briquet",
+                    "'La scrittura dei codici' di Paolo Radiciotti"
+                ],
+                correctIndex: 1,
+                explanation: "Il saggio 'Pour une codicologie expérimentale' (1982) di Carla Bozzolo ed Ezio Ornato, ricercatori del CNRS, rappresenta il manifesto ufficiale di questo metodo scientifico-statistico applicato al manoscritto."
+            },
+            {
+                question: "Qual è la differenza fondamentale tra Codicologia e Paleografia?",
+                options: [
+                    "La paleografia studia il supporto cartaceo, la codicologia solo la pergamena.",
+                    "La paleografia studia la scrittura come evoluzione storica dei segni grafici, la codicologia studia il manoscritto nella sua materialità fisica.",
+                    "Non c'è differenza, sono sinonimi usati in università diverse.",
+                    "La codicologia studia i libri a stampa, la paleografia quelli scritti a mano."
+                ],
+                correctIndex: 1,
+                explanation: "La paleografia indaga la grafia, le abbreviazioni e lo sviluppo storico delle scritture; la codicologia ('l'archeologia del libro') studia gli aspetti materiali, strutturali ed economici del codice."
+            }
+        ]
+    },
+
+    cod_cap2_supporti: {
+        subject: "codicologia",
+        chapterTag: "Cap. II",
+        title: "I Supporti: Papiro e Pergamena",
+        questions: [
+            {
+                question: "Da quale parola latina arcaica, che significava originariamente 'tronco d'albero', deriva il termine 'codice'?",
+                options: [
+                    "Liber",
+                    "Caudex",
+                    "Volumen",
+                    "Philyra"
+                ],
+                correctIndex: 1,
+                explanation: "La parola deriva da 'caudex' (tronco d'albero), che indicava originariamente il blocco di tavolette lignee unite lungo un lato, antenato strutturale del nostro libro in contrapposizione al rotolo."
+            },
+            {
+                question: "Nella pergamena, qual è la differenza cromatica e strutturale tra il 'lato pelo' e il 'lato carne'?",
+                options: [
+                    "Il lato carne è più scuro e ruvido, il lato pelo è liscio e candido.",
+                    "Il lato pelo è più scuro, ruvido e presenta i follicoli piliferi, mentre il lato carne è liscio, morbido e molto chiaro.",
+                    "Sono identici in tutto, non c'è differenza visibile.",
+                    "Il lato pelo assorbe l'inchiostro in rosso, il lato carne in nero."
+                ],
+                correctIndex: 1,
+                explanation: "Il lato pelo (esterno) mantiene le tracce dei follicoli piliferi ed è più pigmentato e ruvido; il lato carne (interno) è più levigato, candido e morbido."
+            },
+            {
+                question: "A chi attribuisce la leggenda pliniana l'invenzione della pergamena per ovviare al blocco dell'esportazione del papiro?",
+                options: [
+                    "A Tolomeo V d'Egitto",
+                    "A Eumene II re di Pergamo",
+                    "A Carlo Magno in Francia",
+                    "A Ts'ai Lun in Cina"
+                ],
+                correctIndex: 1,
+                explanation: "Plinio riferisce che Tolomeo d'Egitto, invidioso dello sviluppo della biblioteca di Pergamo, bloccò l'esportazione del papiro, spingendo Eumene II a inventare (o perfezionare) la pergamena."
+            }
+        ]
+    },
+
+    cod_cap3_carta: {
+        subject: "codicologia",
+        chapterTag: "Cap. III",
+        title: "La Carta e le Filigrane",
+        questions: [
+            {
+                question: "Quale fu il centro cartario italiano che nel XIII secolo rivoluzionò la carta introducendo la pila a magli idraulica e la collatura animale?",
+                options: [
+                    "Venezia",
+                    "Fabriano",
+                    "Amalfi",
+                    "Lucca"
+                ],
+                correctIndex: 1,
+                explanation: "Fabriano introdusse tre innovazioni decisive: la pila idraulica a magli per sfibrare gli stracci, la gelatina animale per impermeabilizzare i fogli e l'invenzione della filigrana."
+            },
+            {
+                question: "Che cos'è una 'filigrana' (watermark) nei codici cartacei?",
+                options: [
+                    "Una decorazione a foglia d'oro sui margini esterni del libro.",
+                    "Un disegno in trasparenza ottenuto cucendo un filo metallico sagomato sulla forma metallica della carta.",
+                    "Una firma segreta apposta dall'amanuense per rivendicare il lavoro.",
+                    "Una rigatura colorata tracciata con inchiostri metallici."
+                ],
+                correctIndex: 1,
+                explanation: "La filigrana è un filo metallico cucito sul setaccio della forma; riducendo il deposito di pasta di carta in quel punto, crea un disegno visibile solo in controluce."
+            },
+            {
+                question: "Quale autore ha pubblicato nel 1907 il monumentale repertorio di 16.112 filigrane storiche, fondamentale per la datazione dei manoscritti?",
+                options: [
+                    "Carla Bozzolo",
+                    "Charles-Moïse Briquet",
+                    "Ezio Ornato",
+                    "Jean Pucelle"
+                ],
+                correctIndex: 1,
+                explanation: "Charles-Moïse Briquet è l'autore de 'Les Filigranes', repertorio fondamentale che cataloga le marche della carta dal 1282 al 1600 consentendo datazioni precise."
+            }
+        ]
+    },
+
+    cod_cap4_struttura: {
+        subject: "codicologia",
+        chapterTag: "Cap. IV",
+        title: "Fascicolazione e Numerazione",
+        questions: [
+            {
+                question: "Che cos'è la 'Regola di Gregory' (o della corrispondenza dei lati) nella fascicolazione di un codice pergameno?",
+                options: [
+                    "L'obbligo di disporre il testo sempre in due colonne simmetriche.",
+                    "La norma secondo cui i fogli affrontati a libro aperto devono presentare lo stesso lato della pelle (carne di fronte a carne, pelo di fronte a pelo).",
+                    "Il dovere di inserire esattamente 8 bifogli in ogni fascicolo.",
+                    "Il divieto assoluto di inserire miniature sul lato pelo."
+                ],
+                correctIndex: 1,
+                explanation: "La regola garantisce armonia visiva, facendo sì che il lettore veda all'apertura del codice pagine omogenee per colore e tessitura (carne/carne o pelo/pelo)."
+            },
+            {
+                question: "Qual era la funzione del 'richiamo' (catchword) nel margine inferiore dell'ultimo foglio di un fascicolo?",
+                options: [
+                    "Indicare il nome dell'amanuense che aveva terminato la scrittura.",
+                    "Evitare errori di sequenza dei fascicoli durante la rilegatura, riportando le prime parole del fascicolo successivo.",
+                    "Segnalare le rubriche e i titoli dei capitoli in inchiostro rosso.",
+                    "Proteggere la pergamena dall'usura delle dita del lettore."
+                ],
+                correctIndex: 1,
+                explanation: "Scrivendo l'incipit del fascicolo successivo in fondo a quello precedente, il legatore poteva verificare l'esatta sequenza ed evitare inversioni."
+            },
+            {
+                question: "Qual è la differenza tecnica tra 'fogliazione' e 'paginazione' nella numerazione dei codici?",
+                options: [
+                    "La fogliazione numera solo le pagine miniate, la paginazione tutto il libro.",
+                    "La fogliazione numera progressivamente i fogli (carte) sul solo lato recto, mentre la paginazione numera ciascuna singola facciata.",
+                    "Sono sinonimi usati indistintamente per tutto il Medioevo.",
+                    "La fogliazione usa cifre arabe, la paginazione numeri romani."
+                ],
+                correctIndex: 1,
+                explanation: "La fogliazione medievale numera le carte (es. f. 10r, f. 10v); la paginazione, che numera ogni facciata singolarmente, si afferma stabilmente solo con la stampa."
+            }
+        ]
+    },
+
+    cod_cap5_allestimento: {
+        subject: "codicologia",
+        chapterTag: "Cap. V",
+        title: "L'Allestimento della Pagina",
+        questions: [
+            {
+                question: "Che cos'è la 'tabula ad rigandum' impiegata nel basso Medioevo?",
+                options: [
+                    "Una tavoletta di cera per abbozzare i disegni preparatori.",
+                    "Una tavoletta di legno con corde o fili metallici in rilievo usata per imprimere la rigatura per pressione su interi fogli in una sola volta.",
+                    "Uno strumento per misurare la tensione della pergamena sul telaio.",
+                    "La tavola su cui i monaci stendevano la colla animale."
+                ],
+                correctIndex: 1,
+                explanation: "Questo strumento accelerava notevolmente la preparazione della pagina negli scriptoria laici o commerciali, stampando lo schema di rigatura per pressione."
+            },
+            {
+                question: "In codicologia e paleografia, cosa indica la regola del 'below top line' introdotta intorno al 1220?",
+                options: [
+                    "L'obbligo di inserire il titolo sempre sotto la prima miniatura.",
+                    "La prassi di iniziare a scrivere il testo sotto la prima linea orizzontale di rigatura, lasciandola vuota, invece che sopra di essa.",
+                    "Il divieto di inserire glosse nel margine inferiore.",
+                    "L'allineamento dei fori di legatura sotto la linea del dorso."
+                ],
+                correctIndex: 1,
+                explanation: "Prima del 1220 si scriveva sopra la riga superiore; dopo, si appende la scrittura sotto la riga. Rappresenta un indicatore cronologico fondamentale per i codicologi."
+            },
+            {
+                question: "Quali erano i due aspetti principali dell'organizzazione grafica della pagina?",
+                options: [
+                    "Margine e Interlinea",
+                    "Il sistema di rigatura (operazione fisica di incisione) e il tipo di rigatura (disegno geometrico risultante sulla pagina)",
+                    "Colonna e Colonnina",
+                    "Riga a secco e riga a inchiostro"
+                ],
+                correctIndex: 1,
+                explanation: "Il sistema di rigatura riguarda il come le righe vengono impresse (secco, colore, a gruppi); il tipo di rigatura riguarda lo schema geometrico che l'amanuense vede sulla pagina."
+            }
+        ]
+    },
+
+    cod_cap6_copia: {
+        subject: "codicologia",
+        chapterTag: "Cap. VI",
+        title: "La Copia e la Pecia",
+        questions: [
+            {
+                question: "Nel sistema della 'pecia' universitario, che cos'era l'exemplar?",
+                options: [
+                    "Il codice di lusso con lettere d'oro riservato ai professori.",
+                    "La copia ufficiale, certificata e corretta di un'opera di studio depositata presso lo stazionario e divisa in fascicoli sciolti.",
+                    "Il contratto stipulato tra stazionario e studente.",
+                    "La firma autografa dell'autore depositata in comune."
+                ],
+                correctIndex: 1,
+                explanation: "L'exemplar era il testo ufficiale di riferimento da cui venivano estratti i singoli fascicoli (peciae) affittati separatamente per consentire la copia simultanea."
+            },
+            {
+                question: "Chi erano i 'taxatores' (o petiarii) nel contesto delle università medievali?",
+                options: [
+                    "I funzionari comunali delegati a riscuotere le tasse sulla carta.",
+                    "Le commissioni di docenti che verificavano l'accuratezza degli exemplaria degli stazionari e ne fissavano le tariffe di affitto.",
+                    "I copisti professionisti pagati a cottimo.",
+                    "Gli studenti addetti alla legatura dei codici."
+                ],
+                correctIndex: 1,
+                explanation: "Erano commissioni universitarie che regolavano il mercato della copia controllando la qualità degli exemplaria e tutelando gli studenti da tariffe eccessive."
+            },
+            {
+                question: "Che cos'è il 'colofone' (o sottoscrizione) in un manoscritto?",
+                options: [
+                    "Il segnalibro di stoffa incollato al capitello.",
+                    "La nota finale del copista contenente il proprio nome, la data, il luogo di lavoro o preghiere ed imprecazioni sulla fatica.",
+                    "La custodia protettiva di legno rivestita di pelle.",
+                    "Il primo paragrafo decorato dell'incipit."
+                ],
+                correctIndex: 1,
+                explanation: "Il colofone è la firma finale dell'amanuense che fornisce preziose informazioni storiche sul copista, la data e il contesto geografico del lavoro."
+            }
+        ]
+    },
+
+    cod_cap7_decorazione: {
+        subject: "codicologia",
+        chapterTag: "Cap. VII",
+        title: "Decorazione e Miniatura",
+        questions: [
+            {
+                question: "Da quale sostanza minerale deriva il termine 'miniatura'?",
+                options: [
+                    "Dal lapislazzulo blu",
+                    "Dal minio (solfuro di mercurio di colore rosso vivo)",
+                    "Dalla malachite verde",
+                    "Dalla polvere di oro zecchino"
+                ],
+                correctIndex: 1,
+                explanation: "Il termine deriva dal 'minio', pigmento rosso usato fin dall'antichità per tracciare i titoli dei capitoli e le iniziali decorative."
+            },
+            {
+                question: "Quale tipo di lettera iniziale racchiude al suo interno una scena narrativa figurata coerente con il testo circostante?",
+                options: [
+                    "Iniziale zoomorfa",
+                    "Iniziale campita",
+                    "Iniziale istoriata",
+                    "Iniziale fitomorfa"
+                ],
+                correctIndex: 2,
+                explanation: "L'iniziale istoriata contiene al suo interno un'illustrazione o una scena figurata legata direttamente al contenuto del testo."
+            },
+            {
+                question: "Qual è la caratteristica artistica principale del Libro d'Ore di Jeanne d'Evreux miniato da Jean Pucelle nel XIV secolo?",
+                options: [
+                    "È scritto interamente in lettere d'oro su pergamena purpurea.",
+                    "Utilizza la tecnica gotica della grisaille (sfumature di grigio) ed è popolato nei margini da droleries e scene giocose.",
+                    "È un codice monumentale alto più di un metro.",
+                    "Contiene esclusivamente miniature di paesaggi senza figure umane."
+                ],
+                correctIndex: 1,
+                explanation: "Questo capolavoro gotico è celebre per l'uso virtuoso della grisaille (monocromo grigio) e per le vivaci decorazioni marginali ludiche."
+            }
+        ]
+    },
+
+    cod_cap8_legatura: {
+        subject: "codicologia",
+        chapterTag: "Cap. VIII",
+        title: "La Legatura (Bookbinding)",
+        questions: [
+            {
+                question: "Cosa sono i 'nervi' (raised bands) nella struttura di una legatura medievale?",
+                options: [
+                    "I fermagli metallici che stringono le copertine.",
+                    "Corde o strisce di pelle perpendicolari al dorso su cui venivano cuciti i fascicoli, visibili come rilievi.",
+                    "Le venature del legno delle assi della copertina.",
+                    "Le cuciture interne del capitello."
+                ],
+                correctIndex: 1,
+                explanation: "I nervi sono i supporti di cucitura disposti sul dorso del codice; una volta rivestito il dorso, emergono come rilievi paralleli."
+            },
+            {
+                question: "Qual è la caratteristica distintiva di una cucitura e legatura di tipo 'bizantino' (o greco)?",
+                options: [
+                    "I piatti sono rivestiti di seta imperiale cinese.",
+                    "La cucitura avviene senza supporti (dorso piatto) e le assi di legno presentano scanalature scavate per ospitare i fili, con sporgenza zero dei piatti.",
+                    "Si usano esclusivamente copertine flosce in velluto.",
+                    "Il blocco dei fogli è cucito con sottili fili di rame."
+                ],
+                correctIndex: 1,
+                explanation: "La legatura bizantina non usa nervi (dorso piatto), incassa i fili in canali scavati e allinea i piatti lignei a livello del blocco fogli."
+            },
+            {
+                question: "A chi sono storicamente attribuite le celebri legature rinascimentali a placchetta con il medaglione di Apollo e il carro del Sole sul Pegaso?",
+                options: [
+                    "A Jean Pucelle",
+                    "A Giovanni Battista Grimaldi (note anche come legature Canevari)",
+                    "A Eumene II di Pergamo",
+                    "A Niccolò V"
+                ],
+                correctIndex: 1,
+                explanation: "Commissionate da Grimaldi a metà '500, queste lussuose legature con medaglione ovale di Apollo furono a lungo attribuite al medico Demetrio Canevari."
+            }
+        ]
+    },
+
+    cod_cap9_biblioteche: {
+        subject: "codicologia",
+        chapterTag: "Cap. IX",
+        title: "Storia delle Biblioteche e Cataloghi",
+        questions: [
+            {
+                question: "Quale biblioteca tardoantica ebbe un ruolo decisivo nel salvare le opere cristiane trascrivendole da papiro a pergamena?",
+                options: [
+                    "La biblioteca di Alessandria",
+                    "La biblioteca di Cesarea fondata da Origene",
+                    "La biblioteca Marciana di Venezia",
+                    "La biblioteca palatina di Aquisgrana"
+                ],
+                correctIndex: 1,
+                explanation: "A Cesarea si svolse l'epocale trascrizione sistematica dei testi cristiani dai rotoli di papiro deteriorati ai codici di pergamena."
+            },
+            {
+                question: "Come si salvarono i preziosi codici dell'abbazia di Montecassino durante la seconda guerra mondiale prima del bombardamento del 1944?",
+                options: [
+                    "Furono nascosti nei sotterranei segreti del monastero.",
+                    "Furono evacuati preventivamente a Roma da ufficiali della divisione tedesca Hermann Göring (come il colonnello Schlegel) e consegnati al Vaticano.",
+                    "Furono gettati nei pozzi d'acqua dell'abbazia.",
+                    "Vennero distribuiti agli abitanti del paese circostante."
+                ],
+                correctIndex: 1,
+                explanation: "Il colonnello tedesco Julius Schlegel promosse l'evacuazione preventiva dei codici a bordo di automezzi militari, salvando la storica biblioteca benedettina."
+            },
+            {
+                question: "Qual è la differenza fondamentale tra un 'inventario' medievale e un 'catalogo' scientifico moderno?",
+                options: [
+                    "L'inventario è scritto in greco, il catalogo in latino.",
+                    "L'inventario è un semplice elenco patrimoniale di possesso spesso lacunoso, mentre il catalogo fornisce una descrizione dettagliata degli aspetti fisici, paleografici e testuali del codice.",
+                    "Non c'è alcuna differenza metodologica.",
+                    "L'inventario elenca solo libri a stampa, il catalogo solo i manoscritti."
+                ],
+                correctIndex: 1,
+                explanation: "L'inventario storico serviva per il controllo del patrimonio fisico; il catalogo moderno analizza in dettaglio le caratteristiche materiali e testuali per scopi di studio."
+            }
+        ]
+    },
+
+    cod_cap10_palinsesti: {
+        subject: "codicologia",
+        chapterTag: "Cap. X",
+        title: "I Manoscritti Palinsesti",
+        questions: [
+            {
+                question: "Che cos'è un 'palinsesto' (o codex rescriptus) nel contesto codicologico?",
+                options: [
+                    "Un codice composto interamente da fogli di papiro importati dall'Egitto.",
+                    "Un manoscritto di pergamena cancellato tramite raschiatura o lavaggio e riscritto con un nuovo testo.",
+                    "Un libro protetto da una legatura in cuoio con borchie dorate.",
+                    "Un codice scritto da più copisti contemporaneamente usando il sistema della pecia."
+                ],
+                correctIndex: 1,
+                explanation: "Un palinsesto (dal greco 'raschiato di nuovo') è una pergamena riscritta previa cancellazione del testo originario per ragioni economiche o di mutamento dei testi d'interesse."
+            },
+            {
+                question: "Quale celebre scoperta filologica effettuò il cardinale Angelo Mai nel 1819 nel codice Vaticano Latino 5757?",
+                options: [
+                    "La Bibbia di Gutenberg.",
+                    "Il De Re Publica di Cicerone coperto dal Commento ai Salmi di sant'Agostino.",
+                    "La Commedia di Dante miniata da Giotto.",
+                    "Il codice delle Istituzioni di Gaio."
+                ],
+                correctIndex: 1,
+                explanation: "Il cardinale Angelo Mai scoprì nel 1819 ampie porzioni del De Re Publica di Cicerone (scritto in onciale) sotto la scrittura superiore contenente i Salmi agostiniani."
+            },
+            {
+                question: "Quale tecnologia moderna viene impiegata per decifrare la scriptio inferior dei palinsesti senza danneggiare la pergamena?",
+                options: [
+                    "L'applicazione di reagenti chimici come l'acido gallico.",
+                    "La fotografia e spettroscopia multispettrale ad alta definizione.",
+                    "La raschiatura meccanica con pietra pomice fine.",
+                    "L'esposizione diretta ai raggi solari per trasparenza termica."
+                ],
+                correctIndex: 1,
+                explanation: "La spettroscopia multispettrale acquisisce immagini a diverse lunghezze d'onda isolando digitalmente la firma chimica dell'inchiostro inferiore cancellato."
+            }
+        ]
+    },
+
+    cod_cap11_catalogazione: {
+        subject: "codicologia",
+        chapterTag: "Cap. XI",
+        title: "La Catalogazione dei Manoscritti",
+        questions: [
+            {
+                question: "Nella catalogazione scientifica di un manoscritto, cosa comprende la 'descrizione esterna'?",
+                options: [
+                    "L'elenco degli autori citati nel testo e la bibliografia critica.",
+                    "L'analisi degli aspetti fisici e materiali come supporto, misure, fascicolazione, rigatura e legatura.",
+                    "La traduzione degli incipit e degli explicit delle opere.",
+                    "L'inventario dei beni della biblioteca del monastero."
+                ],
+                correctIndex: 1,
+                explanation: "La descrizione esterna analizza il codice come manufatto archeologico (dimensioni, fascicoli, foratura, rigatura, scrittura, legatura)."
+            },
+            {
+                question: "Perché sono fondamentali l'incipit e l'explicit nella descrizione interna di un manoscritto?",
+                options: [
+                    "Servono per calcolare il prezzo di vendita all'asta del codice.",
+                    "Consentono di identificare con precisione un'opera e la sua famiglia testuale, specialmente nei testi mutili o privi di titolo.",
+                    "Indicano esclusivamente la firma e la datazione del copista.",
+                    "Servono per descrivere lo schema geometrico della rigatura."
+                ],
+                correctIndex: 1,
+                explanation: "L'incipit (le parole iniziali) e l'explicit (le parole finali) sono marcatori testuali univoci usati per riconoscere testi non titolati o frammentari."
+            },
+            {
+                question: "Che cos'è Manus Online (MOL) nel panorama dei beni culturali italiani?",
+                options: [
+                    "Un software per la digitalizzazione automatica tramite scanner 3D.",
+                    "Un portale e database nazionale che cataloga i manoscritti conservati nelle biblioteche italiane.",
+                    "Una casa d'aste online per codici medievali.",
+                    "La biblioteca digitale del Vaticano contenente 80.000 codici."
+                ],
+                correctIndex: 1,
+                explanation: "Manus Online (MOL) è il database gestito dall'ICCU che censisce e descrive scientificamente i manoscritti conservati in Italia."
+            }
+        ]
+    },
+
+    cod_cap12_scritture: {
+        subject: "codicologia",
+        chapterTag: "Cap. XII",
+        title: "Scritture e Centri Scrittori",
+        questions: [
+            {
+                question: "Qual è la culla d'origine e la zona di diffusione della scrittura minuscola libraria 'Beneventana'?",
+                options: [
+                    "Il regno franco durante il rinascimento carolingio.",
+                    "L'Abbazia di Montecassino e il territorio del Ducato longobardo di Benevento nel Mezzogiorno italiano.",
+                    "La corte papale di Avignone nel XIV secolo.",
+                    "I monasteri della costa irlandese e della Northumbria."
+                ],
+                correctIndex: 1,
+                explanation: "La Beneventana si è sviluppata nell'Italia meridionale tra l'VIII e il XIV secolo, avendo come centro propulsore Montecassino."
+            },
+            {
+                question: "Quale abate ricostruì la basilica di Montecassino nell'XI secolo e promosse un'età d'oro per la produzione di codici in scrittura Beneventana?",
+                options: [
+                    "L'abate Desiderio (futuro papa Vittore III).",
+                    "L'abate Bernardo di Chiaravalle.",
+                    "L'abate Suger di Saint-Denis.",
+                    "L'abate Giovanni di Gorze."
+                ],
+                correctIndex: 0,
+                explanation: "L'abate Desiderio promosse una straordinaria fioritura artistica e libraria a Montecassino, curando la produzione di codici miniati e rotoli liturgici."
+            },
+            {
+                question: "Quali sono le differenze visive principali della variante pugliese 'Beneventana di tipo barese'?",
+                options: [
+                    "È angolosa, ricca di abbreviazioni fitte e tracciata in inchiostro blu.",
+                    "È più grande, rotonda, chiara e con minore contrasto tra tratti spessi e sottili rispetto al tipo cassinese.",
+                    "È scritta interamente in alfabeto greco.",
+                    "Utilizza esclusivamente pergamena di capra tinta di porpora."
+                ],
+                correctIndex: 1,
+                explanation: "La beneventana barese (diffusa in Puglia) è caratterizzata da prima facie da forme più ampie, tondeggianti e da un tracciato fluido influenzato dalla minuscola greca bizantina."
+            }
+        ]
     }
+
 };
 
 // Global export

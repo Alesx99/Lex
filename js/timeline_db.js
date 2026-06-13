@@ -892,6 +892,107 @@ const timelineDatabase = [
         subjectLabel: "Diritto dei Beni Culturali",
         description: "La Legge 22/2022 inserisce nel codice penale nuove e più aspre fattispecie di reato per chi danneggia o traffica beni storici.",
         link: "diritto/index.html?open=summaries/13_sanzioni.md"
+    },
+
+    // --- CODICOLOGIA ---
+    {
+        id: "cod_talas_751",
+        year: 751,
+        title: "Battaglia del Talas",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Gli Arabi catturano cartai cinesi dopo la battaglia, apprendendo il segreto della fabbricazione della carta e avviando la sua diffusione nel mondo islamico.",
+        link: "codicologia/index.html?open=summaries/cap3.md"
+    },
+    {
+        id: "cod_below_top_line_1220",
+        year: 1220,
+        title: "Diffusione della regola 'Below Top Line'",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Negli scriptoria medievali si afferma la prassi di appendere la scrittura sotto la prima riga orizzontale tracciata, anziché scrivervi sopra.",
+        link: "codicologia/index.html?open=summaries/cap5.md"
+    },
+    {
+        id: "cod_federico_ii_1221",
+        year: 1221,
+        title: "Decreto di Federico II contro la carta negli atti pubblici",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Federico II emana le Costituzioni di Melfi vietando l'uso della carta per i documenti pubblici a causa della sua deperibilità rispetto alla pergamena.",
+        link: "codicologia/index.html?open=summaries/cap3.md"
+    },
+    {
+        id: "cod_cartiere_fabriano_1268",
+        year: 1268,
+        title: "Fondazione delle prime cartiere a Fabriano",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Attestazione delle prime cartiere a Fabriano, che rivoluzionano la manifattura introducendo la pila idraulica a magli e la collatura animale.",
+        link: "codicologia/index.html?open=summaries/cap3.md"
+    },
+    {
+        id: "cod_filigrana_fabriano_1282",
+        year: 1282,
+        title: "Prima apparizione della filigrana a Fabriano",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Compare a Fabriano il primo foglio di carta filigranato, introducendo un marcatore fondamentale per datare e localizzare la provenienza dei manoscritti.",
+        link: "codicologia/index.html?open=summaries/cap3.md"
+    },
+    {
+        id: "cod_jeanne_d_evreux_1325",
+        year: 1325,
+        title: "Miniatura del Libro d'Ore di Jeanne d'Evreux",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Jean Pucelle realizza il capolavoro gotico miniaturizzato a grisaille, introducendo un repertorio innovativo di droleries e scene marginali ludiche.",
+        link: "codicologia/index.html?open=summaries/cap7.md"
+    },
+    {
+        id: "cod_biblioteca_vaticana_1447",
+        year: 1447,
+        title: "Fondazione della Biblioteca Vaticana moderna",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Papa Niccolò V (Tommaso Parentucelli) fonda la sezione moderna della BAV, dotandola di una ricca collezione di manoscritti aperti alla consultazione degli studiosi.",
+        link: "codicologia/index.html?open=summaries/cap9.md"
+    },
+    {
+        id: "cod_filigranes_briquet_1907",
+        year: 1907,
+        title: "Pubblicazione de 'Les Filigranes' di Briquet",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Charles-Moïse Briquet pubblica il monumentale repertorio di oltre 16.000 filigrane storiche, ponendo le basi scientifiche per la datazione della carta.",
+        link: "codicologia/index.html?open=summaries/cap3.md"
+    },
+    {
+        id: "cod_montecassino_1944",
+        year: 1944,
+        title: "Bombardamento di Montecassino ed evacuazione dei codici",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "L'abbazia viene distrutta dal bombardamento alleato, ma l'evacuazione preventiva guidata dal colonnello tedesco Schlegel mette in salvo i codici in Vaticano.",
+        link: "codicologia/index.html?open=summaries/cap9.md"
+    },
+    {
+        id: "cod_dain_1949",
+        year: 1949,
+        title: "Nascita ufficiale del termine 'Codicologia'",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Alphonse Dain conia ufficialmente il termine nel saggio 'Les Manuscrits', formalizzando l'autonomia scientifica dello studio materiale del libro.",
+        link: "codicologia/index.html?open=summaries/cap1.md"
+    },
+    {
+        id: "cod_quantitativa_1982",
+        year: 1982,
+        title: "Manifesto della Codicologia Quantitativa",
+        subject: "codicologia",
+        subjectLabel: "Codicologia",
+        description: "Carla Bozzolo ed Ezio Ornato pubblicano 'Pour une codicologie expérimentale', inaugurando l'applicazione di metodi statistici su larga scala al codice.",
+        link: "codicologia/index.html?open=summaries/cap1.md"
     }
 ];
 
