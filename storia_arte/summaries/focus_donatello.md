@@ -1,32 +1,32 @@
 # Focus Artista: Donatello (Donato de' Bardi) (1386 – 1466)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Scultore rivoluzionario, introdusse lo 'stiacciato' prospettico e infuse nelle sue figure un realismo drammatico e psicologico senza precedenti.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Verità Psicologica**: Rappresentazione di stati d'animo reali e tensioni emotive che rendono i personaggi vivi, fieri o tragicamente provati.
+*   **Lo Stiacciato**: Tecnica di rilievo a spessore millimetrico digradante che simula la profondità dello sfondo atmosferico con effetti quasi pittorici.
+*   **Sperimentalismo Tecnico**: Utilizzo virtuoso di molteplici materiali (marmo, bronzo, legno, terracotta) e recupero monumentale del nudo e dei monumenti equestri antichi.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *David in bronzo*
-Rappresenta uno dei cardini dello studio di Donatello (Donato de' Bardi). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Primo nudo virile a tutto tondo dell'età moderna, caratterizzato da una posa sinuosa a chiasmo e da una sottile ambiguità psicologica, che celebra la virtù civica fiorentina contro la tirannia.
 
 ### 🖼️ Opera Chiave: *San Giorgio*
-Rappresenta uno dei cardini dello studio di Donatello (Donato de' Bardi). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Statua per la corporazione dei Corazzai, dove l'eroe cristiano è ritratto come un giovane umanista concentrato e fiero; il basamento presenta lo 'stiacciato' prospettico con una resa quasi pittorica dello spazio.
 
 ### 🖼️ Opera Chiave: *Monumento equestre al Gattamelata*
-Rappresenta uno dei cardini dello studio di Donatello (Donato de' Bardi). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Statua bronzea monumentale eretta a Padova, ispirata ai modelli imperiali romani come il Marco Aurelio; unisce la solennità celebrativa a un'acuta indagine psicologica del condottiero.
 
 
 ---
@@ -39,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Donatello (Donato de' Bardi). L'anal
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Donatello (Donato de' Bardi)?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Donatello (Donato de' Bardi)?**
 * a) 1500 – 1550.
 * b) 1386 – 1466.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

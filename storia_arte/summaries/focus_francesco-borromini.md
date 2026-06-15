@@ -1,32 +1,32 @@
 # Focus Artista: Francesco Borromini (1599 – 1667)
 
 *   **Periodo/Movimento**: Barocco
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Innovatore spaziale radicale, creò architetture dinamiche basate sulla geometria complessa, l'alternanza di curve concave/convesse e lo stucco bianco.
+### 1. Profilo e Contributo Critico
+Francesco Borromini è l'instancabile innovatore dello spazio architettonico barocco. Opponendosi all'antropomorfismo classico e alle regole tradizionali, modella lo spazio attraverso un uso rigoroso e visionario della geometria complessa.
 
 ### 2. Metodologia e Stile
-*   **Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.**: Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.
-*   **Poetica del 'bel composto'**:  fusione integrata di scultura, pittura e architettura in un'unica scenografia.
-*   **Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).**: Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).
+*   **Mura Dinamiche**: Superfici ondulate a andamento sinusoidale, basate su curve concave e convesse alternate, che rendono lo spazio fluido e in costante movimento.
+*   **Geometria Complessa**: Progettazione basata su piante geometriche innovative (ellissi, triangoli equilateri intrecciati, stelle a sei punte) che rompono con la rigida simmetria classica.
+*   **Rigore dei Materiali**: Uso predominante di stucco bianco e materiali semplici per esaltare la luce e l'invenzione spaziale pura sopra la ricchezza cromatica decorativa.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *San Carlo alle Quattro Fontane*
-Rappresenta uno dei cardini dello studio di Francesco Borromini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Costruita in uno spazio ridottissimo, si distingue per la pianta ellittica basata su triangoli intrecciati, una cupola a cassettoni geometrici digradanti e la celebre facciata ondulata sinusoidale.
 
 ### 🖼️ Opera Chiave: *Sant'Ivo alla Sapienza*
-Rappresenta uno dei cardini dello studio di Francesco Borromini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Chiesa a pianta stellare generata da due triangoli equilateri sovrapposti, caratterizzata all'esterno dalla lanterna elicoidale a spirale che simboleggia l'ascesa divina della sapienza.
 
 ### 🖼️ Opera Chiave: *Galleria di Palazzo Spada*
-Rappresenta uno dei cardini dello studio di Francesco Borromini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Celebre colonnato prospettico illusionistico di soli 8 metri che simula una profondità di circa 37 metri grazie alla convergenza geometrica delle pareti e al pavimento in salita.
 
 
 ---
@@ -39,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Francesco Borromini. L'analisi si co
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Francesco Borromini?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Francesco Borromini?**
 * a) 1500 – 1550.
 * b) 1599 – 1667.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

@@ -1,32 +1,32 @@
 # Focus Artista: Masaccio (Tommaso di Ser Giovanni) (1401 – 1428)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Pioniere della pittura rinascimentale, applicò la prospettiva brunelleschiana per dare volume plastico e realismo emotivo alle figure.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Volume Plastico**: Figure dotate di una forte e pesante fisicità terrena, modellate attraverso forti chiaroscurali e panneggi pesanti.
+*   **Luce Univoca**: Utilizzo di un'unica fonte di luce coerente che colpisce e modella i personaggi, definendone le ombre e lo spazio circostante.
+*   **Realismo Drammatico**: Rappresentazione sincera della disperazione, del dolore e della dignità umana lontana dall'eleganza gotica.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *La Trinità (Santa Maria Novella)*
-Rappresenta uno dei cardini dello studio di Masaccio (Tommaso di Ser Giovanni). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grande affresco caratterizzato da una straordinaria illusione spaziale in prospettiva lineare centrica, che proietta una cappella voltata a botte a lacunari digradanti, con una struttura morale piramidale.
 
 ### 🖼️ Opera Chiave: *Cacciata dei Progenitori*
-Rappresenta uno dei cardini dello studio di Masaccio (Tommaso di Ser Giovanni). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Affresco della Cappella Brancacci in cui i corpi carichi di gravità plastica esprimono un realismo drammatico universale: il disperato grido espressionista di Eva si contrappone alla vergogna silenziosa di Adamo.
 
 ### 🖼️ Opera Chiave: *Il Tributo*
-Rappresenta uno dei cardini dello studio di Masaccio (Tommaso di Ser Giovanni). L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Affresco in cui la prospettiva e la luce univoca unificano tre momenti narrativi distinti del Vangelo in uno spazio continuo e monumentale, definendo plasticamente i volumi dei personaggi.
 
 
 ---
@@ -39,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Masaccio (Tommaso di Ser Giovanni). 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Masaccio (Tommaso di Ser Giovanni)?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Masaccio (Tommaso di Ser Giovanni)?**
 * a) 1500 – 1550.
 * b) 1401 – 1428.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

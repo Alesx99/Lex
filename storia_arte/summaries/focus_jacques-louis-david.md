@@ -1,32 +1,32 @@
 # Focus Artista: Jacques-Louis David (1748 – 1825)
 
 *   **Periodo/Movimento**: Neoclassicismo
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Massimo pittore neoclassico francese, unì il primato del disegno geometrico a un severo impegno morale e rivoluzionario.
+### 1. Profilo e Contributo Critico
+Jacques-Louis David è il leader indiscusso del Neoclassicismo pittorico francese. Trasforma la pittura in un manifesto etico, politico e civile prima per la Rivoluzione Francese e poi per l'Impero di Napoleone.
 
 ### 2. Metodologia e Stile
-*   **Recupero del classicismo greco e romano in opposizione agli eccessi decorativi del Barocco e del Rococò.**: Recupero del classicismo greco e romano in opposizione agli eccessi decorativi del Barocco e del Rococò.
-*   **Bello ideale winckelmanniano caratterizzato da nobile semplicità, quieta grandezza ed equilibrio etico.**: Bello ideale winckelmanniano caratterizzato da nobile semplicità, quieta grandezza ed equilibrio etico.
-*   **Primato del disegno nitido, contorni puliti e colori puri e ordinati.**: Primato del disegno nitido, contorni puliti e colori puri e ordinati.
+*   **Primato del Disegno**: Contorni nitidi, volumi scolpiti e rifiuto della pennellata vaporosa rococò a favore di una stesura controllata e razionale.
+*   **Rigore Etico e Morale**: Rappresentazione di virtù civiche romane e greche e di martiri politici come modelli morali per la società contemporanea.
+*   **Composizione Geometrica**: Scene ordinate regolate da assi ortogonali, luce direzionale tagliente e architetture classiche severe che scandiscono la narrazione.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Il giuramento degli Orazi*
-Rappresenta uno dei cardini dello studio di Jacques-Louis David. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grande dipinto neoclassico strutturato secondo la rigorosa prospettiva di tre archi classici, in cui le rette rigide degli uomini giuranti si contrappongono al pianto curvo e sommesso delle donne.
 
 ### 🖼️ Opera Chiave: *La morte di Marat*
-Rappresenta uno dei cardini dello studio di Jacques-Louis David. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Omaggio laico al martire rivoluzionario Jean-Paul Marat assassinato, in cui la posa solenne del braccio cadente cita la Pietà michelangiolesca all'interno di una stanza spoglia ed essenziale.
 
 ### 🖼️ Opera Chiave: *Il Primo Console supera le Alpi al Gran San Bernardo*
-Rappresenta uno dei cardini dello studio di Jacques-Louis David. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Ritratto equestre propagandistico in cui Napoleone, fiero e idealizzato, domina un cavallo impennato mentre indica la direzione della marcia, con i nomi dei condottieri storici incisi sulla roccia.
 
 
 ---
@@ -39,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Jacques-Louis David. L'analisi si co
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Jacques-Louis David?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Jacques-Louis David?**
 * a) 1500 – 1550.
 * b) 1748 – 1825.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

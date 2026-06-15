@@ -1,32 +1,31 @@
 # Focus Artista: Sandro Botticelli (1445 – 1510)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Interprete visivo del neoplatonismo mediceo, predilesse la linea elegante e sinuosa e soggetti mitologici ad alta densità allegorica.
+### 1. Profilo e Contributo Critico
+Sandro Botticelli è il massimo interprete pittorico della cerchia neoplatonica radunata a Firenze intorno a Lorenzo il Magnifico. La sua arte privilegia l'eleganza della linea fluttuante e l'ideale filosofico di bellezza poetica rispetto al realismo prospettico.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Il Neoplatonismo Mediceo**: La pittura di Botticelli traspone in immagini le idee del filosofo Marsilio Ficino e del poeta Agnolo Poliziano, vedendo nel mito un'allegoria morale di elevazione spirituale.
+*   **Linearismo Elegante**: Uso di linee fluttuanti, contorni sinuosi e panneggi leggeri che creano ritmi decorativi astratti, mettendo in secondo piano la tridimensionalità prospettica.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *La Primavera*
-Rappresenta uno dei cardini dello studio di Sandro Botticelli. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Grande allegoria mitologica da leggere da destra a sinistra, in cui l'eleganza sinuosa del disegno e il linearismo fluttuante traspongono visivamente l'ideale di armonia del neoplatonismo mediceo.
 
 ### 🖼️ Opera Chiave: *La Nascita di Venere*
-Rappresenta uno dei cardini dello studio di Sandro Botticelli. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Raffigurazione della Venere che emerge dalle acque ispirata alla Venere Pudica classica; privilegia l'armonia ritmica bidimensionale e la purezza della linea rispetto al rigore prospettico.
 
 ### 🖼️ Opera Chiave: *La Calunnia*
-Rappresenta uno dei cardini dello studio di Sandro Botticelli. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Allegoria tarda ispirata a un dipinto perduto di Apelle descritto da Leon Battista Alberti; le figure agitate e tormentate esprimono la crisi spirituale dell'artista colpita dalla predicazione del Savonarola.
 
 
 ---
@@ -39,14 +38,14 @@ Rappresenta uno dei cardini dello studio di Sandro Botticelli. L'analisi si conc
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Sandro Botticelli?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Sandro Botticelli?**
 * a) 1500 – 1550.
 * b) 1445 – 1510.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

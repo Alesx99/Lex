@@ -1,32 +1,32 @@
 # Focus Artista: Gian Lorenzo Bernini (1598 – 1680)
 
 *   **Periodo/Movimento**: Barocco
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Architetto e scultore supremo del Barocco, teorizzò il 'bel composto' integrando arti diverse in spettacolari scenografie spaziali.
+### 1. Profilo e Contributo Critico
+Gian Lorenzo Bernini è il vertice indiscusso della scultura e dell'architettura barocca. Genio versatile, trasforma Roma nella capitale teatrale del Seicento attraverso l'uso scenografico dello spazio e la metamorfosi emotiva del marmo.
 
 ### 2. Metodologia e Stile
-*   **Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.**: Coinvolgimento sensoriale dello spettatore attraverso la drammaticità, il dinamismo e la teatralità delle scene.
-*   **Poetica del 'bel composto'**:  fusione integrata di scultura, pittura e architettura in un'unica scenografia.
-*   **Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).**: Chiaroscuro violento e luce morale (Caravaggio) o spettacolari scorci prospettici aerei (quadratura).
+*   **Il Bel Composto**: Integrazione scenografica e inscindibile di scultura, architettura e pittura all'interno di un'unica opera d'arte totale.
+*   **Metamorfosi del Marmo**: Capacità virtuosa di scolpire la pietra per imitare la consistenza soffice della carne, dei capelli, del fogliame e delle nuvole.
+*   **Dinamismo Teatrale**: Scelta del momento culminante e più drammatico dell'azione per catturare l'emozione dello spettatore.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Apollo e Dafne*
-Rappresenta uno dei cardini dello studio di Gian Lorenzo Bernini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Straordinaria scultura in marmo che immortala il momento dinamico della metamorfosi della ninfa in alloro, sfidando la durezza della pietra con superfici levigate e dettagli fogliacei sottilissimi.
 
 ### 🖼️ Opera Chiave: *Estasi di santa Teresa*
-Rappresenta uno dei cardini dello studio di Gian Lorenzo Bernini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Capolavoro del 'bel composto' barocco in cui scultura, architettura e pittura si fondono in una scenografia teatrale illuminata da una finestra nascosta che riflette la luce naturale su raggi bronzei.
 
 ### 🖼️ Opera Chiave: *Colonnato di Piazza San Pietro*
-Rappresenta uno dei cardini dello studio di Gian Lorenzo Bernini. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Porticato ellittico a quattro file di colonne che avvolge la piazza simboleggiando le braccia accoglienti della Chiesa, progettato per correggere la percezione ottica della facciata della basilica.
 
 
 ---
@@ -39,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Gian Lorenzo Bernini. L'analisi si c
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Gian Lorenzo Bernini?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Canova.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Gian Lorenzo Bernini?**
 * a) 1500 – 1550.
 * b) 1598 – 1680.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

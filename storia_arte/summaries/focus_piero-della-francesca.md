@@ -1,32 +1,31 @@
 # Focus Artista: Piero della Francesca (1412 – 1492)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Maestro di luce e geometria, autore del De prospectiva pingendi; creò figure monumentali e solenni immerse in atmosfere limpide.
+### 1. Profilo e Contributo Critico
+Piero della Francesca è il teorico supremo della luce e della prospettiva scientifica nel Quattrocento. La sua pittura unisce l'immobilità solenne delle figure alla rigorosa astrazione geometrica dello spazio.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **La Prospettiva Matematica**: Piero scrive fondamentali trattati matematici, tra cui il *De prospectiva pingendi*, in cui codifica le leggi geometriche del disegno scorciato.
+*   **Luce e Volume**: La sua pittura è caratterizzata da una luce zenitale purissima che definisce i volumi e blocca l'azione in un silenzio eterno.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Il Battesimo di Cristo*
-Rappresenta uno dei cardini dello studio di Piero della Francesca. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Tavola caratterizzata da una rigorosa geometria compositiva basata sulla sezione aurea e da una luce tersa zenitale che solidifica e immobilizza le figure all'interno del paesaggio altotiberino.
 
 ### 🖼️ Opera Chiave: *La Flagellazione di Urbino*
-Rappresenta uno dei cardini dello studio di Piero della Francesca. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Celebre tavoletta prospettica divisa in due scene in cui il rigore geometrico del pavimento a piastrelle bianche e nere convive con l'enigmatico colloquio silenzioso delle three figure in primo piano.
 
 ### 🖼️ Opera Chiave: *Pala di Brera*
-Rappresenta uno dei cardini dello studio di Piero della Francesca. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Sacra conversazione prospettica in cui un uovo di struzzo, appeso a una conchiglia sopra la Vergine col Bambino e Federico da Montefeltro orante, costituisce il fulcro geometrico e simbolico dell'opera.
 
 
 ---
@@ -39,14 +38,14 @@ Rappresenta uno dei cardini dello studio di Piero della Francesca. L'analisi si 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Piero della Francesca?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Piero della Francesca?**
 * a) 1500 – 1550.
 * b) 1412 – 1492.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

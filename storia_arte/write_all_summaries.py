@@ -1161,6 +1161,179 @@ enriched_data = {
         "works": {
             "Il castello dei Papi ad Avignone": "Veduta del palazzo dei papi avvolto da una luce rosa e dorata che si riflette sul Rodano."
         }
+    },
+    "filippo-brunelleschi": {
+        "name": "Filippo Brunelleschi",
+        "period": "Primo Rinascimento",
+        "years": "1377 – 1446",
+        "desc": "Padre dell'architettura rinascimentale, codificò la prospettiva lineare centrica e progettò strutture basate sul modulo proporzionale classico.",
+        "points": [
+            "**Razionalità Prospettica**: Ideazione della prospettiva lineare centrica a punto di fuga unico per ordinare lo spazio tridimensionale su base geometrica matematica.",
+            "**Modulo Proporzionale**: Strutture architettoniche regolate da una griglia modulare rigorosa desunta dallo studio degli ordini classici.",
+            "**Bicromia Serene-Intonaco**: Uso ricorrente della pietra serena grigia per evidenziare le membrature portanti sull'intonaco bianco delle pareti."
+        ],
+        "works": {
+            "Cupola di Santa Maria del Fiore": "Capolavoro ingegneristico autoportante a doppia calotta, strutturato con un'intelaiatura di costoloni e una muratura interna con disposizione dei mattoni a 'spina di pesce' per evitare scivolamenti durante la costruzione.",
+            "Spedale degli Innocenti": "Primo edificio pienamente rinascimentale, caratterizzato da un portico con archi a tutto sesto basato su un modulo proporzionale cubico e dalla bicromia tra pietra serena grigia e intonaco chiaro.",
+            "Sagrestia Vecchia di San Lorenzo": "Cappella funeraria a pianta quadrata sormontata da una cupola a ombrello su pennacchi sferici, che definisce lo spazio sacro come un volume cubico perfetto ispirato alla geometria divina."
+        }
+    },
+    "donatello": {
+        "name": "Donatello (Donato de' Bardi)",
+        "period": "Primo Rinascimento",
+        "years": "1386 – 1466",
+        "desc": "Scultore rivoluzionario, introdusse lo 'stiacciato' prospettico e infuse nelle sue figure un realismo drammatico e psicologico senza precedenti.",
+        "points": [
+            "**Verità Psicologica**: Rappresentazione di stati d'animo reali e tensioni emotive che rendono i personaggi vivi, fieri o tragicamente provati.",
+            "**Lo Stiacciato**: Tecnica di rilievo a spessore millimetrico digradante che simula la profondità dello sfondo atmosferico con effetti quasi pittorici.",
+            "**Sperimentalismo Tecnico**: Utilizzo virtuoso di molteplici materiali (marmo, bronzo, legno, terracotta) e recupero monumentale del nudo e dei monumenti equestri antichi."
+        ],
+        "works": {
+            "David in bronzo": "Primo nudo virile a tutto tondo dell'età moderna, caratterizzato da una posa sinuosa a chiasmo e da una sottile ambiguità psicologica, che celebra la virtù civica fiorentina contro la tirannia.",
+            "San Giorgio": "Statua per la corporazione dei Corazzai, dove l'eroe cristiano è ritratto come un giovane umanista concentrato e fiero; il basamento presenta lo 'stiacciato' prospettico con una resa quasi pittorica dello spazio.",
+            "Monumento equestre al Gattamelata": "Statua bronzea monumentale eretta a Padova, ispirata ai modelli imperiali romani come il Marco Aurelio; unisce la solennità celebrativa a un'acuta indagine psicologica del condottiero."
+        }
+    },
+    "masaccio": {
+        "name": "Masaccio (Tommaso di Ser Giovanni)",
+        "period": "Primo Rinascimento",
+        "years": "1401 – 1428",
+        "desc": "Pioniere della pittura rinascimentale, applicò la prospettiva brunelleschiana per dare volume plastico e realismo emotivo alle figure.",
+        "points": [
+            "**Volume Plastico**: Figure dotate di una forte e pesante fisicità terrena, modellate attraverso forti chiaroscurali e panneggi pesanti.",
+            "**Luce Univoca**: Utilizzo di un'unica fonte di luce coerente che colpisce e modella i personaggi, definendone le ombre e lo spazio circostante.",
+            "**Realismo Drammatico**: Rappresentazione sincera della disperazione, del dolore e della dignità umana lontana dall'eleganza gotica."
+        ],
+        "works": {
+            "La Trinità (Santa Maria Novella)": "Grande affresco caratterizzato da una straordinaria illusione spaziale in prospettiva lineare centrica, che proietta una cappella voltata a botte a lacunari digradanti, con una struttura morale piramidale.",
+            "Cacciata dei Progenitori": "Affresco della Cappella Brancacci in cui i corpi carichi di gravità plastica esprimono un realismo drammatico universale: il disperato grido espressionista di Eva si contrappone alla vergogna silenziosa di Adamo.",
+            "Il Tributo": "Affresco in cui la prospettiva e la luce univoca unificano tre momenti narrativi distinti del Vangelo in uno spazio continuo e monumentale, definendo plasticamente i volumi dei personaggi."
+        }
+    },
+    "leon-battista-alberti": {
+        "name": "Leon Battista Alberti",
+        "period": "Secondo Quattrocento",
+        "years": "1404 – 1472",
+        "desc": "Leon Battista Alberti incarna perfettamente l'ideale dell'uomo universale del Rinascimento. Intellettuale, umanista, scrittore e matematico, concepisce l'architettura non come mestiere manuale ma come disciplina intellettuale fondata sulla filosofia e sulla geometria.",
+        "points": [
+            "**Concinnitas**: L'armonia originata dall'integrazione ordinata di tutte le parti di un edificio, regolata da proporzioni matematiche matematicamente riproducibili.",
+            "**Lineamenta**: Il disegno concettuale dell'opera che prescinde dalla materia fisica."
+        ],
+        "works": {
+            "Tempio Malatestiano": "Involucro marmoreo classico ispirato agli archi di trionfo romani che riveste la preesistente chiesa gotica di San Francesco, arricchito da semicolonne su alti piedistalli.",
+            "Facciata di Santa Maria Novella": "Completamento in stile rinascimentale con grandi volutoni laterali geometrici per raccordare gli spioventi delle navate e un disegno interamente regolato da proporzioni modulari basate sul quadrato.",
+            "Sant'Andrea a Mantova": "Modello monumentale di chiesa a navata unica coperta da una gigantesca volta a botte a lacunari e affiancata da cappelle laterali alternate a pilastri, ispirato alla Basilica di Massenzio."
+        }
+    },
+    "piero-della-francesca": {
+        "name": "Piero della Francesca",
+        "period": "Secondo Quattrocento",
+        "years": "1412 – 1492",
+        "desc": "Piero della Francesca è il teorico supremo della luce e della prospettiva scientifica nel Quattrocento. La sua pittura unisce l'immobilità solenne delle figure alla rigorosa astrazione geometrica dello spazio.",
+        "points": [
+            "**La Prospettiva Matematica**: Piero scrive fondamentali trattati matematici, tra cui il *De prospectiva pingendi*, in cui codifica le leggi geometriche del disegno scorciato.",
+            "**Luce e Volume**: La sua pittura è caratterizzata da una luce zenitale purissima che definisce i volumi e blocca l'azione in un silenzio eterno."
+        ],
+        "works": {
+            "Il Battesimo di Cristo": "Tavola caratterizzata da una rigorosa geometria compositiva basata sulla sezione aurea e da una luce tersa zenitale che solidifica e immobilizza le figure all'interno del paesaggio altotiberino.",
+            "La Flagellazione di Urbino": "Celebre tavoletta prospettica divisa in due scene in cui il rigore geometrico del pavimento a piastrelle bianche e nere convive con l'enigmatico colloquio silenzioso delle three figure in primo piano.",
+            "Pala di Brera": "Sacra conversazione prospettica in cui un uovo di struzzo, appeso a una conchiglia sopra la Vergine col Bambino e Federico da Montefeltro orante, costituisce il fulcro geometrico e simbolico dell'opera."
+        }
+    },
+    "sandro-botticelli": {
+        "name": "Sandro Botticelli",
+        "period": "Secondo Quattrocento",
+        "years": "1445 – 1510",
+        "desc": "Sandro Botticelli è il massimo interprete pittorico della cerchia neoplatonica radunata a Firenze intorno a Lorenzo il Magnifico. La sua arte privilegia l'eleganza della linea fluttuante e l'ideale filosofico di bellezza poetica rispetto al realismo prospettico.",
+        "points": [
+            "**Il Neoplatonismo Mediceo**: La pittura di Botticelli traspone in immagini le idee del filosofo Marsilio Ficino e del poeta Agnolo Poliziano, vedendo nel mito un'allegoria morale di elevazione spirituale.",
+            "**Linearismo Elegante**: Uso di linee fluttuanti, contorni sinuosi e panneggi leggeri che creano ritmi decorativi astratti, mettendo in secondo piano la tridimensionalità prospettica."
+        ],
+        "works": {
+            "La Primavera": "Grande allegoria mitologica da leggere da destra a sinistra, in cui l'eleganza sinuosa del disegno e il linearismo fluttuante traspongono visivamente l'ideale di armonia del neoplatonismo mediceo.",
+            "La Nascita di Venere": "Raffigurazione della Venere che emerge dalle acque ispirata alla Venere Pudica classica; privilegia l'armonia ritmica bidimensionale e la purezza della linea rispetto al rigore prospettico.",
+            "La Calunnia": "Allegoria tarda ispirata a un dipinto perduto di Apelle descritto da Leon Battista Alberti; le figure agitate e tormentate esprimono la crisi spirituale dell'artista colpita dalla predicazione del Savonarola."
+        }
+    },
+    "andrea-mantegna": {
+        "name": "Andrea Mantegna",
+        "period": "Secondo Quattrocento",
+        "years": "1431 – 1506",
+        "desc": "Andrea Mantegna unisce la passione rigorosa per l'archeologia classica alla padronanza assoluta delle leggi prospettiche, creando scene monumentali dall'illusione spaziale stupefacente.",
+        "points": [
+            "**Passione Archeologica**: Studio accurato e riproduzione precisa di monumenti antichi, costumi, armature ed iscrizioni classiche romane.",
+            "**Disegno Scultoreo**: Le figure umane e le architetture sono tracciate con un disegno nitido e tagliente che evoca la solidità della pietra.",
+            "**Illusionismo Prospettico**: Ricerca di scorci estremi e sfondati spaziali per integrare lo spazio reale dello spettatore con quello dipinto."
+        ],
+        "works": {
+            "Camera degli Sposi": "Capolavoro dell'illusionismo prospettico rinascimentale a Mantova, celebre per l'oculo circolare dipinto sul soffitto da cui putti e fanciulle si affacciano scorciati in un cielo aperto.",
+            "Cristo Morto": "Dipinto dal drammatico scorcio prospettico frontale in cui Mantegna riduce le dimensioni dei piedi per fini estetici ed espressivi, accentuando la tragica fisicità e il pathos della morte.",
+            "Pala di San Zeno": "Trittico d'altare a Verona in cui la cornice architettonica reale si fonde prospetticamente con lo spazio dipinto della sacra conversazione all'aperto, arricchita da dettagli antiquari romani."
+        }
+    },
+    "tiziano-vecellio": {
+        "name": "Tiziano Vecellio",
+        "period": "Rinascimento Veneto",
+        "years": "1488 – 1576",
+        "desc": "Tiziano Vecellio è il gigante indiscusso del Rinascimento Veneto. Conduce la rivoluzione del colorito tonale al suo apice espressivo, sciogliendo la forma nel colore e influenzando generazioni di pittori europei.",
+        "points": [
+            "**Rivoluzione Tonale**: Costruisce le figure e lo spazio stendendo direttamente strati di colore sovrapposti e accostati, senza far ricorso a un disegno preparatorio rigido.",
+            "**La Pittura di Tocco (Stile Tardo)**: Pennellate larghe, pastose ed espressive stese in vecchiaia anche con le dita, dissolvendo i contorni in un impasto di luce."
+        ],
+        "works": {
+            "Assunta dei Frari": "Gigantesca pala d'altare veneziana che impone uno spazio dinamico tripartito, guidando lo sguardo dei fedeli verso l'alto tramite un uso espressivo del colore rosso e di una luce dorata.",
+            "Amor Sacro e Amor Profano": "Allegoria nuziale in cui due figure femminili identiche simboleggiano l'amore terrestre e quello celeste, immerse in un sereno paesaggio veneto fuso con la pittura tonale.",
+            "Venere di Urbino": "Nudo sensuale sdraiato in un raffinato interno domestico, in cui la stesura tonale del colore e la disposizione obliqua del corpo creano un'atmosfera sospesa di intima bellezza quotidiana.",
+            "La punizione di Marsia": "Capolavoro dello stile tardo caratterizzato da una pennellata disgregata, materica ed espressionista stese anche con le dita, dove le forme si dissolvono in un drammatico contrasto di luce."
+        }
+    },
+    "gian-lorenzo-bernini": {
+        "name": "Gian Lorenzo Bernini",
+        "period": "Barocco",
+        "years": "1598 – 1680",
+        "desc": "Gian Lorenzo Bernini è il vertice indiscusso della scultura e dell'architettura barocca. Genio versatile, trasforma Roma nella capitale teatrale del Seicento attraverso l'uso scenografico dello spazio e la metamorfosi emotiva del marmo.",
+        "points": [
+            "**Il Bel Composto**: Integrazione scenografica e inscindibile di scultura, architettura e pittura all'interno di un'unica opera d'arte totale.",
+            "**Metamorfosi del Marmo**: Capacità virtuosa di scolpire la pietra per imitare la consistenza soffice della carne, dei capelli, del fogliame e delle nuvole.",
+            "**Dinamismo Teatrale**: Scelta del momento culminante e più drammatico dell'azione per catturare l'emozione dello spettatore."
+        ],
+        "works": {
+            "Apollo e Dafne": "Straordinaria scultura in marmo che immortala il momento dinamico della metamorfosi della ninfa in alloro, sfidando la durezza della pietra con superfici levigate e dettagli fogliacei sottilissimi.",
+            "Estasi di santa Teresa": "Capolavoro del 'bel composto' barocco in cui scultura, architettura e pittura si fondono in una scenografia teatrale illuminata da una finestra nascosta che riflette la luce naturale su raggi bronzei.",
+            "Colonnato di Piazza San Pietro": "Porticato ellittico a quattro file di colonne che avvolge la piazza simboleggiando le braccia accoglienti della Chiesa, progettato per correggere la percezione ottica della facciata della basilica."
+        }
+    },
+    "francesco-borromini": {
+        "name": "Francesco Borromini",
+        "period": "Barocco",
+        "years": "1599 – 1667",
+        "desc": "Francesco Borromini è l'instancabile innovatore dello spazio architettonico barocco. Opponendosi all'antropomorfismo classico e alle regole tradizionali, modella lo spazio attraverso un uso rigoroso e visionario della geometria complessa.",
+        "points": [
+            "**Mura Dinamiche**: Superfici ondulate a andamento sinusoidale, basate su curve concave e convesse alternate, che rendono lo spazio fluido e in costante movimento.",
+            "**Geometria Complessa**: Progettazione basata su piante geometriche innovative (ellissi, triangoli equilateri intrecciati, stelle a sei punte) che rompono con la rigida simmetria classica.",
+            "**Rigore dei Materiali**: Uso predominante di stucco bianco e materiali semplici per esaltare la luce e l'invenzione spaziale pura sopra la ricchezza cromatica decorativa."
+        ],
+        "works": {
+            "San Carlo alle Quattro Fontane": "Costruita in uno spazio ridottissimo, si distingue per la pianta ellittica basata su triangoli intrecciati, una cupola a cassettoni geometrici digradanti e la celebre facciata ondulata sinusoidale.",
+            "Sant'Ivo alla Sapienza": "Chiesa a pianta stellare generata da due triangoli equilateri sovrapposti, caratterizzata all'esterno dalla lanterna elicoidale a spirale che simboleggia l'ascesa divina della sapienza.",
+            "Galleria di Palazzo Spada": "Celebre colonnato prospettico illusionistico di soli 8 metri che simula una profondità di circa 37 metri grazie alla convergenza geometrica delle pareti e al pavimento in salita."
+        }
+    },
+    "jacques-louis-david": {
+        "name": "Jacques-Louis David",
+        "period": "Neoclassicismo",
+        "years": "1748 – 1825",
+        "desc": "Jacques-Louis David è il leader indiscusso del Neoclassicismo pittorico francese. Trasforma la pittura in un manifesto etico, politico e civile prima per la Rivoluzione Francese e poi per l'Impero di Napoleone.",
+        "points": [
+            "**Primato del Disegno**: Contorni nitidi, volumi scolpiti e rifiuto della pennellata vaporosa rococò a favore di una stesura controllata e razionale.",
+            "**Rigore Etico e Morale**: Rappresentazione di virtù civiche romane e greche e di martiri politici come modelli morali per la società contemporanea.",
+            "**Composizione Geometrica**: Scene ordinate regolate da assi ortogonali, luce direzionale tagliente e architetture classiche severe che scandiscono la narrazione."
+        ],
+        "works": {
+            "Il giuramento degli Orazi": "Grande dipinto neoclassico strutturato secondo la rigorosa prospettiva di tre archi classici, in cui le rette rigide degli uomini giuranti si contrappongono al pianto curvo e sommesso delle donne.",
+            "La morte di Marat": "Omaggio laico al martire rivoluzionario Jean-Paul Marat assassinato, in cui la posa solenne del braccio cadente cita la Pietà michelangiolesca all'interno di una stanza spoglia ed essenziale.",
+            "Il Primo Console supera le Alpi al Gran San Bernardo": "Ritratto equestre propagandistico in cui Napoleone, fiero e idealizzato, domina un cavallo impennato mentre indica la direzione della marcia, con i nomi dei condottieri storici incisi sulla roccia."
+        }
     }
 }
 

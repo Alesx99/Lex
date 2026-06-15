@@ -1,32 +1,31 @@
 # Focus Artista: Leon Battista Alberti (1404 – 1472)
 
 *   **Periodo/Movimento**: Secondo Quattrocento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
-Grande teorico dell'architettura (De re aedificatoria), concepì la progettazione basata sulla concinnitas (armonia proporzionale) e sui modelli antichi.
+### 1. Profilo e Contributo Critico
+Leon Battista Alberti incarna perfettamente l'ideale dell'uomo universale del Rinascimento. Intellettuale, umanista, scrittore e matematico, concepisce l'architettura non come mestiere manuale ma come disciplina intellettuale fondata sulla filosofia e sulla geometria.
 
 ### 2. Metodologia e Stile
-*   **Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).**: Diffusione dei modelli umanistici e rinascimentali nelle grandi corti principesche italiane (Urbino, Mantova, Ferrara).
-*   **Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).**: Integrazione della luce come elemento intellettuale e chiarificatore dei volumi geometrici (Piero della Francesca).
-*   **Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).**: Sperimentazioni prospettiche e illusionistiche estreme (Mantegna) ed eleganza allegorica neoplatonica (Botticelli).
+*   **Concinnitas**: L'armonia originata dall'integrazione ordinata di tutte le parti di un edificio, regolata da proporzioni matematiche matematicamente riproducibili.
+*   **Lineamenta**: Il disegno concettuale dell'opera che prescinde dalla materia fisica.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Tempio Malatestiano*
-Rappresenta uno dei cardini dello studio di Leon Battista Alberti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Involucro marmoreo classico ispirato agli archi di trionfo romani che riveste la preesistente chiesa gotica di San Francesco, arricchito da semicolonne su alti piedistalli.
 
 ### 🖼️ Opera Chiave: *Facciata di Santa Maria Novella*
-Rappresenta uno dei cardini dello studio di Leon Battista Alberti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Completamento in stile rinascimentale con grandi volutoni laterali geometrici per raccordare gli spioventi delle navate e un disegno interamente regolato da proporzioni modulari basate sul quadrato.
 
 ### 🖼️ Opera Chiave: *Sant'Andrea a Mantova*
-Rappresenta uno dei cardini dello studio di Leon Battista Alberti. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Modello monumentale di chiesa a navata unica coperta da una gigantesca volta a botte a lacunari e affiancata da cappelle laterali alternate a pilastri, ispirato alla Basilica di Massenzio.
 
 
 ---
@@ -39,14 +38,14 @@ Rappresenta uno dei cardini dello studio di Leon Battista Alberti. L'analisi si 
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Leon Battista Alberti?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Leon Battista Alberti?**
 * a) 1500 – 1550.
 * b) 1404 – 1472.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*

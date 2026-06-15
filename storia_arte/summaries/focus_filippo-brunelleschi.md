@@ -1,32 +1,32 @@
 # Focus Artista: Filippo Brunelleschi (1377 – 1446)
 
 *   **Periodo/Movimento**: Primo Rinascimento
-*   **Stato**: Sintesi Concettuale dei Punti Focali
+*   **Stato**: Sintesi Accademica di Livello Universitario
 
 ---
 
 ## 📌 Punti Focali dell'Artista
 
-### 1. Profilo e Contributo
+### 1. Profilo e Contributo Critico
 Padre dell'architettura rinascimentale, codificò la prospettiva lineare centrica e progettò strutture basate sul modulo proporzionale classico.
 
 ### 2. Metodologia e Stile
-*   **Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).**: Definizione prospettica dello spazio in base a regole geometriche e matematiche razionali (Brunelleschi).
-*   **Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.**: Studio anatomico realistico, proporzione a misura d'uomo e recupero consapevole degli ordini classici antichi.
-*   **Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.**: Rilievo plastico e chiaroscuro per conferire peso fisico ed emotività alle figure umane.
+*   **Razionalità Prospettica**: Ideazione della prospettiva lineare centrica a punto di fuga unico per ordinare lo spazio tridimensionale su base geometrica matematica.
+*   **Modulo Proporzionale**: Strutture architettoniche regolate da una griglia modulare rigorosa desunta dallo studio degli ordini classici.
+*   **Bicromia Serene-Intonaco**: Uso ricorrente della pietra serena grigia per evidenziare le membrature portanti sull'intonaco bianco delle pareti.
 
 ---
 
 ## 🔍 Opere Principali in Esame
 
 ### 🖼️ Opera Chiave: *Cupola di Santa Maria del Fiore*
-Rappresenta uno dei cardini dello studio di Filippo Brunelleschi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Capolavoro ingegneristico autoportante a doppia calotta, strutturato con un'intelaiatura di costoloni e una muratura interna con disposizione dei mattoni a 'spina di pesce' per evitare scivolamenti durante la costruzione.
 
 ### 🖼️ Opera Chiave: *Spedale degli Innocenti*
-Rappresenta uno dei cardini dello studio di Filippo Brunelleschi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Primo edificio pienamente rinascimentale, caratterizzato da un portico con archi a tutto sesto basato su un modulo proporzionale cubico e dalla bicromia tra pietra serena grigia e intonaco chiaro.
 
 ### 🖼️ Opera Chiave: *Sagrestia Vecchia di San Lorenzo*
-Rappresenta uno dei cardini dello studio di Filippo Brunelleschi. L'analisi si concentra sulla composizione prospettica, sulla stesura cromatica e sull'innovazione formale rispetto ai contemporanei.
+Cappella funeraria a pianta quadrata sormontata da una cupola a ombrello su pennacchi sferici, che definisce lo spazio sacro come un volume cubico perfetto ispirato alla geometria divina.
 
 
 ---
@@ -39,14 +39,14 @@ Rappresenta uno dei cardini dello studio di Filippo Brunelleschi. L'analisi si c
 * c) Rinascimento Maturo.
 * *Risposta corretta: b*
 
-**2. Quali sono gli estremi cronologici attribuiti a Filippo Brunelleschi?**
+**2. Quale manuale d'esame contiene l'analisi completa di questo artista?**
+* a) Brunelleschi.pdf.
+* b) Diritto dei Beni Culturali.
+* c) Codicologia e Paleografia.
+* *Risposta corretta: a*
+
+**3. Quali sono gli estremi cronologici (anni di nascita e morte/attività) attribuiti a Filippo Brunelleschi?**
 * a) 1500 – 1550.
 * b) 1377 – 1446.
 * c) 1780 – 1830.
-* *Risposta corretta: b*
-
-**3. Qual è l'elemento centrale dell'analisi critica delle sue opere?**
-* a) La scomposizione cubista totale.
-* b) La combinazione tra stesura tecnica dell'epoca e innovazione proporzionale/cromatica.
-* c) L'uso esclusivo del carboncino.
 * *Risposta corretta: b*
