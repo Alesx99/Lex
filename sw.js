@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v15';
+const CACHE_NAME = 'lex-cache-v16';
 const ASSETS = [
   './',
   './index.html',
@@ -15,6 +15,10 @@ const ASSETS = [
   './arte_romana/style.css',
   './arte_romana/quiz.html',
   './arte_romana/connections.html',
+  './codicologia/index.html',
+  './codicologia/style.css',
+  './codicologia/quiz.html',
+  './codicologia/connections.html',
   './minigames.html',
   './js/minigames.js'
 ];

@@ -3609,6 +3609,129 @@ const quizDatabase = {
                 explanation: "La beneventana barese (diffusa in Puglia) è caratterizzata da prima facie da forme più ampie, tondeggianti e da un tracciato fluido influenzato dalla minuscola greca bizantina."
             }
         ]
+    },
+
+    cod_cap13_archeometria: {
+        subject: "codicologia",
+        chapterTag: "Cap. XIII",
+        title: "Biocodicologia e Archeometria del Libro",
+        questions: [
+            {
+                question: "Quale metodo consente di determinare con certezza scientifica la specie animale di provenienza delle pergamene di un codice?",
+                options: [
+                    "La fluorescenza a raggi X (XRF) applicata alle miniature.",
+                    "L'estrazione e analisi del DNA antico (aDNA) o l'analisi delle proteine del collagene (eZooMS).",
+                    "L'esame visivo con luce polarizzata rasente.",
+                    "La spettroscopia Raman applicata al recto dei bifogli."
+                ],
+                correctIndex: 1,
+                explanation: "L'estrazione del DNA antico (aDNA) e la spettrometria delle proteine del collagene (eZooMS) permettono di identificare la specie (vitello, pecora, capra) e la provenienza geografica degli animali."
+            },
+            {
+                question: "Quale tecnica non distruttiva è comunemente impiegata in archeometria per identificare la composizione elementare dei pigmenti delle miniature?",
+                options: [
+                    "La spettrometria di massa a ionizzazione.",
+                    "La fluorescenza a raggi X (XRF).",
+                    "La datazione al radiocarbonio AMS.",
+                    "L'analisi stratigrafica distruttiva a luce ultravioletta."
+                ],
+                correctIndex: 1,
+                explanation: "La fluorescenza a raggi X (XRF) eccita gli atomi del pigmento permettendo di leggerne lo spettro chimico elementare (es. identificando il mercurio nel cinabro o il rame nell'azzurrite) senza alcun danno al foglio."
+            },
+            {
+                question: "Quale strumento diagnostico consente di analizzare la struttura interna delle legature antiche senza smontarne i piatti o il cuoio di rivestimento?",
+                options: [
+                    "La spettroscopia infrarossa a trasformata di Fourier (FTIR).",
+                    "La radiografia e la micro-tomografia computerizzata (Micro-CT Scan).",
+                    "Il microscopio ottico a riflettanza.",
+                    "La spettrometria di massa eZooMS."
+                ],
+                correctIndex: 1,
+                explanation: "La radiografia e la tomografia computerizzata (Micro-CT) consentono di ricreare modelli 3D interni delle legature, rivelando canali di cucitura, perni di fissaggio e materiali di riempimento senza intaccare il volume."
+            }
+        ]
+    },
+
+    cod_cap14_frammentologia: {
+        subject: "codicologia",
+        chapterTag: "Cap. XIV",
+        title: "Frammentologia e Archeologia del Legatore",
+        questions: [
+            {
+                question: "Che cosa si intende per 'maculatura' (o binding waste) nel contesto della frammentologia?",
+                options: [
+                    "Un errore macroscopico di inchiostrazione commesso dal copista.",
+                    "L'uso di fogli o frammenti di vecchi manoscritti pergamenacei obsoleti per rinforzare la legatura di nuovi libri.",
+                    "Una macchia di umidità che corrode la pergamena o la carta.",
+                    "Il disegno decorativo a spruzzo d'oro sul taglio del libro."
+                ],
+                correctIndex: 1,
+                explanation: "La maculatura è il riuso di frammenti o fogli interi di vecchi manoscritti (ritenuti obsoleti per lingua, scrittura o contenuto) per rinforzare i cardini, i dorsi o i piatti delle nuove legature."
+            },
+            {
+                question: "Qual è la differenza tra un frammento conservato 'in situ' e uno 'ex situ'?",
+                options: [
+                    "Il frammento in situ è in latino, quello ex situ in volgare.",
+                    "Il frammento in situ si trova ancora integrato all'interno della legatura originaria in cui fu riciclato, mentre quello ex situ è stato distaccato e conservato a parte.",
+                    "Il frammento in situ proviene da un archivio ecclesiastico, quello ex situ da uno privato.",
+                    "Non vi è alcuna differenza, sono sinonimi bibliografici."
+                ],
+                correctIndex: 1,
+                explanation: "I frammenti 'in situ' preservano il contesto archeologico della legatura in cui sono stati inseriti, mentre quelli 'ex situ' sono stati rimossi da restauratori o bibliotecari per facilitarne lo studio separato."
+            },
+            {
+                question: "Quale risorsa digitale internazionale funge da database e laboratorio per lo studio e la ricomposizione virtuale dei frammenti dispersi?",
+                options: [
+                    "Manus Online (MOL)",
+                    "Fragmentarium",
+                    "Digita Vaticana",
+                    "Schoenberg Database"
+                ],
+                correctIndex: 1,
+                explanation: "Fragmentarium è un portale accademico internazionale dedicato specificamente alla catalogazione, alla digitalizzazione e alla ricomposizione virtuale di frammenti di manoscritti medievali dispersi."
+            }
+        ]
+    },
+
+    cod_cap15_formati: {
+        subject: "codicologia",
+        chapterTag: "Cap. XV",
+        title: "Tipologie Funzionali e Formati del Manoscritto",
+        questions: [
+            {
+                question: "Perché le grandi Bibbie atlantiche romaniche o gli Antifonari e Graduali trecenteschi venivano realizzati in 'formati giganti'?",
+                options: [
+                    "Perché la pergamena di scarto era disponibile solo in grandissime dimensioni.",
+                    "Per consentire a un intero coro di monaci o canonici di leggere e cantare contemporaneamente dallo stesso volume posto su un leggio distante.",
+                    "Per proteggere i volumi dai furti, rendendoli troppo pesanti da trasportare.",
+                    "Per motivi di prestigio fiscale legati alle tasse sulla carta."
+                ],
+                correctIndex: 1,
+                explanation: "Il formato gigante dei libri liturgici corali risponde a una necessità funzionale: posizionato sul grande leggio del coro, permetteva a tutti i cantori di decifrare note e testi a debita distanza."
+            },
+            {
+                question: "Cosa caratterizza i rotoli liturgici noti come 'Exultet' prodotti nell'Italia meridionale?",
+                options: [
+                    "Sono scritti in lettere greche bizantine su papiro egiziano.",
+                    "Hanno le miniature dipinte capovolte rispetto al testo, per permettere ai fedeli di vederle mentre il diacono srotolava il testo dal pulpito.",
+                    "Venivano letti orizzontalmente ed erano privi di qualsiasi decorazione figurata.",
+                    "Erano rilegati in piatti di legno rivestiti di seta porpora."
+                ],
+                correctIndex: 1,
+                explanation: "Gli Exultet presentano il testo orientato in senso opposto rispetto alle immagini, in modo che durante la proclamazione pasquale i fedeli analfabeti potessero guardare le scene illustrate man mano che il rotolo scendeva dal pulpito."
+            },
+            {
+                question: "Qual è la differenza filologica tra un codice 'autografo' e uno 'idiografo'?",
+                options: [
+                    "Il codice autografo è una copia stampata, l'idiografo è interamente scritto a mano.",
+                    "L'autografo è scritto di pugno dall'autore stesso del testo, mentre l'idiografo è scritto da un copista sotto la diretta supervisione o correzione dell'autore.",
+                    "L'autografo contiene solo opere poetiche, l'idiografo solo trattati scientifici.",
+                    "L'autografo è anonimo, l'idiografo reca la firma del copista nel colofone."
+                ],
+                correctIndex: 1,
+                explanation: "L'autografo è redatto fisicamente dall'autore del testo (es. Decameron di Boccaccio nel codice Hamilton 90). L'idiografo è scritto da altri ma controllato, corretto o autorizzato dall'autore (es. Canzoniere di Petrarca nel Vat. Lat. 3195)."
+            }
+        ]
     }
 
 };

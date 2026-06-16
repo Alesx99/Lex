@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa delle Connessioni - Lex Codicologia</title>
+    <meta name="description" content="Mappa interattiva delle relazioni logiche e materiali tra i capitoli dello studio del manoscritto.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Specific page override for map view */
+        main {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-section {
+            flex: 1;
+            margin-top: 1rem;
+        }
+
+        /* Responsive styling for connections layout */
+        @media (max-width: 1024px) {
+            main {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Codicologia</h1>
+            <p>Modulo di Studio Accademico</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link active" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+        
+        <section class="connections-container map-section">
+            
+            <!-- Graphic Map Panel -->
+            <div class="map-card">
+                <svg id="network-svg" class="map-svg" viewBox="0 0 720 720" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Glow filters for highlighted nodes/edges -->
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="6" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    
+                    <!-- Edges (Links) Layer -->
+                    <g id="edges-group"></g>
+                    <!-- Nodes Layer -->
+                    <g id="nodes-group"></g>
+                </svg>
+            </div>
+
+            <!-- Descriptive Right Panel -->
+            <div class="info-panel" id="detail-panel">
+                <div class="panel-placeholder" id="placeholder-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <h3>Mappa delle Connessioni Materiali</h3>
+                    <p>Seleziona o passa il mouse sopra un nodo del grafo per esplorare come i diversi aspetti fisici del libro manoscritto (supporti, rigatura, legatura, centri scrittori) si collegano tra loro.</p>
+                </div>
+
+                <div class="panel-content" id="panel-details" style="display: none;">
+                    <div class="panel-header">
+                        <span class="panel-tag" id="panel-chapter-tag">Capitolo I</span>
+                        <h2 class="panel-title" id="panel-chapter-title">Codicologia e Paleografia</h2>
+                        <div class="panel-author">Autore: <span id="panel-chapter-author">Sintesi Accademica</span></div>
+                    </div>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        Descrizione
+                    </p>
+                    <p class="panel-desc" id="panel-chapter-desc">Descrizione sintetica del capitolo.</p>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path></svg>
+                        Collegamenti Tematici
+                    </p>
+                    <div class="connection-list" id="panel-connections-list">
+                        <!-- Connection list generated dynamically -->
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="btn-read-summary" style="width: 100%;">Leggi Sintesi Completa</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Capitolo I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Titolo del Capitolo</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Codicologia. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Graph Dataset
+        const nodes = [
+            { id: 1, label: "Cap. I", shortNum: "I", title: "Codicologia e Paleografia", author: "Sintesi Accademica", file: "summaries/cap1.md", desc: "Definizione della materia, evoluzione metodologica (Samaran, Dain), nascita della codicologia quantitativa (Bozzolo, Ornato) e differenze chiave con la Paleografia." },
+            { id: 2, label: "Cap. II", shortNum: "II", title: "I Supporti: Papiro e Pergamena", author: "Sintesi Accademica", file: "summaries/cap2.md", desc: "Le tavolette cerate e l'origine del termine codice. Studio del papiro (fabbricazione, volumen) e della pergamena (preparazione calce, depilazione, lato pelo/carne)." },
+            { id: 3, label: "Cap. III", shortNum: "III", title: "La Carta e le Filigrane", author: "Sintesi Accademica", file: "summaries/cap3.md", desc: "L'invenzione cinese e araba, l'arrivo a Fabriano e le innovazioni (pila a magli, gelatina). La filigrana e il repertorio Briquet per la datazione." },
+            { id: 4, label: "Cap. IV", shortNum: "IV", title: "Fascicolazione e Numerazione", author: "Sintesi Accademica", file: "summaries/cap4.md", desc: "Allestimento del fascicolo (bifogli, quaternioni). La Regola di Gregory per l'uniformità dei lati. Richiami, segnature ed evoluzione della numerazione." },
+            { id: 5, label: "Cap. V", shortNum: "V", title: "L'Allestimento della Pagina", author: "Sintesi Accademica", file: "summaries/cap5.md", desc: "Metodi di foratura (pricking) e rigatura (ruling). Tecniche a secco, a inchiostro e a mina di piombo. Geometria del foglio e la regola del below top line." },
+            { id: 6, label: "Cap. VI", shortNum: "VI", title: "La Copia e il Sistema della Pecia", author: "Sintesi Accademica", file: "summaries/cap6.md", desc: "Le condizioni fisiche e gli strumenti di copia dell'amanuense. Gli scriptoria monastici. La rivoluzione universitaria e il sistema di affitto delle peciae." },
+            { id: 7, label: "Cap. VII", shortNum: "VII", title: "Decorazione e Miniatura", author: "Sintesi Accademica", file: "summaries/cap7.md", desc: "Tecniche pittoriche e chimica dei pigmenti. Doratura a foglia. Lettere iniziali (campite, zoomorfe, istoriate) ed evoluzione stilistica delle miniature." },
+            { id: 8, label: "Cap. VIII", shortNum: "VIII", title: "La Legatura (Bookbinding)", author: "Sintesi Accademica", file: "summaries/cap8.md", desc: "Anatomia e componenti strutturali della legatura (assi, piatti, nervi, capitelli, fermagli). Tipologie storiche: legatura bizantina, carolingia, gotica." },
+            { id: 9, label: "Cap. IX", shortNum: "IX", title: "Storia delle Biblioteche e Cataloghi", author: "Sintesi Accademica", file: "summaries/cap9.md", desc: "Evoluzione delle biblioteche (Alessandria, Cesarea, Montecassino, Vaticana, Petrarca). Declinazione storica dei cataloghi scientifici." },
+            { id: 10, label: "Cap. X", shortNum: "X", title: "I Manoscritti Palinsesti", author: "Sintesi Accademica", file: "summaries/cap10.md", desc: "Causa e metodo dei palinsesti (scarsità pergamena, riscrittura). Scoperte storiche come il De Re Publica di Cicerone decifrato da Angelo Mai." },
+            { id: 11, label: "Cap. XI", shortNum: "XI", title: "La Catalogazione dei Manoscritti", author: "Sintesi Accademica", file: "summaries/cap11.md", desc: "La scheda codicologica: descrizione esterna (supporto, rigatura, legatura) ed interna (incipit, explicit, note di possesso). Portali online scientifici." },
+            { id: 12, label: "Cap. XII", shortNum: "XII", title: "Scritture e Centri Scrittori", author: "Sintesi Accademica", file: "summaries/cap12.md", desc: "Pluralismo grafico in Italia. La scrittura Beneventana cassinese (Montecassino, abate Desiderio) e la variante barese pugliese." },
+            { id: 13, label: "Cap. XIII", shortNum: "XIII", title: "Biocodicologia e Archeometria", author: "Sintesi Accademica", file: "summaries/cap13.md", desc: "Le scienze sperimentali applicate al libro: estrazione del DNA antico e delle proteine per tracciare le pelli; spettroscopia Raman/XRF per i pigmenti; micro-CT scan delle legature." },
+            { id: 14, label: "Cap. XIV", shortNum: "XIV", title: "Frammentologia e Archeologia", author: "Sintesi Accademica", file: "summaries/cap14.md", desc: "Lo studio delle pergamene antiche tagliate e riciclate dai legatori per rinforzare volumi successivi (maculature in situ ed ex situ) e i progetti di ricomposizione virtuale." },
+            { id: 15, label: "Cap. XV", shortNum: "XV", title: "Tipologie Funzionali e Formati", author: "Sintesi Accademica", file: "summaries/cap15.md", desc: "Il rapporto tra formato del codice e sua funzione (libri giganti, libri da tasca, libri d'ore, rotoli liturgici Exultet) e la distinzione filologica tra codici autografi e idiografi." }
+        ];
+
+        const links = [
+            { source: 1, target: 2, type: "core", desc: "L'archeologia del libro (Codicologia) parte dallo studio dei supporti materiali di scrittura (Papiro e Pergamena, Cap. II)." },
+            { source: 1, target: 11, type: "core", desc: "La catalogazione scientifica (Cap. XI) è l'applicazione pratica delle competenze codicologiche e paleografiche (Cap. I)." },
+            { source: 2, target: 3, type: "core", desc: "La carta (Cap. III) rappresenta la rivoluzione tecnologica ed economica che sostituisce gradualmente la pergamena (Cap. II)." },
+            { source: 2, target: 10, type: "core", desc: "I palinsesti (Cap. X) utilizzano esclusivamente la pergamena (Cap. II) per la sua resistenza alla raschiatura, al contrario del papiro." },
+            { source: 4, target: 5, type: "core", desc: "La foratura e la rigatura (Cap. V) avvengono sui bifogli già piegati e assemblati in fascicoli (Cap. IV)." },
+            { source: 4, target: 8, type: "core", desc: "La legatura (Cap. VIII) è il processo strutturale finale che cuce e unisce insieme i singoli fascicoli (Cap. IV)." },
+            { source: 5, target: 6, type: "core", desc: "La rigatura della pagina (Cap. V) funge da guida geometrica indispensabile per la copia da parte dell'amanuense (Cap. VI)." },
+            { source: 6, target: 7, type: "core", desc: "La copia del testo (Cap. VI) precede la miniatura (Cap. VII); i copisti lasciavano spazi bianchi per le iniziali destinate ai miniatori." },
+            { source: 6, target: 12, type: "core", desc: "La scrittura usata per la copia (Cap. VI) riflette lo stile grafico e le regole del centro scrittorio d'appartenenza (Cap. XII)." },
+            { source: 9, target: 11, type: "core", desc: "I moderni cataloghi scientifici (Cap. XI) derivano dall'evoluzione storica dei registri e degli inventari delle biblioteche (Cap. IX)." },
+            { source: 10, target: 12, type: "core", desc: "La decifrazione dei palinsesti (Cap. X) richiede l'analisi paleografica delle antiche scritture sommerse (Cap. XII, come la Beneventana)." },
+            { source: 13, target: 2, type: "core", desc: "La biocodicologia analizza il DNA e le proteine estratti dal supporto in pergamena (Cap. II) per rivelare la specie animale e la provenienza delle greggi." },
+            { source: 13, target: 7, type: "core", desc: "L'archeometria analizza chimicamente i pigmenti e i leganti delle miniature (Cap. VII) tramite tecniche non distruttive come XRF e spettroscopia Raman." },
+            { source: 14, target: 8, type: "core", desc: "La frammentologia indaga i frammenti riutilizzati come rinforzi strutturali interni alle legature (Cap. VIII) dei libri a stampa e codici tardi." },
+            { source: 15, target: 2, type: "core", desc: "Il tipo funzionale determina la scelta materiale del supporto (Cap. II): es. pergamena finissima per libri da tasca, o rotoli verticali per gli Exultet." },
+            { source: 15, target: 4, type: "core", desc: "La funzione del manoscritto determina le dimensioni del foglio e la piegatura del fascicolo (Cap. IV, come nei libri giganti o da tasca)." }
+        ];
+
+        // Dimensions of SVG canvas
+        const width = 720;
+        const height = 720;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const R = 205; // radius of chapter nodes placement
+
+        // Calculate positions dynamically for radial layout
+        const nodePositions = {};
+        nodes.forEach((node, index) => {
+            const angle = (2 * Math.PI * index) / nodes.length - Math.PI / 2; // Offset by -PI/2 to start from top
+            nodePositions[node.id] = {
+                x: centerX + R * Math.cos(angle),
+                y: centerY + R * Math.sin(angle),
+                angle: angle
+            };
+        });
+
+        // SVG Render logic
+        const edgesGroup = document.getElementById('edges-group');
+        const nodesGroup = document.getElementById('nodes-group');
+
+        // Draw Edges (with a slight bend towards center to look clean)
+        links.forEach(link => {
+            const p1 = nodePositions[link.source];
+            const p2 = nodePositions[link.target];
+            
+            // Calculate quadratic curve control point
+            const mx = (p1.x + p2.x) / 2;
+            const my = (p1.y + p2.y) / 2;
+            const k = 0.22; // bend factor towards center
+            const cx = mx + (centerX - mx) * k;
+            const cy = my + (centerY - my) * k;
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`);
+            path.setAttribute("class", "graph-edge");
+            path.setAttribute("data-source", link.source);
+            path.setAttribute("data-target", link.target);
+            path.setAttribute("id", `edge-${link.source}-${link.target}`);
+            edgesGroup.appendChild(path);
+        });
+
+        // Draw Nodes
+        nodes.forEach((node, index) => {
+            const pos = nodePositions[node.id];
+            
+            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.setAttribute("class", "graph-node");
+            g.setAttribute("data-id", node.id);
+            g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
+            
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "22");
+            
+            const textNum = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textNum.setAttribute("class", "graph-node-number");
+            textNum.setAttribute("y", "5");
+            textNum.textContent = node.shortNum;
+            
+            // Outer text labels positioned radially
+            const labelR = 34; // distance from circle node
+            const lx = labelR * Math.cos(pos.angle);
+            const ly = labelR * Math.sin(pos.angle);
+            
+            let anchor = "middle";
+            let labelOffsetY = 5;
+            
+            // Determine best text anchor based on circle side
+            const cosVal = Math.cos(pos.angle);
+            if (cosVal > 0.2) {
+                anchor = "start";
+            } else if (cosVal < -0.2) {
+                anchor = "end";
+            } else {
+                anchor = "middle";
+                labelOffsetY = Math.sin(pos.angle) > 0 ? 15 : -8;
+            }
+            
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", lx);
+            label.setAttribute("y", ly + labelOffsetY);
+            label.setAttribute("text-anchor", anchor);
+            
+            // Truncate labels for cleaner rendering in circle
+            let cleanTitle = node.title.split(":")[0]; // cut subtitle
+            if (cleanTitle.length > 25) {
+                cleanTitle = cleanTitle.substring(0, 23) + "...";
+            }
+            label.textContent = cleanTitle;
+            
+            g.appendChild(circle);
+            g.appendChild(textNum);
+            g.appendChild(label);
+            nodesGroup.appendChild(g);
+        });
+
+        // Interaction logic
+        const nodeElements = document.querySelectorAll('.graph-node');
+        const edgeElements = document.querySelectorAll('.graph-edge');
+        const placeholderView = document.getElementById('placeholder-view');
+        const panelDetails = document.getElementById('panel-details');
+        
+        const pChapterTag = document.getElementById('panel-chapter-tag');
+        const pChapterTitle = document.getElementById('panel-chapter-title');
+        const pChapterAuthor = document.getElementById('panel-chapter-author');
+        const pChapterDesc = document.getElementById('panel-chapter-desc');
+        const pConnectionsList = document.getElementById('panel-connections-list');
+        const btnReadSummary = document.getElementById('btn-read-summary');
+
+        let selectedNodeId = null;
+
+        // Function to select a node and render side panel info
+        function selectNode(nodeId) {
+            selectedNodeId = nodeId;
+            const node = nodes.find(n => n.id === nodeId);
+            
+            // UI classes adjustment
+            nodeElements.forEach(el => {
+                const elId = parseInt(el.getAttribute('data-id'));
+                if (elId === nodeId) {
+                    el.classList.add('active');
+                    el.classList.remove('dimmed');
+                } else {
+                    el.classList.remove('active');
+                    el.classList.add('dimmed');
+                }
+            });
+
+            // Highlight connections on SVG
+            edgeElements.forEach(edge => {
+                const s = parseInt(edge.getAttribute('data-source'));
+                const t = parseInt(edge.getAttribute('data-target'));
+                if (s === nodeId || t === nodeId) {
+                    edge.classList.add('active');
+                    edge.classList.remove('dimmed');
+                } else {
+                    edge.classList.remove('active');
+                    edge.classList.add('dimmed');
+                }
+            });
+
+            // Render Right Side Panel
+            placeholderView.style.display = 'none';
+            panelDetails.style.display = 'block';
+
+            pChapterTag.textContent = `Capitolo ${node.shortNum}`;
+            pChapterTitle.textContent = node.title;
+            pChapterAuthor.textContent = node.author;
+            pChapterDesc.textContent = node.desc;
+
+            // Generate connection list in panel
+            pConnectionsList.innerHTML = '';
+            const connectedLinks = links.filter(l => l.source === nodeId || l.target === nodeId);
+            
+            if (connectedLinks.length === 0) {
+                pConnectionsList.innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem;">Nessuna connessione diretta definita.</div>';
+            } else {
+                connectedLinks.forEach(link => {
+                    const isSource = link.source === nodeId;
+                    const partnerId = isSource ? link.target : link.source;
+                    const partnerNode = nodes.find(n => n.id === partnerId);
+                    
+                    const item = document.createElement('div');
+                    item.className = 'connection-item';
+                    item.onclick = (e) => {
+                        e.stopPropagation();
+                        selectNode(partnerId);
+                    };
+
+                    item.innerHTML = `
+                        <div class="connection-item-header">
+                            <span class="connection-target-title">Cap. ${partnerNode.shortNum}: ${partnerNode.title.split(':')[0]}</span>
+                            <span class="connection-type-badge type-core">Materiale</span>
+                        </div>
+                        <p class="connection-desc">${link.desc}</p>
+                    `;
+                    pConnectionsList.appendChild(item);
+                });
+            }
+
+            // Bind reader button click
+            btnReadSummary.onclick = () => {
+                openSummary(`Capitolo ${node.shortNum}`, node.file);
+            };
+        }
+
+        // Mouse Hover Actions (Temporary highlight without selecting)
+        nodeElements.forEach(nodeEl => {
+            const nodeId = parseInt(nodeEl.getAttribute('data-id'));
+            
+            nodeEl.addEventListener('mouseenter', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+
+                nodeElements.forEach(el => {
+                    const elId = parseInt(el.getAttribute('data-id'));
+                    if (elId === nodeId) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.add('dimmed');
+                    }
+                });
+
+                edgeElements.forEach(edge => {
+                    const s = parseInt(edge.getAttribute('data-source'));
+                    const t = parseInt(edge.getAttribute('data-target'));
+                    if (s === nodeId || t === nodeId) {
+                        edge.classList.add('active');
+                    } else {
+                        edge.classList.add('dimmed');
+                    }
+                });
+            });
+
+            nodeEl.addEventListener('mouseleave', () => {
+                if (selectedNodeId) return; // ignore hover when selected
+                
+                nodeElements.forEach(el => {
+                    el.classList.remove('active', 'dimmed');
+                });
+                edgeElements.forEach(edge => {
+                    edge.classList.remove('active', 'dimmed');
+                });
+            });
+
+            nodeEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectNode(nodeId);
+            });
+        });
+
+        // Click SVG canvas to deselect node
+        document.getElementById('network-svg').addEventListener('click', () => {
+            selectedNodeId = null;
+            nodeElements.forEach(el => el.classList.remove('active', 'dimmed'));
+            edgeElements.forEach(edge => edge.classList.remove('active', 'dimmed'));
+            panelDetails.style.display = 'none';
+            placeholderView.style.display = 'flex';
+        });
+
+        // Reader Modal mechanism (identical to index.html)
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(212,175,55,0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            progressIndicator.style.width = '0%';
+
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("Errore nel caricamento del file.");
+                    return response.text();
+                })
+                .then(text => {
+                    const firstHeaderMatch = text.match(/^#\s+(.+)$/m);
+                    if (firstHeaderMatch) {
+                        modalChapterTitle.textContent = firstHeaderMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = chapterTag;
+                    }
+                    markdownView.innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore";
+                    markdownView.innerHTML = `<div style="color:#ef4444; text-align:center; padding: 2rem;">
+                        <p>Impossibile caricare la sintesi. Verifica che il file esista localmente.</p>
+                        <p style="font-size:0.85rem; margin-top:0.5rem; opacity:0.7;">${err.message}</p>
+                    </div>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeSummary();
+        });
+
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('open')) closeSummary();
+        });
+
+        modalBodyContent.addEventListener('scroll', function() {
+            const scrollTop = modalBodyContent.scrollTop;
+            const scrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (scrollHeight > 0) {
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressIndicator.style.width = scrollPercent + '%';
+            } else {
+                progressIndicator.style.width = '0%';
+            }
+        });
+    </script>
+</body>
+</html>

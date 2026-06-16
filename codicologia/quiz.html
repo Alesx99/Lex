@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Codicologia - Quiz di Autovalutazione</title>
+    <meta name="description" content="Mettiti alla prova con i nostri quiz accademici sulla storia e tecnica del libro manoscritto.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Centralized Quiz Database -->
+    <script src="../js/quiz_db.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Codicologia</h1>
+            <p>Modulo di Studio Accademico</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+            <a href="quiz.html" class="nav-link active" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Autovalutazione Codicologica</h2>
+            <div class="hero-divider"></div>
+            <p>Valuta le tue competenze sull'archeologia e la materialità del libro manoscritto. Seleziona uno dei 12 capitoli per avviare una sessione di domande a risposta multipla con report e commento accademico finale.</p>
+        </section>
+
+        <!-- Dynamic Quiz Area -->
+        <div id="quiz-wrapper">
+            
+            <!-- STEP 1: SELECT TOPIC SCREEN -->
+            <div id="selection-screen" class="quiz-step active">
+                <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                
+                <div class="selection-grid">
+                    <button class="select-btn" onclick="startQuiz('cod_cap1_intro')">
+                        <span class="btn-chapter">Cap. I</span>
+                        <span class="btn-title">Codicologia e Paleografia</span>
+                        <span class="btn-desc">Definizione della materia, evoluzione metodologica (Samaran, Dain), nascita della codicologia quantitativa (Bozzolo, Ornato) e differenze con la Paleografia.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap2_supporti')">
+                        <span class="btn-chapter">Cap. II</span>
+                        <span class="btn-title">I Supporti: Papiro e Pergamena</span>
+                        <span class="btn-desc">Tavolette cerate e l'origine di codice (caudex). Preparazione della pergamena, lato pelo/carne e processo del papiro (volumen).</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap3_carta')">
+                        <span class="btn-chapter">Cap. III</span>
+                        <span class="btn-title">La Carta e le Filigrane</span>
+                        <span class="btn-desc">Invenzione cinese e araba, pilastri di Fabriano (pila a magli, gelatina) e l'uso delle filigrane per la datazione (repertorio Briquet).</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap4_struttura')">
+                        <span class="btn-chapter">Cap. IV</span>
+                        <span class="btn-title">Fascicolazione e Numerazione</span>
+                        <span class="btn-desc">Allestimento del fascicolo (bifogli, quaternioni), Regola di Gregory, richiami, segnature, fogliazione e paginazione.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap5_allestimento')">
+                        <span class="btn-chapter">Cap. V</span>
+                        <span class="btn-title">L'Allestimento della Pagina</span>
+                        <span class="btn-desc">Pricking (foratura) e ruling (rigatura) a secco, a inchiostro e a piombo. Geometria della pagina e regola del below top line.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap6_copia')">
+                        <span class="btn-chapter">Cap. VI</span>
+                        <span class="btn-title">La Copia e il Sistema della Pecia</span>
+                        <span class="btn-desc">Strumenti dell'amanuense, scriptoria monastici, colofoni e la nascita delle università con il sistema d'affitto delle peciae.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap7_decorazione')">
+                        <span class="btn-chapter">Cap. VII</span>
+                        <span class="btn-title">Decorazione e Miniatura</span>
+                        <span class="btn-desc">Pigmenti, leganti, foglia oro, lettere iniziali decorate (zoomorfe, istoriate) e capolavori miniati.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap8_legatura')">
+                        <span class="btn-chapter">Cap. VIII</span>
+                        <span class="btn-title">La Legatura (Bookbinding)</span>
+                        <span class="btn-desc">Componenti strutturali (assi, piatti, dorso, nervi, capitelli, borchie). Tipologie bizantina, carolingia e gotica.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap9_biblioteche')">
+                        <span class="btn-chapter">Cap. IX</span>
+                        <span class="btn-title">Storia delle Biblioteche e Cataloghi</span>
+                        <span class="btn-desc">Da Alessandria e Cesarea a Montecassino, Vaticana e Petrarca. Evoluzione dai registri patrimoniali ai cataloghi scientifici.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap10_palinsesti')">
+                        <span class="btn-chapter">Cap. X</span>
+                        <span class="btn-title">I Manoscritti Palinsesti</span>
+                        <span class="btn-desc">Scarsità di pergamena e riscrittura (codex rescriptus). Scoperte di Cicerone (Angelo Mai) e decifrazione multispettrale moderna.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap11_catalogazione')">
+                        <span class="btn-chapter">Cap. XI</span>
+                        <span class="btn-title">La Catalogazione dei Manoscritti</span>
+                        <span class="btn-desc">Scheda codicologica: descrizione esterna ed interna (incipit, explicit, note di possesso). Portali Manus Online e BAV.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap12_scritture')">
+                        <span class="btn-chapter">Cap. XII</span>
+                        <span class="btn-title">Scritture e Centri Scrittori</span>
+                        <span class="btn-desc">Pluralismo grafico italiano, scrittura Beneventana cassinese (abate Desiderio) e variante barese pugliese.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap13_archeometria')">
+                        <span class="btn-chapter">Cap. XIII</span>
+                        <span class="btn-title">Biocodicologia e Archeometria</span>
+                        <span class="btn-desc">Analisi del DNA antico della pergamena, eZooMS, diagnostica dei pigmenti (XRF, Raman) e CT scan delle legature.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap14_frammentologia')">
+                        <span class="btn-chapter">Cap. XIV</span>
+                        <span class="btn-title">Frammentologia e Archeologia</span>
+                        <span class="btn-desc">Lo studio dei frammenti riutilizzati come rinforzo strutturale (maculature in situ ed ex situ) e ricomposizioni digitali.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('cod_cap15_formati')">
+                        <span class="btn-chapter">Cap. XV</span>
+                        <span class="btn-title">Tipologie Funzionali e Formati</span>
+                        <span class="btn-desc">Rapporto forma-funzione (libri giganti, libri d'ore, rotoli Exultet) e la distinzione tra autografi e idiografi.</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="question-screen" class="quiz-step">
+                <div class="quiz-card-container">
+                    <div class="quiz-card-header">
+                        <span id="quiz-chapter-tag" class="quiz-chapter-tag">Modulo I</span>
+                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 3</span>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="quiz-progress-bar-bg">
+                        <div id="quiz-progress-indicator" class="quiz-progress-indicator" style="width: 0%;"></div>
+                    </div>
+
+                    <!-- Question content -->
+                    <div class="quiz-question-body">
+                        <h3 id="quiz-question-text">Testo della domanda...</h3>
+                        <div id="quiz-options-container" class="quiz-options-grid">
+                            <!-- Injected buttons go here -->
+                        </div>
+                    </div>
+
+                    <!-- Feedback screen (hidden by default) -->
+                    <div id="quiz-feedback-box" class="quiz-feedback-box">
+                        <div class="feedback-header">
+                            <span id="feedback-icon" class="feedback-icon"></span>
+                            <span id="feedback-title" class="feedback-title">Esatto!</span>
+                        </div>
+                        <p id="feedback-explanation" class="feedback-explanation">Spiegazione accademica...</p>
+                        <button id="next-question-btn" class="btn btn-primary" onclick="nextQuestion()">Prossima Domanda</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: SCORE / RESULT SCREEN -->
+            <div id="result-screen" class="quiz-step">
+                <div class="result-card">
+                    <div class="result-glow-ring">
+                        <span id="result-score-text">0 / 3</span>
+                    </div>
+                    <h3 id="result-title">Risultato</h3>
+                    <p id="result-message" class="result-message">Messaggio personalizzato...</p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Riprova questo Quiz</button>
+                        <button class="btn btn-secondary" onclick="showSelectionScreen()">Seleziona un altro argomento</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Codicologia. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // State variables
+        let currentSubject = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Dom Elements
+        const selectionScreen = document.getElementById('selection-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const quizChapterTag = document.getElementById('quiz-chapter-tag');
+        const quizProgressText = document.getElementById('quiz-progress-text');
+        const quizProgressIndicator = document.getElementById('quiz-progress-indicator');
+        const quizQuestionText = document.getElementById('quiz-question-text');
+        const quizOptionsContainer = document.getElementById('quiz-options-container');
+        
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        
+        const resultScoreText = document.getElementById('result-score-text');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+
+        function showSelectionScreen() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            selectionScreen.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz(subjectKey) {
+            currentSubject = subjectKey;
+            const data = quizDatabase[subjectKey];
+            currentQuestions = data.questions;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            quizChapterTag.textContent = data.chapterTag;
+            
+            selectionScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Hide feedback box
+            feedbackBox.classList.remove('open');
+            
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const totalQuestions = currentQuestions.length;
+            
+            // Update progress
+            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di ${totalQuestions}`;
+            const progressPercent = (currentQuestionIndex / totalQuestions) * 100;
+            quizProgressIndicator.style.width = progressPercent + '%';
+
+            // Set question text
+            quizQuestionText.textContent = currentQuestion.question;
+
+            // Render options
+            quizOptionsContainer.innerHTML = '';
+            currentQuestion.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + idx)}</span> <span class="option-text">${option}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                quizOptionsContainer.appendChild(btn);
+            });
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const correctIndex = currentQuestion.correctIndex;
+            const allOptionButtons = quizOptionsContainer.querySelectorAll('.quiz-option-btn');
+
+            // Disable all options to prevent double-clicking
+            allOptionButtons.forEach(btn => btn.disabled = true);
+
+            const isCorrect = selectedIndex === correctIndex;
+            if (typeof LexCore !== 'undefined' && LexCore.trackQuizStreak) {
+                LexCore.trackQuizStreak(isCorrect);
+            }
+
+            // Highlight answers
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                feedbackTitle.textContent = "Esatto!";
+                feedbackTitle.style.color = "#10b981";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="width:24px; height:24px;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+                allOptionButtons[correctIndex].classList.add('correct');
+                feedbackTitle.textContent = "Errato";
+                feedbackTitle.style.color = "#ef4444";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" style="width:24px; height:24px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            }
+
+            // Set explanation
+            feedbackExplanation.innerHTML = currentQuestion.explanation;
+
+            // Show feedback box
+            feedbackBox.classList.add('open');
+
+            // Set next button text
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                nextQuestionBtn.textContent = "Visualizza Risultato";
+            } else {
+                nextQuestionBtn.textContent = "Prossima Domanda";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                showResult();
+            } else {
+                currentQuestionIndex++;
+                showQuestion();
+            }
+        }
+
+        function showResult() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+
+            // Update score progress bar at 100%
+            quizProgressIndicator.style.width = '100%';
+
+            const totalQuestions = currentQuestions.length;
+            resultScoreText.textContent = `${score} / ${totalQuestions}`;
+            resultTitle.textContent = quizDatabase[currentSubject].title;
+
+            // Set custom score message
+            let message = '';
+            const ratio = score / totalQuestions;
+            if (ratio === 1) {
+                message = "Eccellente! Conoscenza e comprensione della Codicologia impeccabile. Ottima padronanza delle dinamiche materiali, storiche e paleografiche del manoscritto.";
+            } else if (ratio >= 0.6) {
+                message = "Molto bene! Hai una conoscenza solida degli aspetti fisici e storici del codice. Qualche piccola incertezza superabile rileggendo le sintesi.";
+            } else {
+                message = "Preparazione non sufficiente. I processi materiali, i sistemi di copia o la terminologia codicologica non sono chiari. Rileggi il capitolo e ripeti il test.";
+            }
+            resultMessage.textContent = message;
+
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            startQuiz(currentSubject);
+        }
+    </script>
+</body>
+</html>

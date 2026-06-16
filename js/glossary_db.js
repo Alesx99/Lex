@@ -177,6 +177,91 @@ const glossaryDatabase = {
         term: "Legatura",
         definition: "Copertina protettiva esterna del codice. Composta da piatti (lignei o in cartone), nervi di cucitura sul dorso, capitelli di rinforzo, chiusure metalliche (fermogli) e borchie protettive (bulloni).",
         domain: "codicologia"
+    },
+    "volumen": {
+        term: "Volumen (Rotolo)",
+        definition: "Il rotolo di papiro o pergamena, diffuso nell'antichità classica prima dell'affermazione del codice.",
+        domain: "codicologia"
+    },
+    "caudex": {
+        term: "Caudex",
+        definition: "Termine latino (tronco d'albero) da cui deriva codice, indicante in origine tavolette lignee cerate legate insieme.",
+        domain: "codicologia"
+    },
+    "bifoglio": {
+        term: "Bifoglio",
+        definition: "Foglio di supporto (pergamena o carta) piegato in due, che costituisce l'unità fondamentale del fascicolo.",
+        domain: "codicologia"
+    },
+    "scriptio inferior": {
+        term: "Scriptio Inferior",
+        definition: "La scrittura originaria, cancellata o raschiata, posta sotto la scrittura visibile superiore (scriptio superior) di un palinsesto.",
+        domain: "codicologia"
+    },
+    "scriptorium": {
+        term: "Scriptorium",
+        definition: "Laboratorio di scrittura medievale, tipico dei monasteri, in cui gli amanuensi copiavano e decoravano i manoscritti.",
+        domain: "codicologia"
+    },
+    "stazionario": {
+        term: "Stazionario (Stationarius)",
+        definition: "Librai-editori autorizzati dalle università medievali a conservare gli exemplaria ufficiali e ad affittarne le peciae ai copisti.",
+        domain: "codicologia"
+    },
+    "below top line": {
+        term: "Below Top Line",
+        definition: "Regola imposta dal 1220 che prevede la scrittura a partire dalla seconda riga tracciata, lasciando la prima linea vuota.",
+        domain: "codicologia"
+    },
+    "doratura": {
+        term: "Doratura",
+        definition: "Tecnica decorativa per applicare una sottilissima foglia d'oro o d'argento sulla pagina di un codice miniato.",
+        domain: "codicologia"
+    },
+    "punto interrogativo": {
+        term: "Punto Interrogativo Beneventano",
+        definition: "Segno di interpunzione a forma di onda introdotto negli scriptoria meridionali per indicare l'intonazione interrogativa.",
+        domain: "codicologia"
+    },
+    "scheda codicologica": {
+        term: "Scheda Codicologica",
+        definition: "Modello descrittivo usato per catalogare scientificamente un manoscritto, divisa in descrizione esterna ed interna.",
+        domain: "codicologia"
+    },
+    "segnatura": {
+        term: "Segnatura (Shelfmark)",
+        definition: "Codice identificativo unico assegnato a un manoscritto in una biblioteca (es. Vat. Lat. 3225).",
+        domain: "codicologia"
+    },
+    "incipit": {
+        term: "Incipit",
+        definition: "Le prime parole con cui inizia un'opera in un manoscritto, usate per identificarla univocamente.",
+        domain: "codicologia"
+    },
+    "explicit": {
+        term: "Explicit",
+        definition: "Le ultime parole con cui termina un'opera in un manoscritto, fondamentali nei codici mutili o privi di titolo.",
+        domain: "codicologia"
+    },
+    "biocodicologia": {
+        term: "Biocodicologia",
+        definition: "Studio biologico dei manoscritti mediante estrazione di DNA e proteine dalla pergamena.",
+        domain: "codicologia"
+    },
+    "frammentologia": {
+        term: "Frammentologia",
+        definition: "Disciplina che studia i frammenti di manoscritti medievali conservati all'interno di legature successive o in raccolte storiche.",
+        domain: "codicologia"
+    },
+    "maculatura": {
+        term: "Maculatura",
+        definition: "Frammento di manoscritto riutilizzato come elemento di rinforzo nella legatura di un altro libro.",
+        domain: "codicologia"
+    },
+    "exultet": {
+        term: "Exultet",
+        definition: "Rotolo liturgico miniato altomedievale diffuso nell'Italia meridionale, srotolato dall'alto verso il basso dal pulpito.",
+        domain: "codicologia"
     }
 };
 
