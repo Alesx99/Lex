@@ -2946,6 +2946,497 @@ body.coccole-theme .lex-footer-changelog-btn:hover {
 }
 }
 
+/* ==========================================================================
+   ADVANCED STUDY TOOLS v2.5.0
+   ========================================================================== */
+
+/* 1. Pomodoro Scriptorium Timer Styles */
+.pomodoro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.pomodoro-timer-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--study-accent, #d4af37);
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    margin: 0.5rem 0;
+    letter-spacing: 2px;
+}
+
+.pomodoro-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.pomodoro-settings {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    background: rgba(255,255,255,0.02);
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.pomodoro-setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.pomodoro-setting-group select {
+    background: rgba(13, 20, 35, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* 2. Cloze Test Styles */
+.cloze-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.cloze-instructions {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    border-bottom: 1px dashed rgba(255,255,255,0.05);
+    padding-bottom: 0.8rem;
+}
+
+.cloze-paragraph {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    background: rgba(255, 255, 255, 0.01);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.cloze-blank {
+    display: inline-block;
+    min-width: 95px;
+    height: 24px;
+    border-bottom: 2px dashed var(--study-accent);
+    background: rgba(212, 175, 55, 0.04);
+    margin: 0 4px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 22px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.cloze-blank.hovered {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: #fff;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.cloze-blank.correct {
+    border-bottom: 2px solid #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    cursor: default;
+}
+
+.cloze-word-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.03);
+    min-height: 60px;
+}
+
+.cloze-draggable-word {
+    padding: 4px 12px;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 6px;
+    color: var(--accent-cyan, #06b6d4);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s;
+}
+
+.cloze-draggable-word:hover {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--accent-cyan);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(6, 182, 212, 0.15);
+}
+
+.cloze-draggable-word:active {
+    cursor: grabbing;
+}
+
+/* 3. Split-Screen Styles */
+.splitscreen-container {
+    display: flex;
+    width: 100%;
+    height: 65vh;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.splitscreen-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 15, 30, 0.4);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.splitscreen-col-header {
+    background: rgba(255,255,255,0.02);
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.splitscreen-col-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--study-accent);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+}
+
+.splitscreen-col-body {
+    padding: 1.2rem;
+    overflow-y: auto;
+    flex-grow: 1;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.splitscreen-col-body p {
+    margin-bottom: 1rem;
+}
+
+.splitscreen-select-box {
+    background: rgba(13, 20, 35, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    max-width: 180px;
+}
+
+.splitscreen-common-highlight {
+    background: rgba(212, 175, 55, 0.18);
+    border-bottom: 1px dashed var(--study-accent);
+    color: #fff;
+    font-weight: 600;
+    padding: 0 2px;
+}
+
+/* 4. Concept Matcher Styles */
+.matcher-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    height: 520px;
+}
+
+.matcher-grid {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    flex-grow: 1;
+}
+
+.matcher-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 44%;
+}
+
+.matcher-card-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 70px;
+}
+
+.matcher-card-item:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    background: rgba(212, 175, 55, 0.02);
+    transform: translateX(3px);
+}
+
+.matcher-card-item.selected {
+    border-color: var(--accent-cyan);
+    background: rgba(6, 182, 212, 0.05);
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+.matcher-card-item.matched {
+    border-color: #22c55e !important;
+    background: rgba(34, 197, 94, 0.05) !important;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: default;
+    transform: none !important;
+}
+
+.matcher-connector-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--study-accent);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.matcher-col-left .matcher-connector-dot {
+    right: -5px;
+}
+
+.matcher-col-right .matcher-connector-dot {
+    left: -5px;
+}
+
+.matcher-svg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 5. Smart Margin Marginator Styles */
+.lex-margin-note-btn {
+    position: absolute;
+    left: -32px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37, #b2902b);
+    border: 1.5px solid #0d1423;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d1423;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+}
+
+.lex-margin-note-btn:hover {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.lex-margin-note-btn.has-note {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    color: #fff;
+}
+
+.lex-margin-note-btn.has-note::before {
+    content: '📜';
+    font-size: 0.7rem;
+}
+
+/* Margin Post-it card */
+.lex-margin-postit {
+    position: absolute;
+    right: -245px;
+    width: 230px;
+    background: linear-gradient(135deg, #fef08a, #fef9c3);
+    border: 1px solid #fef08a;
+    border-radius: 4px;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
+    padding: 0.6rem;
+    z-index: 200;
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transform: scale(0.9) rotate(2deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lex-margin-postit.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) rotate(-1deg);
+}
+
+/* Shadow corner curl page-peel effect */
+.lex-margin-postit::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-width: 10px 10px 0 0;
+    border-style: solid;
+    border-color: #e2e8f0 #182c33;
+    display: block;
+    width: 0;
+}
+
+.lex-margin-postit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(30, 41, 59, 0.15);
+    padding-bottom: 2px;
+}
+
+.lex-margin-postit-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.lex-margin-postit-close {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.lex-margin-postit textarea {
+    width: 100%;
+    height: 90px;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 0.8rem;
+    color: #0f172a;
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+}
+
+.lex-margin-postit-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.lex-margin-postit-save-btn {
+    background: #1e293b;
+    color: #fff;
+    border: none;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.lex-margin-postit-save-btn:hover {
+    background: #0f172a;
+}
+
+/* Feedback animations & particles */
+.cloze-blank.shake, .matcher-card-item.shake {
+    animation: lex-cloze-shake 0.4s ease;
+}
+
+@keyframes lex-cloze-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+.lex-star-particle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.2rem;
+    z-index: 9999;
+    animation: lex-star-fade 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes lex-star-fade {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.cloze-success-message {
+    text-align: center;
+    color: #4ade80;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    animation: fade-in-up 0.5s ease;
+}
+
+
 
 
 

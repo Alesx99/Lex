@@ -2540,10 +2540,22 @@ const LexCore = {
                     <button class="changelog-modal-close" onclick="document.getElementById('changelog-modal').remove()">&times;</button>
                 </div>
                 <div class="changelog-modal-body">
+                    <!-- Version 2.5.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.5.0 (Attuale)</span>
+                            <span class="changelog-version-date">18 Giugno 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>5 Nuovi Strumenti di Studio Avanzati:</strong> Rilascio del Pomodoro Scriptorium (con candela canvas e rintocchi audio), Cloze Test (drag-and-drop con feedback di stelline), Studio Comparativo Split-Screen (scroll sincronizzato ed evidenziazione di lemmi comuni), Concept Matcher (gioco con linee elastiche SVG) e Marginator (post-it interattivi su margine salvati in localStorage).</li>
+                            <li><strong>Incremento della piattaforma:</strong> Aggiornamento globale di sicurezza e stabilità a v2.5.0.</li>
+                        </ul>
+                    </div>
+
                     <!-- Version 2.4.0 -->
                     <div class="changelog-version-block">
                         <div class="changelog-version-header">
-                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.4.0 (Attuale)</span>
+                            <span class="changelog-version-num">v2.4.0</span>
                             <span class="changelog-version-date">18 Giugno 2026</span>
                         </div>
                         <ul class="changelog-version-list">
@@ -2980,7 +2992,7 @@ const LexCore = {
         { id:'ee-decodifica-codex',  cat:'materie',     icon:'🔓', name:'Decodificatore di Codex',        hint:'Risolvi il mistero nascosto nel cifrario medievale...',                           desc:'Decodifica una frase latina nell\'Arena Minigiochi.', page:'minigames.html' },
         { id:'ee-cruciverba-completato',cat:'materie',  icon:'🧩', name:'Scriba Enigmatico',               hint:'Completa tutti i termini dello Scriptorium nel cruciverba...',                    desc:'Completa con successo il cruciverba didattico.', page:'minigames.html' },
         { id:'ee-caccia-tesoro-completata',cat:'materie',icon:'🏆', name:'Il Saggio di Alessandria',       hint:'Tre glifi antichi si nascondono nelle sintesi di materie diverse...',             desc:'Trova ed evidenzia i 3 glifi antichi nascosti nei capitoli.', page:'*' },
-        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.4.0 nel modal del Changelog.', page:'*' },
+        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.5.0 nel modal del Changelog.', page:'*' },
         { id:'ee-caverna-platone',   cat:'materie',     icon:'🕯️', name:'La Caverna di Platone',          hint:'Ciò che vedi è solo un\'ombra. Spegni le luci e cerca la verità nella roccia.',    desc:'Nella sintesi di Filosofia con tema Scuro, seleziona la parola "Caverna" o "Ombra".', page:'filosofia/*' },
         { id:'ee-stratigrafia',      cat:'materie',     icon:'⛏️', name:'Lo Scavo Archeologico',          hint:'La conoscenza è stratificata. Scava oltre i limiti della pagina.',                desc:'Fai scorrimento continuo (overscroll) verso il basso a fondo pagina per 5 volte.', page:'*' },
         { id:'ee-damnatio-memoriae-quiz',cat:'materie', icon:'🛡️', name:'L\'Eresia Giuridica',            hint:'Certe eresie giuridiche non meritano risposta, solo l\'oblio della censura.',      desc:'Nel Simulatore d\'Esame, in una domanda di Diritto, premi Ctrl + Shift + X.', page:'exam.html' }
@@ -4683,7 +4695,7 @@ const LexCore = {
         } catch(e) {}
     },
 
-    // --- ADVANCED STUDY TOOLS SYSTEM (v2.4.0) ---
+    // --- ADVANCED STUDY TOOLS SYSTEM (v2.5.0) ---
     currentSummaryTitle: '',
     currentSummaryPath: '',
     currentSummaryMarkdown: '',
@@ -4726,6 +4738,18 @@ const LexCore = {
             <button class="lex-study-tool-btn" data-tooltip="Glossario Capitolo" id="lex-btn-glossary">
                 <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </button>
+            <button class="lex-study-tool-btn" data-tooltip="Pomodoro Scriptorium" id="lex-btn-pomodoro">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H7M17 19H7M12 2a5 5 0 0 0-5 5v3c0 2 2 4 5 4s5-2 5-4V7a5 5 0 0 0-5-5zM12 22a5 5 0 0 1-5-5v-3c0-2 2-4 5-4s5 2 5 4v3a5 5 0 0 1-5 5z"/></svg>
+            </button>
+            <button class="lex-study-tool-btn" data-tooltip="Test Riempi Spazi" id="lex-btn-cloze">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="10" y1="17" x2="8" y2="17"/></svg>
+            </button>
+            <button class="lex-study-tool-btn" data-tooltip="Studio Comparativo" id="lex-btn-splitscreen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+            </button>
+            <button class="lex-study-tool-btn" data-tooltip="Concept Matcher" id="lex-btn-matcher">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 21H3v-5M12 12m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0M21 3L14 10M3 21l7-7"/></svg>
+            </button>
         `;
 
         const loadAndExecute = (action) => {
@@ -4756,6 +4780,10 @@ const LexCore = {
         container.querySelector('#lex-btn-vocal').onclick = () => loadAndExecute((md) => this.showVocalExaminerOverlay(title, md));
         container.querySelector('#lex-btn-flashcards').onclick = () => loadAndExecute((md) => this.showFlashcardsOverlay(title, md));
         container.querySelector('#lex-btn-glossary').onclick = () => loadAndExecute((md) => this.showGlossarySidebar(title, md));
+        container.querySelector('#lex-btn-pomodoro').onclick = () => loadAndExecute((md) => this.showPomodoroOverlay(title, md));
+        container.querySelector('#lex-btn-cloze').onclick = () => loadAndExecute((md) => this.showClozeTestOverlay(title, md));
+        container.querySelector('#lex-btn-splitscreen').onclick = () => loadAndExecute((md) => this.showSplitScreenOverlay(title, md));
+        container.querySelector('#lex-btn-matcher').onclick = () => loadAndExecute((md) => this.showConceptMatcherOverlay(title, md));
 
         setTimeout(() => {
             const inlineTerms = document.querySelectorAll('.glossary-term');
@@ -4768,6 +4796,8 @@ const LexCore = {
                     });
                 };
             });
+            // Inizializza post-it e note a margine
+            this.initMarginNotes(filePath);
         }, 300);
     },
 
@@ -4819,11 +4849,21 @@ const LexCore = {
                 window.speechSynthesis.cancel();
                 this.vocalSpeaking = false;
             }
+            if (id === 'pomodoro-tool-overlay') {
+                if (this.pomodoroInterval) {
+                    clearInterval(this.pomodoroInterval);
+                    this.pomodoroInterval = null;
+                }
+                if (this.pomodoroAudioCtx) {
+                    try { this.pomodoroAudioCtx.close(); } catch(e){}
+                    this.pomodoroAudioCtx = null;
+                }
+            }
         }
     },
 
     closeAllStudyTools() {
-        ['mindmap-tool-overlay', 'vocal-tool-overlay', 'flashcard-tool-overlay'].forEach(id => {
+        ['mindmap-tool-overlay', 'vocal-tool-overlay', 'flashcard-tool-overlay', 'pomodoro-tool-overlay', 'cloze-tool-overlay', 'splitscreen-tool-overlay', 'matcher-tool-overlay'].forEach(id => {
             this.closeStudyTool(id);
         });
         const sidebar = document.getElementById('lex-glossary-sidebar');
@@ -5645,6 +5685,1005 @@ const LexCore = {
             toast.classList.add('hide');
             setTimeout(() => toast.remove(), 300);
         }, 4000);
+    },
+
+    playAudioSuccessChime() {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = audioCtx.currentTime;
+            const playTone = (time, freq) => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, time);
+                gainNode.gain.setValueAtTime(0.15, time);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
+                osc.start(time);
+                osc.stop(time + 0.5);
+            };
+            playTone(now, 880);
+            playTone(now + 0.12, 1320);
+        } catch(e) { console.error(e); }
+    },
+
+    playMonasteryBell() {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = audioCtx.currentTime;
+            const freqs = [110, 220, 330, 440, 550];
+            const gains = [0.4, 0.3, 0.2, 0.1, 0.05];
+            freqs.forEach((f, idx) => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                const lfo = audioCtx.createOscillator();
+                const lfoGain = audioCtx.createGain();
+                
+                lfo.frequency.value = 6;
+                lfoGain.gain.value = 2;
+                lfo.connect(lfoGain);
+                lfoGain.connect(osc.frequency);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(f, now);
+                gainNode.gain.setValueAtTime(gains[idx], now);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 4.0);
+                
+                lfo.start(now);
+                osc.start(now);
+                lfo.stop(now + 4.5);
+                osc.stop(now + 4.5);
+            });
+        } catch(e) { console.error(e); }
+    },
+
+    showPomodoroOverlay(title, md) {
+        const overlay = this.getSharedOverlay('pomodoro-tool-overlay', 'Pomodoro Scriptorium - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H7M17 19H7M12 2a5 5 0 0 0-5 5v3c0 2 2 4 5 4s5-2 5-4V7a5 5 0 0 0-5-5zM12 22a5 5 0 0 1-5-5v-3c0-2 2-4 5-4s5 2 5 4v3a5 5 0 0 1-5 5z"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+        
+        body.innerHTML = `
+            <div class="pomodoro-container">
+                <canvas id="pomodoro-candle-canvas" width="200" height="250"></canvas>
+                <div class="pomodoro-timer-display" id="pomodoro-timer-time">25:00</div>
+                <div class="pomodoro-controls">
+                    <button class="btn btn-primary" id="pomodoro-start-btn" style="background:#d4af37; border-color:#d4af37; color:#0d1423; font-weight:bold;">Avvia</button>
+                    <button class="btn btn-secondary" id="pomodoro-reset-btn">Reset</button>
+                </div>
+                <div class="pomodoro-settings">
+                    <div class="pomodoro-setting-group">
+                        <label>Sessione</label>
+                        <select id="pomodoro-study-select">
+                            <option value="15">15 Minuti (Test)</option>
+                            <option value="25" selected>25 Minuti</option>
+                            <option value="50">50 Minuti</option>
+                        </select>
+                    </div>
+                    <div class="pomodoro-setting-group">
+                        <label>Pausa</label>
+                        <select id="pomodoro-break-select">
+                            <option value="3">3 Minuti (Test)</option>
+                            <option value="5" selected>5 Minuti</option>
+                            <option value="10">10 Minuti</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        overlay.classList.add('open');
+        
+        if (this.pomodoroInterval) clearInterval(this.pomodoroInterval);
+        this.pomodoroInterval = null;
+        
+        this.pomodoroStudyTime = parseInt(body.querySelector('#pomodoro-study-select').value) * 60;
+        this.pomodoroBreakTime = parseInt(body.querySelector('#pomodoro-break-select').value) * 60;
+        
+        this.pomodoroTimeLeft = this.pomodoroStudyTime;
+        this.pomodoroTotalDuration = this.pomodoroStudyTime;
+        this.pomodoroState = 'idle';
+        
+        const timeDisplay = body.querySelector('#pomodoro-timer-time');
+        const startBtn = body.querySelector('#pomodoro-start-btn');
+        const resetBtn = body.querySelector('#pomodoro-reset-btn');
+        
+        const updateTimeDisplay = () => {
+            const mins = Math.floor(this.pomodoroTimeLeft / 60).toString().padStart(2, '0');
+            const secs = (this.pomodoroTimeLeft % 60).toString().padStart(2, '0');
+            timeDisplay.innerText = `${mins}:${secs}`;
+            if (this.pomodoroState === 'break') {
+                timeDisplay.style.color = '#4ade80';
+                timeDisplay.style.textShadow = '0 0 15px rgba(74, 222, 128, 0.3)';
+            } else {
+                timeDisplay.style.color = 'var(--study-accent, #d4af37)';
+                timeDisplay.style.textShadow = '0 0 15px rgba(212, 175, 55, 0.3)';
+            }
+        };
+        
+        updateTimeDisplay();
+        this.startPomodoroAnimation();
+        
+        body.querySelector('#pomodoro-study-select').onchange = (e) => {
+            if (this.pomodoroState === 'idle' || this.pomodoroState === 'paused') {
+                this.pomodoroStudyTime = parseInt(e.target.value) * 60;
+                this.pomodoroTimeLeft = this.pomodoroStudyTime;
+                this.pomodoroTotalDuration = this.pomodoroStudyTime;
+                updateTimeDisplay();
+            }
+        };
+        
+        body.querySelector('#pomodoro-break-select').onchange = (e) => {
+            this.pomodoroBreakTime = parseInt(e.target.value) * 60;
+        };
+        
+        startBtn.onclick = () => {
+            if (this.pomodoroState === 'running') {
+                this.pomodoroState = 'paused';
+                startBtn.innerText = 'Riprendi';
+                if (this.pomodoroInterval) clearInterval(this.pomodoroInterval);
+            } else {
+                if (this.pomodoroState === 'idle') {
+                    this.playAudioSuccessChime();
+                }
+                this.pomodoroState = 'running';
+                startBtn.innerText = 'Pausa';
+                
+                this.pomodoroInterval = setInterval(() => {
+                    this.pomodoroTimeLeft--;
+                    if (this.pomodoroTimeLeft <= 0) {
+                        clearInterval(this.pomodoroInterval);
+                        this.playMonasteryBell();
+                        
+                        if (this.pomodoroState === 'running') {
+                            this.showNotification('Pomodoro Completato', 'Ottimo lavoro! Ora è tempo di fare una meritata pausa.');
+                            this.pomodoroState = 'break';
+                            this.pomodoroTimeLeft = this.pomodoroBreakTime;
+                            this.pomodoroTotalDuration = this.pomodoroBreakTime;
+                            startBtn.innerText = 'Avvia Pausa';
+                        } else {
+                            this.showNotification('Pausa Finita', 'La pausa è terminata. Sei pronto per una nuova sessione di studio?');
+                            this.pomodoroState = 'idle';
+                            this.pomodoroTimeLeft = this.pomodoroStudyTime;
+                            this.pomodoroTotalDuration = this.pomodoroStudyTime;
+                            startBtn.innerText = 'Avvia Studio';
+                        }
+                        updateTimeDisplay();
+                    } else {
+                        updateTimeDisplay();
+                    }
+                }, 1000);
+            }
+        };
+        
+        resetBtn.onclick = () => {
+            if (this.pomodoroInterval) clearInterval(this.pomodoroInterval);
+            this.pomodoroInterval = null;
+            this.pomodoroState = 'idle';
+            this.pomodoroStudyTime = parseInt(body.querySelector('#pomodoro-study-select').value) * 60;
+            this.pomodoroTimeLeft = this.pomodoroStudyTime;
+            this.pomodoroTotalDuration = this.pomodoroStudyTime;
+            startBtn.innerText = 'Avvia';
+            updateTimeDisplay();
+        };
+    },
+
+    showClozeTestOverlay(title, md) {
+        const overlay = this.getSharedOverlay('cloze-tool-overlay', 'Test Riempi Spazi - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="10" y1="17" x2="8" y2="17"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+        
+        const data = this.extractClozeItems(md);
+        if (!data.paragraph || data.terms.length === 0) {
+            body.innerHTML = `
+                <div style="text-align:center; padding: 2rem; color:var(--text-muted);">
+                    Nessun elemento in grassetto sufficiente trovato per generare l'esercizio in questo capitolo.
+                </div>
+            `;
+            overlay.classList.add('open');
+            return;
+        }
+        
+        let htmlParagraph = data.paragraph
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+            
+        data.terms.forEach((term, idx) => {
+            const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            const regex = new RegExp(`\\*\\*${escapedTerm}\\*\\*`, 'g');
+            htmlParagraph = htmlParagraph.replace(regex, `<span class="cloze-blank" data-answer="${encodeURIComponent(term)}" id="cloze-blank-${idx}">____</span>`);
+        });
+        
+        htmlParagraph = htmlParagraph.replace(/\*\*(.*?)\*\*/g, '$1');
+        
+        const shuffled = [...data.terms].sort(() => Math.random() - 0.5);
+        const wordPoolHtml = shuffled.map((term, idx) => `
+            <div class="cloze-draggable-word" draggable="true" data-word="${encodeURIComponent(term)}" id="cloze-word-${idx}">${term}</div>
+        `).join('');
+        
+        body.innerHTML = `
+            <div class="cloze-container">
+                <div class="cloze-instructions">
+                    Trascina le parole dal pool sottostante oppure fai clic su una parola e poi sul relativo spazio vuoto.
+                </div>
+                <div class="cloze-paragraph">
+                    ${htmlParagraph}
+                </div>
+                <div class="cloze-word-pool">
+                    ${wordPoolHtml}
+                </div>
+                <div id="cloze-congrats-area"></div>
+            </div>
+        `;
+        
+        overlay.classList.add('open');
+        
+        let activeSelectedWord = null;
+        const words = body.querySelectorAll('.cloze-draggable-word');
+        const blanks = body.querySelectorAll('.cloze-blank');
+        
+        words.forEach(word => {
+            word.ondragstart = (e) => {
+                e.dataTransfer.setData('text/plain', word.getAttribute('data-word'));
+                e.dataTransfer.setData('source-id', word.id);
+            };
+            word.onclick = () => {
+                words.forEach(w => w.style.boxShadow = '');
+                activeSelectedWord = word;
+                word.style.boxShadow = '0 0 10px var(--accent-cyan)';
+            };
+        });
+        
+        const checkClozeAnswer = (blank, wordValue, sourceId) => {
+            if (blank.classList.contains('correct')) return;
+            
+            const decodedAnswer = decodeURIComponent(blank.getAttribute('data-answer'));
+            const decodedWord = decodeURIComponent(wordValue);
+            
+            if (decodedAnswer.toLowerCase().trim() === decodedWord.toLowerCase().trim()) {
+                blank.innerText = decodedAnswer;
+                blank.classList.add('correct');
+                
+                const srcEl = body.querySelector('#' + sourceId);
+                if (srcEl) {
+                    srcEl.style.opacity = '0.3';
+                    srcEl.style.pointerEvents = 'none';
+                    srcEl.setAttribute('draggable', 'false');
+                }
+                
+                this.playAudioSuccessChime();
+                this.triggerGoldStarsExplosion(blank);
+                
+                const allCorrect = Array.from(blanks).every(b => b.classList.contains('correct'));
+                if (allCorrect) {
+                    const congrats = body.querySelector('#cloze-congrats-area');
+                    congrats.innerHTML = `
+                        <div class="cloze-success-message">
+                            🎉 Complimenti! Hai completato l'esercizio con successo!
+                        </div>
+                    `;
+                }
+            } else {
+                blank.classList.add('shake');
+                setTimeout(() => blank.classList.remove('shake'), 400);
+            }
+        };
+        
+        blanks.forEach(blank => {
+            blank.ondragover = (e) => {
+                e.preventDefault();
+                blank.classList.add('hovered');
+            };
+            blank.ondragleave = () => {
+                blank.classList.remove('hovered');
+            };
+            blank.ondrop = (e) => {
+                e.preventDefault();
+                blank.classList.remove('hovered');
+                const wordValue = e.dataTransfer.getData('text/plain');
+                const sourceId = e.dataTransfer.getData('source-id');
+                checkClozeAnswer(blank, wordValue, sourceId);
+            };
+            blank.onclick = () => {
+                if (activeSelectedWord) {
+                    const wordValue = activeSelectedWord.getAttribute('data-word');
+                    const sourceId = activeSelectedWord.id;
+                    checkClozeAnswer(blank, wordValue, sourceId);
+                    activeSelectedWord = null;
+                    words.forEach(w => w.style.boxShadow = '');
+                }
+            };
+        });
+    },
+
+    showSplitScreenOverlay(title, md) {
+        const overlay = this.getSharedOverlay('splitscreen-tool-overlay', 'Studio Comparativo - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+        
+        const chapters = this.getAvailableChapters();
+        const optionsHtml = chapters.map(ch => `
+            <option value="${ch.path}">${ch.title}</option>
+        `).join('');
+        
+        body.innerHTML = `
+            <div class="splitscreen-container">
+                <div class="splitscreen-col">
+                    <div class="splitscreen-col-header">
+                        <h4 class="splitscreen-col-title">${title}</h4>
+                        <span style="font-size:0.75rem; color:var(--text-muted)">Corrente</span>
+                    </div>
+                    <div class="splitscreen-col-body" id="splitscreen-left-body">
+                        ${this.renderMarkdownToHtml(md)}
+                    </div>
+                </div>
+                <div class="splitscreen-col">
+                    <div class="splitscreen-col-header">
+                        <h4 class="splitscreen-col-title" id="splitscreen-right-title">Seleziona capitolo...</h4>
+                        <select class="splitscreen-select-box" id="splitscreen-select-chapter">
+                            <option value="" selected disabled>Confronta con...</option>
+                            ${optionsHtml}
+                        </select>
+                    </div>
+                    <div class="splitscreen-col-body" id="splitscreen-right-body" style="display:flex; align-items:center; justify-content:center; color:var(--text-muted)">
+                        Scegli un capitolo dal menu a tendina per avviare il confronto.
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        overlay.classList.add('open');
+        
+        const leftBody = body.querySelector('#splitscreen-left-body');
+        const rightBody = body.querySelector('#splitscreen-right-body');
+        const select = body.querySelector('#splitscreen-select-chapter');
+        const rightTitle = body.querySelector('#splitscreen-right-title');
+        
+        let isSyncingScroll = false;
+        const syncScroll = (src, dest) => {
+            if (isSyncingScroll) return;
+            isSyncingScroll = true;
+            const percentage = src.scrollTop / (src.scrollHeight - src.clientHeight);
+            dest.scrollTop = percentage * (dest.scrollHeight - dest.clientHeight);
+            setTimeout(() => { isSyncingScroll = false; }, 50);
+        };
+        
+        leftBody.onscroll = () => syncScroll(leftBody, rightBody);
+        
+        select.onchange = (e) => {
+            const path = e.target.value;
+            const option = select.options[select.selectedIndex];
+            const compareTitle = option.text;
+            
+            rightBody.innerHTML = `
+                <div style="display:flex; justify-content:center; align-items:center; height:100%">
+                    <span style="color:var(--study-accent)">Caricamento in corso...</span>
+                </div>
+            `;
+            
+            fetch(path)
+                .then(r => r.text())
+                .then(compareMd => {
+                    rightTitle.innerText = compareTitle;
+                    
+                    const commonKeywords = this.findCommonKeywords(md, compareMd);
+                    
+                    const leftHtml = this.highlightCommonWords(this.renderMarkdownToHtml(md), commonKeywords);
+                    const rightHtml = this.highlightCommonWords(this.renderMarkdownToHtml(compareMd), commonKeywords);
+                    
+                    leftBody.innerHTML = leftHtml;
+                    rightBody.innerHTML = rightHtml;
+                    
+                    rightBody.style.display = 'block';
+                    rightBody.onscroll = () => syncScroll(rightBody, leftBody);
+                    
+                    if (commonKeywords.length > 0) {
+                        this.showNotification('Analisi Completata', `Identificati ${commonKeywords.length} concetti in comune evidenziati in oro.`);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    rightBody.innerHTML = `
+                        <div style="display:flex; justify-content:center; align-items:center; height:100%; color:#ef4444">
+                            Errore durante il caricamento del capitolo.
+                        </div>
+                    `;
+                });
+        };
+    },
+
+    showConceptMatcherOverlay(title, md) {
+        const overlay = this.getSharedOverlay('matcher-tool-overlay', 'Concept Matcher - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 21H3v-5M12 12m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0M21 3L14 10M3 21l7-7"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+        
+        const pairs = this.getMatcherPairs(md);
+        if (pairs.length < 3) {
+            body.innerHTML = `
+                <div style="text-align:center; padding: 2rem; color:var(--text-muted);">
+                    Termini di glossario insufficienti in questo capitolo per generare il gioco delle coppie.
+                </div>
+            `;
+            overlay.classList.add('open');
+            return;
+        }
+        
+        const leftTerms = pairs.map((p, idx) => ({ id: idx, term: p.term }));
+        const rightDefs = pairs.map((p, idx) => ({ id: idx, def: p.definition }));
+        
+        leftTerms.sort(() => Math.random() - 0.5);
+        rightDefs.sort(() => Math.random() - 0.5);
+        
+        const leftHtml = leftTerms.map(t => `
+            <div class="matcher-card-item matcher-col-left-item" data-id="${t.id}" id="matcher-left-${t.id}">
+                <div style="flex-grow:1">${t.term}</div>
+                <span class="matcher-connector-dot"></span>
+            </div>
+        `).join('');
+        
+        const rightHtml = rightDefs.map(d => `
+            <div class="matcher-card-item matcher-col-right-item" data-id="${d.id}" id="matcher-right-${d.id}">
+                <span class="matcher-connector-dot"></span>
+                <div style="flex-grow:1; font-size:0.75rem; line-height:1.3">${d.def}</div>
+            </div>
+        `).join('');
+        
+        body.innerHTML = `
+            <div class="matcher-container">
+                <div class="cloze-instructions">
+                    Collega ogni termine di sinistra con la rispettiva definizione a destra. Seleziona prima un termine, poi la sua definizione.
+                </div>
+                <div class="matcher-grid">
+                    <div class="matcher-col matcher-col-left">
+                        ${leftHtml}
+                    </div>
+                    <div class="matcher-col matcher-col-right">
+                        ${rightHtml}
+                    </div>
+                </div>
+                <svg class="matcher-svg-overlay" id="matcher-svg-lines"></svg>
+                <div id="matcher-congrats-area"></div>
+            </div>
+        `;
+        
+        overlay.classList.add('open');
+        
+        const svgLines = body.querySelector('#matcher-svg-lines');
+        let selectedLeftCard = null;
+        
+        const leftCards = body.querySelectorAll('.matcher-col-left-item');
+        const rightCards = body.querySelectorAll('.matcher-col-right-item');
+        
+        const onMouseMove = (e) => {
+            if (!selectedLeftCard) return;
+            const rect = svgLines.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            const startCoords = this.getDotCoords(selectedLeftCard);
+            this.drawSvgLine('temp-line', startCoords.x, startCoords.y, mouseX, mouseY, 'var(--accent-cyan)', true);
+        };
+        
+        overlay.addEventListener('mousemove', onMouseMove);
+        
+        const animateLineRetract = (id, x1, y1, startX2, startY2) => {
+            const line = svgLines.getElementById(id);
+            if (!line) return;
+            line.setAttribute('stroke', '#ef4444');
+            line.removeAttribute('stroke-dasharray');
+            let startTime = null;
+            const duration = 250;
+            const animate = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = (timestamp - startTime) / duration;
+                if (progress < 1) {
+                    const ease = 1 - Math.pow(1 - progress, 3);
+                    const curX2 = startX2 - (startX2 - x1) * ease;
+                    const curY2 = startY2 - (startY2 - y1) * ease;
+                    line.setAttribute('x2', curX2);
+                    line.setAttribute('y2', curY2);
+                    requestAnimationFrame(animate);
+                } else {
+                    line.remove();
+                }
+            };
+            requestAnimationFrame(animate);
+        };
+        
+        leftCards.forEach(card => {
+            card.onclick = (e) => {
+                if (card.classList.contains('matched')) return;
+                leftCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedLeftCard = card;
+            };
+        });
+        
+        rightCards.forEach(card => {
+            card.onclick = (e) => {
+                if (card.classList.contains('matched')) return;
+                if (!selectedLeftCard) return;
+                
+                const leftId = selectedLeftCard.getAttribute('data-id');
+                const rightId = card.getAttribute('data-id');
+                const startCoords = this.getDotCoords(selectedLeftCard);
+                const endCoords = this.getDotCoords(card);
+                
+                const tempLine = svgLines.getElementById('temp-line');
+                if (tempLine) tempLine.remove();
+                
+                if (leftId === rightId) {
+                    selectedLeftCard.classList.add('matched');
+                    card.classList.add('matched');
+                    selectedLeftCard.classList.remove('selected');
+                    
+                    const lineId = `matched-line-${leftId}`;
+                    this.drawSvgLine(lineId, startCoords.x, startCoords.y, endCoords.x, endCoords.y, '#22c55e');
+                    
+                    this.playAudioSuccessChime();
+                    this.triggerGoldStarsExplosion(card);
+                    selectedLeftCard = null;
+                    
+                    const allMatched = Array.from(leftCards).every(c => c.classList.contains('matched'));
+                    if (allMatched) {
+                        const congrats = body.querySelector('#matcher-congrats-area');
+                        congrats.innerHTML = `
+                            <div class="cloze-success-message">
+                                🎉 Fantastico! Hai accoppiato correttamente tutti i termini!
+                            </div>
+                        `;
+                    }
+                } else {
+                    selectedLeftCard.classList.add('shake');
+                    card.classList.add('shake');
+                    const cSelected = selectedLeftCard;
+                    const cCard = card;
+                    setTimeout(() => {
+                        cSelected.classList.remove('shake');
+                        cCard.classList.remove('shake');
+                    }, 400);
+                    
+                    this.drawSvgLine('wrong-line', startCoords.x, startCoords.y, endCoords.x, endCoords.y, '#ef4444');
+                    animateLineRetract('wrong-line', startCoords.x, startCoords.y, endCoords.x, endCoords.y);
+                    
+                    selectedLeftCard.classList.remove('selected');
+                    selectedLeftCard = null;
+                }
+            };
+        });
+    },
+
+    initMarginNotes(filePath) {
+        const view = document.getElementById('markdown-view') || document.querySelector('.markdown-view');
+        if (!view) return;
+        
+        const paragraphs = view.querySelectorAll('p');
+        paragraphs.forEach((p, idx) => {
+            p.style.position = 'relative';
+            const noteKey = `lex-margin-note-${filePath}-${idx}`;
+            const savedNote = localStorage.getItem(noteKey);
+            if (savedNote && savedNote.trim().length > 0) {
+                this.createMarginNoteElements(filePath, idx, p, savedNote);
+            }
+            
+            p.ondblclick = (e) => {
+                if (e.target.closest('.lex-margin-note-btn') || e.target.closest('.lex-margin-postit')) return;
+                this.showMarginPostIt(filePath, idx, p);
+            };
+        });
+    },
+
+    createMarginNoteElements(filePath, idx, paragraphEl, text) {
+        let btn = paragraphEl.querySelector('.lex-margin-note-btn');
+        if (!btn) {
+            btn = document.createElement('button');
+            btn.className = 'lex-margin-note-btn has-note';
+            paragraphEl.appendChild(btn);
+        }
+        
+        let postit = paragraphEl.querySelector('.lex-margin-postit');
+        if (!postit) {
+            postit = document.createElement('div');
+            postit.className = 'lex-margin-postit';
+            paragraphEl.appendChild(postit);
+        }
+        
+        const noteKey = `lex-margin-note-${filePath}-${idx}`;
+        postit.innerHTML = `
+            <div class="lex-margin-postit-header">
+                <span class="lex-margin-postit-title">Nota Paragrafo</span>
+                <button class="lex-margin-postit-close">&times;</button>
+            </div>
+            <textarea placeholder="Scrivi nota...">${text}</textarea>
+            <div class="lex-margin-postit-footer">
+                <span>Modificato</span>
+                <button class="lex-margin-postit-save-btn">Salva</button>
+            </div>
+        `;
+        
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            postit.classList.toggle('open');
+        };
+        
+        postit.querySelector('.lex-margin-postit-close').onclick = (e) => {
+            e.stopPropagation();
+            postit.classList.remove('open');
+        };
+        
+        postit.querySelector('.lex-margin-postit-save-btn').onclick = (e) => {
+            e.stopPropagation();
+            const newText = postit.querySelector('textarea').value;
+            if (newText.trim().length === 0) {
+                localStorage.removeItem(noteKey);
+                postit.remove();
+                btn.remove();
+            } else {
+                localStorage.setItem(noteKey, newText);
+                postit.classList.remove('open');
+                this.showNotification('Nota Salvata', 'La nota a margine è stata salvata con successo.');
+            }
+        };
+    },
+
+    showMarginPostIt(filePath, idx, paragraphEl) {
+        const noteKey = `lex-margin-note-${filePath}-${idx}`;
+        const currentText = localStorage.getItem(noteKey) || '';
+        this.createMarginNoteElements(filePath, idx, paragraphEl, currentText);
+        const postit = paragraphEl.querySelector('.lex-margin-postit');
+        if (postit) {
+            postit.classList.add('open');
+            postit.querySelector('textarea').focus();
+        }
+    },
+
+    getDotCoords(cardEl) {
+        const dot = cardEl.querySelector('.matcher-connector-dot');
+        if (!dot) return { x: 0, y: 0 };
+        const container = document.getElementById('matcher-svg-lines');
+        if (!container) return { x: 0, y: 0 };
+        const rectDot = dot.getBoundingClientRect();
+        const rectContainer = container.getBoundingClientRect();
+        return {
+            x: rectDot.left + rectDot.width / 2 - rectContainer.left,
+            y: rectDot.top + rectDot.height / 2 - rectContainer.top
+        };
+    },
+
+    drawSvgLine(id, x1, y1, x2, y2, color, isTemp = false) {
+        const svg = document.getElementById('matcher-svg-lines');
+        if (!svg) return;
+        let line = svg.getElementById(id);
+        if (!line) {
+            line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('id', id);
+            svg.appendChild(line);
+        }
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.setAttribute('stroke', color);
+        line.setAttribute('stroke-width', '3');
+        if (isTemp) {
+            line.setAttribute('stroke-dasharray', '5,5');
+        } else {
+            line.removeAttribute('stroke-dasharray');
+        }
+    },
+
+    getAvailableChapters() {
+        const list = [];
+        const cards = document.querySelectorAll('.chapter-card, .chapter-card-plus');
+        cards.forEach(card => {
+            const h3 = card.querySelector('h3');
+            const button = card.querySelector('button[onclick*="openSummary"]');
+            if (h3 && button) {
+                const title = h3.innerText.trim();
+                const onclickText = button.getAttribute('onclick');
+                const match = onclickText.match(/openSummary\s*\(\s*['"`](.*?)['"`]\s*,\s*['"`](.*?)['"`]\s*\)/);
+                if (match) {
+                    list.push({ title: match[1], path: match[2] });
+                }
+            }
+        });
+        if (list.length === 0) {
+            const buttons = document.querySelectorAll('button[onclick*="openSummary"]');
+            buttons.forEach(button => {
+                const onclickText = button.getAttribute('onclick');
+                const match = onclickText.match(/openSummary\s*\(\s*['"`](.*?)['"`]\s*,\s*['"`](.*?)['"`]\s*\)/);
+                if (match) {
+                    let title = match[1];
+                    const card = button.closest('article, div');
+                    if (card) {
+                        const h3 = card.querySelector('h3, h4, h2');
+                        if (h3) title = h3.innerText.trim();
+                    }
+                    list.push({ title: title, path: match[2] });
+                }
+            });
+        }
+        return list;
+    },
+
+    renderMarkdownToHtml(md) {
+        if (window.marked && typeof window.marked.parse === 'function') {
+            return window.marked.parse(md);
+        } else if (window.marked && typeof window.marked === 'function') {
+            return window.marked(md);
+        } else {
+            let html = md;
+            html = html.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            html = html.replace(/\n\s*\n/g, '</p><p>');
+            return '<p>' + html + '</p>';
+        }
+    },
+
+    findCommonKeywords(text1, text2) {
+        const stopwords = new Set([
+            'questo', 'questa', 'questi', 'queste', 'quello', 'quella', 'quelli', 'quelle',
+            'perche', 'perché', 'quando', 'mentre', 'contro', 'dentro', 'dietro', 'grande',
+            'piccolo', 'sempre', 'ancora', 'allora', 'invece', 'oppure', 'ovvero', 'alcuni',
+            'alcune', 'durante', 'tramite', 'presso', 'pressoché', 'nonostante', 'tuttavia'
+        ]);
+        const getWords = (text) => {
+            const clean = text.replace(/[*#_`~\[\]()\-+,.!?;:]/g, ' ');
+            return clean.toLowerCase().split(/\s+/).filter(w => w.length >= 6 && !stopwords.has(w));
+        };
+        const words1 = new Set(getWords(text1));
+        const words2 = new Set(getWords(text2));
+        const common = new Set();
+        words1.forEach(w => {
+            if (words2.has(w)) common.add(w);
+        });
+        return Array.from(common);
+    },
+
+    highlightCommonWords(htmlContent, commonWords) {
+        if (commonWords.length === 0) return htmlContent;
+        let result = htmlContent;
+        const sortedWords = [...commonWords].sort((a,b) => b.length - a.length);
+        sortedWords.forEach(word => {
+            const parts = result.split(/(<[^>]+>)/g);
+            for (let i = 0; i < parts.length; i++) {
+                if (parts[i].startsWith('<')) continue;
+                const regex = new RegExp(`\\b(${word}[a-z]*)\\b`, 'gi');
+                parts[i] = parts[i].replace(regex, '<span class="splitscreen-common-highlight">$1</span>');
+            }
+            result = parts.join('');
+        });
+        return result;
+    },
+
+    extractClozeItems(md) {
+        const paragraphs = md.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 0 && !p.startsWith('#') && !p.startsWith('!'));
+        let targetParagraph = null;
+        let terms = [];
+        for (const p of paragraphs) {
+            const matches = [...p.matchAll(/\*\*(.*?)\*\*/g)].map(m => m[1].trim());
+            const uniqueMatches = [...new Set(matches)];
+            if (uniqueMatches.length >= 3 && uniqueMatches.length <= 6) {
+                targetParagraph = p;
+                terms = uniqueMatches;
+                break;
+            }
+        }
+        if (!targetParagraph) {
+            for (const p of paragraphs) {
+                const matches = [...p.matchAll(/\*\*(.*?)\*\*/g)].map(m => m[1].trim());
+                const uniqueMatches = [...new Set(matches)];
+                if (uniqueMatches.length >= 2) {
+                    targetParagraph = p;
+                    terms = uniqueMatches;
+                    break;
+                }
+            }
+        }
+        if (!targetParagraph) {
+            const matches = [...md.matchAll(/\*\*(.*?)\*\*/g)].map(m => m[1].trim());
+            const uniqueMatches = [...new Set(matches)].slice(0, 5);
+            if (uniqueMatches.length >= 2) {
+                terms = uniqueMatches;
+                const sentences = md.split(/[.!?\n]/).map(s => s.trim()).filter(s => s.length > 0);
+                const matchedSentences = [];
+                for (const s of sentences) {
+                    if (uniqueMatches.some(t => s.includes(`**${t}**`))) {
+                        matchedSentences.push(s);
+                        if (matchedSentences.length >= 4) break;
+                    }
+                }
+                targetParagraph = matchedSentences.join('. ') + '.';
+            }
+        }
+        return { paragraph: targetParagraph, terms: terms };
+    },
+
+    getMatcherPairs(md) {
+        const pairs = [];
+        if (window.glossaryDatabase) {
+            const cleanMD = md.toLowerCase();
+            Object.keys(window.glossaryDatabase).forEach(key => {
+                const termMeta = window.glossaryDatabase[key];
+                const cleanTerm = key.toLowerCase();
+                if (cleanMD.includes(cleanTerm)) {
+                    pairs.push({ term: termMeta.term, definition: termMeta.definition });
+                }
+            });
+        }
+        if (pairs.length < 3) {
+            const lines = md.split('\n');
+            lines.forEach(line => {
+                const match = line.match(/^\s*\*\*(.*?)\*\*\s*[:\-]\s*(.*?)$/);
+                if (match) {
+                    const term = match[1].trim();
+                    const def = match[2].trim();
+                    if (term && def && !pairs.some(p => p.term.toLowerCase() === term.toLowerCase())) {
+                        pairs.push({ term, definition: def });
+                    }
+                }
+            });
+        }
+        if (pairs.length < 3) {
+            const matches = [...md.matchAll(/\*\*(.*?)\*\*/g)].map(m => m[1].trim());
+            const uniqueMatches = [...new Set(matches)];
+            const sentences = md.split(/[.!?\n]/).map(s => s.trim()).filter(s => s.length > 10);
+            uniqueMatches.forEach(term => {
+                if (pairs.some(p => p.term.toLowerCase() === term.toLowerCase())) return;
+                for (const s of sentences) {
+                    const cleanS = s.replace(/\*\"/g, '');
+                    if (s.includes(`**${term}**`) && cleanS.length > term.length + 15) {
+                        pairs.push({ term, definition: cleanS });
+                        break;
+                    }
+                }
+            });
+        }
+        const shuffled = [...pairs].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, 5);
+    },
+
+    triggerGoldStarsExplosion(el) {
+        const rect = el.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        for (let i = 0; i < 12; i++) {
+            const star = document.createElement('div');
+            star.className = 'lex-star-particle';
+            star.innerText = '✨';
+            star.style.left = `${centerX}px`;
+            star.style.top = `${centerY}px`;
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 40 + Math.random() * 60;
+            const destX = Math.cos(angle) * distance;
+            const destY = Math.sin(angle) * distance;
+            star.style.setProperty('--dx', `${destX}px`);
+            star.style.setProperty('--dy', `${destY}px`);
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 1000);
+        }
+    },
+
+    startPomodoroAnimation() {
+        const render = () => {
+            if (!document.getElementById('pomodoro-tool-overlay') || !document.getElementById('pomodoro-tool-overlay').classList.contains('open')) {
+                this.pomodoroAnimationId = null;
+                return;
+            }
+            const total = this.pomodoroTotalDuration || 1500;
+            const left = this.pomodoroTimeLeft !== undefined ? this.pomodoroTimeLeft : total;
+            const progress = 1 - (left / total);
+            const isRunning = this.pomodoroState === 'running';
+            this.drawCandle(progress, isRunning);
+            this.pomodoroAnimationId = requestAnimationFrame(render);
+        };
+        if (!this.pomodoroAnimationId) {
+            this.pomodoroAnimationId = requestAnimationFrame(render);
+        }
+    },
+
+    drawCandle(progress, isFlickering) {
+        const canvas = document.getElementById('pomodoro-candle-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        const initialHeight = 140;
+        const minHeight = 20;
+        const currentHeight = initialHeight - (initialHeight - minHeight) * progress;
+        const candleWidth = 40;
+        const baseX = w / 2;
+        const baseY = h - 30;
+        const topY = baseY - currentHeight;
+        ctx.fillStyle = 'rgba(212, 175, 55, 0.4)';
+        ctx.strokeStyle = '#d4af37';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.ellipse(baseX, baseY, 60, 10, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(baseX, baseY - 5, 25, 6, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        const grad = ctx.createLinearGradient(baseX - candleWidth/2, topY, baseX + candleWidth/2, topY);
+        grad.addColorStop(0, '#fbf4d9');
+        grad.addColorStop(0.3, '#fffef2');
+        grad.addColorStop(0.7, '#ebd8a3');
+        grad.addColorStop(1, '#cca747');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.moveTo(baseX - candleWidth/2, baseY);
+        ctx.lineTo(baseX - candleWidth/2, topY + 5);
+        ctx.quadraticCurveTo(baseX, topY, baseX + candleWidth/2, topY + 5);
+        ctx.lineTo(baseX + candleWidth/2, baseY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#fbf4d9';
+        ctx.beginPath();
+        ctx.arc(baseX - 15, topY + 15, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(baseX - 19, topY + 5);
+        ctx.quadraticCurveTo(baseX - 15, topY + 8, baseX - 11, topY + 5);
+        ctx.lineTo(baseX - 11, topY + 15);
+        ctx.lineTo(baseX - 19, topY + 15);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(baseX + 10, topY + 30, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(baseX + 5, topY + 5);
+        ctx.lineTo(baseX + 15, topY + 5);
+        ctx.lineTo(baseX + 15, topY + 30);
+        ctx.lineTo(baseX + 5, topY + 30);
+        ctx.fill();
+        ctx.strokeStyle = '#2d2013';
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(baseX, topY + 2);
+        ctx.lineTo(baseX, topY - 8);
+        ctx.stroke();
+        if (progress < 1) {
+            const flickerOffset = isFlickering ? (Math.sin(Date.now() * 0.02) * 2.5 + (Math.random() - 0.5) * 1.5) : 0;
+            const flameY = topY - 8;
+            const flameGrad = ctx.createRadialGradient(baseX, flameY - 15, 2, baseX, flameY - 15, 25);
+            flameGrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+            flameGrad.addColorStop(0.2, 'rgba(253, 224, 71, 0.9)');
+            flameGrad.addColorStop(0.6, 'rgba(239, 68, 68, 0.6)');
+            flameGrad.addColorStop(1, 'rgba(239, 68, 68, 0)');
+            ctx.shadowColor = 'rgba(212, 175, 55, 0.7)';
+            ctx.shadowBlur = 18;
+            ctx.fillStyle = flameGrad;
+            ctx.beginPath();
+            ctx.moveTo(baseX, flameY);
+            ctx.bezierCurveTo(baseX - 12 + flickerOffset * 0.3, flameY - 10, baseX - 12 + flickerOffset, flameY - 25, baseX, flameY - 38);
+            ctx.bezierCurveTo(baseX + 12 + flickerOffset, flameY - 25, baseX + 12 + flickerOffset * 0.3, flameY - 10, baseX, flameY);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            const innerGrad = ctx.createLinearGradient(baseX, flameY, baseX, flameY - 15);
+            innerGrad.addColorStop(0, 'rgba(59, 130, 246, 0.7)');
+            innerGrad.addColorStop(1, 'rgba(253, 224, 71, 0)');
+            ctx.fillStyle = innerGrad;
+            ctx.beginPath();
+            ctx.moveTo(baseX, flameY);
+            ctx.bezierCurveTo(baseX - 4, flameY - 4, baseX - 4, flameY - 12, baseX, flameY - 18);
+            ctx.bezierCurveTo(baseX + 4, flameY - 18, baseX + 4, flameY - 4, baseX, flameY);
+            ctx.fill();
+        }
     }
 };
 
