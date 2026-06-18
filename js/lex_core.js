@@ -93,16 +93,23 @@ const LexCore = {
     applyTheme() {
         if (this.theme === 'light') {
             document.body.classList.add('light-theme');
-            document.body.classList.remove('coccole-theme');
+            document.body.classList.remove('coccole-theme', 'eclissi-theme');
             this.stopFloatingHeartsBackground();
+            this.stopEclissiBackground();
         } else if (this.theme === 'coccole') {
             document.body.classList.add('coccole-theme');
-            document.body.classList.remove('light-theme');
+            document.body.classList.remove('light-theme', 'eclissi-theme');
+            this.stopEclissiBackground();
             this.startFloatingHeartsBackground();
-        } else {
-            document.body.classList.remove('light-theme');
-            document.body.classList.remove('coccole-theme');
+        } else if (this.theme === 'eclissi') {
+            document.body.classList.add('eclissi-theme');
+            document.body.classList.remove('light-theme', 'coccole-theme');
             this.stopFloatingHeartsBackground();
+            this.startEclissiBackground();
+        } else {
+            document.body.classList.remove('light-theme', 'coccole-theme', 'eclissi-theme');
+            this.stopFloatingHeartsBackground();
+            this.stopEclissiBackground();
         }
         this.updateThemeIcons();
         this.updateBrandName();
@@ -2226,6 +2233,8 @@ const LexCore = {
         if (headerTitle) {
             if (document.body.classList.contains('coccole-theme')) {
                 headerTitle.textContent = "Lex dell'Amore 💕";
+            } else if (document.body.classList.contains('eclissi-theme')) {
+                headerTitle.textContent = "Lex Eclissi 🌌";
             } else {
                 const path = window.location.pathname;
                 if (path.includes('diritto')) headerTitle.textContent = "Lex Patrimoniale";
@@ -2519,10 +2528,24 @@ const LexCore = {
                     <button class="changelog-modal-close" onclick="document.getElementById('changelog-modal').remove()">&times;</button>
                 </div>
                 <div class="changelog-modal-body">
+                    <!-- Version 2.3.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.3.0 (Attuale)</span>
+                            <span class="changelog-version-date">18 Giugno 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Galleria dei Segreti:</strong> Rilascio di 7 nuovi Easter Egg interattivi suddivisi in tre categorie (Amore, Scriptorium, Materie dello Studio).</li>
+                            <li><strong>Integrazione Grafica & Sonora:</strong> Aggiunto il tema dinamico "Eclissi", scia orbitante di stelline/cuori al cursore del mouse, suoni sintetizzati via Web Audio API e animazione di terremoto sullo schermo.</li>
+                            <li><strong>Sintesi Codicologia & Filosofia:</strong> Introdotte le gesture di scratching per svelare palinsesti medievali, timer di inattività con rosicchiamento del tarlo, ed effetto torcia/ombre cinesi per il Mito della Caverna.</li>
+                            <li><strong>Simulatore Quiz:</strong> Aggiunta la scorciatoia di censura imperiale <code>Ctrl + Shift + X</code> (PROHIBITUM) per evitare le domande ostiche di Diritto Romano.</li>
+                        </ul>
+                    </div>
+
                     <!-- Version 2.2.0 -->
                     <div class="changelog-version-block">
                         <div class="changelog-version-header">
-                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.2.0 (Attuale)</span>
+                            <span class="changelog-version-num">v2.2.0</span>
                             <span class="changelog-version-date">18 Giugno 2026</span>
                         </div>
                         <ul class="changelog-version-list">
@@ -2868,6 +2891,14 @@ const LexCore = {
         this.initMouseTopolinoTracker();
         this.initAlchimistaWatcher();
         this.initScismaIconoclasta();
+        
+        // 7 Nuovi Easter Eggs
+        this.initEclissiTheme();
+        this.initPalinsestoBobbio();
+        this.initTarloWatcher();
+        this.initCavernaPlatoneWatcher();
+        this.initStratigrafiaWatcher();
+        this.initDamnatioMemoriaeQuizWatcher();
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -2886,6 +2917,8 @@ const LexCore = {
         { id:'ee-frecce-cupido',     cat:'amore',       icon:'🏹', name:'Le Frecce di Cupido',            hint:'Unire i concetti giusti può far scoccare la scintilla...',                         desc:'Collega i nodi "Alessio" (o "Lex") e "Alessandra" nella lavagna di Connections.', page:'connections.html' },
         { id:'ee-clessidra-romantica',cat:'amore',      icon:'⏳', name:'Tempo d\'Amore',                 hint:'Il tempo si ferma per chi si ama... letteralmente.',                               desc:'Imposta il timer di pausa esattamente a 14 minuti.', page:'*' },
         { id:'ee-serenata-retro',    cat:'amore',       icon:'🎶', name:'La Serenata del Bot',            hint:'Chiedi una melodia per il tuo cuore all\'assistente...',                           desc:'Chiedi all\'assistente "cantami una canzone" o "dedicami una serenata".', page:'assistant.html' },
+        { id:'ee-eclissi-tema',      cat:'amore',       icon:'🌌', name:'L\'Eclissi degli Innamorati',     hint:'Quando il Sole e la Luna si fondono, il cielo si tinge dei colori del cuore.',    desc:'Tieni premuto il pulsante del tema per 3 secondi o fai doppio clic premendo A.', page:'*' },
+        { id:'ee-messaggio-bottiglia',cat:'amore',      icon:'🏺', name:'Il Messaggio del Naufrago',       hint:'Un antico frammento d\'amore fluttua nel mare delle connessioni concettuali...',   desc:'Nella mappa Connections, collega Alessio e Alessandra a grande distanza (>60% schermo).', page:'connections.html' },
         // ── Categoria: Scriptorium ──
         { id:'ee-colofone',          cat:'scriptorium', icon:'✦',  name:'Il Colofone del Copista',        hint:'"Explicit liber"... cosa succede quando si chiude davvero un\'opera?',             desc:'Completa tutti e 12 i capitoli di Codicologia.', page:'codicologia/index.html' },
         { id:'ee-manoscritto',       cat:'scriptorium', icon:'📜', name:'Il Manoscritto Perduto',         hint:'La fortuna sorride a chi apre la porta giusta nel momento giusto...',              desc:'Con l\'1% di probabilità ad ogni apertura della home, un frammento di pergamena appare.', page:'index.html' },
@@ -2898,6 +2931,8 @@ const LexCore = {
         { id:'ee-damnatio-memoriae', cat:'scriptorium', icon:'🏛️', name:'Damnatio Memoriae',              hint:'Cancellare la storia per riscriverla da capo.',                                    desc:'Seleziona un testo in una sintesi e premi Canc o Backspace sulla tastiera.', page:'*' },
         { id:'ee-topolino-biblioteca',cat:'scriptorium',icon:'🐭', name:'Il Topo d\'Archivio',              hint:'Un piccolo ospite rosicchia i volumi più antichi nel silenzio della notte.',       desc:'Muovi il cursore sui bordi dello schermo per 30 secondi senza cliccare.', page:'*' },
         { id:'ee-index-prohibitorum',cat:'scriptorium', icon:'🔥', name:'L\'Indice dei Libri Proibiti',   hint:'Ci sono stanze della biblioteca in cui è vietato l\'accesso... ma l\'indirizzo è palese.',desc:'Forza l\'URL inserendo manualmente segreti.html o prohibited.html.', page:'*' },
+        { id:'ee-palinsesto-bobbio', cat:'scriptorium', icon:'📜', name:'Il Palinsesto Nascosto',         hint:'Sotto le parole moderne giace la sapienza antica. Raschia via il presente.',       desc:'Nelle sintesi di Codicologia, trascina velocemente il mouse avanti e indietro su un paragrafo.', page:'codicologia/index.html' },
+        { id:'ee-tarlo-biblioteca',  cat:'scriptorium', icon:'🐛', name:'Il Tarlo del Codice',            hint:'Se lasci la pergamena incustodita troppo a lungo, qualcuno farà merenda...',       desc:'Rimani completamente inattivo per esattamente 3 minuti su una pagina di sintesi.', page:'*' },
         // ── Categoria: Materie ──
         { id:'ee-dedica-augusto',    cat:'materie',     icon:'🏛️', name:'La Dedica dell\'Augusto',        hint:'"Tres faciunt collegium" — cosa succede se premi tre volte?',                    desc:'Clicca 3 volte di fila sul titolo del capitolo nella sintesi di Arte Romana.', page:'arte_romana/index.html' },
         { id:'ee-sentenza-pretore',  cat:'materie',     icon:'⚖️', name:'La Sentenza del Pretore',        hint:'Il diritto romano non perdona gli ignoranti... né li premia senza fatica.',       desc:'Nel quiz di Diritto, sbaglia 3 risposte di fila, poi rispondi correttamente 3 volte.', page:'exam.html' },
@@ -2919,7 +2954,10 @@ const LexCore = {
         { id:'ee-decodifica-codex',  cat:'materie',     icon:'🔓', name:'Decodificatore di Codex',        hint:'Risolvi il mistero nascosto nel cifrario medievale...',                           desc:'Decodifica una frase latina nell\'Arena Minigiochi.', page:'minigames.html' },
         { id:'ee-cruciverba-completato',cat:'materie',  icon:'🧩', name:'Scriba Enigmatico',               hint:'Completa tutti i termini dello Scriptorium nel cruciverba...',                    desc:'Completa con successo il cruciverba didattico.', page:'minigames.html' },
         { id:'ee-caccia-tesoro-completata',cat:'materie',icon:'🏆', name:'Il Saggio di Alessandria',       hint:'Tre glifi antichi si nascondono nelle sintesi di materie diverse...',             desc:'Trova ed evidenzia i 3 glifi antichi nascosti nei capitoli.', page:'*' },
-        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.2.0 nel modal del Changelog.', page:'*' }
+        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.3.0 nel modal del Changelog.', page:'*' },
+        { id:'ee-caverna-platone',   cat:'materie',     icon:'🕯️', name:'La Caverna di Platone',          hint:'Ciò che vedi è solo un\'ombra. Spegni le luci e cerca la verità nella roccia.',    desc:'Nella sintesi di Filosofia con tema Scuro, seleziona la parola "Caverna" o "Ombra".', page:'filosofia/*' },
+        { id:'ee-stratigrafia',      cat:'materie',     icon:'⛏️', name:'Lo Scavo Archeologico',          hint:'La conoscenza è stratificata. Scava oltre i limiti della pagina.',                desc:'Fai scorrimento continuo (overscroll) verso il basso a fondo pagina per 5 volte.', page:'*' },
+        { id:'ee-damnatio-memoriae-quiz',cat:'materie', icon:'🛡️', name:'L\'Eresia Giuridica',            hint:'Certe eresie giuridiche non meritano risposta, solo l\'oblio della censura.',      desc:'Nel Simulatore d\'Esame, in una domanda di Diritto, premi Ctrl + Shift + X.', page:'exam.html' }
     ],
 
     unlockEasterEgg(id) {
@@ -3895,6 +3933,718 @@ const LexCore = {
                 targetPara.appendChild(span);
             }
         }
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // 7 NUOVISSIMI EASTER EGG — LOGICA DI ATTIVAZIONE E EFFETTI
+    // ═══════════════════════════════════════════════════════════════
+
+    // ── EE #1: Eclissi degli Innamorati ──
+    initEclissiTheme() {
+        const themeBtn = document.getElementById('theme-toggle');
+        if (!themeBtn) return;
+
+        let pressTimer = null;
+        let isHolding = false;
+
+        const startPress = (e) => {
+            if (e.button && e.button !== 0) return; // solo click sinistro
+            isHolding = false;
+            pressTimer = setTimeout(() => {
+                isHolding = true;
+                this.triggerEclissiTheme();
+            }, 3000);
+        };
+
+        const cancelPress = () => {
+            if (pressTimer) {
+                clearTimeout(pressTimer);
+                pressTimer = null;
+            }
+        };
+
+        themeBtn.addEventListener('mousedown', startPress);
+        themeBtn.addEventListener('touchstart', startPress, { passive: true });
+        themeBtn.addEventListener('mouseup', cancelPress);
+        themeBtn.addEventListener('mouseleave', cancelPress);
+        themeBtn.addEventListener('touchend', cancelPress);
+        themeBtn.addEventListener('touchcancel', cancelPress);
+
+        // Doppio click tenendo premuto il tasto A
+        let isAKeyPressed = false;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'a' || e.key === 'A') isAKeyPressed = true;
+        });
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'a' || e.key === 'A') isAKeyPressed = false;
+        });
+
+        themeBtn.addEventListener('dblclick', () => {
+            if (isAKeyPressed) {
+                this.triggerEclissiTheme();
+            }
+        });
+    },
+
+    triggerEclissiTheme() {
+        this.theme = 'eclissi';
+        localStorage.setItem('lex-theme', this.theme);
+        this.applyTheme();
+        this.unlockEasterEgg('ee-eclissi-tema');
+
+        // Suono: Accordo consonante di quinta tramite AudioContext
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = ctx.createGain();
+            gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.0);
+
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            osc1.type = 'sine';
+            osc1.frequency.value = 261.63; // C4
+            osc2.type = 'sine';
+            osc2.frequency.value = 392.00; // G4
+
+            osc1.connect(gain);
+            osc2.connect(gain);
+
+            osc1.start();
+            osc2.start();
+
+            osc1.stop(ctx.currentTime + 3.0);
+            osc2.stop(ctx.currentTime + 3.0);
+        } catch (e) {}
+
+        alert("🌌 L'Eclissi degli Innamorati è iniziata! 🌌\nIl sole e la luna si fondono nei colori del cuore.");
+    },
+
+    startEclissiBackground() {
+        if (document.getElementById('lex-eclissi-bg')) return;
+        const bgContainer = document.createElement('div');
+        bgContainer.id = 'lex-eclissi-bg';
+        bgContainer.style.pointerEvents = 'none';
+        document.body.appendChild(bgContainer);
+
+        // Pioggia fluttuante di stelle e cuori
+        this.eclissiBgInterval = setInterval(() => {
+            if (this.theme !== 'eclissi') {
+                this.stopEclissiBackground();
+                return;
+            }
+            const el = document.createElement('div');
+            el.className = 'eclissi-bg-element';
+            el.textContent = ['⭐', '❤️', '✨', '💜'][Math.floor(Math.random() * 4)];
+            el.style.left = (Math.random() * 100) + 'vw';
+            el.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            el.style.fontSize = (Math.random() * 0.8 + 0.5) + 'rem';
+            bgContainer.appendChild(el);
+            setTimeout(() => el.remove(), 12000);
+        }, 1200);
+
+        // Scia del mouse orbitante/cadente
+        this.eclissiMouseHandler = (e) => {
+            if (Math.random() > 0.4) return; // limita la densità per performance
+            const trail = document.createElement('div');
+            trail.className = 'eclissi-mouse-trail';
+            trail.textContent = ['✨', '❤️', '⭐'][Math.floor(Math.random() * 3)];
+            
+            // Offset casuale attorno al cursore
+            const angle = Math.random() * Math.PI * 2;
+            const dist = Math.random() * 15;
+            const x = e.clientX + Math.cos(angle) * dist + (window.scrollX || window.pageXOffset);
+            const y = e.clientY + Math.sin(angle) * dist + (window.scrollY || window.pageYOffset);
+            
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+            
+            // Imposta coordinate di traslazione casuali per l'effetto di caduta
+            const dx = (Math.random() * 40 - 20) + 'px';
+            const dy = (Math.random() * 30 - 50) + 'px';
+            trail.style.setProperty('--dx', dx);
+            trail.style.setProperty('--dy', dy);
+
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 1200);
+        };
+        document.addEventListener('mousemove', this.eclissiMouseHandler);
+    },
+
+    stopEclissiBackground() {
+        const bgContainer = document.getElementById('lex-eclissi-bg');
+        if (bgContainer) bgContainer.remove();
+        if (this.eclissiBgInterval) {
+            clearInterval(this.eclissiBgInterval);
+            this.eclissiBgInterval = null;
+        }
+        if (this.eclissiMouseHandler) {
+            document.removeEventListener('mousemove', this.eclissiMouseHandler);
+            this.eclissiMouseHandler = null;
+        }
+    },
+
+    // ── EE #2: Il Messaggio del Naufrago ──
+    triggerMessaggioBottiglia() {
+        if (document.getElementById('lex-bottiglia-container')) return;
+        this.unlockEasterEgg('ee-messaggio-bottiglia');
+
+        const container = document.createElement('div');
+        container.id = 'lex-bottiglia-container';
+        container.className = 'bottiglia-container';
+        container.innerHTML = `
+            <div class="bottiglia-sprite" id="lex-bottiglia-sprite">🏺</div>
+        `;
+        document.body.appendChild(container);
+
+        const sprite = document.getElementById('lex-bottiglia-sprite');
+        sprite.addEventListener('click', () => {
+            container.remove();
+            this.showMessaggioBottigliaLetter();
+        });
+    },
+
+    showMessaggioBottigliaLetter() {
+        if (document.getElementById('lex-bottiglia-letter-overlay')) return;
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-bottiglia-letter-overlay';
+        overlay.className = 'bottiglia-letter-overlay';
+        overlay.innerHTML = `
+            <div class="bottiglia-letter-card">
+                <div class="bottiglia-letter-seal">🏺</div>
+                <div class="bottiglia-letter-title">Frammento d'Amore Naufrago</div>
+                <p class="bottiglia-letter-quote">
+                    "Mi sembra che pari agli dei sia l'uomo che ti siede di fronte, e da vicino ascolta la tua dolce voce e il riso amoroso. Questo fa tremare il mio cuore nel petto: se appena ti guardo, non ho più voce, la lingua si spezza, un fuoco sottile scorre sotto la pelle, gli occhi non vedono più e le orecchie rombano..."
+                </p>
+                <div class="bottiglia-letter-author">— Saffo, Frammento 31 (Riadattato per Alessandra & Alessio)</div>
+                <button class="bottiglia-letter-close" onclick="document.getElementById('lex-bottiglia-letter-overlay').remove()">Riporre l'Anfora</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Effetto sonoro: scala ascendente dolce
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = ctx.createGain();
+            gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.8);
+
+            const freqs = [329.63, 392.00, 523.25, 659.25]; // E4, G4, C5, E5
+            freqs.forEach((f, idx) => {
+                const osc = ctx.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.value = f;
+                osc.connect(gain);
+                osc.start(ctx.currentTime + idx * 0.15);
+                osc.stop(ctx.currentTime + idx * 0.15 + 1.2);
+            });
+        } catch (e) {}
+    },
+
+    // ── EE #3: Il Palinsesto Nascosto (Codicologia) ──
+    initPalinsestoBobbio() {
+        let scratchCount = 0;
+        let lastX = null;
+        let lastDir = 0; // -1 = sinistra, 1 = destra
+        let isMouseDown = false;
+        let scratchStartTime = 0;
+        let targetP = null;
+
+        document.addEventListener('mousedown', (e) => {
+            if (!window.location.pathname.includes('codicologia')) return;
+            const p = e.target.closest('#markdown-view p, .markdown-view p');
+            if (!p) return;
+            isMouseDown = true;
+            scratchCount = 0;
+            scratchStartTime = Date.now();
+            lastX = e.clientX;
+            lastDir = 0;
+            targetP = p;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isMouseDown || !targetP) return;
+            const currentX = e.clientX;
+            if (lastX === null) {
+                lastX = currentX;
+                return;
+            }
+            const dx = currentX - lastX;
+            if (Math.abs(dx) > 12) {
+                const dir = dx > 0 ? 1 : -1;
+                if (lastDir !== 0 && dir !== lastDir) {
+                    scratchCount++;
+                    // Riproduci suono sfregamento/raschiatura
+                    if (scratchCount % 2 === 0) {
+                        this.playRaspingSound();
+                    }
+                    if (scratchCount >= 10 && (Date.now() - scratchStartTime) < 4500) {
+                        this.triggerPalinsestoBobbio(targetP);
+                        isMouseDown = false;
+                        targetP = null;
+                    }
+                }
+                lastDir = dir;
+                lastX = currentX;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isMouseDown = false;
+            targetP = null;
+        });
+    },
+
+    playRaspingSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(90, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(130, ctx.currentTime + 0.1);
+
+            filter.type = 'bandpass';
+            filter.frequency.value = 750;
+            filter.Q.value = 3.0;
+
+            gain.gain.setValueAtTime(0.015, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+
+            osc.start();
+            osc.stop(ctx.currentTime + 0.12);
+        } catch (e) {}
+    },
+
+    playRevealSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = ctx.createGain();
+            gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.5);
+
+            [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
+                const osc = ctx.createOscillator();
+                osc.type = 'triangle';
+                osc.frequency.value = f;
+                osc.connect(gain);
+                osc.start(ctx.currentTime + idx * 0.12);
+                osc.stop(ctx.currentTime + idx * 0.12 + 1.2);
+            });
+        } catch (e) {}
+    },
+
+    triggerPalinsestoBobbio(pElement) {
+        if (pElement.classList.contains('palinsesto-revealed')) return;
+        this.unlockEasterEgg('ee-palinsesto-bobbio');
+        pElement.classList.add('palinsesto-revealed');
+        this.playRevealSound();
+
+        const explanation = document.createElement('div');
+        explanation.className = 'palinsesto-toast';
+        explanation.innerHTML = `
+            <strong>📜 Palinsesto di Bobbio Svelato!</strong><br>
+            <span>Sotto la sintesi moderna risorge un frammento onciale dell'abbazia di San Colombano (Codex Rescriptus).</span>
+        `;
+        document.body.appendChild(explanation);
+        setTimeout(() => explanation.classList.add('visible'), 50);
+        setTimeout(() => {
+            explanation.classList.remove('visible');
+            setTimeout(() => explanation.remove(), 400);
+        }, 5000);
+    },
+
+    // ── EE #4: Il Tarlo del Codice ──
+    initTarloWatcher() {
+        const path = window.location.pathname;
+        const isStudyPage = ['codicologia', 'diritto', 'storia', 'cristiana', 'cultura_greca', 'geografia', 'inglese', 'letteratura', 'restauro', 'museologia', 'storia_arte', 'arte_romana', 'arte_medievale', 'arte_contemporanea', 'storia_contemporanea', 'storia_medievale'].some(s => path.includes(s));
+        if (!isStudyPage) return;
+
+        let inactivityTimer = null;
+        const resetTimer = () => {
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                this.triggerTarloBiblioteca();
+            }, 3 * 60 * 1000); // 3 minuti
+        };
+
+        document.addEventListener('mousemove', resetTimer);
+        document.addEventListener('keydown', resetTimer);
+        document.addEventListener('click', resetTimer);
+        document.addEventListener('scroll', resetTimer);
+
+        resetTimer();
+    },
+
+    playRosicchiamentoSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = ctx.createGain();
+            gain.connect(ctx.destination);
+
+            for (let i = 0; i < 10; i++) {
+                const t = ctx.currentTime + i * 0.22 + Math.random() * 0.04;
+                const osc = ctx.createOscillator();
+                const oscGain = ctx.createGain();
+
+                osc.connect(oscGain);
+                oscGain.connect(gain);
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(160, t);
+                osc.frequency.exponentialRampToValueAtTime(25, t + 0.1);
+
+                oscGain.gain.setValueAtTime(0, t);
+                oscGain.gain.linearRampToValueAtTime(0.03, t + 0.02);
+                oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+
+                osc.start(t);
+                osc.stop(t + 0.1);
+            }
+        } catch (e) {}
+    },
+
+    triggerTarloBiblioteca() {
+        if (document.getElementById('lex-tarlo-overlay')) return;
+        this.unlockEasterEgg('ee-tarlo-biblioteca');
+        this.playRosicchiamentoSound();
+
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-tarlo-overlay';
+        overlay.className = 'tarlo-overlay';
+        overlay.innerHTML = `
+            <div class="tarlo-bite-hole"></div>
+            <div class="tarlo-bug">🐛</div>
+            <div class="tarlo-balloon">"Mmm... questo capitolo era davvero squisito!"</div>
+            <button class="tarlo-close" onclick="document.getElementById('lex-tarlo-overlay').remove()">Scacciare il Tarlo</button>
+        `;
+        document.body.appendChild(overlay);
+    },
+
+    // ── EE #5: La Caverna di Platone (Filosofia) ──
+    initCavernaPlatoneWatcher() {
+        document.addEventListener('selectionchange', () => {
+            if (!window.location.pathname.includes('filosofia')) return;
+            if (this.theme !== 'dark') return;
+
+            const sel = window.getSelection()?.toString().trim().toLowerCase();
+            if (sel === 'caverna' || sel === 'ombra') {
+                this.triggerCavernaPlatone();
+            }
+        });
+    },
+
+    triggerCavernaPlatone() {
+        if (document.getElementById('lex-caverna-overlay')) return;
+        this.unlockEasterEgg('ee-caverna-platone');
+
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-caverna-overlay';
+        overlay.className = 'caverna-overlay';
+        overlay.innerHTML = `
+            <div class="caverna-shadow-elements">
+                <span class="caverna-shadow shadow-1">🏺</span>
+                <span class="caverna-shadow shadow-2">👑</span>
+                <span class="caverna-shadow shadow-3">👥</span>
+                <span class="caverna-shadow shadow-4">🐎</span>
+                <span class="caverna-quote">"E se uno fosse costretto a guardare la luce stessa..." — Platone, Repubblica</span>
+            </div>
+            <button class="caverna-close" onclick="document.getElementById('lex-caverna-overlay').remove()">Uscire dalla Caverna</button>
+        `;
+        document.body.appendChild(overlay);
+
+        const moveHandler = (e) => {
+            overlay.style.setProperty('--x', `${e.clientX}px`);
+            overlay.style.setProperty('--y', `${e.clientY}px`);
+        };
+        document.addEventListener('mousemove', moveHandler);
+
+        // Auto-cleanup del mousemove quando viene chiuso l'overlay
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((m) => {
+                m.removedNodes.forEach((node) => {
+                    if (node.id === 'lex-caverna-overlay') {
+                        document.removeEventListener('mousemove', moveHandler);
+                        observer.disconnect();
+                    }
+                });
+            });
+        });
+        observer.observe(document.body, { childList: true });
+
+        // Suono eco di caverna
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = ctx.createGain();
+            gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.5);
+
+            const osc = ctx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(105, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(75, ctx.currentTime + 2.5);
+            osc.connect(gain);
+            osc.start();
+            osc.stop(ctx.currentTime + 2.5);
+        } catch (e) {}
+    },
+
+    // ── EE #6: Lo Scavo Archeologico (Archeologia) ──
+    initStratigrafiaWatcher() {
+        let bottomScrollCount = 0;
+        let lastScrollTime = 0;
+
+        window.addEventListener('wheel', (e) => {
+            // Verifica se siamo vicini al fondo della pagina
+            const isBottom = (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 25);
+            if (!isBottom) return;
+
+            if (e.deltaY > 0) {
+                const now = Date.now();
+                if (now - lastScrollTime < 1500) {
+                    bottomScrollCount++;
+                } else {
+                    bottomScrollCount = 1;
+                }
+                lastScrollTime = now;
+
+                if (bottomScrollCount >= 5) {
+                    bottomScrollCount = 0;
+                    this.triggerStratigrafia();
+                }
+            }
+        }, { passive: true });
+
+        // Supporto touch per mobile
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            const isBottom = (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 25);
+            if (!isBottom) return;
+
+            const touchEndY = e.touches[0].clientY;
+            if (touchStartY - touchEndY > 60) { // scorrimento verso il basso (swipe up)
+                const now = Date.now();
+                if (now - lastScrollTime < 1500) {
+                    bottomScrollCount++;
+                } else {
+                    bottomScrollCount = 1;
+                }
+                lastScrollTime = now;
+
+                if (bottomScrollCount >= 5) {
+                    bottomScrollCount = 0;
+                    this.triggerStratigrafia();
+                }
+            }
+        }, { passive: true });
+    },
+
+    triggerStratigrafia() {
+        if (document.getElementById('lex-stratigrafia-drawer')) return;
+        this.unlockEasterEgg('ee-stratigrafia');
+
+        // Effetto terremoto sullo schermo
+        document.body.classList.add('lex-earthquake');
+        setTimeout(() => document.body.classList.remove('lex-earthquake'), 900);
+
+        // Suono ciottoli / sassi che cadono
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = ctx.createGain();
+            gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+
+            for (let i = 0; i < 5; i++) {
+                const osc = ctx.createOscillator();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(45 + Math.random() * 25, ctx.currentTime + i * 0.12);
+                osc.connect(gain);
+                osc.start(ctx.currentTime + i * 0.12);
+                osc.stop(ctx.currentTime + i * 0.12 + 0.25);
+            }
+        } catch (e) {}
+
+        const drawer = document.createElement('div');
+        drawer.id = 'lex-stratigrafia-drawer';
+        drawer.className = 'stratigrafia-drawer';
+        drawer.innerHTML = `
+            <div class="stratigrafia-header">
+                <h3>⛏️ Livello Stratigrafico I — Archeologia Romana</h3>
+                <button class="stratigrafia-close-btn" onclick="document.getElementById('lex-stratigrafia-drawer').remove()">Chiudi Scavo</button>
+            </div>
+            <div class="stratigrafia-body">
+                <p style="font-size:0.85rem; margin-bottom:0.5rem;">Usa il cursore (mouse/dito) come spazzola per rimuovere la terra e svelare il reperto:</p>
+                <div class="stratigrafia-canvas-container">
+                    <canvas id="stratigrafia-scratch-canvas" width="300" height="200"></canvas>
+                    <div class="stratigrafia-treasure">
+                        <div class="mosaic-tile">🏺</div>
+                        <div class="mosaic-title">Vaso di Vetro Romano (IV d.C.)</div>
+                        <div class="mosaic-sub">Reperto riportato alla luce!</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(drawer);
+
+        // Inizializza scratch canvas dopo il caricamento nel DOM
+        setTimeout(() => {
+            const canvas = document.getElementById('stratigrafia-scratch-canvas');
+            if (!canvas) return;
+            const sctx = canvas.getContext('2d');
+
+            // Colore terra di base
+            sctx.fillStyle = '#654321';
+            sctx.fillRect(0, 0, 300, 200);
+
+            // Aggiunge granelli/trama
+            sctx.fillStyle = '#4a2f13';
+            for (let i = 0; i < 35; i++) {
+                sctx.fillRect(Math.random() * 300, Math.random() * 200, 4, 4);
+            }
+
+            let isDrawing = false;
+            const scratch = (clientX, clientY) => {
+                const rect = canvas.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+
+                sctx.globalCompositeOperation = 'destination-out';
+                sctx.beginPath();
+                sctx.arc(x, y, 22, 0, Math.PI * 2);
+                sctx.fill();
+
+                // Suono leggero spazzolamento casuale
+                if (Math.random() > 0.88) {
+                    try {
+                        const actx = new (window.AudioContext || window.webkitAudioContext)();
+                        const osc = actx.createOscillator();
+                        const gn = actx.createGain();
+                        osc.connect(gn); gn.connect(actx.destination);
+                        osc.frequency.setValueAtTime(250, actx.currentTime);
+                        gn.gain.setValueAtTime(0.008, actx.currentTime);
+                        gn.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.08);
+                        osc.start(); osc.stop(actx.currentTime + 0.08);
+                    } catch (err) {}
+                }
+            };
+
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                scratch(e.clientX, e.clientY);
+            });
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDrawing) scratch(e.clientX, e.clientY);
+            });
+            window.addEventListener('mouseup', () => isDrawing = false);
+
+            // Touch
+            canvas.addEventListener('touchstart', (e) => {
+                isDrawing = true;
+                scratch(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+            canvas.addEventListener('touchmove', (e) => {
+                if (isDrawing) scratch(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+        }, 150);
+    },
+
+    // ── EE #7: L'Eresia Giuridica ──
+    initDamnatioMemoriaeQuizWatcher() {
+        document.addEventListener('keydown', (e) => {
+            if (!window.location.pathname.includes('exam.html')) return;
+            
+            // Verifica combinazione Ctrl + Shift + X
+            if (e.ctrlKey && e.shiftKey && (e.key === 'x' || e.key === 'X' || e.keyCode === 88)) {
+                e.preventDefault();
+                if (typeof examQuestions !== 'undefined' && typeof currentQuestionIndex !== 'undefined') {
+                    const q = examQuestions[currentQuestionIndex];
+                    if (q && q.subject === 'diritto') {
+                        this.triggerDamnatioMemoriaeQuiz();
+                    }
+                }
+            }
+        });
+    },
+
+    triggerDamnatioMemoriaeQuiz() {
+        this.unlockEasterEgg('ee-damnatio-memoriae-quiz');
+
+        const qText = document.getElementById('exam-question-text');
+        const opts = document.getElementById('exam-options-container');
+        if (!qText || !opts) return;
+
+        qText.classList.add('damnatio-censored');
+        const optionBtns = opts.querySelectorAll('.exam-option-btn');
+        optionBtns.forEach(btn => btn.classList.add('damnatio-censored'));
+
+        // Crea ed inserisce a schermo il timbro rosso reale "PROHIBITUM"
+        const stamp = document.createElement('div');
+        stamp.className = 'prohibitum-stamp-popup';
+        stamp.textContent = 'PROHIBITUM';
+        
+        const activeScreen = document.getElementById('exam-active-screen');
+        if (activeScreen) {
+            activeScreen.appendChild(stamp);
+        } else {
+            document.body.appendChild(stamp);
+        }
+
+        // Suono di timbratura/tonfo e buzzer
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = ctx.createGain();
+            gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(0.25, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+
+            const osc = ctx.createOscillator();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(115, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(55, ctx.currentTime + 0.45);
+
+            osc.connect(gain);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.45);
+        } catch (e) {}
+
+        setTimeout(() => stamp.classList.add('visible'), 50);
+
+        // Imposta la risposta corrente come corretta modificando la variabile globale del quiz
+        if (typeof examQuestions !== 'undefined' && typeof currentQuestionIndex !== 'undefined') {
+            const q = examQuestions[currentQuestionIndex];
+            if (q && typeof selectedOptionIdx !== 'undefined') {
+                selectedOptionIdx = q.correctIndex;
+            }
+        }
+
+        // Rimuove la censura e invia la risposta automatica dopo 2.5 secondi
+        setTimeout(() => {
+            stamp.remove();
+            qText.classList.remove('damnatio-censored');
+            optionBtns.forEach(btn => btn.classList.remove('damnatio-censored'));
+            if (typeof submitAnswer === 'function') {
+                submitAnswer();
+            }
+        }, 2500);
     },
 
     // --- ACTIVITY LOG HELPER FOR HEATMAP ---

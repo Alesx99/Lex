@@ -55,6 +55,16 @@ I segreti sono divisi in tre categorie tematiche principali. Di seguito trovi la
 * **Indizio:** Il Pomodoro nasconde qualcosa di ludico nelle sue pause...
 * **Metodo di sblocco:** Apri la barra laterale del Pomodoro Timer e avvia il timer. Nelle impostazioni o durante la pausa troverai il mini-gioco del Memory da risolvere.
 
+#### 🔓 ee-eclissi-tema — L'Eclissi degli Innamorati
+* **Indizio:** Quando il Sole e la Luna si fondono, il cielo si tinge dei colori del cuore.
+* **Metodo di sblocco:** Tieni premuto il pulsante di cambio tema (Sole/Luna) per 3 secondi consecutivi, oppure fai doppio clic tenendo premuto il tasto `A` (di Alessandra) sulla tastiera.
+- **Effetto:** Attiva il tema scuro/viola/rosa pastello Eclissi, avvia una pioggia di cuori/stelle cadenti, un effetto scia orbitante al mouse e riproduce un accordo melodico consonante (quinta).
+
+#### 🔓 ee-messaggio-bottiglia — Il Messaggio del Naufrago
+* **Indizio:** Un antico frammento d'amore fluttua nel mare delle connessioni concettuali...
+* **Metodo di sblocco:** Nella mappa Connections (`connections.html`), posiziona i nodi "Alessio" (o "Lex") e "Alessandra" ai lati opposti dello schermo e collegali direttamente.
+- **Effetto:** Un'anfora greca fluttua in acqua sullo sfondo. Cliccandola, si apre una pergamena con un frammento di Saffo riadattato.
+
 ---
 
 ### 2. Categoria: Scriptorium (Segreti dell'Ammanuense)
@@ -97,8 +107,18 @@ I segreti sono divisi in tre categorie tematiche principali. Di seguito trovi la
 
 #### 🔓 ee-cronista-scriptorium — Il Cronista dello Scriptorium
 * **Indizio:** Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.
-* **Metodo di sblocco:** Apri il **Changelog** nel footer, e fai click **5 volte consecutive** sul numero di versione **`v2.2.0 (Attuale)`**.
+* **Metodo di sblocco:** Apri il **Changelog** nel footer, e fai click **5 volte consecutive** sul numero di versione **`v2.3.0 (Attuale)`**.
 - **Effetto:** Sblocca l'achievement segreto dell'archivista e riproduce un feedback sonoro di successo.
+
+#### 🔓 ee-palinsesto-bobbio — Il Palinsesto Nascosto
+* **Indizio:** Sotto le parole moderne giace la sapienza antica. Raschia via il presente per rivelare il passato.
+* **Metodo di sblocco:** Nelle sintesi di Codicologia, fai clic e trascina il mouse avanti e indietro velocemente (effetto "sfregamento") sopra un paragrafo di testo.
+- **Effetto:** Riproduce un suono di sfregamento e dissolve il testo moderno rivelando un'antica pergamena con una scrittura onciale dorata e un suono di chime celestiale.
+
+#### 🔓 ee-tarlo-biblioteca — Il Tarlo del Codice
+* **Indizio:** Se lasci la pergamena incustodita troppo a lungo, qualcuno farà merenda nel silenzio della biblioteca...
+* **Metodo di sblocco:** Rimani completamente inattivo per esattamente 3 minuti su una sintesi di qualsiasi materia.
+- **Effetto:** Si sente un rumore di rosicchiamento, appare un buco nero circolare in un punto a caso con un simpatico bruco animato che commenta il capitolo.
 
 ---
 
@@ -164,3 +184,19 @@ I segreti sono divisi in tre categorie tematiche principali. Di seguito trovi la
 * **Indizio:** Un badge che non compare nella lista... esiste solo per i più completi.
 * **Metodo di sblocco:** Completa e sblocca almeno **15 sidequest/achievement ordinari** nella pagina Traguardi.
 - **Effetto:** Viene sbloccato l'ultimo e più importante trofeo segreto, che ti incorona guardiano e custode della memoria accademica del portale.
+
+#### 🔓 ee-caverna-platone — La Caverna di Platone (🧠 Filosofia)
+* **Indizio:** Ciò che vedi è solo un'ombra. Spegni le luci della ragione e cerca la verità nella roccia.
+* **Metodo di sblocco:** Nella sintesi di Filosofia, con il tema Scuro attivo, seleziona la parola "Caverna" o "Ombra".
+- **Effetto:** Lo schermo si oscura con un gradiente "torcia" che segue il cursore, rivelando ombre cinesi di oggetti classici e una citazione luminosa di Platone.
+
+#### 🔓 ee-stratigrafia — Lo Scavo Archeologico (🏺 Archeologia)
+* **Indizio:** La conoscenza è stratificata. Scava oltre i limiti della pagina per trovare il passato.
+* **Metodo di sblocco:** Esegui uno scorrimento (overscroll) continuo verso il basso a fondo pagina per 5 volte consecutive.
+- **Effetto:** La pagina trema con rumore di pietre e si alza un drawer dal fondo contenente uno scavo interattivo: l'utente spazzola via la terra per svelare un vaso romano.
+
+#### 🔓 ee-damnatio-memoriae-quiz — L'Eresia Giuridica (⚖️ Diritto)
+* **Indizio:** Certe eresie giuridiche non meritano risposta, solo l'oblio della censura.
+* **Metodo di sblocco:** Nel simulatore d'esame (`exam.html`), in una domanda di Diritto, premi la combinazione `Ctrl + Shift + X`.
+- **Effetto:** Domanda e risposte vengono censurate in nero. Appare un timbro rosso "PROHIBITUM" con suono di impatto e la domanda viene considerata automaticamente corretta per superare il quiz.
+
