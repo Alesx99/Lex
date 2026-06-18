@@ -3343,6 +3343,11 @@ const LexCore = {
 
     // ── EE-INK-BLOT: Macchia di inchiostro ───────────────────────────
     initBackgroundInkBlot() {
+        const page = window.location.pathname.split('/').pop() || 'index.html';
+        if (['minigames.html', 'exam.html', 'flashcards.html', 'connections.html', 'timeline.html', 'achievements.html', 'index.html', 'easter_eggs.html', 'segreti.html', 'prohibited.html'].includes(page) || window.location.pathname === '/') {
+            return;
+        }
+
         let clicks = 0;
         let lastClickTime = 0;
         document.addEventListener('click', (e) => {
