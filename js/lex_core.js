@@ -60,6 +60,8 @@ const LexCore = {
         this.injectUpdateButtons();
         this.injectFooterSecretLink();
         this.injectFooterChangelogLink();
+        this.injectFooterCodexLink();
+        this.injectXPBar();
 
         // Track visited pages for achievements
         try {
@@ -1953,6 +1955,15 @@ const LexCore = {
                 originalOpenSummary(title, path);
                 setTimeout(() => {
                     LexCore.initAdvancedStudyTools(title, path);
+                    // Award XP for opening chapter summary
+                    try {
+                        let openedXP = JSON.parse(localStorage.getItem('lex-opened-chapters-xp') || '[]');
+                        if (!openedXP.includes(path)) {
+                            openedXP.push(path);
+                            localStorage.setItem('lex-opened-chapters-xp', JSON.stringify(openedXP));
+                            LexCore.awardXP(10);
+                        }
+                    } catch(e){}
                 }, 150);
             };
         }
@@ -2540,10 +2551,24 @@ const LexCore = {
                     <button class="changelog-modal-close" onclick="document.getElementById('changelog-modal').remove()">&times;</button>
                 </div>
                 <div class="changelog-modal-body">
+                    <!-- Version 2.6.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.6.0 (Attuale)</span>
+                            <span class="changelog-version-date">18 Giugno 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Strumenti di Studio Avanzati & Cursus Honorum:</strong> Rilascio del sistema di XP e Livelli (7 Ranghi Accademici) con barra di progresso e animazione di Level-Up.</li>
+                            <li><strong>Miglioramenti Feature Esistenti:</strong> Integrazione SRS (SuperMemo-2) nelle Flashcards; Streak Badge nella barra degli strumenti; Generatore automatico di connessioni nella Mappa Trans-disciplinare basato sul glossario.</li>
+                            <li><strong>Strumenti nel Modal:</strong> Tecnica Feynman ("Spiega al Monaco") con valutazione a stelle e rilevamento concetti chiave; Active Recall ("Il Quaesitor") con interruzioni di lettura mirate e ripasso automatico.</li>
+                            <li><strong>Pagine e Strumenti Globali:</strong> Condensatore di Sintesi 3-tab ("L'Arte del Compendio"), Diario dello Studioso ("Codex Personalis") con statistiche di scrittura, Esportazione del Pacchetto Studio (📦), Speed Review ("Scriptura Veloce") a tempo con classifica, e Trova l'Errore ("L'Eresiarca") con parole cliccabili.</li>
+                        </ul>
+                    </div>
+
                     <!-- Version 2.5.0 -->
                     <div class="changelog-version-block">
                         <div class="changelog-version-header">
-                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.5.0 (Attuale)</span>
+                            <span class="changelog-version-num">v2.5.0</span>
                             <span class="changelog-version-date">18 Giugno 2026</span>
                         </div>
                         <ul class="changelog-version-list">
@@ -4725,7 +4750,41 @@ const LexCore = {
             }
         }
 
+        // Dynamically inject Export Package button next to print button in header
+        const modalControls = header.querySelector('.modal-controls');
+        if (modalControls && !modalControls.querySelector('#lex-btn-export-pkg')) {
+            const printBtn = modalControls.querySelector('button[onclick*="window.print"]');
+            const exportBtn = document.createElement('button');
+            exportBtn.id = 'lex-btn-export-pkg';
+            exportBtn.className = 'modal-close';
+            exportBtn.title = 'Esporta Pacchetto Studio Standalone';
+            exportBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            `;
+            exportBtn.onclick = () => loadAndExecute((md) => this.showExportPackage(title, md, filePath));
+            if (printBtn) {
+                printBtn.before(exportBtn);
+            } else {
+                modalControls.prepend(exportBtn);
+            }
+        }
+
+        // Streak & study time info
+        let streak = 0;
+        let minutes = 0;
+        try {
+            const todayStr = new Date().toISOString().split('T')[0];
+            streak = parseInt(localStorage.getItem('lex-study-streak') || '0');
+            const dailyLog = JSON.parse(localStorage.getItem('lex-study-daily-log') || '{}');
+            minutes = Math.floor((dailyLog[todayStr] || 0) / 60);
+        } catch(e) {}
+
         container.innerHTML = `
+            <div class="lex-streak-badge-container" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.75rem; font-weight:bold; color:#d4af37; background:rgba(212,175,55,0.05); padding:3px 8px; border-radius:99px; border:1px solid rgba(212,175,55,0.15); margin-right: 0.5rem;">
+                <span title="Giorni consecutivi di studio">🔥 <span id="lex-streak-badge-days">${streak}</span>d</span>
+                <span style="color:rgba(255,255,255,0.3)">|</span>
+                <span title="Tempo di studio oggi">⏱️ <span id="lex-streak-badge-time">${minutes}</span>m</span>
+            </div>
             <button class="lex-study-tool-btn" data-tooltip="Mappa Concettuale" id="lex-btn-mindmap">
                 <svg viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM18 8H6M18 16H6"/></svg>
             </button>
@@ -4741,15 +4800,46 @@ const LexCore = {
             <button class="lex-study-tool-btn" data-tooltip="Pomodoro Scriptorium" id="lex-btn-pomodoro">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H7M17 19H7M12 2a5 5 0 0 0-5 5v3c0 2 2 4 5 4s5-2 5-4V7a5 5 0 0 0-5-5zM12 22a5 5 0 0 1-5-5v-3c0-2 2-4 5-4s5 2 5 4v3a5 5 0 0 1-5 5z"/></svg>
             </button>
-            <button class="lex-study-tool-btn" data-tooltip="Test Riempi Spazi" id="lex-btn-cloze">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="10" y1="17" x2="8" y2="17"/></svg>
-            </button>
             <button class="lex-study-tool-btn" data-tooltip="Studio Comparativo" id="lex-btn-splitscreen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
             </button>
-            <button class="lex-study-tool-btn" data-tooltip="Concept Matcher" id="lex-btn-matcher">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 21H3v-5M12 12m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0M21 3L14 10M3 21l7-7"/></svg>
-            </button>
+
+            <!-- Dropdown Altri Strumenti -->
+            <div class="lex-study-tools-dropdown-container" id="lex-tools-dropdown-container">
+                <button class="lex-study-tool-btn" data-tooltip="Altri Strumenti" id="lex-btn-dropdown-trigger">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h3a2 2 0 0 1 2 2zM7 7h10V5H7z"/></svg>
+                </button>
+                <div class="lex-study-tools-dropdown-menu" id="lex-tools-dropdown-menu">
+                    <button class="lex-study-dropdown-item" id="lex-btn-cloze">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="10" y1="17" x2="8" y2="17"/></svg>
+                        Test Riempi Spazi
+                    </button>
+                    <button class="lex-study-dropdown-item" id="lex-btn-matcher">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 21H3v-5M12 12m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0M21 3L14 10M3 21l7-7"/></svg>
+                        Concept Matcher
+                    </button>
+                    <button class="lex-study-dropdown-item" id="lex-btn-feynman">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        Spiega al Monaco
+                    </button>
+                    <button class="lex-study-dropdown-item" id="lex-btn-quaesitor">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+                        Il Quaesitor
+                    </button>
+                    <button class="lex-study-dropdown-item" id="lex-btn-condensatore">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        Arte del Compendio
+                    </button>
+                    <button class="lex-study-dropdown-item" id="lex-btn-speedreview">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        Scriptura Veloce
+                    </button>
+                    <button class="lex-study-dropdown-item" id="lex-btn-trovaerrore">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Trova l'Errore
+                    </button>
+                </div>
+            </div>
         `;
 
         const loadAndExecute = (action) => {
@@ -4776,14 +4866,43 @@ const LexCore = {
             }
         };
 
+        // Click handlers for visible buttons
         container.querySelector('#lex-btn-mindmap').onclick = () => loadAndExecute((md) => this.showMindMapOverlay(title, md));
         container.querySelector('#lex-btn-vocal').onclick = () => loadAndExecute((md) => this.showVocalExaminerOverlay(title, md));
         container.querySelector('#lex-btn-flashcards').onclick = () => loadAndExecute((md) => this.showFlashcardsOverlay(title, md));
         container.querySelector('#lex-btn-glossary').onclick = () => loadAndExecute((md) => this.showGlossarySidebar(title, md));
         container.querySelector('#lex-btn-pomodoro').onclick = () => loadAndExecute((md) => this.showPomodoroOverlay(title, md));
-        container.querySelector('#lex-btn-cloze').onclick = () => loadAndExecute((md) => this.showClozeTestOverlay(title, md));
         container.querySelector('#lex-btn-splitscreen').onclick = () => loadAndExecute((md) => this.showSplitScreenOverlay(title, md));
+
+        // Click handlers for dropdown elements
+        container.querySelector('#lex-btn-cloze').onclick = () => loadAndExecute((md) => this.showClozeTestOverlay(title, md));
         container.querySelector('#lex-btn-matcher').onclick = () => loadAndExecute((md) => this.showConceptMatcherOverlay(title, md));
+        container.querySelector('#lex-btn-feynman').onclick = () => loadAndExecute((md) => this.showFeynmanOverlay(title, md));
+        container.querySelector('#lex-btn-quaesitor').onclick = () => this.toggleQuaesitor();
+        container.querySelector('#lex-btn-condensatore').onclick = () => loadAndExecute((md) => this.showCondensatoreOverlay(title, md));
+        container.querySelector('#lex-btn-speedreview').onclick = () => loadAndExecute((md) => this.showSpeedReviewOverlay(title, md));
+        container.querySelector('#lex-btn-trovaerrore').onclick = () => loadAndExecute((md) => this.showTrovaErroreOverlay(title, md));
+
+        // Toggle dropdown logic
+        const dropdown = container.querySelector('#lex-tools-dropdown-container');
+        const trigger = container.querySelector('#lex-btn-dropdown-trigger');
+        trigger.onclick = (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+        };
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('open');
+        });
+        container.querySelectorAll('.lex-study-dropdown-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+                dropdown.classList.remove('open');
+            });
+        });
+
+        // Toggle state styling for Quaesitor if active
+        if (this.quaesitorActive) {
+            container.querySelector('#lex-btn-quaesitor').classList.add('lex-active-tool-highlight');
+        }
 
         setTimeout(() => {
             const inlineTerms = document.querySelectorAll('.glossary-term');
@@ -4859,15 +4978,26 @@ const LexCore = {
                     this.pomodoroAudioCtx = null;
                 }
             }
+            if (id === 'speedreview-tool-overlay') {
+                if (this.speedReviewTimer) clearInterval(this.speedReviewTimer);
+                if (this.speedReviewGameTimer) clearInterval(this.speedReviewGameTimer);
+            }
         }
     },
 
     closeAllStudyTools() {
-        ['mindmap-tool-overlay', 'vocal-tool-overlay', 'flashcard-tool-overlay', 'pomodoro-tool-overlay', 'cloze-tool-overlay', 'splitscreen-tool-overlay', 'matcher-tool-overlay'].forEach(id => {
+        ['mindmap-tool-overlay', 'vocal-tool-overlay', 'flashcard-tool-overlay', 'pomodoro-tool-overlay', 'cloze-tool-overlay', 'splitscreen-tool-overlay', 'matcher-tool-overlay', 'feynman-tool-overlay', 'condensatore-tool-overlay', 'speedreview-tool-overlay', 'trovaerrore-tool-overlay'].forEach(id => {
             this.closeStudyTool(id);
         });
         const sidebar = document.getElementById('lex-glossary-sidebar');
         if (sidebar) sidebar.classList.remove('open');
+
+        if (this.quaesitorActive) {
+            this.quaesitorActive = false;
+            if (this.quaesitorTimer) clearTimeout(this.quaesitorTimer);
+            const btn = document.getElementById('lex-btn-quaesitor');
+            if (btn) btn.classList.remove('lex-active-tool-highlight');
+        }
     },
 
     showMindMapOverlay(title, md) {
@@ -5478,14 +5608,18 @@ const LexCore = {
                     </div>
                 </div>
                 
-                <div class="flashcard-status-actions" id="flashcard-status-actions" style="visibility:hidden;">
-                    <button class="flashcard-status-btn dont-know" id="fc-dont-know-btn">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        Non lo so
+                <div class="flashcard-status-actions" id="flashcard-status-actions" style="visibility:hidden; display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
+                    <button class="flashcard-status-btn dont-know" id="fc-btn-srs-1" style="background:rgba(239,68,68,0.1); color:#ef4444; border:1px solid rgba(239,68,68,0.2); padding:6px 12px; font-size:0.75rem;">
+                        Di Nuovo
                     </button>
-                    <button class="flashcard-status-btn know" id="fc-know-btn" style="background:rgba(34,197,94,0.1); color:#4ade80; border:1px solid rgba(34,197,94,0.2)">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Lo so!
+                    <button class="flashcard-status-btn hard" id="fc-btn-srs-3" style="background:rgba(245,158,11,0.1); color:#f59e0b; border:1px solid rgba(245,158,11,0.2); padding:6px 12px; font-size:0.75rem;">
+                        Difficile
+                    </button>
+                    <button class="flashcard-status-btn good" id="fc-btn-srs-4" style="background:rgba(59,130,246,0.1); color:#3b82f6; border:1px solid rgba(59,130,246,0.2); padding:6px 12px; font-size:0.75rem;">
+                        Bene
+                    </button>
+                    <button class="flashcard-status-btn easy" id="fc-btn-srs-5" style="background:rgba(34,197,94,0.1); color:#4ade80; border:1px solid rgba(34,197,94,0.2); padding:6px 12px; font-size:0.75rem;">
+                        Facile
                     </button>
                 </div>
 
@@ -5511,8 +5645,10 @@ const LexCore = {
         const prevBtn = body.querySelector('#fc-prev-btn');
         const nextBtn = body.querySelector('#fc-next-btn');
         const counter = body.querySelector('#fc-counter');
-        const knowBtn = body.querySelector('#fc-know-btn');
-        const dontKnowBtn = body.querySelector('#fc-dont-know-btn');
+        const srsBtn1 = body.querySelector('#fc-btn-srs-1');
+        const srsBtn3 = body.querySelector('#fc-btn-srs-3');
+        const srsBtn4 = body.querySelector('#fc-btn-srs-4');
+        const srsBtn5 = body.querySelector('#fc-btn-srs-5');
 
         let currentIndex = 0;
 
@@ -5553,24 +5689,64 @@ const LexCore = {
             }
         };
 
-        const handleSRS = (known) => {
-            let completed = parseInt(localStorage.getItem('lex-flashcards-completed') || '0');
-            localStorage.setItem('lex-flashcards-completed', (completed + 1).toString());
-
-            if (known) {
-                this.showNotification("Memorizzato!", "La scheda è stata inserita nel ripasso programmato.");
+        const handleSRS = (quality) => {
+            const currentCard = cards[currentIndex];
+            
+            const defaultState = {
+                interval: 0,
+                repetition: 0,
+                efactor: 2.5,
+                dueDate: 0
+            };
+            let srs = defaultState;
+            try {
+                const stored = localStorage.getItem('lex-srs-' + currentCard.id);
+                srs = stored ? JSON.parse(stored) : defaultState;
+            } catch(e){}
+            
+            if (quality < 3) {
+                srs.repetition = 0;
+                srs.interval = 1;
+            } else {
+                if (srs.repetition === 0) {
+                    srs.interval = 1;
+                } else if (srs.repetition === 1) {
+                    srs.interval = 3;
+                } else {
+                    srs.interval = Math.ceil(srs.interval * srs.efactor);
+                }
+                srs.repetition++;
             }
+            
+            srs.efactor = srs.efactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+            if (srs.efactor < 1.3) srs.efactor = 1.3;
+            
+            srs.dueDate = Date.now() + srs.interval * 24 * 60 * 60 * 1000;
+            
+            try {
+                localStorage.setItem('lex-srs-' + currentCard.id, JSON.stringify(srs));
+                let completed = parseInt(localStorage.getItem('lex-flashcards-completed') || '0');
+                localStorage.setItem('lex-flashcards-completed', (completed + 1).toString());
+            } catch(e){}
+            
+            this.awardXP(3);
+
+            this.showNotification("Registrato!", `Ripasso programmato tra ${srs.interval} giorni.`);
 
             if (currentIndex < cards.length - 1) {
                 setTimeout(() => {
                     currentIndex++;
                     updateCard();
-                }, 300);
+                }, 400);
+            } else {
+                this.showNotification("Mazzo Completato!", "Ottimo! Hai completato le flashcard di questo capitolo.");
             }
         };
 
-        knowBtn.onclick = (e) => { e.stopPropagation(); handleSRS(true); };
-        dontKnowBtn.onclick = (e) => { e.stopPropagation(); handleSRS(false); };
+        srsBtn1.onclick = (e) => { e.stopPropagation(); handleSRS(1); };
+        srsBtn3.onclick = (e) => { e.stopPropagation(); handleSRS(3); };
+        srsBtn4.onclick = (e) => { e.stopPropagation(); handleSRS(4); };
+        srsBtn5.onclick = (e) => { e.stopPropagation(); handleSRS(5); };
 
         updateCard();
     },
@@ -5841,6 +6017,7 @@ const LexCore = {
                         
                         if (this.pomodoroState === 'running') {
                             this.showNotification('Pomodoro Completato', 'Ottimo lavoro! Ora è tempo di fare una meritata pausa.');
+                            this.awardXP(25);
                             this.pomodoroState = 'break';
                             this.pomodoroTimeLeft = this.pomodoroBreakTime;
                             this.pomodoroTotalDuration = this.pomodoroBreakTime;
@@ -5968,6 +6145,7 @@ const LexCore = {
                             🎉 Complimenti! Hai completato l'esercizio con successo!
                         </div>
                     `;
+                    this.awardXP(15);
                 }
             } else {
                 blank.classList.add('shake');
@@ -6240,6 +6418,7 @@ const LexCore = {
                                 🎉 Fantastico! Hai accoppiato correttamente tutti i termini!
                             </div>
                         `;
+                        this.awardXP(20);
                     }
                 } else {
                     selectedLeftCard.classList.add('shake');
@@ -6684,7 +6863,1323 @@ const LexCore = {
             ctx.bezierCurveTo(baseX + 4, flameY - 18, baseX + 4, flameY - 4, baseX, flameY);
             ctx.fill();
         }
-    }
+    },
+
+    getLevelInfo(xp) {
+        const levels = [
+            { level: 1, name: "Novizio", icon: "📜", threshold: 0 },
+            { level: 2, name: "Copista", icon: "✒️", threshold: 100 },
+            { level: 3, name: "Amanuense", icon: "📖", threshold: 300 },
+            { level: 4, name: "Scriba", icon: "🪶", threshold: 600 },
+            { level: 5, name: "Magister", icon: "📚", threshold: 1200 },
+            { level: 6, name: "Doctor", icon: "🎓", threshold: 2500 },
+            { level: 7, name: "Doctor Universalis", icon: "👑", threshold: 5000 }
+        ];
+        let current = levels[0];
+        let next = null;
+        for (let i = 0; i < levels.length; i++) {
+            if (xp >= levels[i].threshold) {
+                current = levels[i];
+                next = levels[i + 1] || null;
+            } else {
+                break;
+            }
+        }
+        return { current, next };
+    },
+
+    checkLevelUp(xp) {
+        const info = this.getLevelInfo(xp);
+        const oldLevel = parseInt(localStorage.getItem('lex-xp-level') || '1');
+        if (info.current.level > oldLevel) {
+            localStorage.setItem('lex-xp-level', info.current.level.toString());
+            this.showLevelUpAnimation(info.current);
+        }
+    },
+
+    showLevelUpAnimation(levelInfo) {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = audioCtx.currentTime;
+            const playNote = (freq, delay, duration) => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + delay);
+                gainNode.gain.setValueAtTime(0, now + delay);
+                gainNode.gain.linearRampToValueAtTime(0.15, now + delay + 0.1);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, now + delay + duration);
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                osc.start(now + delay);
+                osc.stop(now + delay + duration);
+            };
+            playNote(261.63, 0, 1.5);
+            playNote(329.63, 0.15, 1.5);
+            playNote(392.00, 0.3, 1.5);
+            playNote(523.25, 0.45, 2.0);
+        } catch(e) {}
+
+        const overlay = document.createElement('div');
+        overlay.className = 'lex-levelup-overlay';
+        overlay.innerHTML = `
+            <div class="lex-levelup-card">
+                <div class="lex-levelup-sparkles"></div>
+                <div class="lex-levelup-icon">${levelInfo.icon}</div>
+                <h2 class="lex-levelup-title">Cursus Honorum</h2>
+                <p class="lex-levelup-subtitle">Sei asceso di rango!</p>
+                <div class="lex-levelup-rank">${levelInfo.name}</div>
+                <p class="lex-levelup-desc">Nuovo rango accademico sbloccato con successo.</p>
+                <button class="lex-levelup-close-btn">Prosegui gli Studi</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        setTimeout(() => overlay.classList.add('active'), 50);
+
+        overlay.querySelector('.lex-levelup-close-btn').onclick = () => {
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.remove(), 500);
+        };
+    },
+
+    awardXP(amount) {
+        try {
+            let xp = parseInt(localStorage.getItem('lex-xp-total') || '0');
+            xp += amount;
+            localStorage.setItem('lex-xp-total', xp.toString());
+            this.checkLevelUp(xp);
+            this.renderXPBar();
+        } catch(e) {
+            console.error("Errore incremento XP:", e);
+        }
+    },
+
+    injectXPBar() {
+        setTimeout(() => {
+            const footer = document.querySelector('footer');
+            if (footer && !document.getElementById('lex-footer-xp-bar-container')) {
+                const container = document.createElement('div');
+                container.id = 'lex-footer-xp-bar-container';
+                container.className = 'lex-footer-xp-bar-container';
+                footer.prepend(container);
+                this.renderXPBar();
+            }
+        }, 1500);
+    },
+
+    renderXPBar() {
+        const container = document.getElementById('lex-footer-xp-bar-container');
+        if (!container) return;
+
+        const xp = parseInt(localStorage.getItem('lex-xp-total') || '0');
+        const info = this.getLevelInfo(xp);
+        
+        let nextThreshold = info.next ? info.next.threshold : info.current.threshold;
+        let prevThreshold = info.current.threshold;
+        let progressPercent = 100;
+        
+        if (info.next) {
+            const range = nextThreshold - prevThreshold;
+            const currentProgress = xp - prevThreshold;
+            progressPercent = Math.min(100, Math.max(0, (currentProgress / range) * 100));
+        }
+        
+        const xpRemainingText = info.next 
+            ? `${xp} / ${nextThreshold} XP (Prossimo livello in ${nextThreshold - xp} XP)`
+            : `${xp} XP (Rango Massimo)`;
+
+        container.innerHTML = `
+            <div class="lex-xp-bar-info">
+                <span class="lex-xp-bar-rank">${info.current.icon} ${info.current.name} (Livello ${info.current.level})</span>
+                <span class="lex-xp-bar-points">${xpRemainingText}</span>
+            </div>
+            <div class="lex-xp-bar-track">
+                <div class="lex-xp-bar-fill" style="width: ${progressPercent}%"></div>
+            </div>
+        `;
+    },
+
+    injectFooterCodexLink() {
+        setTimeout(() => {
+            const footer = document.querySelector('footer');
+            if (footer && !document.getElementById('lex-footer-codex-btn')) {
+                const link = document.createElement('a');
+                link.id = 'lex-footer-codex-btn';
+                link.href = '#';
+                link.className = 'lex-footer-codex-btn';
+                link.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; vertical-align:middle;">
+                        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    Codex Personalis 📖
+                `;
+                
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showCodexPersonalis();
+                });
+
+                const changelogBtn = document.getElementById('lex-footer-changelog-btn');
+                const secretsBtn = document.getElementById('lex-footer-secrets-btn');
+                const pwaBtn = document.getElementById('pwa-update-btn');
+                if (changelogBtn) {
+                    footer.insertBefore(link, changelogBtn);
+                } else if (secretsBtn) {
+                    footer.insertBefore(link, secretsBtn);
+                } else if (pwaBtn) {
+                    footer.insertBefore(link, pwaBtn);
+                } else {
+                    footer.appendChild(link);
+                }
+            }
+        }, 1300);
+    },
+
+    showCodexPersonalis() {
+        const existing = document.getElementById('codex-personalis-modal');
+        if (existing) existing.remove();
+
+        const modal = document.createElement('div');
+        modal.id = 'codex-personalis-modal';
+        modal.className = 'lex-study-tool-overlay open';
+        modal.innerHTML = `
+            <div class="lex-study-tool-card" style="max-width: 650px;">
+                <div class="lex-study-tool-card-header">
+                    <h3 class="lex-study-tool-card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        <span>Codex Personalis — Diario dello Studioso</span>
+                    </h3>
+                    <button class="lex-study-tool-close-btn" onclick="document.getElementById('codex-personalis-modal').remove()">&times;</button>
+                </div>
+                <div class="lex-study-tool-card-body" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; max-height: 480px; overflow-y: auto;">
+                    <div class="codex-new-entry-card" style="background: rgba(212,175,55,0.03); border: 1px dashed rgba(212,175,55,0.25); padding: 12px; border-radius: 8px;">
+                        <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.85rem;">Nuova Riflessione Giornaliera</h4>
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 8px;">
+                            <select id="codex-subject-select" style="background:#0d1423; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 4px; border-radius: 4px; font-size: 0.75rem; flex-grow: 1;">
+                                <option value="generale">Materia: Generale</option>
+                                <option value="diritto">Materia: Diritto dei Beni Culturali</option>
+                                <option value="arte">Materia: Storia dell'Arte</option>
+                                <option value="storia">Materia: Storia Moderna</option>
+                            </select>
+                            <select id="codex-mood-select" style="background:#0d1423; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 4px; border-radius: 4px; font-size: 0.75rem;">
+                                <option value="🔥 Concentrato">🔥 Concentrato</option>
+                                <option value="📚 Produttivo">📚 Produttivo</option>
+                                <option value="💤 Stanco">💤 Stanco</option>
+                                <option value="💡 Ispirato">💡 Ispirato</option>
+                            </select>
+                        </div>
+                        <textarea id="codex-entry-text" placeholder="Scrivi i tuoi progressi, difficoltà o riflessioni di oggi..." style="width: 100%; height: 60px; background: rgba(13,20,35,0.8); border: 1px solid rgba(255,255,255,0.08); color: white; padding: 6px; border-radius: 4px; font-size: 0.8rem; box-sizing: border-box; resize: none;"></textarea>
+                        <button class="btn btn-primary" id="codex-save-entry-btn" style="background: #d4af37; border-color: #d4af37; color: #0d1423; font-weight: bold; width: 100%; font-size: 0.75rem; padding: 6px; margin-top: 8px;">
+                            Sigilla nel Codex
+                        </button>
+                    </div>
+
+                    <div id="codex-entries-list" style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;"></div>
+                    
+                    <div id="codex-stats-footer" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; font-size: 0.7rem; color: var(--text-muted); display: flex; justify-content: space-between;"></div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const listEl = modal.querySelector('#codex-entries-list');
+        const statsEl = modal.querySelector('#codex-stats-footer');
+        const saveBtn = modal.querySelector('#codex-save-entry-btn');
+        const selectSubject = modal.querySelector('#codex-subject-select');
+        const selectMood = modal.querySelector('#codex-mood-select');
+        const entryText = modal.querySelector('#codex-entry-text');
+
+        const renderEntries = () => {
+            let entries = [];
+            try {
+                entries = JSON.parse(localStorage.getItem('lex-codex-personalis') || '[]');
+            } catch(e){}
+
+            if (entries.length === 0) {
+                listEl.innerHTML = `
+                    <div style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding: 1.5rem;">
+                        Il diario è vuoto. Appunta la tua prima riflessione di oggi!
+                    </div>
+                `;
+                statsEl.innerHTML = `<span>Totale pagine: 0</span><span>Parole scritte: 0</span>`;
+                return;
+            }
+
+            listEl.innerHTML = entries.map((entry, idx) => `
+                <div class="codex-entry-card" style="background: rgba(13,20,35,0.95); border: 1px solid rgba(212,175,55,0.15); border-radius: 6px; padding: 12px; position: relative;">
+                    <button style="position: absolute; top: 6px; right: 8px; background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 0.8rem;" onclick="window.deleteCodexEntry(${idx})">&times;</button>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #d4af37; margin-bottom: 6px;">
+                        <span>📅 ${entry.date} (${entry.subject.toUpperCase()})</span>
+                        <span>Stato: ${entry.mood}</span>
+                    </div>
+                    <p style="margin: 0; font-size: 0.8rem; line-height: 1.4; color: #e2e8f0; font-family: 'Playfair Display', serif; font-style: italic;">
+                        “ ${entry.text} ”
+                    </p>
+                </div>
+            `).join('');
+
+            const totalWords = entries.reduce((acc, entry) => acc + entry.text.split(/\s+/).length, 0);
+            statsEl.innerHTML = `
+                <span>Totale pagine: <strong>${entries.length}</strong></span>
+                <span>Parole: <strong>${totalWords}</strong></span>
+            `;
+        };
+
+        window.deleteCodexEntry = (idx) => {
+            let entries = [];
+            try {
+                entries = JSON.parse(localStorage.getItem('lex-codex-personalis') || '[]');
+                entries.splice(idx, 1);
+                localStorage.setItem('lex-codex-personalis', JSON.stringify(entries));
+            } catch(e){}
+            renderEntries();
+        };
+
+        saveBtn.onclick = () => {
+            const text = entryText.value.trim();
+            if (!text) {
+                alert("Scrivi qualcosa prima di sigillare il Codex!");
+                return;
+            }
+
+            let entries = [];
+            try {
+                entries = JSON.parse(localStorage.getItem('lex-codex-personalis') || '[]');
+            } catch(e){}
+
+            const todayStr = new Date().toLocaleDateString('it-IT');
+            const alreadyWroteToday = entries.some(e => e.date.startsWith(todayStr));
+
+            entries.unshift({
+                date: todayStr + ' ' + new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }),
+                subject: selectSubject.value,
+                mood: selectMood.value,
+                text: text
+            });
+
+            try {
+                localStorage.setItem('lex-codex-personalis', JSON.stringify(entries));
+            } catch(e){}
+
+            entryText.value = '';
+            renderEntries();
+
+            if (!alreadyWroteToday) {
+                this.awardXP(5);
+                this.showNotification("Codex Sigillato", "Hai aggiunto una pagina al Codex Personalis! +5 XP");
+            } else {
+                this.showNotification("Codex Sigillato", "Pagina aggiunta al Codex.");
+            }
+        };
+
+        renderEntries();
+    },
+
+    showFeynmanOverlay(title, md) {
+        const overlay = this.getSharedOverlay('feynman-tool-overlay', 'Spiega al Monaco - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+
+        const sections = [];
+        const regex = /^##\s+(.+)$/gm;
+        let match;
+        const cleanText = md.replace(/\r/g, '');
+        while ((match = regex.exec(cleanText)) !== null) {
+            const startIndex = match.index;
+            const headingTitle = match[1].trim();
+            const nextMatch = cleanText.indexOf('\n## ', startIndex + match[0].length);
+            const content = nextMatch !== -1 ? cleanText.substring(startIndex, nextMatch) : cleanText.substring(startIndex);
+            sections.push({ title: headingTitle, content });
+        }
+
+        if (sections.length === 0) {
+            body.innerHTML = `
+                <div style="text-align:center; padding: 2rem; color:var(--text-muted);">
+                    Nessuna sezione principale (##) trovata in questo capitolo per la tecnica Feynman.
+                </div>
+            `;
+            overlay.classList.add('open');
+            return;
+        }
+
+        const section = sections[Math.floor(Math.random() * sections.length)];
+
+        const keywords = [];
+        const allGlossaryTerms = Object.keys(window.glossaryDatabase || {});
+        allGlossaryTerms.forEach(term => {
+            const termObj = window.glossaryDatabase[term];
+            if (section.content.toLowerCase().includes(termObj.term.toLowerCase()) || section.content.toLowerCase().includes(term.toLowerCase())) {
+                if (!keywords.includes(termObj.term)) {
+                    keywords.push(termObj.term);
+                }
+            }
+        });
+
+        const boldRegex = /\*\*(.*?)\*\*/g;
+        let boldMatch;
+        while ((boldMatch = boldRegex.exec(section.content)) !== null) {
+            const word = boldMatch[1].trim();
+            if (word.length > 3 && !keywords.includes(word)) {
+                keywords.push(word);
+            }
+        }
+
+        body.innerHTML = `
+            <div class="feynman-container">
+                <div class="feynman-prompt-card">
+                    <div class="feynman-monk-avatar">🪶</div>
+                    <div class="feynman-speech-bubble">
+                        <p>Salute, studioso. Immagina di dover spiegare questo concetto a me, un semplice monaco amanuense privo di nozioni moderne:</p>
+                        <h4 class="feynman-section-title">"${section.title}"</h4>
+                        <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem; font-style: italic;">
+                            Spiegalo in modo semplice, chiaro e scorrevole. Cita i punti chiave senza gergo inutile.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feynman-input-area">
+                    <textarea id="feynman-textarea" placeholder="Scrivi la tua spiegazione qui... (almeno 30 caratteri)"></textarea>
+                    <button class="btn btn-primary" id="feynman-submit-btn" style="background:#d4af37; border-color:#d4af37; color:#0d1423; font-weight:bold; margin-top: 1rem; width: 100%;">
+                        Invia Spiegazione al Scriptorium
+                    </button>
+                </div>
+            </div>
+        `;
+
+        overlay.classList.add('open');
+
+        const submitBtn = body.querySelector('#feynman-submit-btn');
+        const textarea = body.querySelector('#feynman-textarea');
+
+        submitBtn.onclick = () => {
+            const userText = textarea.value.trim();
+            if (userText.length < 30) {
+                alert("La spiegazione è troppo breve! Sforzati di spiegare il concetto in almeno un paio di frasi compiute.");
+                return;
+            }
+
+            const coveredKeywords = [];
+            const missedKeywords = [];
+            keywords.forEach(kw => {
+                if (userText.toLowerCase().includes(kw.toLowerCase())) {
+                    coveredKeywords.push(kw);
+                } else {
+                    missedKeywords.push(kw);
+                }
+            });
+
+            let stars = 1;
+            if (keywords.length > 0) {
+                const ratio = coveredKeywords.length / keywords.length;
+                if (ratio > 0.8) stars = 5;
+                else if (ratio > 0.5) stars = 4;
+                else if (ratio > 0.25) stars = 3;
+                else if (ratio > 0) stars = 2;
+            } else {
+                stars = userText.length > 150 ? 5 : 4;
+            }
+
+            const xpAwarded = stars * 3;
+            this.awardXP(xpAwarded);
+            this.playAudioSuccessChime();
+
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<span style="font-size: 1.8rem; color: ${i <= stars ? '#d4af37' : 'rgba(255,255,255,0.15)'};">★</span>`;
+            }
+
+            let keywordsHtml = '';
+            if (coveredKeywords.length > 0) {
+                keywordsHtml += `
+                    <div style="margin-top: 1rem;">
+                        <span style="color: #4ade80; font-weight: bold; font-size: 0.85rem;">✓ Concetti Coperti:</span>
+                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.3rem;">
+                            ${coveredKeywords.map(k => `<span class="feynman-kw-badge covered">${k}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            if (missedKeywords.length > 0) {
+                keywordsHtml += `
+                    <div style="margin-top: 1rem;">
+                        <span style="color: #f87171; font-weight: bold; font-size: 0.85rem;">✗ Concetti Tralasciati:</span>
+                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.3rem;">
+                            ${missedKeywords.map(k => `<span class="feynman-kw-badge missed">${k}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            body.innerHTML = `
+                <div class="feynman-feedback-container">
+                    <div class="feynman-stars-rating">${starsHtml}</div>
+                    <h3 style="color: #d4af37; margin-bottom: 0.5rem; text-align: center;">Valutazione dello Scriba</h3>
+                    <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+                        Hai spiegato il concetto guadagnando <strong>+${xpAwarded} XP</strong>!
+                    </p>
+                    
+                    <div class="feynman-feedback-text-card">
+                        <p style="font-style: italic; font-size: 0.85rem; line-height: 1.5; color: #e2e8f0;">
+                            "${userText}"
+                        </p>
+                    </div>
+
+                    ${keywordsHtml}
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+                            ${stars >= 4 
+                                ? "Eccellente! Hai reso il concetto chiaro ed esaustivo, ideale per lo Scriptorium." 
+                                : "Buon tentativo. Prova a includere più parole chiave per renderlo comprensibile a chiunque."}
+                        </p>
+                        <button class="btn btn-secondary" id="feynman-retry-btn">Spiega un Altro Concetto</button>
+                    </div>
+                </div>
+            `;
+
+            body.querySelector('#feynman-retry-btn').onclick = () => {
+                this.showFeynmanOverlay(title, md);
+            };
+        };
+    },
+
+    toggleQuaesitor() {
+        this.quaesitorActive = !this.quaesitorActive;
+        const btn = document.getElementById('lex-btn-quaesitor');
+        if (btn) {
+            if (this.quaesitorActive) {
+                btn.classList.add('lex-active-tool-highlight');
+                this.showNotification("Il Quaesitor Attivo", "Il Quaesitor ti interrogherà periodicamente durante la lettura.");
+                this.initQuaesitor();
+            } else {
+                btn.classList.remove('lex-active-tool-highlight');
+                this.showNotification("Il Quaesitor Disattivato", "Le interruzioni di lettura sono disattivate.");
+                if (this.quaesitorTimer) clearTimeout(this.quaesitorTimer);
+            }
+        }
+    },
+
+    initQuaesitor() {
+        const scrollContainer = document.getElementById('modal-body-content');
+        if (!scrollContainer) return;
+
+        if (this.quaesitorScrollHandler) {
+            scrollContainer.removeEventListener('scroll', this.quaesitorScrollHandler);
+        }
+
+        this.quaesitorLastHeading = null;
+        if (this.quaesitorTimer) clearTimeout(this.quaesitorTimer);
+
+        this.quaesitorScrollHandler = (e) => {
+            if (!this.quaesitorActive) return;
+            
+            const headings = Array.from(document.querySelectorAll('#markdown-view h2'));
+            if (headings.length === 0) return;
+
+            const containerRect = scrollContainer.getBoundingClientRect();
+            let currentPassed = null;
+            headings.forEach(h => {
+                const hRect = h.getBoundingClientRect();
+                if (hRect.top - containerRect.top < 80) {
+                    currentPassed = h;
+                }
+            });
+
+            if (currentPassed && currentPassed !== this.quaesitorLastHeading) {
+                this.quaesitorLastHeading = currentPassed;
+                if (this.quaesitorTimer) clearTimeout(this.quaesitorTimer);
+                
+                this.quaesitorTimer = setTimeout(() => {
+                    this.triggerQuaesitorQuestion(currentPassed);
+                }, 15000);
+            }
+        };
+
+        scrollContainer.addEventListener('scroll', this.quaesitorScrollHandler);
+    },
+
+    triggerQuaesitorQuestion(heading) {
+        if (!this.quaesitorActive) return;
+
+        let sectionText = '';
+        let curr = heading.nextElementSibling;
+        while (curr && curr.tagName !== 'H2') {
+            sectionText += ' ' + curr.innerText;
+            curr = curr.nextElementSibling;
+        }
+
+        const allGlossaryTerms = Object.keys(window.glossaryDatabase || {});
+        const domainTerms = allGlossaryTerms.filter(k => {
+            const item = window.glossaryDatabase[k];
+            return sectionText.toLowerCase().includes(item.term.toLowerCase()) || sectionText.toLowerCase().includes(k.toLowerCase());
+        });
+
+        let targetTermKey = '';
+        if (domainTerms.length > 0) {
+            targetTermKey = domainTerms[Math.floor(Math.random() * domainTerms.length)];
+        } else {
+            if (allGlossaryTerms.length > 0) {
+                targetTermKey = allGlossaryTerms[Math.floor(Math.random() * allGlossaryTerms.length)];
+            }
+        }
+
+        if (!targetTermKey) return;
+
+        const termObj = window.glossaryDatabase[targetTermKey];
+        const correctAnswer = termObj.definition;
+
+        const otherDefs = Object.keys(window.glossaryDatabase)
+            .filter(k => k !== targetTermKey)
+            .map(k => window.glossaryDatabase[k].definition);
+        otherDefs.sort(() => Math.random() - 0.5);
+        const distractors = otherDefs.slice(0, 3);
+
+        const options = [correctAnswer, ...distractors];
+        options.sort(() => Math.random() - 0.5);
+
+        const toast = document.createElement('div');
+        toast.className = 'lex-quaesitor-toast';
+        toast.innerHTML = `
+            <div class="lex-quaesitor-toast-header">
+                <span>⏱️ Quaesitor - Active Recall</span>
+                <button class="lex-quaesitor-toast-close">&times;</button>
+            </div>
+            <div class="lex-quaesitor-toast-body">
+                <p class="lex-quaesitor-question">Riguardo alla sezione appena letta, che cosa significa il termine <strong>${termObj.term}</strong>?</p>
+                <div class="lex-quaesitor-options">
+                    ${options.map((opt, idx) => `
+                        <button class="lex-quaesitor-opt-btn" data-correct="${opt === correctAnswer}">${opt}</button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add('visible'), 100);
+
+        const closeToast = () => {
+            toast.classList.remove('visible');
+            setTimeout(() => toast.remove(), 400);
+        };
+
+        toast.querySelector('.lex-quaesitor-toast-close').onclick = closeToast;
+
+        const optionBtns = toast.querySelectorAll('.lex-quaesitor-opt-btn');
+        optionBtns.forEach(btn => {
+            btn.onclick = () => {
+                const isCorrect = btn.getAttribute('data-correct') === 'true';
+                optionBtns.forEach(b => {
+                    const isBCorrect = b.getAttribute('data-correct') === 'true';
+                    b.disabled = true;
+                    if (isBCorrect) {
+                        b.style.background = 'rgba(34, 197, 94, 0.2)';
+                        b.style.borderColor = '#22c55e';
+                        b.style.color = '#4ade80';
+                    } else {
+                        b.style.background = 'rgba(255, 255, 255, 0.02)';
+                        b.style.borderColor = 'rgba(255,255,255,0.05)';
+                        b.style.color = 'rgba(255,255,255,0.4)';
+                    }
+                });
+
+                if (isCorrect) {
+                    btn.style.background = '#22c55e';
+                    btn.style.color = '#0d1423';
+                    this.playAudioSuccessChime();
+                    this.triggerGoldStarsExplosion(btn);
+                    this.awardXP(5);
+                    
+                    const successBadge = document.createElement('div');
+                    successBadge.style.color = '#4ade80';
+                    successBadge.style.fontSize = '0.8rem';
+                    successBadge.style.fontWeight = 'bold';
+                    successBadge.style.marginTop = '0.5rem';
+                    successBadge.style.textAlign = 'center';
+                    successBadge.innerHTML = '🎉 Corretto! +5 XP';
+                    toast.querySelector('.lex-quaesitor-toast-body').appendChild(successBadge);
+
+                    setTimeout(closeToast, 2000);
+                } else {
+                    btn.style.background = 'rgba(239, 68, 68, 0.3)';
+                    btn.style.borderColor = '#ef4444';
+                    btn.style.color = '#f87171';
+
+                    heading.classList.add('lex-quaesitor-review-highlight');
+
+                    try {
+                        const reviewKey = `lex-quaesitor-review-${this.currentSummaryPath}`;
+                        const currentReview = JSON.parse(localStorage.getItem(reviewKey) || '[]');
+                        if (!currentReview.includes(heading.innerText)) {
+                            currentReview.push(heading.innerText);
+                            localStorage.setItem(reviewKey, JSON.stringify(currentReview));
+                        }
+                    } catch(e){}
+
+                    const failBadge = document.createElement('div');
+                    failBadge.style.color = '#ef4444';
+                    failBadge.style.fontSize = '0.8rem';
+                    failBadge.style.fontWeight = 'bold';
+                    failBadge.style.marginTop = '0.5rem';
+                    failBadge.style.textAlign = 'center';
+                    failBadge.innerHTML = '📌 Paragrafo contrassegnato da ripassare!';
+                    toast.querySelector('.lex-quaesitor-toast-body').appendChild(failBadge);
+
+                    const confirmBtn = document.createElement('button');
+                    confirmBtn.className = 'btn btn-secondary';
+                    confirmBtn.style.width = '100%';
+                    confirmBtn.style.marginTop = '0.8rem';
+                    confirmBtn.style.padding = '4px';
+                    confirmBtn.style.fontSize = '0.8rem';
+                    confirmBtn.innerText = 'Ho capito';
+                    confirmBtn.onclick = closeToast;
+                    toast.querySelector('.lex-quaesitor-toast-body').appendChild(confirmBtn);
+                }
+            };
+        });
+    },
+
+    showCondensatoreOverlay(title, md) {
+        const overlay = this.getSharedOverlay('condensatore-tool-overlay', 'Arte del Compendio - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+
+        const markdownView = document.getElementById('markdown-view');
+        const fullText = markdownView ? markdownView.innerText : '';
+        const fullHtml = markdownView ? markdownView.innerHTML : '';
+
+        let compendioHtml = '';
+        if (markdownView) {
+            const paragraphs = markdownView.querySelectorAll('p, li');
+            paragraphs.forEach(p => {
+                const text = p.innerText.trim();
+                if (text.length > 15) {
+                    const firstSentence = text.split(/[.!?]/)[0] + '.';
+                    compendioHtml += `<p style="margin-bottom:0.8rem; line-height:1.4;">• ${firstSentence}</p>`;
+                }
+            });
+            const glossarySpans = markdownView.querySelectorAll('.glossary-term');
+            const uniqueTerms = new Set();
+            glossarySpans.forEach(span => {
+                const termAttr = span.getAttribute('data-term') || span.innerText;
+                uniqueTerms.add(termAttr.toLowerCase().trim());
+            });
+
+            if (uniqueTerms.size > 0) {
+                compendioHtml += `<h4 style="color:#d4af37; margin-top:1.5rem; margin-bottom:0.5rem; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom:4px;">Nodi Glossario Fondamentali</h4><ul>`;
+                uniqueTerms.forEach(term => {
+                    const item = window.glossaryDatabase[term];
+                    if (item) {
+                        compendioHtml += `<li style="font-size:0.8rem; margin-bottom:0.4rem;"><strong>${item.term}:</strong> ${item.definition}</li>`;
+                    }
+                });
+                compendioHtml += `</ul>`;
+            }
+        }
+
+        let haikuHtml = `<div class="lex-haiku-container" style="padding:1.5rem; background:rgba(212,175,55,0.02); border:1px dashed rgba(212,175,55,0.2); border-radius:8px; text-align:center; font-family:'Playfair Display', serif;">`;
+        if (fullText) {
+            const sentences = fullText.split(/[.!?\n]/).map(s => s.trim()).filter(s => s.length > 25);
+            const sentenceScores = sentences.map(s => {
+                let score = 0;
+                Object.keys(window.glossaryDatabase || {}).forEach(k => {
+                    if (s.toLowerCase().includes(k.toLowerCase())) {
+                        score++;
+                    }
+                });
+                return { sentence: s, score };
+            });
+            sentenceScores.sort((a, b) => b.score - a.score);
+            const topSentences = sentenceScores.slice(0, 4);
+            
+            topSentences.forEach((ts, idx) => {
+                haikuHtml += `<p style="font-style:italic; font-size:1rem; margin-bottom:0.8rem; color:#e2e8f0; line-height:1.5;">“ ${ts.sentence}. ”</p>`;
+            });
+        }
+        haikuHtml += `</div>`;
+
+        body.innerHTML = `
+            <div class="condensatore-container" style="display:flex; flex-direction:column; height:100%;">
+                <div class="condensatore-tabs" style="display:flex; gap:0.5rem; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px; margin-bottom:12px;">
+                    <button class="condensatore-tab-btn active" data-tab="completa">Completa</button>
+                    <button class="condensatore-tab-btn" data-tab="compendio">Compendio (30%)</button>
+                    <button class="condensatore-tab-btn" data-tab="haiku">Haiku Accademico</button>
+                </div>
+                
+                <div class="condensatore-content-area" style="flex-grow:1; overflow-y:auto; max-height:300px; padding-right:6px; font-size:0.85rem; line-height:1.5;">
+                    <div class="condensatore-tab-content active" id="condensatore-tab-completa">${fullHtml}</div>
+                    <div class="condensatore-tab-content" id="condensatore-tab-compendio" style="display:none;">${compendioHtml}</div>
+                    <div class="condensatore-tab-content" id="condensatore-tab-haiku" style="display:none;">${haikuHtml}</div>
+                </div>
+
+                <div style="margin-top:12px; display:flex; gap:0.5rem;">
+                    <button class="btn btn-primary" id="condensatore-copy-btn" style="flex-grow:1; background:#d4af37; border-color:#d4af37; color:#0d1423; font-weight:bold; font-size:0.8rem; padding:6px;">
+                        Copia Testo
+                    </button>
+                </div>
+            </div>
+        `;
+
+        overlay.classList.add('open');
+
+        const tabBtns = body.querySelectorAll('.condensatore-tab-btn');
+        const tabContents = body.querySelectorAll('.condensatore-tab-content');
+        const copyBtn = body.querySelector('#condensatore-copy-btn');
+
+        tabBtns.forEach(btn => {
+            btn.onclick = () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const targetTab = btn.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    if (content.id === `condensatore-tab-${targetTab}`) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            };
+        });
+
+        copyBtn.onclick = () => {
+            const activeTab = body.querySelector('.condensatore-tab-btn.active').getAttribute('data-tab');
+            const activeContent = body.querySelector(`#condensatore-tab-${activeTab}`);
+            if (activeContent) {
+                const text = activeContent.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    this.showNotification("Copiato!", "Il testo sintetizzato è stato copiato negli appunti.");
+                });
+            }
+        };
+    },
+
+    showSpeedReviewOverlay(title, md) {
+        const overlay = this.getSharedOverlay('speedreview-tool-overlay', 'Scriptura Veloce - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+
+        const chapterTerms = [];
+        const markdownView = document.getElementById('markdown-view');
+        if (markdownView) {
+            const glossarySpans = markdownView.querySelectorAll('.glossary-term');
+            const uniqueTerms = new Set();
+            glossarySpans.forEach(span => {
+                const termAttr = span.getAttribute('data-term') || span.innerText;
+                uniqueTerms.add(termAttr.toLowerCase().trim());
+            });
+
+            uniqueTerms.forEach(term => {
+                const item = window.glossaryDatabase[term];
+                if (item) {
+                    chapterTerms.push(item);
+                }
+            });
+        }
+
+        if (chapterTerms.length < 3) {
+            body.innerHTML = `
+                <div style="text-align:center; padding:2rem; color:var(--text-muted);">
+                    Termini insufficienti in questo capitolo per avviare la Scriptura Veloce.
+                </div>
+            `;
+            overlay.classList.add('open');
+            return;
+        }
+
+        body.innerHTML = `
+            <div class="speedreview-game-container" style="text-align:center; padding:1.5rem;">
+                <h3 style="color:#d4af37; margin-bottom:1rem;">Scriptura Veloce ⚡</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5; margin-bottom:1.5rem;">
+                    Un nastro scorrevole ti mostrerà le definizioni. Associa il termine corretto prima che scada il tempo! La velocità aumenta ogni 5 risposte corrette.
+                </p>
+                <button class="btn btn-primary" id="speedreview-start-btn" style="background:#d4af37; border-color:#d4af37; color:#0d1423; font-weight:bold; padding:10px 30px;">
+                    Inizia la Gara
+                </button>
+            </div>
+        `;
+
+        overlay.classList.add('open');
+
+        body.querySelector('#speedreview-start-btn').onclick = () => {
+            this.runSpeedReviewGame(body, chapterTerms, title);
+        };
+    },
+
+    runSpeedReviewGame(body, terms, title) {
+        let score = 0;
+        let currentIndex = 0;
+        let speedMultiplier = 1;
+        let correctAnswersCount = 0;
+        let totalQuestions = Math.min(10, terms.length * 2);
+        let startTime = Date.now();
+        
+        if (this.speedReviewTimer) clearInterval(this.speedReviewTimer);
+        if (this.speedReviewGameTimer) clearInterval(this.speedReviewGameTimer);
+
+        body.innerHTML = `
+            <div class="speedreview-active-container" style="position:relative; height:320px; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between;">
+                <div class="speedreview-stats-bar" style="display:flex; justify-content:space-between; font-size:0.75rem; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:6px; margin-bottom:8px;">
+                    <span>Domanda: <strong id="speed-q-index">1</strong> / ${totalQuestions}</span>
+                    <span>Punteggio: <strong id="speed-score">0</strong></span>
+                    <span>Velocità: <strong id="speed-multiplier">1.0x</strong></span>
+                </div>
+                
+                <div class="speedreview-scroll-area" style="flex-grow:1; display:flex; justify-content:center; align-items:center; position:relative; perspective: 1000px;">
+                    <div id="speedreview-scroll-card" class="speedreview-parchment-card">
+                        <p id="speedreview-definition-text" style="font-family:'Playfair Display', serif; font-size:0.85rem; line-height:1.4; color:#0d1423; margin:0; padding:12px; font-weight:600; text-align:center;"></p>
+                    </div>
+                </div>
+
+                <div class="speedreview-timer-track" style="height:4px; background:rgba(255,255,255,0.1); margin-top:8px; border-radius:2px; overflow:hidden;">
+                    <div id="speedreview-timer-fill" style="height:100%; width:100%; background:#d4af37; transition: width 0.1s linear;"></div>
+                </div>
+                
+                <div class="speedreview-options-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:12px;">
+                    <button class="speed-opt-btn" id="speed-opt-0"></button>
+                    <button class="speed-opt-btn" id="speed-opt-1"></button>
+                    <button class="speed-opt-btn" id="speed-opt-2"></button>
+                    <button class="speed-opt-btn" id="speed-opt-3"></button>
+                </div>
+            </div>
+        `;
+
+        const qIndexEl = body.querySelector('#speed-q-index');
+        const scoreEl = body.querySelector('#speed-score');
+        const multEl = body.querySelector('#speed-multiplier');
+        const card = body.querySelector('#speedreview-scroll-card');
+        const defText = body.querySelector('#speedreview-definition-text');
+        const timerFill = body.querySelector('#speedreview-timer-fill');
+        const optionBtns = [
+            body.querySelector('#speed-opt-0'),
+            body.querySelector('#speed-opt-1'),
+            body.querySelector('#speed-opt-2'),
+            body.querySelector('#speed-opt-3')
+        ];
+
+        const loadNextQuestion = () => {
+            if (currentIndex >= totalQuestions) {
+                endGame();
+                return;
+            }
+
+            qIndexEl.innerText = currentIndex + 1;
+            scoreEl.innerText = score;
+            multEl.innerText = speedMultiplier.toFixed(1) + 'x';
+
+            const correctTerm = terms[currentIndex % terms.length];
+            defText.innerHTML = correctTerm.definition;
+
+            const otherTerms = terms.filter(t => t.term !== correctTerm.term);
+            otherTerms.sort(() => Math.random() - 0.5);
+            const chosenDistractors = otherTerms.slice(0, 3);
+            
+            const gameOptions = [correctTerm, ...chosenDistractors];
+            gameOptions.sort(() => Math.random() - 0.5);
+
+            optionBtns.forEach((btn, idx) => {
+                const opt = gameOptions[idx];
+                btn.innerText = opt ? opt.term : "—";
+                btn.disabled = false;
+                btn.style.background = 'rgba(255, 255, 255, 0.03)';
+                btn.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                btn.style.color = '#e2e8f0';
+                btn.onclick = () => handleAnswer(opt === correctTerm, btn);
+            });
+
+            card.classList.remove('scrolled-in');
+            void card.offsetWidth;
+            card.classList.add('scrolled-in');
+
+            const baseTime = 5000;
+            const timeLimit = baseTime / speedMultiplier;
+            let timeRemaining = timeLimit;
+
+            if (this.speedReviewGameTimer) clearInterval(this.speedReviewGameTimer);
+            
+            this.speedReviewGameTimer = setInterval(() => {
+                timeRemaining -= 100;
+                const percent = Math.max(0, (timeRemaining / timeLimit) * 100);
+                timerFill.style.width = percent + '%';
+
+                if (timeRemaining <= 0) {
+                    clearInterval(this.speedReviewGameTimer);
+                    handleAnswer(false, null);
+                }
+            }, 100);
+        };
+
+        const handleAnswer = (isCorrect, clickedBtn) => {
+            clearInterval(this.speedReviewGameTimer);
+            optionBtns.forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                score += Math.round(10 * speedMultiplier);
+                correctAnswersCount++;
+                if (clickedBtn) {
+                    clickedBtn.style.background = '#22c55e';
+                    clickedBtn.style.color = '#0d1423';
+                    this.triggerGoldStarsExplosion(clickedBtn);
+                }
+                this.playAudioSuccessChime();
+
+                if (correctAnswersCount % 3 === 0) {
+                    speedMultiplier += 0.3;
+                }
+            } else {
+                if (clickedBtn) {
+                    clickedBtn.style.background = '#ef4444';
+                    clickedBtn.style.color = '#fff';
+                }
+                optionBtns.forEach(btn => {
+                    const btnTerm = btn.innerText;
+                    const correctTerm = terms[currentIndex % terms.length].term;
+                    if (btnTerm === correctTerm) {
+                        btn.style.background = 'rgba(34, 197, 94, 0.2)';
+                        btn.style.borderColor = '#22c55e';
+                        btn.style.color = '#4ade80';
+                    }
+                });
+            }
+
+            currentIndex++;
+            setTimeout(loadNextQuestion, 1200);
+        };
+
+        const endGame = () => {
+            const timeSpent = Math.floor((Date.now() - startTime) / 1000);
+            const accuracy = Math.round((correctAnswersCount / totalQuestions) * 100);
+
+            const xpAwarded = Math.min(30, Math.max(10, Math.round((score / 10) + correctAnswersCount)));
+            this.awardXP(xpAwarded);
+
+            const subject = this.inferSubject();
+            const leaderboardKey = `lex-speed-review-${subject}`;
+            let scores = [];
+            try {
+                scores = JSON.parse(localStorage.getItem(leaderboardKey) || '[]');
+            } catch(e){}
+            scores.push({
+                score,
+                accuracy,
+                wpm: Math.round((totalQuestions / (timeSpent || 1)) * 60),
+                date: new Date().toLocaleDateString('it-IT')
+            });
+            scores.sort((a,b) => b.score - a.score);
+            scores = scores.slice(0, 5);
+            localStorage.setItem(leaderboardKey, JSON.stringify(scores));
+
+            body.innerHTML = `
+                <div class="speedreview-results" style="text-align:center; padding:1rem;">
+                    <div style="font-size:2.5rem; margin-bottom:0.5rem;">🏆</div>
+                    <h3 style="color:#d4af37; margin-bottom:0.8rem;">Gara Completata!</h3>
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.5rem;">
+                        Hai risposto correttamente a <strong>${correctAnswersCount}</strong> su ${totalQuestions} domande.
+                    </p>
+                    
+                    <div style="display:flex; justify-content:space-around; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:8px; margin-bottom:1.5rem;">
+                        <div>
+                            <span style="display:block; font-size:0.75rem; color:var(--text-muted);">Punteggio</span>
+                            <span style="font-size:1.2rem; font-weight:bold; color:#d4af37;">${score}</span>
+                        </div>
+                        <div>
+                            <span style="display:block; font-size:0.75rem; color:var(--text-muted);">Accuratezza</span>
+                            <span style="font-size:1.2rem; font-weight:bold; color:#22c55e;">${accuracy}%</span>
+                        </div>
+                        <div>
+                            <span style="display:block; font-size:0.75rem; color:var(--text-muted);">XP Guadagnati</span>
+                            <span style="font-size:1.2rem; font-weight:bold; color:#3b82f6;">+${xpAwarded}</span>
+                        </div>
+                    </div>
+
+                    <h4 style="font-size:0.8rem; color:#d4af37; text-align:left; margin-bottom:0.5rem;">Classifica Locale (${subject.toUpperCase()})</h4>
+                    <div style="text-align:left; font-size:0.75rem; margin-bottom:1.5rem;">
+                        ${scores.map((s, idx) => `
+                            <div style="display:flex; justify-content:between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.03);">
+                                <span style="width:30px;">#${idx+1}</span>
+                                <span style="flex-grow:1;">Punti: <strong>${s.score}</strong> (${s.accuracy}% acc)</span>
+                                <span style="color:var(--text-muted);">${s.date}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <button class="btn btn-primary" id="speedreview-retry-btn" style="background:#d4af37; border-color:#d4af37; color:#0d1423; font-weight:bold; padding:8px 24px;">
+                        Gioca di Nuovo
+                    </button>
+                </div>
+            `;
+
+            body.querySelector('#speedreview-retry-btn').onclick = () => {
+                this.runSpeedReviewGame(body, terms, title);
+            };
+        };
+
+        loadNextQuestion();
+    },
+
+    showTrovaErroreOverlay(title, md) {
+        const overlay = this.getSharedOverlay('trovaerrore-tool-overlay', 'L\'Eresiarca - ' + title, `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+
+        const markdownView = document.getElementById('markdown-view');
+        if (!markdownView) {
+            body.innerHTML = `<div style="text-align:center; padding:2rem; color:var(--text-muted);">Sintesi non disponibile.</div>`;
+            overlay.classList.add('open');
+            return;
+        }
+
+        const paragraphs = Array.from(markdownView.querySelectorAll('p')).filter(p => p.innerText.trim().length > 100);
+        if (paragraphs.length === 0) {
+            body.innerHTML = `
+                <div style="text-align:center; padding:2rem; color:var(--text-muted);">
+                    Testo insufficiente in questo capitolo per generare la modalità L'Eresiarca.
+                </div>
+            `;
+            overlay.classList.add('open');
+            return;
+        }
+
+        const targetPara = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+        const text = targetPara.innerText.trim();
+
+        const dateRegex = /\b(\d{4})\b/g;
+        const dates = [];
+        let dateMatch;
+        while ((dateMatch = dateRegex.exec(text)) !== null) {
+            dates.push(dateMatch[1]);
+        }
+
+        const allGlossaryTerms = Object.keys(window.glossaryDatabase || {});
+        const glossaryInPara = allGlossaryTerms.filter(k => {
+            const item = window.glossaryDatabase[k];
+            return text.toLowerCase().includes(item.term.toLowerCase()) || text.toLowerCase().includes(k.toLowerCase());
+        });
+
+        const nameRegex = /\b([A-Z][a-z]{4,})\b/g;
+        const names = [];
+        let nameMatch;
+        while ((nameMatch = nameRegex.exec(text)) !== null) {
+            const name = nameMatch[1];
+            if (name !== 'Il' && name !== 'La' && name !== 'Lo' && name !== 'I' && name !== 'Nel' && name !== 'Con' && name !== 'Per' && !names.includes(name)) {
+                names.push(name);
+            }
+        }
+
+        const errorsToMake = [];
+        if (dates.length > 0) {
+            const date = dates[0];
+            const swapped = date.substring(0, 1) + date.substring(2, 3) + date.substring(1, 2) + date.substring(3);
+            errorsToMake.push({ type: 'date', original: date, altered: swapped });
+        }
+        if (glossaryInPara.length > 0) {
+            const termKey = glossaryInPara[0];
+            const termObj = window.glossaryDatabase[termKey];
+            const otherTerms = allGlossaryTerms.filter(k => k !== termKey);
+            if (otherTerms.length > 0) {
+                const altKey = otherTerms[Math.floor(Math.random() * otherTerms.length)];
+                errorsToMake.push({ type: 'glossary', original: termObj.term, altered: window.glossaryDatabase[altKey].term });
+            }
+        }
+        if (names.length > 0) {
+            const name = names[0];
+            const otherNames = ['Teodosio', 'Giustiniano', 'Michelangelo', 'Brunelleschi', 'Canova', 'Bernini', 'Filippo Brunelleschi', 'Cesare Beccaria'].filter(n => n !== name);
+            const alteredName = otherNames[Math.floor(Math.random() * otherNames.length)];
+            errorsToMake.push({ type: 'name', original: name, altered: alteredName });
+        }
+
+        if (errorsToMake.length === 0) {
+            errorsToMake.push({ type: 'word', original: 'studio', altered: 'esilio' });
+        }
+
+        let alteredText = text;
+        errorsToMake.forEach(err => {
+            const index = alteredText.indexOf(err.original);
+            if (index !== -1) {
+                alteredText = alteredText.substring(0, index) + `||ERR:${err.altered}:${err.original}||` + alteredText.substring(index + err.original.length);
+            }
+        });
+
+        const parts = alteredText.split(/(\s+)/);
+        let htmlContent = '';
+        let errorCount = 0;
+
+        parts.forEach((part) => {
+            if (part.startsWith('||ERR:') && part.endsWith('||')) {
+                const segments = part.substring(6, part.length - 2).split(':');
+                const alteredVal = segments[0];
+                const originalVal = segments[1];
+                htmlContent += `<span class="errore-clickable-word altered" data-original="${originalVal}" id="err-word-${errorCount}">${alteredVal}</span>`;
+                errorCount++;
+            } else if (part.trim().length > 0) {
+                const wordClean = part.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+                const punctuation = part.substring(wordClean.length);
+                htmlContent += `<span class="errore-clickable-word normal">${wordClean}</span>${punctuation}`;
+            } else {
+                htmlContent += part;
+            }
+        });
+
+        body.innerHTML = `
+            <div class="trovaerrore-container" style="display:flex; flex-direction:column; height:100%;">
+                <div class="cloze-instructions" style="margin-bottom:12px;">
+                    L'eresiarca ha inserito <strong>${errorCount}</strong> errori dottrinali in questo paragrafo. Clicca sulle parole errate per confutarle e rivelare la verità!
+                </div>
+                
+                <div class="trovaerrore-text-card" style="flex-grow:1; padding:15px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); font-size:0.9rem; line-height:1.6; max-height:280px; overflow-y:auto; color:#e2e8f0; text-align:justify;">
+                    ${htmlContent}
+                </div>
+
+                <div class="trovaerrore-footer" style="margin-top:15px; display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:0.8rem; color:var(--text-muted);">
+                        Errori trovati: <strong id="err-found-count" style="color:#d4af37;">0</strong> / ${errorCount}
+                    </span>
+                    <button class="btn btn-secondary" id="err-reveal-btn" style="padding:6px 12px; font-size:0.75rem;">Rivela Errori</button>
+                </div>
+            </div>
+        `;
+
+        overlay.classList.add('open');
+
+        let foundCount = 0;
+        const foundCountEl = body.querySelector('#err-found-count');
+        const revealBtn = body.querySelector('#err-reveal-btn');
+        const wordSpans = body.querySelectorAll('.errore-clickable-word');
+
+        wordSpans.forEach(span => {
+            span.onclick = () => {
+                if (span.classList.contains('clicked')) return;
+                span.classList.add('clicked');
+
+                if (span.classList.contains('altered')) {
+                    span.style.background = '#22c55e';
+                    span.style.color = '#0d1423';
+                    const original = span.getAttribute('data-original');
+                    span.innerText = `${span.innerText} (vero: ${original})`;
+                    
+                    foundCount++;
+                    foundCountEl.innerText = foundCount;
+
+                    this.playAudioSuccessChime();
+                    this.triggerGoldStarsExplosion(span);
+                    this.awardXP(5);
+
+                    if (foundCount === errorCount) {
+                        this.showNotification("Confutazione Completata!", "Hai scovato tutti gli errori dell'Eresiarca con successo!");
+                    }
+                } else {
+                    span.style.background = 'rgba(239, 68, 68, 0.2)';
+                    span.style.color = '#f87171';
+                }
+            };
+        });
+
+        revealBtn.onclick = () => {
+            wordSpans.forEach(span => {
+                if (span.classList.contains('altered') && !span.classList.contains('clicked')) {
+                    span.classList.add('clicked');
+                    span.style.background = 'rgba(212, 175, 55, 0.2)';
+                    span.style.borderColor = '#d4af37';
+                    span.style.color = '#d4af37';
+                    const original = span.getAttribute('data-original');
+                    span.innerText = `${span.innerText} (vero: ${original})`;
+                }
+            });
+            revealBtn.disabled = true;
+        };
+    },
+
+    showExportPackage(title, md, filePath) {
+        const cards = [];
+        const termDefRegex = /\*\s*\*\*([^*]+)\*\*:\s*([^\n]+)/g;
+        let match;
+        const cleanText = md.replace(/\r/g, '');
+        while ((match = termDefRegex.exec(cleanText)) !== null) {
+            cards.push({ question: match[1].trim(), answer: match[2].trim() });
+        }
+
+        const glossaryHtml = Object.keys(window.glossaryDatabase || {}).filter(k => {
+            const item = window.glossaryDatabase[k];
+            return md.toLowerCase().includes(item.term.toLowerCase()) || md.toLowerCase().includes(k.toLowerCase());
+        }).map(k => {
+            const item = window.glossaryDatabase[k];
+            return `<div style="margin-bottom: 8px;"><strong>${item.term}:</strong> ${item.definition}</div>`;
+        }).join('') || "Nessun termine glossario registrato per questo capitolo.";
+
+        let notes = [];
+        try {
+            notes = JSON.parse(localStorage.getItem(`lex-margin-notes-${filePath}`) || '[]');
+        } catch(e){}
+        const notesHtml = notes.map(n => `
+            <div style="background: #fef08a; border-left: 4px solid #ca8a04; padding: 8px; margin-bottom: 8px; color: #854d0e; font-size: 0.85rem; border-radius: 4px;">
+                ${n.text}
+            </div>
+        `).join('') || "Nessuna nota salvata a margine di questo capitolo.";
+
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html lang="it">
+            <head>
+                <meta charset="UTF-8">
+                <title>Pacchetto Studio - ${title}</title>
+                <style>
+                    body {
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                        line-height: 1.6;
+                        color: #1e293b;
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 2rem;
+                    }
+                    h1 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+                    h2 { color: #1e293b; margin-top: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px; }
+                    .metadata { font-size: 0.85rem; color: #64748b; margin-bottom: 2rem; }
+                    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+                    .card { border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; background: #f8fafc; }
+                    .print-btn { background: #0f172a; color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-bottom: 2rem; }
+                    @media print {
+                        .print-btn { display: none; }
+                    }
+                </style>
+            </head>
+            <body>
+                <button class="print-btn" onclick="window.print()">Stampa / Esporta PDF</button>
+                <h1>Lex Studiorum - Pacchetto Studio</h1>
+                <div class="metadata">Generato il: ${new Date().toLocaleDateString('it-IT')} | Capitolo: ${title}</div>
+                
+                <h2>1. Sintesi Completa</h2>
+                <div style="text-align: justify;">
+                    ${this.renderMarkdownToHtml(md)}
+                </div>
+
+                <h2>2. Mazzo di Flashcards</h2>
+                <div class="card-grid">
+                    ${cards.map(c => `
+                        <div class="card">
+                            <strong>D:</strong> ${c.question}<br>
+                            <strong>R:</strong> ${c.answer}
+                        </div>
+                    `).join('') || "<div style='grid-column: span 2;'>Nessuna flashcard generata per questo capitolo.</div>"}
+                </div>
+
+                <h2>3. Glossario del Capitolo</h2>
+                <div>${glossaryHtml}</div>
+
+                <h2>4. Note a Margine</h2>
+                <div>${notesHtml}</div>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        
+        this.awardXP(5);
+        this.showNotification("Pacchetto Generato", "Il documento stampabile è stato aperto in una nuova scheda. +5 XP!");
+    },
 };
 
 // Auto-init

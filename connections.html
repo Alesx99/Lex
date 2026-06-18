@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
     <!-- Lex Core (Shared UI & Logic) -->
     <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/glossary_db.js"></script>
     <script src="js/lex_core.js"></script>
     <style>
         /* Specific Styles for Connections Map */
@@ -651,6 +652,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                 Personalizza Relazioni
             </button>
+            <button id="auto-generate-connections-btn" class="edit-btn" style="background: rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.4); color: #4ade80; margin-left: 0.5rem;" onclick="autoGenerateConnections()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                🔗 Auto-Genera Connessioni
+            </button>
         </div>
 
         <!-- Edit active banner notifications -->
@@ -1207,6 +1212,110 @@
                     
                     expPlaceholder.style.display = 'block';
                     expContent.style.display = 'none';
+                }
+            };
+
+            window.autoGenerateConnections = async function() {
+                const btn = document.getElementById('auto-generate-connections-btn');
+                if (!btn) return;
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = `⏳ Scansione in corso...`;
+
+                try {
+                    const nodes = Array.from(document.querySelectorAll('.node-card'));
+                    const nodeContents = {};
+                    
+                    await Promise.all(nodes.map(async (node) => {
+                        const rawPath = node.getAttribute('data-path');
+                        if (!rawPath) return;
+                        
+                        let mdPath = '';
+                        if (rawPath.includes('?open=')) {
+                            const parts = rawPath.split('?open=');
+                            const folder = parts[0].substring(0, parts[0].lastIndexOf('/'));
+                            mdPath = folder ? `${folder}/${parts[1]}` : parts[1];
+                        } else {
+                            mdPath = rawPath;
+                        }
+                        
+                        try {
+                            const response = await fetch(mdPath);
+                            if (response.ok) {
+                                nodeContents[node.id] = await response.text();
+                            }
+                        } catch (err) {
+                            console.error("Failed to fetch markdown for node " + node.id, err);
+                        }
+                    }));
+
+                    const newConnections = [];
+                    const glossaryKeys = Object.keys(glossaryDatabase);
+                    
+                    for (let i = 0; i < nodes.length; i++) {
+                        const nodeA = nodes[i];
+                        const contentA = nodeContents[nodeA.id];
+                        if (!contentA) continue;
+                        
+                        for (let j = i + 1; j < nodes.length; j++) {
+                            const nodeB = nodes[j];
+                            const contentB = nodeContents[nodeB.id];
+                            if (!contentB) continue;
+                            
+                            const domainA = nodeA.id.split('-')[0];
+                            const domainB = nodeB.id.split('-')[0];
+                            if (domainA === domainB) continue; 
+                            
+                            const sharedTerms = [];
+                            glossaryKeys.forEach(key => {
+                                const termObj = glossaryDatabase[key];
+                                const termText = termObj.term.toLowerCase();
+                                const keyText = key.toLowerCase();
+                                
+                                const inA = contentA.toLowerCase().includes(termText) || contentA.toLowerCase().includes(keyText);
+                                const inB = contentB.toLowerCase().includes(termText) || contentB.toLowerCase().includes(keyText);
+                                
+                                if (inA && inB) {
+                                    sharedTerms.push(termObj.term);
+                                }
+                            });
+                            
+                            if (sharedTerms.length > 0) {
+                                const exists = window.allConnections.some(c => 
+                                    (c.from === nodeA.id && c.to === nodeB.id) || 
+                                    (c.from === nodeB.id && c.to === nodeA.id)
+                                );
+                                
+                                if (!exists) {
+                                    const titleA = nodeA.querySelector('.node-title')?.innerText || "Capitolo";
+                                    const titleB = nodeB.querySelector('.node-title')?.innerText || "Capitolo";
+                                    newConnections.push({
+                                        from: nodeA.id,
+                                        to: nodeB.id,
+                                        title: `Collegamento Glossario: ${sharedTerms.slice(0, 3).join(', ')}`,
+                                        description: `Connessione automatica stabilita tramite la condivisione di termini chiave del glossario: ${sharedTerms.join(', ')}. Collega il capitolo '${titleA}' con '${titleB}'.`,
+                                        isCustom: true
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    if (newConnections.length > 0) {
+                        window.customConnections = [...window.customConnections, ...newConnections];
+                        localStorage.setItem('lex-custom-connections', JSON.stringify(window.customConnections));
+                        loadCustomConnections();
+                        drawLines();
+                        alert(`🔗 Auto-generazione completata! Sono state create ${newConnections.length} nuove connessioni interdisciplinari basate sui termini condivisi del glossario.`);
+                    } else {
+                        alert(`✨ Nessuna nuova connessione trovata. Tutte le relazioni basate sul glossario sono già tracciate.`);
+                    }
+                } catch (err) {
+                    console.error("Errore nell'auto-generazione delle connessioni:", err);
+                    alert("Si è verificato un errore durante l'auto-generazione.");
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
                 }
             };
 
