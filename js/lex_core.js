@@ -2522,7 +2522,7 @@ const LexCore = {
                     <!-- Version 2.2.0 -->
                     <div class="changelog-version-block">
                         <div class="changelog-version-header">
-                            <span class="changelog-version-num">v2.2.0 (Attuale)</span>
+                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.2.0 (Attuale)</span>
                             <span class="changelog-version-date">18 Giugno 2026</span>
                         </div>
                         <ul class="changelog-version-list">
@@ -2586,6 +2586,26 @@ const LexCore = {
         `;
 
         document.body.appendChild(overlay);
+    },
+
+    _changelogClicks: 0,
+    trackChangelogClick() {
+        this._changelogClicks = (this._changelogClicks || 0) + 1;
+        if (this._changelogClicks === 5) {
+            this._changelogClicks = 0;
+            this.unlockEasterEgg('ee-cronista-scriptorium');
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.frequency.setValueAtTime(880, ctx.currentTime);
+                osc.frequency.setValueAtTime(1200, ctx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                osc.start(); osc.stop(ctx.currentTime + 0.4);
+            } catch(e) {}
+        }
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -2898,7 +2918,8 @@ const LexCore = {
         { id:'ee-alchimista',        cat:'materie',     icon:'🧪', name:'La Pietra Filosofale',           hint:'Trasmutare il piombo in oro richiede la giusta combinazione di elementi.',        desc:'Seleziona consecutivamente le parole "Corpo", "Anima" e "Spirito" in un testo.', page:'*' },
         { id:'ee-decodifica-codex',  cat:'materie',     icon:'🔓', name:'Decodificatore di Codex',        hint:'Risolvi il mistero nascosto nel cifrario medievale...',                           desc:'Decodifica una frase latina nell\'Arena Minigiochi.', page:'minigames.html' },
         { id:'ee-cruciverba-completato',cat:'materie',  icon:'🧩', name:'Scriba Enigmatico',               hint:'Completa tutti i termini dello Scriptorium nel cruciverba...',                    desc:'Completa con successo il cruciverba didattico.', page:'minigames.html' },
-        { id:'ee-caccia-tesoro-completata',cat:'materie',icon:'🏆', name:'Il Saggio di Alessandria',       hint:'Tre glifi antichi si nascondono nelle sintesi di materie diverse...',             desc:'Trova ed evidenzia i 3 glifi antichi nascosti nei capitoli.', page:'*' }
+        { id:'ee-caccia-tesoro-completata',cat:'materie',icon:'🏆', name:'Il Saggio di Alessandria',       hint:'Tre glifi antichi si nascondono nelle sintesi di materie diverse...',             desc:'Trova ed evidenzia i 3 glifi antichi nascosti nei capitoli.', page:'*' },
+        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.2.0 nel modal del Changelog.', page:'*' }
     ],
 
     unlockEasterEgg(id) {

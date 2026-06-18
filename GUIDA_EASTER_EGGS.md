@@ -95,6 +95,11 @@ I segreti sono divisi in tre categorie tematiche principali. Di seguito trovi la
 * **Metodo di sblocco:** Supera una simulazione d'esame nel simulatore (`exam.html`) con un punteggio finale **uguale o superiore al 90%** (27/30).
 - **Effetto:** Il foglio viene marchiato con il timbro a inchiostro rosso reale *"LAUS DEO"*.
 
+#### 🔓 ee-cronista-scriptorium — Il Cronista dello Scriptorium
+* **Indizio:** Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.
+* **Metodo di sblocco:** Apri il **Changelog** nel footer, e fai click **5 volte consecutive** sul numero di versione **`v2.2.0 (Attuale)`**.
+- **Effetto:** Sblocca l'achievement segreto dell'archivista e riproduce un feedback sonoro di successo.
+
 ---
 
 ### 3. Categoria: Materie dello Studio (Curriculum Segreto)
