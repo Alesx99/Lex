@@ -1196,6 +1196,9 @@
                 drawLines();
                 window.closeCustomConnModal();
                 window.toggleEditMode();
+                if (typeof LexCore !== 'undefined' && LexCore.trackConnectionLink) {
+                    LexCore.trackConnectionLink();
+                }
             };
 
             window.deleteCustomConnection = function(fromId, toId) {
@@ -1780,6 +1783,19 @@
                                 isCupid = true;
                                 fromEl.classList.add('heart-pulse');
                                 toEl.classList.add('heart-pulse');
+                                
+                                // Check for ee-messaggio-bottiglia dynamically on drag/render
+                                const xA = fromEl.offsetLeft + fromEl.offsetWidth / 2;
+                                const yA = fromEl.offsetTop + fromEl.offsetHeight / 2;
+                                const xB = toEl.offsetLeft + toEl.offsetWidth / 2;
+                                const yB = toEl.offsetTop + toEl.offsetHeight / 2;
+                                const dist = Math.sqrt((xA - xB) ** 2 + (yA - yB) ** 2);
+                                const threshold = window.innerWidth * 0.6;
+                                if (dist > threshold) {
+                                    if (typeof LexCore !== 'undefined' && LexCore.triggerMessaggioBottiglia) {
+                                        LexCore.triggerMessaggioBottiglia();
+                                    }
+                                }
                             }
                         }
                         

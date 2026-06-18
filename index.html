@@ -717,6 +717,9 @@
 
                     // ── EE #6: Lo Scriptore Segreto ──
                     if (query === 'scriptorium') {
+                        if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                            LexCore.unlockEasterEgg('ee-scriptore');
+                        }
                         countText.textContent = '📜 Capitolo Apocrifo — Dallo Scriptorium';
                         resultsList.innerHTML = `
                             <div class="search-scriptorium-result">
@@ -878,6 +881,9 @@
                 
                 if (word === 'pantheon') {
                     portalError.style.display = 'none';
+                    if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                        LexCore.unlockEasterEgg('ee-portale-atena');
+                    }
                     // starry exit zoom transition
                     document.body.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                     document.body.style.opacity = '0';

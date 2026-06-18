@@ -1656,6 +1656,11 @@ const LexCore = {
                 read.push(chapterId);
                 localStorage.setItem('lex-unique-chapters-read', JSON.stringify(read));
             }
+            // Check for ee-colofone (read 12+ Codicologia chapters)
+            const codicologiaCount = read.filter(path => path.includes('codicologia/')).length;
+            if (codicologiaCount >= 12 && !this.isEggUnlocked('ee-colofone')) {
+                this.unlockEasterEgg('ee-colofone');
+            }
         } catch(e){}
     },
 
@@ -1974,6 +1979,7 @@ const LexCore = {
             window.applyHighlightColor = function(color) {
                 originalApplyHighlightColor(color);
                 if (color !== 'clear') {
+                    LexCore.unlockEasterEgg('ee-cuori-highlight');
                     LexCore.triggerHeartExplosion();
                     LexCore.showParagraphSuccessToast();
                 }
@@ -2004,6 +2010,9 @@ const LexCore = {
                     const triggerKeywords = ['alessio', 'amore', 'fidanzato', 'ti amo', 'love', 'alessandra', 'lex'];
                     const isTrigger = triggerKeywords.some(keyword => question.includes(keyword));
                     if (isTrigger) {
+                        if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                            LexCore.unlockEasterEgg('ee-chatbot-romantico');
+                        }
                         if (window.addUserMessage && window.addBotMessage) {
                             window.addUserMessage(inputField.value.trim());
                             inputField.value = '';
@@ -2042,6 +2051,7 @@ const LexCore = {
 
     // --- SWEET MOTIVATIONAL TOAST ---
     showMotivationalToast() {
+        this.unlockEasterEgg('ee-toast-motivazionale');
         const sweetPhrases = [
             "Sei bravissima, Ale! Un passo alla volta e conquisterai questo esame! 💖",
             "Fiero di te e del tuo impegno, Lex! Ti meriti un grandissimo bacio 😘",
@@ -2165,6 +2175,7 @@ const LexCore = {
 
     // --- EASTER EGG: LOVE LETTER OVERLAY ---
     triggerLoveLetter() {
+        this.unlockEasterEgg('ee-lettera-amore');
         // 1. Rain of hearts
         const rainContainer = document.createElement('div');
         rainContainer.id = 'lex-hearts-rain';
@@ -2310,6 +2321,7 @@ const LexCore = {
     },
 
     startMemoryGame() {
+        this.unlockEasterEgg('ee-memory-game');
         const emojis = ['💖', '🧸', '🌸', '☕', '🍕', '🐱', '👑', '🍫'];
         let cardsData = [...emojis, ...emojis];
         cardsData.sort(() => Math.random() - 0.5);
@@ -2782,6 +2794,7 @@ const LexCore = {
     },
 
     openManoscritto(data) {
+        this.unlockEasterEgg('ee-manoscritto');
         document.getElementById('lex-manoscritto-frag')?.remove();
         const overlay = document.createElement('div');
         overlay.className = 'manoscritto-page-overlay';
@@ -2853,6 +2866,7 @@ const LexCore = {
     },
 
     triggerGhost() {
+        this.unlockEasterEgg('ee-fantasma');
         const quote = this.GHOST_QUOTES[Math.floor(Math.random() * this.GHOST_QUOTES.length)];
         const ghost = document.createElement('div');
         ghost.className = 'ghost-biblioteca';
@@ -2883,6 +2897,7 @@ const LexCore = {
     },
 
     triggerCodexAureus() {
+        this.unlockEasterEgg('ee-codex-aureus');
         if (document.getElementById('lex-codex-aureus')) return;
         const overlay = document.createElement('div');
         overlay.className = 'codex-aureus-overlay';
@@ -2914,6 +2929,7 @@ const LexCore = {
 
     // ── EE #7: Timbro LAUS DEO ──────────────────────────────────────
     triggerLausDeo() {
+        this.unlockEasterEgg('ee-laus-deo');
         if (document.getElementById('lex-laus-deo')) return;
         const stamp = document.createElement('div');
         stamp.className = 'laus-deo-stamp';
@@ -3017,7 +3033,7 @@ const LexCore = {
         { id:'ee-decodifica-codex',  cat:'materie',     icon:'🔓', name:'Decodificatore di Codex',        hint:'Risolvi il mistero nascosto nel cifrario medievale...',                           desc:'Decodifica una frase latina nell\'Arena Minigiochi.', page:'minigames.html' },
         { id:'ee-cruciverba-completato',cat:'materie',  icon:'🧩', name:'Scriba Enigmatico',               hint:'Completa tutti i termini dello Scriptorium nel cruciverba...',                    desc:'Completa con successo il cruciverba didattico.', page:'minigames.html' },
         { id:'ee-caccia-tesoro-completata',cat:'materie',icon:'🏆', name:'Il Saggio di Alessandria',       hint:'Tre glifi antichi si nascondono nelle sintesi di materie diverse...',             desc:'Trova ed evidenzia i 3 glifi antichi nascosti nei capitoli.', page:'*' },
-        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.5.0 nel modal del Changelog.', page:'*' },
+        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.6.0 nel modal del Changelog.', page:'*' },
         { id:'ee-caverna-platone',   cat:'materie',     icon:'🕯️', name:'La Caverna di Platone',          hint:'Ciò che vedi è solo un\'ombra. Spegni le luci e cerca la verità nella roccia.',    desc:'Nella sintesi di Filosofia con tema Scuro, seleziona la parola "Caverna" o "Ombra".', page:'filosofia/*' },
         { id:'ee-stratigrafia',      cat:'materie',     icon:'⛏️', name:'Lo Scavo Archeologico',          hint:'La conoscenza è stratificata. Scava oltre i limiti della pagina.',                desc:'Fai scorrimento continuo (overscroll) verso il basso a fondo pagina per 5 volte.', page:'*' },
         { id:'ee-damnatio-memoriae-quiz',cat:'materie', icon:'🛡️', name:'L\'Eresia Giuridica',            hint:'Certe eresie giuridiche non meritano risposta, solo l\'oblio della censura.',      desc:'Nel Simulatore d\'Esame, in una domanda di Diritto, premi Ctrl + Shift + X.', page:'exam.html' }
