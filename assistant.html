@@ -465,6 +465,18 @@
             
             <!-- Left Side Settings -->
             <aside class="assistant-sidebar" id="assistant-sidebar">
+                <!-- PWA Offline Sync Indicator -->
+                <div class="sidebar-section" id="pwa-sync-section">
+                    <h3 class="sidebar-title">Database Offline PWA</h3>
+                    <div class="model-status-badge">
+                        <div id="pwa-sync-indicator" class="status-indicator ready"></div>
+                        <span id="pwa-sync-status-text">Database offline pronto</span>
+                    </div>
+                    <div id="pwa-sync-progress-bar" style="display:none; width:100%; height:6px; background:rgba(255,255,255,0.05); border-radius:3px; overflow:hidden; margin-top:0.4rem;">
+                        <div id="pwa-sync-progress-fill" style="width:0%; height:100%; background:var(--accent-gold); transition:width 0.2s;"></div>
+                    </div>
+                </div>
+
                 <div class="sidebar-section">
                     <h3 class="sidebar-title">Motore AI</h3>
                     <select id="chat-engine" class="form-select" onchange="toggleCredentialsField(); saveSettings();">
@@ -812,120 +824,77 @@
             sidebar.classList.toggle('open');
         }
 
-        // Parallel summary fetcher to build the Knowledge Base
+        // Parallel summary fetcher to build the Knowledge Base (with IndexedDB fallback)
         async function preloadKnowledgeBase() {
             const statusLabel = document.getElementById('kb-status');
-            statusLabel.textContent = "Caricamento testi di studio in corso...";
+            const syncIndicator = document.getElementById('pwa-sync-indicator');
+            const syncStatus = document.getElementById('pwa-sync-status-text');
+            const syncProgress = document.getElementById('pwa-sync-progress-bar');
+            const syncFill = document.getElementById('pwa-sync-progress-fill');
 
-            const fetchPromises = [];
+            statusLabel.textContent = "Preparazione del database locale...";
+
+            // Connect to IndexedDB
+            let dbReady = false;
+            try {
+                await LexCore.initIndexedDB();
+                dbReady = true;
+            } catch (err) {
+                console.error("IndexedDB not available, falling back to network-only RAG:", err);
+            }
+
+            const filesToLoad = [];
 
             // 1. Diritto: load from knowledge_base/diritto/
             Object.entries(dirittoChapterLinks).forEach(([chapterKey, relPath]) => {
                 const filename = relPath.split('/').pop();
                 const fullUrl = `knowledge_base/diritto/${filename}`;
-                fetchPromises.push(
-                    fetch(fullUrl)
-                        .then(res => {
-                            if (!res.ok) throw new Error(`Fetch failed for ${fullUrl}`);
-                            return res.text();
-                        })
-                        .then(mdText => {
-                            const chapterTitle = quizDatabase[chapterKey]?.title || chapterKey;
-                            const sections = parseSummaryIntoSections('diritto', chapterKey, chapterTitle, mdText);
-                            knowledgeBase.push(...sections);
-                        })
-                        .catch(err => {
-                            console.error(`Error loading diritto chapter ${chapterKey}:`, err);
-                        })
-                );
+                filesToLoad.push({
+                    url: fullUrl,
+                    subject: 'diritto',
+                    chapterKey: chapterKey,
+                    chapterTitle: quizDatabase[chapterKey]?.title || chapterKey
+                });
             });
 
-            // 1b. Diritto Pubblico & Codice completo: load from knowledge_base/diritto/diritto_completo.md
-            const dirittoCompletoUrl = "knowledge_base/diritto/diritto_completo.md";
-            fetchPromises.push(
-                fetch(dirittoCompletoUrl)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`Fetch failed for ${dirittoCompletoUrl}`);
-                        return res.text();
-                    })
-                    .then(mdText => {
-                        const sections = parseSummaryIntoSections('diritto', 'diritto_completo', 'Diritto Pubblico e Codice (Manuale Completo)', mdText);
-                        knowledgeBase.push(...sections);
-                    })
-                    .catch(err => {
-                        console.error(`Error loading complete Diritto text:`, err);
-                    })
-            );
+            // 1b. Diritto Pubblico & Codice completo
+            filesToLoad.push({
+                url: "knowledge_base/diritto/diritto_completo.md",
+                subject: 'diritto',
+                chapterKey: 'diritto_completo',
+                chapterTitle: 'Diritto Pubblico e Codice (Manuale Completo)'
+            });
 
-            // 2. Arte Romana: load the single complete file from knowledge_base/arte_romana/arte_romana_completo.md
-            const romanaUrl = "knowledge_base/arte_romana/arte_romana_completo.md";
-            fetchPromises.push(
-                fetch(romanaUrl)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`Fetch failed for ${romanaUrl}`);
-                        return res.text();
-                    })
-                    .then(mdText => {
-                        const sections = parseSummaryIntoSections('arte_romana', 'arte_romana_completo', 'Arte Romana (Manuale Completo)', mdText);
-                        knowledgeBase.push(...sections);
-                    })
-                    .catch(err => {
-                        console.error(`Error loading complete Roman Art text:`, err);
-                    })
-            );
+            // 2. Arte Romana
+            filesToLoad.push({
+                url: "knowledge_base/arte_romana/arte_romana_completo.md",
+                subject: 'arte_romana',
+                chapterKey: 'arte_romana_completo',
+                chapterTitle: 'Arte Romana (Manuale Completo)'
+            });
 
-            // 2b. Storia Moderna: load the single complete file from knowledge_base/storia/storia_completo.md
-            const storiaUrl = "knowledge_base/storia/storia_completo.md";
-            fetchPromises.push(
-                fetch(storiaUrl)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`Fetch failed for ${storiaUrl}`);
-                        return res.text();
-                    })
-                    .then(mdText => {
-                        const sections = parseSummaryIntoSections('storia', 'storia_completo', 'Storia Moderna (Manuale Completo)', mdText);
-                        knowledgeBase.push(...sections);
-                    })
-                    .catch(err => {
-                        console.error(`Error loading complete Storia Moderna text:`, err);
-                    })
-            );
+            // 2b. Storia Moderna
+            filesToLoad.push({
+                url: "knowledge_base/storia/storia_completo.md",
+                subject: 'storia',
+                chapterKey: 'storia_completo',
+                chapterTitle: 'Storia Moderna (Manuale Completo)'
+            });
 
-            // 3. Storia dell'Arte:
-            // - Load Brunelleschi complete: knowledge_base/storia_arte/brunelleschi_completo.md
-            // - Load Canova complete: knowledge_base/storia_arte/canova_completo.md
-            // - Load fallbacks for other chapters (esperienze, maturo, veneto, barocco, romanticismo, impressionismo, postimpressionismo) from storia_arte/summaries/
-            const brunelleschiUrl = "knowledge_base/storia_arte/brunelleschi_completo.md";
-            fetchPromises.push(
-                fetch(brunelleschiUrl)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`Fetch failed for ${brunelleschiUrl}`);
-                        return res.text();
-                    })
-                    .then(mdText => {
-                        const sections = parseSummaryIntoSections('storia_arte', 'brunelleschi_completo', 'Filippo Brunelleschi (Manuale Completo)', mdText);
-                        knowledgeBase.push(...sections);
-                    })
-                    .catch(err => {
-                        console.error(`Error loading Brunelleschi text:`, err);
-                    })
-            );
+            // 3. Storia dell'Arte
+            filesToLoad.push({
+                url: "knowledge_base/storia_arte/brunelleschi_completo.md",
+                subject: 'storia_arte',
+                chapterKey: 'brunelleschi_completo',
+                chapterTitle: 'Filippo Brunelleschi (Manuale Completo)'
+            });
 
-            const canovaUrl = "knowledge_base/storia_arte/canova_completo.md";
-            fetchPromises.push(
-                fetch(canovaUrl)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`Fetch failed for ${canovaUrl}`);
-                        return res.text();
-                    })
-                    .then(mdText => {
-                        const sections = parseSummaryIntoSections('storia_arte', 'canova_completo', 'Antonio Canova (Manuale Completo)', mdText);
-                        knowledgeBase.push(...sections);
-                    })
-                    .catch(err => {
-                        console.error(`Error loading Canova text:`, err);
-                    })
-            );
+            filesToLoad.push({
+                url: "knowledge_base/storia_arte/canova_completo.md",
+                subject: 'storia_arte',
+                chapterKey: 'canova_completo',
+                chapterTitle: 'Antonio Canova (Manuale Completo)'
+            });
 
             // Load other Storia dell'Arte chapters from summaries/ as fallback
             const fallbackArteChapters = {
@@ -939,27 +908,81 @@
             };
 
             Object.entries(fallbackArteChapters).forEach(([chapterKey, relPath]) => {
-                const fullUrl = `storia_arte/${relPath}`;
-                fetchPromises.push(
-                    fetch(fullUrl)
-                        .then(res => {
-                            if (!res.ok) throw new Error(`Fetch failed for ${fullUrl}`);
-                            return res.text();
-                        })
-                        .then(mdText => {
-                            const chapterTitle = quizDatabase[chapterKey]?.title || chapterKey;
-                            const sections = parseSummaryIntoSections('storia_arte', chapterKey, chapterTitle, mdText);
-                            knowledgeBase.push(...sections);
-                        })
-                        .catch(err => {
-                            console.error(`Error loading fallback history of art chapter ${chapterKey}:`, err);
-                        })
-                );
+                filesToLoad.push({
+                    url: `storia_arte/${relPath}`,
+                    subject: 'storia_arte',
+                    chapterKey: chapterKey,
+                    chapterTitle: quizDatabase[chapterKey]?.title || chapterKey
+                });
             });
+
+            const total = filesToLoad.length;
+            let loadedCount = 0;
+            const fetchPromises = [];
+
+            if (syncIndicator) {
+                syncIndicator.className = 'status-indicator loading';
+                syncStatus.textContent = 'Sync in corso...';
+                syncProgress.style.display = 'block';
+            }
+
+            for (const file of filesToLoad) {
+                const p = (async () => {
+                    let mdText = null;
+
+                    // Try loading from IndexedDB first
+                    if (dbReady) {
+                        try {
+                            const cached = await LexCore.getSummaryFromDB(file.url);
+                            if (cached && cached.text) {
+                                mdText = cached.text;
+                            }
+                        } catch (e) {
+                            console.warn("Cached load failed for:", file.url, e);
+                        }
+                    }
+
+                    // Fallback to fetch if not cached
+                    if (!mdText) {
+                        try {
+                            const res = await fetch(file.url);
+                            if (res.ok) {
+                                mdText = await res.text();
+                                if (dbReady) {
+                                    await LexCore.storeSummaryInDB(file.url, file.subject, file.chapterKey, file.chapterTitle, mdText);
+                                }
+                            } else {
+                                throw new Error(`Status ${res.status}`);
+                            }
+                        } catch (err) {
+                            console.error(`Error loading text for URL ${file.url}:`, err);
+                        }
+                    }
+
+                    if (mdText) {
+                        const sections = parseSummaryIntoSections(file.subject, file.chapterKey, file.chapterTitle, mdText);
+                        knowledgeBase.push(...sections);
+                    }
+
+                    loadedCount++;
+                    const pct = Math.round((loadedCount / total) * 100);
+                    if (syncFill) syncFill.style.width = pct + '%';
+                    if (syncStatus) syncStatus.textContent = `Sync in corso... ${pct}%`;
+                })();
+                fetchPromises.push(p);
+            }
 
             await Promise.all(fetchPromises);
             isKbReady = true;
-            statusLabel.textContent = `Knowledge Base attiva: ${knowledgeBase.length} pagine/argomenti caricati.`;
+            statusLabel.textContent = `Knowledge Base attiva: ${knowledgeBase.length} argomenti pronti offline.`;
+
+            if (syncIndicator) {
+                syncIndicator.className = 'status-indicator ready';
+                syncStatus.textContent = 'Database offline pronto';
+                setTimeout(() => {
+                    syncProgress.style.display = 'none';
+                }, 1000);
+            }
         }
 
         // Fix path mapping for history of art
@@ -1224,7 +1247,7 @@
             return Array.from(output.data);
         }
 
-        // Dual-stage RAG query retriever
+        // Dual-stage RAG query retriever (attaches similarity scores for visual inspection)
         async function retrieveContext(query) {
             if (knowledgeBase.length === 0) return [];
 
@@ -1232,6 +1255,7 @@
             const scored = knowledgeBase.map(sec => {
                 const textToSearch = `${sec.chapterTitle} ${sec.sectionTitle} ${sec.text}`;
                 const score = calculateKeywordScore(textToSearch, query);
+                sec.keywordScore = score;
                 return { section: sec, score };
             });
 
@@ -1253,8 +1277,10 @@
                             const blockEmbedding = await getEmbedding(blockText);
                             if (blockEmbedding) {
                                 const similarity = cosineSimilarity(queryEmbedding, blockEmbedding);
+                                cand.section.similarityScore = similarity;
                                 return { section: cand.section, score: similarity };
                             }
+                            cand.section.similarityScore = 0;
                             return cand;
                         });
 
@@ -1270,7 +1296,10 @@
             }
 
             // Fallback: top 3 keyword matches
-            return candidates.slice(0, 3).map(c => c.section);
+            return candidates.slice(0, 3).map(c => {
+                c.section.similarityScore = null;
+                return c.section;
+            });
         }
 
         // Suggestions
@@ -1378,7 +1407,7 @@
             conversationHistory.push({ role: 'user', text });
         }
 
-        // UI rendering helper for assistant messages (with custom HTML support for links)
+        // UI rendering helper for assistant messages (with custom HTML support for links, RAG inspector, and dynamic quiz)
         function addBotMessage(htmlContent, citations = [], textToSpeak = '') {
             const messagesContainer = document.getElementById('chat-messages');
             const bubble = document.createElement('div');
@@ -1390,7 +1419,7 @@
             
             let citationHtml = '';
             if (citations.length > 0) {
-                citationHtml = `<div class="rag-citations">`;
+                citationHtml = `<div class="rag-citations" style="display:flex; flex-direction:column; gap:0.4rem; margin-top:0.6rem;">`;
                 citations.forEach(c => {
                     const path = getDirittoOrArteOrRomanaPath(c.subject, c.chapterKey, c.sectionTitle);
                     citationHtml += `
@@ -1400,6 +1429,40 @@
                         </div>
                     `;
                 });
+                
+                // RAG Visual Inspector
+                citationHtml += `
+                    <details class="rag-inspector-details" style="margin-top:0.4rem; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-radius:8px; padding:0.5rem;">
+                        <summary style="font-size:0.75rem; font-weight:600; color:var(--accent-gold); cursor:pointer; outline:none; user-select:none;">
+                            🔍 RAG Inspector (Similarità Vettoriale)
+                        </summary>
+                        <div class="rag-inspector-content" style="margin-top:0.4rem; display:flex; flex-direction:column; gap:0.5rem; text-align:left;">
+                `;
+                
+                citations.forEach((c, idx) => {
+                    const scoreText = c.similarityScore !== undefined && c.similarityScore !== null 
+                        ? `Cosine similarity: <strong>${c.similarityScore.toFixed(4)}</strong>`
+                        : `Keyword matching score: <strong>${c.keywordScore || 0}</strong>`;
+                    citationHtml += `
+                        <div style="font-size:0.75rem; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:0.3rem; color:var(--text-secondary);">
+                            <span style="color:var(--text-primary); font-weight:600;">[Fonte ${idx+1}] ${c.chapterTitle} (${c.sectionTitle})</span><br>
+                            <span style="font-size:0.7rem; color:var(--text-muted);">${scoreText}</span>
+                            <div style="font-size:0.7rem; background:rgba(0,0,0,0.2); padding:0.3rem; border-radius:4px; margin-top:0.15rem; max-height:70px; overflow-y:auto; font-family:monospace; line-height:1.3;">
+                                ${escapeHtml(c.text.substring(0, 250))}...
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                citationHtml += `
+                        </div>
+                    </details>
+                    
+                    <button class="btn btn-secondary btn-generate-quiz" onclick="generateQuizFromCitations('${messageId}')" style="margin-top:0.4rem; padding:0.4rem 0.8rem; font-size:0.75rem; display:flex; align-items:center; gap:0.4rem; border-color:var(--accent-gold); color:var(--accent-gold); background:rgba(212,175,55,0.04); align-self:flex-start; width:fit-content;">
+                        ✨ Genera Quiz Rapido (+Punti)
+                    </button>
+                `;
+                
                 citationHtml += `</div>`;
             }
 
@@ -1421,7 +1484,7 @@
             
             messagesContainer.appendChild(bubble);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            conversationHistory.push({ role: 'assistant', text: speakText, html: htmlContent, citations });
+            conversationHistory.push({ role: 'assistant', text: speakText, html: htmlContent, citations, id: messageId });
         }
 
         // Helper to resolve navigation links based on subject
@@ -1939,6 +2002,277 @@ Fornisci una risposta chiara, completa, accademica ed esaustiva. Se ti basi sul 
             tmp.innerHTML = html;
             return tmp.textContent || tmp.innerText || "";
         }
+
+        // --- DYNAMIC AI QUIZ MODAL GENERATOR ---
+        let activeQuizQuestions = [];
+        
+        function showQuizModalLoading() {
+            const modal = document.getElementById('ai-quiz-modal');
+            modal.style.display = 'flex';
+            document.getElementById('quiz-modal-loading').style.display = 'block';
+            document.getElementById('quiz-modal-content').style.display = 'none';
+        }
+        
+        function hideQuizModal() {
+            document.getElementById('ai-quiz-modal').style.display = 'none';
+        }
+        
+        function renderQuizModal(questions) {
+            activeQuizQuestions = questions;
+            document.getElementById('quiz-modal-loading').style.display = 'none';
+            document.getElementById('quiz-modal-content').style.display = 'block';
+            document.getElementById('quiz-feedback-box').style.display = 'none';
+            
+            const list = document.getElementById('quiz-questions-list');
+            list.innerHTML = "";
+            
+            questions.forEach((q, qIdx) => {
+                let optionsHtml = "";
+                q.options.forEach((opt, oIdx) => {
+                    optionsHtml += `
+                        <label style="display:flex; align-items:center; gap:0.6rem; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); padding:0.6rem 1rem; border-radius:8px; margin-bottom:0.4rem; cursor:pointer; font-size:0.9rem; width:100%; box-sizing:border-box;">
+                            <input type="radio" name="ai-quiz-q-${qIdx}" value="${oIdx}" style="accent-color:var(--accent-gold);">
+                            <span>${escapeHtml(opt)}</span>
+                        </label>
+                    `;
+                });
+                
+                list.innerHTML += `
+                    <div style="margin-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:1rem; text-align:left;">
+                        <h4 style="font-size:0.95rem; font-weight:600; margin-bottom:0.6rem; line-height:1.4; color:var(--text-primary);">${qIdx+1}. ${escapeHtml(q.question)}</h4>
+                        <div>${optionsHtml}</div>
+                    </div>
+                `;
+            });
+        }
+        
+        function checkAiQuizAnswers() {
+            let correctCount = 0;
+            const feedbacks = [];
+            
+            activeQuizQuestions.forEach((q, qIdx) => {
+                const selected = document.querySelector(`input[name="ai-quiz-q-${qIdx}"]:checked`);
+                if (!selected) {
+                    feedbacks.push(`Domanda ${qIdx+1}: Nessuna risposta selezionata.`);
+                    return;
+                }
+                const ansIdx = parseInt(selected.value);
+                if (ansIdx === q.correctIndex) {
+                    correctCount++;
+                } else {
+                    feedbacks.push(`Domanda ${qIdx+1}: Errata (Risposta corretta: "${q.options[q.correctIndex]}")`);
+                }
+            });
+            
+            const feedbackBox = document.getElementById('quiz-feedback-box');
+            feedbackBox.style.display = 'block';
+            
+            const pointsEarned = correctCount * 5;
+            
+            // Add points to total
+            let currentPoints = parseInt(localStorage.getItem('lex-total-points') || '0');
+            localStorage.setItem('lex-total-points', currentPoints + pointsEarned);
+            
+            const pointsEl = document.getElementById('lex-points-total');
+            if (pointsEl) pointsEl.textContent = currentPoints + pointsEarned;
+            
+            // Log study activity
+            if (correctCount === 3 && typeof LexCore !== 'undefined' && LexCore.logStudyActivity) {
+                LexCore.logStudyActivity();
+            }
+            
+            // Sound feedback
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.frequency.setValueAtTime(correctCount === 3 ? 830 : 415, ctx.currentTime);
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+                osc.start(); osc.stop(ctx.currentTime + 0.45);
+            } catch(e) {}
+            
+            if (correctCount === 3) {
+                feedbackBox.style.background = 'rgba(16,185,129,0.1)';
+                feedbackBox.style.border = '1px solid #10b981';
+                feedbackBox.innerHTML = `<h3 style="color:#10b981; font-weight:700; font-size:1.1rem;">Superbo! 3/3 Risposte Esatte!</h3>
+                <p style="margin-top:0.4rem; font-size:0.85rem; color:var(--text-secondary);">Hai guadagnato <strong>15 punti accademici!</strong> Le tue conoscenze sono eccellenti.</p>`;
+            } else {
+                feedbackBox.style.background = 'rgba(212,175,55,0.1)';
+                feedbackBox.style.border = '1px solid var(--accent-gold)';
+                feedbackBox.innerHTML = `<h3 style="color:var(--accent-gold); font-weight:700; font-size:1.1rem;">Completato: ${correctCount}/3 risposte corrette</h3>
+                <p style="margin-top:0.4rem; font-size:0.85rem; color:var(--text-secondary);">Hai guadagnato <strong>${pointsEarned} punti accademici!</strong> Errori riscontrati:</p>
+                <ul style="margin-top:0.4rem; padding-left:1.2rem; font-size:0.8rem; color:var(--text-secondary); line-height:1.4; text-align:left;">
+                    ${feedbacks.map(f => `<li>${escapeHtml(f)}</li>`).join('')}
+                </ul>`;
+            }
+        }
+
+        async function queryLlmDirect(engine, key, prompt) {
+            if (engine === 'gemini') {
+                if (!key) throw new Error("Chiave API Gemini mancante.");
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+                if (!res.ok) throw new Error(`Gemini HTTP ${res.status}`);
+                const data = await res.json();
+                return data.candidates[0].content.parts[0].text;
+            } else if (engine === 'ollama') {
+                const host = key || 'http://localhost:11434';
+                const res = await fetch(`${host}/api/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'llama3',
+                        messages: [{ role: 'user', content: prompt }],
+                        stream: false
+                    })
+                });
+                if (!res.ok) throw new Error(`Ollama HTTP ${res.status}`);
+                const data = await res.json();
+                return data.message?.content || data.response;
+            } else if (engine === 'nvidia') {
+                if (!key) throw new Error("Chiave API NVIDIA NIM mancante.");
+                const res = await fetch("https://corsproxy.io/?https://integrate.api.nvidia.com/v1/chat/completions", {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${key}`
+                    },
+                    body: JSON.stringify({
+                        model: 'meta/llama-3.1-8b-instruct',
+                        messages: [{ role: 'user', content: prompt }],
+                        temperature: 0.2,
+                        stream: false
+                    })
+                });
+                if (!res.ok) throw new Error(`NVIDIA NIM HTTP ${res.status}`);
+                const data = await res.json();
+                return data.choices[0].message.content;
+            } else if (engine === 'openrouter') {
+                if (!key) throw new Error("Chiave API OpenRouter mancante.");
+                const modelId = document.getElementById('chat-model').value === 'custom' 
+                    ? document.getElementById('chat-custom-model').value.trim() 
+                    : document.getElementById('chat-model').value;
+                const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${key}`,
+                        'HTTP-Referer': window.location.href,
+                        'X-Title': 'Lex Tutor'
+                    },
+                    body: JSON.stringify({
+                        model: modelId || 'meta-llama/llama-3.1-8b-instruct',
+                        messages: [{ role: 'user', content: prompt }],
+                        temperature: 0.2,
+                        stream: false
+                    })
+                });
+                if (!res.ok) throw new Error(`OpenRouter HTTP ${res.status}`);
+                const data = await res.json();
+                return data.choices[0].message.content;
+            } else if (engine === 'lm-studio') {
+                const host = key || 'http://localhost:12345';
+                const res = await fetch(`${host}/v1/chat/completions`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        messages: [{ role: 'user', content: prompt }],
+                        temperature: 0.2,
+                        stream: false
+                    })
+                });
+                if (!res.ok) throw new Error(`LM Studio HTTP ${res.status}`);
+                const data = await res.json();
+                return data.choices[0].message.content;
+            }
+            throw new Error("Engine non supportato per la generazione dei quiz.");
+        }
+
+        async function generateQuizFromCitations(messageId) {
+            const histItem = conversationHistory.find(h => h.id === messageId);
+            if (!histItem || !histItem.citations || histItem.citations.length === 0) {
+                alert("Impossibile trovare le fonti per questo messaggio.");
+                return;
+            }
+            
+            const contextText = histItem.citations.map((c, idx) => `[Fonte ${idx+1}]: ${c.text}`).join('\n\n');
+            const prompt = `Sei un generatore di quiz accademico preciso ed affidabile. Basandoti RIGOROSAMENTE sul seguente testo di studio, genera un quiz di 3 domande a risposta multipla in lingua italiana.
+            
+Il quiz deve essere formattato in formato JSON valido, contenente un array chiamato "quiz" con esattamente 3 oggetti. Ogni oggetto deve contenere:
+- "question" (stringa): la domanda
+- "options" (array di 4 stringhe): le 4 opzioni di risposta
+- "correctIndex" (intero): l'indice zero-based (0, 1, 2 o 3) dell'opzione corretta.
+
+Rispondi esclusivamente con il JSON valido. Nessun preambolo, nessuna spiegazione e nessun tag markdown come \`\`\`json.
+
+Testo di studio:
+${contextText}`;
+
+            showQuizModalLoading();
+
+            try {
+                const engine = document.getElementById('chat-engine').value;
+                const credentials = document.getElementById('chat-key').value.trim();
+                const systemPrompt = "Sei un generatore di quiz JSON.";
+                
+                let jsonResponseText = "";
+                
+                if (engine === 'local') {
+                    if (webLlmEngine) {
+                        const reply = await webLlmEngine.chat.completions.create({
+                            messages: [
+                                { role: 'system', content: systemPrompt },
+                                { role: 'user', content: prompt }
+                            ],
+                            temperature: 0.1,
+                        });
+                        jsonResponseText = reply.choices[0].message.content;
+                    } else {
+                        throw new Error("L'IA Generativa Locale (WebLLM) non è caricata. Per generare quiz offline, attiva SmolLM o Llama nella barra laterale, oppure passa a un motore cloud (Gemini).");
+                    }
+                } else {
+                    jsonResponseText = await queryLlmDirect(engine, credentials, prompt);
+                }
+                
+                const cleanJson = jsonResponseText.replace(/```json/g, "").replace(/```/g, "").trim();
+                const quizData = JSON.parse(cleanJson);
+                
+                if (!quizData.quiz || quizData.quiz.length < 3) {
+                    throw new Error("Il formato del quiz generato non è valido.");
+                }
+                
+                renderQuizModal(quizData.quiz);
+            } catch (err) {
+                console.error(err);
+                hideQuizModal();
+                alert("Errore nella generazione del quiz: " + err.message);
+            }
+        }
     </script>
+    <!-- Dynamic AI Quiz Modal -->
+    <div id="ai-quiz-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(5,7,12,0.85); backdrop-filter:blur(8px); z-index:20000; align-items:center; justify-content:center; padding:1rem; box-sizing:border-box;">
+        <div class="quiz-modal-card" style="background:var(--bg-card, #161c2d); border:1px solid var(--border-color, rgba(255,255,255,0.08)); border-radius:24px; padding:2rem; max-width:550px; width:100%; box-shadow: 0 20px 50px rgba(0,0,0,0.5); color:var(--text-primary, #fff); position:relative; max-height:90vh; overflow-y:auto; box-sizing:border-box;">
+            <button onclick="hideQuizModal()" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:var(--text-muted); font-size:1.5rem; cursor:pointer;">&times;</button>
+            <div id="quiz-modal-loading" style="text-align:center; padding:2rem;">
+                <span class="spinner" style="display:inline-block; width:30px; height:30px; border:3px solid rgba(255,255,255,0.1); border-top-color:var(--accent-gold); border-radius:50%; animation:spin 1s infinite linear;"></span>
+                <p style="margin-top:1rem; color:var(--text-secondary); font-size:0.95rem;">Generazione del quiz personalizzato basato sulle fonti in corso...</p>
+            </div>
+            <div id="quiz-modal-content" style="display:none;">
+                <h2 style="font-family:var(--font-serif); font-size:1.6rem; color:var(--accent-gold); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; margin-top:0;">
+                    <span>🎓</span> Quiz Rapido sull'Argomento
+                </h2>
+                <div id="quiz-questions-list" style="margin-bottom:1rem;"></div>
+                <button onclick="checkAiQuizAnswers()" class="btn" style="background:var(--accent-gold); color:#000; font-weight:700; width:100%; padding:0.8rem; border-radius:12px; margin-top:1.5rem; cursor:pointer; border:none;">Invia Risposte</button>
+                <div id="quiz-feedback-box" style="margin-top:1.2rem; display:none; padding:1rem; border-radius:12px; font-size:0.9rem;"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

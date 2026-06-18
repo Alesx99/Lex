@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
     <!-- Lex Core -->
     <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/search_db.js"></script>
     <script src="js/lex_core.js"></script>
     <style>
         .analytics-grid {
@@ -46,6 +47,12 @@
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(11, 15, 25, 0.9) 100%);
             border: 1px solid var(--accent-gold);
             text-align: center;
+        }
+
+        .heatmap-card {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
         }
 
         .prediction-score {
@@ -155,6 +162,27 @@
                 </div>
             </div>
 
+            <!-- STUDY HEATMAP -->
+            <div class="stat-card heatmap-card">
+                <div class="stat-label">Calendario di Studio (Ultimo Anno)</div>
+                <div style="overflow-x: auto; width: 100%; padding-bottom: 0.5rem; scrollbar-width: thin;">
+                    <div id="study-heatmap-container" style="min-width: 700px; display: flex; justify-content: center; align-items: center;">
+                        <!-- SVG Heatmap will be injected here -->
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-secondary); margin-top: -0.5rem;">
+                    <span>Attività registrata in base alle sintesi consultate o ai Pomodoro completati.</span>
+                    <div style="display: flex; align-items: center; gap: 4px;">
+                        <span>Meno</span>
+                        <div style="width: 10px; height: 10px; background: rgba(255,255,255,0.05); border-radius: 2px;"></div>
+                        <div style="width: 10px; height: 10px; background: #c8b273; border-radius: 2px; opacity: 0.4;"></div>
+                        <div style="width: 10px; height: 10px; background: #c8b273; border-radius: 2px; opacity: 0.7;"></div>
+                        <div style="width: 10px; height: 10px; background: var(--accent-gold); border-radius: 2px;"></div>
+                        <span>Più</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- TIME STATS -->
             <div class="stat-card">
                 <div class="stat-label">Tempo Totale Studio</div>
@@ -162,6 +190,15 @@
                 <div class="chart-container" id="time-chart">
                     <!-- SVG Chart will be injected -->
                 </div>
+            </div>
+
+            <!-- TIME ESTIMATOR -->
+            <div class="stat-card">
+                <div class="stat-label">Stima Tempo di Studio Rimanente</div>
+                <div class="stat-value" id="remaining-study-time">0h</div>
+                <p style="color:var(--text-secondary); font-size:0.85rem;" id="remaining-exams-desc">Caricamento esami rimanenti...</p>
+                <div class="prob-bar-bg" style="margin: 0.5rem 0;"><div class="prob-bar-fill" id="remaining-time-bar" style="width: 0%; background: var(--accent-blue); box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);"></div></div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Stima basata su 45 minuti per capitolo non completato delle materie attive.</span>
             </div>
 
             <!-- SUBJECT READINESS -->
@@ -253,6 +290,8 @@
                 document.getElementById('total-lp').textContent = localStorage.getItem('lex-total-points') || '0';
                 
                 this.renderTimeChart();
+                this.renderHeatmap();
+                this.calculateRemainingTime();
             },
 
             calculateReadiness(subId) {
@@ -340,6 +379,186 @@
 
             animateBars() {
                 // Bars already handled by CSS transitions mostly, but we can trigger specific triggers here
+            },
+
+            renderHeatmap() {
+                const container = document.getElementById('study-heatmap-container');
+                if (!container) return;
+
+                let activity = {};
+                try {
+                    activity = JSON.parse(localStorage.getItem('lex-study-activity') || '{}');
+                } catch(e) {}
+
+                const today = new Date();
+                const daysInYear = 365;
+                const startDate = new Date(today);
+                startDate.setDate(today.getDate() - daysInYear);
+                
+                const dayOfWeek = startDate.getDay();
+                const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                startDate.setDate(startDate.getDate() - diffToMonday);
+
+                const cellSize = 10;
+                const cellGap = 3;
+                const textSpaceLeft = 30;
+                const textSpaceTop = 15;
+                const numWeeks = 53;
+                
+                const svgWidth = textSpaceLeft + (numWeeks * (cellSize + cellGap));
+                const svgHeight = textSpaceTop + (7 * (cellSize + cellGap));
+
+                let svgHtml = `<svg viewBox="0 0 ${svgWidth} ${svgHeight}" width="100%" height="100%" style="font-family: var(--font-sans); font-size: 8px; fill: var(--text-secondary);">`;
+
+                const dayLabels = ["Lu", "", "Me", "", "Ve", "", "Do"];
+                for (let i = 0; i < 7; i++) {
+                    if (dayLabels[i]) {
+                        const y = textSpaceTop + i * (cellSize + cellGap) + 8;
+                        svgHtml += `<text x="5" y="${y}" fill="var(--text-muted)">${dayLabels[i]}</text>`;
+                    }
+                }
+
+                const months = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
+                let lastMonth = -1;
+
+                const cursorDate = new Date(startDate);
+                
+                for (let w = 0; w < numWeeks; w++) {
+                    const x = textSpaceLeft + w * (cellSize + cellGap);
+                    
+                    const colDate = new Date(cursorDate);
+                    const currentMonth = colDate.getMonth();
+                    if (currentMonth !== lastMonth && w % 4 === 0) {
+                        svgHtml += `<text x="${x}" y="10" fill="var(--text-muted)">${months[currentMonth]}</text>`;
+                        lastMonth = currentMonth;
+                    }
+
+                    for (let d = 0; d < 7; d++) {
+                        const dateStr = cursorDate.toISOString().split('T')[0];
+                        const count = activity[dateStr] || 0;
+                        const y = textSpaceTop + d * (cellSize + cellGap);
+
+                        let fill = 'rgba(255, 255, 255, 0.05)';
+                        let opacity = '1';
+                        if (count > 0) {
+                            if (count <= 1) {
+                                fill = '#c8b273';
+                                opacity = '0.4';
+                            } else if (count <= 3) {
+                                fill = '#c8b273';
+                                opacity = '0.7';
+                            } else {
+                                fill = 'var(--accent-gold)';
+                            }
+                        }
+
+                        const formattedDate = cursorDate.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
+                        const tooltip = `${count} attività il ${formattedDate}`;
+
+                        svgHtml += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" fill="${fill}" opacity="${opacity}">
+                            <title>${tooltip}</title>
+                        </rect>`;
+
+                        cursorDate.setDate(cursorDate.getDate() + 1);
+                    }
+                }
+
+                svgHtml += `</svg>`;
+                container.innerHTML = svgHtml;
+            },
+
+            calculateRemainingTime() {
+                let studyPlan = [];
+                try {
+                    const stored = localStorage.getItem('lex-exams-passed');
+                    if (stored) {
+                        studyPlan = JSON.parse(stored);
+                    } else {
+                        studyPlan = [
+                            { id: "diritto", name: "Diritto dei Beni Culturali", cfu: 9, passed: false, subject: "diritto" },
+                            { id: "arte", name: "Storia dell'Arte Moderna", cfu: 12, passed: false, subject: "arte" },
+                            { id: "romana", name: "Archeologia e Arte Romana", cfu: 6, passed: false, subject: "romana" },
+                            { id: "storia", name: "Storia Moderna", cfu: 6, passed: false, subject: "storia" },
+                            { id: "codicologia", name: "Codicologia", cfu: 9, passed: false, subject: "codicologia" },
+                            { id: "filosofia", name: "Filosofia Estetica", cfu: 6, passed: false, subject: "filosofia" },
+                            { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, subject: "letteratura" },
+                            { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, subject: "tesi" }
+                        ];
+                    }
+                } catch(e) {
+                    studyPlan = [];
+                }
+
+                let readChapters = [];
+                try {
+                    readChapters = JSON.parse(localStorage.getItem('lex-unique-chapters-read') || '[]');
+                } catch(e) {}
+
+                let totalChaptersCount = 0;
+                let remainingChaptersCount = 0;
+                let uncompletedExamsCount = 0;
+
+                studyPlan.forEach(exam => {
+                    const subjKey = exam.subject || exam.id;
+                    let mappedSubj = subjKey;
+                    if (subjKey === 'romana') mappedSubj = 'arte_romana';
+
+                    let chapters = [];
+                    if (typeof searchDatabase !== 'undefined') {
+                        chapters = searchDatabase.filter(item => item.subject === mappedSubj);
+                    }
+                    
+                    let totalCh = chapters.length;
+                    if (totalCh === 0) {
+                        const cfu = exam.cfu || 6;
+                        totalCh = Math.max(6, cfu * 2);
+                    }
+
+                    totalChaptersCount += totalCh;
+
+                    if (exam.passed) {
+                        // Completed
+                    } else {
+                        uncompletedExamsCount++;
+                        let readCount = 0;
+                        if (chapters.length > 0) {
+                            readCount = readChapters.filter(path => {
+                                return chapters.some(ch => ch.navPath && path.includes(ch.navPath));
+                            }).length;
+                        } else {
+                            readCount = readChapters.filter(path => path.includes(subjKey)).length;
+                        }
+                        
+                        readCount = Math.min(totalCh, readCount);
+                        remainingChaptersCount += (totalCh - readCount);
+                    }
+                });
+
+                const remainingMinutes = remainingChaptersCount * 45;
+                const remainingHours = Math.round(remainingMinutes / 60);
+
+                const remainingTimeEl = document.getElementById('remaining-study-time');
+                const remainingDescEl = document.getElementById('remaining-exams-desc');
+                const remainingBarEl = document.getElementById('remaining-time-bar');
+
+                if (remainingTimeEl) {
+                    remainingTimeEl.textContent = `${remainingHours}h`;
+                }
+
+                if (remainingDescEl) {
+                    if (uncompletedExamsCount === 0) {
+                        remainingDescEl.textContent = "Tutti gli esami completati! Congratulazioni! 🎉";
+                    } else {
+                        remainingDescEl.textContent = `${uncompletedExamsCount} esami rimanenti (${remainingChaptersCount} capitoli da studiare)`;
+                    }
+                }
+
+                if (remainingBarEl) {
+                    const totalNeeded = totalChaptersCount * 45;
+                    const completedTime = (totalChaptersCount - remainingChaptersCount) * 45;
+                    const percent = totalNeeded > 0 ? Math.min(100, Math.round((completedTime / totalNeeded) * 100)) : 100;
+                    remainingBarEl.style.width = `${percent}%`;
+                }
             }
         };
 

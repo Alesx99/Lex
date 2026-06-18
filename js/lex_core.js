@@ -59,6 +59,7 @@ const LexCore = {
         this.initTTS();
         this.injectUpdateButtons();
         this.injectFooterSecretLink();
+        this.injectFooterChangelogLink();
 
         // Track visited pages for achievements
         try {
@@ -79,6 +80,12 @@ const LexCore = {
         this.updateBrandName();
         // Init hidden easter eggs
         this.initEasterEggs();
+        this.initIndexedDB().catch(e => console.error("IndexedDB initialization error:", e));
+        
+        // Log study activity if viewing a summary/chapter
+        if (window.location.search.includes('open=') || window.location.pathname.includes('/summaries/')) {
+            this.logStudyActivity();
+        }
     },
 
 
@@ -1986,6 +1993,21 @@ const LexCore = {
                 return originalSendMessage.apply(this, arguments);
             };
         }
+
+        // E. Watch for markdown summary rendering to inject treasure hunt glyphs
+        if (typeof MutationObserver !== 'undefined') {
+            const observer = new MutationObserver((mutations) => {
+                for (let mutation of mutations) {
+                    if (mutation.addedNodes.length > 0) {
+                        const view = document.getElementById('markdown-view') || document.querySelector('.markdown-view');
+                        if (view && !view.querySelector('.treasure-glyph')) {
+                            LexCore.injectTreasureHuntGlyphs();
+                        }
+                    }
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
     },
 
     // --- SWEET MOTIVATIONAL TOAST ---
@@ -2439,6 +2461,133 @@ const LexCore = {
         }, 1000);
     },
 
+    injectFooterChangelogLink() {
+        setTimeout(() => {
+            const footer = document.querySelector('footer');
+            if (footer && !document.getElementById('lex-footer-changelog-btn')) {
+                const link = document.createElement('a');
+                link.id = 'lex-footer-changelog-btn';
+                link.href = '#';
+                link.className = 'lex-footer-changelog-btn';
+                link.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; vertical-align:middle;">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Changelog 📋
+                `;
+                
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showChangelogModal();
+                });
+
+                const secretsBtn = document.getElementById('lex-footer-secrets-btn');
+                const pwaBtn = document.getElementById('pwa-update-btn');
+                if (secretsBtn) {
+                    footer.insertBefore(link, secretsBtn);
+                } else if (pwaBtn) {
+                    footer.insertBefore(link, pwaBtn);
+                } else {
+                    footer.appendChild(link);
+                }
+            }
+        }, 1200);
+    },
+
+    showChangelogModal() {
+        const existing = document.getElementById('changelog-modal');
+        if (existing) existing.remove();
+
+        const overlay = document.createElement('div');
+        overlay.id = 'changelog-modal';
+        overlay.className = 'changelog-modal-overlay';
+        
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
+
+        overlay.innerHTML = `
+            <div class="changelog-modal-card">
+                <div class="changelog-modal-header">
+                    <h3>📜 Registro Modifiche (Changelog)</h3>
+                    <button class="changelog-modal-close" onclick="document.getElementById('changelog-modal').remove()">&times;</button>
+                </div>
+                <div class="changelog-modal-body">
+                    <!-- Version 2.2.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num">v2.2.0 (Attuale)</span>
+                            <span class="changelog-version-date">18 Giugno 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Pianificatore:</strong> Lavagna Kanban interattiva con drag-and-drop per la gestione delle attività di studio giornaliere, salvataggio persistente in <code>localStorage</code> e feedback sonori.</li>
+                            <li><strong>Statistiche di Studio:</strong> Grafico Heatmap in stile GitHub (Calendario di Studio) e stimatore del tempo rimanente basato sui capitoli non ancora consultati (45 min/capitolo).</li>
+                            <li><strong>Esportazione Calendario:</strong> Esportazione delle tabelle di marcia in file standard <code>.ics</code> (iCal) importabili in Google Calendar ed Apple Calendar.</li>
+                            <li><strong>Caccia al Tesoro:</strong> Aggiunti glifi interattivi misteriosi (<code>🏺</code>, <code>⚖️</code>, <code>✒️</code>) nascosti nei riassunti delle materie per sbloccare l'Easter Egg "Il Saggio di Alessandria".</li>
+                        </ul>
+                    </div>
+
+                    <!-- Version 2.1.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num">v2.1.0</span>
+                            <span class="changelog-version-date">Giugno 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Supporto Offline:</strong> Integrazione del database IndexedDB (<code>LexKnowledgeBase</code>) per memorizzare in cache le sintesi delle materie e consentire l'utilizzo del RAG offline.</li>
+                            <li><strong>RAG Inspector:</strong> Sezione di ispezione del contesto RAG nel pannello Assistente, con punteggi di similarità cosina e match di parole chiave.</li>
+                            <li><strong>AI Quiz:</strong> Generatore di quiz rapidi a scelta multipla basato sul contesto RAG (+15 punti di ricompensa per risposte corrette).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Version 2.0.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num">v2.0.0</span>
+                            <span class="changelog-version-date">Maggio 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Arena Minigiochi:</strong> Aggiunti i giochi interattivi "Decodifica il Codex" (decifrazione medievale con slider ROT) e "Cruciverba dello Scriptorium" (cruciverba 5x5).</li>
+                            <li><strong>Classifica Copisti:</strong> Scriptorium Board con 4 copisti storici concorrenti che guadagnano punti dinamicamente.</li>
+                            <li><strong>Sistema Easter Eggs:</strong> Aggiunto il registro degli Easter Eggs con 7 obiettivi segreti dello Scriptorium.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Version 1.5.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num">v1.5.0</span>
+                            <span class="changelog-version-date">Aprile 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Simulatore d'Esame:</strong> Rilascio del motore per simulare gli esami universitari con calcolo statistico del voto di superamento.</li>
+                            <li><strong>Flashcards Hub:</strong> Sistema di ripasso attivo programmato (SRS) basato sull'algoritmo di intervallo.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Version 1.0.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num">v1.0.0</span>
+                            <span class="changelog-version-date">Marzo 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Lancio del Portale:</strong> Rilascio iniziale di Lex Studiorum con lezioni interattive di Diritto, Cultura Greca, Codicologia e Storia.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+    },
+
     // ═══════════════════════════════════════════════════════════════
     // EASTER EGGS — 7 SEGRETI DELLO SCRIPTORIUM
     // ═══════════════════════════════════════════════════════════════
@@ -2747,6 +2896,9 @@ const LexCore = {
         { id:'ee-ghigliottina',      cat:'materie',     icon:'⚔️', name:'Il Taglio della Storia',         hint:'A Versailles le teste cadono velocemente... interrompi il flusso.',               desc:'Nella Linea del Tempo, trascina lo slider dall\'anno 1789 al 1793 velocemente.', page:'timeline.html' },
         { id:'ee-notte-stellata',    cat:'materie',     icon:'🌌', name:'Il Delirio di Van Gogh',         hint:'La follia creativa deforma la realtà della pagina.',                               desc:'Apri la pagina Analytics dopo aver studiato tra le 02:00 e le 05:00 del mattino.', page:'analytics.html' },
         { id:'ee-alchimista',        cat:'materie',     icon:'🧪', name:'La Pietra Filosofale',           hint:'Trasmutare il piombo in oro richiede la giusta combinazione di elementi.',        desc:'Seleziona consecutivamente le parole "Corpo", "Anima" e "Spirito" in un testo.', page:'*' },
+        { id:'ee-decodifica-codex',  cat:'materie',     icon:'🔓', name:'Decodificatore di Codex',        hint:'Risolvi il mistero nascosto nel cifrario medievale...',                           desc:'Decodifica una frase latina nell\'Arena Minigiochi.', page:'minigames.html' },
+        { id:'ee-cruciverba-completato',cat:'materie',  icon:'🧩', name:'Scriba Enigmatico',               hint:'Completa tutti i termini dello Scriptorium nel cruciverba...',                    desc:'Completa con successo il cruciverba didattico.', page:'minigames.html' },
+        { id:'ee-caccia-tesoro-completata',cat:'materie',icon:'🏆', name:'Il Saggio di Alessandria',       hint:'Tre glifi antichi si nascondono nelle sintesi di materie diverse...',             desc:'Trova ed evidenzia i 3 glifi antichi nascosti nei capitoli.', page:'*' }
     ],
 
     unlockEasterEgg(id) {
@@ -3471,6 +3623,263 @@ const LexCore = {
             }
         }, 400);
     },
+
+    // --- INDEXEDDB CACHING & SYNC ---
+    db: null,
+    async initIndexedDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open('LexKnowledgeBase', 2);
+            request.onerror = (e) => reject(e);
+            request.onsuccess = (e) => {
+                this.db = e.target.result;
+                resolve(this.db);
+            };
+            request.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains('summaries')) {
+                    db.createObjectStore('summaries', { keyPath: 'navPath' });
+                }
+            };
+        });
+    },
+
+    async storeSummaryInDB(navPath, subject, chapterTag, chapterTitle, text) {
+        if (!this.db) await this.initIndexedDB();
+        return new Promise((resolve, reject) => {
+            const tx = this.db.transaction('summaries', 'readwrite');
+            const store = tx.objectStore('summaries');
+            store.put({
+                navPath,
+                subject,
+                chapterTag,
+                chapterTitle,
+                text,
+                syncedAt: Date.now()
+            });
+            tx.oncomplete = () => resolve();
+            tx.onerror = (e) => reject(e);
+        });
+    },
+
+    async getSummaryFromDB(navPath) {
+        if (!this.db) await this.initIndexedDB();
+        return new Promise((resolve, reject) => {
+            const tx = this.db.transaction('summaries', 'readonly');
+            const store = tx.objectStore('summaries');
+            const req = store.get(navPath);
+            req.onsuccess = (e) => resolve(e.target.result);
+            req.onerror = (e) => reject(e);
+        });
+    },
+
+    async getAllSummariesFromDB() {
+        if (!this.db) await this.initIndexedDB();
+        return new Promise((resolve, reject) => {
+            const tx = this.db.transaction('summaries', 'readonly');
+            const store = tx.objectStore('summaries');
+            const req = store.getAll();
+            req.onsuccess = (e) => resolve(e.target.result || []);
+            req.onerror = (e) => reject(e);
+        });
+    },
+
+    async loadSearchDatabaseIfNeeded() {
+        if (typeof searchDatabase !== 'undefined') return searchDatabase;
+        return new Promise((resolve) => {
+            const prefix = window.location.pathname.includes('/summaries/') || 
+                           window.location.pathname.includes('/storia/') || 
+                           window.location.pathname.includes('/diritto/') || 
+                           window.location.pathname.includes('/arte_romana/') ||
+                           window.location.pathname.includes('/storia_arte/') ||
+                           window.location.pathname.includes('/codicologia/') ||
+                           window.location.pathname.includes('/arte_contemporanea/') ||
+                           window.location.pathname.includes('/arte_medievale/') ||
+                           window.location.pathname.includes('/cristiana/') ||
+                           window.location.pathname.includes('/cultura_greca/') ||
+                           window.location.pathname.includes('/geografia/') ||
+                           window.location.pathname.includes('/inglese/') ||
+                           window.location.pathname.includes('/laboratorio/') ||
+                           window.location.pathname.includes('/letteratura_italiana/') ||
+                           window.location.pathname.includes('/letteratura_latina/') ||
+                           window.location.pathname.includes('/museologia/') ||
+                           window.location.pathname.includes('/restauro/') ||
+                           window.location.pathname.includes('/tesi/') ||
+                           window.location.pathname.includes('/storia_contemporanea/') ||
+                           window.location.pathname.includes('/storia_medievale/')
+                           ? '../' : '';
+            const script = document.createElement('script');
+            script.src = `${prefix}js/search_db.js`;
+            script.onload = () => resolve(searchDatabase);
+            script.onerror = () => {
+                console.error("Impossibile caricare search_db.js");
+                resolve([]);
+            };
+            document.head.appendChild(script);
+        });
+    },
+
+    async startBackgroundSync(onProgress) {
+        try {
+            await this.initIndexedDB();
+            const dbList = await this.loadSearchDatabaseIfNeeded();
+            if (!dbList || dbList.length === 0) return;
+            
+            const total = dbList.length;
+            let count = 0;
+            
+            for (const item of dbList) {
+                const navPath = item.navPath;
+                const existing = await this.getSummaryFromDB(navPath);
+                if (existing) {
+                    count++;
+                    if (onProgress) onProgress(count, total, item.title);
+                    continue;
+                }
+
+                const fetchUrl = this.getFetchUrlFromNavPath(navPath);
+                if (!fetchUrl) {
+                    count++;
+                    if (onProgress) onProgress(count, total, item.title);
+                    continue;
+                }
+
+                try {
+                    const res = await fetch(fetchUrl);
+                    if (res.ok) {
+                        const text = await res.text();
+                        await this.storeSummaryInDB(navPath, item.subject, item.chapterTag, item.title, text);
+                    }
+                } catch (err) {
+                    console.error(`Errore nel sync di ${fetchUrl}:`, err);
+                }
+                
+                count++;
+                if (onProgress) onProgress(count, total, item.title);
+            }
+        } catch (e) {
+            console.error("Errore generico nel background sync:", e);
+        }
+    },
+
+    getFetchUrlFromNavPath(navPath) {
+        const match = navPath.match(/^([^/]+)\/index\.html\?open=(.+)$/);
+        if (match) {
+            const prefix = window.location.pathname.includes('/summaries/') || 
+                           window.location.pathname.includes('/storia/') || 
+                           window.location.pathname.includes('/diritto/') || 
+                           window.location.pathname.includes('/arte_romana/') ||
+                           window.location.pathname.includes('/storia_arte/') ||
+                           window.location.pathname.includes('/codicologia/') ||
+                           window.location.pathname.includes('/arte_contemporanea/') ||
+                           window.location.pathname.includes('/arte_medievale/') ||
+                           window.location.pathname.includes('/cristiana/') ||
+                           window.location.pathname.includes('/cultura_greca/') ||
+                           window.location.pathname.includes('/geografia/') ||
+                           window.location.pathname.includes('/inglese/') ||
+                           window.location.pathname.includes('/laboratorio/') ||
+                           window.location.pathname.includes('/letteratura_italiana/') ||
+                           window.location.pathname.includes('/letteratura_latina/') ||
+                           window.location.pathname.includes('/museologia/') ||
+                           window.location.pathname.includes('/restauro/') ||
+                           window.location.pathname.includes('/tesi/') ||
+                           window.location.pathname.includes('/storia_contemporanea/') ||
+                           window.location.pathname.includes('/storia_medievale/')
+                           ? '../' : '';
+            return `${prefix}${match[1]}/${match[2]}`;
+        }
+        return null;
+    },
+
+    // --- CACCIA AL TESORO GLYPHS INJECTION ---
+    injectTreasureHuntGlyphs() {
+        const view = document.getElementById('markdown-view') || document.querySelector('.markdown-view');
+        if (!view) return;
+        if (view.querySelector('.treasure-glyph')) return;
+        
+        const path = window.location.pathname;
+        let glyph = null;
+        let key = null;
+        let riddle = '';
+        
+        if (path.includes('cultura_greca')) {
+            glyph = '🏺';
+            key = 'greca';
+            riddle = 'Indovinello di Atena: "Custodisco l\'olio e il vino, plasmata dall\'argilla antica. Mi hai trovato! (1/3)"';
+        } else if (path.includes('diritto')) {
+            glyph = '⚖️';
+            key = 'diritto';
+            riddle = 'Indovinello di Giustizia: "Bilancio la colpa e il merito, ma non sono un mercante. Mi hai trovato! (2/3)"';
+        } else if (path.includes('codicologia')) {
+            glyph = '✒️';
+            key = 'codicologia';
+            riddle = 'Indovinello del Copista: "Traccio segni sull\'antica pergamena, intinta nel calamaio. Mi hai trovato! (3/3)"';
+        }
+        
+        if (glyph) {
+            const paras = view.querySelectorAll('p');
+            if (paras.length > 0) {
+                const targetPara = paras[Math.min(3, paras.length - 1)];
+                const span = document.createElement('span');
+                span.className = 'treasure-glyph';
+                span.style.cursor = 'pointer';
+                span.style.marginLeft = '8px';
+                span.style.fontSize = '1.2rem';
+                span.style.display = 'inline-block';
+                span.style.transition = 'all 0.3s';
+                span.style.filter = 'grayscale(100%) opacity(0.4)';
+                span.title = 'Glifo misterioso... Cliccami!';
+                span.innerHTML = glyph;
+                
+                span.addEventListener('mouseover', () => {
+                    span.style.filter = 'none';
+                    span.style.transform = 'scale(1.2) rotate(10deg)';
+                });
+                span.addEventListener('mouseout', () => {
+                    span.style.filter = 'grayscale(100%) opacity(0.4)';
+                    span.style.transform = 'none';
+                });
+                
+                span.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    span.style.filter = 'none';
+                    span.style.transform = 'scale(1.4)';
+                    alert(riddle);
+                    
+                    let found = JSON.parse(localStorage.getItem('lex-treasure-glyphs') || '[]');
+                    if (!found.includes(key)) {
+                        found.push(key);
+                        localStorage.setItem('lex-treasure-glyphs', JSON.stringify(found));
+                    }
+                    
+                    if (found.length === 3) {
+                        this.unlockEasterEgg('ee-caccia-tesoro-completata');
+                    } else {
+                        try {
+                            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                            const osc = ctx.createOscillator();
+                            const gain = ctx.createGain();
+                            osc.connect(gain); gain.connect(ctx.destination);
+                            osc.frequency.setValueAtTime(600, ctx.currentTime);
+                            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                            osc.start(); osc.stop(ctx.currentTime + 0.3);
+                        } catch(e) {}
+                    }
+                });
+                targetPara.appendChild(span);
+            }
+        }
+    },
+
+    // --- ACTIVITY LOG HELPER FOR HEATMAP ---
+    logStudyActivity() {
+        try {
+            const today = new Date().toISOString().split('T')[0];
+            const activity = JSON.parse(localStorage.getItem('lex-study-activity') || '{}');
+            activity[today] = (activity[today] || 0) + 1;
+            localStorage.setItem('lex-study-activity', JSON.stringify(activity));
+        } catch(e) {}
+    }
 
 };
 

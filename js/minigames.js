@@ -47,6 +47,8 @@ const Minigames = {
 
     init() {
         this.updatePointsUI();
+        this.initLeaderboard();
+        this.renderLeaderboard();
         this.renderSubjectLocks();
         console.log("Minigames Engine v4 Ready");
     },
@@ -55,11 +57,17 @@ const Minigames = {
         const el = document.getElementById('lex-points-total');
         if (el) el.textContent = this.points;
         localStorage.setItem('lex-total-points', this.points);
+        if (typeof this.renderLeaderboard === 'function') {
+            this.renderLeaderboard();
+        }
     },
 
     addPoints(val) {
         this.points += val;
         this.updatePointsUI();
+        if (typeof this.updateCompetitorScores === 'function') {
+            this.updateCompetitorScores();
+        }
     },
 
     renderSubjectLocks() {
@@ -146,7 +154,9 @@ const Minigames = {
         '2048': { title: "2048 Accademico", start: () => Minigames.start2048() },
         'snake': { title: "Lex Snake", start: () => Minigames.startSnake() },
         'lexle': { title: "Lexle", start: () => Minigames.startLexle() },
-        'clicker': { title: "Caffè Clicker", start: () => Minigames.startClicker() }
+        'clicker': { title: "Caffè Clicker", start: () => Minigames.startClicker() },
+        'decrypt': { title: "Decodifica il Codex", start: () => Minigames.startDecrypt() },
+        'crossword': { title: "Cruciverba dello Scriptorium", start: () => Minigames.startCrossword() }
     },
 
     // --- 2048 ACCADEMICO ---
@@ -1227,6 +1237,270 @@ const Minigames = {
     closeGameModal() {
         this.stopTimer();
         document.getElementById('game-modal-overlay').classList.remove('open');
+    },
+
+    // --- LEADERBOARD LOGIC ---
+    leaderboardScores: [],
+    competitors: [
+        { name: "Beda il Venerabile", icon: "🧙‍♂️" },
+        { name: "Cassiodoro", icon: "🏛️" },
+        { name: "Ildegarda di Bingen", icon: "🌿" },
+        { name: "Frate Francesco", icon: "🔔" }
+    ],
+
+    initLeaderboard() {
+        let scores = JSON.parse(localStorage.getItem('lex-leaderboard-scores'));
+        if (!scores) {
+            scores = this.competitors.map(c => ({
+                name: c.name,
+                icon: c.icon,
+                points: Math.floor(Math.random() * 40) + 30
+            }));
+            localStorage.setItem('lex-leaderboard-scores', JSON.stringify(scores));
+        }
+        this.leaderboardScores = scores;
+    },
+
+    renderLeaderboard() {
+        const container = document.getElementById('leaderboard-list');
+        if (!container) return;
+
+        const userPoints = this.points;
+        const allScores = [
+            { name: "Alesx99 (Tu)", icon: "👑", points: userPoints, isUser: true },
+            ...this.leaderboardScores
+        ];
+
+        allScores.sort((a, b) => b.points - a.points);
+
+        container.innerHTML = "";
+        allScores.forEach((s, idx) => {
+            const rankEmoji = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `${idx + 1}.`;
+            const highlightStyle = s.isUser ? "background:rgba(212,175,55,0.12); border:1px solid var(--accent-gold);" : "background:rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.04);";
+            container.innerHTML += `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-radius:10px; ${highlightStyle} font-size:0.9rem; width:100%; box-sizing:border-box; margin-bottom: 0.3rem;">
+                    <div style="display:flex; align-items:center; gap:0.8rem;">
+                        <span style="font-weight:700; color:var(--accent-gold); width:24px;">${rankEmoji}</span>
+                        <span>${s.icon}</span>
+                        <span style="font-weight:${s.isUser ? '700' : '400'}; color:${s.isUser ? 'var(--accent-gold)' : 'inherit'};">${s.name}</span>
+                    </div>
+                    <span style="font-weight:700; color:var(--accent-gold);">${s.points} Pti</span>
+                </div>
+            `;
+        });
+    },
+
+    updateCompetitorScores() {
+        this.leaderboardScores.forEach(c => {
+            if (Math.random() > 0.4) {
+                c.points += Math.floor(Math.random() * 8) + 1;
+            }
+        });
+        localStorage.setItem('lex-leaderboard-scores', JSON.stringify(this.leaderboardScores));
+        this.renderLeaderboard();
+    },
+
+    // --- CAESAR DECRYPTOR GAME ---
+    decryptWords: [
+        { original: "DURUM EST SED ITA LEX", subject: "diritto", offset: 3, clue: "Espressione sul rigore della legge scritta" },
+        { original: "ARA PACIS AUGUSTAE", subject: "arte_romana", offset: 5, clue: "Celebre altare romano dedicato alla pace augustea" },
+        { original: "ARS LONGA VITA BREVIS", subject: "arte", offset: 4, clue: "Motto sull'infinità dell'arte contrapposta alla brevità della vita" },
+        { original: "HISTORIA MAGISTRA VITAE", subject: "storia", offset: 6, clue: "Famosa citazione di Cicerone sul valore della storia" },
+        { original: "EXPLICIT LIBER DEO GRATIAS", subject: "codicologia", offset: 2, clue: "La formula di ringraziamento medievale al completamento di un codice" }
+    ],
+    activeDecrypt: null,
+
+    startDecrypt() {
+        const subject = this.currentSubject || 'codicologia';
+        let wordItem = this.decryptWords.find(w => w.subject === subject);
+        if (!wordItem) wordItem = this.decryptWords[Math.floor(Math.random() * this.decryptWords.length)];
+        
+        this.activeDecrypt = wordItem;
+        const ciphered = this.caesarCipher(wordItem.original, wordItem.offset);
+        const container = document.getElementById('game-content');
+        container.innerHTML = `
+            <div style="text-align:center;">
+                <p style="font-size:0.85rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:1rem;">
+                    Indizio: <strong>${wordItem.clue}</strong>
+                </p>
+                <div style="background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
+                    <div id="decrypt-ciphered-text" style="font-family:monospace; font-size:1.6rem; letter-spacing:0.15em; color:var(--accent-gold); font-weight:700; margin-bottom:0.5rem; word-break:break-all;">${ciphered}</div>
+                    <div id="decrypt-realtime-text" style="font-family:monospace; font-size:1.4rem; letter-spacing:0.15em; color:var(--text-primary); font-weight:700; height:1.6rem; word-break:break-all;"></div>
+                </div>
+                
+                <div style="margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.5rem; align-items:center;">
+                    <label for="decrypt-key-slider" style="font-size:0.9rem; color:var(--text-secondary);">Rotazione della Chiave (Rot): <span id="decrypt-key-val" style="font-weight:700; color:var(--accent-gold);">0</span></label>
+                    <input type="range" id="decrypt-key-slider" min="0" max="25" value="0" style="width:100%; max-width:300px; accent-color:var(--accent-gold);" oninput="Minigames.onDecryptSliderChange(this.value)">
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:0.8rem; max-width:320px; margin:0 auto; width:100%;">
+                    <input type="text" id="decrypt-input" class="form-input" style="text-align:center; padding:0.8rem; font-size:1rem; border-radius:8px; background:rgba(0,0,0,0.2); border:1px solid var(--border-color); color:#fff; text-transform:uppercase; box-sizing:border-box; width:100%;" placeholder="Digita la frase decodificata...">
+                    <button class="btn-action btn-action-primary" style="padding:0.8rem; border:none; width:100%; box-sizing:border-box;" onclick="Minigames.checkDecryptAnswer()">Sottometti Risposta</button>
+                </div>
+                <p id="decrypt-error" style="color:#ef4444; font-size:0.85rem; margin-top:0.6rem; font-weight:700; display:none;">Decodifica errata o incompleta!</p>
+            </div>
+        `;
+        
+        this.onDecryptSliderChange(0);
+    },
+
+    caesarCipher(str, offset) {
+        return str.split('').map(char => {
+            const code = char.charCodeAt(0);
+            if (code >= 65 && code <= 90) {
+                return String.fromCharCode(((code - 65 + offset) % 26) + 65);
+            }
+            return char;
+        }).join('');
+    },
+
+    onDecryptSliderChange(val) {
+        document.getElementById('decrypt-key-val').textContent = val;
+        if (!this.activeDecrypt) return;
+        
+        const ciphered = this.caesarCipher(this.activeDecrypt.original, this.activeDecrypt.offset);
+        const shiftBack = (26 - parseInt(val)) % 26;
+        const decoded = this.caesarCipher(ciphered, shiftBack);
+        
+        document.getElementById('decrypt-realtime-text').textContent = decoded;
+    },
+
+    checkDecryptAnswer() {
+        const input = document.getElementById('decrypt-input').value.toUpperCase().trim();
+        if (!this.activeDecrypt) return;
+        
+        if (input === this.activeDecrypt.original) {
+            if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                LexCore.unlockEasterEgg('ee-decodifica-codex');
+            }
+            this.showResult(true, "Codex Decodificato!", 20);
+        } else {
+            const err = document.getElementById('decrypt-error');
+            err.style.display = 'block';
+            setTimeout(() => err.style.display = 'none', 2000);
+        }
+    },
+
+    // --- SCRIPTORIUM CROSSWORD GAME ---
+    crosswordSolutions: null,
+
+    startCrossword() {
+        const container = document.getElementById('game-content');
+        
+        const gridSetup = [
+            [0, 1, 0, 0, 0],
+            [1, 1, 1, 1, 1],
+            [0, 1, 0, 0, 0],
+            [1, 1, 1, 1, 1],
+            [0, 1, 0, 0, 0]
+        ];
+        
+        const solutions = {
+            "0-1": "F",
+            "1-0": "C", "1-1": "O", "1-2": "D", "1-3": "E", "1-4": "X",
+            "2-1": "R",
+            "3-0": "L", "3-1": "E", "3-2": "G", "3-3": "G", "3-4": "E",
+            "4-1": "S"
+        };
+        
+        let gridHtml = `<div style="display:grid; grid-template-columns:repeat(5, 45px); gap:6px; justify-content:center; margin:1.5rem auto; width:fit-content;">`;
+        
+        for (let r = 0; r < 5; r++) {
+            for (let c = 0; c < 5; c++) {
+                if (gridSetup[r][c] === 1) {
+                    let numLabel = "";
+                    if (r === 0 && c === 1) numLabel = `<span style="position:absolute; top:2px; left:4px; font-size:0.6rem; color:var(--accent-gold); font-weight:700;">1v</span>`;
+                    else if (r === 1 && c === 0) numLabel = `<span style="position:absolute; top:2px; left:4px; font-size:0.6rem; color:var(--accent-gold); font-weight:700;">1o</span>`;
+                    else if (r === 3 && c === 0) numLabel = `<span style="position:absolute; top:2px; left:4px; font-size:0.6rem; color:var(--accent-gold); font-weight:700;">2o</span>`;
+                    
+                    gridHtml += `
+                        <div style="position:relative; width:45px; height:45px;">
+                            ${numLabel}
+                            <input type="text" id="cross-cell-${r}-${c}" maxlength="1" style="width:45px; height:45px; text-align:center; text-transform:uppercase; font-size:1.1rem; font-weight:700; border:1px solid var(--border-color); background:rgba(255,255,255,0.05); color:#fff; border-radius:6px; outline:none; box-sizing:border-box; padding-top:6px;" oninput="Minigames.onCrosswordInput(this, ${r}, ${c})">
+                        </div>
+                    `;
+                } else {
+                    gridHtml += `<div style="width:45px; height:45px; background:#080b11; border-radius:6px; border:1px solid rgba(255,255,255,0.02); box-sizing:border-box;"></div>`;
+                }
+            }
+        }
+        gridHtml += `</div>`;
+
+        container.innerHTML = `
+            <div>
+                <p style="font-size:0.85rem; color:var(--text-secondary); text-align:center; margin-bottom:1rem;">
+                    Risolvi lo schema compilando le parole crociate dello Scriptorium.
+                </p>
+                
+                ${gridHtml}
+                
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; text-align:left; background:rgba(0,0,0,0.2); padding:1rem; border-radius:12px; border:1px solid var(--border-color); margin-bottom:1.5rem; font-size:0.85rem; box-sizing:border-box; width: 100%;">
+                    <div>
+                        <strong style="color:var(--accent-gold);">Orizzontali:</strong>
+                        <ul style="margin-top:0.4rem; padding-left:1.2rem; line-height:1.4; color:var(--text-secondary); list-style:none;">
+                            <li><strong>1o.</strong> Libro antico a fogli rilegati.</li>
+                            <li><strong>2o.</strong> Norma fondamentale del diritto.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color:var(--accent-gold);">Verticali:</strong>
+                        <ul style="margin-top:0.4rem; padding-left:1.2rem; line-height:1.4; color:var(--text-secondary); list-style:none;">
+                            <li><strong>1v.</strong> Plurale latino per "porte" o "ingressi".</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="btn-action btn-action-primary" style="width:100%; border:none;" onclick="Minigames.checkCrosswordAnswer()">Verifica Schema</button>
+                <p id="crossword-error" style="color:#ef4444; font-size:0.85rem; margin-top:0.6rem; font-weight:700; text-align:center; display:none;">Schema errato o incompleto!</p>
+            </div>
+        `;
+        
+        this.crosswordSolutions = solutions;
+    },
+
+    onCrosswordInput(input, r, c) {
+        if (input.value.length === 1) {
+            let next = document.getElementById(`cross-cell-${r}-${c+1}`);
+            if (next) {
+                next.focus();
+            } else {
+                next = document.getElementById(`cross-cell-${r+1}-${c}`);
+                if (next) next.focus();
+            }
+        }
+    },
+
+    checkCrosswordAnswer() {
+        let isCorrect = true;
+        
+        Object.keys(this.crosswordSolutions).forEach(key => {
+            const [r, c] = key.split('-');
+            const input = document.getElementById(`cross-cell-${r}-${c}`);
+            if (!input || input.value.toUpperCase().trim() !== this.crosswordSolutions[key]) {
+                isCorrect = false;
+                if (input) input.style.borderColor = '#ef4444';
+            } else {
+                if (input) input.style.borderColor = '#10b981';
+            }
+        });
+
+        if (isCorrect) {
+            if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                LexCore.unlockEasterEgg('ee-cruciverba-completato');
+            }
+            this.showResult(true, "Enigma Risolto!", 25);
+        } else {
+            const err = document.getElementById('crossword-error');
+            err.style.display = 'block';
+            setTimeout(() => {
+                err.style.display = 'none';
+                Object.keys(this.crosswordSolutions).forEach(key => {
+                    const [r, c] = key.split('-');
+                    const input = document.getElementById(`cross-cell-${r}-${c}`);
+                    if (input) input.style.borderColor = 'var(--border-color)';
+                });
+            }, 2500);
+        }
     }
 };
 

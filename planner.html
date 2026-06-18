@@ -45,6 +45,65 @@
         body.coccole-theme .back-hub:hover {
             color: #ff6b8b;
         }
+
+        /* KANBAN BOARD STYLES */
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .kanban-column {
+            background: rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 350px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        body.light-theme .kanban-column {
+            background: rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .kanban-column.drag-over {
+            background: rgba(212, 175, 55, 0.05) !important;
+            border-color: var(--accent-gold) !important;
+        }
+
+        body.light-theme .kanban-column.drag-over {
+            background: rgba(212, 175, 55, 0.08) !important;
+        }
+
+        .kanban-task-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.8rem;
+            cursor: grab;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        body.light-theme .kanban-task-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .kanban-task-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .kanban-task-card.dragging {
+            opacity: 0.4;
+        }
     </style>
 </head>
 <body>
@@ -187,6 +246,76 @@
                 </div>
             </section>
         </div>
+
+        <!-- Kanban Board Section -->
+        <section class="kanban-section" style="margin-top: 2rem; width: 100%;">
+            <div class="planner-card">
+                <h3 style="display: flex; align-items: center; gap: 0.5rem; justify-content: space-between; margin-top: 0; width: 100%;">
+                    <span style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></svg>
+                        Lavagna Kanban delle Attività
+                    </span>
+                    <button class="control-btn" id="btn-add-kanban" onclick="Kanban.showAddTaskModal()" style="font-size:0.75rem; padding:0.4rem 0.8rem; display:flex; align-items:center; gap:0.4rem; border-radius:8px; border:1px solid var(--border-color); background:rgba(255,255,255,0.05); color:var(--text-primary); cursor:pointer; font-weight:600; transition:all 0.2s;">
+                        + Aggiungi Task
+                    </button>
+                </h3>
+                
+                <div class="kanban-board">
+                    <!-- Column: Todo -->
+                    <div class="kanban-column" id="kanban-todo" ondragover="Kanban.allowDrop(event)" ondragleave="Kanban.dragLeave(event)" ondrop="Kanban.drop(event, 'todo')">
+                        <h4 style="color: var(--text-secondary); border-bottom: 2px solid var(--accent-terracotta); padding-bottom: 0.5rem; margin-top: 0; font-family: var(--font-serif); display: flex; justify-content: space-between; align-items: center;">
+                            Da Fare <span class="task-count" style="font-size: 0.8rem; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 99px;" id="count-todo">0</span>
+                        </h4>
+                        <div class="kanban-tasks-list" style="display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1;" id="list-todo">
+                            <!-- Tasks injected dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Column: In Progress -->
+                    <div class="kanban-column" id="kanban-progress" ondragover="Kanban.allowDrop(event)" ondragleave="Kanban.dragLeave(event)" ondrop="Kanban.drop(event, 'progress')">
+                        <h4 style="color: var(--text-secondary); border-bottom: 2px solid var(--accent-gold); padding-bottom: 0.5rem; margin-top: 0; font-family: var(--font-serif); display: flex; justify-content: space-between; align-items: center;">
+                            In Corso <span class="task-count" style="font-size: 0.8rem; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 99px;" id="count-progress">0</span>
+                        </h4>
+                        <div class="kanban-tasks-list" style="display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1;" id="list-progress">
+                            <!-- Tasks injected dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Column: Done -->
+                    <div class="kanban-column" id="kanban-done" ondragover="Kanban.allowDrop(event)" ondragleave="Kanban.dragLeave(event)" ondrop="Kanban.drop(event, 'done')">
+                        <h4 style="color: var(--text-secondary); border-bottom: 2px solid var(--accent-green); padding-bottom: 0.5rem; margin-top: 0; font-family: var(--font-serif); display: flex; justify-content: space-between; align-items: center;">
+                            Completato <span class="task-count" style="font-size: 0.8rem; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 99px;" id="count-done">0</span>
+                        </h4>
+                        <div class="kanban-tasks-list" style="display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1;" id="list-done">
+                            <!-- Tasks injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Task Modal -->
+        <div id="kanban-task-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;">
+            <div class="planner-card" style="width: 90%; max-width: 450px; padding: 2rem; background: var(--bg-card); border: 1px solid var(--accent-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 20px; position: relative;">
+                <button onclick="Kanban.hideAddTaskModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; transition: color 0.2s; line-height: 1;">&times;</button>
+                <h3 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent-gold); margin-bottom: 1.5rem;">Nuova Attività</h3>
+                
+                <div class="planner-input-group" style="margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; text-align: left;">
+                    <label for="kanban-title-input" style="font-size: 0.85rem; color: var(--text-secondary);">Titolo Attività</label>
+                    <input type="text" id="kanban-title-input" placeholder="Es. Ripassare capitolo 2 Diritto" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.8rem; border-radius: 8px; outline: none; font-size: 0.95rem;">
+                </div>
+
+                <div class="planner-input-group" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.4rem; text-align: left;">
+                    <label for="kanban-desc-input" style="font-size: 0.85rem; color: var(--text-secondary);">Descrizione (Opzionale)</label>
+                    <textarea id="kanban-desc-input" placeholder="Dettagli aggiuntivi..." rows="3" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.8rem; border-radius: 8px; outline: none; font-size: 0.95rem; resize: none; font-family: var(--font-sans);"></textarea>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button onclick="Kanban.hideAddTaskModal()" class="btn-action" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Annulla</button>
+                    <button onclick="Kanban.addTask()" class="btn-action" style="background: var(--accent-gold); border: none; color: #000; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 700; box-shadow: 0 0 10px var(--accent-gold-glow);">Salva</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -301,6 +430,9 @@
             loadStudyPlan();
             populateExamsDropdown();
             loadSavedRoadmap();
+            
+            // Initialize Kanban
+            Kanban.init();
             
             // Set tomorrow as minimum date for date picker
             const today = new Date();
@@ -813,6 +945,192 @@
                 console.error("Errore nel caricamento della roadmap salvata:", e);
             }
         }
+
+        // KANBAN OBJECT LOGIC
+        const Kanban = {
+            tasks: [],
+
+            init() {
+                this.loadTasks();
+                this.render();
+            },
+
+            loadTasks() {
+                try {
+                    const stored = localStorage.getItem('lex-kanban-tasks');
+                    if (stored) {
+                        this.tasks = JSON.parse(stored);
+                    } else {
+                        // Default Tasks
+                        this.tasks = [
+                            { id: 'task-1', title: 'Ripassare Diritto Costituzionale', desc: 'Usa il simulatore d\'esame per testare la preparazione', status: 'todo' },
+                            { id: 'task-2', title: 'Leggere Sintesi di Storia dell\'Arte', desc: 'Focus sul Rinascimento e sul neoclassicismo', status: 'progress' },
+                            { id: 'task-3', title: 'Sincronizzare materiale offline', desc: 'Controllare che tutti i capitoli siano allineati nel database locale', status: 'done' }
+                        ];
+                        this.saveTasks();
+                    }
+                } catch(e) {
+                    console.error("Errore nel caricamento dei task kanban:", e);
+                    this.tasks = [];
+                }
+            },
+
+            saveTasks() {
+                try {
+                    localStorage.setItem('lex-kanban-tasks', JSON.stringify(this.tasks));
+                } catch(e) {
+                    console.error("Errore nel salvataggio dei task kanban:", e);
+                }
+            },
+
+            showAddTaskModal() {
+                const modal = document.getElementById('kanban-task-modal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    const titleInput = document.getElementById('kanban-title-input');
+                    if (titleInput) titleInput.focus();
+                }
+            },
+
+            hideAddTaskModal() {
+                const modal = document.getElementById('kanban-task-modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                    const titleInput = document.getElementById('kanban-title-input');
+                    const descInput = document.getElementById('kanban-desc-input');
+                    if (titleInput) titleInput.value = '';
+                    if (descInput) descInput.value = '';
+                }
+            },
+
+            addTask() {
+                const titleInput = document.getElementById('kanban-title-input');
+                const descInput = document.getElementById('kanban-desc-input');
+                
+                if (!titleInput) return;
+                
+                const title = titleInput.value.trim();
+                const desc = descInput ? descInput.value.trim() : '';
+                
+                if (!title) {
+                    alert('Inserisci un titolo per l\'attività!');
+                    return;
+                }
+
+                const newTask = {
+                    id: 'task-' + Date.now(),
+                    title: title,
+                    desc: desc,
+                    status: 'todo'
+                };
+
+                this.tasks.push(newTask);
+                this.saveTasks();
+                this.render();
+                this.hideAddTaskModal();
+                if (typeof playChime === 'function') playChime(true);
+            },
+
+            deleteTask(id) {
+                this.tasks = this.tasks.filter(t => t.id !== id);
+                this.saveTasks();
+                this.render();
+                if (typeof playChime === 'function') playChime(false);
+            },
+
+            moveTask(id, newStatus) {
+                const task = this.tasks.find(t => t.id === id);
+                if (task) {
+                    const oldStatus = task.status;
+                    if (oldStatus !== newStatus) {
+                        task.status = newStatus;
+                        this.saveTasks();
+                        this.render();
+                        if (typeof playChime === 'function') playChime(true);
+                    }
+                }
+            },
+
+            allowDrop(ev) {
+                ev.preventDefault();
+                const col = ev.currentTarget;
+                if (col && !col.classList.contains('drag-over')) {
+                    col.classList.add('drag-over');
+                }
+            },
+
+            dragLeave(ev) {
+                const col = ev.currentTarget;
+                if (col) {
+                    col.classList.remove('drag-over');
+                }
+            },
+
+            drag(ev) {
+                ev.dataTransfer.setData("text/plain", ev.currentTarget.id);
+                ev.currentTarget.classList.add('dragging');
+            },
+
+            dragEnd(ev) {
+                ev.currentTarget.classList.remove('dragging');
+            },
+
+            drop(ev, columnId) {
+                ev.preventDefault();
+                const col = ev.currentTarget;
+                if (col) {
+                    col.classList.remove('drag-over');
+                }
+                
+                const id = ev.dataTransfer.getData("text/plain");
+                this.moveTask(id, columnId);
+            },
+
+            render() {
+                const lists = {
+                    todo: document.getElementById('list-todo'),
+                    progress: document.getElementById('list-progress'),
+                    done: document.getElementById('list-done')
+                };
+
+                const counts = {
+                    todo: document.getElementById('count-todo'),
+                    progress: document.getElementById('count-progress'),
+                    done: document.getElementById('count-done')
+                };
+
+                Object.keys(lists).forEach(k => {
+                    if (lists[k]) lists[k].innerHTML = '';
+                });
+
+                this.tasks.forEach(task => {
+                    const listEl = lists[task.status];
+                    if (!listEl) return;
+
+                    const card = document.createElement('div');
+                    card.className = 'kanban-task-card';
+                    card.id = task.id;
+                    card.draggable = true;
+
+                    card.addEventListener('dragstart', (e) => this.drag(e));
+                    card.addEventListener('dragend', (e) => this.dragEnd(e));
+
+                    card.innerHTML = `
+                        <button onclick="Kanban.deleteTask('${task.id}')" style="position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; line-height: 1; transition: color 0.2s;" onmouseover="this.style.color='#ff6b8b'" onmouseout="this.style.color='var(--text-muted)'">&times;</button>
+                        <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; padding-right: 1.2rem; color: var(--text-primary); text-align: left;">${task.title}</div>
+                        ${task.desc ? `<div style="font-size: 0.75rem; color: var(--text-secondary); text-align: left; margin-top: 0.3rem; line-height: 1.3;">${task.desc}</div>` : ''}
+                    `;
+                    listEl.appendChild(card);
+                });
+
+                Object.keys(counts).forEach(k => {
+                    if (counts[k]) {
+                        const count = this.tasks.filter(t => t.status === k).length;
+                        counts[k].textContent = count;
+                    }
+                });
+            }
+        };
     </script>
 </body>
 </html>

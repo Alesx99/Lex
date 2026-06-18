@@ -314,6 +314,16 @@
             ← Torna alla Mappa
         </button>
 
+        <!-- Scriptorium Board (Leaderboard) -->
+        <div id="leaderboard-container" class="subject-card" style="margin-bottom: 2.5rem; text-align: left; padding: 1.5rem 2rem; border-color: var(--accent-gold); background: linear-gradient(135deg, rgba(212,175,55,0.05) 0%, rgba(20,26,40,0.4) 100%); width: 100%; box-sizing: border-box;">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 1rem; color: var(--accent-gold); display: flex; align-items: center; gap: 0.5rem; margin-top:0;">
+                <span>📜</span> Scriptorium Board (Classifica Copisti)
+            </h3>
+            <div id="leaderboard-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+                <!-- Filled dynamically by JavaScript -->
+            </div>
+        </div>
+
         <!-- Subjects Selection -->
         <div id="subjects-container" class="subjects-grid">
             <div class="subject-card locked" id="subj-diritto" onclick="Minigames.openSubject('diritto')">
@@ -398,6 +408,18 @@
                 <div class="game-icon">🔍</div>
                 <h3>L'Impiccato</h3>
                 <p>Indovina il termine tecnico in base alla definizione prima che sia troppo tardi.</p>
+                <button class="play-btn">Gioca</button>
+            </div>
+            <div class="game-card" onclick="Minigames.openGame('decrypt')">
+                <div class="game-icon">🔓</div>
+                <h3>Decodifica il Codex</h3>
+                <p>Risolvi gli anagrammi o i cifrari medievali per svelare frammenti storici e guadagnare punti.</p>
+                <button class="play-btn">Gioca</button>
+            </div>
+            <div class="game-card" onclick="Minigames.openGame('crossword')">
+                <div class="game-icon">🧩</div>
+                <h3>Cruciverba dello Scriptorium</h3>
+                <p>Completa le parole crociate accademiche compilando i termini chiave delle materie.</p>
                 <button class="play-btn">Gioca</button>
             </div>
         </div>
