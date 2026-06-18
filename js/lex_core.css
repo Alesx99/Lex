@@ -2261,6 +2261,691 @@ body.coccole-theme .lex-footer-changelog-btn:hover {
     to { transform: scale(1); opacity: 1; }
 }
 
+/* ==========================================================================
+   ADVANCED STUDY TOOLS SYSTEM (v2.4.0)
+   ========================================================================== */
+
+:root {
+    --study-overlay-bg: rgba(13, 20, 35, 0.85);
+    --study-card-bg: rgba(18, 28, 51, 0.95);
+    --study-accent: #d4af37;
+    --study-accent-rgb: 212, 175, 55;
+    --study-glow: 0 0 25px rgba(212, 175, 55, 0.25);
+    --study-border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Tool Buttons in Modal Header */
+.lex-study-tools-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-left: 1.5rem;
+    padding: 0.3rem 0.6rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.lex-study-tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #94a3b8);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.lex-study-tool-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lex-study-tool-btn:hover {
+    color: var(--study-accent);
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Tooltip on hover */
+.lex-study-tool-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    background: rgba(13, 20, 35, 0.95);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 10000;
+}
+
+.lex-study-tool-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    bottom: -38px;
+}
+
+/* Shared Modal Overlay for Tools */
+.lex-study-tool-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--study-overlay-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lex-study-tool-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lex-study-tool-card {
+    background: var(--study-card-bg);
+    border: var(--study-border);
+    box-shadow: var(--study-glow);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+.lex-study-tool-overlay.open .lex-study-tool-card {
+    transform: scale(1) translateY(0);
+}
+
+.lex-study-tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #d4af37, #f3e5ab, #d4af37);
+}
+
+.lex-study-tool-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lex-study-tool-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--study-accent);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.lex-study-tool-card-title svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+.lex-study-tool-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #94a3b8);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.lex-study-tool-close-btn:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.lex-study-tool-card-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
+    color: var(--text-primary, #f8fafc);
+}
+
+/* 1. Mind Map Canvas Styles */
+.mindmap-canvas-container {
+    width: 100%;
+    height: 500px;
+    background: rgba(10, 15, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mindmap-canvas {
+    display: block;
+    cursor: grab;
+}
+
+.mindmap-canvas:active {
+    cursor: grabbing;
+}
+
+.mindmap-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.mindmap-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted, #94a3b8);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* 2. Vocal Examiner Styles */
+.vocal-examiner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.vocal-question-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.vocal-question-title {
+    font-size: 0.9rem;
+    color: var(--study-accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.5rem;
+}
+
+.vocal-question-text {
+    font-size: 1.25rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.vocal-mic-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 1rem 0;
+}
+
+.vocal-mic-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid var(--study-accent);
+    color: var(--study-accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.vocal-mic-btn svg {
+    width: 32px;
+    height: 32px;
+}
+
+.vocal-mic-btn.listening {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+    animation: mic-pulse 1.5s infinite;
+}
+
+@keyframes mic-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.vocal-listening-pulse {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.vocal-listening-pulse.active {
+    opacity: 1;
+}
+
+.vocal-listening-pulse span {
+    width: 4px;
+    height: 6px;
+    background: #ef4444;
+    border-radius: 2px;
+    animation: voice-bar 0.8s ease-in-out infinite alternate;
+}
+
+.vocal-listening-pulse span:nth-child(2) { animation-delay: 0.15s; }
+.vocal-listening-pulse span:nth-child(3) { animation-delay: 0.3s; }
+.vocal-listening-pulse span:nth-child(4) { animation-delay: 0.45s; }
+.vocal-listening-pulse span:nth-child(5) { animation-delay: 0.6s; }
+
+@keyframes voice-bar {
+    0% { height: 6px; }
+    100% { height: 20px; }
+}
+
+.vocal-transcript-box {
+    width: 100%;
+    max-width: 600px;
+    min-height: 80px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary, #cbd5e1);
+    text-align: left;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.vocal-feedback-card {
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    padding: 1.2rem;
+    width: 100%;
+    max-width: 600px;
+    animation: fade-in-up 0.5s ease;
+}
+
+.vocal-score-ring {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--study-accent);
+    margin-bottom: 0.4rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.vocal-score-feedback {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+.vocal-score-keywords {
+    font-size: 0.8rem;
+    color: var(--text-muted, #94a3b8);
+}
+
+.vocal-score-keywords span {
+    display: inline-block;
+    background: rgba(255,255,255,0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin: 2px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 3. Flashcards Styles */
+.flashcard-deck-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.flashcard-stage {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 480px;
+    height: 280px;
+    cursor: pointer;
+}
+
+.flashcard-card-3d {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flashcard-card-3d.flipped {
+    transform: rotateY(180deg);
+}
+
+.flashcard-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.flashcard-front {
+    background: linear-gradient(135deg, #182c33, #0d1e24);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    color: #fff;
+}
+
+.flashcard-front::after {
+    content: 'CLICCA PER GIRARE';
+    position: absolute;
+    bottom: 15px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: rgba(6, 182, 212, 0.5);
+}
+
+.flashcard-back {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: var(--study-border);
+    color: #f1f5f9;
+    transform: rotateY(180deg);
+    overflow-y: auto;
+}
+
+.flashcard-back::after {
+    content: 'CLICCA PER RIGIRARE';
+    position: absolute;
+    bottom: 15px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: rgba(212, 175, 55, 0.4);
+}
+
+.flashcard-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-cyan, #06b6d4);
+}
+
+.flashcard-definition {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-bottom: 1rem;
+}
+
+.flashcard-nav-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.flashcard-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.flashcard-nav-btn:hover {
+    background: var(--study-accent);
+    color: #0d1423;
+    border-color: var(--study-accent);
+    transform: scale(1.05);
+}
+
+.flashcard-nav-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+.flashcard-counter {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    min-width: 60px;
+    text-align: center;
+}
+
+.flashcard-status-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.flashcard-status-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.flashcard-status-btn.know {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.flashcard-status-btn.know:hover {
+    background: #22c55e;
+    color: #0f172a;
+}
+
+.flashcard-status-btn.dont-know {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.flashcard-status-btn.dont-know:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* 4. Glossary Sidebar/Drawer Panel Styles */
+.lex-glossary-sidebar {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100%;
+    background: rgba(13, 20, 35, 0.95);
+    border-left: var(--study-border);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 10005;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.lex-glossary-sidebar.open {
+    right: 0;
+}
+
+.lex-glossary-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lex-glossary-sidebar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--study-accent);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lex-glossary-sidebar-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.lex-glossary-item-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.3s;
+}
+
+.lex-glossary-item-card.highlighted {
+    border-color: var(--study-accent);
+    background: rgba(212, 175, 55, 0.06);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.lex-glossary-item-term {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--study-accent);
+    margin-bottom: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lex-glossary-item-domain {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 99px;
+    color: var(--text-muted);
+}
+
+.lex-glossary-item-def {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+/* Inline glossary terms override to act as button */
+.glossary-term {
+    cursor: pointer;
+    border-bottom: 1px dashed var(--study-accent) !important;
+}
+
+.glossary-term:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--study-accent) !important;
+}
+
+/* Plus Badge styled cards */
+.chapter-card-plus {
+    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    background: linear-gradient(135deg, rgba(20, 24, 38, 0.6), rgba(28, 32, 48, 0.6)) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.chapter-card-plus::before {
+    content: 'PLUS';
+    position: absolute;
+    top: 12px;
+    right: -25px;
+    background: var(--study-accent);
+    color: #0d1423;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 2px 25px;
+    transform: rotate(45deg);
+    letter-spacing: 1px;
+}
+}
+
 
 
 

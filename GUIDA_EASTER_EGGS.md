@@ -107,7 +107,7 @@ I segreti sono divisi in tre categorie tematiche principali. Di seguito trovi la
 
 #### 🔓 ee-cronista-scriptorium — Il Cronista dello Scriptorium
 * **Indizio:** Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.
-* **Metodo di sblocco:** Apri il **Changelog** nel footer, e fai click **5 volte consecutive** sul numero di versione **`v2.3.0 (Attuale)`**.
+* **Metodo di sblocco:** Apri il **Changelog** nel footer, e fai click **5 volte consecutive** sul numero di versione **`v2.4.0 (Attuale)`**.
 - **Effetto:** Sblocca l'achievement segreto dell'archivista e riproduce un feedback sonoro di successo.
 
 #### 🔓 ee-palinsesto-bobbio — Il Palinsesto Nascosto

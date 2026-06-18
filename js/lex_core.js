@@ -1938,12 +1938,24 @@ const LexCore = {
 
     // --- HOOK GLOBAL LEAVING & HIGHLIGHT ACTIONS ---
     hookGlobalFeatures() {
-        // A. Hook closeSummary (Trigger motivational toast on summary exit)
+        // A. Hook closeSummary (Trigger motivational toast on summary exit and clean up tools)
         const originalCloseSummary = window.closeSummary;
         window.closeSummary = function() {
             if (originalCloseSummary) originalCloseSummary();
             LexCore.showMotivationalToast();
+            LexCore.closeAllStudyTools();
         };
+
+        // Hook openSummary (Trigger advanced study tools injection)
+        const originalOpenSummary = window.openSummary;
+        if (originalOpenSummary) {
+            window.openSummary = function(title, path) {
+                originalOpenSummary(title, path);
+                setTimeout(() => {
+                    LexCore.initAdvancedStudyTools(title, path);
+                }, 150);
+            };
+        }
 
         // B. Hook applyHighlightColor (Trigger heart explosion on paragraph highlight)
         const originalApplyHighlightColor = window.applyHighlightColor;
@@ -2528,10 +2540,24 @@ const LexCore = {
                     <button class="changelog-modal-close" onclick="document.getElementById('changelog-modal').remove()">&times;</button>
                 </div>
                 <div class="changelog-modal-body">
+                    <!-- Version 2.4.0 -->
+                    <div class="changelog-version-block">
+                        <div class="changelog-version-header">
+                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.4.0 (Attuale)</span>
+                            <span class="changelog-version-date">18 Giugno 2026</span>
+                        </div>
+                        <ul class="changelog-version-list">
+                            <li><strong>Capitoli Plus Interdisciplinari:</strong> Inserite 3 nuove sintesi interdisciplinari avanzate (Diritto/Restauro e Falsi d'Autore, Paleografia/Epigrafia Sperimentale, Iconoclastia Politica/Arte e Rivoluzione).</li>
+                            <li><strong>Mappa Mentale su Canvas:</strong> Aggiunto un generatore dinamico di mappe concettuali con nodi trascinabili e funzione di esportazione dell'immagine in PNG.</li>
+                            <li><strong>Esaminatore Vocale AI:</strong> Simulatore vocale interattivo per la prova orale, con sintesi vocale (TTS), trascrizione vocale (STT) ed elaborazione semantica del voto in trentesimi basata su concetti chiave.</li>
+                            <li><strong>Instant Flashcards & Glossario:</strong> Parser automatico delle sintesi per generare mazzi di flashcard 3D pronti all'uso e cassetto laterale per la consultazione trans-disciplinare del glossario.</li>
+                        </ul>
+                    </div>
+
                     <!-- Version 2.3.0 -->
                     <div class="changelog-version-block">
                         <div class="changelog-version-header">
-                            <span class="changelog-version-num" onclick="LexCore.trackChangelogClick()" style="cursor: pointer;">v2.3.0 (Attuale)</span>
+                            <span class="changelog-version-num">v2.3.0</span>
                             <span class="changelog-version-date">18 Giugno 2026</span>
                         </div>
                         <ul class="changelog-version-list">
@@ -2954,7 +2980,7 @@ const LexCore = {
         { id:'ee-decodifica-codex',  cat:'materie',     icon:'🔓', name:'Decodificatore di Codex',        hint:'Risolvi il mistero nascosto nel cifrario medievale...',                           desc:'Decodifica una frase latina nell\'Arena Minigiochi.', page:'minigames.html' },
         { id:'ee-cruciverba-completato',cat:'materie',  icon:'🧩', name:'Scriba Enigmatico',               hint:'Completa tutti i termini dello Scriptorium nel cruciverba...',                    desc:'Completa con successo il cruciverba didattico.', page:'minigames.html' },
         { id:'ee-caccia-tesoro-completata',cat:'materie',icon:'🏆', name:'Il Saggio di Alessandria',       hint:'Tre glifi antichi si nascondono nelle sintesi di materie diverse...',             desc:'Trova ed evidenzia i 3 glifi antichi nascosti nei capitoli.', page:'*' },
-        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.3.0 nel modal del Changelog.', page:'*' },
+        { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.4.0 nel modal del Changelog.', page:'*' },
         { id:'ee-caverna-platone',   cat:'materie',     icon:'🕯️', name:'La Caverna di Platone',          hint:'Ciò che vedi è solo un\'ombra. Spegni le luci e cerca la verità nella roccia.',    desc:'Nella sintesi di Filosofia con tema Scuro, seleziona la parola "Caverna" o "Ombra".', page:'filosofia/*' },
         { id:'ee-stratigrafia',      cat:'materie',     icon:'⛏️', name:'Lo Scavo Archeologico',          hint:'La conoscenza è stratificata. Scava oltre i limiti della pagina.',                desc:'Fai scorrimento continuo (overscroll) verso il basso a fondo pagina per 5 volte.', page:'*' },
         { id:'ee-damnatio-memoriae-quiz',cat:'materie', icon:'🛡️', name:'L\'Eresia Giuridica',            hint:'Certe eresie giuridiche non meritano risposta, solo l\'oblio della censura.',      desc:'Nel Simulatore d\'Esame, in una domanda di Diritto, premi Ctrl + Shift + X.', page:'exam.html' }
@@ -4655,8 +4681,971 @@ const LexCore = {
             activity[today] = (activity[today] || 0) + 1;
             localStorage.setItem('lex-study-activity', JSON.stringify(activity));
         } catch(e) {}
-    }
+    },
 
+    // --- ADVANCED STUDY TOOLS SYSTEM (v2.4.0) ---
+    currentSummaryTitle: '',
+    currentSummaryPath: '',
+    currentSummaryMarkdown: '',
+    vocalRecognition: null,
+    vocalSpeaking: false,
+
+    initAdvancedStudyTools(title, filePath) {
+        this.currentSummaryTitle = title;
+        this.currentSummaryPath = filePath;
+        this.currentSummaryMarkdown = ''; // Reset cache
+        this.injectToolsButtons(title, filePath);
+    },
+
+    injectToolsButtons(title, filePath) {
+        const header = document.querySelector('.modal-header');
+        if (!header) return;
+
+        let container = header.querySelector('.lex-study-tools-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'lex-study-tools-container';
+            const titleArea = header.querySelector('.modal-title-area');
+            if (titleArea) {
+                titleArea.after(container);
+            } else {
+                header.prepend(container);
+            }
+        }
+
+        container.innerHTML = `
+            <button class="lex-study-tool-btn" data-tooltip="Mappa Concettuale" id="lex-btn-mindmap">
+                <svg viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM18 8H6M18 16H6"/></svg>
+            </button>
+            <button class="lex-study-tool-btn" data-tooltip="Simulazione Orale" id="lex-btn-vocal">
+                <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+            </button>
+            <button class="lex-study-tool-btn" data-tooltip="Genera Flashcard" id="lex-btn-flashcards">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </button>
+            <button class="lex-study-tool-btn" data-tooltip="Glossario Capitolo" id="lex-btn-glossary">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </button>
+        `;
+
+        const loadAndExecute = (action) => {
+            if (this.currentSummaryMarkdown && this.currentSummaryPath === filePath) {
+                action(this.currentSummaryMarkdown);
+            } else {
+                fetch(filePath)
+                    .then(r => {
+                        if (!r.ok) throw new Error("File loading failed");
+                        return r.text();
+                    })
+                    .then(text => {
+                        this.currentSummaryMarkdown = text;
+                        action(text);
+                    })
+                    .catch(e => {
+                        console.error("Errore recupero markdown:", e);
+                        const markdownView = document.getElementById('markdown-view');
+                        if (markdownView) {
+                            this.currentSummaryMarkdown = markdownView.innerText;
+                            action(this.currentSummaryMarkdown);
+                        }
+                    });
+            }
+        };
+
+        container.querySelector('#lex-btn-mindmap').onclick = () => loadAndExecute((md) => this.showMindMapOverlay(title, md));
+        container.querySelector('#lex-btn-vocal').onclick = () => loadAndExecute((md) => this.showVocalExaminerOverlay(title, md));
+        container.querySelector('#lex-btn-flashcards').onclick = () => loadAndExecute((md) => this.showFlashcardsOverlay(title, md));
+        container.querySelector('#lex-btn-glossary').onclick = () => loadAndExecute((md) => this.showGlossarySidebar(title, md));
+
+        setTimeout(() => {
+            const inlineTerms = document.querySelectorAll('.glossary-term');
+            inlineTerms.forEach(termSpan => {
+                termSpan.onclick = (e) => {
+                    e.stopPropagation();
+                    const term = termSpan.getAttribute('data-term');
+                    loadAndExecute((md) => {
+                        this.showGlossarySidebar(title, md, term);
+                    });
+                };
+            });
+        }, 300);
+    },
+
+    getSharedOverlay(id, titleText, iconSvg) {
+        let overlay = document.getElementById(id);
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = id;
+            overlay.className = 'lex-study-tool-overlay';
+            document.body.appendChild(overlay);
+        }
+
+        overlay.innerHTML = `
+            <div class="lex-study-tool-card">
+                <div class="lex-study-tool-card-header">
+                    <h3 class="lex-study-tool-card-title">
+                        ${iconSvg}
+                        <span>${titleText}</span>
+                    </h3>
+                    <button class="lex-study-tool-close-btn">&times;</button>
+                </div>
+                <div class="lex-study-tool-card-body"></div>
+            </div>
+        `;
+
+        overlay.querySelector('.lex-study-tool-close-btn').onclick = () => {
+            this.closeStudyTool(id);
+        };
+
+        const escHandler = (e) => {
+            if (e.key === 'Escape') {
+                this.closeStudyTool(id);
+                document.removeEventListener('keydown', escHandler);
+            }
+        };
+        document.addEventListener('keydown', escHandler);
+
+        return overlay;
+    },
+
+    closeStudyTool(id) {
+        const overlay = document.getElementById(id);
+        if (overlay) {
+            overlay.classList.remove('open');
+            if (id === 'vocal-tool-overlay') {
+                if (this.vocalRecognition) {
+                    try { this.vocalRecognition.stop(); } catch(e){}
+                }
+                window.speechSynthesis.cancel();
+                this.vocalSpeaking = false;
+            }
+        }
+    },
+
+    closeAllStudyTools() {
+        ['mindmap-tool-overlay', 'vocal-tool-overlay', 'flashcard-tool-overlay'].forEach(id => {
+            this.closeStudyTool(id);
+        });
+        const sidebar = document.getElementById('lex-glossary-sidebar');
+        if (sidebar) sidebar.classList.remove('open');
+    },
+
+    showMindMapOverlay(title, md) {
+        const overlay = this.getSharedOverlay('mindmap-tool-overlay', 'Mappa Concettuale - ' + title, `
+            <svg viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM18 8H6M18 16H6"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+        
+        body.innerHTML = `
+            <div class="mindmap-canvas-container">
+                <canvas id="mindmap-canvas" width="750" height="480"></canvas>
+            </div>
+            <div class="mindmap-controls">
+                <div class="mindmap-hint">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    Trascina i nodi per riorganizzare la mappa concettuale.
+                </div>
+                <button class="btn btn-primary" id="mindmap-export-png-btn" style="background:#d4af37; border-color:#d4af37; color:#0d1423; font-weight:bold;">Esporta PNG</button>
+            </div>
+        `;
+
+        overlay.classList.add('open');
+
+        const canvas = body.querySelector('#mindmap-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const nodes = [];
+        let rootNode = { id: 'root', label: title, x: 375, y: 240, radius: 45, color: '#d4af37', textColor: '#0d1423', isRoot: true };
+        nodes.push(rootNode);
+
+        const lines = md.split('\n');
+        const h2s = [];
+        const h3Map = {};
+
+        lines.forEach(line => {
+            const h2Match = line.match(/^##\s+(.+)$/);
+            if (h2Match) {
+                const label = h2Match[1].trim();
+                h2s.push(label);
+                h3Map[label] = [];
+            } else {
+                const h3Match = line.match(/^###\s+(.+)$/);
+                if (h3Match && h2s.length > 0) {
+                    const currentH2 = h2s[h2s.length - 1];
+                    h3Map[currentH2].push(h3Match[1].trim());
+                }
+            }
+        });
+
+        const h2RadiusRange = 160;
+        h2s.forEach((h2Text, idx) => {
+            const angle = (idx / h2s.length) * 2 * Math.PI;
+            const x = 375 + h2RadiusRange * Math.cos(angle);
+            const y = 240 + h2RadiusRange * Math.sin(angle);
+            const nodeId = 'h2-' + idx;
+            nodes.push({
+                id: nodeId,
+                parentId: 'root',
+                label: h2Text,
+                x: x,
+                y: y,
+                radius: 28,
+                color: '#06b6d4',
+                textColor: '#ffffff'
+            });
+
+            const subHeadingList = h3Map[h2Text] || [];
+            const h3RadiusRange = 85;
+            subHeadingList.forEach((h3Text, subIdx) => {
+                const subAngle = angle - Math.PI/4 + (subIdx / Math.max(1, subHeadingList.length - 1)) * (Math.PI/2);
+                const sx = x + h3RadiusRange * Math.cos(subAngle);
+                const sy = y + h3RadiusRange * Math.sin(subAngle);
+                nodes.push({
+                    id: 'h3-' + idx + '-' + subIdx,
+                    parentId: nodeId,
+                    label: h3Text,
+                    x: sx,
+                    y: sy,
+                    radius: 20,
+                    color: 'rgba(6, 182, 212, 0.2)',
+                    borderColor: '#06b6d4',
+                    textColor: '#cbd5e1',
+                    isLeaf: true
+                });
+            });
+        });
+
+        const wrapText = (ctx, text, x, y, maxWidth, lineHeight) => {
+            const words = text.split(' ');
+            let line = '';
+            let testLine = '';
+            let testWidth = 0;
+            let lines = [];
+
+            for (let n = 0; n < words.length; n++) {
+                testLine = line + words[n] + ' ';
+                testWidth = ctx.measureText(testLine).width;
+                if (testWidth > maxWidth && n > 0) {
+                    lines.push(line);
+                    line = words[n] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line);
+
+            let startY = y - ((lines.length - 1) * lineHeight) / 2;
+            for (let i = 0; i < lines.length; i++) {
+                ctx.fillText(lines[i].trim(), x, startY + i * lineHeight);
+            }
+        };
+
+        const drawMap = () => {
+            ctx.fillStyle = '#090f1d';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = 'rgba(255,255,255,0.02)';
+            ctx.lineWidth = 1;
+            for(let i=0; i<canvas.width; i+=40) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
+            }
+            for(let j=0; j<canvas.height; j+=40) {
+                ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(canvas.width, j); ctx.stroke();
+            }
+
+            nodes.forEach(node => {
+                if (node.parentId) {
+                    const parent = nodes.find(n => n.id === node.parentId);
+                    if (parent) {
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.strokeStyle = node.isLeaf ? 'rgba(6, 182, 212, 0.25)' : 'rgba(212, 175, 55, 0.4)';
+                        ctx.lineWidth = node.isLeaf ? 1.5 : 2.5;
+                        ctx.lineTo(parent.x, parent.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            nodes.forEach(node => {
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
+                
+                ctx.shadowColor = node.isRoot ? 'rgba(212,175,55,0.3)' : 'rgba(6,182,212,0.1)';
+                ctx.shadowBlur = 10;
+                
+                if (node.isRoot) {
+                    const grad = ctx.createRadialGradient(node.x, node.y, 5, node.x, node.y, node.radius);
+                    grad.addColorStop(0, '#f3e5ab');
+                    grad.addColorStop(1, '#d4af37');
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                } else if (node.isLeaf) {
+                    ctx.fillStyle = node.color;
+                    ctx.fill();
+                    ctx.strokeStyle = node.borderColor || 'rgba(255,255,255,0.1)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                } else {
+                    const grad = ctx.createLinearGradient(node.x - node.radius, node.y, node.x + node.radius, node.y);
+                    grad.addColorStop(0, '#06b6d4');
+                    grad.addColorStop(1, '#0891b2');
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                }
+                
+                ctx.shadowBlur = 0;
+
+                ctx.fillStyle = node.textColor || '#fff';
+                ctx.font = node.isRoot ? 'bold 12px Inter, system-ui' : (node.isLeaf ? '9px Inter' : '10px Inter');
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                wrapText(ctx, node.label, node.x, node.y, node.radius * 2.1, 12);
+            });
+        };
+
+        let draggedNode = null;
+        let startX, startY;
+
+        canvas.onmousedown = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+
+            for (let i = nodes.length - 1; i >= 0; i--) {
+                const node = nodes[i];
+                const dx = mx - node.x;
+                const dy = my - node.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < node.radius) {
+                    draggedNode = node;
+                    startX = dx;
+                    startY = dy;
+                    break;
+                }
+            }
+        };
+
+        canvas.onmousemove = (e) => {
+            if (!draggedNode) return;
+            const rect = canvas.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+
+            draggedNode.x = Math.max(draggedNode.radius + 10, Math.min(canvas.width - draggedNode.radius - 10, mx - startX));
+            draggedNode.y = Math.max(draggedNode.radius + 10, Math.min(canvas.height - draggedNode.radius - 10, my - startY));
+            drawMap();
+        };
+
+        canvas.onmouseup = () => { draggedNode = null; };
+        canvas.onmouseleave = () => { draggedNode = null; };
+
+        body.querySelector('#mindmap-export-png-btn').onclick = () => {
+            drawMap();
+            const link = document.createElement('a');
+            link.download = 'mappa_mentale_' + title.toLowerCase().replace(/[^a-z0-9]/g, '_') + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        };
+
+        drawMap();
+    },
+
+    showVocalExaminerOverlay(title, md) {
+        const overlay = this.getSharedOverlay('vocal-tool-overlay', 'Simulatore Esame Orale - ' + title, `
+            <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+        
+        body.innerHTML = `
+            <div class="vocal-examiner-container">
+                <div class="vocal-question-box">
+                    <div class="vocal-question-title">Domanda dell'Esaminatore</div>
+                    <div class="vocal-question-text" id="vocal-question-text">Clicca su "Avvia Simulazione" per cominciare...</div>
+                </div>
+                
+                <div class="vocal-mic-area">
+                    <button class="vocal-mic-btn" id="vocal-mic-btn" disabled>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"></path></svg>
+                    </button>
+                    <div class="vocal-listening-pulse" id="vocal-listening-pulse">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div id="vocal-status-text" style="font-size:0.85rem; color:var(--text-muted);">Simulazione non avviata</div>
+                </div>
+
+                <div class="vocal-transcript-box" id="vocal-transcript-box">
+                    La tua risposta apparirà qui mentre parli...
+                </div>
+
+                <div id="vocal-feedback-area"></div>
+                
+                <div style="display:flex; gap:1rem; margin-top: 1rem;">
+                    <button class="btn btn-primary" id="vocal-start-btn" style="background:#d4af37; border-color:#d4af37; color:#0d1423; font-weight:bold;">Avvia Simulazione</button>
+                    <button class="btn btn-secondary" id="vocal-next-btn" style="display:none; background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.15)">Prossima Domanda</button>
+                </div>
+            </div>
+        `;
+
+        overlay.classList.add('open');
+
+        const sections = [];
+        const lines = md.split('\n');
+        let currentSection = null;
+
+        lines.forEach(line => {
+            const h2Match = line.match(/^##\s+(.+)$/);
+            const h3Match = line.match(/^###\s+(.+)$/);
+            const headingMatch = h2Match || h3Match;
+
+            if (headingMatch) {
+                if (currentSection) {
+                    sections.push(currentSection);
+                }
+                currentSection = {
+                    title: headingMatch[1].trim(),
+                    content: ''
+                };
+            } else if (currentSection) {
+                currentSection.content += line + '\n';
+            }
+        });
+        if (currentSection) {
+            sections.push(currentSection);
+        }
+
+        const validSections = sections.filter(sec => {
+            const titleLower = sec.title.toLowerCase();
+            return !titleLower.includes('sommario') && sec.content.trim().length > 40;
+        });
+
+        if (validSections.length === 0) {
+            body.querySelector('#vocal-question-text').textContent = "Contenuto insufficiente per l'esame in questo capitolo.";
+            body.querySelector('#vocal-start-btn').disabled = true;
+            return;
+        }
+
+        const startBtn = body.querySelector('#vocal-start-btn');
+        const nextBtn = body.querySelector('#vocal-next-btn');
+        const micBtn = body.querySelector('#vocal-mic-btn');
+        const qText = body.querySelector('#vocal-question-text');
+        const statusText = body.querySelector('#vocal-status-text');
+        const pulse = body.querySelector('#vocal-listening-pulse');
+        const transBox = body.querySelector('#vocal-transcript-box');
+        const feedbackArea = body.querySelector('#vocal-feedback-area');
+
+        let activeSection = null;
+
+        const speakText = (text, callback) => {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'it-IT';
+            this.vocalSpeaking = true;
+            
+            const voices = window.speechSynthesis.getVoices();
+            const itVoice = voices.find(v => v.lang.startsWith('it'));
+            if (itVoice) utterance.voice = itVoice;
+
+            utterance.onend = () => {
+                this.vocalSpeaking = false;
+                if (callback) callback();
+            };
+            utterance.onerror = () => {
+                this.vocalSpeaking = false;
+                if (callback) callback();
+            };
+            window.speechSynthesis.speak(utterance);
+        };
+
+        const initSpeechRecognition = () => {
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRec) {
+                statusText.textContent = "Errore: Riconoscimento vocale non supportato su questo browser.";
+                return null;
+            }
+            const rec = new SpeechRec();
+            rec.lang = 'it-IT';
+            rec.continuous = false;
+            rec.interimResults = true;
+
+            rec.onstart = () => {
+                micBtn.classList.add('listening');
+                pulse.classList.add('active');
+                statusText.textContent = "Ascolto in corso... parla ora.";
+                transBox.innerHTML = '';
+            };
+
+            rec.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                transBox.textContent = finalTranscript || interimTranscript;
+            };
+
+            rec.onerror = (e) => {
+                console.error("Speech recognition error:", e);
+                statusText.textContent = "Errore ascolto. Clicca sul microfono per ripetere.";
+                micBtn.classList.remove('listening');
+                pulse.classList.remove('active');
+            };
+
+            rec.onend = () => {
+                micBtn.classList.remove('listening');
+                pulse.classList.remove('active');
+                statusText.textContent = "Ascolto completato. Valutazione in corso...";
+                
+                setTimeout(() => {
+                    evaluateAnswer(transBox.textContent);
+                }, 800);
+            };
+
+            return rec;
+        };
+
+        this.vocalRecognition = initSpeechRecognition();
+
+        const askQuestion = () => {
+            activeSection = validSections[Math.floor(Math.random() * validSections.length)];
+            feedbackArea.innerHTML = '';
+            transBox.textContent = 'In attesa della tua risposta...';
+            
+            const intro = "Domanda. " + activeSection.title + ". Parlami di questo argomento.";
+            qText.textContent = `Parlami di: "${activeSection.title}"`;
+            
+            statusText.textContent = "L'esaminatore sta parlando...";
+            micBtn.disabled = true;
+
+            speakText(intro, () => {
+                micBtn.disabled = false;
+                if (this.vocalRecognition) {
+                    try {
+                        this.vocalRecognition.start();
+                    } catch(e) {
+                        statusText.textContent = "Clicca sull'icona del microfono per rispondere.";
+                    }
+                } else {
+                    statusText.textContent = "Riconoscimento vocale non disponibile.";
+                }
+            });
+        };
+
+        micBtn.onclick = () => {
+            if (micBtn.classList.contains('listening')) {
+                try { this.vocalRecognition.stop(); } catch(e){}
+            } else {
+                window.speechSynthesis.cancel();
+                this.vocalSpeaking = false;
+                try { this.vocalRecognition.start(); } catch(e){}
+            }
+        };
+
+        startBtn.onclick = () => {
+            startBtn.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+            askQuestion();
+        };
+
+        nextBtn.onclick = () => {
+            askQuestion();
+        };
+
+        const evaluateAnswer = (answerText) => {
+            if (!answerText || answerText.trim() === '' || answerText.includes('In attesa della tua risposta')) {
+                feedbackArea.innerHTML = `
+                    <div class="vocal-feedback-card" style="border-color:#ef4444; background:rgba(239,68,68,0.02)">
+                        <div class="vocal-score-ring" style="color:#ef4444">Non Classificato</div>
+                        <div class="vocal-score-feedback">Risposta non pervenuta o insufficiente.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            const textSource = activeSection.content;
+            const words = textSource.toLowerCase().replace(/[^a-zàèìòù\s]/g, '').split(/\s+/);
+            const stopWords = new Set(['anche', 'della', 'delle', 'dello', 'della', 'nella', 'nelle', 'nello', 'questo', 'questa', 'questi', 'queste', 'quello', 'quella', 'quelli', 'quelle', 'tutto', 'tutti', 'tutta', 'tutte', 'dopo', 'prima', 'sopra', 'sotto', 'senza', 'contro', 'verso', 'perché', 'come', 'dove', 'quando', 'mentre', 'sotto', 'dalle', 'dalla', 'dello', 'della', 'degli', 'del', 'al', 'ai', 'all', 'allo', 'alla', 'alle', 'nei', 'negli', 'nel', 'nella', 'nelle', 'sul', 'sulla', 'sulle', 'sugli']);
+            
+            const keywordFrequency = {};
+            words.forEach(w => {
+                if (w.length > 4 && !stopWords.has(w)) {
+                    keywordFrequency[w] = (keywordFrequency[w] || 0) + 1;
+                }
+            });
+
+            const targetKeywords = Object.keys(keywordFrequency).sort((a,b) => keywordFrequency[b] - keywordFrequency[a]).slice(0, 10);
+            
+            const cleanAnswer = answerText.toLowerCase();
+            const matched = [];
+            const missed = [];
+
+            targetKeywords.forEach(kw => {
+                const stem = kw.slice(0, Math.max(5, kw.length - 2));
+                if (cleanAnswer.includes(stem)) {
+                    matched.push(kw);
+                } else {
+                    missed.push(kw);
+                }
+            });
+
+            const ratio = matched.length / Math.max(3, Math.min(6, targetKeywords.length));
+            let grade = Math.min(30, Math.round(18 + ratio * 12));
+            if (matched.length === 0) grade = 18;
+
+            let feedbackMsg = '';
+            let lode = false;
+            
+            if (grade >= 30) {
+                grade = 30;
+                if (ratio >= 1.0) lode = true;
+            }
+
+            if (grade === 30) {
+                feedbackMsg = lode ? "Eccellente! Esposizione magistrale con termini precisi e concetti completi." : "Ottimo lavoro! Hai toccato tutti i punti principali richiesti.";
+            } else if (grade >= 27) {
+                feedbackMsg = "Molto bene! Risposta dettagliata e ben formulata.";
+            } else if (grade >= 24) {
+                feedbackMsg = "Buona risposta. Potresti migliorare citando i termini chiave mancanti.";
+            } else {
+                feedbackMsg = "Risposta sufficiente, ma l'esposizione necessita di maggiore approfondimento.";
+            }
+
+            const gradeSpeak = `Voto: ${grade} ${lode ? 'e Lode' : ''}. ${feedbackMsg}`;
+            speakText(gradeSpeak);
+
+            feedbackArea.innerHTML = `
+                <div class="vocal-feedback-card">
+                    <div class="vocal-score-ring">${grade}${lode ? ' e Lode' : ''} / 30</div>
+                    <div class="vocal-score-feedback">${feedbackMsg}</div>
+                    <div class="vocal-score-keywords" style="margin-bottom: 0.6rem;">
+                        <strong>Concetti toccati:</strong> 
+                        ${matched.length > 0 ? matched.map(m => `<span style="color:#4ade80">${m}</span>`).join(' ') : '<span style="color:#ef4444">Nessuno</span>'}
+                    </div>
+                    ${missed.length > 0 ? `
+                    <div class="vocal-score-keywords">
+                        <strong>Concetti da approfondire:</strong> 
+                        ${missed.map(m => `<span style="color:rgba(255,255,255,0.4)">${m}</span>`).join(' ')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            LexCore.logStudyActivity();
+        };
+    },
+
+    showFlashcardsOverlay(title, md) {
+        const overlay = this.getSharedOverlay('flashcard-tool-overlay', 'Flashcards RAG - ' + title, `
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        `);
+        const body = overlay.querySelector('.lex-study-tool-card-body');
+
+        const cards = [];
+        
+        const termDefRegex = /\*\s*\*\*([^*]+)\*\*:\s*([^\n]+)/g;
+        let match;
+        const cleanText = md.replace(/\r/g, '');
+
+        while ((match = termDefRegex.exec(cleanText)) !== null) {
+            cards.push({
+                id: 'fc-gen-' + Math.random().toString(36).substr(2, 9),
+                subject: this.inferSubject(),
+                question: match[1].trim(),
+                answer: match[2].trim()
+            });
+        }
+
+        if (cards.length < 4) {
+            const listBoldRegex = /\*\s*\*\*([^*]+)\*\*\s+-\s+([^\n]+)/g;
+            let match2;
+            while ((match2 = listBoldRegex.exec(cleanText)) !== null) {
+                cards.push({
+                    id: 'fc-gen-' + Math.random().toString(36).substr(2, 9),
+                    subject: this.inferSubject(),
+                    question: match2[1].trim(),
+                    answer: match2[2].trim()
+                });
+            }
+        }
+
+        if (cards.length < 3) {
+            const lines = cleanText.split('\n');
+            let lastH = null;
+            let lastContent = '';
+            
+            lines.forEach(line => {
+                const hMatch = line.match(/^(##|###)\s+(.+)$/);
+                if (hMatch) {
+                    if (lastH && lastContent.trim().length > 30) {
+                        cards.push({
+                            id: 'fc-gen-' + Math.random().toString(36).substr(2, 9),
+                            subject: this.inferSubject(),
+                            question: "Quali sono gli aspetti principali di: " + lastH,
+                            answer: lastContent.trim().split('.').slice(0, 2).join('.') + '.'
+                        });
+                    }
+                    lastH = hMatch[2].trim();
+                    lastContent = '';
+                } else if (lastH) {
+                    lastContent += line + ' ';
+                }
+            });
+            if (lastH && lastContent.trim().length > 30) {
+                cards.push({
+                    id: 'fc-gen-' + Math.random().toString(36).substr(2, 9),
+                    subject: this.inferSubject(),
+                    question: "Quali sono gli aspetti principali di: " + lastH,
+                    answer: lastContent.trim().split('.').slice(0, 2).join('.') + '.'
+                });
+            }
+        }
+
+        if (cards.length === 0) {
+            body.innerHTML = `
+                <div style="text-align:center; padding: 2rem; color:var(--text-muted)">
+                    Impossibile generare flashcard in questo capitolo.
+                </div>
+            `;
+            return;
+        }
+
+        try {
+            const customList = JSON.parse(localStorage.getItem('lex-custom-flashcards') || '[]');
+            cards.forEach(card => {
+                if (!customList.some(c => c.question === card.question)) {
+                    customList.push(card);
+                }
+            });
+            localStorage.setItem('lex-custom-flashcards', JSON.stringify(customList));
+        } catch(e) {
+            console.error("Errore salvataggio flashcard:", e);
+        }
+
+        body.innerHTML = `
+            <div class="flashcard-deck-container">
+                <div class="flashcard-stage" id="flashcard-stage">
+                    <div class="flashcard-card-3d" id="flashcard-card-3d">
+                        <div class="flashcard-face flashcard-front">
+                            <div class="flashcard-word" id="flashcard-front-text">Front</div>
+                        </div>
+                        <div class="flashcard-face flashcard-back">
+                            <div class="flashcard-definition" id="flashcard-back-text">Back</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flashcard-status-actions" id="flashcard-status-actions" style="visibility:hidden;">
+                    <button class="flashcard-status-btn dont-know" id="fc-dont-know-btn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        Non lo so
+                    </button>
+                    <button class="flashcard-status-btn know" id="fc-know-btn" style="background:rgba(34,197,94,0.1); color:#4ade80; border:1px solid rgba(34,197,94,0.2)">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Lo so!
+                    </button>
+                </div>
+
+                <div class="flashcard-nav-controls">
+                    <button class="flashcard-nav-btn" id="fc-prev-btn">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <span class="flashcard-counter" id="fc-counter">1 / ${cards.length}</span>
+                    <button class="flashcard-nav-btn" id="fc-next-btn">
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        overlay.classList.add('open');
+
+        const stage = body.querySelector('#flashcard-stage');
+        const card3D = body.querySelector('#flashcard-card-3d');
+        const frontText = body.querySelector('#flashcard-front-text');
+        const backText = body.querySelector('#flashcard-back-text');
+        const statusBox = body.querySelector('#flashcard-status-actions');
+        const prevBtn = body.querySelector('#fc-prev-btn');
+        const nextBtn = body.querySelector('#fc-next-btn');
+        const counter = body.querySelector('#fc-counter');
+        const knowBtn = body.querySelector('#fc-know-btn');
+        const dontKnowBtn = body.querySelector('#fc-dont-know-btn');
+
+        let currentIndex = 0;
+
+        const updateCard = () => {
+            card3D.classList.remove('flipped');
+            statusBox.style.visibility = 'hidden';
+            
+            setTimeout(() => {
+                const card = cards[currentIndex];
+                frontText.textContent = card.question;
+                backText.textContent = card.answer;
+                counter.textContent = `${currentIndex + 1} / ${cards.length}`;
+            }, 150);
+        };
+
+        stage.onclick = () => {
+            card3D.classList.toggle('flipped');
+            if (card3D.classList.contains('flipped')) {
+                statusBox.style.visibility = 'visible';
+            } else {
+                statusBox.style.visibility = 'hidden';
+            }
+        };
+
+        prevBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        };
+
+        nextBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+                updateCard();
+            }
+        };
+
+        const handleSRS = (known) => {
+            let completed = parseInt(localStorage.getItem('lex-flashcards-completed') || '0');
+            localStorage.setItem('lex-flashcards-completed', (completed + 1).toString());
+
+            if (known) {
+                this.showNotification("Memorizzato!", "La scheda è stata inserita nel ripasso programmato.");
+            }
+
+            if (currentIndex < cards.length - 1) {
+                setTimeout(() => {
+                    currentIndex++;
+                    updateCard();
+                }, 300);
+            }
+        };
+
+        knowBtn.onclick = (e) => { e.stopPropagation(); handleSRS(true); };
+        dontKnowBtn.onclick = (e) => { e.stopPropagation(); handleSRS(false); };
+
+        updateCard();
+    },
+
+    inferSubject() {
+        const path = window.location.pathname;
+        if (path.includes('diritto')) return 'diritto';
+        if (path.includes('romana')) return 'romana';
+        if (path.includes('storia')) return 'storia';
+        return 'arte';
+    },
+
+    showGlossarySidebar(title, md, activeTerm) {
+        let sidebar = document.getElementById('lex-glossary-sidebar');
+        if (!sidebar) {
+            sidebar = document.createElement('div');
+            sidebar.id = 'lex-glossary-sidebar';
+            sidebar.className = 'lex-glossary-sidebar';
+            document.body.appendChild(sidebar);
+        }
+
+        sidebar.innerHTML = `
+            <div class="lex-glossary-sidebar-header">
+                <h3 class="lex-glossary-sidebar-title">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    Glossario Capitolo
+                </h3>
+                <button class="lex-study-tool-close-btn">&times;</button>
+            </div>
+            <div class="lex-glossary-sidebar-body"></div>
+        `;
+
+        sidebar.querySelector('.lex-study-tool-close-btn').onclick = () => {
+            sidebar.classList.remove('open');
+        };
+
+        const body = sidebar.querySelector('.lex-glossary-sidebar-body');
+        
+        const matchedTerms = [];
+        if (window.glossaryDatabase) {
+            const cleanMD = md.toLowerCase();
+            Object.keys(window.glossaryDatabase).forEach(key => {
+                const termMeta = window.glossaryDatabase[key];
+                const cleanTerm = key.toLowerCase();
+                if (cleanMD.includes(cleanTerm)) {
+                    matchedTerms.push(termMeta);
+                }
+            });
+        }
+
+        if (matchedTerms.length === 0) {
+            body.innerHTML = `
+                <div style="text-align:center; padding: 2rem; color:var(--text-muted); font-size:0.85rem">
+                    Nessun termine di glossario identificato in questa sintesi.
+                </div>
+            `;
+        } else {
+            body.innerHTML = matchedTerms.map(term => `
+                <div class="lex-glossary-item-card" id="glossary-card-${term.term.toLowerCase().replace(/\s+/g, '-')}" data-term="${term.term.toLowerCase()}">
+                    <div class="lex-glossary-item-term">
+                        <span>${term.term}</span>
+                        <span class="lex-glossary-item-domain">${term.domain}</span>
+                    </div>
+                    <div class="lex-glossary-item-def">${term.definition}</div>
+                </div>
+            `).join('');
+        }
+
+        sidebar.classList.add('open');
+
+        if (activeTerm) {
+            const cardId = `glossary-card-${activeTerm.toLowerCase().replace(/\s+/g, '-')}`;
+            setTimeout(() => {
+                const card = body.querySelector('#' + cardId) || body.querySelector(`[data-term*="${activeTerm.toLowerCase()}"]`);
+                if (card) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.classList.add('highlighted');
+                    setTimeout(() => {
+                        card.classList.remove('highlighted');
+                    }, 2500);
+                }
+            }, 300);
+        }
+    },
+
+    showNotification(title, message) {
+        let toastContainer = document.getElementById('lex-sweet-toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'lex-sweet-toast-container';
+            document.body.appendChild(toastContainer);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = 'lex-sweet-toast';
+        toast.innerHTML = `
+            <div class="toast-heart">✨</div>
+            <div class="toast-content">
+                <div class="toast-title">${title}</div>
+                <div class="toast-body">${message}</div>
+            </div>
+            <button class="toast-close-btn" style="margin-left: 0.5rem; font-size: 1.1rem; opacity: 0.7; border:none; background:none; cursor:pointer; color:var(--text-muted);">&times;</button>
+        `;
+        
+        toast.querySelector('.toast-close-btn').onclick = () => {
+            toast.classList.add('hide');
+            setTimeout(() => toast.remove(), 300);
+        };
+        
+        toastContainer.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.add('hide');
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
 };
 
 // Auto-init

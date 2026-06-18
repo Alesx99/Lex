@@ -1336,6 +1336,18 @@
 
         // Initialize on load
         document.addEventListener('DOMContentLoaded', () => {
+            // Carica le flashcard personalizzate generate dalle sintesi
+            try {
+                const custom = JSON.parse(localStorage.getItem('lex-custom-flashcards') || '[]');
+                custom.forEach(card => {
+                    if (!flashcardsDatabase.some(c => c.id === card.id)) {
+                        flashcardsDatabase.push(card);
+                    }
+                });
+            } catch(e) {
+                console.error("Errore caricamento flashcard custom:", e);
+            }
+
             const urlParams = new URLSearchParams(window.location.search);
             const subjectParam = urlParams.get('subject');
             const srsParam = urlParams.get('srs');
