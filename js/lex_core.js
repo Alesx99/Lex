@@ -4603,6 +4603,16 @@ const LexCore = {
 
     triggerStratigrafia() {
         if (document.getElementById('lex-stratigrafia-drawer')) return;
+
+        // Limita l'attivazione ad una volta al giorno
+        const lastActivation = localStorage.getItem('lex-stratigrafia-last-date');
+        const todayStr = new Date().toDateString();
+        if (lastActivation === todayStr) {
+            console.log("Easter Egg 'Lo Scavo Archeologico' già attivato oggi.");
+            return;
+        }
+        localStorage.setItem('lex-stratigrafia-last-date', todayStr);
+
         this.unlockEasterEgg('ee-stratigrafia');
 
         // Effetto terremoto sullo schermo
