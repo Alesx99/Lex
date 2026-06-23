@@ -1,0 +1,868 @@
+/* LEX STUDIO MAX - PREMIUM METHODOLOGY SPACE */
+
+:root {
+    --sm-glow-color: rgba(212, 175, 55, 0.3);
+    --sm-accent: var(--accent-gold);
+    --sm-card-bg: rgba(22, 28, 45, 0.45);
+    --sm-card-border: rgba(255, 255, 255, 0.08);
+    --sm-badge-bg: rgba(212, 175, 55, 0.15);
+}
+
+body.light-theme {
+    --sm-glow-color: rgba(180, 150, 110, 0.2);
+    --sm-accent: #b58900;
+    --sm-card-bg: rgba(255, 255, 255, 0.75);
+    --sm-card-border: rgba(180, 160, 140, 0.25);
+    --sm-badge-bg: rgba(181, 137, 0, 0.1);
+}
+
+body.coccole-theme {
+    --sm-glow-color: rgba(255, 107, 139, 0.35);
+    --sm-accent: #ff6b8b;
+    --sm-card-bg: rgba(255, 240, 245, 0.65);
+    --sm-card-border: rgba(255, 107, 139, 0.18);
+    --sm-badge-bg: rgba(255, 107, 139, 0.15);
+}
+
+body.eclissi-theme {
+    --sm-glow-color: rgba(0, 255, 204, 0.4);
+    --sm-accent: #00ffcc;
+    --sm-card-bg: rgba(5, 5, 5, 0.9);
+    --sm-card-border: #00ffcc;
+    --sm-badge-bg: rgba(0, 255, 204, 0.15);
+}
+
+/* Base Layout */
+.studiomax-container {
+    max-width: 1300px;
+    width: 95%;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@media (max-width: 992px) {
+    .studiomax-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sidebar Progression */
+.studiomax-sidebar {
+    background: var(--sm-card-bg);
+    border: 1px solid var(--sm-card-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    height: fit-content;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.studiomax-phases-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.phase-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.phase-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+}
+
+body.light-theme .phase-item:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.phase-item.active {
+    background: var(--sm-badge-bg);
+    border-color: var(--sm-card-border);
+    color: var(--sm-accent);
+    font-weight: 600;
+    box-shadow: 0 4px 15px var(--sm-glow-color);
+}
+
+.phase-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.phase-item.completed .phase-num {
+    background: var(--sm-accent);
+    color: #000;
+    border-color: var(--sm-accent);
+}
+
+body.eclissi-theme .phase-item.completed .phase-num {
+    color: #000;
+}
+
+/* Workspace Frame */
+.studiomax-workspace {
+    background: var(--sm-card-bg);
+    border: 1px solid var(--sm-card-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 2rem;
+    min-height: 550px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header Config Panel */
+.sm-config-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--sm-card-border);
+    flex-wrap: wrap;
+}
+
+.sm-config-group {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.sm-select {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    color: var(--text-primary);
+    outline: none;
+    font-size: 0.95rem;
+    min-width: 200px;
+    transition: border-color 0.3s;
+}
+
+body.light-theme .sm-select {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.sm-select:focus {
+    border-color: var(--sm-accent);
+}
+
+.sm-btn {
+    background: var(--sm-accent);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px var(--sm-glow-color);
+}
+
+.sm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--sm-glow-color);
+}
+
+.sm-btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid var(--sm-card-border);
+    box-shadow: none;
+}
+
+.sm-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Phase Panels Container */
+.phase-panel {
+    display: none;
+    flex-direction: column;
+    flex-grow: 1;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.phase-panel.active {
+    display: flex;
+}
+
+/* ------------------ PHASE 1: SU SHI READER ------------------ */
+.sushi-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+}
+
+.filter-btn.active {
+    background: var(--sm-badge-bg);
+    border-color: var(--sm-accent);
+    color: var(--sm-accent);
+    font-weight: 600;
+}
+
+.sushi-content-wrapper {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    max-height: 450px;
+    overflow-y: auto;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+}
+
+body.light-theme .sushi-content-wrapper {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Filter Highlighting Classes */
+.sushi-text-dimmed {
+    opacity: 0.35;
+    filter: blur(0.5px);
+    transition: all 0.3s ease;
+}
+
+.sushi-text-highlight {
+    background: var(--sm-badge-bg);
+    color: var(--sm-accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--sm-accent);
+    transition: all 0.3s ease;
+}
+
+/* ------------------ PHASE 2: LECTIO DIVINA ------------------ */
+.lectio-stepper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.lectio-step-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 15px;
+    text-align: center;
+    color: var(--text-secondary);
+    transition: all 0.3s;
+}
+
+.lectio-step-node.active {
+    background: var(--sm-badge-bg);
+    border-color: var(--sm-accent);
+    color: var(--sm-accent);
+    font-weight: 600;
+}
+
+.lectio-step-node.completed {
+    border-color: var(--sm-accent);
+    color: var(--text-primary);
+}
+
+.lectio-step-title {
+    font-size: 0.95rem;
+    font-family: var(--font-serif);
+}
+
+.lectio-workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.lectio-textarea {
+    width: 100%;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+body.light-theme .lectio-textarea {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.lectio-textarea:focus {
+    border-color: var(--sm-accent);
+}
+
+/* Timer and Ambient Sound Styles */
+.lectio-timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.lectio-timer-circle {
+    position: relative;
+    width: 160px;
+    height: 160px;
+}
+
+.lectio-timer-svg {
+    transform: rotate(-90deg);
+    width: 160px;
+    height: 160px;
+}
+
+.lectio-timer-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 8px;
+}
+
+body.light-theme .lectio-timer-bg {
+    stroke: rgba(0, 0, 0, 0.05);
+}
+
+.lectio-timer-progress {
+    fill: none;
+    stroke: var(--sm-accent);
+    stroke-width: 8px;
+    stroke-linecap: round;
+    stroke-dasharray: 477.5;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+}
+
+.lectio-timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.binaural-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* ------------------ PHASE 3: LOCKE INDEXER ------------------ */
+.locke-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .locke-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.locke-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.locke-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.locke-table th, .locke-table td {
+    border: 1px solid var(--sm-card-border);
+    padding: 0.6rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.locke-table th {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.locke-cell {
+    background: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+body.light-theme .locke-cell {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.locke-cell:hover {
+    background: var(--sm-badge-bg);
+}
+
+.locke-cell.has-notes {
+    color: var(--sm-accent);
+    font-weight: 700;
+}
+
+.locke-cell-count {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    font-size: 0.65rem;
+    opacity: 0.7;
+}
+
+.locke-notes-panel {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+body.light-theme .locke-notes-panel {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.locke-note-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.locke-note-card:last-child {
+    margin-bottom: 0;
+}
+
+.locke-note-head {
+    font-weight: 600;
+    color: var(--sm-accent);
+    margin-bottom: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.locke-note-links {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.locke-note-link-tag {
+    cursor: pointer;
+    color: var(--sm-accent);
+    text-decoration: underline;
+}
+
+/* ------------------ PHASE 4: PATHAS ALGORITMICI ------------------ */
+.pathas-game-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.pathas-game-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 300px;
+}
+
+.pathas-dropzone {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    min-height: 80px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px dashed var(--sm-card-border);
+    border-radius: 12px;
+    padding: 1rem;
+    align-items: center;
+}
+
+body.light-theme .pathas-dropzone {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.pathas-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 12px;
+    border: 1px solid var(--sm-card-border);
+}
+
+.pathas-token {
+    background: var(--sm-card-bg);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    cursor: grab;
+    user-select: none;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pathas-token:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.pathas-token.correct {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.pathas-token.incorrect {
+    border-color: var(--accent-terracotta);
+    color: var(--accent-terracotta);
+}
+
+/* Jata Patha reverse indicator */
+.jata-direction-indicator {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: var(--sm-badge-bg);
+    color: var(--sm-accent);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* ------------------ PHASE 5: LUKASA & SONGLINES ------------------ */
+.spatial-mode-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.lukasa-canvas-container {
+    position: relative;
+    border: 1px solid var(--sm-card-border);
+    border-radius: 15px;
+    background: radial-gradient(circle at center, #231815 0%, #0d0908 100%);
+    overflow: hidden;
+    height: 400px;
+}
+
+body.light-theme .lukasa-canvas-container {
+    background: radial-gradient(circle at center, #e6dfd3 0%, #c4baa7 100%);
+}
+
+.lukasa-bead {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lukasa-bead:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.lukasa-svg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.lukasa-connection-line {
+    stroke: var(--sm-accent);
+    stroke-width: 2.5;
+    stroke-dasharray: 5;
+    opacity: 0.5;
+}
+
+/* Songlines */
+.songlines-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.songline-path-visualizer {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 1.5rem 0;
+    margin: 1rem 0;
+}
+
+.songline-path-line {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    height: 3px;
+    background: var(--sm-card-border);
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.songline-station {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--sm-card-bg);
+    border: 2px solid var(--sm-card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 700;
+}
+
+.songline-station.active {
+    background: var(--sm-accent);
+    color: #000;
+    border-color: var(--sm-accent);
+    box-shadow: 0 0 15px var(--sm-accent);
+}
+
+.songline-station.completed {
+    border-color: var(--sm-accent);
+}
+
+.songline-card {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: none;
+    animation: fadeIn 0.4s;
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+}
+
+body.light-theme .songline-card {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.songline-card.active {
+    display: grid;
+}
+
+@media (max-width: 600px) {
+    .songline-card.active {
+        grid-template-columns: 1fr;
+    }
+}
+
+.songline-image {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(135deg, #1f2937, #111827);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border: 1px solid var(--sm-card-border);
+}
+
+/* ------------------ PHASE 6: DISPUTATIO AI ------------------ */
+.disputatio-container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 1.5rem;
+    height: 480px;
+}
+
+.disputatio-chat {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+body.light-theme .disputatio-chat {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.chat-bubble {
+    max-width: 80%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 15px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.chat-bubble.bot {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--sm-card-border);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+body.light-theme .chat-bubble.bot {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.chat-bubble.user {
+    background: var(--sm-accent);
+    color: #000;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    font-weight: 500;
+}
+
+body.eclissi-theme .chat-bubble.user {
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    background: transparent;
+}
+
+.disputatio-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.disputatio-button-choices {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.disputatio-text-bar {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.disputatio-input {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--sm-card-border);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    color: var(--text-primary);
+    outline: none;
+}
+
+body.light-theme .disputatio-input {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.disputatio-input:focus {
+    border-color: var(--sm-accent);
+}
+
+.disputatio-timer-bar {
+    height: 4px;
+    background: var(--sm-card-border);
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+}
+
+.disputatio-timer-fill {
+    height: 100%;
+    background: var(--sm-accent);
+    width: 100%;
+    transition: width 1s linear;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
