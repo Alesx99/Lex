@@ -120,6 +120,11 @@ I segreti sono divisi in tre categorie tematiche principali. Di seguito trovi la
 * **Metodo di sblocco:** Rimani completamente inattivo per esattamente 3 minuti su una sintesi di qualsiasi materia.
 - **Effetto:** Si sente un rumore di rosicchiamento, appare un buco nero circolare in un punto a caso con un simpatico bruco animato che commenta il capitolo.
 
+#### 🔓 ee-apocalypse — L'Apocalisse dello Studente
+* **Indizio:** Un codice segreto irrisolvibile scatena la distruzione...
+* **Metodo di sblocco:** Apri la sezione Codicologia.
+- **Effetto:** Appare un terminale crittografico protetto. Qualsiasi tentativo di decrittazione fallisce, avviando un countdown di autodistruzione con boato finale. Il portale entra in modalità "Apocalisse" per 5 minuti, mostrandosi semidistrutto con dati persi (fittizi), countdown in alto e inibizione delle azioni principali. Al termine dei 5 minuti, il database viene ripristinato dai monaci e si sblocca il trofeo.
+
 ---
 
 ### 3. Categoria: Materie dello Studio (Curriculum Segreto)

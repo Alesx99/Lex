@@ -2978,6 +2978,7 @@ const LexCore = {
         this.initCavernaPlatoneWatcher();
         this.initStratigrafiaWatcher();
         this.initDamnatioMemoriaeQuizWatcher();
+        this.initApocalypse();
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -3036,7 +3037,8 @@ const LexCore = {
         { id:'ee-cronista-scriptorium',cat:'scriptorium',icon:'✍️', name:'Il Cronista dello Scriptorium',  hint:'Il tempo si misura in versioni... clicca sul numero per fare un salto nel passato.', desc:'Clicca 5 volte di fila sul numero di versione v2.6.0 nel modal del Changelog.', page:'*' },
         { id:'ee-caverna-platone',   cat:'materie',     icon:'🕯️', name:'La Caverna di Platone',          hint:'Ciò che vedi è solo un\'ombra. Spegni le luci e cerca la verità nella roccia.',    desc:'Nella sintesi di Filosofia con tema Scuro, seleziona la parola "Caverna" o "Ombra".', page:'filosofia/*' },
         { id:'ee-stratigrafia',      cat:'materie',     icon:'⛏️', name:'Lo Scavo Archeologico',          hint:'La conoscenza è stratificata. Scava oltre i limiti della pagina.',                desc:'Fai scorrimento continuo (overscroll) verso il basso a fondo pagina per 5 volte.', page:'*' },
-        { id:'ee-damnatio-memoriae-quiz',cat:'materie', icon:'🛡️', name:'L\'Eresia Giuridica',            hint:'Certe eresie giuridiche non meritano risposta, solo l\'oblio della censura.',      desc:'Nel Simulatore d\'Esame, in una domanda di Diritto, premi Ctrl + Shift + X.', page:'exam.html' }
+        { id:'ee-damnatio-memoriae-quiz',cat:'materie', icon:'🛡️', name:'L\'Eresia Giuridica',            hint:'Certe eresie giuridiche non meritano risposta, solo l\'oblio della censura.',      desc:'Nel Simulatore d\'Esame, in una domanda di Diritto, premi Ctrl + Shift + X.', page:'exam.html' },
+        { id:'ee-apocalypse',        cat:'scriptorium', icon:'💥', name:'L\'Apocalisse dello Studente',   hint:'Un codice segreto irrisolvibile scatena la distruzione...',                       desc:'Hai assistito alla finta distruzione del portale a causa di un codice irrisolvibile.', page:'codicologia/index.html' }
     ],
 
     unlockEasterEgg(id) {
@@ -4724,6 +4726,381 @@ const LexCore = {
                 submitAnswer();
             }
         }, 2500);
+    },
+
+    // ── EE #4: L'Apocalisse dello Studente (Codicologia) ──
+    initApocalypse() {
+        // 1. Controlla se la modalità Apocalisse è attualmente attiva
+        if (this.isApocalypseActive()) {
+            this.applyApocalypseEffect();
+            return;
+        }
+
+        // 2. Controlla se dobbiamo mostrare la schermata di successo post-ripristino
+        if (localStorage.getItem('lex-apocalypse-restored') === 'true') {
+            this.showApocalypseRestoredOverlay();
+            return;
+        }
+
+        // 3. Trigger della sequenza all'apertura del catalogo di Codicologia (1 sola volta)
+        const path = window.location.pathname;
+        const isCodicologiaIndex = path.includes('codicologia') && 
+            (path.endsWith('index.html') || path.endsWith('codicologia') || path.endsWith('codicologia/'));
+            
+        if (isCodicologiaIndex) {
+            if (!localStorage.getItem('lex-apocalypse-triggered')) {
+                setTimeout(() => this.triggerApocalypseSequence(), 1000);
+            }
+        }
+    },
+
+    triggerApocalypseSequence() {
+        if (document.getElementById('lex-apocalypse-trigger-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-apocalypse-trigger-overlay';
+        overlay.className = 'apocalypse-trigger-overlay';
+        overlay.innerHTML = `
+            <div class="apocalypse-trigger-terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">SECURITY PROTOCOL - LEX SCRIPTORIUM v2.6.0</span>
+                </div>
+                <div class="terminal-body" id="apocalypse-terminal-body">
+                    <p class="terminal-text green">[INFO] Connessione al settore CODICOLOGIA stabilita.</p>
+                    <p class="terminal-text green">[WARNING] File segreti cifrati rilevati. Rilevata chiave di cifratura sconosciuta.</p>
+                    <p class="terminal-text yellow">[ALERT] Sistema di sicurezza attivato. Risolvere il cifrario per evitare la corruzione dei dati.</p>
+                    <div class="riddle-box">
+                        <p class="riddle-text">
+                            "Io sono il codice che unisce l'inizio e la fine,<br>
+                            il collasso del tempo e l'oblio delle parole.<br>
+                            Inserisci la chiave algebrica irrisolvibile per sbloccare l'archivio:"
+                        </p>
+                        <div class="terminal-input-container">
+                            <span class="terminal-prompt">&gt;</span>
+                            <input type="text" id="apocalypse-sec-input" class="terminal-input" placeholder="Parola d'ordine..." autocomplete="off">
+                        </div>
+                        <button id="apocalypse-submit-btn" class="terminal-btn">DECRIPTA</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const input = document.getElementById('apocalypse-sec-input');
+        const submitBtn = document.getElementById('apocalypse-submit-btn');
+
+        if (input) input.focus();
+
+        const runExplosionSequence = () => {
+            const body = document.getElementById('apocalypse-terminal-body');
+            if (!body) return;
+            
+            body.innerHTML = `
+                <p class="terminal-text green">[INFO] Inizializzazione decrittazione con chiave: "${input ? input.value : 'unknown'}"</p>
+                <p class="terminal-text yellow">[ANALISI] Ciclo crittografico ricorsivo avviato...</p>
+                <p class="terminal-text red">[ERRORE] Chiave incompatibile. Divisore per zero nel nucleo crittografico!</p>
+                <p class="terminal-text red">[ERRORE FATALE] Sovraccarico di memoria nel settore CODEX. Buffer overflow!</p>
+                <p class="terminal-text red blink">[CRITICAL] Rilevamento collasso strutturale. Auto-distruzione database avviata!</p>
+                <p class="terminal-text red blink" id="countdown-text" style="font-size: 1.5rem; text-align: center; margin-top: 1rem; font-weight: bold;">DISTRUZIONE TRA: 5...</p>
+            `;
+
+            let seconds = 5;
+            const timer = setInterval(() => {
+                seconds--;
+                const countText = document.getElementById('countdown-text');
+                if (countText) {
+                    countText.textContent = `DISTRUZIONE TRA: ${seconds}...`;
+                }
+
+                // Low pitch beep
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(seconds === 0 ? 880 : 440, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.2);
+                } catch(e) {}
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    this.playExplosionSound();
+                    
+                    overlay.classList.add('flash-white');
+                    document.body.classList.add('violent-shake');
+
+                    setTimeout(() => {
+                        localStorage.setItem('lex-apocalypse-triggered', 'true');
+                        localStorage.setItem('lex-apocalypse-start', Date.now().toString());
+                        
+                        overlay.remove();
+                        document.body.classList.remove('violent-shake');
+                        window.location.reload();
+                    }, 1000);
+                }
+            }, 1000);
+        };
+
+        if (submitBtn) {
+            submitBtn.addEventListener('click', runExplosionSequence);
+        }
+        if (input) {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') runExplosionSequence();
+            });
+        }
+    },
+
+    playExplosionSound() {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            
+            // Rumble bass
+            const osc = ctx.createOscillator();
+            const oscGain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(100, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 1.5);
+            
+            oscGain.gain.setValueAtTime(0.8, ctx.currentTime);
+            oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.6);
+            
+            // Noise buffer for blast/debris hiss
+            const bufferSize = ctx.sampleRate * 2.5;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            
+            const noiseFilter = ctx.createBiquadFilter();
+            noiseFilter.type = 'lowpass';
+            noiseFilter.frequency.setValueAtTime(500, ctx.currentTime);
+            noiseFilter.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + 2.0);
+            
+            const noiseGain = ctx.createGain();
+            noiseGain.gain.setValueAtTime(0.6, ctx.currentTime);
+            noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.4);
+            
+            osc.connect(oscGain);
+            oscGain.connect(ctx.destination);
+            
+            noise.connect(noiseFilter);
+            noiseFilter.connect(noiseGain);
+            noiseGain.connect(ctx.destination);
+            
+            osc.start();
+            noise.start();
+            osc.stop(ctx.currentTime + 2.0);
+            noise.stop(ctx.currentTime + 2.5);
+        } catch(e) {
+            console.error("Errore sintesi audio esplosione:", e);
+        }
+    },
+
+    isApocalypseActive() {
+        const start = localStorage.getItem('lex-apocalypse-start');
+        if (!start) return false;
+        const diff = Date.now() - parseInt(start);
+        const fiveMinutes = 5 * 60 * 1000;
+        if (diff < fiveMinutes) {
+            return true;
+        } else {
+            this.restoreApocalypse();
+            return false;
+        }
+    },
+
+    restoreApocalypse() {
+        localStorage.removeItem('lex-apocalypse-start');
+        localStorage.setItem('lex-apocalypse-restored', 'true');
+        this.unlockEasterEgg('ee-apocalypse');
+        window.location.reload();
+    },
+
+    applyApocalypseEffect() {
+        document.body.classList.add('apocalypse-active');
+
+        // 1. Crea il banner di avvertimento superiore
+        if (!document.querySelector('.apocalypse-warning-banner')) {
+            const banner = document.createElement('div');
+            banner.className = 'apocalypse-warning-banner';
+            banner.innerHTML = `
+                <span class="banner-icon">⚠️</span>
+                <span class="banner-msg"><strong>CRITICAL ERROR:</strong> DETRITI CRITTOGRAFICI IN CORSO. APOCALISSE STUDENTESCA RILEVATA.</span>
+                <span class="banner-timer" id="apocalypse-countdown-timer">MM:SS</span>
+            `;
+            document.body.insertBefore(banner, document.body.firstChild);
+        }
+
+        // 2. Modifica i conteggi XP e i badge per farli sembrare azzerati/corrotti
+        const xpTexts = document.querySelectorAll('.xp-count, .level-badge, .points-display, #total-lp, #total-points, .progress-percentage, .user-points, .xp-bar-fill');
+        xpTexts.forEach(el => {
+            if (!el.getAttribute('data-original-val')) {
+                el.setAttribute('data-original-val', el.textContent);
+            }
+            el.textContent = 'ERR_0%';
+        });
+
+        // 3. Modifica i testi di intestazioni e card per renderli glitchati
+        const textElements = document.querySelectorAll('h1, h2, h3, .card-title, .quest-name, .secret-title, .chapter-title, .nav-link span, nav a');
+        textElements.forEach(el => {
+            if (!el.getAttribute('data-original-text') && el.textContent.trim().length > 0) {
+                el.setAttribute('data-original-text', el.textContent);
+                if (Math.random() > 0.3) {
+                    el.textContent = el.textContent.split('').map(char => {
+                        return Math.random() > 0.25 ? char : ['$', '#', '@', '%', '&', '?', '0', '1', '✖', '⚠', '∅', '⚰️'][Math.floor(Math.random() * 12)];
+                    }).join('');
+                }
+            }
+        });
+
+        // 4. Nasconde alcune card/sezioni simulando la cancellazione dei file ("pezzi mancanti")
+        const contentCards = document.querySelectorAll('.chapter-card, .quest-card, .secret-card, .minigame-card, .event-card, .node-card, .stat-card, .summary-card');
+        contentCards.forEach(card => {
+            if (!card.getAttribute('data-original-display')) {
+                card.setAttribute('data-original-display', card.style.display || 'block');
+                if (Math.random() > 0.6) {
+                    card.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'broken-placeholder-card';
+                    placeholder.innerHTML = `✖ SETTORE DI MEMORIA CANCELLATO (ADDR_0x${Math.floor(Math.random()*16777215).toString(16).toUpperCase()}) ✖`;
+                    card.parentNode.insertBefore(placeholder, card);
+                }
+            }
+        });
+
+        // 5. Applica distorsione visiva pesante alle immagini
+        const images = document.querySelectorAll('img, canvas:not(.pomo-canvas)');
+        images.forEach(img => {
+            img.style.filter = 'contrast(250%) blur(6px) grayscale(100%)';
+            img.style.opacity = '0.35';
+        });
+
+        // 6. Blocca le azioni standard con un feedback acustico di errore ed un alert glitchato
+        const interactives = document.querySelectorAll('.action-btn, button, a:not(.nav-link):not([href*=".html"]), input, select');
+        interactives.forEach(el => {
+            if (el.id === 'sun-icon' || el.id === 'moon-icon' || el.id === 'theme-toggle' || el.classList.contains('banner-timer')) return;
+            
+            // Usiamo un listener con stopPropagation per bloccare i comportamenti originari
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Suono buzzer di errore
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(120, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
+                } catch(err) {}
+
+                this.showMiniGlitchAlert();
+            }, true);
+        });
+
+        // 7. Aggiorna in tempo reale il conto alla rovescia del ripristino
+        const updateTimer = () => {
+            const start = parseInt(localStorage.getItem('lex-apocalypse-start') || '0');
+            const elapsed = Date.now() - start;
+            const remaining = 300000 - elapsed;
+
+            if (remaining <= 0) {
+                this.restoreApocalypse();
+                return;
+            }
+
+            const mins = Math.floor(remaining / 60000);
+            const secs = Math.floor((remaining % 60000) / 1000);
+            const timerEl = document.getElementById('apocalypse-countdown-timer');
+            if (timerEl) {
+                timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+        };
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    },
+
+    showMiniGlitchAlert() {
+        const existing = document.querySelector('.glitch-mini-alert');
+        if (existing) existing.remove();
+        
+        const alertBox = document.createElement('div');
+        alertBox.className = 'glitch-mini-alert';
+        alertBox.innerHTML = `⚠️ RETE DI MEMORIA CANCELLATA - DATI ACCADEMICI ILLEGIBILI`;
+        document.body.appendChild(alertBox);
+        
+        setTimeout(() => alertBox.classList.add('visible'), 50);
+        setTimeout(() => {
+            alertBox.classList.remove('visible');
+            setTimeout(() => alertBox.remove(), 400);
+        }, 2200);
+    },
+
+    showApocalypseRestoredOverlay() {
+        localStorage.removeItem('lex-apocalypse-restored');
+        if (document.getElementById('lex-apocalypse-restored-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'lex-apocalypse-restored-overlay';
+        overlay.className = 'apocalypse-restored-overlay';
+        overlay.innerHTML = `
+            <div class="apocalypse-restored-card">
+                <div class="restored-icon">🎉</div>
+                <h2 class="restored-title">SISTEMA RIPRISTINATO!</h2>
+                <p class="restored-text">
+                    I monaci ammanuensi dello Scriptorium hanno recuperato i detriti crittografici e restaurato il database di <strong>Lex Studiorum</strong> da un antico codice di backup manuale.
+                </p>
+                <p class="restored-sub">
+                    I tuoi progressi di studio, le flashcard, i punti XP e le tesi sono stati salvati dall'oblio digitale!
+                </p>
+                <div class="trophy-reward-box">
+                    <span class="reward-badge">💥 TROFEO SBLOCCATO</span>
+                    <span class="reward-name">L\'Apocalisse dello Studente</span>
+                </div>
+                <button onclick="document.getElementById('lex-apocalypse-restored-overlay').remove()" class="restored-btn">Laus Deo!</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Sound effect (success chime)
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = ctx.currentTime;
+            [261.63, 329.63, 392.00, 523.25].forEach((freq, idx) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+                gain.gain.setValueAtTime(0.15, now + idx * 0.12);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.6);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now + idx * 0.12);
+                osc.stop(now + idx * 0.12 + 0.8);
+            });
+        } catch(e) {}
     },
 
     // --- ACTIVITY LOG HELPER FOR HEATMAP ---
