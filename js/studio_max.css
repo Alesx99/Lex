@@ -590,6 +590,12 @@ body.light-theme .pathas-dropzone {
     color: var(--accent-terracotta);
 }
 
+.pathas-token.selected {
+    outline: 2px solid var(--sm-accent) !important;
+    box-shadow: 0 0 15px var(--sm-glow-color) !important;
+    transform: scale(1.05);
+}
+
 /* Jata Patha reverse indicator */
 .jata-direction-indicator {
     padding: 0.5rem 1rem;

@@ -859,6 +859,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkKramaProgress();
             });
 
+            // Click to drop selected token (touchscreen support)
+            target.addEventListener('click', () => {
+                const selected = document.querySelector('.pathas-token.selected');
+                if (selected && selected.getAttribute('data-pair')) {
+                    const prevToken = target.querySelector('.pathas-token');
+                    if (prevToken && prevToken !== selected) {
+                        prevToken.classList.remove('selected');
+                        kramaPool.appendChild(prevToken);
+                    }
+                    selected.classList.remove('selected');
+                    target.innerHTML = '';
+                    target.appendChild(selected);
+                    restoreKramaPlaceholders();
+                    checkKramaProgress();
+                }
+            });
+
             kramaDropzone.appendChild(target);
         });
 
@@ -866,6 +883,19 @@ document.addEventListener('DOMContentLoaded', () => {
         shuffled.forEach(pairText => {
             const token = createToken(pairText);
             kramaPool.appendChild(token);
+        });
+
+        // Click listener on pool to return items (touchscreen support)
+        kramaPool.addEventListener('click', () => {
+            const selected = document.querySelector('.pathas-token.selected');
+            if (selected && selected.getAttribute('data-pair')) {
+                if (selected.parentElement !== kramaPool) {
+                    selected.classList.remove('selected');
+                    kramaPool.appendChild(selected);
+                    restoreKramaPlaceholders();
+                    checkKramaProgress();
+                }
+            }
         });
     }
 
@@ -880,7 +910,25 @@ document.addEventListener('DOMContentLoaded', () => {
             e.dataTransfer.setData('text/plain', text);
         });
 
+        // Add selection listener
+        token.addEventListener('click', e => {
+            e.stopPropagation();
+            document.querySelectorAll('.pathas-token').forEach(t => {
+                if (t !== token) t.classList.remove('selected');
+            });
+            token.classList.toggle('selected');
+        });
+
         return token;
+    }
+
+    function restoreKramaPlaceholders() {
+        const targets = document.querySelectorAll('.pathas-dropzone-target');
+        targets.forEach((t, tIdx) => {
+            if (t.children.length === 0) {
+                t.textContent = `Coppia ${tIdx + 1}`;
+            }
+        });
     }
 
     function checkKramaProgress() {
@@ -930,6 +978,37 @@ document.addEventListener('DOMContentLoaded', () => {
         setupJataRound();
     }
 
+    function createJataToken(word) {
+        const token = document.createElement('div');
+        token.className = 'pathas-token';
+        token.textContent = word;
+        token.draggable = true;
+        token.setAttribute('data-word', word);
+        
+        token.addEventListener('dragstart', ev => {
+            ev.dataTransfer.setData('text/plain', word);
+        });
+
+        token.addEventListener('click', e => {
+            e.stopPropagation();
+            document.querySelectorAll('.pathas-token').forEach(t => {
+                if (t !== token) t.classList.remove('selected');
+            });
+            token.classList.toggle('selected');
+        });
+
+        return token;
+    }
+
+    function restoreJataPlaceholders() {
+        const targets = document.querySelectorAll('.jata-dropzone-target');
+        targets.forEach(t => {
+            if (t.children.length === 0) {
+                t.innerHTML = `<span style="opacity: 0.15;">-</span>`;
+            }
+        });
+    }
+
     function setupJataRound() {
         jataDropzone.innerHTML = '';
         jataPool.innerHTML = '';
@@ -961,16 +1040,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 const existing = document.querySelector(`.pathas-token[data-word="${word}"]`);
                 if (existing) existing.remove();
 
-                const token = document.createElement('div');
-                token.className = 'pathas-token';
-                token.textContent = word;
-                token.draggable = true;
-                token.setAttribute('data-word', word);
-                token.addEventListener('dragstart', ev => ev.dataTransfer.setData('text/plain', word));
-
+                const token = createJataToken(word);
                 target.innerHTML = '';
                 target.appendChild(token);
+                restoreJataPlaceholders();
                 checkJataProgress();
+            });
+
+            // Click to drop selected token (touchscreen support)
+            target.addEventListener('click', () => {
+                const selected = document.querySelector('.pathas-token.selected');
+                if (selected && selected.getAttribute('data-word')) {
+                    const prevToken = target.querySelector('.pathas-token');
+                    if (prevToken && prevToken !== selected) {
+                        prevToken.classList.remove('selected');
+                        jataPool.appendChild(prevToken);
+                    }
+                    selected.classList.remove('selected');
+                    target.innerHTML = '';
+                    target.appendChild(selected);
+                    restoreJataPlaceholders();
+                    checkJataProgress();
+                }
             });
 
             jataDropzone.appendChild(target);
@@ -978,13 +1069,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Pool tokens
         shuffled.forEach(w => {
-            const token = document.createElement('div');
-            token.className = 'pathas-token';
-            token.textContent = w;
-            token.draggable = true;
-            token.setAttribute('data-word', w);
-            token.addEventListener('dragstart', ev => ev.dataTransfer.setData('text/plain', w));
+            const token = createJataToken(w);
             jataPool.appendChild(token);
+        });
+
+        // Click listener on pool to return items (touchscreen support)
+        jataPool.addEventListener('click', () => {
+            const selected = document.querySelector('.pathas-token.selected');
+            if (selected && selected.getAttribute('data-word')) {
+                if (selected.parentElement !== jataPool) {
+                    selected.classList.remove('selected');
+                    jataPool.appendChild(selected);
+                    restoreJataPlaceholders();
+                    checkJataProgress();
+                }
+            }
         });
 
         // Jata Timer: 15 seconds
@@ -1175,19 +1274,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`📌 [${note.head}]\n${note.body}`);
             });
 
-            // Touch events for tablets (Haptic simulation)
+            // Touch events for tablets (Haptic simulation, link creation and double tap details)
+            let lastTapTime = 0;
             bead.addEventListener('touchstart', e => {
                 const touch = e.touches[0];
                 isDragging = true;
                 startX = touch.clientX - bead.offsetLeft;
                 startY = touch.clientY - bead.offsetTop;
                 
-                // Trigger quick vibration if supported (haptic feedback)
+                // Select bead to draw links (touch counterpart of mousedown)
+                if (selectedBead === null) {
+                    selectedBead = bead;
+                    bead.style.outline = '3px solid #fff';
+                } else if (selectedBead !== bead) {
+                    const b1Idx = parseInt(selectedBead.getAttribute('data-index'));
+                    const b2Idx = idx;
+                    
+                    const linkExists = lukasaLinks.some(l => (l[0] === b1Idx && l[1] === b2Idx) || (l[0] === b2Idx && l[1] === b1Idx));
+                    if (!linkExists) {
+                        lukasaLinks.push([b1Idx, b2Idx]);
+                        drawLukasaLines();
+                    }
+
+                    selectedBead.style.outline = 'none';
+                    selectedBead = null;
+                } else {
+                    bead.style.outline = 'none';
+                    selectedBead = null;
+                }
+
+                // Double tap simulation to view details on touch screens
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTapTime;
+                if (tapLength < 300 && tapLength > 0) {
+                    e.preventDefault();
+                    alert(`📌 [${note.head}]\n${note.body}`);
+                }
+                lastTapTime = currentTime;
+
                 if (navigator.vibrate) navigator.vibrate(20);
             });
 
             bead.addEventListener('touchmove', e => {
                 if (!isDragging) return;
+                e.preventDefault(); // Prevent page scroll/bounce when dragging beads on touchscreens
                 const touch = e.touches[0];
                 let nx = touch.clientX - startX;
                 let ny = touch.clientY - startY;
