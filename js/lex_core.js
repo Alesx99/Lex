@@ -82,6 +82,7 @@ const LexCore = {
         this.updateBrandName();
         // Init hidden easter eggs
         this.initEasterEggs();
+        this.initMascot();
         this.initIndexedDB().catch(e => console.error("IndexedDB initialization error:", e));
         
         // Log study activity if viewing a summary/chapter
@@ -403,6 +404,9 @@ const LexCore = {
                             <button id="lex-save-coupon-btn" class="btn-close-letter" style="margin-top: 0.5rem;">Salva nei Premi 🎁</button>
                         </div>
                     </div>
+                    <button id="lex-minimize-break-btn" class="btn-close-letter" style="margin-top: 1.5rem; width: 100%; max-width: 280px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                        <span>🔍 Esplora il Portale (Senza Studiare)</span>
+                    </button>
                 </div>
             </div>
         `;
@@ -479,6 +483,10 @@ const LexCore = {
                 if (board) board.style.display = 'block';
                 this.startMemoryGame();
             }
+            if (e.target && e.target.closest('#lex-minimize-break-btn')) {
+                localStorage.setItem('lex-pomo-break-minimized', 'true');
+                this.updateUI();
+            }
             if (e.target && e.target.closest('#lex-save-coupon-btn')) {
                 const textEl = document.getElementById('unlocked-coupon-text');
                 if (textEl) {
@@ -495,6 +503,15 @@ const LexCore = {
                     
                     alert("🎁 Coupon salvato con successo nella tua Bacheca dei Premi!");
                 }
+            }
+        });
+
+        const pomoContainer = document.getElementById('lex-pomo-container');
+        pomoContainer?.addEventListener('click', (e) => {
+            if (this.state === 'break' && localStorage.getItem('lex-pomo-break-minimized') === 'true') {
+                if (e.target.closest('#lex-pomo-start') || e.target.closest('#lex-pomo-settings-btn') || e.target.closest('#lex-pomo-settings')) return;
+                localStorage.removeItem('lex-pomo-break-minimized');
+                this.updateUI();
             }
         });
 
@@ -1087,6 +1104,7 @@ const LexCore = {
     startTimer(type, mins) {
         this.state = type;
         this.endTime = Date.now() + (mins * 60 * 1000);
+        localStorage.removeItem('lex-pomo-break-minimized');
         this.saveState();
         this.updateUI();
         this.notify();
@@ -1098,6 +1116,7 @@ const LexCore = {
     stopTimer() {
         this.state = 'idle';
         this.endTime = 0;
+        localStorage.removeItem('lex-pomo-break-minimized');
         this.saveState();
         this.updateUI();
         this.notify();
@@ -1123,10 +1142,23 @@ const LexCore = {
             l.style.display = this.state === 'idle' ? 'none' : 'block';
             l.textContent = this.state === 'work' ? 'Studio' : 'Pausa';
         }
-        if (o) o.style.display = this.state === 'break' ? 'flex' : 'none';
+        if (o) {
+            const isMinimized = localStorage.getItem('lex-pomo-break-minimized') === 'true';
+            o.style.display = (this.state === 'break' && !isMinimized) ? 'flex' : 'none';
+        }
         if (c) {
-            if (this.state === 'break') c.classList.add('on-break');
-            else c.classList.remove('on-break');
+            if (this.state === 'break') {
+                c.classList.add('on-break');
+                const isMinimized = localStorage.getItem('lex-pomo-break-minimized') === 'true';
+                if (isMinimized) {
+                    c.setAttribute('title', 'Pausa Pomodoro attiva! Clicca per riaprire il Memory 🎮');
+                } else {
+                    c.removeAttribute('title');
+                }
+            } else {
+                c.classList.remove('on-break');
+                c.removeAttribute('title');
+            }
         }
         if (s) s.innerHTML = this.getStartIcon();
 
@@ -1141,6 +1173,7 @@ const LexCore = {
         }
 
         this.updatePlantDisplay();
+        this.updateMascotState();
     },
 
     updatePlantDisplay() {
@@ -1682,6 +1715,12 @@ const LexCore = {
             totalSec += seconds;
             localStorage.setItem('lex-study-seconds', totalSec);
 
+            if (this.state === 'work') {
+                let continuous = parseInt(localStorage.getItem('lex-mascot-continuous-study-seconds') || '0');
+                continuous += seconds;
+                localStorage.setItem('lex-mascot-continuous-study-seconds', continuous.toString());
+            }
+
             // Update daily study log
             const now = new Date();
             const todayStr = now.toISOString().split('T')[0];
@@ -1957,6 +1996,10 @@ const LexCore = {
         const originalOpenSummary = window.openSummary;
         if (originalOpenSummary) {
             window.openSummary = function(title, path) {
+                if (LexCore.state === 'break') {
+                    LexCore.showBreakBlockedAlert();
+                    return;
+                }
                 originalOpenSummary(title, path);
                 setTimeout(() => {
                     LexCore.initAdvancedStudyTools(title, path);
@@ -3038,7 +3081,8 @@ const LexCore = {
         { id:'ee-caverna-platone',   cat:'materie',     icon:'🕯️', name:'La Caverna di Platone',          hint:'Ciò che vedi è solo un\'ombra. Spegni le luci e cerca la verità nella roccia.',    desc:'Nella sintesi di Filosofia con tema Scuro, seleziona la parola "Caverna" o "Ombra".', page:'filosofia/*' },
         { id:'ee-stratigrafia',      cat:'materie',     icon:'⛏️', name:'Lo Scavo Archeologico',          hint:'La conoscenza è stratificata. Scava oltre i limiti della pagina.',                desc:'Fai scorrimento continuo (overscroll) verso il basso a fondo pagina per 5 volte.', page:'*' },
         { id:'ee-damnatio-memoriae-quiz',cat:'materie', icon:'🛡️', name:'L\'Eresia Giuridica',            hint:'Certe eresie giuridiche non meritano risposta, solo l\'oblio della censura.',      desc:'Nel Simulatore d\'Esame, in una domanda di Diritto, premi Ctrl + Shift + X.', page:'exam.html' },
-        { id:'ee-apocalypse',        cat:'scriptorium', icon:'💥', name:'L\'Apocalisse dello Studente',   hint:'Un codice segreto irrisolvibile scatena la distruzione...',                       desc:'Hai assistito alla finta distruzione del portale a causa di un codice irrisolvibile.', page:'codicologia/index.html' }
+        { id:'ee-apocalypse',        cat:'scriptorium', icon:'💥', name:'L\'Apocalisse dello Studente',   hint:'Un codice segreto irrisolvibile scatena la distruzione...',                       desc:'Hai assistito alla finta distruzione del portale a causa di un codice irrisolvibile.', page:'codicologia/index.html' },
+        { id:'ee-cifrario-custode',  cat:'scriptorium', icon:'⚙️', name:'Il Cifrario del Custode',        hint:'Decodifica la citazione segreta ruotando il disco del cifrario...',               desc:'Hai decodificato la citazione latina ruotando la ghiera del cifrario medievale nell\'Arena.', page:'minigames.html' }
     ],
 
     unlockEasterEgg(id) {
@@ -3501,6 +3545,11 @@ const LexCore = {
         `;
         document.body.appendChild(overlay);
         
+        // Mascot alarm
+        this.mascotAlarmActive = true;
+        this.updateMascotState();
+        this.triggerMascotReaction("Per tutti i martiri! Chi ha rovesciato l'inchiostro sul codice? Presto, raschia via prima che macchi la pergamena!");
+
         // Sound effect (splash)
         try {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -3527,7 +3576,11 @@ const LexCore = {
 
         setTimeout(() => {
             overlay.classList.add('fade-out');
-            setTimeout(() => overlay.remove(), 1000);
+            setTimeout(() => {
+                overlay.remove();
+                this.mascotAlarmActive = false;
+                this.updateMascotState();
+            }, 1000);
         }, 4000);
     },
 
@@ -4408,9 +4461,20 @@ const LexCore = {
             <div class="tarlo-bite-hole"></div>
             <div class="tarlo-bug">🐛</div>
             <div class="tarlo-balloon">"Mmm... questo capitolo era davvero squisito!"</div>
-            <button class="tarlo-close" onclick="document.getElementById('lex-tarlo-overlay').remove()">Scacciare il Tarlo</button>
+            <button class="tarlo-close" id="lex-tarlo-close-btn">Scacciare il Tarlo</button>
         `;
         document.body.appendChild(overlay);
+
+        // Mascot alarm
+        this.mascotAlarmActive = true;
+        this.updateMascotState();
+        this.triggerMascotReaction("Un tarlo! Nelle sacre scritture! Schiaccialo o rosicchierà la sapienza dei secoli!");
+
+        document.getElementById('lex-tarlo-close-btn')?.addEventListener('click', () => {
+            overlay.remove();
+            this.mascotAlarmActive = false;
+            this.updateMascotState();
+        });
     },
 
     // ── EE #5: La Caverna di Platone (Filosofia) ──
@@ -5058,6 +5122,38 @@ const LexCore = {
         }, 2200);
     },
 
+    showBreakBlockedAlert() {
+        const existing = document.getElementById('lex-break-blocked-modal');
+        if (existing) existing.remove();
+
+        const modal = document.createElement('div');
+        modal.id = 'lex-break-blocked-modal';
+        modal.className = 'break-blocked-modal';
+        modal.innerHTML = `
+            <div class="break-blocked-card">
+                <div class="blocked-icon">🌸</div>
+                <h3 class="blocked-title">Mente in Riposo!</h3>
+                <p class="blocked-text">
+                    La sessione di studio è in pausa Pomodoro. I capitoli di studio sono bloccati per permettere alla tua mente di riposare e sedimentare i concetti.
+                </p>
+                <p class="blocked-sub">
+                    Esplora pure le altre sezioni del portale (Timeline, Connessioni, Statistiche) oppure rilassati con il Memory dell'Amore!
+                </p>
+                <div class="blocked-btn-group">
+                    <button class="blocked-btn play" id="lex-btn-resume-memory">Gioca al Memory 🎮</button>
+                    <button class="blocked-btn explore" onclick="document.getElementById('lex-break-blocked-modal').remove()">Esplora il Portale 🔍</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        document.getElementById('lex-btn-resume-memory')?.addEventListener('click', () => {
+            modal.remove();
+            localStorage.removeItem('lex-pomo-break-minimized');
+            this.updateUI();
+        });
+    },
+
     showApocalypseRestoredOverlay() {
         localStorage.removeItem('lex-apocalypse-restored');
         if (document.getElementById('lex-apocalypse-restored-overlay')) return;
@@ -5101,6 +5197,156 @@ const LexCore = {
                 osc.stop(now + idx * 0.12 + 0.8);
             });
         } catch(e) {}
+    },
+
+    // --- FRATE ALESSIO MASCOT SYSTEM ---
+    mascotAlarmActive: false,
+    mascotBubbleTimeout: null,
+
+    initMascot() {
+        if (this.isApocalypseActive()) return;
+        if (document.getElementById('lex-mascot-container')) return;
+
+        const container = document.createElement('div');
+        container.id = 'lex-mascot-container';
+        container.className = 'mascot-container';
+        container.innerHTML = `
+            <div class="mascot-bubble" id="lex-mascot-bubble">
+                <span class="mascot-bubble-text" id="lex-mascot-bubble-text">Salve, studioso! Sono Frate Alessio. Ti accompagnerò nel tuo cammino di sapienza. 📚</span>
+            </div>
+            <div class="mascot-avatar-wrapper" id="lex-mascot-avatar-wrapper">
+                <div class="mascot-avatar" id="lex-mascot-avatar">🦫📚</div>
+            </div>
+        `;
+        document.body.appendChild(container);
+
+        container.addEventListener('click', () => {
+            this.mascotClick();
+        });
+
+        this.updateMascotState();
+        
+        this.mascotBubbleTimeout = setTimeout(() => {
+            this.hideMascotBubble();
+        }, 6000);
+    },
+
+    updateMascotState() {
+        if (this.isApocalypseActive()) {
+            const container = document.getElementById('lex-mascot-container');
+            if (container) container.remove();
+            return;
+        }
+
+        const avatar = document.getElementById('lex-mascot-avatar');
+        if (!avatar) return;
+
+        let emoji = '🦫📚';
+        let stateText = '';
+
+        if (this.mascotAlarmActive) {
+            emoji = '🦫🚨';
+        } else if (this.state === 'work') {
+            const continuous = parseInt(localStorage.getItem('lex-mascot-continuous-study-seconds') || '0');
+            if (continuous >= 2700) {
+                emoji = '🦫🥱';
+                stateText = "Uff... Studiamo da oltre 45 minuti di fila! Perché non facciamo una pausa Pomodoro? L'intelletto si affatica...";
+            } else {
+                emoji = '🦫✍️';
+                if (continuous > 0 && continuous % 180 === 0) {
+                    const encouragements = [
+                        "Forza, studioso! Ogni riga completata è un passo in più verso la gloria accademica!",
+                        "Mantieni la concentrazione. Come dicevano i copisti: la scrittura stanca la schiena ma allieta lo spirito!",
+                        "Continua così! Stiamo facendo un ottimo lavoro su questo codice.",
+                        "Concentrati sulla pagina. La conoscenza è un tesoro che nessuno potrà sottrarti."
+                    ];
+                    stateText = encouragements[Math.floor(Math.random() * encouragements.length)];
+                }
+            }
+        } else if (this.state === 'break') {
+            emoji = '🦫💤';
+            const hasShownBreakText = sessionStorage.getItem('lex-mascot-shown-break');
+            if (!hasShownBreakText) {
+                stateText = "Zzz... Anche il copista più instancabile ha bisogno di riposare la penna. Goditi la pausa!";
+                sessionStorage.setItem('lex-mascot-shown-break', 'true');
+            }
+        } else {
+            emoji = '🦫📚';
+            sessionStorage.removeItem('lex-mascot-shown-break');
+            localStorage.setItem('lex-mascot-continuous-study-seconds', '0');
+        }
+
+        avatar.textContent = emoji;
+        if (stateText) {
+            this.triggerMascotReaction(stateText);
+        }
+    },
+
+    mascotClick() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(440, now);
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.15);
+        } catch(e) {}
+
+        const quotes = [
+            "Sapevi che nel Medioevo i copisti scrivevano lamentele a margine? Come: 'Fa molto freddo', 'L'inchiostro è troppo fluido' o 'La pergamena è pelosa'!",
+            "La pergamena si ottiene lavorando pelle di capra, pecora o vitello. Veniva raschiata con cura per renderla liscia e adatta all'inchiostro.",
+            "L'inchiostro ferrogallico era ottenuto da noci di galla, solfato di ferro, gomma arabica e vino. Scurendosi col tempo, talvolta corrodeva la pergamena.",
+            "Per scrivere una sola Bibbia monumentale potevano servire le pelli di oltre 200 animali. Un lavoro immenso!",
+            "Il minio è un ossido di piombo di colore rosso acceso, usato per tracciare le iniziali delle sezioni (da cui derivano i termini 'miniare' e 'miniatura').",
+            "Molti manoscritti venivano riutilizzati raschiando via il vecchio testo: questi sono detti 'palinsesti'. La sapienza nascosta sotto la superficie!",
+            "Nulla dies sine linea (Nessun giorno senza una linea) — Un ottimo promemoria per studiare con costanza ogni giorno!",
+            "Scribere portus est (Scrivere è un porto sicuro) — La scrittura e lo studio sono porti sicuri per l'anima del copista.",
+            "Ora et labora (Prega e lavora) — La regola benedettina del perfetto ammanuense di studio.",
+            "Scientia inflat, caritas aedificat (La conoscenza gonfia, ma l'amore edifica) — Studia con passione, ma non perdere mai l'umanità.",
+            "Qui scribit bis legit (Chi scrive legge due volte) — Scrivere appunti a mano aiuta a fissare meglio i concetti!",
+            "I tarli della biblioteca e le macchie d'inchiostro sono i peggiori nemici di un buon codice... Se ne vedi, intervieni subito!"
+        ];
+
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        this.triggerMascotReaction(randomQuote);
+
+        const avatar = document.getElementById('lex-mascot-avatar');
+        if (avatar) {
+            avatar.classList.add('mascot-bounce');
+            setTimeout(() => {
+                avatar.classList.remove('mascot-bounce');
+            }, 500);
+        }
+    },
+
+    triggerMascotReaction(msg) {
+        if (this.isApocalypseActive()) return;
+        const bubble = document.getElementById('lex-mascot-bubble');
+        const bubbleText = document.getElementById('lex-mascot-bubble-text');
+        if (!bubble || !bubbleText) return;
+
+        bubbleText.textContent = msg;
+        bubble.classList.add('visible');
+
+        if (this.mascotBubbleTimeout) {
+            clearTimeout(this.mascotBubbleTimeout);
+        }
+        this.mascotBubbleTimeout = setTimeout(() => {
+            this.hideMascotBubble();
+        }, 6000);
+    },
+
+    hideMascotBubble() {
+        const bubble = document.getElementById('lex-mascot-bubble');
+        if (bubble) {
+            bubble.classList.remove('visible');
+        }
     },
 
     // --- ACTIVITY LOG HELPER FOR HEATMAP ---

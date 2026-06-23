@@ -4370,8 +4370,271 @@ body.apocalypse-active .nav-link:hover {
     60% { transform: translateY(-8px); }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   POMODORO BREAK BLOCKED SYSTEM (v2.6.2)
+   ═══════════════════════════════════════════════════════════════ */
 
+.break-blocked-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8, 10, 20, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10002;
+    animation: break-fade-in 0.35s ease-out;
+}
 
+.break-blocked-card {
+    background: linear-gradient(135deg, rgba(17, 24, 43, 0.98) 0%, rgba(35, 20, 42, 0.98) 100%);
+    border: 2px solid var(--accent-gold, #d4af37);
+    border-radius: 24px;
+    padding: 40px 35px;
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    color: #fff;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: break-scale-in 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.18);
+}
 
+.blocked-icon {
+    font-size: 3.8rem;
+    margin-bottom: 18px;
+    animation: break-heartbeat 1.6s infinite;
+}
 
+.blocked-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: #d4af37;
+    margin-bottom: 14px;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
 
+.blocked-text {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 12px;
+    color: #e2e8f0;
+}
+
+.blocked-sub {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.55;
+    margin-bottom: 28px;
+}
+
+.blocked-btn-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.blocked-btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+}
+
+.blocked-btn.play {
+    background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+}
+.blocked-btn.play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.55);
+}
+
+.blocked-btn.explore {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+}
+.blocked-btn.explore:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+@keyframes break-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes break-scale-in {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes break-heartbeat {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    90% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   FRATE ALESSIO - MASCOT SYSTEM & ANIMATIONS
+   ========================================================================== */
+.mascot-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    pointer-events: none;
+}
+
+.mascot-avatar-wrapper {
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(30, 41, 59, 0.9) 100%);
+    border: 2px solid var(--accent-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    pointer-events: auto;
+    animation: mascot-float 4s ease-in-out infinite;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mascot-avatar-wrapper:hover {
+    transform: scale(1.1) rotate(5deg);
+    border-color: #fff;
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+}
+
+.mascot-avatar {
+    font-size: 2.2rem;
+    user-select: none;
+    line-height: 1;
+}
+
+.mascot-bounce {
+    animation: mascot-click-bounce 0.5s ease-out;
+}
+
+.mascot-bubble {
+    position: absolute;
+    bottom: 75px;
+    left: 10px;
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 16px;
+    padding: 12px 16px;
+    max-width: 260px;
+    min-width: 140px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: auto;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.mascot-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 20px;
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: rgba(30, 41, 59, 0.95) transparent;
+    display: block;
+    width: 0;
+}
+
+.mascot-bubble.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.mascot-bubble-text {
+    display: inline-block;
+}
+
+@keyframes mascot-float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes mascot-click-bounce {
+    0% { transform: scale(1); }
+    30% { transform: scale(0.8) translateY(10px); }
+    60% { transform: scale(1.2) translateY(-15px); }
+    100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    .mascot-container {
+        bottom: 15px;
+        left: 15px;
+    }
+    .mascot-avatar-wrapper {
+        width: 50px;
+        height: 50px;
+    }
+    .mascot-avatar {
+        font-size: 1.7rem;
+    }
+    .mascot-bubble {
+        max-width: 200px;
+        bottom: 60px;
+        font-size: 0.8rem;
+    }
+}
+
+/* ==========================================================================
+   CIFRARIO DEL CUSTODE - SVG & INTERACTIVE COMPONENTS
+   ========================================================================== */
+.cifrario-svg-container {
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6));
+}
+
+.cifrario-letter {
+    font-family: var(--font-serif);
+    font-weight: bold;
+    fill: var(--text-primary);
+    user-select: none;
+    transition: fill 0.3s;
+}
+
+.outer-letter {
+    font-size: 1.1rem;
+    fill: var(--accent-gold);
+}
+
+.inner-letter {
+    font-size: 0.95rem;
+    fill: #cbd5e1;
+}
+
+.cifrario-ring-outer {
+    transition: all 0.3s;
+}
+
+.cifrario-ring-inner {
+    transition: stroke 0.3s;
+}
+
+.cifrario-svg-container:hover .cifrario-ring-inner {
+    stroke: #fff !important;
+}

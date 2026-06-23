@@ -156,7 +156,8 @@ const Minigames = {
         'lexle': { title: "Lexle", start: () => Minigames.startLexle() },
         'clicker': { title: "Caffè Clicker", start: () => Minigames.startClicker() },
         'decrypt': { title: "Decodifica il Codex", start: () => Minigames.startDecrypt() },
-        'crossword': { title: "Cruciverba dello Scriptorium", start: () => Minigames.startCrossword() }
+        'crossword': { title: "Cruciverba dello Scriptorium", start: () => Minigames.startCrossword() },
+        'cifrario': { title: "Cifrario del Custode", start: () => Minigames.startCifrario() }
     },
 
     // --- 2048 ACCADEMICO ---
@@ -1500,6 +1501,188 @@ const Minigames = {
                     if (input) input.style.borderColor = 'var(--border-color)';
                 });
             }, 2500);
+        }
+    },
+
+    // --- CIFRARIO DEL CUSTODE ---
+    cifrarioQuote: '',
+    cifrarioTargetShift: 0,
+    cifrarioCurrentShift: 0,
+    cifrarioCipherText: '',
+
+    startCifrario() {
+        const quotes = [
+            { text: "NULLA DIES SINE LINEA", shift: 5, hint: "Motto di Plinio il Vecchio sulla costanza dello studio." },
+            { text: "VERITAS VOS LIBERABIT", shift: 8, hint: "Celebre frase dal Vangelo di Giovanni sulla verità che rende liberi." },
+            { text: "EXPLICIT LIBER FELICITER", shift: 3, hint: "Formula medievale usata dai copisti al termine della trascrizione." }
+        ];
+
+        const chosen = quotes[Math.floor(Math.random() * quotes.length)];
+        this.cifrarioQuote = chosen.text;
+        this.cifrarioTargetShift = chosen.shift;
+        this.cifrarioCurrentShift = 0;
+
+        const encrypt = (text, s) => {
+            return text.split('').map(c => {
+                if (c >= 'A' && c <= 'Z') {
+                    return String.fromCharCode(((c.charCodeAt(0) - 65 + s) % 26) + 65);
+                }
+                return c;
+            }).join('');
+        };
+        this.cifrarioCipherText = encrypt(chosen.text, chosen.shift);
+
+        const outerLetters = [];
+        const innerLetters = [];
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        for (let i = 0; i < 26; i++) {
+            const char = alphabet[i];
+            const angleDeg = i * (360 / 26);
+            const angleRad = (angleDeg - 90) * Math.PI / 180;
+            
+            const ox = 150 + 125 * Math.cos(angleRad);
+            const oy = 150 + 125 * Math.sin(angleRad);
+            outerLetters.push(`<text x="${ox}" y="${oy}" text-anchor="middle" dominant-baseline="central" class="cifrario-letter outer-letter">${char}</text>`);
+            
+            const ix = 150 + 90 * Math.cos(angleRad);
+            const iy = 150 + 90 * Math.sin(angleRad);
+            innerLetters.push(`<text x="${ix}" y="${iy}" text-anchor="middle" dominant-baseline="central" class="cifrario-letter inner-letter">${char}</text>`);
+        }
+
+        const html = `
+            <div id="lex-cifrario-game-wrapper" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                <p style="text-align: center; color: var(--text-secondary); max-width: 500px; margin-bottom: 0.5rem;">
+                    Ruota la ghiera interna del cifrario medievale usando i pulsanti di rotazione. Allinea le lettere per decrittare il codice d'oro.
+                </p>
+                <div style="font-size: 0.85rem; color: var(--accent-gold); font-style: italic; text-align: center; margin-top: -1rem;">
+                    Suggerimento: ${chosen.hint}
+                </div>
+                
+                <div class="cifrario-svg-container" style="position: relative; width: 300px; height: 300px;">
+                    <svg width="300" height="300" viewBox="0 0 300 300" style="width: 100%; height: 100%;">
+                        <circle cx="150" cy="150" r="142" class="cifrario-ring-outer" style="fill: var(--bg-card); stroke: var(--accent-gold); stroke-width: 3;" />
+                        <circle cx="150" cy="150" r="110" style="fill: none; stroke: rgba(212,175,55,0.4); stroke-dasharray: 4 4;" />
+                        
+                        <g id="cifrario-outer-letters">
+                            ${outerLetters.join('')}
+                        </g>
+                        
+                        <g id="cifrario-inner-wheel" style="transform-origin: 150px 150px; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);">
+                            <circle cx="150" cy="150" r="108" class="cifrario-ring-inner" style="fill: rgba(20,26,40,0.85); stroke: var(--accent-gold); stroke-width: 2;" />
+                            <circle cx="150" cy="150" r="72" style="fill: none; stroke: rgba(212,175,55,0.3);" />
+                            ${innerLetters.join('')}
+                        </g>
+                        
+                        <circle cx="150" cy="150" r="20" style="fill: var(--bg-card); stroke: var(--accent-gold); stroke-width: 2;" />
+                        <text x="150" y="150" text-anchor="middle" dominant-baseline="central" style="fill: var(--accent-gold); font-size: 1rem; font-weight: bold;">🔑</text>
+                        
+                        <polygon points="150,8 144,20 156,20" style="fill: #ef4444;" />
+                    </svg>
+                </div>
+
+                <div style="width: 100%; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div style="background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                        <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); display: block; margin-bottom: 0.25rem;">Messaggio Cifrato</span>
+                        <strong id="cifrario-ciphertext-display" style="font-family: var(--font-mono); font-size: 1.2rem; color: #ef4444; letter-spacing: 0.15em;">${this.cifrarioCipherText}</strong>
+                    </div>
+                    <div style="background: rgba(212,175,55,0.05); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(212,175,55,0.2); text-align: center;">
+                        <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 0.25rem;">Decrittazione Provvisoria</span>
+                        <strong id="cifrario-decrypted-display" style="font-family: var(--font-mono); font-size: 1.2rem; color: #10b981; letter-spacing: 0.15em;">${this.cifrarioCipherText}</strong>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; width: 100%;">
+                    <button class="btn-action" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" onclick="Minigames.rotateCifrario(-1)">
+                        <span>↺</span> Ruota Sx
+                    </button>
+                    <button class="btn-action" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" onclick="Minigames.rotateCifrario(1)">
+                        <span>↻</span> Ruota Dx
+                    </button>
+                </div>
+
+                <button id="cifrario-verify-btn" class="btn-action btn-action-primary" style="width: 100%; height: 50px; font-size: 1.1rem; margin-top: 0.5rem;" onclick="Minigames.verifyCifrario()">
+                    Verifica Cifrario 🔓
+                </button>
+            </div>
+        `;
+        document.getElementById('game-content').innerHTML = html;
+        this.updateCifrarioDecryption();
+    },
+
+    rotateCifrario(dir) {
+        this.cifrarioCurrentShift = (this.cifrarioCurrentShift + dir + 26) % 26;
+        
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(300, now);
+            gain.gain.setValueAtTime(0.04, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.06);
+        } catch(e) {}
+
+        const wheel = document.getElementById('cifrario-inner-wheel');
+        if (wheel) {
+            const angle = this.cifrarioCurrentShift * (360 / 26);
+            wheel.style.transform = `rotate(${angle}deg)`;
+        }
+
+        this.updateCifrarioDecryption();
+    },
+
+    updateCifrarioDecryption() {
+        const decrypt = (text, s) => {
+            return text.split('').map(c => {
+                if (c >= 'A' && c <= 'Z') {
+                    return String.fromCharCode(((c.charCodeAt(0) - 65 - s + 26) % 26) + 65);
+                }
+                return c;
+            }).join('');
+        };
+
+        const preview = decrypt(this.cifrarioCipherText, this.cifrarioCurrentShift);
+        const display = document.getElementById('cifrario-decrypted-display');
+        if (display) {
+            display.textContent = preview;
+        }
+    },
+
+    verifyCifrario() {
+        const decrypt = (text, s) => {
+            return text.split('').map(c => {
+                if (c >= 'A' && c <= 'Z') {
+                    return String.fromCharCode(((c.charCodeAt(0) - 65 - s + 26) % 26) + 65);
+                }
+                return c;
+            }).join('');
+        };
+
+        const currentDecryption = decrypt(this.cifrarioCipherText, this.cifrarioCurrentShift);
+        if (currentDecryption === this.cifrarioQuote) {
+            if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                LexCore.unlockEasterEgg('ee-cifrario-custode');
+            }
+            this.showResult(true, "Cifrario Risolto!", 25);
+        } else {
+            const btn = document.getElementById('cifrario-verify-btn');
+            if (btn) {
+                const originalText = btn.innerHTML;
+                btn.textContent = "Combinazione Errata! ❌";
+                btn.style.backgroundColor = "#ef4444";
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.backgroundColor = "";
+                    btn.disabled = false;
+                }, 1500);
+            }
         }
     }
 };
