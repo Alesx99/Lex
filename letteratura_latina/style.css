@@ -1002,8 +1002,17 @@ main {
     .modal-header {
         padding: 1rem;
     }
-    .modal-title {
-        font-size: 1.1rem;
+    .modal-title-area {
+        display: none !important;
+    }
+    .print-btn-desktop {
+        display: none !important;
+    }
+    .tools-dropdown {
+        display: inline-block !important;
+    }
+    #reading-controls {
+        display: none !important;
     }
     
     /* Segmented Tab Navigation inside Modal */
@@ -1860,19 +1869,5 @@ footer p a:hover {
     background: rgba(190, 24, 93, 0.06);
 }
 
-/* Specific Phone Responsiveness (iPhone size, up to iPhone Pro Max width) */
-@media (max-width: 500px) {
-    .modal-title-area {
-        display: none !important;
-    }
-    .modal-header .modal-controls > button[onclick="window.print()"] {
-        display: none !important;
-    }
-    .tools-dropdown {
-        display: inline-block !important;
-    }
-    #reading-controls {
-        display: none !important;
-    }
-}
+
 
