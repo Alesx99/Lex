@@ -89,6 +89,148 @@ const LexCore = {
         if (window.location.search.includes('open=') || window.location.pathname.includes('/summaries/')) {
             this.logStudyActivity();
         }
+        
+        // Inject mobile layout optimizations for reading modals
+        this.injectMobileModalControls();
+    },
+
+    injectMobileModalControls() {
+        try {
+            const splitContainer = document.querySelector('.modal-content-split');
+            if (!splitContainer) return; // Not a page with summaries/modal
+
+            // 1. Inject Tab Bar if not present
+            if (!document.querySelector('.modal-tabs')) {
+                const tabsHTML = `
+                    <div class="modal-tabs">
+                        <button class="tab-btn active" onclick="switchModalTab('reading')">Sintesi</button>
+                        <button class="tab-btn" onclick="switchModalTab('notes')">Appunti</button>
+                    </div>
+                `;
+                splitContainer.insertAdjacentHTML('beforebegin', tabsHTML);
+                splitContainer.classList.add('show-reading');
+            }
+
+            // Define global switchModalTab if not defined
+            if (typeof window.switchModalTab !== 'function') {
+                window.switchModalTab = function(tabName) {
+                    const split = document.querySelector('.modal-content-split');
+                    const tabs = document.querySelectorAll('.tab-btn');
+                    if (!split || tabs.length < 2) return;
+                    
+                    if (tabName === 'reading') {
+                        split.classList.remove('show-notes');
+                        split.classList.add('show-reading');
+                        tabs[0].classList.add('active');
+                        tabs[1].classList.remove('active');
+                    } else {
+                        split.classList.remove('show-reading');
+                        split.classList.add('show-notes');
+                        tabs[0].classList.remove('active');
+                        tabs[1].classList.add('active');
+                    }
+                };
+            }
+
+            // Hook openSummary to reset to reading tab on modal open
+            if (typeof window.openSummary === 'function' && !window.openSummary.isHooked) {
+                const originalOpen = window.openSummary;
+                window.openSummary = function(chapterTag, filePath) {
+                    if (typeof window.switchModalTab === 'function') {
+                        window.switchModalTab('reading');
+                    }
+                    originalOpen(chapterTag, filePath);
+                };
+                window.openSummary.isHooked = true;
+            }
+
+            // 2. Add class print-btn-desktop to print button in modal-controls
+            const modalControls = document.querySelector('.modal-header .modal-controls');
+            if (modalControls) {
+                const printBtn = modalControls.querySelector('button[onclick="window.print()"]');
+                if (printBtn) {
+                    printBtn.classList.add('print-btn-desktop');
+                }
+
+                // 3. Inject tools-dropdown if not present
+                if (!document.getElementById('tools-dropdown')) {
+                    const dropdownHTML = `
+                        <div class="tools-dropdown" id="tools-dropdown">
+                            <button class="modal-close dropdown-toggle-btn" id="lex-dropdown-toggle-btn" title="Strumenti di Lettura">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                            </button>
+                            <div class="tools-menu" id="tools-menu">
+                                <button id="font-size-btn-mob" class="dropdown-item" title="Aumenta Font">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                                    <span>Aumenta Testo</span>
+                                </button>
+                                <button id="dyslexic-btn-mob" class="dropdown-item" title="Alta Leggibilità">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                                    <span>Leggibilità</span>
+                                </button>
+                                <button id="print-btn-mob" class="dropdown-item" title="Stampa / Salva in PDF">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                    <span>Stampa / PDF</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    // Insert before the last button (close button)
+                    const closeBtn = modalControls.querySelector('button[onclick="closeSummary()"]');
+                    if (closeBtn) {
+                        closeBtn.insertAdjacentHTML('beforebegin', dropdownHTML);
+                    } else {
+                        modalControls.insertAdjacentHTML('beforeend', dropdownHTML);
+                    }
+                    
+                    // Attach listeners
+                    const gearBtn = document.getElementById('lex-dropdown-toggle-btn');
+                    const toolsMenu = document.getElementById('tools-menu');
+                    if (gearBtn && toolsMenu) {
+                        gearBtn.onclick = function(e) {
+                            e.stopPropagation();
+                            toolsMenu.classList.toggle('open');
+                        };
+                    }
+
+                    const markdownView = document.getElementById('markdown-view') || document.querySelector('.markdown-content');
+                    const mobFontBtn = document.getElementById('font-size-btn-mob');
+                    const mobDysBtn = document.getElementById('dyslexic-btn-mob');
+                    const mobPrintBtn = document.getElementById('print-btn-mob');
+
+                    if (mobFontBtn) {
+                        mobFontBtn.onclick = function() {
+                            if (markdownView) markdownView.classList.toggle('large-font');
+                            mobFontBtn.classList.toggle('active');
+                            const dskFontBtn = document.getElementById('font-size-btn');
+                            if (dskFontBtn) dskFontBtn.classList.toggle('active');
+                        };
+                    }
+
+                    if (mobDysBtn) {
+                        mobDysBtn.onclick = function() {
+                            if (markdownView) markdownView.classList.toggle('dyslexic-font');
+                            mobDysBtn.classList.toggle('active');
+                            const dskDysBtn = document.getElementById('dyslexic-btn');
+                            if (dskDysBtn) dskDysBtn.classList.toggle('active');
+                        };
+                    }
+
+                    if (mobPrintBtn) {
+                        mobPrintBtn.onclick = function() {
+                            window.print();
+                        };
+                    }
+
+                    // Close menu when clicking elsewhere
+                    document.addEventListener('click', () => {
+                        if (toolsMenu) toolsMenu.classList.remove('open');
+                    });
+                }
+            }
+        } catch (e) {
+            console.error("Errore iniezione controlli mobile modal:", e);
+        }
     },
 
 
