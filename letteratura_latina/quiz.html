@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Letteratura Latina - Quiz di Autovalutazione</title>
+    <meta name="description" content="Mettiti alla prova con i nostri quiz accademici sulla storia letteraria e gli autori dell'età arcaica e repubblicana di Roma.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Centralized Quiz Database -->
+    <script src="../js/quiz_db.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex Letteratura Latina</h1>
+            <p>Modulo di Studio Accademico</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+            <a href="quiz.html" class="nav-link active" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Autovalutazione di Letteratura Latina</h2>
+            <div class="hero-divider"></div>
+            <p>Valuta le tue competenze sulla storia letteraria della Roma arcaica e repubblicana. Seleziona uno dei 6 capitoli del volume I di Musae Comites per avviare una sessione di domande a risposta multipla con report e spiegazione accademica.</p>
+        </section>
+
+        <!-- Dynamic Quiz Area -->
+        <div id="quiz-wrapper">
+            
+            <!-- STEP 1: SELECT TOPIC SCREEN -->
+            <div id="selection-screen" class="quiz-step active">
+                <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                
+                <div class="selection-grid">
+                    <button class="select-btn" onclick="startQuiz('lat_cap1')">
+                        <span class="btn-chapter">Cap. I</span>
+                        <span class="btn-title">Le Origini e la Preletteratura</span>
+                        <span class="btn-desc">Carmina sacrali, oralità, mos maiorum, fescennini e atellana, le XII Tavole e gli Annales Maximi.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_cap2')">
+                        <span class="btn-chapter">Cap. II</span>
+                        <span class="btn-title">I Padri della Letteratura Arcaica</span>
+                        <span class="btn-desc">L'ellenizzazione del 240 a.C., la traduzione artistica di Livio Andronico, la praetexta di Nevio e gli Annales in esametri di Ennio.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_cap3')">
+                        <span class="btn-chapter">Cap. III</span>
+                        <span class="btn-title">Il Teatro Arcaico: Plauto e Terenzio</span>
+                        <span class="btn-desc">La fabula palliata. Il riso, lo schiavo callidus e i cantica di Plauto; l'humanitas, lo stile puro e la psicologia di Terenzio.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_cap4')">
+                        <span class="btn-chapter">Cap. IV</span>
+                        <span class="btn-title">La Prosa arcaica e il Mos Maiorum</span>
+                        <span class="btn-desc">La battaglia culturale di Catone il Censore, il De agri cultura e le Origines. La nascita della satira d'opinione con Lucilio.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_cap5')">
+                        <span class="btn-chapter">Cap. V</span>
+                        <span class="btn-title">La Rivoluzione Poetica</span>
+                        <span class="btn-desc">La fuga nel privato della tarda repubblica. La fisica di Epicuro nel De rerum natura di Lucrezio; i carmi e l'amore per Lesbia di Catullo.</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_cap6')">
+                        <span class="btn-chapter">Cap. VI</span>
+                        <span class="btn-title">La Prosa della Tarda Repubblica</span>
+                        <span class="btn-desc">L'oratoria e i trattati di Cicerone (concinnitas); lo stile limpido di Cesare (Commentarii); la storiografia morale di Sallustio (inconcinnitas).</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_plus1')">
+                        <span class="btn-chapter">Cap. VII (Plus I)</span>
+                        <span class="btn-title">Grammatica e Epigrafia</span>
+                        <span class="btn-desc">Basi di lingua latina (declinazioni, coniugazioni, sintassi essenziale) ed epigrafia applicata (abbreviazioni e formule monumentali).</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_plus2')">
+                        <span class="btn-chapter">Cap. VIII (Plus II)</span>
+                        <span class="btn-title">Antologia ed Esegesi</span>
+                        <span class="btn-desc">Esegesi critica, analisi testuale e traduzione di passi celebri (Scipione Barbato, Plauto, Catone, Lucrezio, Catullo, Cicerone).</span>
+                    </button>
+                    <button class="select-btn" onclick="startQuiz('lat_plus3')">
+                        <span class="btn-chapter">Cap. IX (Plus III)</span>
+                        <span class="btn-title">Strumenti Digitali</span>
+                        <span class="btn-desc">Banche dati epigrafiche (EDCS, EDR), corpora di testi online (PHI, Perseus), dizionari digitali (Logeion) e repertori bibliografici.</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="question-screen" class="quiz-step">
+                <div class="quiz-card-header">
+                    <span class="quiz-chapter-tag" id="quiz-chapter-tag">Capitolo I</span>
+                    <span class="quiz-progress-text" id="quiz-progress-text">Domanda 1 di 5</span>
+                </div>
+                
+                <div class="reading-progress-container" style="margin-bottom: 2rem;">
+                    <div class="reading-progress-bar" id="quiz-progress-indicator" style="background: var(--accent-gold); height: 4px;"></div>
+                </div>
+
+                <div class="quiz-question-box">
+                    <p class="quiz-question-text" id="quiz-question-text">Testo della domanda?</p>
+                </div>
+
+                <div class="quiz-options-container" id="quiz-options-container">
+                    <!-- Option buttons will be generated dynamically -->
+                </div>
+
+                <!-- Feedback Box -->
+                <div class="quiz-feedback-box" id="quiz-feedback-box">
+                    <div class="feedback-header">
+                        <div class="feedback-icon" id="feedback-icon"></div>
+                        <h4 id="feedback-title">Esatto!</h4>
+                    </div>
+                    <div class="feedback-explanation" id="feedback-explanation">
+                        Spiegazione accademica del quesito.
+                    </div>
+                    <button class="btn btn-primary" id="next-question-btn" onclick="nextQuestion()" style="margin-top: 1.5rem; width: 100%;">Prossima Domanda</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: RESULT SCREEN -->
+            <div id="result-screen" class="quiz-step">
+                <div class="result-card">
+                    <div class="result-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h3>Risultato del Test</h3>
+                    <h4 class="result-title" id="result-title">Argomento del Quiz</h4>
+                    
+                    <div class="score-display">
+                        Punteggio: <span id="result-score-text">0 / 5</span>
+                    </div>
+
+                    <p class="result-message" id="result-message">
+                        Messaggio di valutazione in base al punteggio ottenuto.
+                    </p>
+
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Ripeti il Quiz</button>
+                        <button class="btn btn-secondary" onclick="showSelectionScreen()">Torna all'Indice</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Letteratura Latina. &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // State variables
+        let currentSubject = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Dom Elements
+        const selectionScreen = document.getElementById('selection-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const quizChapterTag = document.getElementById('quiz-chapter-tag');
+        const quizProgressText = document.getElementById('quiz-progress-text');
+        const quizProgressIndicator = document.getElementById('quiz-progress-indicator');
+        const quizQuestionText = document.getElementById('quiz-question-text');
+        const quizOptionsContainer = document.getElementById('quiz-options-container');
+        
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        
+        const resultScoreText = document.getElementById('result-score-text');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+
+        function showSelectionScreen() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            selectionScreen.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz(subjectKey) {
+            currentSubject = subjectKey;
+            const data = quizDatabase[subjectKey];
+            currentQuestions = data.questions;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            quizChapterTag.textContent = data.chapterTag;
+            
+            selectionScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Hide feedback box
+            feedbackBox.classList.remove('open');
+            
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const totalQuestions = currentQuestions.length;
+            
+            // Update progress
+            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di ${totalQuestions}`;
+            const progressPercent = (currentQuestionIndex / totalQuestions) * 100;
+            quizProgressIndicator.style.width = progressPercent + '%';
+
+            // Set question text
+            quizQuestionText.textContent = currentQuestion.question;
+
+            // Render options
+            quizOptionsContainer.innerHTML = '';
+            currentQuestion.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + idx)}</span> <span class="option-text">${option}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                quizOptionsContainer.appendChild(btn);
+            });
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const correctIndex = currentQuestion.correctIndex;
+            const allOptionButtons = quizOptionsContainer.querySelectorAll('.quiz-option-btn');
+
+            // Disable all options to prevent double-clicking
+            allOptionButtons.forEach(btn => btn.disabled = true);
+
+            const isCorrect = selectedIndex === correctIndex;
+            if (typeof LexCore !== 'undefined' && LexCore.trackQuizStreak) {
+                LexCore.trackQuizStreak(isCorrect);
+            }
+
+            // Highlight answers
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                feedbackTitle.textContent = "Esatto!";
+                feedbackTitle.style.color = "#10b981";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="width:24px; height:24px;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+                allOptionButtons[correctIndex].classList.add('correct');
+                feedbackTitle.textContent = "Errato";
+                feedbackTitle.style.color = "#ef4444";
+                feedbackIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" style="width:24px; height:24px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            }
+
+            // Set explanation
+            feedbackExplanation.innerHTML = currentQuestion.explanation;
+
+            // Show feedback box
+            feedbackBox.classList.add('open');
+
+            // Set next button text
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                nextQuestionBtn.textContent = "Visualizza Risultato";
+            } else {
+                nextQuestionBtn.textContent = "Prossima Domanda";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                showResult();
+            } else {
+                currentQuestionIndex++;
+                showQuestion();
+            }
+        }
+
+        function showResult() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+
+            // Update score progress bar at 100%
+            quizProgressIndicator.style.width = '100%';
+
+            const totalQuestions = currentQuestions.length;
+            resultScoreText.textContent = `${score} / ${totalQuestions}`;
+            resultTitle.textContent = quizDatabase[currentSubject].title;
+
+            // Set custom score message
+            let message = '';
+            const ratio = score / totalQuestions;
+            if (ratio === 1) {
+                message = "Eccellente! Conoscenza e comprensione della Letteratura Latina impeccabile. Hai un'ottima preparazione sullo sviluppo della civiltà letteraria in età arcaica e repubblicana.";
+            } else if (ratio >= 0.6) {
+                message = "Molto bene! Hai una conoscenza solida dello sviluppo letterario latino. Qualche piccola incertezza superabile rileggendo le sintesi dei singoli autori.";
+            } else {
+                message = "Preparazione non sufficiente. I contesti storici, la metrica e gli autori principali non sono chiari. Rileggi i capitoli e ripeti il test.";
+            }
+            resultMessage.textContent = message;
+
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            startQuiz(currentSubject);
+        }
+    </script>
+</body>
+</html>

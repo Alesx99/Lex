@@ -924,8 +924,219 @@ main {
 }
 
 @media (max-width: 768px) {
+    /* Header & Nav responsiveness */
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+    .brand {
+        align-items: center;
+        text-align: center;
+    }
+    .brand h1 {
+        font-size: 1.6rem;
+    }
+    .brand p {
+        font-size: 0.75rem;
+    }
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+        width: 100%;
+    }
+    .nav-link {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        width: auto;
+        justify-content: center;
+    }
+    .header-controls {
+        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Main body spacing */
+    main {
+        padding: 1.5rem 1rem;
+    }
+    .hero {
+        margin-bottom: 2rem;
+    }
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    .hero p {
+        font-size: 0.95rem;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .chapter-card {
+        padding: 1.5rem;
+        min-height: auto;
+    }
+    .card-body h3 {
+        font-size: 1.25rem;
+    }
+    .description {
+        -webkit-line-clamp: 3;
+        margin-bottom: 1rem;
+        font-size: 0.88rem;
+    }
+    .btn {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.82rem;
+    }
+
+    /* Modal Layout for Mobile (iPhone) */
+    .modal-container {
+        width: 95%;
+        height: 90vh;
+        border-radius: 12px;
+    }
+    .modal-header {
+        padding: 1rem;
+    }
+    .modal-title {
+        font-size: 1.1rem;
+    }
+    
+    /* Segmented Tab Navigation inside Modal */
+    .modal-tabs {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+        background: rgba(10, 15, 28, 0.2);
+    }
+    .tab-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        padding: 0.8rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+    .tab-btn.active {
+        color: var(--accent-gold);
+        border-bottom-color: var(--accent-gold);
+        background: rgba(190, 24, 93, 0.04);
+    }
+
+    /* Split container tab toggle logic */
+    .modal-content-split {
+        flex-direction: row !important;
+        height: calc(100% - 110px); /* Adjust height for extra tabs bar */
+    }
     .modal-body {
-        padding: 2rem 1.5rem;
+        padding: 1.2rem 1rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .modal-notes-panel {
+        width: 100% !important;
+        height: 100% !important;
+        border-left: none;
+        border-top: none !important;
+        padding: 1rem;
+    }
+    
+    /* Toggle display states */
+    .modal-content-split.show-notes .modal-body {
+        display: none !important;
+    }
+    .modal-content-split.show-notes .modal-notes-panel {
+        display: flex !important;
+    }
+    .modal-content-split.show-reading .modal-body {
+        display: block !important;
+    }
+    .modal-content-split.show-reading .modal-notes-panel {
+        display: none !important;
+    }
+
+    /* Markdown font sizes inside Modal on mobile */
+    .markdown-content h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .markdown-content h2 {
+        font-size: 1.25rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+    }
+    .markdown-content h3 {
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    /* Quiz selections and cards on mobile */
+    .selection-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+    .select-btn {
+        padding: 1.2rem;
+    }
+    .btn-title {
+        font-size: 1.1rem;
+    }
+    .quiz-card-container {
+        padding: 1.5rem 1.2rem;
+        border-radius: 16px;
+    }
+    .quiz-question-body h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    .quiz-option-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.88rem;
+        gap: 0.8rem;
+    }
+    .option-letter {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+    }
+    .quiz-feedback-box {
+        padding: 1rem;
+        margin-top: 1.2rem;
+    }
+    .feedback-title {
+        font-size: 1rem;
+    }
+    .feedback-explanation {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    .result-card {
+        padding: 2rem 1.2rem;
+        border-radius: 16px;
+    }
+    .result-glow-ring {
+        width: 100px;
+        height: 100px;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    .result-card h3 {
+        font-size: 1.4rem;
+    }
+    .result-message {
+        font-size: 0.92rem;
+        margin-bottom: 1.5rem;
     }
 }
 

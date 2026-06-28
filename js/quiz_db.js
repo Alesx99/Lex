@@ -3734,6 +3734,582 @@ const quizDatabase = {
         ]
     }
 
+    ,
+
+    // ═══════════════════════════════════════════════════════════════
+    // LETTERATURA LATINA — 6 Capitoli × 5 Domande = 30 Domande
+    // ═══════════════════════════════════════════════════════════════
+
+    lat_cap1: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. I",
+        title: "Le Origini e la Preletteratura",
+        questions: [
+            {
+                question: "Quale virtù cardinale del mos maiorum romano indica la lealtà alla parola data, fondamentale sia nelle relazioni civili sia nei trattati internazionali?",
+                options: [
+                    "Pietas",
+                    "Fides",
+                    "Gravitas",
+                    "Virtus"
+                ],
+                correctIndex: 1,
+                explanation: "La *fides* rappresenta la fiducia, la lealtà e il rispetto dei patti e della parola data. Nel contesto sociale e giuridico romano arcaico, è la virtù cardine su cui si reggono le relazioni pubbliche e private."
+            },
+            {
+                question: "In quale metro indigeno di natura accentuativa erano composti i carmina arcaici religiosi come il Carmen Saliare e il Carmen Arvale?",
+                options: [
+                    "Esametro dattilico",
+                    "Saturnio",
+                    "Distico elegiaco",
+                    "Senario giambico"
+                ],
+                correctIndex: 1,
+                explanation: "Il saturnio è l'unico metro indigeno italico delle origini, precedente l'ellenizzazione metrica. È caratterizzato da una struttura prevalentemente basata sugli accenti e non sulla quantità delle sillabe."
+            },
+            {
+                question: "Quale ruolo ricoprivano le 'praeficae' nel contesto dei carmina conviviali e funerari?",
+                options: [
+                    "Esercitavano il canto per propiziare i raccolti festivi.",
+                    "Erano donne prezzolate incaricate di intonare i lamenti funebri (neniae) davanti al feretro.",
+                    "Eseguivano canti improvvisati di scherno durante il trionfo dei generali.",
+                    "Trascrivevano i registri annuali del Pontefice Massimo."
+                ],
+                correctIndex: 1,
+                explanation: "Le *praeficae* erano donne pagate per guidare il lamento funebre intonando le *neniae*, canti celebrativi e dolenti per esaltare le virtù e la stirpe del defunto."
+            },
+            {
+                question: "Quale maschera fissa della fabula atellana (farsa popolare italica) incarna lo stereotipo del vecchio avaro, rimbambito e spesso deriso?",
+                options: [
+                    "Maccus",
+                    "Bucco",
+                    "Pappus",
+                    "Dossenus"
+                ],
+                correctIndex: 2,
+                explanation: "Nel sistema fisso dell'Atellana, *Pappus* (il vecchio) incarna l'avarizia e la credulità stupida del senex, precorrendo i tipi comici che confluiranno poi nella commedia regolare."
+            },
+            {
+                question: "Le Leggi delle XII Tavole (451-450 a.C.) rappresentano la prima forma scritta di diritto romano. Quale stile linguistico le caratterizza?",
+                options: [
+                    "Una poesia in esametri greci dorici.",
+                    "Una prosa asciutta e imperativa ritmata da formule fisse, con allitterazioni e cadenze orali.",
+                    "Un dialogo filosofico influenzato dallo stoicismo.",
+                    "Un registro lirico solenne con invocazioni alle divinità sacerdotali."
+                ],
+                correctIndex: 1,
+                explanation: "Le XII Tavole sono scritte in uno stile asciutto ed imperativo (*stilus imperativus*), scandito da formule solenni e cadenze metrico-ritmiche che ne agevolavano la memorizzazione orale ad opera dei cittadini."
+            }
+        ]
+    },
+
+    lat_cap2: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. II",
+        title: "I Padri della Letteratura Arcaica",
+        questions: [
+            {
+                question: "Quale data convenzionale segna la nascita della letteratura latina scritta, in occasione della messa in scena del primo dramma regolare di Livio Andronico?",
+                options: [
+                    "450 a.C.",
+                    "240 a.C.",
+                    "146 a.C.",
+                    "272 a.C."
+                ],
+                correctIndex: 1,
+                explanation: "Il 240 a.C., anno dei Ludi Romani successivi alla prima guerra punica, segna l'avvio formale della letteratura latina con la messa in scena del dramma di Livio Andronico, tradotto da un originale greco."
+            },
+            {
+                question: "Cosa si intende per 'vertere' nella prassi letteraria di Livio Andronico applicata all'Odusia?",
+                options: [
+                    "Un'inversione della direzione di lettura dei testi.",
+                    "Una traduzione artistica e una mediazione culturale che adatta il testo greco alla mentalità romana.",
+                    "La sostituzione del prologo teatrale con un canto corale.",
+                    "Un espediente metrico per fondere saturnio ed esametro."
+                ],
+                correctIndex: 1,
+                explanation: "Il *vertere* non è una traduzione letterale passiva, ma una ricreazione artistica in cui si rielaborano nomi, divinità (es. Muse/Camene) e miti per adeguarli al contesto religioso e civile di Roma."
+            },
+            {
+                question: "Quale importante novità teatrale si attribuisce a Gneo Nevio in polemica con i modelli interamente greci?",
+                options: [
+                    "L'esclusione del coro dalle commedie.",
+                    "L'invenzione della fabula praetexta (tragedia di argomento storico romano).",
+                    "L'introduzione della maschera fissa dell'adulescens.",
+                    "La sostituzione del saturnio con l'esametro nel teatro."
+                ],
+                correctIndex: 1,
+                explanation: "Gneo Nevio crea la *fabula praetexta*, portando in scena per la prima volta eventi storici romani contemporanei o mitici (es. *Clastidium*, *Romulus*), in opposizione alla tragedia greca (*crepidata*)."
+            },
+            {
+                question: "Quale opera di Gneo Nevio rappresenta il primo poema epico originale romano, incentrato su storia contemporanea e origini mitiche?",
+                options: [
+                    "L'Odusia",
+                    "Il Bellum Poenicum",
+                    "Gli Annales",
+                    "Il De analogia"
+                ],
+                correctIndex: 1,
+                explanation: "Il *Bellum Poenicum* è il primo poema epico originale latino. Scritto in saturni, unisce le vicende della prima guerra punica (storia) al viaggio di Enea e alle origini mitiche del conflitto con Cartagine."
+            },
+            {
+                question: "Per quale motivo a Quinto Ennio si attribuivano tre cuori ('tria corda')?",
+                options: [
+                    "Perché era un sostenitore di tre fazioni politiche avversarie.",
+                    "Perché conosceva ed esprimeva tre identità linguistiche e culturali: greca, latina e osca.",
+                    "Perché fu ferito gravemente in tre diverse campagne militari.",
+                    "Perché scrisse opere dedicate a tre muse differenti."
+                ],
+                correctIndex: 1,
+                explanation: "Ennio nacque in Puglia (a Rudiae), zona di confine. Diceva di avere *tria corda* perché sapeva esprimersi correntemente in greco (lingua della cultura), latino (lingua dell'impero) e osco (lingua locale italica)."
+            }
+        ]
+    },
+
+    lat_cap3: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. III",
+        title: "Il Teatro Arcaico: Plauto e Terenzio",
+        questions: [
+            {
+                question: "Nel contesto del teatro latino regolare, qual è la distinzione fondamentale tra la commedia 'palliata' e la commedia 'togata'?",
+                options: [
+                    "La palliata è recitata in maschera, la togata a volto scoperto.",
+                    "La palliata ha ambientazione, trame e costumi greci; la togata ha personaggi e sfondi romani.",
+                    "La palliata è destinata ai plebei, la togata esclusivamente ai patrizi.",
+                    "La palliata è scritta in saturni, la togata in esametri."
+                ],
+                correctIndex: 1,
+                explanation: "La commedia *palliata* (dal mantello greco *pallium*) è di ambientazione e fonte greca, mentre la *togata* (dalla *toga* romana) mette in scena personaggi e contesti prettamente romani o italici."
+            },
+            {
+                question: "Quale personaggio incarna il vero motore d'azione e il riflesso dell'inventiva del poeta nel teatro comico di Plauto?",
+                options: [
+                    "Il miles gloriosus",
+                    "Lo schiavo astuto (servus callidus)",
+                    "Il senex avaro",
+                    "Il parassita affamato"
+                ],
+                correctIndex: 1,
+                explanation: "Il *servus callidus* (schiavo astuto) è il fulcro del teatro plautino. Con le sue bugie e i suoi intrighi geniali, inganna i padroni e risolve le situazioni critiche, agendo come alter ego del drammaturgo."
+            },
+            {
+                question: "Cosa si intende per 'cantica' all'interno delle commedie plautine?",
+                options: [
+                    "I monologhi morali pronunciati all'inizio del dramma.",
+                    "Le parti liriche cantate dagli attori con accompagnamento musicale, che rendevano lo spettacolo simile a un musical.",
+                    "Gli insulti rituali rivolti dagli attori al pubblico in sala.",
+                    "I cori religiosi in onore delle divinità agricole."
+                ],
+                correctIndex: 1,
+                explanation: "Plauto riduce le parti parlate dei modelli greci per ampliare le sezioni cantate (*cantica*), eseguite con accompagnamento di strumenti a fiato (*tibiae*), conferendo vivacità ritmica e musicale allo spettacolo."
+            },
+            {
+                question: "Quale concetto etico-filosofico di origine ellenistica esprime la poetica di Terenzio, volta alla comprensione reciproca tra esseri umani?",
+                options: [
+                    "L'atarassia epicurea",
+                    "L'humanitas",
+                    "Il mos maiorum tradizionale",
+                    "La virtus repubblicana"
+                ],
+                correctIndex: 1,
+                explanation: "La *humanitas* (dal greco *philanthropia*) è il nucleo del teatro terenziano. Esprime il rispetto, la comprensione psicologica e la tolleranza verso i limiti umani, rifiutando lo scherno farsesco."
+            },
+            {
+                question: "Quale innovazione strutturale introduce Terenzio nell'uso del prologo nelle sue commedie?",
+                options: [
+                    "Lo utilizza come spazio di polemica e difesa letteraria contro le accuse dei suoi avversari.",
+                    "Lo elimina del tutto per accelerare l'avvio della trama.",
+                    "Lo trasforma in un riassunto dettagliato dei colpi di scena della vicenda.",
+                    "Lo fa recitare dal coro di fanciulle anziché dal capocomico."
+                ],
+                correctIndex: 0,
+                explanation: "A differenza di Plauto che usava il prologo per spiegare l'intreccio, Terenzio lo trasforma in una sede di arringa letteraria per rispondere a critiche come quella di essere un prestanome dei patrizi o di praticare il plagio."
+            }
+        ]
+    },
+
+    lat_cap4: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. IV",
+        title: "La Prosa arcaica e il Mos Maiorum",
+        questions: [
+            {
+                question: "Per quale motivo ideologico e politico Catone il Censore decise di omettere i nomi dei singoli generali nelle sue 'Origines'?",
+                options: [
+                    "Per timore di rappresaglie legali da parte della gens Scipione.",
+                    "Per evidenziare che le vittorie militari erano il risultato dello sforzo collettivo del popolo romano e non delle individualità.",
+                    "Perché considerava la storiografia un genere puramente geografico.",
+                    "Per nascondere il ruolo dei magistrati plebei nel Senato."
+                ],
+                correctIndex: 1,
+                explanation: "Catone intendeva combattere il personalismo dei generali (come Scipione l'Africano). Nelle *Origines* omette i nomi dei leader per focalizzarsi sul valore collettivo del popolo e delle comunità italiche."
+            },
+            {
+                question: "Qual è l'importanza filologica del 'De agri cultura' di Catone il Censore nella prosa latina?",
+                options: [
+                    "È l'opera che introduce la metrica dell'esametro a Roma.",
+                    "È la più antica opera in prosa latina giuntaci interamente integra.",
+                    "Rappresenta il primo trattato giuridico sulla tutela dei monumenti.",
+                    "Contiene la prima biografia del fondatore Romolo."
+                ],
+                correctIndex: 1,
+                explanation: "Il *De agri cultura* è il più antico testo letterario in prosa latina pervenutoci integro. Offre un quadro pratico ed etico della gestione di una villa agricola repubblicana."
+            },
+            {
+                question: "Quale precetto poetico esprime la visione pragmatica dell'oratoria catoniana, opposta all'ornamento retorico di stampo greco?",
+                options: [
+                    "Poeta nascitur, orator fit",
+                    "Rem tene, verba sequentur",
+                    "Vir bonus dicendi peritus",
+                    "Satura quidem tota nostra est"
+                ],
+                correctIndex: 1,
+                explanation: "*Rem tene, verba sequentur* ('possiedi l'argomento, le parole seguiranno') esprime la convinzione di Catone che la chiarezza dei contenuti morali e pratici sia sufficiente a generare una buona oratoria, senza bisogno di sofismi greci."
+            },
+            {
+                question: "Perché Quintiliano affermò con orgoglio 'Satura quidem tota nostra est'?",
+                options: [
+                    "Perché riteneva che l'oratoria politica fosse nata a Roma.",
+                    "Perché la satira è l'unico genere letterario latino che non ha un corrispondente o un modello nella letteratura greca classica.",
+                    "Per rivendicare il primato romano nella lirica d'amore.",
+                    "Perché i teatri romani erano di proprietà esclusiva dello Stato."
+                ],
+                correctIndex: 1,
+                explanation: "La satira (*satura*) è un genere indigeno romano. Non avendo modelli greci alle spalle (a differenza di epica, tragedia e commedia), i romani la rivendicavano come una creazione esclusiva del loro ingegno."
+            },
+            {
+                question: "In quale metro poetico Gaio Lucilio compose la maggior parte delle sue Satire, fissando lo standard per i successivi classi latini?",
+                options: [
+                    "Saturnio",
+                    "Esametro dattilico",
+                    "Distico elegiaco",
+                    "Senario giambico"
+                ],
+                correctIndex: 1,
+                explanation: "Sebbene abbia sperimentato diversi metri nei 30 libri delle sue satire, Lucilio stabilizzò l'uso dell'esametro dattilico, metro che fu poi ripreso e consacrato da Orazio, Persio e Giovenale."
+            }
+        ]
+    },
+
+    lat_cap5: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. V",
+        title: "La Rivoluzione Poetica",
+        questions: [
+            {
+                question: "Con quale celebre metafora Lucrezio giustifica la scelta di esporre l'arida fisica epicurea in forma poetica nel De rerum natura?",
+                options: [
+                    "Il miele spalmato sul bordo del bicchiere contenente una medicina amara per i fanciulli.",
+                    "La lampada che illumina la via nella notte buia.",
+                    "Il navigatore che osserva le stelle per evitare il naufragio.",
+                    "Il seme che germoglia nella terra fertile."
+                ],
+                correctIndex: 0,
+                explanation: "Lucrezio spiega che la fisica epicurea può apparire ostica (*tristis*); per questo adorna la sua dottrina col dolce miele delle Muse (*musaeo lepore*), rendendola accessibile e benefica per il lettore."
+            },
+            {
+                question: "Quale fenomeno fisico descritto da Lucrezio garantisce la collisione degli atomi nel vuoto e costituisce il fondamento del libero arbitrio umano?",
+                options: [
+                    "La gravità universale",
+                    "Il clinamen (la deviazione casuale)",
+                    "L'evaporazione termica",
+                    "Il magnetismo terrestre"
+                ],
+                correctIndex: 1,
+                explanation: "Il *clinamen* è la deviazione casuale degli atomi rispetto alla linea retta di caduta. Questa minima deviazione consente l'urto e l'aggregazione atomica, ed evita il determinismo meccanicistico, salvando il libero arbitrio."
+            },
+            {
+                question: "Quali sono i cardini della poetica dei 'neoteroi' (o poetae novi) derivati dalla lezione di Callimaco e della poesia ellenistica?",
+                options: [
+                    "Grandiosità epica, impegno politico e sermo vulgaris.",
+                    "Brevitas (componimento breve), labor limae (cura formale) e doctrina (erudizione).",
+                    "Improvvisazione, polimetria e attacco personale diretto.",
+                    "Fides civile, rispetto del mos maiorum e celebrazione del trionfo."
+                ],
+                correctIndex: 1,
+                explanation: "I neoteroi rifiutano il lungo poema epico tradizionale e ricercano una poesia concentrata (*brevitas*), levigata ossessivamente nella metrica (*labor limae*) e ricca di riferimenti mitologici raffinati (*doctrina*)."
+            },
+            {
+                question: "Chi si cela dietro lo pseudonimo di 'Lesbia' cantata nei carmi di Catullo?",
+                options: [
+                    "La poetessa Saffo di Lesbo.",
+                    "Clodia, esponente della potente e scandalosa aristocrazia romana.",
+                    "Licoride, famosa attrice di mimi dell'età sillana.",
+                    "Una liberta di origine cartaginese della cerchia degli Scipioni."
+                ],
+                correctIndex: 1,
+                explanation: "Lesbia è il nome letterario (un omaggio poetico a Saffo) scelto da Catullo per Clodia, sorella del tribuno Clodio e moglie di Metello Celere, donna colta, carismatica e anticonformista della tarda repubblica."
+            },
+            {
+                question: "Nel celebre Carme 85 ('Odi et amo'), quale contrasto psicologico esprime il poeta Catullo?",
+                options: [
+                    "La rivalità politica con Giulio Cesare in Senato.",
+                    "La scissione dolorosa tra la passione amorosa incontrollabile e la perdita dell'affetto e della stima a causa dei tradimenti.",
+                    "La nostalgia per la patria lontana e il richiamo della guerra.",
+                    "Il lamento per la morte del fratello e la solitudine della tomba."
+                ],
+                correctIndex: 1,
+                explanation: "Il dramma di Catullo risiede nella frattura tra l'atto del volere bene (*bene velle*, l'affetto razionale basato sul patto sacro d'amore) e l'atto del desiderare (*amare*, la pura passione fisica che aumenta all'aumentare dei tradimenti)."
+            }
+        ]
+    },
+
+    lat_cap6: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. VI",
+        title: "La Prosa della Tarda Repubblica",
+        questions: [
+            {
+                question: "Quale principio stilistico definisce l'armonia, la simmetria e l'equilibrio sintattico della complessa prosa di Cicerone?",
+                options: [
+                    "Inconcinnitas",
+                    "Concinnitas",
+                    "Brevitas",
+                    "Analogia"
+                ],
+                correctIndex: 1,
+                explanation: "La *concinnitas* è la ricerca della simmetria e della proporzione armonica all'interno del periodo. Cicerone ne è il maestro assoluto, bilanciando le frasi secondarie con clausole ritmiche raffinate."
+            },
+            {
+                question: "Quale approccio filosofico caratterizza le opere speculative di Cicerone (come il De officiis) scritte per tradurre il pensiero greco a Roma?",
+                options: [
+                    "L'epicureismo ortodosso.",
+                    "L'eclettismo (valutazione e unione pragmatica delle tesi filosofiche più valide per la formazione del cittadino).",
+                    "Il cinismo ascetico.",
+                    "Il misticismo orfico."
+                ],
+                correctIndex: 1,
+                explanation: "Cicerone segue l'eclettismo, una posizione intellettuale aperta che seleziona idee dallo stoicismo, dall'Accademia e dall'aristotelismo in base alla loro utilità etica e politica per il bene comune dello Stato."
+            },
+            {
+                question: "Quale espediente narrativo adotta Giulio Cesare nei suoi Commentarii per conferire un tono di scientifica obiettività al resoconto delle sue guerre?",
+                options: [
+                    "La forma epistolare indirizzata ai consoli in carica.",
+                    "L'uso costante della terza persona singolare per riferirsi a se stesso.",
+                    "L'inserimento di dialoghi poetici in esametri.",
+                    "La descrizione delle battaglie affidata a un narratore anonimo gallico."
+                ],
+                correctIndex: 1,
+                explanation: "Utilizzando la terza persona ('Cesare ordinò', 'Cesare mosse'), il condottiero nasconde la sua opera di auto-giustificazione politica prima di tutto in vista dell'opinione pubblica, dietro una parvenza di cronaca militare oggettiva e distaccata."
+            },
+            {
+                question: "Quale tipologia storiografica caratterizza le opere di Sallustio (De Catilinae coniuratione e Bellum Iugurthinum)?",
+                options: [
+                    "La cronaca annalistica universale.",
+                    "La monografia storica (lo studio analitico di un singolo evento carico di significato morale e politico).",
+                    "La biografia encomiastica dei dittatori.",
+                    "L'epigrafia giuridica sui confini dell'impero."
+                ],
+                correctIndex: 1,
+                explanation: "Sallustio adotta la monografia storica per analizzare momenti precisi di crisi della Repubblica, considerandoli indicatori emblematici del collasso etico e politico della società romana."
+            },
+            {
+                question: "Quali sono i due elementi formali essenziali dello stile storiografico di Sallustio, volutamente opposti alla prosa di Cicerone?",
+                options: [
+                    "La simmetria e l'uso di grecismi colloquiali.",
+                    "L'inconcinnitas (asimmetria del periodo) e l'arcaismo (scelte lessicali solenni e desuete).",
+                    "La linearità lessicale e l'uso del saturnio.",
+                    "La prolissità retorica e il ricorso a metafore teatrali."
+                ],
+                correctIndex: 1,
+                explanation: "Sallustio rifiuta l'equilibrio ciceroniano preferendo una sintassi spezzata e imprevedibile (*inconcinnitas*) e un lessico solenne e antico (*arcaismo*) che conferisce autorevolezza storica e gravitas morale al testo."
+            }
+        ]
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // LETTERATURA LATINA (PLUS) — 3 Capitoli × 5 Domande = 15 Domande
+    // ═══════════════════════════════════════════════════════════════
+
+    lat_plus1: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. VII",
+        title: "Grammatica e Epigrafia (Plus I)",
+        questions: [
+            {
+                question: "Qual è la pronuncia classica (restituta) corretta del dittongo 'ae' e della consonante 'c' davanti a 'e' / 'i'?",
+                options: [
+                    "Si pronuncia 'e' e la 'c' è palatale (dolce, come in italiano).",
+                    "Si pronuncia separato come 'a-e' e la 'c' è sempre velare (dura, come 'k').",
+                    "Si pronuncia come 'o' e la 'c' è sempre muta.",
+                    "Si pronuncia come 'ai' e la 'c' ha valore di sibilante."
+                ],
+                correctIndex: 1,
+                explanation: "Nella pronuncia classica (*restituta*), i dittonghi si pronunciano staccati (*Caesar* -> Ca-e-sar) e la `c` ha sempre suono velare (duro come in 'casa'), indipendentemente dalla vocale che segue."
+            },
+            {
+                question: "In quale caso della declinazione latina viene espresso il complemento di specificazione ('di chi?', 'di che cosa?')?",
+                options: [
+                    "Nominativo",
+                    "Accusativo",
+                    "Genitivo",
+                    "Ablativo"
+                ],
+                correctIndex: 2,
+                explanation: "Il genitivo è il caso specificamente deputato a esprimere il complemento di specificazione, chiarendo a chi appartiene o di cosa si compone l'elemento reggente."
+            },
+            {
+                question: "Come si individua a quale delle 5 declinazioni regolari appartiene un sostantivo sul dizionario?",
+                options: [
+                    "Dalla terminazione del Nominativo singolare.",
+                    "Dalla terminazione del Genitivo singolare.",
+                    "Dalla desinenza dell'Ablativo plurale.",
+                    "Dalla presenza o meno del genere neutro."
+                ],
+                correctIndex: 1,
+                explanation: "La desinenza del Genitivo singolare individua inequivocabilmente la declinazione di appartenenza (*-ae* per la prima, *-i* per la seconda, *-is* per la terza, *-us* per la quarta, *-ei* per la quinta)."
+            },
+            {
+                question: "Sulle epigrafi monumentali romane di interesse storico-artistico, quale significato assume comunemente la sigla 'D M'?",
+                options: [
+                    "Deo Maximo (A Dio Massimo)",
+                    "Diis Manibus (Agli Dei Mani)",
+                    "Dominus Marcus (Il signore Marco)",
+                    "Decurio Maximus (Decurione Massimo)"
+                ],
+                correctIndex: 1,
+                explanation: "'D M' sta per *Diis Manibus* ('Agli Dei Mani'), la formula tipica di dedica religiosa e consacrazione funeraria scolpita sugli altari o sulle steli sepolcrali a tutela della tomba."
+            },
+            {
+                question: "In un'epigrafe dedicatoria imperiale su un monumento, in quale caso grammaticale viene espresso il nome dell'imperatore a cui il manufatto è dedicato?",
+                options: [
+                    "Nominativo",
+                    "Accusativo",
+                    "Dativo",
+                    "Vocativo"
+                ],
+                correctIndex: 2,
+                explanation: "Il nome del beneficiario della dedica (il ricevente) viene espresso al caso Dativo (caso del complemento di termine). Il donatore o promotore (es. *Senatus Populusque Romanus*) è invece espresso al Nominativo."
+            }
+        ]
+    },
+
+    lat_plus2: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. VIII",
+        title: "Antologia ed Esegesi (Plus II)",
+        questions: [
+            {
+                question: "Quale tratto linguistico tipico del latino arcaico si riscontra nell'iscrizione funeraria di Scipione Barbato nella formula 'Gnaivod patre prognatus'?",
+                options: [
+                    "La caduta totale delle consonanti finali di parola.",
+                    "La desinenza arcaica di ablativo singolare in -d e il dittongo ai.",
+                    "L'uso dell'esametro dattilico puro di stampo callimacheo.",
+                    "Il ricorso ad abbreviazioni paleografiche medievali."
+                ],
+                correctIndex: 1,
+                explanation: "*Gnaivod* conserva la desinenza arcaica di ablativo singolare in `-d` (poi caduta nel latino classico) e presenta il dittongo *ai* anziché *ae* (*Gnaivus*)."
+            },
+            {
+                question: "Nel monologo di Pseudolo in Plauto (vv. 573-585), a chi viene paragonato lo schiavo astuto che pianifica beffe e inganni?",
+                options: [
+                    "A un generale romano in trionfo.",
+                    "A un poeta che crea la realtà dal nulla.",
+                    "A un usuraio campano avido.",
+                    "A un filosofo stoico imperturbabile."
+                ],
+                correctIndex: 1,
+                explanation: "Pseudolo si paragona a un poeta (*quasi poeta*) che cerca ciò che non esiste da nessuna parte (*quod nusquam est gentium*) eppure lo trova, rendendo credibile la finzione. È un esempio celebre di metateatro plautino."
+            },
+            {
+                question: "Nel proemio del De agri cultura, per quale motivo Catone il Censore esalta la figura dell'agricoltore rispetto a mercanti ed usurai?",
+                options: [
+                    "Perché l'agricoltore ottiene rendite finanziarie più alte dei commercianti.",
+                    "Perché dall'agricoltura nascono i cittadini-soldati più forti, onesti e devoti alla stabilità sociale.",
+                    "Perché gli dèi condannano severamente chi naviga per mare.",
+                    "Perché la plebe non aveva accesso alle cariche finanziarie romane."
+                ],
+                correctIndex: 1,
+                explanation: "Catone associa l'agricoltura alla formazione del perfetto cittadino-soldato devoto (*pius*) e leale alla Repubblica (*mos maiorum*), in contrasto con la rischiosa mercatura marittima e la disonorevole usura."
+            },
+            {
+                question: "Con quale termine di ascendenza filosofica Lucrezio definisce Venere nel celebre inizio del De rerum natura ('Aeneadum genetrix...')?",
+                options: [
+                    "Alma (nutrice/datrice di vita) e voluptas (piacere).",
+                    "Saeva (crudele) e regina delle guerre.",
+                    "Domina (padrona) e mater dolorosa.",
+                    "Uranis (celeste) e sancta protettrice dei romani."
+                ],
+                correctIndex: 0,
+                explanation: "Venere è invocata come *alma* (nutrice, colei che dà la vita) e *hominum divomque voluptas* (piacere degli uomini e degli dei), incarnando la forza fecondatrice della natura ed il supremo valore epicureo della voluttà (*hedoné*)."
+            },
+            {
+                question: "Nel celebre Carme 85 di Catullo ('Odi et amo'), quale forma verbale esprime la passività sofferta del poeta di fronte al conflitto amoroso?",
+                options: [
+                    "Nescio (non so).",
+                    "Odi (odio).",
+                    "Fieri (accadere/subire).",
+                    "Requiris (ti chiedi)."
+                ],
+                correctIndex: 2,
+                explanation: "Catullo usa l'infinito passivo *fieri* ('sento che accade / che mi viene fatto') per evidenziare che il contrasto tra amore e odio non è una scelta cosciente o razionale, ma una dolorosa passione subita passivamente."
+            }
+        ]
+    },
+
+    lat_plus3: {
+        subject: "letteratura_latina",
+        chapterTag: "Cap. IX",
+        title: "Strumenti Digitali (Plus III)",
+        questions: [
+            {
+                question: "Quale database epigrafico online rappresenta lo standard internazionale per consultare trascrizioni e riferimenti bibliografici di quasi tutte le iscrizioni latine conosciute?",
+                options: [
+                    "PHI Latin Texts",
+                    "Epigraphik-Datenbank Clauss-Slaby (EDCS)",
+                    "Logeion (Chicago)",
+                    "L'Année Philologique"
+                ],
+                correctIndex: 1,
+                explanation: "EDCS è la banca dati epigrafica online più completa e consultata a livello globale, permettendo la ricerca delle iscrizioni catalogate per parole, località e cataloghi epigrafici."
+            },
+            {
+                question: "Quale risorsa digitale della Tufts University consente di leggere testi classici lemmatizzati, offrendo traduzioni a fronte e analisi morfologica cliccando sulle singole parole latine?",
+                options: [
+                    "Packard Humanities Institute (PHI)",
+                    "Perseus Digital Library",
+                    "Gnomon Online",
+                    "EAGLE Portal"
+                ],
+                correctIndex: 1,
+                explanation: "La *Perseus Digital Library* è celebre per il suo motore di lemmatizzazione che scompone le parole latine indicandone caso, tempo, modo e lemma di provenienza, con rimandi a dizionari inglesi e statistiche d'autore."
+            },
+            {
+                question: "Per effettuare una ricerca lessicale avanzata mirata a individuare la co-occorrenza di due parole latine entro una certa distanza nei testi classici, quale risorsa digitale libera utilizzerai?",
+                options: [
+                    "L'Année Philologique",
+                    "PHI Latin Texts (Packard Humanities)",
+                    "Epigraphic Database Roma",
+                    "Thesaurus Linguae Latinae"
+                ],
+                correctIndex: 1,
+                explanation: "Il sito di *PHI Latin Texts* (Packard Humanities Institute) permette ricerche lessicali rapide ed avanzate con filtri di prossimità ed operatori di stringa su tutti i testi latini classici fino al II secolo d.C."
+            },
+            {
+                question: "Cos'è Logeion (sviluppato dalla University of Chicago)?
+                options: [
+                    "Un database di immagini di reperti archeologici campani.",
+                    "Un aggregatore online di dizionari classici latini e greci storici.",
+                    "Un social network accademico per filologi classici.",
+                    "Una piattaforma per l'apprendimento automatico della metrica."
+                ],
+                correctIndex: 1,
+                explanation: "Logeion è un utilissimo aggregatore gratuito che visualizza simultaneamente le definizioni e le voci di diversi dizionari storici di riferimento (es. Lewis & Short) per il latino e il greco."
+            },
+            {
+                question: "Quale repertorio bibliografico specialistico viene utilizzato a livello accademico per condurre ricerche sulla letteratura scientifica (articoli e monografie) pubblicata su autori classici e Beni Culturali romani?",
+                options: [
+                    "EDCS",
+                    "L'Année Philologique (APh)",
+                    "Perseus",
+                    "EAGLE"
+                ],
+                correctIndex: 1,
+                explanation: "*L'Année Philologique* è il database bibliografico standard di riferimento internazionale per indicizzare studi scientifici, recensioni e pubblicazioni periodiche sull'antichità classica."
+            }
+        ]
+    }
 };
 
 // Global export

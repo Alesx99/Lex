@@ -497,12 +497,76 @@ const searchDatabase = [
         navPath: "arte_medievale/index.html"
     },
     {
-        title: "Letteratura Latina: Generi e Autori",
+        title: "Letteratura Latina Cap. I: Le Origini e la Preletteratura",
         subject: "letteratura_latina",
-        chapterTag: "Intro",
-        description: "Studio dei generi letterari e dei massimi esponenti della latinità.",
-        keywords: "letteratura latina classici autori",
-        navPath: "letteratura_latina/index.html"
+        chapterTag: "Cap. I",
+        description: "Sintesi sulle origini della cultura latina: carmina sacrali (saliare, arvale) e celebrativi, fescennini, atellana, Leggi delle XII Tavole e Annales Maximi.",
+        keywords: "letteratura latina origini preletteratura carmina saliare arvale fescennini saturnio atellana leggi xii tavole annales maximi mos maiorum",
+        navPath: "letteratura_latina/index.html?open=summaries/cap1.md"
+    },
+    {
+        title: "Letteratura Latina Cap. II: I Padri della Letteratura Arcaica",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. II",
+        description: "Studio di Livio Andronico (Odusia e vertere), Gneo Nevio (praetexta, Bellum Poenicum) e Quinto Ennio (Annales, rivoluzione dell'esametro).",
+        keywords: "letteratura latina arcaica livio andronico gneo nevio quinto ennio odissea odusia saturnio vertere praetexta bellum poenicum annales esametro",
+        navPath: "letteratura_latina/index.html?open=summaries/cap2.md"
+    },
+    {
+        title: "Letteratura Latina Cap. III: Il Teatro Arcaico: Plauto e Terenzio",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. III",
+        description: "Il genere della palliata. Plauto (la beffa, lo schiavo callidus, cantica) vs Terenzio (humanitas, finezza psicologica, sermo purus).",
+        keywords: "letteratura latina teatro commedia palliata plauto terenzio servus callidus cantica sermo plautinus humanitas prologo purus hecyra",
+        navPath: "letteratura_latina/index.html?open=summaries/cap3.md"
+    },
+    {
+        title: "Letteratura Latina Cap. IV: La Prosa arcaica e il Mos Maiorum",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. IV",
+        description: "Catone il Censore, il De agri cultura e le Origines (storiografia senza nomi). La nascita della satira d'opinione con Lucilio.",
+        keywords: "letteratura latina prosa arcaica catone censore origines de agri cultura mos maiorum oratoria gaio lucilio satira esametro saturae",
+        navPath: "letteratura_latina/index.html?open=summaries/cap4.md"
+    },
+    {
+        title: "Letteratura Latina Cap. V: La Rivoluzione Poetica",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. V",
+        description: "Lucrezio e la fisica epicurea del De rerum natura. Catullo e la cerchia dei neoteroi (lirica personale, labor limae, amore per Lesbia).",
+        keywords: "letteratura latina lucrezio catullo de rerum natura epicureismo epicuro clinamen neoteroi callimaco brevitas labor limae lesbia odi et amo",
+        navPath: "letteratura_latina/index.html?open=summaries/cap5.md"
+    },
+    {
+        title: "Letteratura Latina Cap. VI: La Prosa della Tarda Repubblica",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. VI",
+        description: "Cicerone (oratoria, retorica, filosofia eclettica, concinnitas); Cesare (Commentarii, terza persona); Sallustio (monografie storiche, inconcinnitas, gravitas).",
+        keywords: "letteratura latina cicerone cesare sallustio oratoria commentarii de bello gallico de bello civili monografie catilina giugurta concinnitas",
+        navPath: "letteratura_latina/index.html?open=summaries/cap6.md"
+    },
+    {
+        title: "Letteratura Latina Cap. VII: Grammatica di Base e Lettura delle Epigrafi",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. VII",
+        description: "Introduzione alla lingua latina per i Beni Culturali: pronuncia (classica/ecclesiastica), i casi, le 5 declinazioni, coniugazioni verbali e abbreviazioni epigrafiche comuni.",
+        keywords: "letteratura latina grammatica base epigrafi epigrafia pronuncia declinazioni coniugazioni verbi casi nominativo accusativo abbreviazioni dm hse vslm traiano",
+        navPath: "letteratura_latina/index.html?open=summaries/plus1_grammatica.md"
+    },
+    {
+        title: "Letteratura Latina Cap. VIII: Antologia Critica ed Esegesi dei Testi",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. VIII",
+        description: "Esegesi e commento testuale guidato di testi emblematici: elogio di Scipione Barbato, Pseudolus di Plauto, De agri cultura di Catone, De rerum natura di Lucrezio, Catullo e le Catilinarie di Cicerone.",
+        keywords: "letteratura latina antologia esegesi testi commento traduzione scipione barbato plauto pseudolus catone de agri cultura lucrezio de rerum natura catullo odi et amo cicerone catilinaria",
+        navPath: "letteratura_latina/index.html?open=summaries/plus2_antologia.md"
+    },
+    {
+        title: "Letteratura Latina Cap. IX: Strumenti Digitali per lo Studio del Latino",
+        subject: "letteratura_latina",
+        chapterTag: "Cap. IX",
+        description: "Guida pratica all'Umanistica Digitale applicata al latino: database epigrafici (EDCS, EDR), biblioteche testuali online (PHI, Perseus, Brepolis), vocabolari (Logeion) e database bibliografici (L'Année Philologique).",
+        keywords: "letteratura latina strumenti digitali database epigrafia edcs edr eagle corpora testi phi latin texts packard humanities institute perseus digital library logeion dictionaries annee philologique gnomon",
+        navPath: "letteratura_latina/index.html?open=summaries/plus3_strumenti_digitali.md"
     },
     {
         title: "Codicologia: Archeologia del Libro",

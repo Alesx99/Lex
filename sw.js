@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v16';
+const CACHE_NAME = 'lex-cache-v18';
 const ASSETS = [
   './',
   './index.html',
@@ -19,6 +19,19 @@ const ASSETS = [
   './codicologia/style.css',
   './codicologia/quiz.html',
   './codicologia/connections.html',
+  './letteratura_latina/index.html',
+  './letteratura_latina/style.css',
+  './letteratura_latina/quiz.html',
+  './letteratura_latina/connections.html',
+  './letteratura_latina/summaries/cap1.md',
+  './letteratura_latina/summaries/cap2.md',
+  './letteratura_latina/summaries/cap3.md',
+  './letteratura_latina/summaries/cap4.md',
+  './letteratura_latina/summaries/cap5.md',
+  './letteratura_latina/summaries/cap6.md',
+  './letteratura_latina/summaries/plus1_grammatica.md',
+  './letteratura_latina/summaries/plus2_antologia.md',
+  './letteratura_latina/summaries/plus3_strumenti_digitali.md',
   './minigames.html',
   './js/minigames.js'
 ];
