@@ -324,10 +324,30 @@
                     <h3 class="modal-title" id="modal-chapter-title">Titolo del Capitolo</h3>
                 </div>
                 <div class="modal-controls">
-                    <!-- Print Button -->
+                    <!-- Print Button (Desktop Only) -->
                     <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                     </button>
+                    <!-- Dropdown for Reading Tools (Mobile Only) -->
+                    <div class="tools-dropdown" id="tools-dropdown">
+                        <button class="modal-close dropdown-toggle-btn" onclick="toggleToolsMenu(event)" title="Strumenti di Lettura">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <div class="tools-menu" id="tools-menu">
+                            <button id="font-size-btn-mob" class="dropdown-item" onclick="toggleFontSizeMobile()" title="Aumenta Font">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                                <span>Aumenta Testo</span>
+                            </button>
+                            <button id="dyslexic-btn-mob" class="dropdown-item" onclick="toggleDyslexicMobile()" title="Alta Leggibilità">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                                <span>Leggibilità</span>
+                            </button>
+                            <button class="dropdown-item" onclick="window.print()" title="Stampa / Salva in PDF">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                <span>Stampa / PDF</span>
+                            </button>
+                        </div>
+                    </div>
                     <!-- Close Button -->
                     <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -709,6 +729,39 @@
                 tabs[1].classList.add('active');
             }
         }
+
+        // MOBILE READING TOOLS DROPDOWN LOGIC
+        function toggleToolsMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('tools-menu');
+            if (menu) menu.classList.toggle('open');
+        }
+
+        function toggleFontSizeMobile() {
+            markdownView.classList.toggle('large-font');
+            const btn = document.getElementById('font-size-btn-mob');
+            if (btn) btn.classList.toggle('active');
+            
+            // Sync with desktop button
+            const desktopBtn = document.getElementById('font-size-btn');
+            if (desktopBtn) desktopBtn.classList.toggle('active');
+        }
+
+        function toggleDyslexicMobile() {
+            markdownView.classList.toggle('dyslexic-font');
+            const btn = document.getElementById('dyslexic-btn-mob');
+            if (btn) btn.classList.toggle('active');
+            
+            // Sync with desktop button
+            const desktopBtn = document.getElementById('dyslexic-btn');
+            if (desktopBtn) desktopBtn.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            const menu = document.getElementById('tools-menu');
+            if (menu) menu.classList.remove('open');
+        });
     </script>
 
     <!-- Floating Paragraph Highlighter Palette -->

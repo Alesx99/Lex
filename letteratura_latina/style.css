@@ -1804,3 +1804,75 @@ footer p a:hover {
     }
 }
 
+/* Reading Tools Dropdown Menu */
+.tools-dropdown {
+    position: relative;
+    display: none;
+}
+
+.tools-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-modal);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 2000;
+    min-width: 180px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.tools-menu.open {
+    display: flex;
+}
+
+.dropdown-item {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.dropdown-item.active {
+    color: var(--accent-gold);
+    background: rgba(190, 24, 93, 0.06);
+}
+
+/* Specific Phone Responsiveness (iPhone size, up to iPhone Pro Max width) */
+@media (max-width: 500px) {
+    .modal-title-area {
+        display: none !important;
+    }
+    .modal-header .modal-controls > button[onclick="window.print()"] {
+        display: none !important;
+    }
+    .tools-dropdown {
+        display: inline-block !important;
+    }
+    #reading-controls {
+        display: none !important;
+    }
+}
+
