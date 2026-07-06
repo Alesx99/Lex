@@ -103,6 +103,29 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
+        .node-card.selected-node {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.4);
+            border-color: var(--accent-gold) !important;
+            z-index: 10;
+        }
+        .diritto-column .node-card.selected-node {
+            border-color: var(--accent-gold) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+        .arte-column .node-card.selected-node {
+            border-color: var(--accent-terracotta) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(200, 90, 50, 0.4);
+        }
+        .romana-column .node-card.selected-node {
+            border-color: var(--accent-romana) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(169, 50, 38, 0.4);
+        }
+        .storia-column .node-card.selected-node {
+            border-color: var(--accent-storia) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
         .diritto-column .node-card:hover,
         .diritto-column .node-card.active-node {
             border-color: var(--accent-gold);
@@ -158,12 +181,16 @@
             stroke-width: 2;
             transition: all var(--transition-speed) ease;
             stroke-dasharray: 4 4;
+            pointer-events: stroke;
+            cursor: pointer;
         }
 
         .connection-line.cross-link {
             stroke: rgba(255, 255, 255, 0.15);
             stroke-width: 3;
             stroke-dasharray: none;
+            pointer-events: stroke;
+            cursor: pointer;
         }
 
         .connection-line.highlighted {
@@ -1326,6 +1353,206 @@
                 }
             };
 
+            // Selection state
+            window.selectedConnection = null;
+            window.selectedNode = null;
+
+            function clearSelections() {
+                window.selectedConnection = null;
+                window.selectedNode = null;
+
+                document.querySelectorAll('.connection-line').forEach(l => {
+                    l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-storia', 'highlighted-custom');
+                });
+                document.querySelectorAll('.node-card').forEach(n => {
+                    n.classList.remove('active-node', 'selected-node');
+                });
+
+                expPlaceholder.style.display = 'block';
+                expContent.style.display = 'none';
+            }
+
+            function restoreActiveSelections() {
+                if (window.selectedConnection) {
+                    const conn = window.selectedConnection;
+                    const line = document.getElementById(`line-${conn.from}-${conn.to}`);
+                    if (line) {
+                        line.classList.add('highlighted');
+                        if (conn.isCustom) {
+                            line.classList.add('highlighted-custom');
+                        } else {
+                            if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                                line.classList.add('highlighted-romana');
+                            } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                                line.classList.add('highlighted-storia');
+                            } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
+                                line.classList.add('highlighted-arte');
+                            }
+                        }
+                    }
+                    const fromNode = document.getElementById(conn.from);
+                    const toNode = document.getElementById(conn.to);
+                    if (fromNode) fromNode.classList.add('active-node');
+                    if (toNode) toNode.classList.add('active-node');
+                    showConnectionInfo(conn);
+                } else if (window.selectedNode) {
+                    selectNode(window.selectedNode);
+                } else {
+                    expPlaceholder.style.display = 'block';
+                    expContent.style.display = 'none';
+                }
+            }
+
+            function showConnectionInfo(conn) {
+                expPlaceholder.style.display = 'none';
+                expContent.style.display = 'block';
+                infoTitle.textContent = conn.title;
+                if (conn.isCustom) {
+                    infoTitle.style.color = '#22d3ee';
+                    infoText.innerHTML = `${conn.description}<br><button class="delete-conn-btn" onclick="deleteCustomConnection('${conn.from}', '${conn.to}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle; margin-right:3px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        Elimina Collegamento
+                    </button>`;
+                } else {
+                    infoText.textContent = conn.description;
+                    if (conn.from.startsWith('diritto') || conn.to.startsWith('diritto')) {
+                        infoTitle.style.color = 'var(--accent-gold)';
+                    } else if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                        infoTitle.style.color = 'var(--accent-romana)';
+                    } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                        infoTitle.style.color = 'var(--accent-storia)';
+                    } else {
+                        infoTitle.style.color = 'var(--accent-terracotta)';
+                    }
+                }
+            }
+
+            function showNodeInfo(node) {
+                const nodeId = node.id;
+                const activeConnections = window.allConnections.filter(c => c.from === nodeId || c.to === nodeId);
+
+                expPlaceholder.style.display = 'none';
+                expContent.style.display = 'block';
+
+                if (activeConnections.length > 0) {
+                    const primary = activeConnections[0];
+                    infoTitle.textContent = primary.title;
+                    if (primary.isCustom) {
+                        infoTitle.style.color = '#22d3ee';
+                        infoText.innerHTML = `${primary.description}<br><button class="delete-conn-btn" onclick="deleteCustomConnection('${primary.from}', '${primary.to}')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle; margin-right:3px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            Elimina Collegamento
+                        </button>`;
+                    } else {
+                        infoText.textContent = primary.description;
+                        if (nodeId.startsWith('diritto')) {
+                            infoTitle.style.color = 'var(--accent-gold)';
+                        } else if (nodeId.startsWith('romana')) {
+                            infoTitle.style.color = 'var(--accent-romana)';
+                        } else if (nodeId.startsWith('storia')) {
+                            infoTitle.style.color = 'var(--accent-storia)';
+                        } else {
+                            infoTitle.style.color = 'var(--accent-terracotta)';
+                        }
+                    }
+                } else {
+                    const nodeNum = node.querySelector('.node-header span').textContent;
+                    const nodeTitleText = node.querySelector('.node-title').textContent;
+                    infoTitle.textContent = `${nodeNum}: ${nodeTitleText}`;
+                    infoTitle.style.color = 'var(--text-primary)';
+                    infoText.textContent = "Questo capitolo fa parte del percorso di studio. Puoi navigarlo cliccando sulla tessera per accedere alla sintesi approfondita.";
+                }
+
+                // Add read summary button in explanatory panel
+                const dest = node.getAttribute('data-path');
+                if (dest) {
+                    const navBtn = document.createElement('button');
+                    navBtn.className = 'read-summary-btn';
+                    navBtn.innerHTML = `Leggi Sintesi &rarr;`;
+                    navBtn.style.cssText = "margin-top: 10px; display: inline-flex; align-items: center; padding: 0.5rem 1rem; background: var(--accent-gold); color: #080b11; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);";
+                    
+                    if (nodeId.startsWith('diritto')) {
+                        navBtn.style.background = 'var(--accent-gold)';
+                        navBtn.style.color = '#080b11';
+                    } else if (nodeId.startsWith('romana')) {
+                        navBtn.style.background = 'var(--accent-romana)';
+                        navBtn.style.color = '#fff';
+                    } else if (nodeId.startsWith('storia')) {
+                        navBtn.style.background = 'var(--accent-storia)';
+                        navBtn.style.color = '#fff';
+                    } else {
+                        navBtn.style.background = 'var(--accent-terracotta)';
+                        navBtn.style.color = '#fff';
+                    }
+                    navBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        window.location.href = dest;
+                    });
+                    infoText.appendChild(document.createElement('br'));
+                    infoText.appendChild(navBtn);
+                }
+            }
+
+            function selectConnection(conn, pathEl) {
+                clearSelections();
+                window.selectedConnection = conn;
+
+                pathEl.classList.add('highlighted');
+                if (conn.isCustom) {
+                    pathEl.classList.add('highlighted-custom');
+                } else {
+                    if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                        pathEl.classList.add('highlighted-romana');
+                    } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                        pathEl.classList.add('highlighted-storia');
+                    } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
+                        pathEl.classList.add('highlighted-arte');
+                    }
+                }
+
+                const fromNode = document.getElementById(conn.from);
+                const toNode = document.getElementById(conn.to);
+                if (fromNode) fromNode.classList.add('active-node');
+                if (toNode) toNode.classList.add('active-node');
+
+                showConnectionInfo(conn);
+            }
+
+            function selectNode(node) {
+                clearSelections();
+                window.selectedNode = node;
+                node.classList.add('selected-node', 'active-node');
+
+                const nodeId = node.id;
+                const activeConnections = window.allConnections.filter(c => c.from === nodeId || c.to === nodeId);
+
+                activeConnections.forEach(conn => {
+                    const line = document.getElementById(`line-${conn.from}-${conn.to}`);
+                    if (line) {
+                        line.classList.add('highlighted');
+                        if (conn.isCustom) {
+                            line.classList.add('highlighted-custom');
+                        } else {
+                            if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                                line.classList.add('highlighted-romana');
+                            } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                                line.classList.add('highlighted-storia');
+                            } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
+                                line.classList.add('highlighted-arte');
+                            }
+                        }
+                    }
+
+                    const otherNodeId = conn.from === nodeId ? conn.to : conn.from;
+                    const otherNode = document.getElementById(otherNodeId);
+                    if (otherNode) {
+                        otherNode.classList.add('active-node');
+                    }
+                });
+
+                showNodeInfo(node);
+            }
+
             // Draw SVG connection lines
             function drawLines() {
                 svg.innerHTML = ''; 
@@ -1363,14 +1590,117 @@
                             path.setAttribute('class', 'connection-line cross-link');
                         }
                         path.setAttribute('id', `line-${conn.from}-${conn.to}`);
+
+                        // Re-apply highlight class if selected
+                        if (window.selectedConnection && window.selectedConnection.from === conn.from && window.selectedConnection.to === conn.to) {
+                            path.classList.add('highlighted');
+                            if (conn.isCustom) {
+                                path.classList.add('highlighted-custom');
+                            } else {
+                                if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                                    path.classList.add('highlighted-romana');
+                                } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                                    path.classList.add('highlighted-storia');
+                                } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
+                                    path.classList.add('highlighted-arte');
+                                }
+                            }
+                        }
+
+                        // Re-apply highlight class if the connected node is selected
+                        if (window.selectedNode && (window.selectedNode.id === conn.from || window.selectedNode.id === conn.to)) {
+                            path.classList.add('highlighted');
+                            if (conn.isCustom) {
+                                path.classList.add('highlighted-custom');
+                            } else {
+                                if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                                    path.classList.add('highlighted-romana');
+                                } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                                    path.classList.add('highlighted-storia');
+                                } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
+                                    path.classList.add('highlighted-arte');
+                                }
+                            }
+                        }
+
+                        // Event listeners for path
+                        path.addEventListener('mouseenter', () => {
+                            if (window.isEditMode) return;
+
+                            document.querySelectorAll('.connection-line').forEach(l => {
+                                if (l !== path && l !== window.selectedConnection) {
+                                    l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-storia', 'highlighted-custom');
+                                }
+                            });
+                            document.querySelectorAll('.node-card').forEach(n => {
+                                if (n.id !== conn.from && n.id !== conn.to && n !== window.selectedNode) {
+                                    n.classList.remove('active-node');
+                                }
+                            });
+
+                            path.classList.add('highlighted');
+                            if (conn.isCustom) {
+                                path.classList.add('highlighted-custom');
+                            } else {
+                                if (conn.from.startsWith('romana') || conn.to.startsWith('romana')) {
+                                    path.classList.add('highlighted-romana');
+                                } else if (conn.from.startsWith('storia') || conn.to.startsWith('storia')) {
+                                    path.classList.add('highlighted-storia');
+                                } else if (conn.from.startsWith('arte') || conn.to.startsWith('arte')) {
+                                    path.classList.add('highlighted-arte');
+                                }
+                            }
+
+                            const fromNode = document.getElementById(conn.from);
+                            const toNode = document.getElementById(conn.to);
+                            if (fromNode) fromNode.classList.add('active-node');
+                            if (toNode) toNode.classList.add('active-node');
+
+                            showConnectionInfo(conn);
+                        });
+
+                        path.addEventListener('mouseleave', () => {
+                            if (window.isEditMode) return;
+
+                            if (window.selectedConnection !== conn) {
+                                path.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-storia', 'highlighted-custom');
+                                const fromNode = document.getElementById(conn.from);
+                                const toNode = document.getElementById(conn.to);
+                                if (fromNode && window.selectedNode !== fromNode) fromNode.classList.remove('active-node');
+                                if (toNode && window.selectedNode !== toNode) toNode.classList.remove('active-node');
+                            }
+
+                            restoreActiveSelections();
+                        });
+
+                        path.addEventListener('click', (e) => {
+                            if (window.isEditMode) return;
+                            e.stopPropagation();
+                            selectConnection(conn, path);
+                        });
+
                         svg.appendChild(path);
                     }
                 });
             }
 
-            // Highlight connections on hover
+            // Highlight connections on hover and click for nodes
             nodes.forEach(node => {
                 node.addEventListener('mouseenter', () => {
+                    if (window.isEditMode) return;
+
+                    // Clear other temporary highlights
+                    document.querySelectorAll('.connection-line').forEach(l => {
+                        if (l !== window.selectedConnection) {
+                            l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-storia', 'highlighted-custom');
+                        }
+                    });
+                    document.querySelectorAll('.node-card').forEach(n => {
+                        if (n !== window.selectedNode) {
+                            n.classList.remove('active-node');
+                        }
+                    });
+
                     const nodeId = node.id;
                     const activeConnections = window.allConnections.filter(c => c.from === nodeId || c.to === nodeId);
 
@@ -1398,55 +1728,29 @@
                                 otherNode.classList.add('active-node');
                             }
                         });
-
-                        const primary = activeConnections[0];
-                        expPlaceholder.style.display = 'none';
-                        expContent.style.display = 'block';
-                        infoTitle.textContent = primary.title;
-                        
-                        if (primary.isCustom) {
-                            infoTitle.style.color = '#22d3ee'; 
-                            infoText.innerHTML = `${primary.description}<br><button class="delete-conn-btn" onclick="deleteCustomConnection('${primary.from}', '${primary.to}')">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle; margin-right:3px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                                Elimina Collegamento
-                            </button>`;
-                        } else {
-                            infoText.textContent = primary.description;
-                            if (nodeId.startsWith('diritto')) {
-                                infoTitle.style.color = 'var(--accent-gold)';
-                            } else if (nodeId.startsWith('romana')) {
-                                infoTitle.style.color = 'var(--accent-romana)';
-                            } else if (nodeId.startsWith('storia')) {
-                                infoTitle.style.color = 'var(--accent-storia)';
-                            } else {
-                                infoTitle.style.color = 'var(--accent-terracotta)';
-                            }
-                        }
-                    } else {
-                        const nodeNum = node.querySelector('.node-header span').textContent;
-                        const nodeTitleText = node.querySelector('.node-title').textContent;
-                        expPlaceholder.style.display = 'none';
-                        expContent.style.display = 'block';
-                        infoTitle.textContent = `${nodeNum}: ${nodeTitleText}`;
-                        infoTitle.style.color = 'var(--text-primary)';
-                        infoText.textContent = "Questo capitolo fa parte del percorso di studio. Puoi navigarlo cliccando sulla tessera per accedere alla sintesi approfondita.";
                     }
+                    showNodeInfo(node);
                 });
 
                 node.addEventListener('mouseleave', () => {
+                    if (window.isEditMode) return;
+
+                    // Clear temporary highlights
                     document.querySelectorAll('.connection-line').forEach(l => {
-                        l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-storia', 'highlighted-custom');
+                        if (l !== window.selectedConnection) {
+                            l.classList.remove('highlighted', 'highlighted-arte', 'highlighted-romana', 'highlighted-storia', 'highlighted-custom');
+                        }
                     });
                     document.querySelectorAll('.node-card').forEach(n => {
-                        n.classList.remove('active-node');
+                        if (n !== window.selectedNode) {
+                            n.classList.remove('active-node');
+                        }
                     });
 
-                    expPlaceholder.style.display = 'block';
-                    expContent.style.display = 'none';
+                    restoreActiveSelections();
                 });
 
-                node.addEventListener('click', () => {
-                    // Track node view for achievements
+                node.addEventListener('click', (e) => {
                     if (typeof LexCore !== 'undefined' && LexCore.trackConnectionNode) {
                         LexCore.trackConnectionNode();
                     }
@@ -1454,12 +1758,39 @@
                     if (window.isEditMode) {
                         handleNodeClickInEditMode(node);
                     } else {
-                        const dest = node.getAttribute('data-path');
-                        if (dest) {
-                            window.location.href = dest;
+                        e.stopPropagation();
+                        if (window.selectedNode === node) {
+                            // Clicked twice -> navigate!
+                            const dest = node.getAttribute('data-path');
+                            if (dest) {
+                                window.location.href = dest;
+                            }
+                        } else {
+                            selectNode(node);
                         }
                     }
                 });
+
+                node.addEventListener('dblclick', (e) => {
+                    if (window.isEditMode) return;
+                    e.stopPropagation();
+                    const dest = node.getAttribute('data-path');
+                    if (dest) {
+                        window.location.href = dest;
+                    }
+                });
+            });
+
+            // Global click to clear selections when clicking outside
+            document.addEventListener('click', (e) => {
+                if (window.isEditMode) return;
+                const nodeCard = e.target.closest('.node-card');
+                const connectionLine = e.target.closest('.connection-line');
+                const infoPanel = e.target.closest('.info-panel');
+                
+                if (!nodeCard && !connectionLine && !infoPanel) {
+                    clearSelections();
+                }
             });
 
             window.addEventListener('resize', () => {

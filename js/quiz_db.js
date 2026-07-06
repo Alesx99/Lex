@@ -4287,7 +4287,7 @@ const quizDatabase = {
                 explanation: "Il sito di *PHI Latin Texts* (Packard Humanities Institute) permette ricerche lessicali rapide ed avanzate con filtri di prossimità ed operatori di stringa su tutti i testi latini classici fino al II secolo d.C."
             },
             {
-                question: "Cos'è Logeion (sviluppato dalla University of Chicago)?
+                question: "Cos'è Logeion (sviluppato dalla University of Chicago)?",
                 options: [
                     "Un database di immagini di reperti archeologici campani.",
                     "Un aggregatore online di dizionari classici latini e greci storici.",
