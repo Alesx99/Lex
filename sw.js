@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v19';
+const CACHE_NAME = 'lex-cache-v20';
 const ASSETS = [
   './',
   './index.html',
@@ -11,6 +11,7 @@ const ASSETS = [
   './js/search_db.js',
   './js/quiz_db.js',
   './js/glossary_db.js',
+  './js/chart.umd.min.js',
   './arte_romana/index.html',
   './arte_romana/style.css',
   './arte_romana/quiz.html',
