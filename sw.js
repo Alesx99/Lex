@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v21';
+const CACHE_NAME = 'lex-cache-v22';
 const ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ const ASSETS = [
   './segreti.html',
   './timeline.html',
   './studio_max.html',
+  './sleep_study.html',
   './js/lex_core.js',
   './js/lex_core.css',
   './js/search_db.js',

@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Sonnambulo - Ipnopedia & Consolidamento Mnestico</title>
+    <meta name="description" content="Esplora la scienza dell'apprendimento nel sonno. Attiva sessioni di Riattivazione Mirata della Memoria (TMR) con droni binaurali, ninne nanne tradizionali e riassunti audio in loop.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="js/lex_core.css">
+    <script src="js/lex_core.js"></script>
+    <!-- Centralized search DB for chapter checklist -->
+    <script src="js/search_db.js"></script>
+    <!-- Centralized glossary DB for pillow oracle -->
+    <script src="js/glossary_db.js"></script>
+    <style>
+        /* Specific Styles for Sleep Study */
+        .sleep-container {
+            max-width: 1200px;
+            margin: 2rem auto 5rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero banner with deep night theme */
+        .sleep-hero {
+            background: linear-gradient(135deg, #090e1a 0%, #151e36 100%);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .sleep-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 75% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .sleep-hero h1 {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .sleep-hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Ambient floating particles */
+        .stars-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Layout Grid */
+        .sleep-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .sleep-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Educational Tabs Panel */
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tab-headers {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 99px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-color-hover);
+        }
+
+        .tab-btn.active {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+            line-height: 1.7;
+            color: var(--text-primary);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 0.4rem;
+        }
+
+        .tab-content h3:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        .tab-content p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+        }
+
+        .tab-content strong {
+            color: var(--text-primary);
+        }
+
+        /* Sleep Tools Sidebar */
+        .tools-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .tool-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .tool-panel h2 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* TMR Acoustic Cue Simulator Styles */
+        .simulator-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .control-input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+        }
+
+        .control-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        /* Checkbox Accordion for Chapter Selection */
+        .chapters-selector-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.7rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-speed);
+        }
+
+        .chapters-selector-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-color-hover);
+        }
+
+        .chapters-dropdown {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 0.8rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 0.4rem;
+        }
+
+        .subject-group {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .subject-group:last-child {
+            border: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .subject-title-check {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .chapter-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding-left: 0.8rem;
+            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .chapter-check-item input {
+            margin-top: 0.15rem;
+        }
+
+        .chapter-check-item:hover {
+            color: var(--text-primary);
+        }
+
+        /* EEG Brainwave Canvas */
+        .eeg-container {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            height: 90px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #eeg-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .eeg-label {
+            position: absolute;
+            top: 6px; left: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-blue);
+            z-index: 2;
+        }
+
+        .eeg-phase-desc {
+            position: absolute;
+            bottom: 6px; right: 10px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            z-index: 2;
+        }
+
+        /* Action Buttons */
+        .start-session-btn {
+            background: var(--accent-blue);
+            border: none;
+            color: #ffffff;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all var(--transition-speed);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .start-session-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .start-session-btn.active {
+            background: #ef4444;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .start-session-btn.active:hover {
+            background: #dc2626;
+        }
+
+        /* Lori Lullabies Player styles */
+        .lori-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+        }
+
+        .lori-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-speed);
+        }
+
+        .lori-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border-color-hover);
+        }
+
+        .lori-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            max-width: 75%;
+        }
+
+        .lori-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .lori-region {
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .lori-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .lori-play-btn {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--accent-gold);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .lori-play-btn:hover {
+            background: var(--accent-gold);
+            color: #000000;
+            transform: scale(1.1);
+        }
+
+        .lori-play-btn.playing {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Jewish Bibliomancy Oracle Card */
+        .oracle-card-box {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .pillow-widget {
+            width: 140px;
+            height: 90px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .pillow-widget:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .pillow-text {
+            font-family: var(--font-serif);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .pillow-text svg {
+            color: var(--accent-gold);
+            opacity: 0.7;
+        }
+
+        /* Oracle Modal Overlay */
+        .oracle-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(8, 11, 17, 0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(15px);
+            animation: fadeIn 0.4s ease-out both;
+        }
+
+        .oracle-content-card {
+            background: linear-gradient(145deg, #0e1321 0%, #151d33 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+            border-radius: 24px;
+            max-width: 500px;
+            width: 90%;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .oracle-overlay.visible {
+            display: flex;
+        }
+
+        .oracle-overlay.visible .oracle-content-card {
+            transform: scale(1);
+        }
+
+        .oracle-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .oracle-term {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.2rem;
+            line-height: 1.3;
+        }
+
+        .oracle-definition {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .oracle-close-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 99px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all var(--transition-speed);
+        }
+
+        .oracle-close-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Star particle animation styles */
+        .star-particle {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: float-star infinite linear;
+        }
+
+        @keyframes float-star {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-80px) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="header-main">
+            <h1>Lex Studiorum</h1>
+            <p>Il tuo portale accademico per la tutela, lo studio e la sintesi delle scienze giuridiche e umanistiche.</p>
+        </div>
+        <nav class="global-nav">
+            <a href="index.html" class="nav-link" id="nav-home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Home Portale
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Trans-Disciplinare
+            </a>
+            <a href="flashcards.html" class="nav-link" id="nav-flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                Flashcards Hub
+            </a>
+            <a href="exam.html" class="nav-link" id="nav-exam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Simulatore d'Esame
+            </a>
+            <a href="achievements.html" class="nav-link" id="nav-achievements">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                Traguardi
+            </a>
+            <a href="analytics.html" class="nav-link" id="nav-analytics">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Statistiche
+            </a>
+            <a href="planner.html" class="nav-link" id="nav-planner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Pianificatore
+            </a>
+            <a href="assistant.html" class="nav-link" id="nav-assistant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path></svg>
+                Assistente Studio
+            </a>
+            <a href="minigames.html" class="nav-link" id="nav-minigames">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                Minigiochi
+            </a>
+            <a href="timeline.html" class="nav-link" id="nav-timeline">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                Linea del Tempo
+            </a>
+            <a href="studio_max.html" class="nav-link" id="nav-studio-max">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                Studio Max
+            </a>
+            <a href="sleep_study.html" class="nav-link active" id="nav-sleep-study">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <path d="M19 3v4M17 5h4" stroke-width="1.5"></path>
+                    <path d="M15 9.5v2M14 10.5h2" stroke-width="1"></path>
+                </svg>
+                Studio Sonnambulo
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="sleep-container">
+
+        <!-- Hero Section -->
+        <div class="sleep-hero">
+            <div class="stars-container" id="hero-stars"></div>
+            <h1>Studio Sonnambulo</h1>
+            <p>Ipnopedia, consolidamento mnestico e neuroscienze applicate. Scopri come la mente riorganizza la conoscenza durante il sonno ed esegui sessioni di consolidamento acustico mirato.</p>
+        </div>
+
+        <div class="sleep-grid">
+            
+            <!-- Left Side: Interactive Educational Text (Tabs) -->
+            <div class="edu-card">
+                <div class="tab-headers">
+                    <button class="tab-btn active" data-tab="storia">Mito & Storia</button>
+                    <button class="tab-btn" data-tab="scientifica">Parabola Scientifica</button>
+                    <button class="tab-btn" data-tab="neuroscienze">Neuroscienze Moderne</button>
+                    <button class="tab-btn" data-tab="tmr">Riattivazione Mirata (TMR)</button>
+                </div>
+
+                <!-- Tab 1: Mito e Storia -->
+                <div class="tab-content active" id="tab-storia">
+                    <h3>L'ipnopedia tra distopia letteraria e proverbi</h3>
+                    <p>La codificazione terminologica dell'apprendimento notturno nasce nel 1932 con il romanzo distopico <strong>Il mondo nuovo (Brave New World) di Aldous Huxley</strong>. L'auteur coniò il termine <em>"ipnopedia"</em> (dal greco <em>hypno-</em>, sonno, e <em>paideia</em>, educazione) descrivendo come un bambino, Reuben Rabinovitch, potesse memorizzare interi programmi radiofonici in inglese ascoltati nel sonno pur senza comprenderne il significato. Nella distopia, il metodo viene subito monopolizzato dallo Stato non per scopi didattici, bensì per infondere sottomissione morale e condizionamento sociale.</p>
+                    <p>L'assorbimento passivo evoca storicamente la metafora satirica dell'<strong>Imbuto di Norimberga (Nürnberger Trichter)</strong>. Nata da un trattato del 1647 del poeta Georg Philipp Harsdörffer (<em>Poetischer Trichter</em>), che prometteva di infondere l'arte poetica nelle menti degli studenti in sole sei ore, divenne il simbolo di un'istruzione fondata sulla pura memorizzazione passiva. Nel libro illustrato per l'infanzia del 1946 di Franz Kaiser, il protagonista Heinz si rende conto dopo molti tentativi che è solo il percorso stesso di ricerca attiva a procurargli la vera sapienza, svelando l'illusione insita nell'apprendimento passivo.</p>
+
+                    <h3>Il Sonno Sacro nell'Antichità</h3>
+                    <p>Moltissimo tempo prima della psicologia empirica, le civiltà antiche riconoscevano al sonno un valore terapeutico e oracolare. Nel Vicino Oriente, in Mesopotamia e in Egitto era diffusa la pratica dell'<strong>incubazione (enkoimesis)</strong>. Nei <strong>Templi del Sonno egizi</strong> dedicati a Imhotep o Serapis, i malati venivano fatti addormentare in camere sotterranee oscurate, indotti in uno stato di profonda quiete per ricevere sogni diagnostici e curativi.</p>
+                    <p>In Grecia, questa pratica fiorì negli <strong>Asclepieia</strong> (Epidauro, Kos, Atene, Pergamo). I pellegrini, dopo un rituale di purificazione (<em>catharsis</em>) e sacrifici, entravano nell'<strong>Abitacolo (abaton)</strong>. Sdraiati su pelli sacre, ricevevano la visita notturna di Asclepio e dei suoi animali (cani e serpenti sacri). Successivamente, come documentato da Aelius Aristides a Pergamo, i sogni venivano interpretati in chiave ippocratica da medici qualificati, integrando fede ed evidenza clinica. La Chiesa cristiana mantenne in seguito queste abitudini sostituendo Asclepio con i Santi Medici (Cosma e Damiano, Ciro e Giovanni).</p>
+
+                    <h3>L'Oriente e il Controllo della Mente</h3>
+                    <p>In parallelo, la mistica ebraica consigliava la <strong>Kavanah</strong> e la posa di testi sacri (como il <em>Sefer Raziel</em>) sotto il cuscino per scopi protettivi e divinatori (bibliomanzia).</p>
+                    <p>Nelle filosofie hindu e buddiste tibetane, il sonno è uno spazio meditativo raffinato. Le Upanishad definiscono 4 stati di coscienza: la veglia (<em>Jagrat</em>), il sogno (<em>Svapna</em>), il sonno profondo (<em>Sushupti</em>) e la pura consapevolezza (<em>Turiya</em>), simboleggiati dalla sillaba **A-U-M**. Da qui traggono origine lo <strong>Yoga Nidra</strong> (mantenersi lucidi nelle onde cerebrali lente) e lo <strong>Yoga del Sogno</strong> (lucidità onirica nel sonno REM per controllare le proiezioni mentali).</p>
+                </div>
+
+                <!-- Tab 2: La Parabola Scientifica -->
+                <div class="tab-content" id="tab-scientifica">
+                    <h3>Lo scetticismo del XX secolo e i dispositivi storici</h3>
+                    <p>Nel 1914, la psicologa tedesca <strong>Rosa Heine</strong> dimostrò che l'apprendimento diurno è notevolmente potenziato se seguito dal sonno (consolidamento), piuttosto che da intervalli di veglia attiva. Tuttavia, il miraggio di insegnare ex novo a soggetti dormienti spinse diversi inventori verso speculazioni commerciali.</p>
+                    <p>Nel 1927, Alois Saliger brevettò lo <strong>Psycho-Phone</strong>, un fonografo con timer che trasmetteva messaggi suggestivi nella notte, ipotizzando erroneamente che il sonno coincidesse con la trance ipnotica. Il dispositivo vendette migliaia di pezzi promettendo di sconfiggere pigrizia e timidezza senza fatica.</p>
+                    <p>La smentita definitiva giunse nel 1956 grazie agli studi elettroencefalografici (EEG) di <strong>Charles W. Simon e William H. Emmons</strong>. Monitorando l'attività elettrica cerebrale dei soggetti esposti a stimoli sonori nel sonno, constatarono che:</p>
+                    <ul>
+                        <li>La memorizzazione avveniva soltanto se gli stimoli coincidevano con la comparsa di <strong>onde alfa (8-12 Hz)</strong>, indice di microrvegli inconsci.</li>
+                        <li>Stimoli presentati durante il sonno profondo (onde delta) non lasciavano alcuna traccia cosciente al risveglio.</li>
+                    </ul>
+                    <p>Simon ed Emmons conclusero che l'ipnopedia passiva pura era <em>"impaticabile e probabilmente impossibile"</em>.</p>
+                    <p>Nonostante ciò, l'Unione Sovietica continuò a studiare l'ipnopedia negli anni '60 e '70 (esperimenti di Svyadoshch e Balkhashov), nel tentativo di trovare metodi rapidi di apprendimento delle lingue, sebbene con scarse prove di validità statistica al di fuori dei laboratori. Nello stesso filone nacquero miti commerciali simili come la Programmazione Neuro-Linguistica (PNL) associata alle lingue e il **25° fotogramma subliminale** di James Vicari, entrambi successivamente classificati come pseudoscienze prive di fondamento clinico.</p>
+                </div>
+
+                <!-- Tab 3: Le Neuroscienze Moderne -->
+                <div class="tab-content" id="tab-neuroscienze">
+                    <h3>Apprendimento associativo "De Novo"</h3>
+                    <p>Oggi sappiamo che, pur restando impossibile apprendere da zero concetti complessi come la grammatica di una lingua straniera, il cervello addormentato può registrare forme semplici di condizionamento implicito o semantico.</p>
+                    <p>Nel 2012, il team di <strong>Anat Arzi e Noam Sobel</strong> (Weizmann Institute) ha dimostrato che è possibile instaurare un condizionamento classico olfattivo-acustico durante il sonno. Associando specifici toni sonori a odori piacevoli (es. profumo) o aversivi (es. pesce marcio), i soggetti addormentati modificavano il volume di inalazione (sniff response). Al risveglio, i soggetti presentavano la stessa variazione respiratoria all'ascolto dei soli toni acustici, pur senza avere memoria conscia del condizionamento. Nel 2014, lo stesso metodo è stato impiegato con successo per favorire la **disassuefazione dal fumo**, riducendo il consumo di sigarette del 34% associando l'odore del tabacco a uova marce durante il sonno NREM e REM.</p>
+                    <p>Nel 2019, <strong>Katharina Henke e il suo team a Berna</strong> hanno provato che la mente può creare associazioni semantiche nel sonno profondo (Slow-Wave Sleep). Sincronizzando la presentazione acustica di parole artificiali (es. "guga") accoppiate a oggetti reali (es. "elefante") con i picchi di attivazione neuronale delle onde lente (Stato "Up"), i soggetti al risveglio riuscivano a indovinare se la parola misteriosa indicasse un oggetto grande o piccolo, evidenziando una codifica semantica implicita legata alla potenza delle onde theta e dei fusi (spindles).</p>
+
+                    <h3>Il paradosso della saturazione sinaptica</h3>
+                    <p>Forzare l'apprendimento nel sonno ha però un costo biologico. Nel 2022, Simon Ruch e Katharina Henke hanno scoperto che l'apprendimento di nuove parole durante la notte <strong>rallenta significativamente lo studio cosciente delle stesse parole durante il giorno</strong>.</p>
+                    <p>Questo fenomeno sostiene la <strong>Synaptic Homeostasis Hypothesis (SHY)</strong> di Giulio Tononi e Chiara Cirelli. Durante la veglia, le connessioni sinaptiche si potenziano accumulando rumore bioelettrico; durante il sonno a onde lente, il cervello esegue un depotenziamento globale (<em>synaptic downscaling</em>) per ripristinare la plasticità neuronale. La stimolazione acustica notturna forza il potenziamento sinaptico (LTP) locale, impedendo il reset biologico e lasciando le aree cerebrali in uno stato di saturazione che ostacola l'acquisizione attiva durante la veglia.</p>
+                    <p>Inoltre, studi di Philippe Peigneux (2018) tramite MEG hanno provato che durante il sonno SWS la corteccia uditiva capta i suoni ma non riesce a elaborare strutture statistiche e sequenze ordinate, precludendo l'apprendimento di informazioni sintattiche o logiche.</p>
+                </div>
+
+                <!-- Tab 4: Riattivazione Mirata (TMR) -->
+                <div class="tab-content" id="tab-tmr">
+                    <h3>Il consolidamento tramite TMR (Targeted Memory Reactivation)</h3>
+                    <p>A differenza dell'ipnopedia pura (che cerca di inserire dati nuovi), la scienza convalida all'unanimità la <strong>Riattivazione Mirata della Memoria (TMR)</strong>. La TMR non insegna nulla di nuovo, ma utilizza segnali sonori o olfattivi per sollecitare il consolidamento dei concetti appresi durante il giorno.</p>
+                    <p>I dati appena appresi vengono temporaneamente scritti nell'ippocampo. Durante il sonno a onde lente (SWS / N3), il cervello riproduce in automatico questi schemi neuronali per trasferirli alla corteccia a lungo termine. Se durante la veglia associamo lo studio di una materia a un determinato suono o aroma, e poi lo riproduciamo a basso volume nel sonno, forziamo l'ippocampo a riprodurre preferenzialmente quegli engrammi, amplificando la ritenzione e contrastando l'oblio.</p>
+                    <p>Secondo le ricerche di Batterink e Paller (2017), il consolidamento semantico richiede una sinergia REM-NREM: la riproduzione del cue sonoro nella fase a onde lente destabilizza dolcemente la memoria ippocampale rendendola plastica, mentre la successiva fase REM integra il concetto nella rete di conoscenze preesistenti senza causare risvegli.</p>
+
+                    <h3>Allenamento nei sogni lucidi (Lucid Dream Practice)</h3>
+                    <p>Un altro filone neuroscientifico è la pratica nei sogni lucidi (LDP) durante la fase REM. Poiché le aree corticali motorie si attivano in modo identico sia quando compiamo un'azione reale sia quando la sogniamo consciamente, l'allenamento mentale in un sogno lucido consolida le abilità motorie e cognitive.</p>
+                    <p>Gli esperimenti di Erlacher e Schredl (Heidelberg) hanno dimostrato che atleti in grado di fare sogni lucidi che praticavano esercizi balistici o lanci nel sonno facevano registrare un incremento netto delle prestazioni reali al risveglio, mostrando come la simulazione conscia onirica agisca in modo diretto sulla neuroplasticità.</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Interactive Sleep Tools -->
+            <div class="tools-sidebar">
+                
+                <!-- TMR Acoustic Cue Simulator -->
+                <div class="tool-panel">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"></path><path d="M12 6v6l4 2"></path></svg>
+                        Simulatore TMR Acustico
+                    </h2>
+                    
+                    <div class="simulator-controls">
+                        <!-- Select Chapters for loop -->
+                        <div class="control-group">
+                            <label>Seleziona Capitoli per il Sonno 📖</label>
+                            <button type="button" class="chapters-selector-btn" id="toggle-chapters-btn">
+                                <span id="selected-chapters-count">Nessun capitolo selezionato</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <div class="chapters-dropdown" id="chapters-dropdown-container">
+                                <!-- Dynamic check groups will be rendered here -->
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Timer Sessione</label>
+                            <select class="control-input" id="sleep-timer-select">
+                                <option value="1200">Ciclo Breve (20 Min - Power Nap)</option>
+                                <option value="5400">Ciclo Standard (90 Min - NREM/REM)</option>
+                                <option value="28800">Notte Intera (8 Ore)</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Suono Ambientale</label>
+                            <select class="control-input" id="ambient-sound-select">
+                                <option value="none">Nessun Suono</option>
+                                <option value="binaural-delta">Onde Binaurali Delta (1.5 Hz)</option>
+                                <option value="binaural-theta">Onde Binaurali Theta (5 Hz)</option>
+                                <option value="rain">Pioggia Avvolgente</option>
+                                <option value="white">Rumore Bianco</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Intervallo Cue Vocale</label>
+                            <select class="control-input" id="cue-interval-select">
+                                <option value="30">Ogni 30 Secondi</option>
+                                <option value="60" selected>Ogni Minuto</option>
+                                <option value="120">Ogni 2 Minuti</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Volume Stimoli: <span id="volume-val-display">30%</span></label>
+                            <input type="range" id="cue-volume" min="5" max="100" value="30" style="width: 100%; accent-color: var(--accent-blue);">
+                        </div>
+
+                        <!-- Brainwave Visualizer -->
+                        <div class="control-group">
+                            <label>Monitor Elettrofisiologico (Simulato)</label>
+                            <div class="eeg-container">
+                                <canvas id="eeg-canvas"></canvas>
+                                <div class="eeg-label" id="eeg-state-title">Stato: Sveglio</div>
+                                <div class="eeg-phase-desc" id="eeg-wave-type">Alpha (8-12 Hz)</div>
+                            </div>
+                        </div>
+
+                        <button class="start-session-btn" id="start-sleep-btn">Avvia Sessione Sonno</button>
+                    </div>
+                </div>
+
+                <!-- Lori Indian Lullabies Player -->
+                <div class="tool-panel">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                        Ninne Nanne "Lori" Tradizionali
+                    </h2>
+                    <div class="lori-grid">
+                        <div class="lori-card">
+                            <div class="lori-info">
+                                <span class="lori-name">Tamil Thālattu</span>
+                                <span class="lori-region">Tamil Nadu</span>
+                                <span class="lori-desc">Ritmi lenti che integrano primi schemi linguistici.</span>
+                            </div>
+                            <button class="lori-play-btn" data-lori="tamil" title="Riproduci drone tamil">▶</button>
+                        </div>
+                        <div class="lori-card">
+                            <div class="lori-info">
+                                <span class="lori-name">Ghum Parani Mashi</span>
+                                <span class="lori-region">Bengala</span>
+                                <span class="lori-desc">Melodia fluttuante per indurre la quiete neurovegetativa.</span>
+                            </div>
+                            <button class="lori-play-btn" data-lori="bengala" title="Riproduci drone bengalese">▶</button>
+                        </div>
+                        <div class="lori-card">
+                            <div class="lori-info">
+                                <span class="lori-name">Jo Jo Lalana</span>
+                                <span class="lori-region">Karnataka</span>
+                                <span class="lori-desc">Composizione lenta e ripetitiva basata su raga tradizionali.</span>
+                            </div>
+                            <button class="lori-play-btn" data-lori="karnataka" title="Riproduci drone karnataka">▶</button>
+                        </div>
+                        <div class="lori-card">
+                            <div class="lori-info">
+                                <span class="lori-name">Angai Geet</span>
+                                <span class="lori-region">Maharashtra</span>
+                                <span class="lori-desc">Canto ritmato per sincronizzarsi con la frequenza cardiaca a riposo.</span>
+                            </div>
+                            <button class="lori-play-btn" data-lori="maharashtra" title="Riproduci drone maharashtra">▶</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jewish Bibliomancy widget -->
+                <div class="tool-panel" style="margin-bottom: 2rem;">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        Il Rituale del Cuscino
+                    </h2>
+                    <div class="oracle-card-box">
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Pratica l'antica bibliomanzia: metti il libro sotto il cuscino ed estrai un concetto oracolare al risveglio.</p>
+                        <div class="pillow-widget" id="trigger-pillow-oracle">
+                            <div class="pillow-text">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                <span>Metti sotto il cuscino</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Pillow Oracle Overlay Modal -->
+    <div class="oracle-overlay" id="oracle-modal-overlay">
+        <div class="oracle-content-card">
+            <div class="oracle-badge" id="oracle-materia-badge">Codicologia</div>
+            <div class="oracle-term" id="oracle-term-display">Titolo Concetto</div>
+            <div class="oracle-definition" id="oracle-definition-display">Definizione accurata del termine o concetto storico-artistico estratto per la riflessione mattutina.</div>
+            <button class="oracle-close-btn" id="close-oracle-btn">Chiudi Libro</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive JS logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme setup compatibility
+            if (typeof LexCore !== 'undefined' && LexCore.initSharedFeatures) {
+                LexCore.initSharedFeatures();
+            }
+
+            // Tab Navigation
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+                });
+            });
+
+            // Star particle effect inside sleep-hero
+            const heroStars = document.getElementById('hero-stars');
+            if (heroStars) {
+                for (let i = 0; i < 35; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star-particle';
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    star.style.width = `${Math.random() * 3 + 1}px`;
+                    star.style.height = star.style.width;
+                    star.style.animationDuration = `${Math.random() * 5 + 4}s`;
+                    star.style.animationDelay = `${Math.random() * 4}s`;
+                    heroStars.appendChild(star);
+                }
+            }
+
+            // Generate Chapters Dropdown checklist using search_db.js
+            const chaptersDropdown = document.getElementById('chapters-dropdown-container');
+            const toggleChaptersBtn = document.getElementById('toggle-chapters-btn');
+            const selectedCountDisplay = document.getElementById('selected-chapters-count');
+            
+            // Developed subjects filter
+            const developedSubjects = ['diritto', 'storia', 'storia_arte', 'arte_romana', 'codicologia', 'letteratura_latina'];
+            
+            // Human readable subject names mapping
+            const subjectNames = {
+                'diritto': 'Diritto dei Beni Culturali',
+                'storia': 'Storia Moderna',
+                'storia_arte': 'Arte Moderna',
+                'arte_romana': 'Arte Romana',
+                'codicologia': 'Codicologia',
+                'letteratura_latina': 'Letteratura Latina'
+            };
+
+            // Group database items by developed subject
+            const groupedDatabase = {};
+            developedSubjects.forEach(sub => {
+                groupedDatabase[sub] = [];
+            });
+
+            if (typeof searchDatabase !== 'undefined') {
+                searchDatabase.forEach(item => {
+                    if (developedSubjects.includes(item.subject)) {
+                        groupedDatabase[item.subject].push(item);
+                    }
+                });
+            }
+
+            // Render DOM checklists
+            developedSubjects.forEach(sub => {
+                const chapters = groupedDatabase[sub];
+                if (chapters && chapters.length > 0) {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'subject-group';
+                    
+                    const header = document.createElement('div');
+                    header.className = 'subject-title-check';
+                    
+                    const subCheckbox = document.createElement('input');
+                    subCheckbox.type = 'checkbox';
+                    subCheckbox.id = `select-all-${sub}`;
+                    subCheckbox.addEventListener('change', (e) => {
+                        const childChecks = groupDiv.querySelectorAll('.chapter-check');
+                        childChecks.forEach(c => {
+                            c.checked = e.target.checked;
+                        });
+                        updateSelectedChaptersCount();
+                    });
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `select-all-${sub}`;
+                    label.textContent = subjectNames[sub];
+
+                    header.appendChild(subCheckbox);
+                    header.appendChild(label);
+                    groupDiv.appendChild(header);
+
+                    chapters.forEach((ch, idx) => {
+                        const checkLabel = document.createElement('label');
+                        checkLabel.className = 'chapter-check-item';
+                        
+                        const check = document.createElement('input');
+                        check.type = 'checkbox';
+                        check.className = 'chapter-check';
+                        check.dataset.subject = sub;
+                        check.dataset.title = ch.title;
+                        check.dataset.desc = ch.description;
+                        check.dataset.tag = ch.chapterTag || `Capitolo ${idx + 1}`;
+                        
+                        check.addEventListener('change', () => {
+                            // If any single child is unchecked, uncheck the parent select-all
+                            if (!check.checked) {
+                                subCheckbox.checked = false;
+                            }
+                            updateSelectedChaptersCount();
+                        });
+
+                        const textSpan = document.createElement('span');
+                        textSpan.textContent = `${check.dataset.tag}: ${ch.title}`;
+
+                        checkLabel.appendChild(check);
+                        checkLabel.appendChild(textSpan);
+                        groupDiv.appendChild(checkLabel);
+                    });
+
+                    chaptersDropdown.appendChild(groupDiv);
+                }
+            });
+
+            // Toggle Chapters dropdown visibility
+            toggleChaptersBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isVisible = chaptersDropdown.style.display === 'flex';
+                chaptersDropdown.style.display = isVisible ? 'none' : 'flex';
+            });
+
+            document.addEventListener('click', () => {
+                chaptersDropdown.style.display = 'none';
+            });
+
+            chaptersDropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Track selected items
+            let selectedChapters = [];
+            function updateSelectedChaptersCount() {
+                const checks = document.querySelectorAll('.chapter-check:checked');
+                selectedChapters = [];
+                checks.forEach(c => {
+                    selectedChapters.push({
+                        subjectName: subjectNames[c.dataset.subject],
+                        tag: c.dataset.tag,
+                        title: c.dataset.title,
+                        desc: c.dataset.desc
+                    });
+                });
+                
+                if (selectedChapters.length === 0) {
+                    selectedCountDisplay.textContent = "Nessun capitolo selezionato";
+                } else if (selectedChapters.length === 1) {
+                    selectedCountDisplay.textContent = "1 capitolo selezionato";
+                } else {
+                    selectedCountDisplay.textContent = `${selectedChapters.length} capitoli selezionati`;
+                }
+            }
+
+            // Web Audio API Synthesizer for Lori Lullabies and Ambient Drones
+            let audioCtx = null;
+            let currentLoriType = null;
+            let currentLoriNodes = [];
+
+            function initAudio() {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            }
+
+            function stopLori() {
+                currentLoriNodes.forEach(node => {
+                    try { node.stop(); } catch(e){}
+                });
+                currentLoriNodes = [];
+                currentLoriType = null;
+                document.querySelectorAll('.lori-play-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = '▶';
+                });
+            }
+
+            function playLori(type) {
+                initAudio();
+                stopLori();
+
+                currentLoriType = type;
+                const now = audioCtx.currentTime;
+
+                // Drone Oscillator (Fundamental note)
+                const oscBase = audioCtx.createOscillator();
+                const oscHarmonic = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscBase.connect(gainNode);
+                oscHarmonic.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                gainNode.gain.setValueAtTime(0.001, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.18, now + 1.5);
+
+                if (type === 'tamil') {
+                    // Tamil Thālattu: Pentatonic base scale in 180Hz (G3)
+                    oscBase.frequency.setValueAtTime(180, now);
+                    oscHarmonic.frequency.setValueAtTime(270, now); // Perfect fifth (D4)
+                    oscBase.type = 'triangle';
+                    oscHarmonic.type = 'sine';
+
+                    // Slow LFO pitch modulation simulating cradle movement
+                    const lfo = audioCtx.createOscillator();
+                    const lfoGain = audioCtx.createGain();
+                    lfo.frequency.setValueAtTime(0.2, now); // Very slow (5 seconds)
+                    lfoGain.gain.setValueAtTime(4, now);
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(oscBase.frequency);
+                    lfoGain.connect(oscHarmonic.frequency);
+                    lfo.start(now);
+                    currentLoriNodes.push(lfo);
+                } 
+                else if (type === 'bengala') {
+                    // Bengali: Deep drone in 110Hz (A2) + minor third (C3)
+                    oscBase.frequency.setValueAtTime(110, now);
+                    oscHarmonic.frequency.setValueAtTime(130.81, now);
+                    oscBase.type = 'sawtooth'; // Softened with lowpass
+                    oscHarmonic.type = 'triangle';
+
+                    const lowpass = audioCtx.createBiquadFilter();
+                    lowpass.type = 'lowpass';
+                    lowpass.frequency.setValueAtTime(200, now);
+                    
+                    oscBase.disconnect(gainNode);
+                    oscHarmonic.disconnect(gainNode);
+                    oscBase.connect(lowpass);
+                    oscHarmonic.connect(lowpass);
+                    lowpass.connect(gainNode);
+                }
+                else if (type === 'karnataka') {
+                    // Karnataka: 147Hz (D3) + perfect fourth (G3)
+                    oscBase.frequency.setValueAtTime(147, now);
+                    oscHarmonic.frequency.setValueAtTime(196, now);
+                    oscBase.type = 'sine';
+                    oscHarmonic.type = 'sine';
+                    
+                    // Amplitude modulation (tremolo)
+                    const ampLfo = audioCtx.createOscillator();
+                    const ampGain = audioCtx.createGain();
+                    ampLfo.frequency.setValueAtTime(0.3, now);
+                    ampGain.gain.setValueAtTime(0.05, now);
+                    ampLfo.connect(ampGain);
+                    ampGain.connect(gainNode.gain);
+                    ampLfo.start(now);
+                    currentLoriNodes.push(ampLfo);
+                }
+                else if (type === 'maharashtra') {
+                    // Angai Geet: Harmonic frequency rhythm
+                    oscBase.frequency.setValueAtTime(130, now);
+                    oscHarmonic.frequency.setValueAtTime(260, now);
+                    oscBase.type = 'triangle';
+                    oscHarmonic.type = 'sine';
+
+                    // Slower filter sweeping
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'peaking';
+                    filter.Q.setValueAtTime(3, now);
+                    filter.frequency.setValueAtTime(300, now);
+
+                    oscBase.disconnect(gainNode);
+                    oscHarmonic.disconnect(gainNode);
+                    oscBase.connect(filter);
+                    oscHarmonic.connect(filter);
+                    filter.connect(gainNode);
+
+                    // Automate filter frequency
+                    filter.frequency.linearRampToValueAtTime(100, now + 4);
+                    filter.frequency.linearRampToValueAtTime(300, now + 8);
+                }
+
+                oscBase.start(now);
+                oscHarmonic.start(now);
+                currentLoriNodes.push(oscBase, oscHarmonic, gainNode);
+            }
+
+            // Wire up Lori play buttons
+            const loriButtons = document.querySelectorAll('.lori-play-btn');
+            loriButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const loriType = btn.dataset.lori;
+                    if (btn.classList.contains('playing')) {
+                        stopLori();
+                    } else {
+                        playLori(loriType);
+                        btn.classList.add('playing');
+                        btn.textContent = '■';
+                    }
+                });
+            });
+
+            // TMR Simulator Audio Engines
+            let tmrTimer = null;
+            let tmrCycleInterval = null;
+            let tmrTimeRemaining = 0;
+            let isTmrRunning = false;
+            let ambientOscs = [];
+            let speechUtterance = null;
+
+            const startSleepBtn = document.getElementById('start-sleep-btn');
+            const timerSelect = document.getElementById('sleep-timer-select');
+            const ambientSelect = document.getElementById('ambient-sound-select');
+            const intervalSelect = document.getElementById('cue-interval-select');
+            const volSlider = document.getElementById('cue-volume');
+            const volDisplay = document.getElementById('volume-val-display');
+
+            volSlider.addEventListener('input', () => {
+                volDisplay.textContent = `${volSlider.value}%`;
+            });
+
+            // Canvas EEG wave animation variables
+            const eegCanvas = document.getElementById('eeg-canvas');
+            const eegCtx = eegCanvas.getContext('2d');
+            const eegStateTitle = document.getElementById('eeg-state-title');
+            const eegWaveType = document.getElementById('eeg-wave-type');
+            let eegAnimId = null;
+
+            // Fit canvas size
+            function resizeCanvas() {
+                eegCanvas.width = eegCanvas.parentElement.clientWidth;
+                eegCanvas.height = eegCanvas.parentElement.clientHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Render simulated EEG waves
+            let angle = 0;
+            function drawEEG(waveTypeStr) {
+                eegCtx.clearRect(0, 0, eegCanvas.width, eegCanvas.height);
+                eegCtx.beginPath();
+                eegCtx.strokeStyle = 'rgba(59, 130, 246, 0.4)';
+                eegCtx.lineWidth = 2.5;
+
+                let amplitude = 12;
+                let frequency = 0.08;
+
+                if (waveTypeStr === 'delta') {
+                    // Deep slow wave N3 (SWS) - High amplitude, low frequency
+                    amplitude = 25;
+                    frequency = 0.015;
+                    eegCtx.strokeStyle = 'rgba(168, 85, 247, 0.5)'; // purple
+                } else if (waveTypeStr === 'theta') {
+                    // Light sleep N2 - Medium amplitude, medium frequency
+                    amplitude = 18;
+                    frequency = 0.04;
+                    eegCtx.strokeStyle = 'rgba(6, 182, 212, 0.5)'; // cyan
+                } else if (waveTypeStr === 'rem') {
+                    // REM sleep - Low amplitude, mixed rapid frequency
+                    amplitude = 6;
+                    frequency = 0.12;
+                    eegCtx.strokeStyle = 'rgba(239, 68, 68, 0.5)'; // red
+                } else {
+                    // Alpha (awake/relaxed) - Small synchronized wave
+                    amplitude = 8;
+                    frequency = 0.06;
+                    eegCtx.strokeStyle = 'rgba(59, 130, 246, 0.5)'; // blue
+                }
+
+                // Add random signal micro-variations
+                for (let x = 0; x < eegCanvas.width; x++) {
+                    const noise = Math.sin(x * 0.5 + angle * 3) * (amplitude * 0.15);
+                    const y = eegCanvas.height / 2 + Math.sin(x * frequency + angle) * amplitude + noise;
+                    if (x === 0) {
+                        eegCtx.moveTo(x, y);
+                    } else {
+                        eegCtx.lineTo(x, y);
+                    }
+                }
+                eegCtx.stroke();
+                angle += 0.05;
+                eegAnimId = requestAnimationFrame(() => drawEEG(waveTypeStr));
+            }
+
+            function stopTMR() {
+                isTmrRunning = false;
+                startSleepBtn.classList.remove('active');
+                startSleepBtn.textContent = 'Avvia Sessione Sonno';
+                
+                // Clear intervals/timers
+                clearInterval(tmrTimer);
+                clearInterval(tmrCycleInterval);
+                cancelAnimationFrame(eegAnimId);
+
+                // Stop ambient noises
+                ambientOscs.forEach(node => {
+                    try { node.stop(); } catch(e){}
+                });
+                ambientOscs = [];
+
+                // Stop TTS voice
+                if (window.speechSynthesis) {
+                    window.speechSynthesis.cancel();
+                }
+
+                // Reset EEG visual label
+                eegStateTitle.textContent = "Stato: Sveglio";
+                eegWaveType.textContent = "Alpha (8-12 Hz)";
+                drawEEG('alpha');
+            }
+
+            function playAmbientSound(type) {
+                initAudio();
+                const now = audioCtx.currentTime;
+
+                if (type === 'binaural-delta') {
+                    // Binaural delta: left 100Hz, right 101.5Hz
+                    const oscL = audioCtx.createOscillator();
+                    const oscR = audioCtx.createOscillator();
+                    const panL = audioCtx.createStereoPanner();
+                    const panR = audioCtx.createStereoPanner();
+                    const gain = audioCtx.createGain();
+
+                    oscL.frequency.setValueAtTime(100, now);
+                    oscR.frequency.setValueAtTime(101.5, now);
+                    panL.pan.setValueAtTime(-1, now);
+                    panR.pan.setValueAtTime(1, now);
+                    
+                    oscL.connect(panL);
+                    oscR.connect(panR);
+                    panL.connect(gain);
+                    panR.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    gain.gain.setValueAtTime(0.01, now);
+                    gain.gain.linearRampToValueAtTime(0.12, now + 3);
+
+                    oscL.start(now);
+                    oscR.start(now);
+                    ambientOscs.push(oscL, oscR, gain);
+                } 
+                else if (type === 'binaural-theta') {
+                    // Binaural theta: left 130Hz, right 135Hz
+                    const oscL = audioCtx.createOscillator();
+                    const oscR = audioCtx.createOscillator();
+                    const panL = audioCtx.createStereoPanner();
+                    const panR = audioCtx.createStereoPanner();
+                    const gain = audioCtx.createGain();
+
+                    oscL.frequency.setValueAtTime(130, now);
+                    oscR.frequency.setValueAtTime(135, now);
+                    panL.pan.setValueAtTime(-1, now);
+                    panR.pan.setValueAtTime(1, now);
+
+                    oscL.connect(panL);
+                    oscR.connect(panR);
+                    panL.connect(gain);
+                    panR.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    gain.gain.setValueAtTime(0.01, now);
+                    gain.gain.linearRampToValueAtTime(0.1, now + 3);
+
+                    oscL.start(now);
+                    oscR.start(now);
+                    ambientOscs.push(oscL, oscR, gain);
+                }
+                else if (type === 'white') {
+                    // Synthesize low-volume white noise
+                    const bufferSize = 2 * audioCtx.sampleRate;
+                    const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                    const output = noiseBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = Math.random() * 2 - 1;
+                    }
+
+                    const whiteNoise = audioCtx.createBufferSource();
+                    whiteNoise.buffer = noiseBuffer;
+                    whiteNoise.loop = true;
+
+                    // Soften white noise to lowpass
+                    const lp = audioCtx.createBiquadFilter();
+                    lp.type = 'lowpass';
+                    lp.frequency.setValueAtTime(450, now);
+
+                    const gain = audioCtx.createGain();
+                    gain.gain.setValueAtTime(0.05, now);
+
+                    whiteNoise.connect(lp);
+                    lp.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    whiteNoise.start(now);
+                    ambientOscs.push(whiteNoise, lp, gain);
+                }
+                else if (type === 'rain') {
+                    // Rain: pink-ish crackly noise
+                    const bufferSize = 2 * audioCtx.sampleRate;
+                    const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                    const output = noiseBuffer.getChannelData(0);
+                    let lastOut = 0.0;
+                    for (let i = 0; i < bufferSize; i++) {
+                        const white = Math.random() * 2 - 1;
+                        output[i] = (lastOut + (0.02 * white)) / 1.02;
+                        lastOut = output[i];
+                        output[i] *= 3.5; // Gain compensation
+                    }
+
+                    const rainSource = audioCtx.createBufferSource();
+                    rainSource.buffer = noiseBuffer;
+                    rainSource.loop = true;
+
+                    const lp = audioCtx.createBiquadFilter();
+                    lp.type = 'peaking';
+                    lp.frequency.setValueAtTime(300, now);
+                    lp.Q.setValueAtTime(1.5, now);
+
+                    const gain = audioCtx.createGain();
+                    gain.gain.setValueAtTime(0.08, now);
+
+                    rainSource.connect(lp);
+                    lp.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    rainSource.start(now);
+                    ambientOscs.push(rainSource, lp, gain);
+                }
+            }
+
+            // Speak next TMR cue
+            let cueIndex = 0;
+            function playTMRSpeechCue() {
+                if (!window.speechSynthesis || selectedChapters.length === 0) return;
+
+                // Stop current utterance if speaking
+                window.speechSynthesis.cancel();
+
+                // Select next chapter content
+                const currentChapter = selectedChapters[cueIndex];
+                cueIndex = (cueIndex + 1) % selectedChapters.length;
+
+                const textToSpeak = `Ripasso di ${currentChapter.subjectName}. ${currentChapter.tag}: ${currentChapter.title}. ${currentChapter.desc}`;
+                
+                speechUtterance = new SpeechSynthesisUtterance(textToSpeak);
+                speechUtterance.lang = 'it-IT';
+                speechUtterance.rate = 0.85; // Slow, soothing rate
+                speechUtterance.volume = volSlider.value / 100;
+
+                window.speechSynthesis.speak(speechUtterance);
+            }
+
+            function startTMR() {
+                if (selectedChapters.length === 0) {
+                    alert("Seleziona almeno un capitolo prima di iniziare la sessione di studio nel sonno!");
+                    return;
+                }
+
+                // Stop any playing Lori lullabies
+                stopLori();
+
+                isTmrRunning = true;
+                startSleepBtn.classList.add('active');
+                startSleepBtn.textContent = 'Interrompi Sessione';
+
+                tmrTimeRemaining = parseInt(timerSelect.value);
+                const soundType = ambientSelect.value;
+                const cueInterval = parseInt(intervalSelect.value);
+
+                // Play ambient noise loop
+                playAmbientSound(soundType);
+
+                // Start EEG cycle simulator
+                cancelAnimationFrame(eegAnimId);
+                
+                let currentSleepPhase = 'delta';
+                eegStateTitle.textContent = "Stato: Sonno Profondo N3";
+                eegWaveType.textContent = "Delta (1-4 Hz)";
+                drawEEG('delta');
+
+                // Simulation cycle phases depending on total timer
+                const sessionDuration = tmrTimeRemaining;
+                
+                tmrTimer = setInterval(() => {
+                    tmrTimeRemaining--;
+                    if (tmrTimeRemaining <= 0) {
+                        stopTMR();
+                        alert("Sessione di Studio Sonnambulo completata! Bentornato alla coscienza vigile.");
+                        return;
+                    }
+
+                    // Dynamically update EEG simulated state over time to represent sleep architecture
+                    const elapsed = sessionDuration - tmrTimeRemaining;
+                    const progressPercent = elapsed / sessionDuration;
+
+                    if (progressPercent < 0.25) {
+                        // First phase: transition into N2 Light Sleep (Theta waves)
+                        if (currentSleepPhase !== 'theta') {
+                            currentSleepPhase = 'theta';
+                            eegStateTitle.textContent = "Stato: Sonno Leggero N2";
+                            eegWaveType.textContent = "Theta (4-7 Hz)";
+                            cancelAnimationFrame(eegAnimId);
+                            drawEEG('theta');
+                        }
+                    } else if (progressPercent >= 0.25 && progressPercent < 0.8) {
+                        // Core phase: Slow-Wave Sleep (Delta waves)
+                        if (currentSleepPhase !== 'delta') {
+                            currentSleepPhase = 'delta';
+                            eegStateTitle.textContent = "Stato: Sonno Profondo N3 (SWS)";
+                            eegWaveType.textContent = "Delta (1.5 Hz) + Spindles";
+                            cancelAnimationFrame(eegAnimId);
+                            drawEEG('delta');
+                        }
+                    } else {
+                        // Late phase: REM Sleep (Dreaming)
+                        if (currentSleepPhase !== 'rem') {
+                            currentSleepPhase = 'rem';
+                            eegStateTitle.textContent = "Stato: Sonno Attivo REM";
+                            eegWaveType.textContent = "Onde Desincronizzate (Beta/Theta)";
+                            cancelAnimationFrame(eegAnimId);
+                            drawEEG('rem');
+                        }
+                    }
+                }, 1000);
+
+                // First acoustic cue immediate play
+                playTMRSpeechCue();
+
+                // Setup periodic speech cue interval
+                tmrCycleInterval = setInterval(() => {
+                    playTMRSpeechCue();
+                }, cueInterval * 1000);
+
+                // Sblocca achievement dell'ipnopedia
+                if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                    LexCore.unlockEasterEgg('ee-tarlo-biblioteca'); // reuse appropriate ID or let it trigger naturally
+                }
+            }
+
+            // Button toggle handler
+            startSleepBtn.addEventListener('click', () => {
+                if (isTmrRunning) {
+                    stopTMR();
+                } else {
+                    startTMR();
+                }
+            });
+
+            // Set initial state of EEG canvas
+            drawEEG('alpha');
+
+            // Jewish Pillow Oracle implementation
+            const pillowOracleBtn = document.getElementById('trigger-pillow-oracle');
+            const oracleModal = document.getElementById('oracle-modal-overlay');
+            const oracleMateriaBadge = document.getElementById('oracle-materia-badge');
+            const oracleTermDisplay = document.getElementById('oracle-term-display');
+            const oracleDefDisplay = document.getElementById('oracle-definition-display');
+            const closeOracleBtn = document.getElementById('close-oracle-btn');
+
+            pillowOracleBtn.addEventListener('click', () => {
+                if (typeof glossaryDatabase === 'undefined' || glossaryDatabase.length === 0) {
+                    alert("Impossibile caricare il glossario.");
+                    return;
+                }
+
+                // Pick random term
+                const randomIndex = Math.floor(Math.random() * glossaryDatabase.length);
+                const item = glossaryDatabase[randomIndex];
+
+                // Populate Modal content
+                const matNames = {
+                    'diritto': 'Diritto dei Beni Culturali',
+                    'storia': 'Storia Moderna',
+                    'arte': 'Storia dell\'Arte',
+                    'romana': 'Arte Romana'
+                };
+                oracleMateriaBadge.textContent = matNames[item.subject] || 'Scienze Umanistiche';
+                oracleTermDisplay.textContent = item.term;
+                oracleDefDisplay.textContent = item.definition;
+
+                // Open Modal with nice sound + visual fade
+                initAudio();
+                const now = audioCtx ? audioCtx.currentTime : 0;
+                if (audioCtx) {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(261.63, now); // C4 chord
+                    osc.frequency.exponentialRampToValueAtTime(523.25, now + 0.6); // C5
+                    gain.gain.setValueAtTime(0.01, now);
+                    gain.gain.linearRampToValueAtTime(0.12, now + 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 1.5);
+                }
+
+                oracleModal.classList.add('visible');
+
+                // Unlocks Scriptorium bookworm or prohibited egg if visited manually
+                if (typeof LexCore !== 'undefined' && LexCore.unlockEasterEgg) {
+                    LexCore.unlockEasterEgg('ee-index-prohibitorum');
+                }
+            });
+
+            closeOracleBtn.addEventListener('click', () => {
+                oracleModal.classList.remove('visible');
+            });
+        });
+    </script>
+</body>
+</html>
