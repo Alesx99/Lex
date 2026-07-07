@@ -2126,6 +2126,9 @@ const LexCore = {
 
     // --- HOOK GLOBAL LEAVING & HIGHLIGHT ACTIONS ---
     hookGlobalFeatures() {
+        if (this.globalFeaturesHooked) return;
+        this.globalFeaturesHooked = true;
+
         // A. Hook closeSummary (Trigger motivational toast on summary exit and clean up tools)
         const originalCloseSummary = window.closeSummary;
         window.closeSummary = function() {
