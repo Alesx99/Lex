@@ -1762,3 +1762,27 @@ body.eclissi-theme header {
     opacity: 1;
 }
 
+/* PWA Offline Badges */
+.card-badges {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.status-badge.offline-badge {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    font-size: 0.68rem;
+    padding: 0.2rem 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    cursor: help;
+}
+
+body.light-theme .status-badge.offline-badge {
+    background: rgba(59, 130, 246, 0.08);
+    color: #2563eb;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
