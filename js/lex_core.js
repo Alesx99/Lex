@@ -5370,7 +5370,7 @@ const LexCore = {
                 <span class="mascot-bubble-text" id="lex-mascot-bubble-text">Salve, studioso! Sono Frate Alessio. Ti accompagnerò nel tuo cammino di sapienza. 📚</span>
             </div>
             <div class="mascot-avatar-wrapper" id="lex-mascot-avatar-wrapper">
-                <div class="mascot-avatar" id="lex-mascot-avatar">🦫📚</div>
+                <div class="mascot-avatar" id="lex-mascot-avatar"><span class="mascot-main-emoji">🦫</span><span class="mascot-badge-emoji">📚</span></div>
             </div>
         `;
         document.body.appendChild(container);
@@ -5431,7 +5431,11 @@ const LexCore = {
             localStorage.setItem('lex-mascot-continuous-study-seconds', '0');
         }
 
-        avatar.textContent = emoji;
+        const parts = Array.from(emoji);
+        const mainChar = parts[0] || '🦫';
+        const badgeChar = parts[1] || '';
+        avatar.innerHTML = `<span class="mascot-main-emoji">${mainChar}</span>` + 
+                           (badgeChar ? `<span class="mascot-badge-emoji">${badgeChar}</span>` : '');
         if (stateText) {
             this.triggerMascotReaction(stateText);
         }
