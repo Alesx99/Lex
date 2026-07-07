@@ -793,7 +793,12 @@
                         </div>
 
                         <div class="control-group">
-                            <label>Volume Stimoli: <span id="volume-val-display">30%</span></label>
+                            <label>Volume Musica/Rumore: <span id="ambient-volume-val-display">50%</span></label>
+                            <input type="range" id="ambient-volume" min="0" max="100" value="50" style="width: 100%; accent-color: var(--accent-blue);">
+                        </div>
+
+                        <div class="control-group">
+                            <label>Volume Voci/Stimoli: <span id="volume-val-display">30%</span></label>
                             <input type="range" id="cue-volume" min="5" max="100" value="30" style="width: 100%; accent-color: var(--accent-blue);">
                         </div>
 
@@ -1060,6 +1065,7 @@
 
             // Web Audio API Synthesizer for Lori Lullabies and Ambient Drones
             let audioCtx = null;
+            let ambientVolumeNode = null;
             let currentLoriType = null;
             let currentLoriNodes = [];
 
@@ -1067,6 +1073,14 @@
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 }
+                if (!ambientVolumeNode) {
+                    ambientVolumeNode = audioCtx.createGain();
+                    ambientVolumeNode.connect(audioCtx.destination);
+                }
+                // Set volume from slider
+                const sliderVal = document.getElementById('ambient-volume').value / 100;
+                ambientVolumeNode.gain.setValueAtTime(sliderVal, audioCtx.currentTime);
+
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
@@ -1098,7 +1112,7 @@
 
                 oscBase.connect(gainNode);
                 oscHarmonic.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
+                gainNode.connect(ambientVolumeNode);
 
                 gainNode.gain.setValueAtTime(0.001, now);
                 gainNode.gain.exponentialRampToValueAtTime(0.18, now + 1.5);
@@ -1213,9 +1227,19 @@
             const intervalSelect = document.getElementById('cue-interval-select');
             const volSlider = document.getElementById('cue-volume');
             const volDisplay = document.getElementById('volume-val-display');
+            const ambientVolSlider = document.getElementById('ambient-volume');
+            const ambientVolDisplay = document.getElementById('ambient-volume-val-display');
 
             volSlider.addEventListener('input', () => {
                 volDisplay.textContent = `${volSlider.value}%`;
+            });
+
+            ambientVolSlider.addEventListener('input', () => {
+                ambientVolDisplay.textContent = `${ambientVolSlider.value}%`;
+                if (ambientVolumeNode && audioCtx) {
+                    const now = audioCtx.currentTime;
+                    ambientVolumeNode.gain.setValueAtTime(ambientVolSlider.value / 100, now);
+                }
             });
 
             // Canvas EEG wave animation variables
@@ -1329,7 +1353,7 @@
                     oscR.connect(panR);
                     panL.connect(gain);
                     panR.connect(gain);
-                    gain.connect(audioCtx.destination);
+                    gain.connect(ambientVolumeNode);
 
                     gain.gain.setValueAtTime(0.01, now);
                     gain.gain.linearRampToValueAtTime(0.12, now + 3);
@@ -1355,7 +1379,7 @@
                     oscR.connect(panR);
                     panL.connect(gain);
                     panR.connect(gain);
-                    gain.connect(audioCtx.destination);
+                    gain.connect(ambientVolumeNode);
 
                     gain.gain.setValueAtTime(0.01, now);
                     gain.gain.linearRampToValueAtTime(0.1, now + 3);
@@ -1387,7 +1411,7 @@
 
                     whiteNoise.connect(lp);
                     lp.connect(gain);
-                    gain.connect(audioCtx.destination);
+                    gain.connect(ambientVolumeNode);
 
                     whiteNoise.start(now);
                     ambientOscs.push(whiteNoise, lp, gain);
@@ -1419,7 +1443,7 @@
 
                     rainSource.connect(lp);
                     lp.connect(gain);
-                    gain.connect(audioCtx.destination);
+                    gain.connect(ambientVolumeNode);
 
                     rainSource.start(now);
                     ambientOscs.push(rainSource, lp, gain);
