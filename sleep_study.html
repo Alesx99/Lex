@@ -938,7 +938,12 @@
             const selectedCountDisplay = document.getElementById('selected-chapters-count');
             
             // Developed subjects filter
-            const developedSubjects = ['diritto', 'storia', 'storia_arte', 'arte_romana', 'codicologia', 'letteratura_latina'];
+            const developedSubjects = [
+                'diritto', 'storia', 'storia_arte', 'arte_romana', 'codicologia', 'letteratura_latina',
+                'letteratura_italiana', 'cultura_greca', 'storia_medievale', 'geografia', 'arte_medievale',
+                'cristiana', 'laboratorio', 'inglese', 'storia_contemporanea', 'arte_contemporanea',
+                'museologia', 'restauro', 'tesi'
+            ];
             
             // Human readable subject names mapping
             const subjectNames = {
@@ -947,7 +952,20 @@
                 'storia_arte': 'Arte Moderna',
                 'arte_romana': 'Arte Romana',
                 'codicologia': 'Codicologia',
-                'letteratura_latina': 'Letteratura Latina'
+                'letteratura_latina': 'Letteratura Latina',
+                'letteratura_italiana': 'Letteratura Italiana',
+                'cultura_greca': 'Cultura Greca',
+                'storia_medievale': 'Storia Medievale',
+                'geografia': 'Geografia',
+                'arte_medievale': 'Arte Medievale',
+                'cristiana': 'Archeologia Cristiana',
+                'laboratorio': 'Laboratorio Pratico',
+                'inglese': 'Inglese per i Beni Culturali',
+                'storia_contemporanea': 'Storia Contemporanea',
+                'arte_contemporanea': 'Arte Contemporanea',
+                'museologia': 'Museologia',
+                'restauro': 'Storia e Tecnica del Restauro',
+                'tesi': 'Laboratorio Tesi'
             };
 
             // Group database items by developed subject

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v22';
+const CACHE_NAME = 'lex-cache-v23';
 const ASSETS = [
   './',
   './index.html',
@@ -67,7 +67,72 @@ const ASSETS = [
   './storia_arte/quiz.html',
   './storia_arte/connections.html',
   './storia_arte/dizionario.html',
-  './storia_arte/js/artists_db.js'
+  './storia_arte/js/artists_db.js',
+
+  // Introductory Subject: Letteratura Italiana
+  './letteratura_italiana/index.html',
+  './letteratura_italiana/style.css',
+  './letteratura_italiana/summaries/cap1.md',
+
+  // Introductory Subject: Cultura Greca
+  './cultura_greca/index.html',
+  './cultura_greca/style.css',
+  './cultura_greca/summaries/cap1.md',
+
+  // Introductory Subject: Storia Medievale
+  './storia_medievale/index.html',
+  './storia_medievale/style.css',
+  './storia_medievale/summaries/cap1.md',
+
+  // Introductory Subject: Geografia
+  './geografia/index.html',
+  './geografia/style.css',
+  './geografia/summaries/cap1.md',
+
+  // Introductory Subject: Arte Medievale
+  './arte_medievale/index.html',
+  './arte_medievale/style.css',
+  './arte_medievale/summaries/cap1.md',
+
+  // Introductory Subject: Archeologia Cristiana
+  './cristiana/index.html',
+  './cristiana/style.css',
+  './cristiana/summaries/cap1.md',
+
+  // Introductory Subject: Laboratorio
+  './laboratorio/index.html',
+  './laboratorio/style.css',
+  './laboratorio/summaries/cap1.md',
+
+  // Introductory Subject: Inglese
+  './inglese/index.html',
+  './inglese/style.css',
+  './inglese/summaries/cap1.md',
+
+  // Introductory Subject: Storia Contemporanea
+  './storia_contemporanea/index.html',
+  './storia_contemporanea/style.css',
+  './storia_contemporanea/summaries/cap1.md',
+
+  // Introductory Subject: Arte Contemporanea
+  './arte_contemporanea/index.html',
+  './arte_contemporanea/style.css',
+  './arte_contemporanea/summaries/cap1.md',
+
+  // Introductory Subject: Museologia
+  './museologia/index.html',
+  './museologia/style.css',
+  './museologia/summaries/cap1.md',
+
+  // Introductory Subject: Storia e Tecnica del Restauro
+  './restauro/index.html',
+  './restauro/style.css',
+  './restauro/summaries/cap1.md',
+
+  // Introductory Subject: Tesi di Laurea
+  './tesi/index.html',
+  './tesi/style.css',
+  './tesi/summaries/cap1.md'
 ];
 
 self.addEventListener('install', event => {

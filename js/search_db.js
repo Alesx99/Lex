@@ -457,44 +457,44 @@ const searchDatabase = [
     },
     // NUOVI MODULI - PIANO DI STUDI
     {
-        title: "Letteratura Italiana: Movimenti e Classici",
+        title: "Letteratura Italiana Cap. I: Introduzione al Corso",
         subject: "letteratura_italiana",
-        chapterTag: "Intro",
-        description: "Studio dei movimenti letterari italiani e dei relativi classici.",
-        keywords: "letteratura italiana classici movimenti",
-        navPath: "letteratura_italiana/index.html"
+        chapterTag: "Capitolo I",
+        description: "Panoramica del modulo di Letteratura Italiana, evoluzione della lingua letteraria, periodizzazioni e metodi critico-filologici.",
+        keywords: "letteratura italiana origini trecento dante petrarca boccaccio rinascimento romanticismo novecento filologia",
+        navPath: "letteratura_italiana/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Cultura Greca: Civiltà e Letteratura",
+        title: "Cultura Greca Cap. I: Introduzione al Corso",
         subject: "cultura_greca",
-        chapterTag: "Intro",
-        description: "Approfondimento sulla civiltà greca, letteratura e istituzioni.",
-        keywords: "cultura greca civiltà letteratura",
-        navPath: "cultura_greca/index.html"
+        chapterTag: "Capitolo I",
+        description: "Indagine sulle espressioni letterarie, filosofiche e mitologiche greche dall'età omerica al tramonto ellenistico.",
+        keywords: "cultura greca omero esiodo lirica tragedia sofocle platone aristotele ellenismo polis mito",
+        navPath: "cultura_greca/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Storia Medievale: Politica e Società",
+        title: "Storia Medievale Cap. I: Introduzione al Corso",
         subject: "storia_medievale",
-        chapterTag: "Intro",
-        description: "Analisi delle strutture politiche e sociali del Medioevo.",
-        keywords: "storia medievale politica società",
-        navPath: "storia_medievale/index.html"
+        chapterTag: "Capitolo I",
+        description: "Il millennio medievale tra sintesi romana, tradizioni germaniche e cristianesimo. Periodizzazione e critica delle fonti.",
+        keywords: "storia medievale alto medioevo basso feudo carlo magno comuni investiture fonti diplomatica",
+        navPath: "storia_medievale/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Geografia: Dinamiche Territoriali",
+        title: "Geografia Cap. I: Introduzione al Corso",
         subject: "geografia",
-        chapterTag: "Intro",
-        description: "Studio dei processi territoriali e demografici globali.",
-        keywords: "geografia territorio demografia",
-        navPath: "geografia/index.html"
+        chapterTag: "Capitolo I",
+        description: "La superficie terrestre come spazio dell'azione umana. Relazioni spaziali, sostenibilità e dinamiche demografiche urbane.",
+        keywords: "geografia territorio spazio luogo paesaggio demografia globalizzazione urbanizzazione gis",
+        navPath: "geografia/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Arte Medievale: Dal Bizantino al Gotico",
+        title: "Arte Medievale Cap. I: Introduzione al Corso",
         subject: "arte_medievale",
-        chapterTag: "Intro",
-        description: "Sviluppo artistico dall'arte bizantina al gotico internazionale.",
-        keywords: "arte medievale bizantino gotico",
-        navPath: "arte_medievale/index.html"
+        chapterTag: "Capitolo I",
+        description: "Lo sviluppo delle arti visive e dell'architettura in Europa e nel Mediterraneo dal IV al XV secolo.",
+        keywords: "arte medievale bizantino paleocristiana mosaico romanico gotico giotto pisano panofsky",
+        navPath: "arte_medievale/index.html?open=summaries/cap1.md"
     },
     {
         title: "Letteratura Latina Cap. I: Le Origini e la Preletteratura",
@@ -673,68 +673,68 @@ const searchDatabase = [
         navPath: "codicologia/index.html?open=summaries/cap12.md"
     },
     {
-        title: "Archeologia Cristiana",
+        title: "Archeologia Cristiana Cap. I: Introduzione al Corso",
         subject: "cristiana",
-        chapterTag: "Intro",
-        description: "Sviluppo dell'arte e dell'architettura cristiana.",
-        keywords: "cristiana archeologia paleocristiana",
-        navPath: "cristiana/index.html"
+        chapterTag: "Capitolo I",
+        description: "Studio delle testimonianze materiali, epigrafiche e monumentali delle prime comunità cristiane e topografia tardoantica.",
+        keywords: "cristiana archeologia paleocristiana catacombe basilica costantino epigrafia scavo",
+        navPath: "cristiana/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Inglese Accademico",
+        title: "Inglese Accademico Cap. I: Introduzione al Corso",
         subject: "inglese",
-        chapterTag: "Intro",
-        description: "Competenze linguistiche per l'ambito storico-artistico.",
-        keywords: "inglese lingua accademico",
-        navPath: "inglese/index.html"
+        chapterTag: "Capitolo I",
+        description: "Competenze linguistiche e lessico specialistico bilingue per la storia dell'arte, archeologia, musei e restauro.",
+        keywords: "inglese lingua accademico vocabolario abstract museologia restauro english art heritage",
+        navPath: "inglese/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Storia Contemporanea: XX e XXI secolo",
+        title: "Storia Contemporanea Cap. I: Introduzione al Corso",
         subject: "storia_contemporanea",
-        chapterTag: "Intro",
-        description: "Le grandi trasformazioni del mondo contemporaneo.",
-        keywords: "storia contemporanea novecento globalizzazione",
-        navPath: "storia_contemporanea/index.html"
+        chapterTag: "Capitolo I",
+        description: "Le vicende storiche globali dal Congresso di Vienna ad oggi, società di massa, totalitarismi, guerra fredda e fonti moderne.",
+        keywords: "storia contemporanea novecento risorgimento totalitarismo guerra fredda masse globalizzazione",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Arte Contemporanea: Avanguardie e Oggi",
+        title: "Arte Contemporanea Cap. I: Introduzione al Corso",
         subject: "arte_contemporanea",
-        chapterTag: "Intro",
-        description: "Dalle avanguardie storiche alle installazioni multimediali.",
-        keywords: "arte contemporanea avanguardie multimedia",
-        navPath: "arte_contemporanea/index.html"
+        chapterTag: "Capitolo I",
+        description: "Evoluzione delle arti visive dall'Impressionismo alle neoavanguardie del secondo dopoguerra e alle pratiche digitali odierne.",
+        keywords: "arte contemporanea impressionismo avanguardie cubismo pop art performance installazione concettuale",
+        navPath: "arte_contemporanea/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Museologia: Gestione e Allestimento",
+        title: "Museologia Cap. I: Introduzione al Corso",
         subject: "museologia",
-        chapterTag: "Intro",
-        description: "Storia del collezionismo e gestione delle istituzioni museali.",
-        keywords: "museologia musei collezionismo allestimento",
-        navPath: "museologia/index.html"
+        chapterTag: "Capitolo I",
+        description: "Storia del collezionismo, evoluzione storica del museo pubblico, conservazione preventiva, didattica e comunicazione museale.",
+        keywords: "museologia museografia collezionismo wunderkammer louvre icom allestimento tutela",
+        navPath: "museologia/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Restauro: Teoria e Tecnica",
+        title: "Restauro Cap. I: Introduzione al Corso",
         subject: "restauro",
-        chapterTag: "Intro",
-        description: "Teoria del restauro e tecniche di conservazione.",
-        keywords: "restauro conservazione brandi tecnica",
-        navPath: "restauro/index.html"
+        chapterTag: "Capitolo I",
+        description: "Sviluppo metodologico e teorico degli interventi conservativi. Istituzioni, carte del restauro e principi di Brandi.",
+        keywords: "restauro conservazione brandi viollet-le-duc ruskin boito reversibilità diagnostica",
+        navPath: "restauro/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Laboratorio: Attività Pratiche",
+        title: "Laboratorio Cap. I: Introduzione al Corso",
         subject: "laboratorio",
-        chapterTag: "Intro",
-        description: "Attività pratiche e seminari integrativi.",
-        keywords: "laboratorio pratica seminario",
-        navPath: "laboratorio/index.html"
+        chapterTag: "Capitolo I",
+        description: "Traduzione delle nozioni teoriche in competenze operative: catalogazione ICCD, digitalizzazione e diagnostica per immagini.",
+        keywords: "laboratorio catalogazione iccd sigec web digitalizzazione metadati diagnostica",
+        navPath: "laboratorio/index.html?open=summaries/cap1.md"
     },
     {
-        title: "Tesi di Laurea: Ricerca e Redazione",
+        title: "Laboratorio Tesi Cap. I: Introduzione al Corso",
         subject: "tesi",
-        chapterTag: "Intro",
-        description: "Spazio di lavoro per la ricerca e redazione finale.",
-        keywords: "tesi laurea ricerca redazione",
-        navPath: "tesi/index.html"
+        chapterTag: "Capitolo I",
+        description: "Metodologia della ricerca scientifica, schedatura bibliografica, stesura capitoli, note citazionali e redazione finale.",
+        keywords: "tesi laurea ricerca redazione bibliografia note citazioni eco stesura",
+        navPath: "tesi/index.html?open=summaries/cap1.md"
     }
 ];
 
