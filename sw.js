@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v23';
+const CACHE_NAME = 'lex-cache-v24';
 const ASSETS = [
   './',
   './index.html',
@@ -18,6 +18,7 @@ const ASSETS = [
   './timeline.html',
   './studio_max.html',
   './sleep_study.html',
+  './offline.html',
   './js/lex_core.js',
   './js/lex_core.css',
   './js/search_db.js',
@@ -183,8 +184,11 @@ self.addEventListener('fetch', event => {
             });
           }
           return networkResponse;
-        }).catch(() => {
+        }).catch(err => {
           // Fail gracefully when network fails and asset is not cached
+          if (event.request.mode === 'navigate') {
+            return caches.match('./offline.html');
+          }
         });
       })
   );

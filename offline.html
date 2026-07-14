@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baita Offline di Frate Alessio - Lex Studiorum</title>
+    <!-- Fallback design with local fonts & generic safe font families -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1d120a 0%, #0d0805 100%);
+            --bg-card: rgba(38, 24, 15, 0.45);
+            --bg-card-hover: rgba(54, 34, 21, 0.65);
+            --border-color: rgba(140, 88, 53, 0.3);
+            --border-color-hover: rgba(212, 175, 55, 0.4);
+            --text-primary: #f5f2eb;
+            --text-secondary: #c2b4a6;
+            --text-muted: #8c7b6d;
+            --accent-gold: #d4af37;
+            --accent-gold-glow: rgba(212, 175, 55, 0.25);
+            --accent-wood: #8c5835;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Ambient glowing fireplace */
+        .fireplace-glow {
+            position: absolute;
+            bottom: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(212, 90, 30, 0.15) 0%, rgba(200, 50, 20, 0.03) 60%, transparent 100%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            animation: flame-pulse 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes flame-pulse {
+            0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+            100% { opacity: 1.2; transform: translateX(-50%) scale(1.08); }
+        }
+
+        /* Header Area */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(20, 12, 7, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .logo-group h1 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .offline-status {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #f87171;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 99px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .home-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .home-btn:hover {
+            background: var(--accent-gold);
+            color: #1a0f0a;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px var(--accent-gold-glow);
+        }
+
+        /* Main Content Container */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            z-index: 5;
+        }
+
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border-left: 5px solid var(--accent-gold);
+        }
+
+        .welcome-mascot {
+            font-size: 3.5rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .welcome-text h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 0.4rem;
+            color: var(--accent-gold);
+        }
+
+        .welcome-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Column Cards */
+        .column-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: 100%;
+        }
+
+        .column-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        /* Offline Study List */
+        .summaries-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            overflow-y: auto;
+            max-height: 400px;
+            padding-right: 0.5rem;
+        }
+
+        /* Custom Scrollbar for list */
+        .summaries-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .summaries-list::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        .summaries-list::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .summary-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: var(--accent-gold);
+            transform: translateX(4px);
+        }
+
+        .summary-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .summary-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .read-icon {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: opacity var(--transition-speed);
+        }
+
+        .summary-item:hover .read-icon {
+            opacity: 1;
+        }
+
+        .no-data-msg {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Whack-a-Mole Game Styles */
+        .game-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .score-box, .timer-box {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .score-val, .timer-val {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            font-family: var(--font-serif);
+            margin-left: 0.3rem;
+        }
+
+        .btn-game {
+            background: var(--accent-wood);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .btn-game:hover {
+            background: var(--accent-gold);
+            color: #1a0f0a;
+            box-shadow: 0 0 10px var(--accent-gold-glow);
+        }
+
+        .whack-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            background: rgba(43, 27, 16, 0.45);
+            border: 3px solid #5c3c24;
+            border-radius: 20px;
+            padding: 1.2rem;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .hole {
+            aspect-ratio: 1;
+            background: radial-gradient(circle, #1a0f0a 40%, #080402 100%);
+            border-radius: 50%;
+            border: 5px solid #4a301c;
+            box-shadow: inset 0 8px 16px rgba(0,0,0,0.9), 0 4px 10px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hole::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 38%;
+            background: #3e2716;
+            border-top: 3px solid #291a0e;
+            border-radius: 0 0 50% 50%;
+            z-index: 3;
+            box-shadow: 0 -3px 8px rgba(0,0,0,0.5);
+        }
+
+        .mole {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.6rem;
+            user-select: none;
+            bottom: -15%;
+            transform: translateY(100%);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2;
+        }
+
+        .mole.active {
+            transform: translateY(0);
+        }
+
+        /* speech bubble from Frate Alessio */
+        .bubble-dialog {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            position: relative;
+            margin-top: 0.5rem;
+        }
+
+        .bubble-dialog::before {
+            content: '🦫';
+            margin-right: 0.5rem;
+            font-style: normal;
+        }
+
+        /* Floating Score Effect */
+        .floating-points {
+            position: absolute;
+            color: var(--accent-gold);
+            font-weight: 800;
+            font-size: 1.2rem;
+            pointer-events: none;
+            z-index: 10;
+            animation: float-up 0.8s ease-out forwards;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .floating-points.minus {
+            color: #ef4444;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-40px) scale(1.1); opacity: 0; }
+        }
+
+        /* Reader Overlay Modal */
+        .reader-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(12, 7, 4, 0.92);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+            padding: 1.5rem;
+        }
+
+        .reader-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .reader-container {
+            background: #231710;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            overflow: hidden;
+            animation: modal-enter 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes modal-enter {
+            0% { transform: scale(0.9) translateY(20px); }
+            100% { transform: scale(1) translateY(0); }
+        }
+
+        .reader-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(20, 12, 7, 0.4);
+        }
+
+        .reader-title-group h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+        }
+
+        .reader-title-group p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.2rem;
+        }
+
+        .close-reader {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .close-reader:hover {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: #fff;
+        }
+
+        .reader-body {
+            padding: 2.5rem;
+            overflow-y: auto;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Markdown styling tags */
+        .reader-body h1 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .reader-body h2 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .reader-body h3 {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .reader-body p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .reader-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .reader-body ul, .reader-body ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .reader-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Footer Area */
+        footer {
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: rgba(20, 12, 7, 0.8);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            z-index: 10;
+        }
+
+        footer strong {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient glowing fireplace -->
+    <div class="fireplace-glow"></div>
+
+    <!-- Header Area -->
+    <header>
+        <div class="logo-group">
+            <h1><span>🦫</span> Lex Studiorum</h1>
+        </div>
+        <div class="offline-status">
+            <span class="status-dot"></span>
+            Offline
+        </div>
+        <a href="index.html" class="home-btn">Riprova Connessione</a>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <div class="welcome-mascot">🦫💤</div>
+            <div class="welcome-text">
+                <h2>La Baita di Frate Alessio</h2>
+                <p>Niente internet? Nessun problema, studioso! Lo Scriptorium è dotato di una calda stufa a legna. Rilassati qui: puoi leggere i capitoli sincronizzati sul tuo dispositivo o divertirti a catturare i tarli del legno.</p>
+            </div>
+        </div>
+
+        <!-- Left Column: Offline Dispense -->
+        <div class="column-card">
+            <h3 class="column-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Dispense Sincronizzate Offline
+            </h3>
+            <ul class="summaries-list" id="offline-summaries-container">
+                <!-- Dynamically populated from IndexedDB -->
+                <div class="no-data-msg">Ricerca dei materiali salvati in locale...</div>
+            </ul>
+        </div>
+
+        <!-- Right Column: Whack-a-Mole Game -->
+        <div class="column-card">
+            <h3 class="column-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg>
+                Salvaguardia dello Scriptorium
+            </h3>
+            
+            <div class="game-controls">
+                <div class="score-box">Punti:<span class="score-val" id="game-score">0</span></div>
+                <div class="timer-box">Tempo:<span class="timer-val" id="game-timer">30s</span></div>
+                <button class="btn-game" id="btn-start-game">Avvia Gioco</button>
+            </div>
+
+            <div class="whack-grid" id="whack-grid-container">
+                <!-- 3x3 Grid of holes -->
+                <div class="hole" data-index="0"><div class="mole"></div></div>
+                <div class="hole" data-index="1"><div class="mole"></div></div>
+                <div class="hole" data-index="2"><div class="mole"></div></div>
+                <div class="hole" data-index="3"><div class="mole"></div></div>
+                <div class="hole" data-index="4"><div class="mole"></div></div>
+                <div class="hole" data-index="5"><div class="mole"></div></div>
+                <div class="hole" data-index="6"><div class="mole"></div></div>
+                <div class="hole" data-index="7"><div class="mole"></div></div>
+                <div class="hole" data-index="8"><div class="mole"></div></div>
+            </div>
+
+            <div class="bubble-dialog" id="mascot-speech">
+                Benvenuto! Aiutami a salvare le mie pergamene. Schiaccia i tarli 🐛 (+15pt) e acchiappami 🦫 (+10pt) ma non colpire i libri 📚 (-10pt)!
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Reader Overlay Modal -->
+    <div class="reader-overlay" id="reader-overlay-modal">
+        <div class="reader-container">
+            <div class="reader-header">
+                <div class="reader-title-group">
+                    <h3 id="modal-chapter-title">Titolo Capitolo</h3>
+                    <p id="modal-subject-title">Materia</p>
+                </div>
+                <button class="close-reader" id="btn-close-reader">&times;</button>
+            </div>
+            <div class="reader-body" id="modal-reader-content">
+                <!-- Markdown parsed content goes here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Area -->
+    <footer>
+        <p>Lex Studiorum &copy; 2026. Sviluppato con amore e dedizione. Piattaforma attiva in modalità <strong>Offline locale</strong>.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- Standalone IndexedDB Helper ---
+        async function getOfflineSummaries() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open('LexKnowledgeBase', 2);
+                request.onerror = (e) => resolve([]); // Suppress and degrade gracefully
+                request.onsuccess = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains('summaries')) {
+                        resolve([]);
+                        return;
+                    }
+                    const tx = db.transaction('summaries', 'readonly');
+                    const store = tx.objectStore('summaries');
+                    const req = store.getAll();
+                    req.onsuccess = (ev) => resolve(ev.target.result || []);
+                    req.onerror = (ev) => resolve([]);
+                };
+            });
+        }
+
+        // --- Custom Regex-Based Offline Markdown Parser ---
+        function parseMarkdown(md) {
+            if (!md) return "";
+            let html = md;
+            
+            // Normalize breaks
+            html = html.replace(/\r\n/g, '\n');
+            
+            // Basic HTML character escaping to prevent injection
+            html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Titles (#, ##, ###)
+            html = html.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+            html = html.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+            
+            // Bold (**text**)
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Italic (*text*)
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // Bullet lists (* item)
+            html = html.replace(/^\* (.*?)$/gm, '<li>$1</li>');
+            html = html.replace(/^(<li>.*?<\/li>)+/gms, '<ul>$&</ul>');
+            
+            // Paragraph split
+            html = html.replace(/^(?!(?:<h|<ul|<li|<strong|<em))(.*?)$/gm, (match, p1) => {
+                return p1.trim() ? `<p>${p1}</p>` : '';
+            });
+            
+            return html;
+        }
+
+        // --- Reader Overlay Logic ---
+        const readerOverlay = document.getElementById('reader-overlay-modal');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const modalSubjectTitle = document.getElementById('modal-subject-title');
+        const modalReaderContent = document.getElementById('modal-reader-content');
+        const btnCloseReader = document.getElementById('btn-close-reader');
+
+        function openReader(summary) {
+            modalChapterTitle.textContent = `${summary.chapterTag || 'Capitolo'} - ${summary.chapterTitle || 'Sintesi'}`;
+            modalSubjectTitle.textContent = summary.subject ? summary.subject.replace('_', ' ').toUpperCase() : 'MATERIA';
+            modalReaderContent.innerHTML = parseMarkdown(summary.text);
+            
+            readerOverlay.style.display = 'flex';
+            setTimeout(() => {
+                readerOverlay.classList.add('active');
+            }, 10);
+        }
+
+        function closeReader() {
+            readerOverlay.classList.remove('active');
+            setTimeout(() => {
+                readerOverlay.style.display = 'none';
+            }, 300);
+        }
+
+        btnCloseReader.addEventListener('click', closeReader);
+        readerOverlay.addEventListener('click', (e) => {
+            if (e.target === readerOverlay) closeReader();
+        });
+
+        // --- Populate Offline Content ---
+        async function loadOfflineSummaries() {
+            const container = document.getElementById('offline-summaries-container');
+            const summaries = await getOfflineSummaries();
+
+            if (summaries.length === 0) {
+                container.innerHTML = `
+                    <div class="no-data-msg">
+                        Nessun capitolo sincronizzato offline trovato.<br>
+                        <span style="font-size: 0.85rem; color: var(--text-muted); font-style: normal; display: block; margin-top: 0.8rem;">
+                            Torna online e visita una materia per sincronizzare automaticamente i riassunti in cache locale.
+                        </span>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            summaries.forEach((summary) => {
+                const li = document.createElement('li');
+                li.className = 'summary-item';
+                
+                let subjectNice = summary.subject ? summary.subject.replace('_', ' ') : 'Materia';
+                
+                li.innerHTML = `
+                    <div class="summary-info">
+                        <h4>${summary.chapterTag || 'Capitolo'} - ${summary.chapterTitle || 'Sintesi'}</h4>
+                        <p>${subjectNice}</p>
+                    </div>
+                    <span class="read-icon">📖</span>
+                `;
+                li.addEventListener('click', () => openReader(summary));
+                container.appendChild(li);
+            });
+        }
+
+        // --- Whack-a-Mole Game Logic ---
+        let score = 0;
+        let timeLeft = 30;
+        let gameActive = false;
+        let activeMoleTimeout = null;
+        let countdownInterval = null;
+        let currentActiveHole = null;
+        let speed = 1000;
+        let audioCtx = null;
+
+        const scoreEl = document.getElementById('game-score');
+        const timerEl = document.getElementById('game-timer');
+        const startBtn = document.getElementById('btn-start-game');
+        const holes = document.querySelectorAll('.hole');
+        const speechBubble = document.getElementById('mascot-speech');
+
+        // Web Audio API Synthesizer
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSound(type) {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            const now = audioCtx.currentTime;
+            
+            if (type === 'hit') {
+                // Short pop/slap sound
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.08);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } else if (type === 'fail') {
+                // Low buzzer sound
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(140, now);
+                osc.frequency.linearRampToValueAtTime(70, now + 0.25);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            } else if (type === 'pop') {
+                // Bubble pop
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(450, now);
+                osc.frequency.exponentialRampToValueAtTime(900, now + 0.05);
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'victory') {
+                // Fanfare chord
+                const notes = [261.63, 329.63, 392.00, 523.25];
+                notes.forEach((freq, idx) => {
+                    const o = audioCtx.createOscillator();
+                    const g = audioCtx.createGain();
+                    o.connect(g);
+                    g.connect(audioCtx.destination);
+                    o.type = 'triangle';
+                    o.frequency.setValueAtTime(freq, now + idx * 0.08);
+                    g.gain.setValueAtTime(0.15, now + idx * 0.08);
+                    g.gain.linearRampToValueAtTime(0, now + idx * 0.08 + 0.25);
+                    o.start(now + idx * 0.08);
+                    o.stop(now + idx * 0.08 + 0.25);
+                });
+            }
+        }
+
+        // Mascot dialog lines
+        const hitBeaverLines = [
+            "Ahi! Studio sodo ma non sono di legno!",
+            "Ehi, studioso! Guarda che così mi spettini la coda!",
+            "Accidenti, che riflessi! Ma non sono un tarlo!",
+            "Ouch! Sono un frate rispettabile, io!"
+        ];
+
+        const hitWormLines = [
+            "Evvai! Un tarlo in meno nelle sacre scritture!",
+            "Schiaccialo! Salva le pergamene dello Scriptorium!",
+            "Grande! Quella bestiaccia voleva rosicchiare il Diritto!",
+            "Perfetto! La sapienza dei secoli è salva!"
+        ];
+
+        const hitBookLines = [
+            "ERESIA! Hai strappato una pagina del Codice!",
+            "Pietà per la cultura! Non lanciare i libri!",
+            "Attento! I testi sacri vanno sfogliati, non colpiti!",
+            "Che sciagura! Dieci frustate virtuali per aver colpito il libro!"
+        ];
+
+        const missLines = [
+            "Troppo lento! Il tarlo sta banchettando!",
+            "Zac! Svanito nel nulla. Concentrati!",
+            "La stanchezza ti fa rallentare, studioso!",
+            "Ah! Più veloce di una sanzione amministrativa!"
+        ];
+
+        function triggerSpeech(text) {
+            speechBubble.textContent = text;
+        }
+
+        function spawnMole() {
+            if (!gameActive) return;
+
+            // Remove active status from all holes
+            holes.forEach(hole => {
+                const moleDiv = hole.querySelector('.mole');
+                moleDiv.classList.remove('active');
+                moleDiv.innerHTML = '';
+            });
+
+            // Select a random hole
+            let randHole;
+            do {
+                randHole = Math.floor(Math.random() * holes.length);
+            } while (randHole === currentActiveHole);
+            
+            currentActiveHole = randHole;
+            const targetHole = holes[randHole];
+            const moleDiv = targetHole.querySelector('.mole');
+
+            // Determine type of target (🦫 = Beaver, 🐛 = Woodworm, 📚 = Book)
+            const roll = Math.random();
+            let type = 'beaver';
+            if (roll < 0.4) {
+                type = 'worm';
+                moleDiv.innerHTML = '🐛';
+            } else if (roll < 0.6) {
+                type = 'book';
+                moleDiv.innerHTML = '📚';
+            } else {
+                type = 'beaver';
+                moleDiv.innerHTML = '🦫';
+            }
+
+            moleDiv.setAttribute('data-type', type);
+            moleDiv.classList.add('active');
+            
+            playSound('pop');
+
+            // Dynamic speed increase based on score
+            speed = Math.max(500, 1000 - score * 12);
+
+            activeMoleTimeout = setTimeout(() => {
+                if (moleDiv.classList.contains('active')) {
+                    moleDiv.classList.remove('active');
+                    // Complain about misses (except if it was a book)
+                    if (type !== 'book' && Math.random() < 0.4) {
+                        triggerSpeech(missLines[Math.floor(Math.random() * missLines.length)]);
+                    }
+                }
+                // Spawn next
+                spawnMole();
+            }, speed);
+        }
+
+        function whack(e) {
+            if (!gameActive) return;
+            const moleDiv = e.currentTarget.querySelector('.mole');
+            
+            if (!moleDiv.classList.contains('active')) return;
+
+            moleDiv.classList.remove('active');
+            clearTimeout(activeMoleTimeout);
+
+            const type = moleDiv.getAttribute('data-type');
+            let points = 0;
+            let sound = 'hit';
+            let comment = '';
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const posX = e.clientX - rect.left;
+            const posY = e.clientY - rect.top;
+
+            if (type === 'worm') {
+                points = 15;
+                score += points;
+                sound = 'hit';
+                comment = hitWormLines[Math.floor(Math.random() * hitWormLines.length)];
+                createFloatingPoints(`+${points}`, e.currentTarget, posX, posY, false);
+            } else if (type === 'beaver') {
+                points = 10;
+                score += points;
+                sound = 'hit';
+                comment = hitBeaverLines[Math.floor(Math.random() * hitBeaverLines.length)];
+                createFloatingPoints(`+${points}`, e.currentTarget, posX, posY, false);
+            } else if (type === 'book') {
+                points = -10;
+                score = Math.max(0, score + points); // no negative scores
+                sound = 'fail';
+                comment = hitBookLines[Math.floor(Math.random() * hitBookLines.length)];
+                createFloatingPoints(`${points}`, e.currentTarget, posX, posY, true);
+            }
+
+            scoreEl.textContent = score;
+            playSound(sound);
+            triggerSpeech(comment);
+
+            // Spawn next immediately
+            setTimeout(spawnMole, 150);
+        }
+
+        function createFloatingPoints(text, parent, x, y, isMinus) {
+            const el = document.createElement('div');
+            el.className = `floating-points ${isMinus ? 'minus' : ''}`;
+            el.textContent = text;
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
+            parent.appendChild(el);
+            setTimeout(() => el.remove(), 800);
+        }
+
+        function startGame() {
+            initAudio();
+            if (gameActive) return;
+
+            score = 0;
+            timeLeft = 30;
+            gameActive = true;
+            scoreEl.textContent = score;
+            timerEl.textContent = `${timeLeft}s`;
+            startBtn.disabled = true;
+            startBtn.textContent = 'In Corso...';
+
+            triggerSpeech("Facciamo pulizia! Schiaccia i tarli ed evita i libri!");
+
+            // Start countdown
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            // Spawn first mole
+            spawnMole();
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(countdownInterval);
+            clearTimeout(activeMoleTimeout);
+            startBtn.disabled = false;
+            startBtn.textContent = 'Avvia Gioco';
+
+            holes.forEach(hole => {
+                const moleDiv = hole.querySelector('.mole');
+                moleDiv.classList.remove('active');
+                moleDiv.innerHTML = '';
+            });
+
+            // Save High Score
+            const high = parseInt(localStorage.getItem('lex-offline-whack-high') || '0');
+            let isNewHigh = false;
+            if (score > high) {
+                localStorage.setItem('lex-offline-whack-high', score.toString());
+                isNewHigh = true;
+            }
+
+            playSound('victory');
+            
+            const highText = isNewHigh 
+                ? `🏆 NUOVO RECORD! Hai ottenuto ${score} punti!` 
+                : `Tempo scaduto! Punteggio finale: ${score} punti. Record attuale: ${Math.max(high, score)} punti.`;
+            
+            triggerSpeech(highText);
+        }
+
+        // Attach whack event listeners
+        holes.forEach(hole => {
+            hole.addEventListener('click', whack);
+        });
+
+        startBtn.addEventListener('click', startGame);
+
+        // --- Initialize Page ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOfflineSummaries();
+        });
+    </script>
+</body>
+</html>
