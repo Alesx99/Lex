@@ -363,6 +363,11 @@ const LexCore = {
                                 </select>
                             </div>
                             
+                            <div class="setting-row" style="margin-bottom:0.5rem;">
+                                <label style="font-size:0.6rem;">Master Password Cifratura</label>
+                                <input type="password" id="lex-cloud-master-pass" placeholder="Password per cifrare credenziali" style="width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:6px; color:var(--text-primary); padding:0.4rem; font-size:0.75rem; outline:none; box-sizing:border-box;">
+                            </div>
+                            
                             <!-- GDrive fields -->
                             <div id="lex-cloud-gdrive-fields" style="display:none; flex-direction:column; gap:0.4rem;">
                                 <div class="setting-row" style="margin-bottom:0.4rem;">
@@ -724,6 +729,12 @@ const LexCore = {
             e.stopPropagation();
             this.resetFocusMixer();
         });
+
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'lex-theme') {
+                this.applyTheme();
+            }
+        });
     },
 
     // --- CLOUD SYNC LOGIC ---
@@ -751,6 +762,11 @@ const LexCore = {
         
         providerSelect?.addEventListener('change', () => {
             this.updateCloudUI();
+        });
+
+        const masterPassInput = document.getElementById('lex-cloud-master-pass');
+        masterPassInput?.addEventListener('input', () => {
+            sessionStorage.setItem('lex-cloud-master-key', masterPassInput.value);
         });
         
         gdriveConnect?.addEventListener('click', () => {
@@ -805,6 +821,11 @@ const LexCore = {
     updateCloudUI() {
         const providerSelect = document.getElementById('lex-cloud-provider');
         if (!providerSelect) return;
+
+        const masterPassInput = document.getElementById('lex-cloud-master-pass');
+        if (masterPassInput) {
+            masterPassInput.value = sessionStorage.getItem('lex-cloud-master-key') || '';
+        }
         
         const provider = providerSelect.value;
         localStorage.setItem('lex-cloud-provider', provider);
@@ -1206,9 +1227,60 @@ const LexCore = {
 
     setupLocalStorageProxy() {
         const originalSetItem = localStorage.setItem;
+        const originalGetItem = localStorage.getItem;
         const self = this;
+
+        const cryptSensitiveKeys = [
+            'lex-gdrive-token', 
+            'lex-dropbox-token', 
+            'lex-webdav-pass'
+        ];
+
+        function getEncryptionKey() {
+            let key = sessionStorage.getItem('lex-cloud-master-key');
+            if (!key) {
+                const input = document.getElementById('lex-cloud-master-pass');
+                if (input && input.value) {
+                    key = input.value;
+                    sessionStorage.setItem('lex-cloud-master-key', key);
+                }
+            }
+            return key || 'lex-default-obfuscation-key-1789';
+        }
+
+        function xorEncrypt(text, key) {
+            if (!text) return '';
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                const charCode = text.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+                result += String.fromCharCode(charCode);
+            }
+            return btoa(unescape(encodeURIComponent(result)));
+        }
+
+        function xorDecrypt(encoded, key) {
+            if (!encoded) return '';
+            try {
+                const decoded = decodeURIComponent(escape(atob(encoded)));
+                let result = '';
+                for (let i = 0; i < decoded.length; i++) {
+                    const charCode = decoded.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+                    result += String.fromCharCode(charCode);
+                }
+                return result;
+            } catch(e) {
+                return '';
+            }
+        }
+
         localStorage.setItem = function(key, value) {
-            originalSetItem.apply(this, arguments);
+            let valToSave = value;
+            if (cryptSensitiveKeys.includes(key) && value) {
+                const encKey = getEncryptionKey();
+                valToSave = xorEncrypt(value, encKey);
+            }
+            originalSetItem.call(this, key, valToSave);
+
             if (self.isRestoring) return;
             
             const syncablePrefixes = [
@@ -1232,6 +1304,18 @@ const LexCore = {
             if (shouldSync && !sensitiveKeys.includes(key) && localStorage.getItem('lex-cloud-autosave') === 'true') {
                 self.triggerAutosave();
             }
+        };
+
+        localStorage.getItem = function(key) {
+            const rawVal = originalGetItem.call(this, key);
+            if (cryptSensitiveKeys.includes(key) && rawVal) {
+                const encKey = getEncryptionKey();
+                const decrypted = xorDecrypt(rawVal, encKey);
+                if (decrypted) {
+                    return decrypted;
+                }
+            }
+            return rawVal;
         };
     },
 

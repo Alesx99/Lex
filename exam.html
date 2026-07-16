@@ -2299,6 +2299,23 @@
             document.getElementById('oral-active-screen').style.display = 'block';
             document.getElementById('oral-answer-input').value = '';
             
+            // Controllo preventivo compatibilità microfono/STT
+            const micBtn = document.getElementById('oral-mic-btn');
+            const statusText = document.getElementById('mic-status-text');
+            if (micBtn && statusText) {
+                if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+                    micBtn.style.opacity = '0.35';
+                    micBtn.style.cursor = 'not-allowed';
+                    micBtn.title = "Dettatura vocale non supportata da questo browser";
+                    statusText.textContent = "Usa la tastiera (Microfono non supportato)";
+                } else {
+                    micBtn.style.opacity = '1';
+                    micBtn.style.cursor = 'pointer';
+                    micBtn.title = "Detta la tua risposta";
+                    statusText.textContent = "Detta Risposta";
+                }
+            }
+
             await prepareOralQuestion();
         }
 
@@ -2501,6 +2518,9 @@
         }
 
         function toggleOralDictation() {
+            if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+                return;
+            }
             if (!recognition) {
                 if (!initDictation()) return;
             }
@@ -2527,6 +2547,14 @@
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'it-IT';
                 utterance.rate = 1.0;
+                
+                // Cerca la prima voce italiana per evitare la lettura con pronuncia inglese
+                const voices = window.speechSynthesis.getVoices();
+                const itVoice = voices.find(v => v.lang.includes('it-IT') || v.lang.includes('it_IT'));
+                if (itVoice) {
+                    utterance.voice = itVoice;
+                }
+                
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("La sintesi vocale non è supportata dal tuo browser.");
@@ -3063,6 +3091,14 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
             toggleOralEngineFields();
             toggleOralCustomModelField();
             populateOralChapters();
+
+            // Forza caricamento anticipato delle voci per il TTS
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.getVoices();
+                window.speechSynthesis.onvoiceschanged = () => {
+                    window.speechSynthesis.getVoices();
+                };
+            }
         });
 
         updateMaxQuestions();

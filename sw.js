@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v24';
+const CACHE_NAME = 'lex-cache-v25';
 const ASSETS = [
   './',
   './index.html',
@@ -31,6 +31,8 @@ const ASSETS = [
   './js/timeline_db.js',
   './quiz_diritto_new.js',
   './quiz_diritto_new2.js',
+  'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js',
   
   // Developed Subject: Arte Romana
   './arte_romana/index.html',

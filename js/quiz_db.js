@@ -4314,25 +4314,117 @@ const quizDatabase = {
         subject: "letteratura_latina",
         chapterTag: "Spec. I",
         title: "Terenzio, Adelphoe, vv. 98-140",
-        questions: []
+        questions: [
+            {
+                question: "Nel dibattito pedagogico degli Adelphoe (vv. 98-140), quale stile educativo incarna Demea?",
+                options: [
+                    "Un'educazione basata sulla fides, la generosità e la tolleranza verso le colpe giovanili.",
+                    "Un'educazione rigida e tradizionale, fondata sul timore reverenziale e sulla severità paterna.",
+                    "Un'educazione cinica che incoraggia la ricerca del piacere senza vincoli legali.",
+                    "Un'educazione interamente incentrata sulla retorica forense e sul successo politico."
+                ],
+                correctIndex: 1,
+                explanation: "Demea incarna il rigido modello educativo del mos maiorum tradizionale, basato su severità, controllo e timore, contrariamente all'ideale della tolleranza e della fiducia propugnato da suo fratello Micio."
+            },
+            {
+                question: "Quale termine terenziano esprime l'allineamento tra il padre e il figlio basato sulla fiducia reciproca?",
+                options: [
+                    "Severitas",
+                    "Pietas",
+                    "Pudicitia",
+                    "Pudor"
+                ],
+                correctIndex: 3,
+                explanation: "Terenzio ritiene che il pudor (il senso dell'onore e del rispetto) e la liberalitas (la generosità) siano i legami educativi migliori, capaci di responsabilizzare il giovane molto più del metus (timore)."
+            }
+        ]
     },
     lat_spec2: {
         subject: "letteratura_latina",
         chapterTag: "Spec. II",
         title: "Catullo, Carmina (Scelta)",
-        questions: []
+        questions: [
+            {
+                question: "Nel Carme 5 ('Vivamus, mea Lesbia, atque amemus'), quale metafora usa Catullo per rappresentare la caduta senza ritorno della vita umana?",
+                options: [
+                    "La caduta delle foglie autunnali.",
+                    "Il tramontare del sole che torna a risorgere, contrapposto alla nostra notte perpetua.",
+                    "Il naufragio di una nave in un mare in tempesta.",
+                    "L'inaridirsi di una sorgente d'acqua cristallina."
+                ],
+                correctIndex: 1,
+                explanation: "Catullo contrappone il ciclo eterno del sole (che può tramontare e risorgere: 'soles occidere et redire possunt') alla brevità della vita umana che, una volta tramontata, conduce a una sola notte perpetua da dormire ('nobis cum semel occidit brevis lux, nox est perpetua una dormienda')."
+            },
+            {
+                question: "Nel celebre distico elegiaco del Carme 85 ('Odi et amo'), come si manifesta la scissione interiore del poeta?",
+                options: [
+                    "Con un distacco razionale e stoico dai sentimenti amorosi.",
+                    "Attraverso il contrasto tra l'odio per Lesbia e il rispetto per il marito.",
+                    "Con la coesistenza passiva e straziante di sentimenti antitetici di cui il poeta non conosce la causa.",
+                    "Attraverso una rabbiosa ribellione contro la divinità di Venere."
+                ],
+                correctIndex: 2,
+                explanation: "Catullo esprime l'irrazionalità straziante dell'amore-odio ('quare id faciam, fortasse requiris? Nescio, sed fieri sentio et excruciar'): il poeta sperimenta la scissione sentimentale passivamente, sentendola accadere ed essendone tormentato (excruciar), senza poterla spiegare razionalmente."
+            }
+        ]
     },
     lat_spec3: {
         subject: "letteratura_latina",
         chapterTag: "Spec. III",
         title: "Sallustio, De Catilinae coniuratione, cap. 5",
-        questions: []
+        questions: [
+            {
+                question: "Nel capitolo 5 del 'De Catilinae coniuratione', quale caratteristica rende il ritratto di Catilina un ritratto 'paradossale'?",
+                options: [
+                    "Il fatto che le sue straordinarie qualità fisiche e intellettuali siano asservite esclusivamente al male e al crimine.",
+                    "Il fatto che un nobile patrizio romano sia descritto con vesti orientali e costumi greci.",
+                    "Il fatto che egli mostri pentimento e pietà nei confronti dei prigionieri di guerra.",
+                    "Il fatto che Cicerone lo difenda appassionatamente in Senato."
+                ],
+                correctIndex: 0,
+                explanation: "Il paradosso del ritratto sallustiano risiede nella combinazione di straordinario vigore intellettuale e forza fisica ('magna vi et animi et corporis') con una natura intrinsecamente depravata e malvagia ('sed ingenio malo pravoque'), in cui l'energia vitale è volta unicamente alla distruzione morale dello Stato."
+            },
+            {
+                question: "Quale accorgimento stilistico predilige Sallustio in questo passo per sottolineare la frenesia e il disordine interiore di Catilina?",
+                options: [
+                    "La concinnitas ciceroniana ricca di subordinate perfette e parallele.",
+                    "L'inconcinnitas arcaizzante caratterizzata da asindeti, ellissi del verbo e costrutti asimmetrici.",
+                    "L'uso esclusivo del distico elegiaco e di figure di suono musicali.",
+                    "La stesura di lunghi elenchi descrittivi di tipo puramente burocratico."
+                ],
+                correctIndex: 1,
+                explanation: "Sallustio adotta l'inconcinnitas (es. 'vastus animus immoderata, incredibilia, nimis alta semper cupiebat') per rendere, attraverso la frattura e l'asimmetria del ritmo retorico, la perenne irrequietezza morale ed il disordine psicologico del cospiratore."
+            }
+        ]
     },
     lat_spec4: {
         subject: "letteratura_latina",
         chapterTag: "Spec. IV",
         title: "Cicerone, Prima Catilinaria, parr. 1-2",
-        questions: []
+        questions: [
+            {
+                question: "Quale figura retorica caratterizza lo scatto d'ira oratorio iniziale della Prima Catilinaria ('Quo usque tandem abutere, Catilina, patientia nostra?')?",
+                options: [
+                    "L'apostrofe incalzante unita a una serie serrata di interrogative retoriche.",
+                    "Una pacata prolusione accademica ricca di eufemismi.",
+                    "Una descrizione mitologica del giudizio dell'oltretomba.",
+                    "L'uso dell'ottativo per augurare la salvezza a Catilina."
+                ],
+                correctIndex: 0,
+                explanation: "Il celebre exordium ciceroniano inizia ex abrupto (senza preamboli) con un'apostrofe diretta al cospiratore Catilina, incalzato da una sequenza incalzante di interrogative retoriche che ne denunciano la sfrontatezza morale."
+            },
+            {
+                question: "Con quale esclamazione Cicerone stigmatizza la corruzione dei costumi politici del suo tempo nel paragrafo 2?",
+                options: [
+                    "O tempora, o mores!",
+                    "Vae victis!",
+                    "Carthago delenda est!",
+                    "Cui prodest?"
+                ],
+                correctIndex: 0,
+                explanation: "Cicerone esclama 'O tempora, o mores!' ('Che tempi, che costumi!') per esprimere la sua indignazione morale: il Senato conosce la congiura, il console vede l'atto criminoso, ma Catilina continua a vivere e persino a sedere tra i senatori."
+            }
+        ]
     }
 };
 
