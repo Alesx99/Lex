@@ -262,6 +262,56 @@ const glossaryDatabase = {
         term: "Exultet",
         definition: "Rotolo liturgico miniato altomedievale diffuso nell'Italia meridionale, srotolato dall'alto verso il basso dal pulpito.",
         domain: "codicologia"
+    },
+    "humanitas": {
+        term: "Humanitas",
+        definition: "Ideale etico terenziano basato sulla comprensione, la tolleranza e la solidarietà reciproca tra uomini. Si riassume nella celebre sentenza: 'Homo sum, humani nihil a me alienum puto' ('Sono un uomo, non ritengo a me estraneo nulla di ciò che è umano').",
+        domain: "letteratura_latina"
+    },
+    "contaminatio": {
+        term: "Contaminatio",
+        definition: "Pratica teatrale che consiste nell'inserire in una commedia latina elementi, scene o intere trame attinte da una o più commedie greche differenti da quella principale di riferimento. Utilizzata ampiamente da Plauto e Terenzio.",
+        domain: "letteratura_latina"
+    },
+    "concinnitas": {
+        term: "Concinnitas",
+        definition: "Ideale estetico-retorico ciceroniano di armonia, simmetria, proporzione ed equilibrio sintattico, realizzato mediante parallelismi, antitesi e l'uso ritmico del cursus oratorio.",
+        domain: "letteratura_latina"
+    },
+    "inconcinnitas": {
+        term: "Inconcinnitas",
+        definition: "Stile asimmetrico, abrupto, spezzato ed ellittico prediletto da Sallustio e poi da Tacito. Rifiuta l'equilibrio ciceroniano per generare tensione emotiva e drammaticità descrittiva.",
+        domain: "letteratura_latina"
+    },
+    "neoteroi": {
+        term: "Neoteroi (Poeti Nuovi)",
+        definition: "Circolo di poeti latini del I sec. a.C. (tra cui Catullo) ispirati alla poesia callimachea alessandrina. Rifiutano la poesia epico-politica tradizionale in favore di componimenti brevi, raffinati, intimi e ricchi di erudizione mitologica.",
+        domain: "letteratura_latina"
+    },
+    "labor limae": {
+        term: "Labor Limae (Lavoro di Lima)",
+        definition: "L'attenta, paziente e meticolosa opera di revisione e levigatura stilistica dei versi, volta ad eliminare ogni imperfezione per raggiungere la massima perfezione formale ed espressiva.",
+        domain: "letteratura_latina"
+    },
+    "mos maiorum": {
+        term: "Mos Maiorum",
+        definition: "Il nucleo etico dei costumi degli antenati romani (le virtù tradizionali quali fides, pietas, virtus, gravitas, frugalitas) posto a fondamento della repubblica e difeso dagli storici conservatori come Sallustio.",
+        domain: "letteratura_latina"
+    },
+    "palliata": {
+        term: "Fabula Palliata",
+        definition: "Commedia latina di argomento e ambientazione greca (i personaggi indossano il pallio, tipico mantello greco). Rappresentata da autori come Terenzio e Plauto.",
+        domain: "letteratura_latina"
+    },
+    "togata": {
+        term: "Fabula Togata",
+        definition: "Commedia latina di argomento e ambientazione romana o italica (i personaggi indossano la toga).",
+        domain: "letteratura_latina"
+    },
+    "saturnio": {
+        term: "Saturnio",
+        definition: "L'antico verso indigeno laziale, di metrica discussa, utilizzato nella prima letteratura latina (come l'Odusia di Livio Andronico e il Bellum Poenicum di Nevio) prima del trionfo dell'esametro dattilico greco.",
+        domain: "letteratura_latina"
     }
 };
 

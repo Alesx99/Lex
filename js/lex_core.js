@@ -1826,9 +1826,25 @@ const LexCore = {
 
     trackChapterRead(chapterId) {
         try {
+            let normalizedId = chapterId;
+            if (chapterId && !chapterId.startsWith('http') && !chapterId.includes('://')) {
+                const pathParts = window.location.pathname.split('/');
+                const currentFolder = pathParts[pathParts.length - 2];
+                const knownFolders = [
+                    'diritto', 'arte_romana', 'storia', 'storia_arte', 'codicologia', 
+                    'letteratura_latina', 'letteratura_italiana', 'cultura_greca', 
+                    'storia_medievale', 'geografia', 'arte_medievale', 'cristiana', 
+                    'laboratorio', 'inglese', 'storia_contemporanea', 'arte_contemporanea', 
+                    'museologia', 'restauro', 'tesi'
+                ];
+                if (knownFolders.includes(currentFolder) && !chapterId.includes(currentFolder)) {
+                    normalizedId = currentFolder + '/' + chapterId;
+                }
+            }
+
             const read = JSON.parse(localStorage.getItem('lex-unique-chapters-read') || '[]');
-            if (!read.includes(chapterId)) {
-                read.push(chapterId);
+            if (!read.includes(normalizedId)) {
+                read.push(normalizedId);
                 localStorage.setItem('lex-unique-chapters-read', JSON.stringify(read));
             }
             // Check for ee-colofone (read 12+ Codicologia chapters)

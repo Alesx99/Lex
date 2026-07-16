@@ -88,6 +88,22 @@
             box-shadow: 0 4px 15px rgba(75, 85, 99, 0.15);
         }
 
+        .filter-btn.active.latina-btn {
+            background: rgba(190, 24, 93, 0.15);
+            border-color: #be185d;
+            box-shadow: 0 4px 15px rgba(190, 24, 93, 0.15);
+        }
+
+        .card-face-front.letteratura_latina-card {
+            border-top: 5px solid #be185d;
+        }
+
+        .letteratura_latina-badge {
+            background: rgba(190, 24, 93, 0.1);
+            color: #be185d;
+            border: 1px solid rgba(190, 24, 93, 0.2);
+        }
+
         .card-face-front.codicologia-card {
             border-top: 5px solid #4b5563;
         }
@@ -452,6 +468,7 @@
                 <button class="filter-btn romana-btn" onclick="setFilter('romana')">Arte Romana</button>
                 <button class="filter-btn storia-btn" onclick="setFilter('storia')">Storia Moderna</button>
                 <button class="filter-btn codicologia-btn" onclick="setFilter('codicologia')">Codicologia</button>
+                <button class="filter-btn latina-btn" onclick="setFilter('letteratura_latina')">Letteratura Latina</button>
             </div>
 
             <!-- SRS Mode Toggle -->
@@ -1058,6 +1075,79 @@
                 subject: "codicologia",
                 question: "Quali sono le parti strutturali principali di una legatura medievale?",
                 answer: "Assi (lignei) o quadranti (cartone), nervi (corde trasversali per cucire i fascicoli), capitelli (rinforzi colorati al dorso), fermagli (chiusure) e borchie/bulloni (metallo protettivo)."
+            },
+            // LETTERATURA LATINA
+            {
+                id: "latina-fc1",
+                subject: "letteratura_latina",
+                question: "Cos'è la \"contaminatio\" nel teatro latino?",
+                answer: "È il procedimento retorico-teatrale (usato da Plauto e Terenzio) che consiste nell'inserire in una commedia latina scene, personaggi o intrecci estratti da una o più opere greche diverse da quella presa come modello principale."
+            },
+            {
+                id: "latina-fc2",
+                subject: "letteratura_latina",
+                question: "Qual è la differenza tra \"fabula palliata\" e \"fabula togata\"?",
+                answer: "La palliata è una commedia latina ambientata in Grecia con personaggi in abiti greci (pallium); la togata è una commedia di ambientazione romana o italica in cui i personaggi indossano la toga."
+            },
+            {
+                id: "latina-fc3",
+                subject: "letteratura_latina",
+                question: "Cos'è l'ideale della \"humanitas\" in Terenzio?",
+                answer: "È un valore etico basato sul rispetto, la comprensione e la solidarietà verso gli altri uomini, rifiutando ogni barriera sociale o generazionale. Si condensa nel verso: \"Homo sum, humani nihil a me alienum puto\" (Adelphoe)."
+            },
+            {
+                id: "latina-fc4",
+                subject: "letteratura_latina",
+                question: "Che cosa si intende per \"labor limae\"?",
+                answer: "È il meticoloso e paziente lavoro di revisione stilistica e formale dei versi, mirato a raggiungere la massima purezza espressiva e filologica. È una caratteristica fondamentale dei poeti neoterici (Catullo) e di Orazio."
+            },
+            {
+                id: "latina-fc5",
+                subject: "letteratura_latina",
+                question: "Chi erano i \"Neoteroi\" (Poetae Novi) e a chi si ispiravano?",
+                answer: "Era un circolo di poeti latini del I sec. a.C. (tra cui Catullo, Licinio Calvo) che scelsero la poesia lirica breve, intimista e raffinata in opposizione all'epica tradizionale. Si ispiravano al modello greco di Callimaco (alessandrinismo)."
+            },
+            {
+                id: "latina-fc6",
+                subject: "letteratura_latina",
+                question: "Definisci lo stile dell'inconcinnitas in Sallustio.",
+                answer: "È uno stile asimmetrico, spezzato, ellittico e disarmonico (in netta opposizione alla concinnitas di Cicerone), caratterizzato dall'omissione di verbi o congiunzioni (asindeto) e dall'uso di termini arcaici per creare drammaticità."
+            },
+            {
+                id: "latina-fc7",
+                subject: "letteratura_latina",
+                question: "Cos'è il \"mos maiorum\" e chi ne è il principale difensore letterario?",
+                answer: "È il costume degli antenati, l'insieme dei valori morali tradizionali (fides, pietas, virtus, frugalitas) posti a fondamento dello Stato romano. Sallustio ne è un forte difensore, denunciandone la decadenza nelle sue monografie."
+            },
+            {
+                id: "latina-fc8",
+                subject: "letteratura_latina",
+                question: "Cos'è la \"concinnitas\" nello stile ciceroniano?",
+                answer: "È la ricerca di assoluto equilibrio, simmetria ed armonia nella costruzione del periodo oratorio. Si ottiene mediante la paratassi simmetrica, la corrispondenza dei membri e l'uso ritmico delle clausole metriche."
+            },
+            {
+                id: "latina-fc9",
+                subject: "letteratura_latina",
+                question: "Quali sono le caratteristiche dell'ablativo assoluto in latino?",
+                answer: "È un costrutto sintattico formato da un sostantivo (o pronome) in caso ablativo unito a un participio presente o perfetto concordato. Ha valore di proposizione subordinata circostanziale (temporale, causale, concessiva, ipotetica)."
+            },
+            {
+                id: "latina-fc10",
+                subject: "letteratura_latina",
+                question: "Come si traduce e che valore ha il costrutto del \"cum storico\" (o cum narrativo)?",
+                answer: "Si forma con cum + congiuntivo (presente/imperfetto per contemporaneità, perfetto/piuccheperfetto per anteriorità). Si traduce implicitamente con il gerundio, o esplicitamente con una proposizione temporale o causale."
+            },
+            {
+                id: "latina-fc11",
+                subject: "letteratura_latina",
+                question: "Cos'è il \"verso saturnio\"?",
+                answer: "È il più antico metro indigeno romano di origine pre-greca, basato su una struttura ritmica accentuativa. Fu usato da Livio Andronico per l'Odusia e da Nevio nel Bellum Poenicum prima di essere sostituito dall'esametro."
+            },
+            {
+                id: "latina-fc12",
+                subject: "letteratura_latina",
+                question: "Cos'è la \"coniugazione perifrastica attiva\" in latino?",
+                answer: "È un costrutto formato dal participio futuro di un verbo combinato con le voci del verbo sum. Esprime imminenza (\"stare per...\"), intenzionalità (\"avere intenzione di...\") o destinazione (\"essere destinato a...\")."
             }
         ];
 
@@ -1209,6 +1299,10 @@
                 subjectText = 'Codicologia';
                 badgeClass = 'card-subject-badge codicologia-badge';
                 cardClass = 'card-face card-face-front codicologia-card';
+            } else if (currentCard.subject === 'letteratura_latina') {
+                subjectText = 'Letteratura Latina';
+                badgeClass = 'card-subject-badge letteratura_latina-badge';
+                cardClass = 'card-face card-face-front letteratura_latina-card';
             } else {
                 subjectText = 'Arte Moderna';
                 badgeClass = 'card-subject-badge arte-badge';
