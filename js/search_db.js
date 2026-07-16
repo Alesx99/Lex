@@ -569,6 +569,38 @@ const searchDatabase = [
         navPath: "letteratura_latina/index.html?open=summaries/plus3_strumenti_digitali.md"
     },
     {
+        title: "Letteratura Latina Speciale I: Terenzio, Adelphoe, vv. 98-140",
+        subject: "letteratura_latina",
+        chapterTag: "Spec. I",
+        description: "Il dibattito educativo tra Micio e Demea. Traduzione letterale parola per parola, analisi dei paradigmi verbali, della metrica e della grammatica.",
+        keywords: "letteratura latina terenzio adelphoe demea micio commedia traduzione letterale paradigmi declinazioni grammatica",
+        navPath: "letteratura_latina/index.html?open=summaries/spec1_terenzio_adelphoe.md"
+    },
+    {
+        title: "Letteratura Latina Speciale II: Catullo, Carmina (Scelta)",
+        subject: "letteratura_latina",
+        chapterTag: "Spec. II",
+        description: "Esegesi e traduzione dei Carmi 5 (Vivamus mea Lesbia), 85 (Odi et amo) e 101 (il compianto per il fratello). Traduzione letterale a due colonne e analisi dei paradigmi.",
+        keywords: "letteratura latina catullo carmina carme 5 vivamus mea lesbia carme 85 odi et amo carme 101 frater traduzione letterale paradigmi declinazioni",
+        navPath: "letteratura_latina/index.html?open=summaries/spec2_catullo_carmina.md"
+    },
+    {
+        title: "Letteratura Latina Speciale III: Sallustio, De Catilinae coniuratione, cap. 5",
+        subject: "letteratura_latina",
+        chapterTag: "Spec. III",
+        description: "Il paradosso del ritratto di Catilina in Sallustio: la forza dell'indole volta al crimine. Traduzione letterale, esame retorico e paradigmi.",
+        keywords: "letteratura latina sallustio ritratto catilina de catilinae coniuratione congiura traduzione letterale paradigmi declinazioni",
+        navPath: "letteratura_latina/index.html?open=summaries/spec3_sallustio_catilina.md"
+    },
+    {
+        title: "Letteratura Latina Speciale IV: Cicerone, Prima Catilinaria, parr. 1-2",
+        subject: "letteratura_latina",
+        chapterTag: "Spec. IV",
+        description: "L'esordio drammatico contro Catilina in senato ('Quo usque tandem'). Traduzione letterale a fronte, analisi sintattica e retorica.",
+        keywords: "letteratura latina cicerone prima catilinaria quo usque tandem senato oratoria traduzione letterale paradigmi declinazioni",
+        navPath: "letteratura_latina/index.html?open=summaries/spec4_cicerone_catilinaria.md"
+    },
+    {
         title: "Codicologia: Archeologia del Libro",
         subject: "codicologia",
         chapterTag: "Intro",

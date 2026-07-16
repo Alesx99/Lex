@@ -4309,6 +4309,30 @@ const quizDatabase = {
                 explanation: "*L'Année Philologique* è il database bibliografico standard di riferimento internazionale per indicizzare studi scientifici, recensioni e pubblicazioni periodiche sull'antichità classica."
             }
         ]
+    },
+    lat_spec1: {
+        subject: "letteratura_latina",
+        chapterTag: "Spec. I",
+        title: "Terenzio, Adelphoe, vv. 98-140",
+        questions: []
+    },
+    lat_spec2: {
+        subject: "letteratura_latina",
+        chapterTag: "Spec. II",
+        title: "Catullo, Carmina (Scelta)",
+        questions: []
+    },
+    lat_spec3: {
+        subject: "letteratura_latina",
+        chapterTag: "Spec. III",
+        title: "Sallustio, De Catilinae coniuratione, cap. 5",
+        questions: []
+    },
+    lat_spec4: {
+        subject: "letteratura_latina",
+        chapterTag: "Spec. IV",
+        title: "Cicerone, Prima Catilinaria, parr. 1-2",
+        questions: []
     }
 };
 
