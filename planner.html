@@ -420,6 +420,7 @@
             { id: "arte", name: "Storia dell'Arte Moderna", cfu: 12, passed: false, grade: null, date: null, subject: "arte" },
             { id: "romana", name: "Archeologia e Arte Romana", cfu: 6, passed: false, grade: null, date: null, subject: "romana" },
             { id: "storia", name: "Storia Moderna", cfu: 6, passed: false, grade: null, date: null, subject: "storia" },
+            { id: "letteratura-latina", name: "Letteratura Latina", cfu: 12, passed: false, grade: null, date: null, subject: "letteratura_latina" },
             { id: "codicologia", name: "Codicologia", cfu: 9, passed: false, grade: null, date: null, subject: "codicologia" },
             { id: "filosofia", name: "Filosofia Estetica", cfu: 6, passed: false, grade: null, date: null, subject: "filosofia" },
             { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, grade: null, date: null, subject: "letteratura" },
@@ -556,6 +557,7 @@
             if (subjKey === 'storia') mappedSubj = 'storia';
             if (subjKey === 'diritto') mappedSubj = 'diritto';
             if (subjKey === 'codicologia') mappedSubj = 'codicologia';
+            if (subjKey === 'letteratura-latina' || subjKey === 'latina') mappedSubj = 'letteratura_latina';
 
             if (window.searchDatabase) {
                 chapters = window.searchDatabase.filter(item => item.subject === mappedSubj);
