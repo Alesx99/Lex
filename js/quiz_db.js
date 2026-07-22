@@ -4425,6 +4425,57 @@ const quizDatabase = {
                 explanation: "Cicerone esclama 'O tempora, o mores!' ('Che tempi, che costumi!') per esprimere la sua indignazione morale: il Senato conosce la congiura, il console vede l'atto criminoso, ma Catilina continua a vivere e persino a sedere tra i senatori."
             }
         ]
+    },
+    lat_spec5: {
+        subject: "letteratura_latina",
+        chapterTag: "Spec. V",
+        title: "Plauto e Catullo — Antologia e Analisi",
+        questions: [
+            {
+                question: "Nel monologo dello Pseudolus (vv. 394-405), a quale figura creativa Plauto paragona esplicitamente il suo servo callidus che inventa inganni?",
+                options: [
+                    "Al retore che costruisce un'arringa convincente davanti ai giudici.",
+                    "Al poeta che prende le tavolette e trova ciò che non esiste, rendendolo verosimile.",
+                    "Al filosofo stoico che ragiona per sillogismi.",
+                    "All'architetto che progetta un edificio partendo dal nulla."
+                ],
+                correctIndex: 1,
+                explanation: "Plauto usa la celebre similitudine metateatrale: 'quasi poeta, tabulas quom cepit sibi, quaerit quod nusquam est gentium, reperit tamen; facit illud veri simile quod mendacium est.' Il servo-poeta inventa la realtà come il drammaturgo inventa la commedia."
+            },
+            {
+                question: "Quale termine tecnico latino descrive la consapevolezza del personaggio plautino di essere un personaggio teatrale che recita, rivelando la propria artificiosità?",
+                options: [
+                    "Concinnitas",
+                    "Labor limae",
+                    "Metateatro",
+                    "Inconcinnitas"
+                ],
+                correctIndex: 2,
+                explanation: "Il metateatro è la tecnica drammaturgica per cui un personaggio rivela di essere consapevole di trovarsi in una situazione teatrale. Plauto la usa per esaltare il genio inventivo del servus callidus, paragonato esplicitamente al poeta."
+            },
+            {
+                question: "Il Carme 51 di Catullo è una rielaborazione di un celebre originale greco. Da quale poeta e da quale componimento è tratto?",
+                options: [
+                    "Da Pindaro, Olimpica I.",
+                    "Da Alceo, un frammento sui simposi.",
+                    "Da Saffo, il frammento 31 LP ('Phainetai moi').",
+                    "Da Teocrito, Idillio II."
+                ],
+                correctIndex: 2,
+                explanation: "Il Carme 51 è la traduzione/rielaborazione catulliana del frammento 31 Lobel-Page di Saffo ('phainetai moi kenos isos theoisin'), da cui deriva anche la struttura metrica: la strofe saffica (tre endecasillabi saffici + un adonio)."
+            },
+            {
+                question: "Nel Carme 72 ('Dilexi tum te'), Catullo distingue tra due tipi di sentimento usando due verbi diversi. Qual è la distinzione fondamentale?",
+                options: [
+                    "Tra l'amore fisico (amo) e l'amicizia spirituale (diligo/bene velle): Catullo amava Lesbia come una concubina ma non come un'amica.",
+                    "Tra l'affetto profondo, maturo e filiale (diligo/bene velle) e il bruciore del desiderio erotico (amo/uror): Lesbia ha distrutto il primo lasciando solo il secondo.",
+                    "Tra l'odio (odi) e l'amore (amo), la cui coesistenza paradossale è l'essenza del Carme 85.",
+                    "Tra l'amore per una schiava (amo) e l'amore per una matrona rispettabile (diligo)."
+                ],
+                correctIndex: 1,
+                explanation: "Catullo distingue tra diligo/bene velle (amore-stima, affetto rispettoso come quello di un padre per i figli) e amo/uror (desiderio fisico). Il tradimento di Lesbia ha azzerato il primo, lasciando solo il secondo: 'etsi impensius uror, multo mi tamen es vilior et levior.'"
+            }
+        ]
     }
 };
 

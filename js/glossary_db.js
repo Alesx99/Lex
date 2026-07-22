@@ -312,6 +312,26 @@ const glossaryDatabase = {
         term: "Saturnio",
         definition: "L'antico verso indigeno laziale, di metrica discussa, utilizzato nella prima letteratura latina (come l'Odusia di Livio Andronico e il Bellum Poenicum di Nevio) prima del trionfo dell'esametro dattilico greco.",
         domain: "letteratura_latina"
+    },
+    "nugae": {
+        term: "Nugae",
+        definition: "Letteralmente «sciocchezze, inezie»: termine con cui Catullo stesso definisce (in modo ironicamente modesto) i propri componimenti brevi e leggeri nel Carme 1 ('habe tibi quicquid hoc libelli'). Indica l'estetica neoterica della brevità raffinata contrapposta all'epica impegnata.",
+        domain: "letteratura_latina"
+    },
+    "metateatro": {
+        term: "Metateatro",
+        definition: "Tecnica drammaturgica, tipica di Plauto (soprattutto nello Pseudolus), in cui il personaggio è consapevole di essere un personaggio teatrale che recita. La similitudine tra il servo che inventa inganni e il poeta che compone bugie verosimili ('quasi poeta… facit illud veri simile quod mendacium est') è il suo manifesto.",
+        domain: "letteratura_latina"
+    },
+    "servus_callidus": {
+        term: "Servus Callidus",
+        definition: "L'archetipo del servo astuto (letteralmente: 'servo scaltro') nella commedia plautina. È il vero motore della trama: aiuta il giovane padrone innamorato, inganna il vecchio avaro o il lenone, e si vanta della propria intelligenza. Il modello per eccellenza è Pseudolus nello Pseudolus di Plauto.",
+        domain: "letteratura_latina"
+    },
+    "strofe_saffica": {
+        term: "Strofe Saffica",
+        definition: "Schema metrico di origine greca (dalla poetessa Saffo di Lesbo) composto da tre endecasillabi saffici seguiti da un breve adonio (× — ∪ ∪ —). Catullo l'adotta nel Carme 51 (traduzione di Saffo 31) e nel Carme 11, introducendola nella lirica latina.",
+        domain: "letteratura_latina"
     }
 };
 

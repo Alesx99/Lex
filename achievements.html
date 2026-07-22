@@ -2028,7 +2028,7 @@
                 {
                     id: "classicista_accademico",
                     name: "Classicista Accademico 🏛️",
-                    desc: "Leggi interamente tutti e 4 i Capitoli Speciali di Letteratura Latina.",
+                    desc: "Leggi interamente tutti e 5 i Capitoli Speciali di Letteratura Latina.",
                     current: (() => {
                         try {
                             const read = JSON.parse(localStorage.getItem('lex-unique-chapters-read') || '[]');
@@ -2036,12 +2036,13 @@
                                 'letteratura_latina/summaries/spec1_terenzio_adelphoe.md',
                                 'letteratura_latina/summaries/spec2_catullo_carmina.md',
                                 'letteratura_latina/summaries/spec3_sallustio_catilina.md',
-                                'letteratura_latina/summaries/spec4_cicerone_catilinaria.md'
+                                'letteratura_latina/summaries/spec4_cicerone_catilinaria.md',
+                                'letteratura_latina/summaries/spec5_plauto_catullo.md'
                             ];
                             return specialCaps.filter(c => read.includes(c)).length;
                         } catch(e){ return 0; }
                     })(),
-                    target: 4,
+                    target: 5,
                     type: "count"
                 }
             ];

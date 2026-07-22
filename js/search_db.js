@@ -767,6 +767,14 @@ const searchDatabase = [
         description: "Metodologia della ricerca scientifica, schedatura bibliografica, stesura capitoli, note citazionali e redazione finale.",
         keywords: "tesi laurea ricerca redazione bibliografia note citazioni eco stesura",
         navPath: "tesi/index.html?open=summaries/cap1.md"
+    },
+    {
+        title: "Spec. V — Plauto e Catullo: Antologia e Analisi",
+        subject: "letteratura_latina",
+        chapterTag: "Spec. V",
+        description: "Selezione antologica e analisi filologica di testi da Rudens, Aulularia, Pseudolus e Mostellaria di Plauto, e dei Carmina 1, 2, 8, 51, 70 e 72 di Catullo. Traduzione letterale a due colonne, analisi grammaticale, paradigmi verbali e metrologia (strofe saffica).",
+        keywords: "plauto catullo carmina rudens aulularia pseudolus mostellaria curculio servus callidus metateatro strofe saffica nugae labor limae neoteroi foedus amoris lesbia passer dilexi odi et amo analisi grammaticale paradigma fabula palliata cantica",
+        navPath: "letteratura_latina/index.html?open=summaries/spec5_plauto_catullo.md"
     }
 ];
 
