@@ -1412,7 +1412,8 @@
             pub2_governo_parlamento: "summaries/pub2_governo_parlamento.md",
             pub3_fonti_diritto: "summaries/pub3_fonti_diritto.md",
             pub4_diritti_liberta: "summaries/pub4_diritti_liberta.md",
-            pub5_proprieta_impresa: "summaries/pub5_proprieta_impresa.md"
+            pub5_proprieta_impresa: "summaries/pub5_proprieta_impresa.md",
+            dir_spec1: "summaries/spec1_contenziosi_codice_urbani.md"
         };
 
         const arteChapterLinks = {
@@ -1438,7 +1439,9 @@
             cap7_augusto_foro_successori: "summaries/cap7_augusto_foro_successori.md",
             cap8_traiano: "summaries/cap8_traiano.md",
             cap9_adriano: "summaries/cap9_adriano.md",
-            cap10_antonini_tardoantico: "summaries/cap10_antonini_tardoantico.md"
+            cap10_antonini_tardoantico: "summaries/cap10_antonini_tardoantico.md",
+            rom_spec1: "summaries/spec1_architettura_tardoantica.md",
+            rom_spec2: "summaries/spec2_ritrattistica_imperiale.md"
         };
 
         const storiaChapterLinks = {
@@ -1452,7 +1455,13 @@
             sto8_napoleone_restaurazione: "summaries/sto8_napoleone_restaurazione.md",
             sto9_societa_borghese_liberalismo: "summaries/sto9_societa_borghese_liberalismo.md",
             sto10_risorgimento_italiano: "summaries/sto10_risorgimento_italiano.md",
-            sto11_unificazione_regno: "summaries/sto11_unificazione_regno.md"
+            sto11_unificazione_regno: "summaries/sto11_unificazione_regno.md",
+            sto_spec1: "summaries/spec1_riforma_controriforma.md",
+            sto_spec2: "summaries/spec2_rivoluzione_scientifica.md"
+        };
+
+        const itaChapterLinks = {
+            ita_spec1: "summaries/spec1_dante_petrarca.md"
         };
 
         const codicologiaChapterLinks = {
@@ -1526,6 +1535,14 @@
                     chapterName: mod.title,
                     subject: 'storia',
                     link: summary ? `storia/index.html?open=${summary}` : 'storia/index.html',
+                    navText: `Apri ${mod.chapterTag}`
+                };
+            } else if (mod.subject === 'letteratura_italiana') {
+                const summary = itaChapterLinks[moduleKey];
+                return {
+                    chapterName: mod.title,
+                    subject: 'letteratura_italiana',
+                    link: summary ? `letteratura_italiana/index.html?open=${summary}` : 'letteratura_italiana/index.html',
                     navText: `Apri ${mod.chapterTag}`
                 };
             } else if (mod.subject === 'codicologia') {
@@ -2333,6 +2350,9 @@
             } else if (subject === 'codicologia') {
                 const link = codicologiaChapterLinks[moduleKey];
                 return link ? `codicologia/${link}` : null;
+            } else if (subject === 'letteratura_italiana') {
+                const link = itaChapterLinks[moduleKey];
+                return link ? `letteratura_italiana/${link}` : null;
             } else if (subject === 'letteratura_latina') {
                 const link = latChapterLinks[moduleKey];
                 return link ? `letteratura_latina/${link}` : null;

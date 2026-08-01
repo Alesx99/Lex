@@ -332,6 +332,41 @@ const glossaryDatabase = {
         term: "Strofe Saffica",
         definition: "Schema metrico di origine greca (dalla poetessa Saffo di Lesbo) composto da tre endecasillabi saffici seguiti da un breve adonio (× — ∪ ∪ —). Catullo l'adotta nel Carme 51 (traduzione di Saffo 31) e nel Carme 11, introducendola nella lirica latina.",
         domain: "letteratura_latina"
+    },
+    "spolia": {
+        term: "Spolia (Reimpiego)",
+        definition: "Pratica artistica ed architettonica tardo-antica consistente nel prelevare sculture, elementi decorativi o blocchi da monumenti più antichi per integrarli in nuovi edifici imperiali o religiosi (es. Arco di Costantino).",
+        domain: "arte_romana"
+    },
+    "acrolito": {
+        term: "Acrolito",
+        definition: "Tipologia statuaria in cui le sole parti nude del corpo (testa, mani, piedi) sono scolpite in marmo o pietra nobile, mentre il resto della figura è realizzato in legno rivestito di drappeggi metallici o dorati (es. Colosso di Costantino).",
+        domain: "arte_romana"
+    },
+    "codice_urbani": {
+        term: "Codice Urbani (D.Lgs. 42/2004)",
+        definition: "Il testo unico della legislazione italiana sui Beni Culturali e sul Paesaggio, emanato nel 2004, che disciplina i procedimenti di tutela, verifica dell'interesse, dichiarazione del vincolo e circolazione internazionale.",
+        domain: "diritto"
+    },
+    "acquisto_coattivo": {
+        term: "Acquisto Coattivo",
+        definition: "Istituto giuridico attraverso il quale lo Stato italiano ha facoltà di acquisire autoritativamente la proprietà di un bene culturale privato al prezzo denunciato in sede di compravendita o di richiesta di attestato di libera circolazione.",
+        domain: "diritto"
+    },
+    "sola_fide": {
+        term: "Sola Fide",
+        definition: "Principio cardine della Riferma Protestante di Martin Lutero secondo cui la giustificazione e la salvezza dell'anima avvengono esclusivamente per la grazia e la fede in Cristo, senza il valore meritorio delle opere umane.",
+        domain: "storia"
+    },
+    "eliocentrismo": {
+        term: "Eliocentrismo Galileiano",
+        definition: "Modello astronomico e fisico scientifico che colloca il Sole al centro del sistema planetario, confermato empiricamente dalle osservazioni telescopiche di Galileo Galilei e matematicamente dalle leggi di Keplero e Newton.",
+        domain: "storia"
+    },
+    "terzina_dantesca": {
+        term: "Terzina Dantesca",
+        definition: "Metrica in rima incatenata (ABA BCB CDC) inventata da Dante Alighieri per la Commedia, in cui la rima del verso centrale di ogni terzina viene ripresa dal primo e dal terzo verso della terzina successiva.",
+        domain: "letteratura_italiana"
     }
 };
 

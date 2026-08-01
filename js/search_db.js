@@ -775,6 +775,54 @@ const searchDatabase = [
         description: "Selezione antologica e analisi filologica di testi da Rudens, Aulularia, Pseudolus e Mostellaria di Plauto, e dei Carmina 1, 2, 8, 51, 70 e 72 di Catullo. Traduzione letterale a due colonne, analisi grammaticale, paradigmi verbali e metrologia (strofe saffica).",
         keywords: "plauto catullo carmina rudens aulularia pseudolus mostellaria curculio servus callidus metateatro strofe saffica nugae labor limae neoteroi foedus amoris lesbia passer dilexi odi et amo analisi grammaticale paradigma fabula palliata cantica",
         navPath: "letteratura_latina/index.html?open=summaries/spec5_plauto_catullo.md"
+    },
+    {
+        title: "Spec. I — Architettura Tardo-Antica e Svolta Costantiniana",
+        subject: "arte_romana",
+        chapterTag: "Spec. I",
+        description: "Analisi della Basilica di Massenzio, dell'Arco di Costantino (uso degli spolia) e delle Terme di Diocleziano. Evoluzione delle volte in calcestruzzo e dell'iconografia del sovrano.",
+        keywords: "arte romana architettura tardoantica basilica massenzio costantino arco costantino spolia reimpiego porfido acrolito terme diocleziano prospettiva ribaltata",
+        navPath: "arte_romana/index.html?open=summaries/spec1_architettura_tardoantica.md"
+    },
+    {
+        title: "Spec. II — Evoluzione della Ritrattistica Imperiale",
+        subject: "arte_romana",
+        chapterTag: "Spec. II",
+        description: "Studio del ritratto romano dal verismo patrizio repubblicano (ius imaginum) al classicismo neo-attico augusteo (Prima Porta), fino al realismo di III secolo e all'astrazione tardo-imperiale.",
+        keywords: "arte romana ritratto verismo patrizio ius imaginum augusto prima porta adriano adlocutio lorica marco aurelio costantino ieratico",
+        navPath: "arte_romana/index.html?open=summaries/spec2_ritrattistica_imperiale.md"
+    },
+    {
+        title: "Spec. I — Codice Urbani, Contenziosi sul Vincolo e Direttive UE",
+        subject: "diritto",
+        chapterTag: "Spec. I",
+        description: "Approfondimento sul D.Lgs. 42/2004, procedimento di dichiarazione dell'interesse culturale (Art. 13), ricorsi amministrativi/TAR, diritto di prelazione e restituzione internazionale (Direttiva UE 2014/60/UE).",
+        keywords: "diritto beni culturali codice urbani vincolo dichiarazione ricorso gerarchico tar acquisto coattivo prelazione attestato libera circolazione direttiva ue 2014/60/ue",
+        navPath: "diritto/index.html?open=summaries/spec1_contenziosi_codice_urbani.md"
+    },
+    {
+        title: "Spec. I — La Riforma Protestante e la Controriforma",
+        subject: "storia",
+        chapterTag: "Spec. I",
+        description: "Analisi teologica e storica delle 95 Tesi di Lutero, sola fide, sola scriptura, calvinismo e risposte cattoliche al Concilio di Trento (inquisizione, seminari, registri parrocchiali).",
+        keywords: "storia moderna riforma protestante lutero 95 tesi sola fide calvino predestinazione concilio trento controriforma transustanziazione inquisizione",
+        navPath: "storia/index.html?open=summaries/spec1_riforma_controriforma.md"
+    },
+    {
+        title: "Spec. II — La Rivoluzione Scientifica e Galilei",
+        subject: "storia",
+        chapterTag: "Spec. II",
+        description: "La crisi del cosmo aristotelico-tolemaico: da Copernico e Keplero al metodo sperimentale di Galileo Galilei (Sidereus Nuncius) e alla fisica gravitazionale di Newton.",
+        keywords: "storia moderna rivoluzione scientifica copernico keplero galileo galilei sidereus nuncius metodo sperimentale eliocentrismo abiura newton",
+        navPath: "storia/index.html?open=summaries/spec2_rivoluzione_scientifica.md"
+    },
+    {
+        title: "Spec. I — Dante e Petrarca: Antologia e Parafrasi",
+        subject: "letteratura_italiana",
+        chapterTag: "Spec. I",
+        description: "Antologia con testo originale a fronte e parafrasi letterale a due colonne: Inferno V di Dante (Paolo e Francesca, Amor ch'al cor gentil) e Sonetto 1 di Petrarca (Voi ch'ascoltate in rime sparse).",
+        keywords: "letteratura italiana dante alighieri petrarca inferno 5 paolo e francesca amor ch al cor gentil galeotto canzoniere voi ch ascoltate rime sparse parafrasi terzina sonetto",
+        navPath: "letteratura_italiana/index.html?open=summaries/spec1_dante_petrarca.md"
     }
 ];
 

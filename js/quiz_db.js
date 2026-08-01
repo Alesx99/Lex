@@ -4476,6 +4476,169 @@ const quizDatabase = {
                 explanation: "Catullo distingue tra diligo/bene velle (amore-stima, affetto rispettoso come quello di un padre per i figli) e amo/uror (desiderio fisico). Il tradimento di Lesbia ha azzerato il primo, lasciando solo il secondo: 'etsi impensius uror, multo mi tamen es vilior et levior.'"
             }
         ]
+    },
+    rom_spec1: {
+        subject: "arte_romana",
+        chapterTag: "Spec. I",
+        title: "Architettura Tardo-Antica e Svolta Costantiniana",
+        questions: [
+            {
+                question: "Quale importante innovazione ingegneristica caratterizza la struttura della Basilica di Massenzio e Costantino rispetto alle basiliche romane tradizionali?",
+                options: [
+                    "L'adozione esclusiva di capriate in legno di cedro senza sostegni verticali.",
+                    "L'uso di immense volte a crociera e a botte cassettonate in calcestruzzo ispirate alle grandi sale termali.",
+                    "La pianta circolare a cupola centrale poggiata su colonne binate.",
+                    "La copertura piana con lastre di marmo pentelico."
+                ],
+                correctIndex: 1,
+                explanation: "La Basilica di Massenzio abbandona la copertura in legno tradizionale delle basiliche forensi per adottare l'architettura voltata in calcestruzzo tipica delle grandi frigidaria termali (come le Terme di Diocleziano)."
+            },
+            {
+                question: "Cosa simboleggia l'uso sistematico dello spolia (reimpiego di rilievi traianei, adrianei ed antonini) nell'Arco di Costantino?",
+                options: [
+                    "La mancanza assoluta di fondi finanziari per pagare nuovi scultori.",
+                    "La volontà di Costantino di legittimarsi come erede e continuatore dei 'boni principes' della tradizione imperiale.",
+                    "Un atto di sfregio e damnatio memoriae nei confronti degli imperatori del II secolo.",
+                    "La conversione immediata dell'intera corte imperiale al cristianesimo ortodosso."
+                ],
+                correctIndex: 1,
+                explanation: "Attraverso il reimpiego ideologico delle sculture di Traiano, Adriano e Marco Aurelio, Costantino si proclama solennemente legittimo restauratore delle virtù dei grandi imperatori del passato."
+            }
+        ]
+    },
+    rom_spec2: {
+        subject: "arte_romana",
+        chapterTag: "Spec. II",
+        title: "Evoluzione della Ritrattistica Imperiale",
+        questions: [
+            {
+                question: "Da quale tradizione romana trae origine il marcato verismo della ritrattistica di età repubblicana?",
+                options: [
+                    "Dalla scultura classica ateniese del V secolo a.C.",
+                    "Dal culto degli antenati e dalle maschere in cera (imagines maiorum) conservate nelle domus patrizie.",
+                    "Dai rilievi figurati assiri e babilonesi importati dopo la conquista dell'Oriente.",
+                    "Dalla pittura vascolare etrusca a figure nere."
+                ],
+                correctIndex: 1,
+                explanation: "Il verismo repubblicano deriva dal rituale patrizio dell'ius imaginum: le maschere di cera improntate sul volto dei defunti venivano riprodotte in marmo accentuando rughe ed asimmetrie come segno di gravitas e severitas."
+            },
+            {
+                question: "Quale novità stilistica ed iconografica introduce l'imperatore Adriano nei propri ritratti ufficiali nel II secolo d.C.?",
+                options: [
+                    "L'adozione della barba corta ispirata ai filosofi greci e l'incisione plastica della pupilla e dell'iride.",
+                    "La rasatura completa del capo e l'uso di corone di piume egizie.",
+                    "La raffigurazione in età senile con rughe esasperate in stile repubblicano.",
+                    "L'annullamento dei tratti del volto a favore di maschere geometriche di bronzo."
+                ],
+                correctIndex: 0,
+                explanation: "Filelleno appassionato, Adriano introduce la barba di foggia greca e l'incisione nello scalpello dell'iride e della pupilla, sostituendo la precedente pittura dei dettagli oculari."
+            }
+        ]
+    },
+    dir_spec1: {
+        subject: "diritto",
+        chapterTag: "Spec. I",
+        title: "Codice Urbani, Contenziosi sul Vincolo e Direttive UE",
+        questions: [
+            {
+                question: "Entro quale termine ed a quale organo può essere proposto il ricorso amministrativo gerarchico contro la dichiarazione d'interesse culturale (Art. 16 D.Lgs. 42/2004)?",
+                options: [
+                    "Entro 60 giorni al Tribunale Amministrativo Regionale (TAR).",
+                    "Entro 30 giorni al Direttore Generale competente del Ministero della Cultura (MiC).",
+                    "Entro 120 giorni al Presidente della Repubblica.",
+                    "Entro 10 giorni al Sindaco del Comune dove si trova il bene."
+                ],
+                correctIndex: 1,
+                explanation: "Il ricorso amministrativo gerarchico contro la dichiarazione d'interesse (vincolo) si propone al Direttore Generale del MiC entro 30 giorni dalla notifica e sospende l'efficacia del provvedimento."
+            },
+            {
+                question: "Quale importante novità introduce la Direttiva UE 2014/60/UE in materia di restituzione dei beni culturali usciti illecitamente dal territorio di uno Stato membro?",
+                options: [
+                    "L'introduzione di tasse doganali obbligatorie per tutte le opere d'arte contemporanea.",
+                    "L'eliminazione delle soglie finanziarie d'imposta e dell'anzianità minima dei beni rientranti nell'azione di restituzione.",
+                    "L'obbligo di distruggere le opere d'arte prive di certificato di autenticità.",
+                    "Il trasferimento di tutti i beni contesi alla sede centrale dell'UNESCO a Parigi."
+                ],
+                correctIndex: 1,
+                explanation: "La Direttiva 2014/60/UE ha superato l'impianto della Direttiva 93/7/CEE eliminando le soglie di valore economico e di vetustà per la restituzione dei beni classificati come patrimonio culturale nazionale."
+            }
+        ]
+    },
+    sto_spec1: {
+        subject: "storia",
+        chapterTag: "Spec. I",
+        title: "La Riforma Protestante e la Controriforma",
+        questions: [
+            {
+                question: "Quale principio teologico luterano afferma che la salvezza dell'anima avviene unicamente per la grazia divina e non mediante le opere meritorie?",
+                options: [
+                    "Sola Scriptura",
+                    "Sola Fide (e Sola Gratia)",
+                    "Transustanziazione",
+                    "Doppia Predestinazione"
+                ],
+                correctIndex: 1,
+                explanation: "Il principio del Sola Fide stabilisce che l'uomo viene giustificato e salvato da Dio per la sola fede nella grazia di Cristo, rendendo teologicamente inefficaci le opere di bene ed il pagamento delle indulgenze."
+            },
+            {
+                question: "Quale importante decreto disciplinare istituisce il Concilio di Trento (1545-1563) per contrastare l'ignoranza e l'immoralità del clero?",
+                options: [
+                    "L'abolizione dei monasteri maschili e femminili.",
+                    "L'obbligo di residenza dei vescovi nelle diocesi e l'istituzione dei Seminari per la formazione dei sacerdoti.",
+                    "La traduzione obbligatoria della Bibbia in tutti i volgari europei.",
+                    "L'elezione diretta dei parroci da parte dei fedeli della comunità."
+                ],
+                correctIndex: 1,
+                explanation: "Il Concilio tridentino riorganizza la struttura ecclesiastica imponendo ai vescovi la residenza pastorale e fondando i Seminari diocesani per garantire un'adeguata preparazione teologica e morale del clero."
+            }
+        ]
+    },
+    sto_spec2: {
+        subject: "storia",
+        chapterTag: "Spec. II",
+        title: "La Rivoluzione Scientifica e Galilei",
+        questions: [
+            {
+                question: "Nelle celebri 'Lettere Copernicane', come definisce Galileo Galilei il rapporto tra l'autorità della Sacra Scrittura e l'indagine scientifica della Natura?",
+                options: [
+                    "La Bibbia è l'unica fonte valida anche per calcolare i moti astronomici ed i fenomeni fisici.",
+                    "La Bibbia insegna come si vada in cielo (verità soteriologica) e non come vada il cielo (verità scientifica naturale).",
+                    "La scienza deve essere subordinata in ogni decisione alle sentenze dell'Inquisizione Romana.",
+                    "La Natura ed la Bibbia sono in costante ed insanabile contraddizione teologica."
+                ],
+                correctIndex: 1,
+                explanation: "Galileo argomenta la separazione tra la sfera religiosa e quella scientifica: la Scrittura usa un linguaggio accomodato alla comprensione del popolo per guidare la salvezza morale, mentre la Natura risponde a leggi matematiche inalterabili."
+            }
+        ]
+    },
+    ita_spec1: {
+        subject: "letteratura_italiana",
+        chapterTag: "Spec. I",
+        title: "Dante e Petrarca — Antologia e Parafrasi",
+        questions: [
+            {
+                question: "Quale celebre verso del Canto V dell'Inferno dantesco riassume il principio dell'amore cortese ripreso dal trattato De Amore di Andrea Cappellano?",
+                options: [
+                    "«Considerate la vostra semenza: fatti non foste a viver come bruti...»",
+                    "«Amor, ch'al cor gentil ratto s'apprende...»",
+                    "«Per me si va ne la città dolente, per me si va ne l'etterno dolore...»",
+                    "«Vergine Madre, figlia del tuo figlio...»"
+                ],
+                correctIndex: 1,
+                explanation: "Francesca da Rimini giustifica la nascita del suo amore sventurato per Paolo pronunciando la celebre terzina 'Amor, ch'al cor gentil ratto s'apprende', che teorizza l'inevitabilità dell'amore in un animo nobile."
+            },
+            {
+                question: "Nel sonetto introduttivo dei Rerum vulgarium fragmenta ('Voi ch'ascoltate in rime sparse'), come definisce Petrarca la sua passata passione amorosa per Laura?",
+                options: [
+                    "Un percorso teologico di elevazione verso Dio.",
+                    "Un 'primo giovenile errore' ed un 'vaneggiare' di cui prova vergogna e pentimento.",
+                    "Un'impresa eroica degna della gloria politica e poetica dei romani.",
+                    "Un'illusione comica priva di qualsiasi riflessione morale."
+                ],
+                correctIndex: 1,
+                explanation: "Nel sonetto proemiale Petrarca traccia un bilancio amaro e disincantato della propria esistenza, definendo l'amore terreno per Laura un 'giovenile errore' ed un 'vaneggiare' che lascia soltanto vergogna e pentimento."
+            }
+        ]
     }
 };
 
