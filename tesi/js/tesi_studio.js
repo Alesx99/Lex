@@ -68,6 +68,7 @@
         initStudiorumIndex();
         initThesisEditor();
         initDragAndDrop();
+        initMascotSnoozeManager();
     });
 
     // LOCAL STORAGE LOAD/SAVE
@@ -783,21 +784,112 @@
             .replace(/-+$/, '');
     }
 
-    function showToast(msg) {
-        if (typeof LexCore !== 'undefined' && LexCore.showNotification) {
-            LexCore.showNotification("Scrittoio Tesi", msg);
+    // MASCOT FRATE ALESSIO 15-MINUTE SNOOZE MANAGER
+    const SNOOZE_KEY = 'lex_mascot_snooze_until';
+
+    function initMascotSnoozeManager() {
+        checkMascotSnoozeState();
+        setInterval(checkMascotSnoozeState, 1000);
+    }
+
+    function checkMascotSnoozeState() {
+        const snoozeUntil = localStorage.getItem(SNOOZE_KEY);
+        const container = document.getElementById('lex-mascot-container');
+        const snoozeBtn = document.getElementById('mascot-snooze-btn');
+        const snoozeLabel = document.getElementById('mascot-snooze-label');
+
+        if (!snoozeUntil) {
+            if (snoozeBtn) {
+                snoozeBtn.classList.remove('active-snooze');
+                if (snoozeLabel) snoozeLabel.textContent = "Meditazione (15m)";
+            }
+            if (container && container.style.display === 'none' && !container.classList.contains('mascot-snoozing-out')) {
+                bringBackMascot(container);
+            }
             return;
         }
 
-        const toast = document.createElement('div');
-        toast.className = 'thesis-toast';
-        toast.textContent = msg;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.classList.add('show'), 10);
+        const remainingMs = parseInt(snoozeUntil, 10) - Date.now();
+        if (remainingMs <= 0) {
+            localStorage.removeItem(SNOOZE_KEY);
+            if (snoozeBtn) {
+                snoozeBtn.classList.remove('active-snooze');
+                if (snoozeLabel) snoozeLabel.textContent = "Meditazione (15m)";
+            }
+            if (container) {
+                bringBackMascot(container);
+            }
+        } else {
+            const totalSec = Math.ceil(remainingMs / 1000);
+            const mins = Math.floor(totalSec / 60);
+            const secs = totalSec % 60;
+            const timeStr = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+            if (snoozeBtn) {
+                snoozeBtn.classList.add('active-snooze');
+                if (snoozeLabel) snoozeLabel.textContent = `Meditazione (${timeStr})`;
+            }
+            if (container && container.style.display !== 'none' && !container.classList.contains('mascot-snoozing-out')) {
+                container.style.display = 'none';
+            }
+        }
+    }
+
+    window.toggleMascotSnooze15m = function() {
+        const snoozeUntil = localStorage.getItem(SNOOZE_KEY);
+        const container = document.getElementById('lex-mascot-container');
+
+        if (snoozeUntil && parseInt(snoozeUntil, 10) > Date.now()) {
+            localStorage.removeItem(SNOOZE_KEY);
+            checkMascotSnoozeState();
+            if (container) {
+                bringBackMascot(container);
+            }
+        } else {
+            const futureTime = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(SNOOZE_KEY, futureTime.toString());
+
+            if (container) {
+                const bubble = document.getElementById('lex-mascot-bubble');
+                const bubbleText = document.getElementById('lex-mascot-bubble-text');
+                if (bubble && bubbleText) {
+                    bubbleText.textContent = "Vado a meditare nello Scriptorium per 15 minuti! Buono studio, Lex! 🦫✨";
+                    bubble.classList.add('visible');
+                }
+
+                setTimeout(() => {
+                    container.classList.remove('mascot-snoozing-in');
+                    container.classList.add('mascot-snoozing-out');
+
+                    setTimeout(() => {
+                        container.style.display = 'none';
+                        container.classList.remove('mascot-snoozing-out');
+                        checkMascotSnoozeState();
+                    }, 750);
+                }, 800);
+            } else {
+                checkMascotSnoozeState();
+            }
+        }
+    };
+
+    function bringBackMascot(container) {
+        if (!container) return;
+        container.style.display = 'flex';
+        container.classList.remove('mascot-snoozing-out');
+        container.classList.add('mascot-snoozing-in');
+
+        const bubble = document.getElementById('lex-mascot-bubble');
+        const bubbleText = document.getElementById('lex-mascot-bubble-text');
+        if (bubble && bubbleText) {
+            bubbleText.textContent = "Sono tornato dalla meditazione! Pronto ad assisterti nello studio, Lex! 📚✨";
+            bubble.classList.add('visible');
+            setTimeout(() => bubble.classList.remove('visible'), 5000);
+        }
+
         setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 300);
-        }, 2500);
+            container.classList.remove('mascot-snoozing-in');
+        }, 900);
     }
 
 })();

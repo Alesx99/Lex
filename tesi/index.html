@@ -24,20 +24,25 @@
     <header class="thesis-header">
         <div class="brand">
             <a href="../index.html" class="back-hub-icon" title="Torna al Portale Centrale di Lex Studiorum">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             </a>
-            <div>
-                <h1>Lex · Scrittoio della Tesi</h1>
-                <p>Laboratorio Multidisciplinare di Stesura & Ricerca</p>
+            <div class="brand-text">
+                <h1>Lex Studiorum</h1>
+                <p>Scrittoio della Tesi · Laboratorio Multidisciplinare</p>
             </div>
         </div>
-        <nav class="thesis-nav">
-            <button class="nav-view-btn active" id="btn-view-studio">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18" rx="1"></rect><rect x="9.5" y="3" width="5" height="18" rx="1"></rect><rect x="16" y="3" width="5" height="18" rx="1"></rect></svg>
-                Scrittoio 3 Colonne
-            </button>
-        </nav>
+        <div class="header-center">
+            <div class="nav-view-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18" rx="1"></rect><rect x="9.5" y="3" width="5" height="18" rx="1"></rect><rect x="16" y="3" width="5" height="18" rx="1"></rect></svg>
+                <span>Scrittoio 3 Colonne</span>
+            </div>
+        </div>
         <div class="header-controls">
+            <!-- Frate Alessio 15m Snooze Button -->
+            <button id="mascot-snooze-btn" class="mascot-snooze-btn" onclick="toggleMascotSnooze15m()" title="Fai meditare Frate Alessio per 15 minuti per liberare la colonna a sinistra">
+                <span class="btn-icon">🦫</span>
+                <span id="mascot-snooze-label">Meditazione (15m)</span>
+            </button>
             <button id="theme-toggle" class="control-btn" title="Cambia Tema">
                 <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
