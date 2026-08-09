@@ -788,21 +788,41 @@
     const SNOOZE_KEY = 'lex_mascot_snooze_until';
 
     function initMascotSnoozeManager() {
+        injectMascotSnoozePill();
         checkMascotSnoozeState();
-        setInterval(checkMascotSnoozeState, 1000);
+        setInterval(() => {
+            injectMascotSnoozePill();
+            checkMascotSnoozeState();
+        }, 1000);
+    }
+
+    function injectMascotSnoozePill() {
+        const container = document.getElementById('lex-mascot-container');
+        if (!container) return;
+
+        // Ensure snooze pill is attached to mascot avatar wrapper
+        const avatarWrapper = document.getElementById('lex-mascot-avatar-wrapper');
+        if (avatarWrapper && !document.getElementById('mascot-snooze-action-pill')) {
+            const pill = document.createElement('button');
+            pill.id = 'mascot-snooze-action-pill';
+            pill.className = 'mascot-snooze-pill';
+            pill.title = 'Fai meditare Frate Alessio per 15 minuti per liberare lo spazio a sinistra';
+            pill.innerHTML = '<span>💤 Medita 15m</span>';
+            pill.onclick = (e) => {
+                e.stopPropagation();
+                window.toggleMascotSnooze15m();
+            };
+            avatarWrapper.appendChild(pill);
+        }
     }
 
     function checkMascotSnoozeState() {
         const snoozeUntil = localStorage.getItem(SNOOZE_KEY);
         const container = document.getElementById('lex-mascot-container');
-        const snoozeBtn = document.getElementById('mascot-snooze-btn');
-        const snoozeLabel = document.getElementById('mascot-snooze-label');
+        let reentryPill = document.getElementById('mascot-snooze-reentry-pill');
 
         if (!snoozeUntil) {
-            if (snoozeBtn) {
-                snoozeBtn.classList.remove('active-snooze');
-                if (snoozeLabel) snoozeLabel.textContent = "Meditazione (15m)";
-            }
+            if (reentryPill) reentryPill.remove();
             if (container && container.style.display === 'none' && !container.classList.contains('mascot-snoozing-out')) {
                 bringBackMascot(container);
             }
@@ -812,26 +832,29 @@
         const remainingMs = parseInt(snoozeUntil, 10) - Date.now();
         if (remainingMs <= 0) {
             localStorage.removeItem(SNOOZE_KEY);
-            if (snoozeBtn) {
-                snoozeBtn.classList.remove('active-snooze');
-                if (snoozeLabel) snoozeLabel.textContent = "Meditazione (15m)";
-            }
-            if (container) {
-                bringBackMascot(container);
-            }
+            if (reentryPill) reentryPill.remove();
+            if (container) bringBackMascot(container);
         } else {
             const totalSec = Math.ceil(remainingMs / 1000);
             const mins = Math.floor(totalSec / 60);
             const secs = totalSec % 60;
             const timeStr = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 
-            if (snoozeBtn) {
-                snoozeBtn.classList.add('active-snooze');
-                if (snoozeLabel) snoozeLabel.textContent = `Meditazione (${timeStr})`;
-            }
+            // Ensure container is hidden during snooze
             if (container && container.style.display !== 'none' && !container.classList.contains('mascot-snoozing-out')) {
                 container.style.display = 'none';
             }
+
+            // Create or update compact reentry pill at bottom left
+            if (!reentryPill) {
+                reentryPill = document.createElement('button');
+                reentryPill.id = 'mascot-snooze-reentry-pill';
+                reentryPill.className = 'mascot-reentry-pill';
+                reentryPill.title = 'Richiama Frate Alessio prima del tempo';
+                reentryPill.onclick = () => window.toggleMascotSnooze15m();
+                document.body.appendChild(reentryPill);
+            }
+            reentryPill.innerHTML = `<span>🦫 Meditazione (${timeStr})</span> <span style="font-size:0.7rem; opacity:0.8;">· Richiama</span>`;
         }
     }
 
@@ -841,10 +864,9 @@
 
         if (snoozeUntil && parseInt(snoozeUntil, 10) > Date.now()) {
             localStorage.removeItem(SNOOZE_KEY);
-            checkMascotSnoozeState();
-            if (container) {
-                bringBackMascot(container);
-            }
+            const reentryPill = document.getElementById('mascot-snooze-reentry-pill');
+            if (reentryPill) reentryPill.remove();
+            if (container) bringBackMascot(container);
         } else {
             const futureTime = Date.now() + 15 * 60 * 1000;
             localStorage.setItem(SNOOZE_KEY, futureTime.toString());
@@ -875,6 +897,9 @@
 
     function bringBackMascot(container) {
         if (!container) return;
+        const reentryPill = document.getElementById('mascot-snooze-reentry-pill');
+        if (reentryPill) reentryPill.remove();
+
         container.style.display = 'flex';
         container.classList.remove('mascot-snoozing-out');
         container.classList.add('mascot-snoozing-in');
