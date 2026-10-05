@@ -4639,6 +4639,1018 @@ const quizDatabase = {
                 explanation: "Nel sonetto proemiale Petrarca traccia un bilancio amaro e disincantato della propria esistenza, definendo l'amore terreno per Laura un 'giovenile errore' ed un 'vaneggiare' che lascia soltanto vergogna e pentimento."
             }
         ]
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // STORIA DELLA FILOSOFIA MODERNA — 16 Capitoli × 5 Domande = 80 Domande
+    // ═══════════════════════════════════════════════════════════════
+
+    cap1_naturalismo: {
+        subject: "filosofia",
+        chapterTag: "Studio I",
+        title: "Il Naturalismo Rinascimentale e l'Alba della Modernità",
+        questions: [
+            {
+                question: "Cosa intende Bernardino Telesio con il celebre principio metodologico «iuxta propria principia» nel De rerum natura?",
+                options: [
+                    "Che la natura deve essere spiegata mediante le verità teologiche rivelate nella Scrittura.",
+                    "Che la natura deve essere indagata unicamente attraverso le sue forze immanenti e materiali, senza ricorrere a forme metafisiche aristoteliche astratte.",
+                    "Che la conoscenza del cosmo è accessibile solo tramite la deduzione geometrica a priori.",
+                    "Che la materia corporea è un'illusione ingannevole creata dai sensi umani."
+                ],
+                correctIndex: 1,
+                explanation: "Telesio afferma che i fenomeni fisici vanno indagati secondo i princìpi propri della natura stessa, individuando nel caldo e nel freddo i due princìpi attivi che agiscono sulla massa corporea estesa passiva, respingendo l'apparato delle forme sostanziali aristoteliche."
+            },
+            {
+                question: "Quale visione dell'universo sostiene Giordano Bruno a partire dall'eliocentrismo copernicano?",
+                options: [
+                    "Un universo geocentrico sferico chiuso dal cielo delle stelle fisse.",
+                    "Un universo finito creato da un Dio separato e trascendente.",
+                    "Un universo infinito, privo di centro e di confini, popolato da un'innumerevole pluralità di mondi e sistemi solari.",
+                    "Un cosmo composto unicamente da sfere cristalline solide guidate da intelligenze angeliche."
+                ],
+                correctIndex: 2,
+                explanation: "Bruno compie un passo rivoluzionario oltre Copernico: abbattendo la sfera delle stelle fisse, concepisce l'universo come infinito ed eterno, specchio della potenza infinita di Dio, contenente un'infinità di altri mondi abitati."
+            },
+            {
+                question: "Cosa rappresenta l'«eroico furore» nella filosofia morale ed estetica di Giordano Bruno?",
+                options: [
+                    "L'ira cieca e distruttiva provocata dalle passioni corporali.",
+                    "Il fanatismo religioso delle guerre confessionali del Cinquecento.",
+                    "Lo slancio intellettuale ed estatico con cui l'uomo supera la propria finitezza per identificarsi con l'infinito fluire della natura divina.",
+                    "La sottomissione timorosa e passiva dell'intelletto ai dogmi ecclesiastici."
+                ],
+                correctIndex: 2,
+                explanation: "Negli 'Eroici furori', Bruno paragona il filosofo ad Atteone: da cacciatore che insegue la verità della natura, egli diviene preda divina, fondendosi intimamente con l'infinità vivente del cosmo in un impeto d'amore sovrumano."
+            },
+            {
+                question: "Quali sono le tre «primalità dell'essere» teorizzate da Tommaso Campanella nella sua metafisica?",
+                options: [
+                    "Materia, Forma e Privazione.",
+                    "Potere (Posse), Sapere (Nosse) e Volere (Velle).",
+                    "Memoria, Intelletto e Volontà.",
+                    "Caldo, Freddo e Umido."
+                ],
+                correctIndex: 1,
+                explanation: "Per Campanella ogni ente creato possiede in misura finita le tre potenze originarie dell'essere: Potere (capacità di esistere), Sapere (autocoscienza e sensibilità) e Volere (amore di sé e conservazione), che in Dio sussistono in grado infinito e assoluto."
+            },
+            {
+                question: "Come viene concepita la «magia naturale» nel contesto filosofico del Rinascimento?",
+                options: [
+                    "Come un patto demoniaco proibito basato sull'evocazione di spiriti maligni.",
+                    "Come la parte pratica e operativa della filosofia della natura, fondata sulla conoscenza delle simpatie e antipatie che legano le cose del cosmo.",
+                    "Come una forma di sofistica verbale priva di qualsiasi applicazione pratica.",
+                    "Come una pura superstizione popolare combattuta dai filosofi umanisti."
+                ],
+                correctIndex: 1,
+                explanation: "La magia naturale rinascimentale è intesa come un sapere operativo e benefico: il mago è un filosofo-artigiano che conosce le trame segrete e le corrispondenze dell'universo per dominare le forze della natura a vantaggio dell'umanità."
+            }
+        ]
+    },
+
+    cap2_misura_mondo: {
+        subject: "filosofia",
+        chapterTag: "Studio II",
+        title: "Alla Scoperta della Misura del Mondo – La Rivoluzione Astronomica",
+        questions: [
+            {
+                question: "Quale funzione aveva la prefazione anonima redatta dal teologo Andreas Osiander al De revolutionibus di Copernico (1543)?",
+                options: [
+                    "Dichiarare che il sistema copernicano descriveva la realtà fisica letterale del cosmo.",
+                    "Presentare la teoria eliocentrica come un mero artificio matematico utile per facilitare i calcoli astronomici, privo di pretese di verità fisica.",
+                    "Condannare l'opera come eretica e ordinarne la distruzione immediata.",
+                    "Dimostrare la concordanza perfetta tra eliocentrismo e letteralità biblica."
+                ],
+                correctIndex: 1,
+                explanation: "Osiander inserì una premessa anonima per attenuare le reazioni teologiche, riducendo l'eliocentrismo a una pura ipotesi geometrica volta a 'salvare i fenomeni', tradendo la convinzione realista di Copernico sulla reale mobilità della Terra."
+            },
+            {
+                question: "Quali sono i tre moti che Niccolò Copernico attribuisce al pianeta Terra?",
+                options: [
+                    "Moto rettilineo verso il basso, moto circolare intorno alla Luna e moto di nutazione.",
+                    "Rotazione diurna attorno al proprio asse, rivoluzione annua attorno al Sole e declinazione dell'asse terrestre.",
+                    "Moto epiciclico, moto deferente e oscillazione rispetto all'equante tolemaico.",
+                    "La Terra è perfettamente immobile e priva di qualsiasi moto nel cosmo copernicano."
+                ],
+                correctIndex: 1,
+                explanation: "Copernico declassa la Terra a semplice pianeta, spiegando i fenomeni astronomici apparenti con il suo triplice moto: rotazione diurna (alternanza giorno/notte), rivoluzione annua (ciclo delle stagioni) e declinazione dell'asse."
+            },
+            {
+                question: "In che modo le osservazioni empiriche di Tycho Brahe sulla cometa del 1577 demolirono la fisica celeste aristotelica?",
+                options: [
+                    "Dimostrarono che la cometa era un'illusione ottica sublunare generata da vapori caldi.",
+                    "Provarono che i cieli non sono costituiti da sfere cristalline solide impenetrabili, poiché la cometa attraversava liberamente le orbite planetarie.",
+                    "Confermarono che la Terra ruota attorno al Sole con velocità uniforme.",
+                    "Dimostrarono che tutti i corpi celesti sono composti dai quattro elementi tradizionali."
+                ],
+                correctIndex: 1,
+                explanation: "Tycho Brahe calcolò che la cometa del 1577 si trovava oltre l'orbita della Luna. Il suo passaggio indisturbato dimostrò che lo spazio celeste è fluido e che le rigide sfere cristalline solide teorizzate da Aristotele non esistono."
+            },
+            {
+                question: "Cosa stabilisce la prima legge del moto planetario formulata da Giovanni Keplero nell'Astronomia Nova (1609)?",
+                options: [
+                    "I pianeti si muovono con velocità costante lungo orbite circolari perfette attorno al centro della Terra.",
+                    "Le orbite descritte dai pianeti sono ellissi di cui il Sole occupa uno dei due fuochi.",
+                    "Tutti i pianeti orbitano attorno alla Terra lungo cerchi concentrici guidati dall'etere.",
+                    "La velocità di un pianeta è inversamente proporzionale alla sua massa gravitazionale."
+                ],
+                correctIndex: 1,
+                explanation: "La prima legge di Keplero abbatte il millenario assioma della circolarità uniforme dei moti celesti, dimostrando matematicamente che le orbite planetarie sono ellittiche e che il Sole occupa uno dei due fuochi."
+            },
+            {
+                question: "Quale relazione matematica intercorre tra i pianeti secondo la terza legge di Keplero (Harmonices Mundi, 1619)?",
+                options: [
+                    "I periodi di rivoluzione sono inversamente proporzionali al diametro dei pianeti.",
+                    "I quadrati dei periodi di rivoluzione dei pianeti sono proporzionali ai cubi delle loro distanze medie dal Sole.",
+                    "Tutti i pianeti impiegano lo stesso identico tempo a percorrere la loro orbita ellittica.",
+                    "La forza attrattiva del Sole diminuisce linearmente con la distanza."
+                ],
+                correctIndex: 1,
+                explanation: "La terza legge (T² ∝ a³) stabilisce un legame matematico rigoroso tra il tempo di percorrenza dell'orbita e la distanza dal Sole, preparando la strada alla legge di gravitazione universale formulata da Newton."
+            }
+        ]
+    },
+
+    cap3_bacone_galileo: {
+        subject: "filosofia",
+        chapterTag: "Studio III",
+        title: "Francis Bacon e Galileo Galilei – I Fondatori del Metodo Scientifico",
+        questions: [
+            {
+                question: "A quale celebre classe di pregiudizi appartengono, secondo Francis Bacon, gli «Idola fori» (idoli della piazza o del foro)?",
+                options: [
+                    "Ai limiti connaturati alla struttura biologica dei sensi umani.",
+                    "Alle deformazioni nate dall'educazione e dalle abitudini individuali di ciascuno.",
+                    "Agli equivoci e ai fraintendimenti generati dal linguaggio e dall'uso volgare delle parole nei rapporti sociali.",
+                    "Ai sistemi filosofici dogmatici del passato paragonati a recite teatrali."
+                ],
+                correctIndex: 2,
+                explanation: "Gli idola fori derivano dalle parole e dal commercio sociale: il linguaggio volgare attribuisce nomi a cose inesistenti ('primo mobile') o definisce in modo confuso cose reali ('umido'), ingenerando continue dispute verbali."
+            },
+            {
+                question: "Nella celebre apologetica metodologica del Novum Organum, a quale animale Bacon paragona i veri scienziati?",
+                options: [
+                    "Alle formiche, che accumulano soltanto dati empirici senza elaborarli.",
+                    "Ai ragni, che ricavano da sé stessi la tela di sottili ragionamenti aerei e dogmatici.",
+                    "Alle api, che raccolgono il nettare dai fiori ma lo trasformano e digeriscono mediante una virtù propria.",
+                    "Ai castori, che costruiscono dighe seguendo ciecamente l'istinto naturale."
+                ],
+                correctIndex: 2,
+                explanation: "Bacon contrappone la vera scienza (le api, sintesi equilibrata di osservazione empirica e rielaborazione intellettuale) sia all'empirismo cieco che raccoglie fatti senza metodo (le formiche), sia al razionalismo dogmatico deduttivo (i ragni)."
+            },
+            {
+                question: "Quale scoperta annunciata da Galileo nel Sidereus Nuncius (1610) provò che corpi celesti potevano ruotare attorno a un pianeta diverso dalla Terra?",
+                options: [
+                    "La scoperta delle macchie solari.",
+                    "La scoperta dei quattro satelliti di Giove (Pianeti Medicei).",
+                    "L'osservazione delle fasi di Mercurio.",
+                    "La risoluzione della Via Lattea in un insieme fluido di comete."
+                ],
+                correctIndex: 1,
+                explanation: "I quattro satelliti di Giove offrirono una prova visiva inconfutabile: corpi celesti orbitano attorno a un centro che a sua volta è in moto, smontando l'obiezione aristotelica secondo cui la Terra non poteva muoversi senza perdere la Luna."
+            },
+            {
+                question: "In che modo Galileo descrive la struttura dell'universo nel Saggiatore (1623)?",
+                options: [
+                    "Come un grande organismo vivente retto da simpatie e antipatie occulte.",
+                    "Come un libro aperto scritto in lingua matematica, i cui caratteri sono triangoli, cerchi ed altre figure geometriche.",
+                    "Come un caos insondabile accessibile solo alla fede mistica e alla rivelazione biblica.",
+                    "Come una gerarchia statica di sfere governate dal principio dell'autorità aristotelica."
+                ],
+                correctIndex: 1,
+                explanation: "Galileo afferma la natura quantitativa e matematica della realtà fisica: la natura non parla il linguaggio qualitativo dei sillogismi aristotelici, ma è decifrabile unicamente attraverso figure geometriche e calcolo matematico."
+            },
+            {
+                question: "Cosa dimostra il celebre esperimento mentale del «gran navilio» nella Seconda Giornata del Dialogo sopra i due massimi sistemi?",
+                options: [
+                    "Che la luce del Sole viaggia a velocità infinita nel vuoto.",
+                    "Il principio di relatività classica: i fenomeni meccanici si svolgono allo stesso identico modo all'interno di un sistema sia che esso sia fermo sia che si muova di moto rettilineo uniforme.",
+                    "Che la caduta dei gravi dipende dalla massa e dal peso degli oggetti.",
+                    "Che le maree sono provocate esclusivamente dall'attrazione magnetica della Luna."
+                ],
+                correctIndex: 1,
+                explanation: "Nella cabina sottocoperta di una nave che viaggia senza scosse, gocce, mosche e salti si comportano come a nave ferma. Ciò spiega perché noi non percepiamo il moto di rotazione della Terra sulla sua superficie."
+            }
+        ]
+    },
+
+    cap4_tarda_scolastica: {
+        subject: "filosofia",
+        chapterTag: "Studio IV",
+        title: "La Tarda Scolastica Europea e Francisco Suárez",
+        questions: [
+            {
+                question: "Quale elemento di radicale novità strutturale presentano le Disputationes Metaphysicae (1597) di Francisco Suárez?",
+                options: [
+                    "Rifiutano ogni riferimento alla tradizione tomista per abbracciare l'atomismo di Democrito.",
+                    "Abbandonano il commentario sequenziale al testo di Aristotele per organizzare la metafisica in una trattazione tematica, sistematica e autonoma.",
+                    "Sostengono che la metafisica è una scienza subordinata alla fisica meccanica.",
+                    "Eliminano la teologia naturale per dedicarsi esclusivamente allo studio dell'ottica."
+                ],
+                correctIndex: 1,
+                explanation: "Le Disputationes di Suárez segnano il passaggio dal commento esegetico medievale alla forma del trattato sistematico moderno, dividendo la materia per problemi ontologici e influenzando le università di tutta Europa."
+            },
+            {
+                question: "Secondo Francisco Suárez, qual è l'oggetto proprio e adeguato della metafisica generale?",
+                options: [
+                    "I corpi materiali in movimento nello spazio sublunare.",
+                    "L'ente in quanto ente reale (ens inquantum ens reale), inteso come essenza non contraddittoria dotata di attitudine all'esistenza.",
+                    "La sola essenza di Dio in quanto causa trascendente priva di analogia.",
+                    "Le percezioni psicologiche interiori della mente umana."
+                ],
+                correctIndex: 1,
+                explanation: "Suárez definisce l'oggetto della metafisica come l'ente reale comune, caratterizzato dalla non-contraddittorietà e dall'aptitudo ad existendum, fondando la disciplina come scienza generale delle essenze possibili."
+            },
+            {
+                question: "In quale partizione canonica si articola la metafisica suareziana, destinata a influenzare Wolff e Kant?",
+                options: [
+                    "Fisica, Chimica e Biologia.",
+                    "Metafisica generale (Ontologia dell'ente in generale) e Metafisica speciale (Dio, l'anima e il mondo).",
+                    "Etica delle virtù, Politica degli Stati e Retorica.",
+                    "Logica formale, Grammatica speculativa e Dialettica."
+                ],
+                correctIndex: 1,
+                explanation: "Suárez divide la disciplina tra lo studio dell'ente comune e delle sue proprietà trascendentali (Metafisica generale o Ontologia) e lo studio degli enti particolari: increato (Dio) e creati (spiriti e corpi), matrice della metafisica moderna."
+            },
+            {
+                question: "Quale dottrina consente a Suárez di predicare il concetto di ente sia a Dio sia alle creature senza cadere nell'equivocità?",
+                options: [
+                    "L'univocità assoluta dello scotismo.",
+                    "L'analogia intrinseca di attribuzione.",
+                    "Il nominalismo scettico di Ockham.",
+                    "Il panteismo immanente arabo."
+                ],
+                correctIndex: 1,
+                explanation: "Attraverso l'analogia di attribuzione intrinseca, il concetto oggettivo di ente compete prioritariamente a Dio per essenza e secondariamente alle creature per partecipazione, evitando sia il panteismo univoco sia l'incomunicabilità equivoca."
+            },
+            {
+                question: "In che modo l'opera di Suárez ha influenzato René Descartes e i filosofi razionalisti?",
+                options: [
+                    "Cartesio studiò a La Flèche su manuali suareziani, mutuando da essi il vocabolario tecnico su sostanza, causa e realtà oggettiva delle idee.",
+                    "Cartesio non lesse mai gli scolastici e ignorava l'opera di Suárez.",
+                    "Suárez convinse Cartesio ad abbandonare la matematica per la teologia dogmatica.",
+                    "I filosofi moderni rigettarono integralmente e senza eccezioni ogni termine scolastico."
+                ],
+                correctIndex: 0,
+                explanation: "Nelle Meditazioni, Descartes ricorre costantemente a nozioni suareziane (la distinzione tra realtà formale e realtà oggettiva, l'argomento ontologico, la dottrina della sostanza), evidenziando il debito della modernità verso la Seconda Scolastica."
+            }
+        ]
+    },
+
+    cap5_cartesio: {
+        subject: "filosofia",
+        chapterTag: "Studio V",
+        title: "René Descartes – Il Dubbio, il Cogito e la Fondazione del Razionalismo",
+        questions: [
+            {
+                question: "Qual è la prima e fondamentale regola del metodo formulata da Descartes nel Discorso sul metodo (1637)?",
+                options: [
+                    "La regola dell'analisi: dividere ogni problema nel maggior numero di parti possibili.",
+                    "La regola dell'evidenza: non accogliere mai nulla per vero che non sia conosciuto con chiarezza e distinzione tali da escludere ogni dubbio.",
+                    "La regola della sintesi: procedere dagli oggetti più complessi a quelli semplici.",
+                    "La regola dell'enumerazione: fare calcoli aritmetici continui."
+                ],
+                correctIndex: 1,
+                explanation: "La prima regola stabilisce il criterio di verità dell'evidenza razionale: accogliere solo idee chiare (manifeste a uno spirito attento) e distinte (separate e non confuse con altre), evitando precipitazione e pregiudizio."
+            },
+            {
+                question: "Quale funzione svolge l'ipotesi del «Genio Maligno» (Deus deceptor) nelle Meditazioni metafisiche?",
+                options: [
+                    "Spiegare l'origine del peccato originale e la colpa morale dell'uomo.",
+                    "Estendere il dubbio al suo grado estremo (dubbio iperbolico), mettendo in discussione perfino le verità matematiche più evidenti.",
+                    "Dimostrare che il diavolo governa le orbite dei pianeti celesti.",
+                    "Sostituire la figura di Dio con una forza naturale cieca e caotica."
+                ],
+                correctIndex: 1,
+                explanation: "Con l'ipotesi iperbolica di un genio ingannatore infinitamente potente, Cartesio radicalizza il dubbio: perfino la certezza che 2+3=5 potrebbe essere un'illusione continua se la nostra mente fosse stata creata per ingannarsi sistematicamente."
+            },
+            {
+                question: "Quale verità inattaccabile emerge dal vertice del dubbio iperbolico cartesiano?",
+                options: [
+                    "L'esistenza reale del corpo materiale nello spazio tridimensionale.",
+                    "Il principio del «Cogito ergo sum»: anche se un genio maligno mi ingannasse su tutto, per essere ingannato io devo necessariamente esistere come sostanza pensante (res cogitans).",
+                    "L'autorità infallibile delle Scritture e della tradizione aristotelica.",
+                    "L'inesistenza del male morale nel mondo materiale."
+                ],
+                correctIndex: 1,
+                explanation: "Il Cogito è la certezza originaria e intuitiva: posso dubitare di tutto, ma non del fatto stesso che sto dubitando, cioè pensando. L'atto del pensiero prova inconfutabilmente l'esistenza dell'Io pensante."
+            },
+            {
+                question: "Come dimostra Cartesio l'esistenza di Dio a partire dall'idea di infinito presente nella mente (prima prova)?",
+                options: [
+                    "Attraverso l'osservazione empirica dell'ordine armonioso della natura animale.",
+                    "Poiché l'io è finito e imperfetto, non può aver prodotto da sé l'idea di una sostanza infinita e perfettissima; la causa di tale idea deve possedere altrettanta realtà formale, dunque solo Dio stesso può averla impressa nella mente.",
+                    "Ricorrendo al principio di autorità dei Padri della Chiesa.",
+                    "Dimostrando che il vuoto cosmico è impossibile nella fisica dei vortici."
+                ],
+                correctIndex: 1,
+                explanation: "Nella causa efficiente deve esserci almeno tanta realtà quanta è nell'effetto. Un essere finito non possiede la realtà necessaria a generare l'idea di infinito: Dio è l'unica causa adeguata dell'idea innata di perfezione impressa nell'uomo."
+            },
+            {
+                question: "Quale organo anatomico viene individuato da Cartesio come sede del collegamento causale tra res cogitans e res extensa?",
+                options: [
+                    "Il cuore umano, sede delle passioni amorose.",
+                    "La ghiandola pineale (epifisi), situata al centro del cervello.",
+                    "Il fegato, responsabile della produzione degli umori corporei.",
+                    "Il midollo spinale, attraverso la rete dei nervi ottici."
+                ],
+                correctIndex: 1,
+                explanation: "Cartesio individua nell'epifisi o ghiandola pineale l'unico organo unitario e non doppio del cervello in cui gli 'spiriti animali' corporei possono interagire con l'anima inestesa, mediando tra sensazioni fisiche e volizioni spirituali."
+            }
+        ]
+    },
+
+    cap6_spinoza: {
+        subject: "filosofia",
+        chapterTag: "Studio VI",
+        title: "Baruch Spinoza – Deus Sive Natura e l'Etica Geometrica",
+        questions: [
+            {
+                question: "Come definisce Spinoza la Sostanza nella prima parte dell'Ethica more geometrico demonstrata?",
+                options: [
+                    "Ciò che ha bisogno di un creatore trascendente per essere conservato nell'essere.",
+                    "Ciò che è in sé e per sé si concepisce; ossia ciò il cui concetto non ha bisogno del concetto di un'altra cosa dal quale debba essere formato.",
+                    "La materia estesa e inerte contrapposta al pensiero spirituale dell'anima.",
+                    "Un insieme accidentale di atomi materiali aggregati dal caso nel vuoto."
+                ],
+                correctIndex: 1,
+                explanation: "La definizione spinoziana di Sostanza esclude qualsiasi dipendenza ontologica o concettuale: essa è causa di sé (causa sui), increata, infinita, eterna e necessariamente unica: Dio ovvero la Natura (Deus sive Natura)."
+            },
+            {
+                question: "Cosa intende Spinoza per «Natura naturans» e «Natura naturata»?",
+                options: [
+                    "La Natura naturans è il mondo vegetale, la Natura naturata è il mondo animale.",
+                    "La Natura naturans è Dio considerato come causa immanente infinita; la Natura naturata è la totalità dei modi che ne derivano necessariamente.",
+                    "La Natura naturans è il creato prima del peccato originale, la Naturata dopo la caduta.",
+                    "La Natura naturans è la fisica terrestre, la Naturata l'astronomia celeste."
+                ],
+                correctIndex: 1,
+                explanation: "Spinoza distingue tra la Natura considerata nella sua sorgente attiva e infinita (Dio con i suoi attributi eterni: Natura naturante) e la Natura considerata come l'insieme di tutte le modificazioni necessarie finite e infinite (Natura naturata)."
+            },
+            {
+                question: "In cosa consiste il «parallelismo psico-fisico» formulato nella proposizione 7 della Parte II dell'Etica?",
+                options: [
+                    "La mente comanda al corpo attraverso impulsi elettrici inviati alla ghiandola pineale.",
+                    "L'ordine e la connessione delle idee è identico all'ordine e alla connessione delle cose (ordo et connexio idearum idem est ac ordo et connexio rerum).",
+                    "I corpi materiali non esistono e sono semplici allucinazioni delle anime spirituali.",
+                    "Le idee e i corpi appartengono a due universi completamente separati senza alcuna corrispondenza."
+                ],
+                correctIndex: 1,
+                explanation: "Pensiero ed Estensione sono due attributi della medesima Sostanza: mente e corpo non interagiscono causalmente (contro Cartesio), ma sono la stessa realtà considerata sotto due aspetti diversi in perfetta corrispondenza strutturale."
+            },
+            {
+                question: "Cosa esprime il concetto spinoziano di «Conatus sese conservandi»?",
+                options: [
+                    "Il dovere morale imposto dai comandamenti divini di compiere la carità verso il prossimo.",
+                    "Lo sforzo naturale e immanente con cui ogni singola cosa tenta, per quanto è in suo potere, di perseverare indefinitamente nel proprio essere.",
+                    "La paura della morte violenta che spinge gli uomini a sottomettersi al potere del sovrano.",
+                    "Il decadimento entropico spontaneo della materia verso il disordine assoluto."
+                ],
+                correctIndex: 1,
+                explanation: "Il conatus è l'essenza stessa dell'ente finito: la tendenza a preservare e accrescere la propria potenza d'agire. Riferito alla mente è Volontà, riferito a mente e corpo è Appetito, e quando è consapevole è Desiderio (Cupiditas)."
+            },
+            {
+                question: "Qual è il terzo e supremo genere di conoscenza descritto da Spinoza e quale stato dell'anima suscita?",
+                options: [
+                    "L'immaginazione sensibile, che suscita la paura superstiziosa degli dèi.",
+                    "La ragione deduttiva discorsiva, che genera la sottomissione alle leggi civili dello Stato.",
+                    "La scienza intuitiva, che conosce le cose singole sub specie aeternitatis e genera il sommo compimento etico: l'Amore intellettuale di Dio (Amor Dei intellectualis).",
+                    "La fede rivelata, che concede l'ingresso nel Paradiso trascendente dopo la morte corporea."
+                ],
+                correctIndex: 2,
+                explanation: "La scienza intuitiva coglie immediatamente la derivazione necessaria di tutte le cose dall'essenza di Dio, colmando la mente della suprema beatitudine e letizia: l'Amor Dei intellectualis, in cui l'uomo partecipa dell'amore infinito con cui Dio ama sé stesso."
+            }
+        ]
+    },
+
+    cap7_leibniz: {
+        subject: "filosofia",
+        chapterTag: "Studio VII",
+        title: "Gottfried Wilhelm Leibniz – La Monadologia e l'Armonia Prestabilita",
+        questions: [
+            {
+                question: "Su quale principio logico si fondano, secondo Leibniz, le «verità di fatto»?",
+                options: [
+                    "Sul principio di non-contraddizione, per cui il loro opposto è impossibile e impensabile.",
+                    "Sul principio di ragion sufficiente, secondo cui nulla accade senza che vi sia una ragione atta a spiegare perché sia così e non altrimenti.",
+                    "Sul principio dell'autorità dogmatica della rivelazione biblica.",
+                    "Sul principio del moto perpetuo e della conservazione della quantità di moto."
+                ],
+                correctIndex: 1,
+                explanation: "Leibniz distingue le verità di ragione (necessarie, a priori, fondate sulla non-contraddizione) dalle verità di fatto (contingenti, a posteriori, il cui contrario è possibile), regolate dal principio di ragion sufficiente."
+            },
+            {
+                question: "Cosa intende Leibniz con il principio «praedicatum inest subjecto» riferito alla sostanza individuale?",
+                options: [
+                    "Che ogni predicato è arbitrariamente assegnato dall'uomo attraverso il linguaggio convenzionale.",
+                    "Che nel concetto completo di una sostanza individuale (es. Cesare o Alessandro) è già contenuto a priori fin dall'eternità tutto ciò che le accadrà nel tempo.",
+                    "Che il soggetto materiale dipende sempre dalle cause finali del cosmo tolemaico.",
+                    "Che non è possibile formulare alcuna proposizione vera sulle cose contingenti del mondo."
+                ],
+                correctIndex: 1,
+                explanation: "Per Leibniz, in ogni proposizione vera il predicato è intrinseco al soggetto. Nella nozione completa di Cesare sono già presenti fin dall'eternità il passaggio del Rubicone e la morte alle Idi di marzo, leggibili a priori dall'intelletto divino."
+            },
+            {
+                question: "Quali sono le caratteristiche ontologiche fondamentali delle «Monadi» nella Monadologia (1714)?",
+                options: [
+                    "Sono particelle materiali indivisibili ed estese che si muovono meccanicamente nel vuoto.",
+                    "Sono sostanze semplici spirituali, prive di parti, inestese, incorporee e «senza finestre» attraverso cui qualcosa possa entrare o uscire.",
+                    "Sono sfere celesti solide cristalline mosse da intelligenze angeliche pure.",
+                    "Sono atomi pesanti dotati di ganci che si aggregano casualmente nello spazio cosmico."
+                ],
+                correctIndex: 1,
+                explanation: "Le monadi sono gli autentici atomi spirituali dell'universo: inestese, immortali, prive di parti e prive di comunicazione causale diretta ('senza finestre'), centri di forza interiore dotati di percezione e appetizione."
+            },
+            {
+                question: "Come spiega Leibniz l'accordo perfetto e costante tra l'anima razionale e il corpo materiale?",
+                options: [
+                    "Attraverso l'azione meccanica degli spiriti animali nella ghiandola pineale cartesiana.",
+                    "Attraverso un miracolo continuo e perpetuo compiuto da Dio a ogni istante (occasionalismo).",
+                    "Attraverso l'Armonia prestabilita da Dio all'atto della creazione, come due orologi perfetti sincronizzati fin dall'origine dal Supremo Orologiaio.",
+                    "Negando completamente l'esistenza del corpo e sostenendo l'allucinazione solipsistica dell'anima."
+                ],
+                correctIndex: 2,
+                explanation: "L'Armonia prestabilita (harmonia praestabilita) è la mirabile soluzione leibniziana: anima e corpo seguono ciascuno le proprie leggi interne (cause finali la mente, cause efficienti il corpo) senza interagire, ma corrispondono perfettamente grazie alla sincronia originaria impressa da Dio."
+            },
+            {
+                question: "Negli Essais de Théodicée (1710), come risponde Leibniz all'accusa di crudeltà divina di fronte alla presenza del male nel mondo?",
+                options: [
+                    "Afferma che Dio non è onnipotente e non ha potuto impedire la nascita del male.",
+                    "Sostiene che il mondo presente è «il migliore dei mondi possibili», scelto da Dio perché realizza il massimo di perfezione e varietà col minimo di princìpi, e dove il male è un'ombra necessaria all'armonia universale.",
+                    "Dichiara che il male è solo un'illusione dei sensi che scomparirà con la scienza moderna.",
+                    "Accetta lo scetticismo di Bayle dichiarando insolubile il mistero della fede."
+                ],
+                correctIndex: 1,
+                explanation: "Dio ha contemplato tutti i mondi possibili e ha scelto di creare quello che offre la massima ricchezza e bellezza d'insieme. Il male metafisico (finitezza delle creature) e morale (peccato per libero arbitrio) è permesso affinché risplenda un bene superiore."
+            }
+        ]
+    },
+
+    cap8_crisi_razionalismo: {
+        subject: "filosofia",
+        chapterTag: "Studio VIII",
+        title: "Crisi del Razionalismo – Pascal, Malebranche e il Giusnaturalismo",
+        questions: [
+            {
+                question: "Quale distinzione fondamentale traccia Blaise Pascal tra «Esprit de géométrie» ed «Esprit de finesse»?",
+                options: [
+                    "L'esprit de géométrie studia i corpi celesti, l'esprit de finesse studia la fisiologia umana.",
+                    "L'esprit de géométrie è la ragione deduttiva e dimostrativa applicata agli oggetti astratti; l'esprit de finesse è l'intuito del cuore che coglie i primi princìpi e le verità esistenziali con immediatezza.",
+                    "L'esprit de géométrie è proprio della fede religiosa, l'esprit de finesse della scienza fisica empirica.",
+                    "L'esprit de géométrie riguarda l'arte e la pittura, l'esprit de finesse la logica sillogistica aristotelica."
+                ],
+                correctIndex: 1,
+                explanation: "Pascal denuncia l'insufficienza del metodo geometrico cartesiano per comprendere la vita umana: la ragione discorsiva non può dimostrare i primi princìpi (spazio, tempo, numero), che sono colti con evidenza solo dal cuore (esprit de finesse)."
+            },
+            {
+                question: "Cosa intende Pascal con la celebre metafora dell'uomo come «canna pensante»?",
+                options: [
+                    "Che l'essere umano è una creatura puramente vegetale priva di anima immortale.",
+                    "Che l'uomo è la cosa più fragile della natura (basta una goccia d'acqua a ucciderlo), ma è infinitamente superiore a ciò che lo schiaccia perché possiede la coscienza del proprio morire.",
+                    "Che l'uomo è rigido e inflessibile nei suoi pregiudizi dogmatici tradizionali.",
+                    "Che la mente umana è vuota come una canna cava finché non riceve le sensazioni esterne."
+                ],
+                correctIndex: 1,
+                explanation: "La grandezza dell'uomo risiede interamente nel pensiero: anche se l'universo infinito può annientarlo fisicamente in un istante, l'universo non sa nulla della propria forza, mentre l'uomo è conscio della propria nobiltà e miseria."
+            },
+            {
+                question: "Quale scopo persegue la celebre «Scommessa su Dio» (Le Pari) formulata nei Pensieri di Pascal?",
+                options: [
+                    "Dimostrare matematicamente con certezza assoluta l'esistenza della Trinità cattolica.",
+                    "Mostrare ai libertini scettici che, di fronte all'incertezza teorica, scommettere sull'esistenza di Dio è la scelta massimamente razionale per convenienza: si rischia un bene finito per guadagnare un'infinità di beatitudine eterna.",
+                    "Condannare all'ergastolo chiunque rifiuti di credere nei miracoli cristiani.",
+                    "Giustificare il gioco d'azzardo come pratica spirituale meritoria."
+                ],
+                correctIndex: 1,
+                explanation: "Pascal usa la logica del calcolo delle probabilità per sfidare l'incredulità: non scegliere è impossibile, poiché siamo già imbarcati; scommettendo su Dio si rischia di perdere beni mondani effimeri ma si può vincere una vita eterna infinitamente beata."
+            },
+            {
+                question: "Cosa sostiene Nicolas Malebranche con la dottrina della «visione delle idee in Dio» (Vision en Dieu)?",
+                options: [
+                    "Che l'uomo conosce le cose esterne toccandole fisicamente con gli organi sensoriali.",
+                    "Che la mente umana contempla le idee eterne e universali direttamente all'interno della mente divina, unico sole dell'intelletto.",
+                    "Che le idee sono prodotte dall'immaginazione arbitraria dell'uomo senza alcun riferimento divino.",
+                    "Che Dio si manifesta visibilmente agli occhi corporei di tutti i cittadini dello Stato."
+                ],
+                correctIndex: 1,
+                explanation: "Per Malebranche, i corpi materiali non possono agire sullo spirito per imprimervi idee. Noi vediamo tutte le cose in Dio: le verità matematiche e le essenze ideali risiedono eternamente nell'intelletto divino, a cui la nostra mente partecipa."
+            },
+            {
+                question: "Cosa afferma Ugo Grozio nel De jure belli ac pacis (1625) con la formula «etiamsi daremus non esse Deum»?",
+                options: [
+                    "Che l'esistenza di Dio è una favola inventata dai legislatori per spaventare i popoli.",
+                    "Che i princìpi del diritto naturale manterrebbero la loro validità oggettiva e razionale anche se, per assurdo, si ipotizzasse che Dio non esistesse o non si curasse delle cose umane.",
+                    "Che la guerra è sempre illegittima e contraria alle leggi divine del Vangelo.",
+                    "Che solo i decreti ecclesiastici del papa possono stabilire le norme della convivenza tra Stati."
+                ],
+                correctIndex: 1,
+                explanation: "Grozio compie la secolarizzazione del diritto naturale: esso non poggia su rivelazioni religiose particolari, ma sulla retta ragione umana e sulla socievolezza naturale, fondando così il diritto internazionale moderno indipendente dalle fedi confessionali."
+            }
+        ]
+    },
+
+    cap9_hobbes: {
+        subject: "filosofia",
+        chapterTag: "Studio IX",
+        title: "Thomas Hobbes – Materialismo Corporeo e il Leviatano",
+        questions: [
+            {
+                question: "Qual è la concezione hobbesiana della ragione e del processo conoscitivo?",
+                options: [
+                    "L'intuizione mistica delle idee eterne presenti nella mente di Dio.",
+                    "La computazione: «Ragionare è calcolare», ossia addizionare e sottrarre nomi e proposizioni linguistiche convenzionali.",
+                    "La ricezione passiva delle forme sostanziali aristoteliche trasmesse dall'aria.",
+                    "Un moto circolare continuo degli spiriti animali nella ghiandola pineale."
+                ],
+                correctIndex: 1,
+                explanation: "Per Hobbes la ragione è una facoltà discorsiva e calcolatrice: pensare equivale a compiere operazioni matematiche con i concetti e le parole (es. uomo = corpo + animato + razionale; animale = uomo - razionale)."
+            },
+            {
+                question: "Cosa intende Hobbes definendo l'uomo nello stato di natura con l'espressione «Homo homini lupus»?",
+                options: [
+                    "Che gli uomini possiedono una natura biologicamente identica a quella dei lupi dei boschi.",
+                    "Che nella condizione prepolitica, priva di leggi e di un potere comune, la brama naturale e la diffidenza reciproca portano a una guerra di tutti contro tutti (bellum omnium contra omnes).",
+                    "Che gli uomini primitivi vivevano in branchi solidali e privi di conflitti interiori.",
+                    "Che la civiltà moderna ha migliorato l'istinto animale originario con la gentilezza."
+                ],
+                correctIndex: 1,
+                explanation: "Nello stato di natura non vigono leggi né giustizia: l'uguaglianza originaria e il diritto di tutti su tutto (ius in omnia) generano la paura costante della morte violenta, rendendo ciascun uomo un lupo aggressivo per il proprio simile."
+            },
+            {
+                question: "Quali sono le tre principali leggi naturali di prudenza che la ragione suggerisce all'uomo per sopravvivere?",
+                options: [
+                    "Amare il prossimo tuo, donare tutti i beni ai poveri e pregare costantemente.",
+                    "Cercare la pace (pax quaerenda est), rinunciare al proprio diritto su tutto a patto che lo facciano gli altri, e rispettare i patti stipulati (pacta sunt servanda).",
+                    "Ubbidire ciecamente all'autorità del clero, difendere la patria e conquistare nuove colonie.",
+                    "Accumulare ricchezze, vendicarsi dei nemici e dominare con la forza i più deboli."
+                ],
+                correctIndex: 1,
+                explanation: "Le leggi di natura hobbesiane sono regole di prudenza calcolatrice: per sfuggire all'autodistruzione della guerra civile perenne, la ragione impone di cercare la pace, limitare la propria libertà e onorare i contratti stipulati."
+            },
+            {
+                question: "Come si costituisce lo Stato sovrano (il Leviatano) secondo Thomas Hobbes?",
+                options: [
+                    "Per grazia e investitura divina diretta concessa dal papa al monarca.",
+                    "Attraverso un patto sociale unico e contestuale di unione e sottomissione, con cui tutti i cittadini cedono irrevocabilmente i propri diritti naturali a un terzo sovrano che non è parte del patto.",
+                    "Attraverso una serie di assemblee democratiche rinnovate ogni anno a suffragio universale.",
+                    "Attraverso l'eredità genetica patriarcale della famiglia originaria di Adamo."
+                ],
+                correctIndex: 1,
+                explanation: "Il patto hobbesiano unisce patto di unione e patto di sottomissione: gli individui si associano rinunciando ciascuno alla propria forza a favore di un sovrano (monarca o assemblea) che, non essendo contraente, detiene un potere assoluto e sciolto dalle leggi."
+            },
+            {
+                question: "Quale prerogativa attribuisce Hobbes al sovrano nei confronti della religione e della Chiesa?",
+                options: [
+                    "Il sovrano deve essere sottomesso ai decreti del pontefice romano in materia di fede e morale.",
+                    "Il sovrano civile è anche il capo supremo e indiscutibile della Chiesa nazionale: non possono esistere due poteri sovrani contrastanti nello stesso Stato.",
+                    "La religione deve essere totalmente abolita e bandita dallo spazio pubblico statale.",
+                    "Ciascun cittadino ha il diritto civile di fondare la propria chiesa armata indipendente."
+                ],
+                correctIndex: 1,
+                explanation: "Hobbes rifiuta qualsiasi diarchia: un regno diviso in due capi (temporale e spirituale) è destinato alla guerra civile. Il Leviatano impugna sia la spada del comando politico sia il pastorale dell'autorità religiosa."
+            }
+        ]
+    },
+
+    cap10_newton: {
+        subject: "filosofia",
+        chapterTag: "Studio X",
+        title: "Isaac Newton – I Principia e la Meccanica Razionale",
+        questions: [
+            {
+                question: "Quale principio fondamentale esprime la seconda legge della dinamica formulata da Newton nei Principia?",
+                options: [
+                    "Ogni corpo rimane indefinitamente in quiete se non viene riscaldato da una sorgente luminosa.",
+                    "Il cambiamento di moto è direttamente proporzionale alla forza motrice impressa, e avviene lungo la retta secondo cui la forza agisce (F = ma).",
+                    "A ogni azione corrisponde una reazione sempre diseguale e ritardata nel tempo.",
+                    "La massa dei corpi aumenta esponenzialmente all'avvicinarsi al Sole."
+                ],
+                correctIndex: 1,
+                explanation: "La seconda legge della dinamica quantifica l'azione della forza meccanica: una forza impressa accelera un corpo in proporzione diretta alla sua intensità e in proporzione inversa alla massa inerziale dell'oggetto."
+            },
+            {
+                question: "In che modo la legge di gravitazione universale unifica la fisica moderna?",
+                options: [
+                    "Dimostra che la caduta dei gravi terrestri e le orbite dei pianeti e della Luna sono governate dalla medesima identica forza attrattiva proporzionale alle masse e inversamente proporzionale al quadrato della distanza.",
+                    "Riconduce tutti i fenomeni fisici alla pressione di vortici di etere materiale denso.",
+                    "Dimostra che la Terra è attratta unicamente dalla luce spirituale del Sole.",
+                    "Stabilisce che i corpi celesti sono composti da un etere perfetto incorruttibile."
+                ],
+                correctIndex: 0,
+                explanation: "Newton unifica la dinamica terrestre galileiana e l'astronomia kepleriana in un'unica equazione (F = G m₁m₂/r²): la stessa forza che fa cadere la mela mantiene i pianeti nelle loro orbite celesti."
+            },
+            {
+                question: "Cosa intende Isaac Newton con la celebre affermazione «Hypotheses non fingo» nello Scolio Generale?",
+                options: [
+                    "Che la scienza rifiuta qualsiasi forma di calcolo matematico o ragionamento deduttivo.",
+                    "Che egli non inventa ipotesi metafisiche arbitrarie o congetture occulte per spiegare la natura intima della gravità, limitandosi a descriverne rigorosamente le leggi matematiche osservabili nei fenomeni.",
+                    "Che tutti gli esperimenti di laboratorio sono privi di qualsiasi valore scientifico reale.",
+                    "Che la fisica deve conformarsi alle visioni alchemiche dell'ermetismo rinascimentale."
+                ],
+                correctIndex: 1,
+                explanation: "Newton rivendica la sobrietà del metodo empirico-matematico: non conoscendo la causa ultima della forza di gravità, rifiuta di inventare spiegazioni favolistiche (come i vortici di Cartesio), attenendosi a ciò che è deducibile dai fenomeni."
+            },
+            {
+                question: "Come concepisce Newton lo «Spazio assoluto» nella sua fisica matematica?",
+                options: [
+                    "Come l'insieme mobile e relativo delle distanze variabili tra i corpi materiali.",
+                    "Come un'entità reale, infinita, immobile e omogenea, che rimane sempre simile a sé stessa senza alcuna relazione con gli oggetti esteriori, fungendo da sensorium Dei.",
+                    "Come un'illusione soggettiva creata dalla retina dell'occhio umano.",
+                    "Come un aggregato finito racchiuso dall'etere celeste."
+                ],
+                correctIndex: 1,
+                explanation: "Per Newton lo spazio e il tempo sono assoluti, veri e matematici: esistono indipendentemente dalla materia che contengono, contenitore eterno e immobile dell'universo e quasi sensorio della presenza divina nel cosmo."
+            },
+            {
+                question: "Quale ruolo attribuisce Newton a Dio (Pantokrator) nello Scolio Generale dei Principia?",
+                options: [
+                    "Dio è una causa immanente che coincide interamente con la natura materiale cieca.",
+                    "Dio è il Supremo Signore e Sovrano dell'universo, un Essere intelligente e potente che governa tutte le cose con provvidenza e mantiene la mirabile armonia del sistema cosmico.",
+                    "Dio è un'ipotesi superflua che la fisica newtoniana ha definitivamente cancellato.",
+                    "Dio interviene unicamente per distruggere ciclicamente i pianeti col fuoco."
+                ],
+                correctIndex: 1,
+                explanation: "Nello Scolio Generale Newton rifiuta l'ateismo meccanicista: l'ordine sublime del sistema solare non può derivare dalla cieca necessità della materia, ma presuppone il continuo dominio di un Dio personale, eterno, onnipotente e provvidente."
+            }
+        ]
+    },
+
+    cap11_locke: {
+        subject: "filosofia",
+        chapterTag: "Studio XI",
+        title: "John Locke – L'Empirismo Gnoseologico e il Liberalismo Politico",
+        questions: [
+            {
+                question: "Con quale celebre argomento John Locke confuta l'esistenza delle idee innate nel Libro I del Saggio sull'intelletto umano?",
+                options: [
+                    "Dimostrando che le idee innate non possono essere espresse nella lingua latina.",
+                    "Evidenziando che i bambini, gli idioti e le popolazioni selvagge non hanno alcuna nozione dei presunti princìpi logici e morali universali; se fossero innati, dovrebbero esserne necessariamente coscienti fin dalla nascita.",
+                    "Affermando che solo Dio possiede idee innate, mentre gli uomini posseggono solo memorie angeliche.",
+                    "Sostenendo che l'anima viene creata solo all'età della ragione matura."
+                ],
+                correctIndex: 1,
+                explanation: "Locke smonta l'innatismo mostrando che non esiste alcun consenso universale: i princìpi logici (identità, non-contraddizione) non sono presenti nella mente infantile, e avere un'idea nella mente senza esserne coscienti è una contraddizione palese."
+            },
+            {
+                question: "Quali sono le due uniche fonti da cui la mente riceve tutti i materiali della conoscenza (le idee semplici)?",
+                options: [
+                    "La fede rivelata e l'immaginazione poetica.",
+                    "La sensazione (esperienza degli oggetti esterni) e la riflessione (esperienza delle operazioni interiori della mente).",
+                    "La memoria mnemonica e il sillogismo aristotelico formale.",
+                    "La geometria pura e il calcolo infinitesimale leibniziano."
+                ],
+                correctIndex: 1,
+                explanation: "Per Locke la mente è una tabula rasa (foglio bianco): riceve passivamente le idee semplici solo dall'esperienza, articolata in senso esterno (sensazione: colori, calore, suoni) e senso interno (riflessione: dubitare, credere, volere)."
+            },
+            {
+                question: "Qual è la concezione lockiana della «Sostanza» materiale o spirituale?",
+                options: [
+                    "È l'essenza chiara e distinta che la mente intuisce con certezza immediata.",
+                    "È un oscuro e sconosciuto «non so che» (something, I know not what), un ipotetico substrato supposto per sostenere qualità semplici che non possiamo immaginare sussistere da sole.",
+                    "È una finzione linguistica che deve essere totalmente espunta dal pensiero umano.",
+                    "È la causa prima infinita coincidente con la totalità della natura corporea."
+                ],
+                correctIndex: 1,
+                explanation: "Locke demistifica la sostanza: noi percepiamo solo collezioni di qualità semplici costantemente congiunte (giallo, pesante, malleabile nell'oro); supponiamo un supporto sottostante che le tenga insieme, ma la sua essenza reale rimane un 'non so che' inaccessibile."
+            },
+            {
+                question: "Quali sono i tre diritti naturali inalienabili che ciascun individuo possiede nello stato di natura lockiano?",
+                options: [
+                    "Potere, Gloria e Vendetta.",
+                    "Vita, Libertà e Proprietà (fondata sul lavoro personale).",
+                    "Sicurezza militare, Fede religiosa e Obbedienza civile.",
+                    "Uguaglianza economica, Comunione dei beni e Lavoro collettivo."
+                ],
+                correctIndex: 1,
+                explanation: "Nel Secondo trattato sul governo Locke fonda il liberalismo: l'uomo possiede per legge di natura il diritto inalienabile alla propria vita, alla libertà e alla proprietà privata, che trae la sua legittimità etica dall'energia del lavoro personale mescolato alle risorse della terra."
+            },
+            {
+                question: "Cosa intende Locke con l'espressione «Appello al Cielo» (Appeal to Heaven)?",
+                options: [
+                    "L'obbligo di pregare Dio prima di promulgare qualsiasi legge civile statale.",
+                    "Il diritto naturale di resistenza del popolo di ribellarsi e rovesciare il potere politico costituito quando i governanti violano sistematicamente il patto di fiducia e i diritti fondamentali dei cittadini.",
+                    "L'abbandono della vita terrena per ritirarsi in meditazione monastica nei boschi.",
+                    "L'appello al papa per dirimere le controversie dinastiche europee."
+                ],
+                correctIndex: 1,
+                explanation: "Il potere politico è un trust (deposito di fiducia condizionato): se il governo abusa della propria autorità violando vita, libertà o proprietà, non essendoci giudice terzo sulla terra tra popolo e tiranno, i cittadini hanno il legittimo diritto all'appello al cielo, ossia alla rivoluzione."
+            }
+        ]
+    },
+
+    cap12_berkeley: {
+        subject: "filosofia",
+        chapterTag: "Studio XII",
+        title: "George Berkeley – L'Immaterialismo e il Principio Esse Est Percipi",
+        questions: [
+            {
+                question: "Quale dottrina gnoseologica viene radicalmente criticata da George Berkeley nell'Introduzione ai Princìpi della conoscenza umana?",
+                options: [
+                    "La teoria delle idee astratte formulata da John Locke.",
+                    "La validità del sillogismo disgiuntivo e dell'induzione scientifica.",
+                    "L'esistenza degli spiriti incorporei creati da Dio.",
+                    "L'utilità pratica dei calcoli dell'aritmetica commerciale."
+                ],
+                correctIndex: 0,
+                explanation: "Berkeley individua la radice di tutti gli equivoci della metafisica nella dottrina delle idee astratte: la mente non può concepire un'idea generale di triangolo o di estensione priva di qualità particolari; tutte le nostre idee sono rigorosamente singolari."
+            },
+            {
+                question: "Qual è il significato fondamentale della formula ontologica berkeleiana «Esse est percipi»?",
+                options: [
+                    "Le cose materiali esistono indipendentemente da qualsiasi mente che le osservi.",
+                    "L'essere delle cose sensibili coincide interamente con il loro essere percepite da uno spirito (una mente).",
+                    "La conoscenza consiste nel ricordare le idee eterne contemplate prima della nascita corporea.",
+                    "L'esistenza reale compete unicamente agli atomi materiali invisibili all'occhio."
+                ],
+                correctIndex: 1,
+                explanation: "Per Berkeley gli oggetti sensibili (mele, tavoli, monti) sono collezioni di idee sensoriali: poiché un'idea può esistere solo all'interno di una mente che la percepisce, l'esistenza delle cose coincide senza residui con il loro essere percepite."
+            },
+            {
+                question: "In che modo Berkeley confuta la distinzione lockiana tra qualità primarie e qualità secondarie?",
+                options: [
+                    "Affermando che le qualità secondarie sono corporee e le primarie spirituali.",
+                    "Dimostrando che le qualità primarie (estensione, figura, moto) sono inseparabili da quelle secondarie (colore, tatto): se le seconde esistono solo nella mente, anche le prime non possono esistere altrove che nello spirito percipiente.",
+                    "Dimostrando che né le primarie né le secondarie possono essere percepite dai sensi.",
+                    "Sostenendo che le qualità primarie cambiano a seconda della temperatura atmosferica."
+                ],
+                correctIndex: 1,
+                explanation: "Non è possibile percepire o concepire un'estensione o una figura senza attribuirle un colore o una densità tattile: essendo le qualità secondarie pacificamente mentali, anche la materia estesa esterna si rivela una mera chimera filosofica priva di fondamento."
+            },
+            {
+                question: "Se la materia non esiste, da dove provengono le idee stabili e regolari del mondo naturale secondo Berkeley?",
+                options: [
+                    "Sono allucinazioni arbitrarie prodotte dalla fantasia individuale del soggetto.",
+                    "Sono impresse continuamente nella nostra mente finita da uno Spirito Infinito ed Eterno: Dio.",
+                    "Derivano dall'urto caotico di atomi materiali nel vuoto cosmico.",
+                    "Sono memorie genetiche trasmesse dagli antenati biologici dell'umanità."
+                ],
+                correctIndex: 1,
+                explanation: "Le nostre sensazioni si impongono con un ordine, una vivacità e una coerenza mirabile indipendenti dalla nostra volontà: esse sono il linguaggio visivo con cui Dio comunica costantemente con le menti create, garantendo la realtà oggettiva del mondo."
+            },
+            {
+                question: "Qual è il principale intento apologetico che guida la filosofia immaterialista di Berkeley?",
+                options: [
+                    "Favorire l'avvento di una rivoluzione repubblicana atea in Irlanda.",
+                    "Sradicare il materialismo, il deismo e lo scetticismo per condurre l'uomo alla percezione immediata e costante della presenza di Dio nel mondo.",
+                    "Dimostrare che la scienza newtoniana deve sostituire interamente la teologia cristiana.",
+                    "Convincere i teologi ad abbandonare la predicazione morale per la geometria analitica."
+                ],
+                correctIndex: 1,
+                explanation: "Eliminando la nozione fittizia di materia inerte autosufficiente (su cui facevano perno atei e scettici per spiegare il cosmo senza Dio), Berkeley mostra che la realtà è un colloquio continuo tra gli spiriti finiti e lo Spirito divino onnipresente."
+            }
+        ]
+    },
+
+    cap13_hume: {
+        subject: "filosofia",
+        chapterTag: "Studio XIII",
+        title: "David Hume – Scetticismo Radicale, Causalità e Passioni",
+        questions: [
+            {
+                question: "Quale distinzione fondamentale stabilisce David Hume tra i contenuti della mente (percezioni)?",
+                options: [
+                    "Idee innate e idee avventizie cartesiane.",
+                    "Impressioni (percezioni dotate del massimo grado di forza e vivacità, quando sentiamo o proviamo emozioni attuali) e Idee (copie sbiadite delle impressioni trattenute nella memoria e nell'immaginazione).",
+                    "Monadi semplici e monadi appercettive leibniziane.",
+                    "Concetti a priori e categorie trascendentali dell'intelletto puro."
+                ],
+                correctIndex: 1,
+                explanation: "Per Hume tutte le percezioni si distinguono in base alla vivacità: l'impressione è l'esperienza immediata e viva (il dolore della ferita), mentre l'idea è la memoria o il pensiero affievolito di quella medesima impressione originaria."
+            },
+            {
+                question: "Cosa stabilisce la cosiddetta «Forchetta di Hume» (Hume's Fork)?",
+                options: [
+                    "Tutte le azioni umane si dividono in virtuose e criminose secondo la legge biblica.",
+                    "Tutti gli oggetti della ragione si dividono in «Relazioni tra idee» (necessarie, intuitive o dimostrative, certe a priori come la matematica) e «Materie di fatto» (conoscenze empiriche a posteriori, il cui contrario è sempre logicamente possibile).",
+                    "La divisione cartesiana tra res cogitans e res extensa nello spazio tridimensionale.",
+                    "La separazione politica dei tre poteri di uno Stato moderno."
+                ],
+                correctIndex: 1,
+                explanation: "La 'forchetta' divide rigidamente il sapere: le relazioni di idee (es. algebra e geometria) si fondano sul principio di non-contraddizione; le materie di fatto (es. 'il Sole sorge') dipendono dall'esperienza e il loro contrario non implica mai contraddizione logica."
+            },
+            {
+                question: "Su quale fondamento psicologico poggia la nostra credenza nella connessione necessaria di causa ed effetto?",
+                options: [
+                    "Su una dimostrazione razionale a priori evidente all'intelletto puro.",
+                    "Sull'esperienza diretta e oggettiva del legame necessario tra i due eventi fisici.",
+                    "Sull'abitudine psicologica (custom/habit) e sulla credenza (belief), sentimento istintivo nato dalla ripetuta osservazione della contiguità e successione regolare nel passato.",
+                    "Sulla rivelazione divina comunicata al cuore dell'uomo credente."
+                ],
+                correctIndex: 2,
+                explanation: "Noi vediamo solo che B segue costantemente A nel tempo e nello spazio, ma non facciamo mai esperienza della loro 'connessione necessaria': è l'abitudine mentale che genera l'attesa psicologica e la credenza istintiva che il futuro sarà conforme al passato."
+            },
+            {
+                question: "In che modo David Hume dissolve l'idea tradizionale dell'«Io» come sostanza spirituale permanente (teoria del fascio)?",
+                options: [
+                    "Afferma che l'anima è un atomo corporeo situato nel ventricolo sinistro del cuore.",
+                    "Afferma che l'Io non è una sostanza immutabile, ma un «fascio o collezione di differenti percezioni che si susseguono l'un l'altra con inconcepibile rapidità in un perpetuo flusso e movimento».",
+                    "Sostiene che l'Io coincide con l'Io Penso universale legislatore della natura.",
+                    "Dichiara che l'identità personale è garantita dall'immortalità biologica delle cellule cerebrali."
+                ],
+                correctIndex: 1,
+                explanation: "Hume compie una celebre introspezione: ogni volta che cerca sé stesso, trova solo una percezione passeggera (caldo, freddo, amore, odio). Non esiste un sostrato sostanziale permanente: la mente è come un teatro senza palcoscenico fisso."
+            },
+            {
+                question: "Quale celebre principio etico-epistemologico viene definito «Legge di Hume»?",
+                options: [
+                    "La dimostrazione che tutti gli uomini cercano naturalmente la felicità pubblica.",
+                    "Il divieto logico di compiere il salto ingiustificato da proposizioni descrittive con il verbo «essere» a proposizioni normative con il verbo «dover essere».",
+                    "L'affermazione che le leggi civili devono coincidere con i dogmi religiosi della Chiesa cattolica.",
+                    "Il principio per cui la ragione deve dominare e reprimere ogni passione umana istintiva."
+                ],
+                correctIndex: 1,
+                explanation: "La legge di Hume (fallacia naturalistica) sancisce l'impossibilità logica di dedurre valori o doveri morali ('si deve fare') da semplici descrizioni di fatti naturali ('è così'), separando la sfera della scienza da quella dell'etica."
+            }
+        ]
+    },
+
+    cap14_illuminismo: {
+        subject: "filosofia",
+        chapterTag: "Studio XIV",
+        title: "Nello Spazio dell'Illuminismo – Modelli Inglese, Francese e Tedesco",
+        questions: [
+            {
+                question: "Quale celebre definizione di «Illuminismo» formula Immanuel Kant nel 1784?",
+                options: [
+                    "L'adesione incondizionata al modello scientifico e geometrico cartesiano.",
+                    "L'uscita dell'uomo dallo stato di minorità che egli deve imputare a sé stesso, riassunta nel motto: «Sapere aude! Abbi il coraggio di servirti della tua propria intelligenza!».",
+                    "La restaurazione della monarchia assoluta temperata dal potere dei filosofi.",
+                    "La soppressione delle passioni sensibili attraverso il rigore dell'ascetismo monastico."
+                ],
+                correctIndex: 1,
+                explanation: "Nel celebre saggio di risposta alla domanda 'Cos'è l'Illuminismo?', Kant definisce il movimento come emancipazione razionale autonoma, esortando l'umanità ad abbandonare la pigrizia e la viltà per pensare con la propria testa."
+            },
+            {
+                question: "Cosa teorizza Montesquieu nella sua opera fondamentale Lo spirito delle leggi (1748) a tutela della libertà politica?",
+                options: [
+                    "L'accentramento di tutti i poteri nelle mani di un monarca illuminato paternalista.",
+                    "La dottrina della separazione e dell'equilibrio reciproco dei tre poteri fondamentali: Legislativo, Esecutivo e Giudiziario («il potere freni il potere»).",
+                    "L'eliminazione dello Stato a favore di una democrazia diretta spontanea senza assemblee.",
+                    "La subordinazione del diritto civile alle corti d'inquisizione ecclesiastica."
+                ],
+                correctIndex: 1,
+                explanation: "Montesquieu individua nella divisione dei poteri la garanzia costituzionale contro la tirannia: affinché non si possa abusare del potere, le tre funzioni dello Stato devono essere affidate a organi distinti e indipendenti che si controllino a vicenda."
+            },
+            {
+                question: "Quale carattere innovativo contraddistingue l'Encyclopédie diretta da Diderot e d'Alembert (1751-1772)?",
+                options: [
+                    "È scritta interamente in lingua latina per rivolgersi solo a una stretta cerchia accademica aristocratica.",
+                    "Integra il sapere teorico filosofico e scientifico con la dettagliata descrizione delle arti meccaniche, delle tecniche e dei mestieri artigianali, promuovendo la circolazione sociale della conoscenza.",
+                    "È un'opera dogmatica commissionata dalla Chiesa per confutare la fisica newtoniana.",
+                    "Tratta esclusivamente di questioni teologiche ed esegesi delle profezie dell'Antico Testamento."
+                ],
+                correctIndex: 1,
+                explanation: "L'Encyclopédie valorizza la dimensione pratica e tecnica del lavoro umano con magnifiche tavole illustrative, democratizzando l'accesso al sapere e scardinando il disprezzo tradizionale per le arti manuali e meccaniche."
+            },
+            {
+                question: "Cosa dimostra Étienne Bonnot de Condillac con il celebre esperimento mentale della «statua di marmo» nel Trattato delle sensazioni (1754)?",
+                options: [
+                    "Che la scultura classica greca è l'unica vera forma di perfezione artistica terrena.",
+                    "Che tutte le facoltà della mente umana (attenzione, memoria, comparazione, giudizio, volontà) non sono altro che «sensazione trasformata», a partire dal senso dell'olfatto accordato progressivamente alla statua.",
+                    "Che la materia è inanimata e non potrà mai sviluppare alcuna forma di pensiero cosciente.",
+                    "Che l'anima possiede fin dalla nascita tutte le idee platoniche del Bene e del Giusto."
+                ],
+                correctIndex: 1,
+                explanation: "Condillac porta il sensismo alle estreme conseguenze: animando progressivamente una statua di marmo con i cinque sensi (iniziando dal più debole, l'odorato), mostra come ogni operazione intellettuale ed emotiva derivi direttamente dalla modificazione sensoriale."
+            },
+            {
+                question: "Quale fondamentale disciplina filosofica viene fondata dal pensatore tedesco Alexander Gottlieb Baumgarten con l'opera Aesthetica (1750)?",
+                options: [
+                    "La Filosofia della storia.",
+                    "L'Estetica, concepita come scienza autonoma della conoscenza sensibile inferiore (cognitio sensitiva) diretta alla perfezione della bellezza.",
+                    "La Sociologia politica dei ceti borghesi.",
+                    "La Fisica molecolare delle particelle elementari."
+                ],
+                correctIndex: 1,
+                explanation: "Baumgarten emancipa la dimensione sensoriale ed estetica: l'estetica cessa di essere un gradino imperfetto rispetto alla ragione geometrica e diviene la teoria autonoma della conoscenza sensibile, il cui fine intrinseco è il Bello."
+            }
+        ]
+    },
+
+    cap15_vico_rousseau: {
+        subject: "filosofia",
+        chapterTag: "Studio XV",
+        title: "Due Casi Atipici – Giambattista Vico e Jean-Jacques Rousseau",
+        questions: [
+            {
+                question: "Cosa stabilisce il celebre principio gnoseologico vichiano del «Verum-Factum» nel De antiquissima Italorum sapientia (1710)?",
+                options: [
+                    "Che l'uomo conosce con verità scientifica solo la natura fisica creata da Dio.",
+                    "«Verum et factum reciprocantur seu convertuntur»: si può conoscere con piena verità solo ciò che si è fatto e prodotto; dunque l'uomo può avere vera scienza del mondo civile e della storia, mentre la natura è pienamente nota solo a Dio.",
+                    "Che i fatti empirici sono sempre falsi rispetto alle idee astratte della logica sillogistica.",
+                    "Che le azioni pratiche degli uomini sono determinate unicamente dagli astri celesti."
+                ],
+                correctIndex: 1,
+                explanation: "Vico rovescia la presunzione cartesiana: la fisica matematica dell'uomo non conosce le cause reali della natura perché l'uomo non l'ha creata. Al contrario, la storia è stata fatta dagli uomini, e i suoi princìpi possono essere ritrovati nella mente umana."
+            },
+            {
+                question: "Quali sono le «tre età» che attraversano le nazioni umane nella Scienza Nuova di Giambattista Vico?",
+                options: [
+                    "Età dell'oro, Età del bronzo ed Età del ferro.",
+                    "L'Età degli Dèi (governi divini, terrore del sacro, geroglifici), l'Età degli Eroi (governi aristocratici, poemi omerici, forza) e l'Età degli Uomini (ragione dispiegata, uguaglianza civile, leggi scritte).",
+                    "Infanzia, Maturità e Senescenza cosmica.",
+                    "Età antica, Medioevo oscuro ed Età moderna razionalista."
+                ],
+                correctIndex: 1,
+                explanation: "Vico scandisce il corso storico dell'umanità in tre epoche organiche: prima dominata dai sensi e dal timore religioso, poi dalla fantasia poetica e dal vigore eroico, infine dalla riflessione filosofica e dal diritto universale egualitario."
+            },
+            {
+                question: "Cosa sostiene Jean-Jacques Rousseau nel Discorso sulle scienze e sulle arti (1750) circa l'effetto della civiltà?",
+                options: [
+                    "Che la scienza e le lettere hanno purificato i costumi e condotto l'uomo alla perfetta virtù morale.",
+                    "Che il progresso delle scienze e delle arti ha corrotto i costumi originari, stendendo ghirlande di fiori sulle catene della tirannia e sostituendo l'apparire ipocrita all'essere sincero.",
+                    "Che le arti sono l'unico strumento capace di abbattere le disuguaglianze economiche.",
+                    "Che solo l'insegnamento universitario della teologia può salvare gli Stati moderni dal disastro."
+                ],
+                correctIndex: 1,
+                explanation: "Nel primo Discorso, Rousseau scandalizza i contemporanei sostenendo che il raffinamento culturale e scientifico non ha reso gli uomini più virtuosi o liberi, ma ha introdotto la vanità, il vizio, l'artificio ipocrita e la sottomissione al potere."
+            },
+            {
+                question: "Nel Discorso sull'origine della disuguaglianza (1755), quale evento segna l'uscita definitiva dallo stato di innocenza naturale?",
+                options: [
+                    "La scoperta del fuoco da parte di Prometeo.",
+                    "L'invenzione della proprietà privata: «Il primo che, avendo cintato un terreno, pensò di dire questo è mio, e trovò persone abbastanza ingenue da credergli, fu il vero fondatore della società civile».",
+                    "L'adozione della scrittura alfabetica da parte dei greci.",
+                    "La caduta della monarchia feudale a vantaggio delle repubbliche."
+                ],
+                correctIndex: 1,
+                explanation: "Per Rousseau la recinzione delle terre, unita alla metallurgia e all'agricoltura, distrugge l'uguaglianza originaria del buon selvaggio, introducendo la divisione del lavoro, l'amor proprio egoistico, la competizione sfrenata e la servitù legale."
+            },
+            {
+                question: "Cosa intende Rousseau per «Volontà Generale» (Volonté générale) nel Contratto Sociale (1762)?",
+                options: [
+                    "La somma numerica arbitraria delle volontà particolari di tutti i singoli individui (volontà di tutti).",
+                    "La volontà del corpo politico sovrano unitario, inalienabile e indivisibile, orientata esclusivamente al bene comune e all'interesse pubblico generale.",
+                    "Il volere autocratico e assoluto del monarca illuminato che impone la pace con la forza.",
+                    "L'opinione della maggioranza espressa attraverso i partiti parlamentari delegati."
+                ],
+                correctIndex: 1,
+                explanation: "La volontà generale non è la mera maggioranza quantitativa di interessi egoistici privati (volontà di tutti), ma la volontà qualitativa e morale del corpo sovrano che mira unicamente al bene comune; obbedirle significa obbedire a sé stessi ed essere veramente liberi."
+            }
+        ]
+    },
+
+    cap16_kant: {
+        subject: "filosofia",
+        chapterTag: "Studio XVI",
+        title: "Immanuel Kant – La Filosofia Critica e i Tre Giudizi",
+        questions: [
+            {
+                question: "In cosa consiste la «Rivoluzione Copernicana» compiuta da Kant nella Critica della ragion pura?",
+                options: [
+                    "Nell'affermare che la Terra gira attorno al Sole anche nella dimensione morale interiore.",
+                    "Nel capovolgere il rapporto tra soggetto e oggetto: non è la mente che si modella passivamente sulle cose esterne, ma sono gli oggetti che devono conformarsi alle forme pure a priori della nostra sensibilità e del nostro intelletto.",
+                    "Nel dimostrare che la metafisica è la regina incontrastata di tutte le scienze naturali.",
+                    "Nell'affermare che la conoscenza empirica deriva direttamente dall'intuizione mistica di Dio."
+                ],
+                correctIndex: 1,
+                explanation: "Come Copernico pose il sole al centro per spiegare i moti apparenti dei cieli, così Kant pone il soggetto trascendente al centro del processo conoscitivo: noi conosciamo delle cose a priori solo quello che noi stessi vi mettiamo attraverso le nostre strutture cognitive."
+            },
+            {
+                question: "Quali caratteri possiedono i «Giudizi sintetici a priori», fondamento della scienza newtoniana secondo Kant?",
+                options: [
+                    "Sono infecondi, particolari e contingenti, ricavati dal sillogismo aristotelico.",
+                    "Sono sia fecondi (il predicato aggiunge nozioni nuove non contenute nel concetto del soggetto) sia universali e necessari (fondati su forme a priori della mente indipendenti dall'esperienza sensibile).",
+                    "Sono meri giudizi di gusto estetico soggettivi privi di applicazione nel mondo fisico.",
+                    "Sono giudizi analitici che si limitano a esplicitare il principio di non-contraddizione formale."
+                ],
+                correctIndex: 1,
+                explanation: "I giudizi sintetici a priori (es. 7+5=12 o 'ogni mutamento ha una causa') uniscono il vantaggio dell'empirismo (fecondità informativa) a quello del razionalismo (universalità e necessità oggettiva), rendendo possibile la matematica e la fisica pura."
+            },
+            {
+                question: "Qual è la differenza fondamentale tra «Fenomeno» e «Noumeno» (Cosa in sé) nella gnoseologia kantiana?",
+                options: [
+                    "Il fenomeno è l'oggetto spirituale eterno, il noumeno è il corpo materiale corruttibile.",
+                    "Il fenomeno è la realtà quale appare ed è conosciuta attraverso le forme a priori di spazio, tempo e categorie (unico ambito della scienza); il noumeno è la realtà quale è in sé stessa indipendente dalla mente, un concetto-limite inaccessibile alla conoscenza empirica.",
+                    "Il fenomeno è un'illusione ingannevole creata dai sensi, il noumeno è la verità matematica pura.",
+                    "Il fenomeno riguarda la morale pratica, il noumeno la percezione estetica del bello."
+                ],
+                correctIndex: 1,
+                explanation: "Noi possiamo conoscere scientificamente solo i fenomeni (le cose come appaiono conformate alle nostre strutture trascendentali). La cosa in sé (noumeno) è pensabile ma inconoscibile (Grenzbegriff), ricordando alla ragione i confini invalicabili dell'esperienza."
+            },
+            {
+                question: "Quale imperativo morale esprime la forma del dovere assoluto e incondizionato nella Critica della ragion pratica?",
+                options: [
+                    "L'imperativo ipotetico («Se vuoi essere lodato, devi compiere buone azioni»).",
+                    "L'Imperativo categorico («Devi perché devi»), comando oggettivo e universale della ragione pura che ordina l'azione morale per sé stessa, prescindendo da qualsiasi scopo materiale o ricerca della felicità.",
+                    "Il precetto di prudenza sociale basato sull'adeguamento ai costumi della patria.",
+                    "Il comando divino della vendetta contro i trasgressori della legge civile."
+                ],
+                correctIndex: 1,
+                explanation: "La morale kantiana è autonoma e formale: non dipende da moventi esterni, passioni o utilità (eudemonismo), ma dall'imperativo categorico dettato dalla ragione, che impone di agire solo secondo massime che possano valere come legislazione universale."
+            },
+            {
+                question: "Cosa distingue il sentimento del «Sublime» dal sentimento del «Bello» nella Critica del Giudizio (1790)?",
+                options: [
+                    "Il Bello riguarda gli oggetti artificiali dell'uomo, il Sublime riguarda unicamente i testi letterari sacri.",
+                    "Il Bello nasce dall'armonia e dalla proporzione formale finita; il Sublime è suscitato da ciò che è smisurato, informe o terribilmente potente nella natura (sublime matematico e dinamico), che prima atterrisce la fragilità fisica dell'uomo e poi ne risveglia la grandezza morale soprasensibile.",
+                    "Il Bello è doloroso e spiacevole, mentre il Sublime è una gioia corporale tranquilla.",
+                    "Il Bello è dimostrabile mediante concetti logici, il Sublime è privo di qualsiasi valore universale."
+                ],
+                correctIndex: 1,
+                explanation: "Di fronte all'incommensurabile (l'oceano, il cielo stellato) o alla potenza soverchiante della natura (uragani, vulcani), l'uomo sperimenta lo sgomento della propria piccolezza fisica, ma scopre la propria grandezza morale soprasensibile come essere razionale libero e immortale."
+            }
+        ]
     }
 };
 

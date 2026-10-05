@@ -663,6 +663,25 @@
             sto11_unificazione_regno: "summaries/sto11_unificazione_regno.md"
         };
 
+        const filosofiaChapterLinks = {
+            cap1_naturalismo: "summaries/cap1_naturalismo.md",
+            cap2_misura_mondo: "summaries/cap2_misura_mondo.md",
+            cap3_bacone_galileo: "summaries/cap3_bacone_galileo.md",
+            cap4_tarda_scolastica: "summaries/cap4_tarda_scolastica.md",
+            cap5_cartesio: "summaries/cap5_cartesio.md",
+            cap6_spinoza: "summaries/cap6_spinoza.md",
+            cap7_leibniz: "summaries/cap7_leibniz.md",
+            cap8_crisi_razionalismo: "summaries/cap8_crisi_razionalismo.md",
+            cap9_hobbes: "summaries/cap9_hobbes.md",
+            cap10_newton: "summaries/cap10_newton.md",
+            cap11_locke: "summaries/cap11_locke.md",
+            cap12_berkeley: "summaries/cap12_berkeley.md",
+            cap13_hume: "summaries/cap13_hume.md",
+            cap14_illuminismo: "summaries/cap14_illuminismo.md",
+            cap15_vico_rousseau: "summaries/cap15_vico_rousseau.md",
+            cap16_kant: "summaries/cap16_kant.md"
+        };
+
         // Knowledge Base flat paragraphs
         let knowledgeBase = [];
         let isKbReady = false;
@@ -918,6 +937,14 @@
                     chapterKey: chapterKey,
                     chapterTitle: quizDatabase[chapterKey]?.title || chapterKey
                 });
+            });
+
+            // 4. Storia della Filosofia
+            filesToLoad.push({
+                url: "knowledge_base/filosofia/filosofia_completo.md",
+                subject: 'filosofia',
+                chapterKey: 'filosofia_completo',
+                chapterTitle: 'Storia della Filosofia (Manuale Completo)'
             });
 
             const total = filesToLoad.length;
@@ -1509,6 +1536,9 @@
             } else if (chapterKey === 'storia_completo') {
                 const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
                 return `knowledge_base/storia/storia_completo.md${anchor}`;
+            } else if (chapterKey === 'filosofia_completo') {
+                const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                return `knowledge_base/filosofia/filosofia_completo.md${anchor}`;
             }
 
             if (subject === 'diritto') {
@@ -1525,6 +1555,9 @@
             } else if (subject === 'storia') {
                 const rel = storiaChapterLinks[chapterKey];
                 return rel ? `storia/index.html?open=${rel}` : `storia/index.html`;
+            } else if (subject === 'filosofia') {
+                const rel = filosofiaChapterLinks[chapterKey];
+                return rel ? `filosofia/index.html?open=${rel}` : `filosofia/index.html`;
             } else {
                 const rel = arteChapterLinks[chapterKey];
                 return rel ? `storia_arte/index.html?open=${rel}` : `storia_arte/index.html`;

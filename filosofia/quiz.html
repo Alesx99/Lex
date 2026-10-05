@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Philosophia - Quiz di Autovalutazione</title>
+    <meta name="description" content="Verifica le tue conoscenze di Storia della Filosofia Moderna con i nostri quiz accademici autocorrettivi e report dettagliati.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Centralized Quiz Database -->
+    <script src="../js/quiz_db.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Philosophia</span></h1>
+            <p>Storia della Filosofia Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link active" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Autovalutazione Filosofica</h2>
+            <div class="hero-divider"></div>
+            <p>Mettiti alla prova con i nostri quiz accademici autocorrettivi di Storia della Filosofia Moderna. Seleziona uno dei 16 moduli per avviare una sessione di 5 domande a risposta multipla con feedback immediato e commento teorico approfondito.</p>
+        </section>
+
+        <!-- Dynamic Quiz Area -->
+        <div id="quiz-wrapper">
+            
+            <!-- STEP 1: SELECT TOPIC SCREEN -->
+            <div id="selection-screen" class="quiz-step active">
+                <h3 class="selection-title">Seleziona l'Argomento del Quiz:</h3>
+                <div class="selection-grid">
+                    <button class="select-btn" onclick="startQuiz('cap1_naturalismo')">
+                        <span class="btn-chapter">Studio I</span>
+                        <span class="btn-title">Il Naturalismo Rinascimentale e l'Alba della Modernità</span>
+                        <span class="btn-desc">Telesio, Bruno, Campanella, anima del mondo, panteismo, magia naturale e nuova scienza.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap2_misura_mondo')">
+                        <span class="btn-chapter">Studio II</span>
+                        <span class="btn-title">Alla Scoperta della Misura del Mondo – La Rivoluzione Astronomica</span>
+                        <span class="btn-desc">Copernico, Osiander, Brahe e la rottura delle sfere celesti, Keplero e le orbite ellittiche.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap3_bacone_galileo')">
+                        <span class="btn-chapter">Studio III</span>
+                        <span class="btn-title">Francis Bacon e Galileo Galilei – I Fondatori del Metodo</span>
+                        <span class="btn-desc">Novum Organum, idoli della mente, Sidereus Nuncius, Dialogo sui massimi sistemi, relatività e metodo.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap4_tarda_scolastica')">
+                        <span class="btn-chapter">Studio IV</span>
+                        <span class="btn-title">La Tarda Scolastica Europea e Francisco Suárez</span>
+                        <span class="btn-desc">Disputationes Metaphysicae, ontologia moderna, ens inquantum ens e l'influenza su Cartesio.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap5_cartesio')">
+                        <span class="btn-chapter">Studio V</span>
+                        <span class="btn-title">René Descartes – Il Dubbio, il Cogito e il Razionalismo</span>
+                        <span class="btn-desc">Regole del metodo, dubbio iperbolico, Cogito ergo sum, prove di Dio, dualismo e fisica dei vortici.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap6_spinoza')">
+                        <span class="btn-chapter">Studio VI</span>
+                        <span class="btn-title">Baruch Spinoza – Deus Sive Natura e l'Etica Geometrica</span>
+                        <span class="btn-desc">Sostanza unica, causa sui, attributi e modi, parallelismo, conatus, beatitudine e libertà civile.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap7_leibniz')">
+                        <span class="btn-chapter">Studio VII</span>
+                        <span class="btn-title">Gottfried Wilhelm Leibniz – Monadologia e Armonia Prestabilita</span>
+                        <span class="btn-desc">Verità di ragione e di fatto, monadi prive di finestre, appercezione, Teodicea e migliore dei mondi.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap8_crisi_razionalismo')">
+                        <span class="btn-chapter">Studio VIII</span>
+                        <span class="btn-title">Crisi del Razionalismo – Pascal, Malebranche e il Giusnaturalismo</span>
+                        <span class="btn-desc">Esprit de finesse, canna pensante, scommessa su Dio, occasionalismo, Grozio e il diritto naturale laico.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap9_hobbes')">
+                        <span class="btn-chapter">Studio IX</span>
+                        <span class="btn-title">Thomas Hobbes – Materialismo Corporeo e il Leviatano</span>
+                        <span class="btn-desc">Nominalismo, calcolo della ragione, stato di natura, homo homini lupus, patto di sottomissione e sovranità assoluta.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap10_newton')">
+                        <span class="btn-chapter">Studio X</span>
+                        <span class="btn-title">Isaac Newton – I Principia e la Meccanica Razionale</span>
+                        <span class="btn-desc">Leggi del moto, gravitazione universale, hypotheses non fingo, spazio e tempo assoluti, Scolio Generale.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap11_locke')">
+                        <span class="btn-chapter">Studio XI</span>
+                        <span class="btn-title">John Locke – Empirismo Gnoseologico e Liberalismo</span>
+                        <span class="btn-desc">Tabula rasa, critica dell'innatismo, idee semplici/complesse, sostanza, Due trattati e tolleranza.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap12_berkeley')">
+                        <span class="btn-chapter">Studio XII</span>
+                        <span class="btn-title">George Berkeley – Immaterialismo ed Esse Est Percipi</span>
+                        <span class="btn-desc">Critica delle idee astratte, negazione della materia corporea inerte, Dio autore del linguaggio della natura.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap13_hume')">
+                        <span class="btn-chapter">Studio XIII</span>
+                        <span class="btn-title">David Hume – Scetticismo Radicale, Causalità e Passioni</span>
+                        <span class="btn-desc">Impressioni e idee, critica del nesso causale, abitudine e credenza, teoria del fascio dell'Io, etica della simpatia.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap14_illuminismo')">
+                        <span class="btn-chapter">Studio XIV</span>
+                        <span class="btn-title">Nello Spazio dell'Illuminismo – Modelli Europeo e Tedesco</span>
+                        <span class="btn-desc">Deismo inglese, Voltaire, Montesquieu e divisione dei poteri, Encyclopédie, sensismo, Wolff, Baumgarten e Lessing.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap15_vico_rousseau')">
+                        <span class="btn-chapter">Studio XV</span>
+                        <span class="btn-title">Due Casi Atipici – Giambattista Vico e Jean-Jacques Rousseau</span>
+                        <span class="btn-desc">Verum-factum, Scienza Nuova, tre età storiche; critica della civiltà, stato di natura, Contratto Sociale e l'Émile.</span>
+                    </button>\n                    <button class="select-btn" onclick="startQuiz('cap16_kant')">
+                        <span class="btn-chapter">Studio XVI</span>
+                        <span class="btn-title">Immanuel Kant – La Filosofia Critica e i Tre Giudizi</span>
+                        <span class="btn-desc">Rivoluzione copernicana, giudizi sintetici a priori, Ragion Pura (forme, categorie, Io Penso, idee), Ragion Pratica e Giudizio.</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="question-screen" class="quiz-step">
+                <div class="quiz-card-container">
+                    <div class="quiz-card-header">
+                        <span id="quiz-chapter-tag" class="quiz-chapter-tag">Studio I</span>
+                        <span id="quiz-progress-text" class="quiz-progress-text">Domanda 1 di 5</span>
+                    </div>
+
+                    <div class="quiz-progress-bar-bg">
+                        <div id="quiz-progress-indicator" class="quiz-progress-indicator" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="quiz-question-body">
+                        <h3 id="quiz-question-text">Testo della domanda...</h3>
+                        <div id="quiz-options-container" class="quiz-options-grid"></div>
+                    </div>
+
+                    <div id="quiz-feedback-box" class="quiz-feedback-box">
+                        <div class="feedback-header">
+                            <span id="feedback-icon" class="feedback-icon"></span>
+                            <span id="feedback-title" class="feedback-title">Esatto!</span>
+                        </div>
+                        <p id="feedback-explanation" class="feedback-explanation">Spiegazione accademica...</p>
+                        <button id="next-question-btn" class="btn btn-primary" onclick="nextQuestion()">Prossima Domanda</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: SCORE / RESULT SCREEN -->
+            <div id="result-screen" class="quiz-step">
+                <div class="result-card">
+                    <div class="result-glow-ring">
+                        <span id="result-score-text">0 / 5</span>
+                    </div>
+                    <h3 id="result-title">Risultato</h3>
+                    <p id="result-message" class="result-message">Messaggio personalizzato...</p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Riprova questo Quiz</button>
+                        <button class="btn btn-secondary" onclick="showSelectionScreen()">Seleziona un altro argomento</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // State variables
+        let currentSubject = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Dom Elements
+        const selectionScreen = document.getElementById('selection-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const quizChapterTag = document.getElementById('quiz-chapter-tag');
+        const quizProgressText = document.getElementById('quiz-progress-text');
+        const quizProgressIndicator = document.getElementById('quiz-progress-indicator');
+        const quizQuestionText = document.getElementById('quiz-question-text');
+        const quizOptionsContainer = document.getElementById('quiz-options-container');
+        
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        
+        const resultScoreText = document.getElementById('result-score-text');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function setTheme(isLight) {
+            if (isLight) {
+                document.body.classList.add('light-theme');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                document.body.classList.remove('light-theme');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(currentTheme === 'light');
+
+        themeToggle.addEventListener('click', () => {
+            const isLight = document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            setTheme(isLight);
+        });
+
+        function showSelectionScreen() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            selectionScreen.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz(subjectKey) {
+            currentSubject = subjectKey;
+            const data = (typeof quizDatabase !== 'undefined' && quizDatabase[subjectKey]) ? quizDatabase[subjectKey] : null;
+            if (!data || !data.questions) {
+                alert("Quiz per questo argomento in preparazione.");
+                return;
+            }
+
+            currentQuestions = data.questions;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            quizChapterTag.textContent = data.chapterTag || "Studio";
+            selectionScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            feedbackBox.classList.remove('open');
+            
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            quizProgressText.textContent = `Domanda ${currentQuestionIndex + 1} di ${currentQuestions.length}`;
+            const progressPercent = (currentQuestionIndex / currentQuestions.length) * 100;
+            quizProgressIndicator.style.width = progressPercent + '%';
+
+            quizQuestionText.textContent = currentQuestion.question;
+            quizOptionsContainer.innerHTML = '';
+
+            currentQuestion.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + idx)}</span> <span class="option-text">${option}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                quizOptionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const allOptionBtns = quizOptionsContainer.querySelectorAll('.quiz-option-btn');
+            
+            // Disable all options
+            allOptionBtns.forEach(btn => btn.disabled = true);
+            
+            const isCorrect = (selectedIndex === currentQuestion.correctIndex);
+            if (isCorrect) {
+                score++;
+                selectedBtn.classList.add('correct');
+                feedbackIcon.textContent = '✓';
+                feedbackIcon.style.color = '#10b981';
+                feedbackTitle.textContent = 'Risposta Esatta!';
+                feedbackTitle.style.color = '#10b981';
+            } else {
+                selectedBtn.classList.add('incorrect');
+                allOptionBtns[currentQuestion.correctIndex].classList.add('correct');
+                feedbackIcon.textContent = '✗';
+                feedbackIcon.style.color = '#ef4444';
+                feedbackTitle.textContent = 'Risposta Errata';
+                feedbackTitle.style.color = '#ef4444';
+            }
+
+            feedbackExplanation.textContent = currentQuestion.explanation;
+            feedbackBox.classList.add('open');
+
+            // Track quiz answer in LexCore if available
+            if (typeof LexCore !== 'undefined' && LexCore.trackQuizAnswer) {
+                LexCore.trackQuizAnswer('filosofia', isCorrect);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuestions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+
+            const total = currentQuestions.length;
+            resultScoreText.textContent = `${score} / ${total}`;
+            const percentage = Math.round((score / total) * 100);
+
+            if (percentage === 100) {
+                resultTitle.textContent = "Eccellente! Padronanza Perfetta";
+                resultMessage.textContent = "Congratulazioni! Hai dimostrato una comprensione impeccabile e rigorosa dei concetti filosofici di questo modulo d'esame.";
+            } else if (percentage >= 80) {
+                resultTitle.textContent = "Ottimo Risultato!";
+                resultMessage.textContent = "Ottima preparazione accademica! Hai colto con lucidità i nodi speculativi principali della materia.";
+            } else if (percentage >= 60) {
+                resultTitle.textContent = "Buona Preparazione (Sufficiente)";
+                resultMessage.textContent = "Conoscenze solide di base, ma alcuni passaggi concettuali e distinzioni terminologiche meritano un ripasso della sintesi.";
+            } else {
+                resultTitle.textContent = "Revisione Consigliata";
+                resultMessage.textContent = "Il punteggio suggerisce di rileggere attentamente la sintesi monografica dello studio prima di affrontare l'esame orale.";
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            if (currentSubject) {
+                startQuiz(currentSubject);
+            } else {
+                showSelectionScreen();
+            }
+        }
+    </script>
+</body>
+</html>

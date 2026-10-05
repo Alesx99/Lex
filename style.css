@@ -368,6 +368,7 @@ main {
 .subject-card.active-arte-contemp::before { background: #ec4899; }
 .subject-card.active-museologia::before { background: #06b6d4; }
 .subject-card.active-restauro::before { background: #14b8a6; }
+.subject-card.active-filosofia::before { background: #a855f7; }
 .subject-card.active-tesi::before { background: #ffffff; }
 
 /* Glow Effects */
@@ -386,6 +387,7 @@ main {
 .subject-card.active-arte-contemp:hover { box-shadow: 0 15px 35px rgba(236, 72, 153, 0.2); }
 .subject-card.active-museologia:hover { box-shadow: 0 15px 35px rgba(6, 182, 212, 0.2); }
 .subject-card.active-restauro:hover { box-shadow: 0 15px 35px rgba(20, 184, 166, 0.2); }
+.subject-card.active-filosofia:hover { box-shadow: 0 15px 35px rgba(168, 85, 247, 0.2); }
 .subject-card.active-tesi:hover { box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1); }
 
 /* Hover Titles */
@@ -404,6 +406,7 @@ main {
 .subject-card.active-arte-contemp:hover h2 { color: #ec4899; }
 .subject-card.active-museologia:hover h2 { color: #06b6d4; }
 .subject-card.active-restauro:hover h2 { color: #14b8a6; }
+.subject-card.active-filosofia:hover h2 { color: #a855f7; }
 .subject-card.active-tesi:hover h2 { color: #ffffff; }
 
 /* Icon Hovers */
@@ -421,7 +424,8 @@ main {
 .subject-card.active-storia-contemp:hover .subject-icon { color: #dc2626; border-color: #dc2626; background: rgba(220, 38, 38, 0.1); }
 .subject-card.active-arte-contemp:hover .subject-icon { color: #ec4899; border-color: #ec4899; background: rgba(236, 72, 153, 0.1); }
 .subject-card.active-museologia:hover .subject-icon { color: #06b6d4; border-color: #06b6d4; background: rgba(6, 182, 212, 0.1); }
-.subject-card.active-restauro:hover .subject-icon { color: #14b8a6; border-color: #14b8a6; background: rgba(20, 184, 166, 0.1); }
+.subject-card.active-restauro:hover .subject-icon { color: #14b8a6; border-color: #14b8a6; background: rgba(200, 184, 166, 0.1); }
+.subject-card.active-filosofia:hover .subject-icon { color: #a855f7; border-color: #a855f7; background: rgba(168, 85, 247, 0.1); }
 .subject-card.active-tesi:hover .subject-icon { color: #ffffff; border-color: #ffffff; background: rgba(255, 255, 255, 0.1); }
 
 /* Footer Link Colors */
@@ -440,6 +444,7 @@ main {
 .subject-card.active-arte-contemp .card-footer { color: #ec4899; }
 .subject-card.active-museologia .card-footer { color: #06b6d4; }
 .subject-card.active-restauro .card-footer { color: #14b8a6; }
+.subject-card.active-filosofia .card-footer { color: #a855f7; }
 .subject-card.active-tesi .card-footer { color: #ffffff; }
 
 

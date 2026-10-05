@@ -373,6 +373,7 @@
         .exam-card.subject-medievale.passed:hover { box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25); }
         .exam-card.subject-greca.passed:hover { box-shadow: 0 10px 25px rgba(139, 92, 246, 0.25); }
         .exam-card.subject-latina.passed:hover { box-shadow: 0 10px 25px rgba(236, 72, 153, 0.25); }
+        .exam-card.subject-filosofia.passed:hover { box-shadow: 0 10px 25px rgba(168, 85, 247, 0.25); }
         .exam-card.subject-cristiana.passed:hover { box-shadow: 0 10px 25px rgba(249, 115, 22, 0.25); }
         .exam-card.subject-contemporanea.passed:hover { box-shadow: 0 10px 25px rgba(6, 182, 212, 0.25); }
         .exam-card.subject-tesi.passed:hover { box-shadow: 0 10px 25px var(--accent-gold-glow); }
@@ -1307,6 +1308,7 @@
             { id: "arte-contemporanea", name: "Storia dell'Arte Contemporanea", cfu: 9, passed: false, grade: null, date: null, subject: "contemporanea", year: 3, gradeType: "voto" },
             { id: "museologia", name: "Museologia", cfu: 9, passed: false, grade: null, date: null, subject: "museologia", year: 3, gradeType: "voto" },
             { id: "restauro", name: "Storia e Tecnica del Restauro", cfu: 6, passed: false, grade: null, date: null, subject: "restauro", year: 3, gradeType: "voto" },
+            { id: "filosofia", name: "Storia della Filosofia", cfu: 6, passed: false, grade: null, date: null, subject: "filosofia", year: 3, gradeType: "voto" },
             { id: "inglese-3", name: "Inglese (3° anno)", cfu: 3, passed: false, grade: null, date: null, subject: "inglese", year: 3, gradeType: "idoneo" },
             { id: "insegnamento-scelta", name: "Insegnamento a Scelta", cfu: 9, passed: false, grade: null, date: null, subject: "custom", year: 3, gradeType: "voto" },
             { id: "crediti-scelta-3", name: "Crediti a Scelta (3° anno)", cfu: 9, passed: false, grade: null, date: null, subject: "idoneo", year: 3, gradeType: "idoneo" },
@@ -1317,7 +1319,7 @@
             'letteratura', 'cultura-greca', 'storia-medievale', 'arte-romana', 'geografia', 'arte-medievale',
             'storia-moderna', 'letteratura-latina', 'codicologia', 'arte-moderna', 'cristiana', 'diritto',
             'laboratorio', 'inglese-2', 'crediti-scelta-2',
-            'storia-contemporanea', 'arte-contemporanea', 'museologia', 'restauro', 'inglese-3',
+            'storia-contemporanea', 'arte-contemporanea', 'museologia', 'restauro', 'filosofia', 'inglese-3',
             'insegnamento-scelta', 'crediti-scelta-3', 'tesi'
         ];
 
@@ -1473,7 +1475,8 @@
                     'diritto': 'diritto',
                     'arte': 'arte-moderna',
                     'romana': 'arte-romana',
-                    'storia': 'storia-moderna'
+                    'storia': 'storia-moderna',
+                    'filosofia': 'filosofia'
                 };
 
                 Object.keys(subjectKeys).forEach(statKey => {

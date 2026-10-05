@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa delle Relazioni Filosofiche - Lex Philosophia</title>
+    <meta name="description" content="Mappa concettuale interattiva delle relazioni teoriche, gnoseologiche e metafisiche della Storia della Filosofia Moderna.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        main {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-section {
+            flex: 1;
+            margin-top: 1rem;
+        }
+
+        .connections-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            min-height: 640px;
+        }
+
+        @media (max-width: 1024px) {
+            .connections-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        .map-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            min-height: 580px;
+        }
+
+        .map-svg {
+            width: 100%;
+            height: 100%;
+            min-height: 560px;
+            display: block;
+            user-select: none;
+        }
+
+        /* SVG Graph Styles */
+        .graph-edge {
+            stroke: rgba(168, 85, 247, 0.18);
+            stroke-width: 1.8;
+            transition: all 0.25s ease;
+        }
+
+        .graph-edge.active {
+            stroke: var(--accent-filosofia);
+            stroke-width: 3.2;
+            filter: drop-shadow(0 0 8px var(--accent-filosofia));
+        }
+
+        .graph-node {
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .graph-node circle {
+            fill: #130f24;
+            stroke: rgba(168, 85, 247, 0.4);
+            stroke-width: 2.2;
+            transition: all 0.25s ease;
+        }
+
+        body.light-theme .graph-node circle {
+            fill: #ffffff;
+            stroke: rgba(147, 51, 234, 0.5);
+        }
+
+        .graph-node:hover circle, .graph-node.active circle {
+            stroke: var(--accent-filosofia);
+            stroke-width: 3.5;
+            filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.7));
+            fill: rgba(168, 85, 247, 0.2);
+        }
+
+        .graph-node-number {
+            fill: var(--accent-filosofia);
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 13px;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+        }
+
+        .graph-node-label {
+            fill: var(--text-secondary);
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 500;
+            text-anchor: middle;
+            pointer-events: none;
+            transition: fill 0.2s ease;
+        }
+
+        .graph-node:hover .graph-node-label, .graph-node.active .graph-node-label {
+            fill: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* Detail Panel */
+        .info-panel {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-md);
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .panel-placeholder {
+            text-align: center;
+            margin: auto 0;
+            color: var(--text-muted);
+        }
+
+        .panel-placeholder svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            stroke: var(--accent-filosofia);
+            opacity: 0.6;
+        }
+
+        .panel-placeholder h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .panel-tag {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--accent-filosofia);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .panel-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            line-height: 1.3;
+        }
+
+        .panel-author {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .panel-section-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-filosofia);
+            margin: 1.2rem 0 0.6rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-section-title svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .panel-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .connection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .connection-item {
+            background: rgba(168, 85, 247, 0.06);
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-left: 3px solid var(--accent-filosofia);
+            border-radius: 8px;
+            padding: 0.9rem 1.1rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .connection-item:hover {
+            background: rgba(168, 85, 247, 0.14);
+            border-color: var(--accent-filosofia);
+            transform: translateX(3px);
+        }
+
+        .conn-target-title {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .conn-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Philosophia</span></h1>
+            <p>Storia della Filosofia Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link active" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+        
+        <section class="connections-container map-section">
+            
+            <!-- Graphic Map Panel -->
+            <div class="map-card">
+                <svg id="network-svg" class="map-svg" viewBox="0 0 740 740" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="6" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    <g id="edges-group"></g>
+                    <g id="nodes-group"></g>
+                </svg>
+            </div>
+
+            <!-- Descriptive Right Panel -->
+            <div class="info-panel" id="detail-panel">
+                <div class="panel-placeholder" id="placeholder-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <h3>Mappa delle Relazioni Filosofiche</h3>
+                    <p>Seleziona o clicca su uno dei 16 nodi del grafo per visualizzare i nessi gnoseologici, metafisici e storici tra i grandi pensatori della modernità.</p>
+                </div>
+
+                <div class="panel-content" id="panel-details" style="display: none;">
+                    <div class="panel-header">
+                        <span class="panel-tag" id="panel-chapter-tag">Studio I</span>
+                        <h2 class="panel-title" id="panel-chapter-title">Titolo</h2>
+                        <div class="panel-author">Autore: <span id="panel-chapter-author">C. Esposito - P. Porro</span></div>
+                    </div>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        Descrizione Concettuale
+                    </p>
+                    <p class="panel-desc" id="panel-chapter-desc"></p>
+                    
+                    <p class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path></svg>
+                        Nessi con altri Studi
+                    </p>
+                    <div class="connection-list" id="panel-connections-list"></div>
+
+                    <div style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="btn-read-summary" style="width: 100%;">Leggi Sintesi Completa</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag-view">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title-view">Titolo dello Studio</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="window.print()" title="Stampa o Salva PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        const nodes = [
+            {
+                        "id": 1,
+                        "label": "Studio I",
+                        "shortNum": "I",
+                        "title": "Il Naturalismo Rinascimentale e l'Alba della Modernità",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap1_naturalismo.md",
+                        "desc": "La riscoperta della natura nel Cinquecento. Bernardino Telesio e i princìpi attivi (caldo e freddo); Giordano Bruno tra infinità dell'universo, pluralità dei mondi, panteismo ed eroico furore; Tommaso Campanella e la Città del Sole; l'osmosi tra magia naturale e proto-scienza."
+            },
+            {
+                        "id": 2,
+                        "label": "Studio II",
+                        "shortNum": "II",
+                        "title": "Alla Scoperta della Misura del Mondo – La Rivoluzione Astronomica",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap2_misura_mondo.md",
+                        "desc": "Il passaggio dal cosmo chiuso tolemaico-aristotelico all'universo aperto eliocentrico. Niccolò Copernico (De revolutionibus, 1543), il compromesso ticonico di Tycho Brahe con la distruzione delle sfere cristalline, e le tre leggi matematiche delle orbite ellittiche di Giovanni Keplero."
+            },
+            {
+                        "id": 3,
+                        "label": "Studio III",
+                        "shortNum": "III",
+                        "title": "Francis Bacon e Galileo Galilei – I Fondatori del Metodo Scientifico",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap3_bacone_galileo.md",
+                        "desc": "I fondatori del metodo moderno. Bacon: dottrina degli idola, metafora delle api, induzione vera e Nuova Atlantide. Galileo: Sidereus Nuncius, il libro della natura scritto in caratteri matematici, qualità primarie e secondarie, principio di relatività classica e il processo del 1633."
+            },
+            {
+                        "id": 4,
+                        "label": "Studio IV",
+                        "shortNum": "IV",
+                        "title": "La Tarda Scolastica Europea e Francisco Suárez",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap4_tarda_scolastica.md",
+                        "desc": "La Seconda Scolastica iberica tra Salamanca e Coimbra. Le Disputationes Metaphysicae (1597) di Suárez: il superamento dei commentari per un'esposizione tematica autonoma, la nascita dell'ontologia moderna e l'influenza su Cartesio, Spinoza e Leibniz."
+            },
+            {
+                        "id": 5,
+                        "label": "Studio V",
+                        "shortNum": "V",
+                        "title": "René Descartes – Il Dubbio, il Cogito e il Razionalismo",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap5_cartesio.md",
+                        "desc": "La rifondazione metafisica cartesiana. Le quattro regole del metodo, il dubbio iperbolico, il Genio maligno e la prima verità del Cogito ergo sum; le tre prove dell'esistenza di Dio, il dualismo tra res cogitans e res extensa, la ghiandola pineale e la morale provvisoria."
+            },
+            {
+                        "id": 6,
+                        "label": "Studio VI",
+                        "shortNum": "VI",
+                        "title": "Baruch Spinoza – Deus Sive Natura e l'Etica Geometrica",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap6_spinoza.md",
+                        "desc": "Il monismo panteista dell'Ethica more geometrico demonstrata. La Sostanza unica increata (Deus sive Natura), attributi e modi, parallelismo psico-fisico, la dottrina degli affetti, il conatus, e la liberazione dell'uomo attraverso l'Amor Dei intellectualis."
+            },
+            {
+                        "id": 7,
+                        "label": "Studio VII",
+                        "shortNum": "VII",
+                        "title": "Gottfried Wilhelm Leibniz – Monadologia e Armonia Prestabilita",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap7_leibniz.md",
+                        "desc": "Il pensiero barocco di Leibniz. Verità di ragione e verità di fatto, principio di ragion sufficiente, sostanza come forza viva, le Monadi prive di finestre, appercezione, l'Armonia prestabilita e la Teodicea con il migliore dei mondi possibili."
+            },
+            {
+                        "id": 8,
+                        "label": "Studio VIII",
+                        "shortNum": "VIII",
+                        "title": "Crisi del Razionalismo – Pascal, Malebranche e il Giusnaturalismo",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap8_crisi_razionalismo.md",
+                        "desc": "Le reazioni al cartesianesimo. Blaise Pascal: esprit de finesse, l'uomo come canna pensante, il divertissement e la scommessa su Dio; l'Occasionalismo e Malebranche (visione in Dio); il Giusnaturalismo laico da Grozio (etiamsi daremus non esse Deum) a Pufendorf e Thomasius."
+            },
+            {
+                        "id": 9,
+                        "label": "Studio IX",
+                        "shortNum": "IX",
+                        "title": "Thomas Hobbes – Materialismo Corporeo e il Leviatano",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap9_hobbes.md",
+                        "desc": "La filosofia politica geometrica di Hobbes. Materialismo meccanicista e nominalismo: ragionare è calcolare; lo stato di natura come bellum omnium contra omnes (homo homini lupus); le leggi naturali di prudenza e la sovranità assoluta, indivisibile e irrevocabile del Leviatano."
+            },
+            {
+                        "id": 10,
+                        "label": "Studio X",
+                        "shortNum": "X",
+                        "title": "Isaac Newton – I Principia e la Meccanica Razionale",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap10_newton.md",
+                        "desc": "Il culmine della rivoluzione scientifica. I Principia Mathematica (1687): assiomi del moto, gravitazione universale, unificazione di dinamica celeste e terrestre; Regulae philosophandi e Hypotheses non fingo; spazio e tempo assoluti e lo Scolio Generale su Dio Pantokrator."
+            },
+            {
+                        "id": 11,
+                        "label": "Studio XI",
+                        "shortNum": "XI",
+                        "title": "John Locke – Empirismo Gnoseologico e Liberalismo",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap11_locke.md",
+                        "desc": "Il fondatore dell'empirismo critico e del costituzionalismo. Confutazione dell'innatismo e mente come tabula rasa; sensazione e riflessione; idee semplici e complesse; la critica della sostanza come sostegno sconosciuto; i Due trattati sul governo: diritti naturali (vita, libertà, proprietà) e divisione dei poteri; tolleranza religiosa."
+            },
+            {
+                        "id": 12,
+                        "label": "Studio XII",
+                        "shortNum": "XII",
+                        "title": "George Berkeley – Immaterialismo ed Esse Est Percipi",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap12_berkeley.md",
+                        "desc": "L'apologia spiritualistica dell'empirismo. Confutazione delle idee astratte; il principio Esse est percipi: inesistenza della materia inerte extracorporea; le idee come percezioni impresse costantemente nelle menti dallo Spirito divino onnipotente; la natura come linguaggio visivo di Dio."
+            },
+            {
+                        "id": 13,
+                        "label": "Studio XIII",
+                        "shortNum": "XIII",
+                        "title": "David Hume – Scetticismo Radicale, Causalità e Passioni",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap13_hume.md",
+                        "desc": "L'esito scettico dell'empirismo. Impressioni e idee; il principio di copia e la Forchetta di Hume; demolizione del nesso causale: abitudine psicologica e credenza istintiva; dissoluzione della sostanza e teoria dell'Io come fascio di percezioni; scetticismo moderato; etica della simpatia e Legge di Hume."
+            },
+            {
+                        "id": 14,
+                        "label": "Studio XIV",
+                        "shortNum": "XIV",
+                        "title": "Nello Spazio dell'Illuminismo – Modelli Inglese, Francese e Tedesco",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap14_illuminismo.md",
+                        "desc": "Il Secolo dei Lumi e l'emancipazione razionale (Sapere aude). Il deismo inglese; i philosophes francesi: Voltaire (tolleranza), Montesquieu (separazione dei poteri), l'Encyclopédie di Diderot e d'Alembert, sensismo di Condillac e materialismo; l'Aufklärung tedesca con Wolff, Baumgarten e Lessing."
+            },
+            {
+                        "id": 15,
+                        "label": "Studio XV",
+                        "shortNum": "XV",
+                        "title": "Due Casi Atipici – Giambattista Vico e Jean-Jacques Rousseau",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap15_vico_rousseau.md",
+                        "desc": "Due pensatori controcorrente. Vico: principio del verum-factum, la Scienza Nuova, tre età dell'umanità (dèi, eroi, uomini) e corsi e ricorsi storici. Rousseau: critica della civiltà nei due Discorsi, il buon selvaggio, nascita della disuguaglianza con la proprietà privata; rifondazione della libertà nel Contratto Sociale (Volontà Generale) e l'Émile."
+            },
+            {
+                        "id": 16,
+                        "label": "Studio XVI",
+                        "shortNum": "XVI",
+                        "title": "Immanuel Kant – La Filosofia Critica e i Tre Giudizi",
+                        "author": "C. Esposito - P. Porro",
+                        "file": "summaries/cap16_kant.md",
+                        "desc": "La sintesi culminante della modernità. Rivoluzione copernicana e giudizi sintetici a priori; Critica della ragion pura: estetica (spazio, tempo), analitica (categorie, Io Penso), dialettica (paralogismi, antinomie, confutazione prove di Dio) e distinzione fenomeno/noumeno; Critica della ragion pratica (imperativo categorico); Critica del Giudizio (bello, sublime, teleologia)."
+            }
+];
+        const links = [
+            {
+                        "source": 1,
+                        "target": 2,
+                        "desc": "La visione cosmica rinascimentale di un universo vivo e mobile (Studio I) stimola le audaci ipotesi astronomiche copernicane e kepleriane (Studio II)."
+            },
+            {
+                        "source": 2,
+                        "target": 3,
+                        "desc": "Le scoperte telescopiche di Galileo e le orbite ellittiche di Keplero (Studio II) abbattono la cosmologia aristotelica e fondano il metodo scientifico moderno (Studio III)."
+            },
+            {
+                        "source": 3,
+                        "target": 5,
+                        "desc": "Il rigore geometrico galileiano ispira Cartesio nella formulazione del metodo filosofico universale e della fisica meccanicistica (Studio V)."
+            },
+            {
+                        "source": 4,
+                        "target": 5,
+                        "desc": "L'ontologia suareziana dell'ente e la ripartizione della metafisica (Studio IV) forniscono il vocabolario concettuale alle Meditazioni cartesiane (Studio V)."
+            },
+            {
+                        "source": 5,
+                        "target": 6,
+                        "desc": "Spinoza radicalizza la definizione cartesiana di sostanza, trasformando il dualismo cartesiano nel monismo assoluto del Deus sive Natura (Studio VI)."
+            },
+            {
+                        "source": 5,
+                        "target": 7,
+                        "desc": "Leibniz critica la riduzione cartesiana della materia a mera estensione geometrica inerte, reintroducendo la forza viva e le monadi immateriali (Studio VII)."
+            },
+            {
+                        "source": 5,
+                        "target": 8,
+                        "desc": "L'aporia del dualismo anima-corpo cartesiano dà origine all'occasionalismo di Malebranche, mentre Pascal denuncia i limiti esistenziali della ragione geometrica (Studio VIII)."
+            },
+            {
+                        "source": 5,
+                        "target": 9,
+                        "desc": "Hobbes rifiuta la res cogitans incorporea di Cartesio, riducendo l'intera realtà a corpi materiali e movimenti meccanici calcolabili (Studio IX)."
+            },
+            {
+                        "source": 3,
+                        "target": 10,
+                        "desc": "Newton unifica la cinematica terrestre di Galileo e le leggi astronomiche di Keplero nella gravitazione universale dei Principia (Studio X)."
+            },
+            {
+                        "source": 5,
+                        "target": 11,
+                        "desc": "Locke demolisce le idee innate di Cartesio, affermando che la mente è una tabula rasa che trae tutti i suoi contenuti dall'esperienza (Studio XI)."
+            },
+            {
+                        "source": 9,
+                        "target": 11,
+                        "desc": "Locke rovescia l'assolutismo autoritario di Hobbes: nello stato di natura vigono diritti inalienabili e il potere politico è un trust revocabile dal popolo (Studio XI)."
+            },
+            {
+                        "source": 11,
+                        "target": 12,
+                        "desc": "Berkeley spinge l'empirismo di Locke all'estremo: eliminando la distinzione tra qualità primarie e secondarie, nega l'esistenza della materia inerte (Studio XII)."
+            },
+            {
+                        "source": 11,
+                        "target": 13,
+                        "desc": "Hume radicalizza l'empirismo lockiano: ogni idea deve corrispondere a un'impressione originaria, demolendo la certezza oggettiva della causalità e dell'Io (Studio XIII)."
+            },
+            {
+                        "source": 12,
+                        "target": 13,
+                        "desc": "La confutazione berkeleiana delle idee astratte apre la strada allo scetticismo fenomenico di Hume sulle sostanze materiali e spirituali (Studio XIII)."
+            },
+            {
+                        "source": 10,
+                        "target": 14,
+                        "desc": "La meccanica di Newton e l'empirismo di Locke diventano i due modelli teorici indiscussi dell'Illuminismo europeo (Studio XIV)."
+            },
+            {
+                        "source": 5,
+                        "target": 15,
+                        "desc": "Vico contesta il cartesianesimo: l'uomo non può conoscere la natura creata da Dio, ma solo la storia civile da lui stesso prodotta (verum-factum) (Studio XV)."
+            },
+            {
+                        "source": 14,
+                        "target": 15,
+                        "desc": "Rousseau rompe con l'ottimismo progressista dei philosophes francesi, denunciando la corruzione morale generata dalla civiltà artificiale (Studio XV)."
+            },
+            {
+                        "source": 13,
+                        "target": 16,
+                        "desc": "Lo scetticismo radicale di Hume sulla causalità risveglia Kant dal suo sonno dogmatico, innescando la nascita della filosofia critica (Studio XVI)."
+            },
+            {
+                        "source": 7,
+                        "target": 16,
+                        "desc": "Kant supera il dogmatismo razionalista della metafisica leibniziano-wolffiana, trasformando le verità a priori in condizioni trascendentali dell'esperienza (Studio XVI)."
+            },
+            {
+                        "source": 10,
+                        "target": 16,
+                        "desc": "La fisica newtoniana offre a Kant il modello perfetto di giudizi sintetici a priori fecondi, necessari e universali (Studio XVI)."
+            },
+            {
+                        "source": 15,
+                        "target": 16,
+                        "desc": "Rousseau ispira la riflessione etica di Kant: la legge morale riconosce l'assoluta dignità della persona umana come fine in sé e mai come mezzo (Studio XVI)."
+            }
+];
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function setTheme(isLight) {
+            if (isLight) {
+                document.body.classList.add('light-theme');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                document.body.classList.remove('light-theme');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(currentTheme === 'light');
+
+        themeToggle.addEventListener('click', () => {
+            const isLight = document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            setTheme(isLight);
+        });
+
+        // Generate Node Positions (Circular layout on 740x740 SVG)
+        const centerX = 370;
+        const centerY = 370;
+        const radius = 275;
+        const totalNodes = nodes.length;
+
+        nodes.forEach((node, index) => {
+            const angle = (index / totalNodes) * 2 * Math.PI - (Math.PI / 2);
+            node.x = centerX + radius * Math.cos(angle);
+            node.y = centerY + radius * Math.sin(angle);
+        });
+
+        const edgesGroup = document.getElementById('edges-group');
+        const nodesGroup = document.getElementById('nodes-group');
+
+        // Render Links
+        links.forEach((link, idx) => {
+            const sourceNode = nodes.find(n => n.id === link.source);
+            const targetNode = nodes.find(n => n.id === link.target);
+
+            if (sourceNode && targetNode) {
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                path.setAttribute("x1", sourceNode.x);
+                path.setAttribute("y1", sourceNode.y);
+                path.setAttribute("x2", targetNode.x);
+                path.setAttribute("y2", targetNode.y);
+                path.setAttribute("class", "graph-edge");
+                path.setAttribute("id", `edge-${idx}`);
+                path.setAttribute("data-source", link.source);
+                path.setAttribute("data-target", link.target);
+                edgesGroup.appendChild(path);
+            }
+        });
+
+        // Render Nodes
+        nodes.forEach(node => {
+            const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            group.setAttribute("class", "graph-node");
+            group.setAttribute("id", `node-${node.id}`);
+            group.setAttribute("transform", `translate(${node.x}, ${node.y})`);
+
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", "20");
+
+            const textNum = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textNum.setAttribute("class", "graph-node-number");
+            textNum.textContent = node.shortNum;
+
+            const textLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textLabel.setAttribute("class", "graph-node-label");
+            
+            // Adjust label position depending on quadrant
+            const angle = Math.atan2(node.y - centerY, node.x - centerX);
+            const dist = 34;
+            textLabel.setAttribute("x", Math.cos(angle) * dist);
+            textLabel.setAttribute("y", Math.sin(angle) * dist + 4);
+            
+            // Short label
+            const shortNames = [
+                "Naturalismo", "Astronomia", "Bacon & Galilei", "Suárez",
+                "Descartes", "Spinoza", "Leibniz", "Pascal & Giusnat.",
+                "Hobbes", "Newton", "Locke", "Berkeley",
+                "Hume", "Illuminismo", "Vico & Rousseau", "Kant"
+            ];
+            textLabel.textContent = shortNames[node.id - 1] || node.label;
+
+            group.appendChild(circle);
+            group.appendChild(textNum);
+            group.appendChild(textLabel);
+
+            group.addEventListener('click', () => selectNode(node.id));
+            nodesGroup.appendChild(group);
+        });
+
+        // Selection & Highlighting Logic
+        let activeNodeId = null;
+
+        function selectNode(id) {
+            activeNodeId = id;
+            const selectedNode = nodes.find(n => n.id === id);
+            if (!selectedNode) return;
+
+            // Highlight nodes
+            document.querySelectorAll('.graph-node').forEach(n => n.classList.remove('active'));
+            const activeElem = document.getElementById(`node-${id}`);
+            if (activeElem) activeElem.classList.add('active');
+
+            // Highlight edges
+            document.querySelectorAll('.graph-edge').forEach(edge => {
+                const s = parseInt(edge.getAttribute('data-source'));
+                const t = parseInt(edge.getAttribute('data-target'));
+                if (s === id || t === id) {
+                    edge.classList.add('active');
+                } else {
+                    edge.classList.remove('active');
+                }
+            });
+
+            // Update Panel Details
+            document.getElementById('placeholder-view').style.display = 'none';
+            const panel = document.getElementById('panel-details');
+            panel.style.display = 'block';
+
+            document.getElementById('panel-chapter-tag').textContent = selectedNode.label;
+            document.getElementById('panel-chapter-title').textContent = selectedNode.title;
+            document.getElementById('panel-chapter-author').textContent = selectedNode.author;
+            document.getElementById('panel-chapter-desc').textContent = selectedNode.desc;
+
+            // Render Connection List
+            const listContainer = document.getElementById('panel-connections-list');
+            listContainer.innerHTML = '';
+
+            const relatedLinks = links.filter(l => l.source === id || l.target === id);
+            relatedLinks.forEach(l => {
+                const targetId = (l.source === id) ? l.target : l.source;
+                const targetNode = nodes.find(n => n.id === targetId);
+
+                const item = document.createElement('div');
+                item.className = 'connection-item';
+                item.innerHTML = `
+                    <div class="conn-target-title">
+                        <span>${targetNode.label}: ${targetNode.title}</span>
+                    </div>
+                    <div class="conn-desc">${l.desc}</div>
+                `;
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    selectNode(targetId);
+                });
+                listContainer.appendChild(item);
+            });
+
+            // Summary button
+            const readBtn = document.getElementById('btn-read-summary');
+            readBtn.onclick = () => openSummary(selectedNode.label, selectedNode.file);
+        }
+
+        // Modal reader logic
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag-view');
+        const modalChapterTitle = document.getElementById('modal-chapter-title-view');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            if (typeof LexCore !== 'undefined' && LexCore.trackChapterRead) {
+                LexCore.trackChapterRead(filePath);
+            } 
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(168, 85, 247, 0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = "@keyframes spin { 100% { transform: rotate(360deg); } }";
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            fetch(filePath)
+                .then(res => {
+                    if (!res.ok) throw new Error("Sintesi non trovata");
+                    return res.text();
+                })
+                .then(text => {
+                    const lines = text.split('\n');
+                    let title = "Sintesi";
+                    let contentText = text;
+                    if (lines[0].startsWith('# ')) {
+                        title = lines[0].substring(2).trim();
+                        contentText = lines.slice(1).join('\n');
+                    }
+                    modalChapterTitle.textContent = title;
+                    markdownView.innerHTML = marked.parse(contentText);
+                    modalBodyContent.scrollTop = 0;
+                    progressIndicator.style.width = '0%';
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore";
+                    markdownView.innerHTML = `<p style="color:var(--accent-filosofia); text-align:center; padding: 2rem;">${err.message}</p>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('open')) closeSummary();
+        });
+
+        modalBodyContent.addEventListener('scroll', () => {
+            const totalScrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (totalScrollHeight > 0) {
+                const percentage = (modalBodyContent.scrollTop / totalScrollHeight) * 100;
+                progressIndicator.style.width = percentage + '%';
+            }
+        });
+
+        // Initial default selection
+        document.addEventListener('DOMContentLoaded', () => {
+            selectNode(5); // Default on Descartes
+        });
+    </script>
+</body>
+</html>

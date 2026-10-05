@@ -360,6 +360,10 @@
             background: #be185d;
         }
 
+        .filosofia-fill {
+            background: #a855f7;
+        }
+
         .badge-cod {
             background: rgba(75, 85, 99, 0.1);
             color: #4b5563;
@@ -370,6 +374,12 @@
             background: rgba(190, 24, 93, 0.1);
             color: #be185d;
             border: 1px solid rgba(190, 24, 93, 0.2);
+        }
+
+        .badge-fil {
+            background: rgba(168, 85, 247, 0.1);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, 0.2);
         }
 
         .recommendations-section {
@@ -867,13 +877,14 @@
                     <div class="form-group">
                         <label class="form-label">Materie d'Esame</label>
                         <select id="exam-subject-select" class="form-select" onchange="updateMaxQuestions()">
-                            <option value="misto">Misto (Diritto, Arte Moderna, Arte Romana, Storia Moderna, Codicologia e Letteratura Latina — Max 291 domande)</option>
+                            <option value="misto">Misto (Diritto, Arte Moderna, Arte Romana, Storia Moderna, Codicologia, Letteratura Latina e Storia della Filosofia — Max 371 domande)</option>
                             <option value="diritto">Solo Diritto dei Beni Culturali (Max 60 domande)</option>
                             <option value="arte">Solo Storia dell'Arte Moderna (Max 50 domande)</option>
                             <option value="arte_romana">Solo Arte Romana (Max 50 domande)</option>
                             <option value="storia">Solo Storia Moderna (Max 50 domande)</option>
                             <option value="codicologia">Solo Codicologia (Max 36 domande)</option>
                             <option value="letteratura_latina">Solo Letteratura Latina (Max 45 domande)</option>
+                            <option value="filosofia">Solo Storia della Filosofia (Max 80 domande)</option>
                         </select>
                     </div>
 
@@ -919,6 +930,7 @@
                                 <option value="storia">Storia Moderna</option>
                                 <option value="codicologia">Codicologia</option>
                                 <option value="letteratura_latina">Letteratura Latina</option>
+                                <option value="filosofia">Storia della Filosofia</option>
                             </select>
                         </div>
 
@@ -1125,6 +1137,16 @@
                             </div>
                             <div class="stat-bar-bg">
                                 <div class="stat-bar-fill latina-fill" id="stat-latina-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-bar-group">
+                            <div class="stat-label">
+                                <span>Storia della Filosofia</span>
+                                <span id="stat-filosofia-text">0 / 0 (0%)</span>
+                            </div>
+                            <div class="stat-bar-bg">
+                                <div class="stat-bar-fill filosofia-fill" id="stat-filosofia-bar" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
@@ -1499,6 +1521,25 @@
             lat_spec5: "summaries/spec5_plauto_catullo.md"
         };
 
+        const filosofiaChapterLinks = {
+            cap1_naturalismo: "summaries/cap1_naturalismo.md",
+            cap2_misura_mondo: "summaries/cap2_misura_mondo.md",
+            cap3_bacone_galileo: "summaries/cap3_bacone_galileo.md",
+            cap4_tarda_scolastica: "summaries/cap4_tarda_scolastica.md",
+            cap5_cartesio: "summaries/cap5_cartesio.md",
+            cap6_spinoza: "summaries/cap6_spinoza.md",
+            cap7_leibniz: "summaries/cap7_leibniz.md",
+            cap8_crisi_razionalismo: "summaries/cap8_crisi_razionalismo.md",
+            cap9_hobbes: "summaries/cap9_hobbes.md",
+            cap10_newton: "summaries/cap10_newton.md",
+            cap11_locke: "summaries/cap11_locke.md",
+            cap12_berkeley: "summaries/cap12_berkeley.md",
+            cap13_hume: "summaries/cap13_hume.md",
+            cap14_illuminismo: "summaries/cap14_illuminismo.md",
+            cap15_vico_rousseau: "summaries/cap15_vico_rousseau.md",
+            cap16_kant: "summaries/cap16_kant.md"
+        };
+
         function getPoolSize(subject) {
             let count = 0;
             Object.values(quizDatabase).forEach(mod => {
@@ -1559,6 +1600,14 @@
                     chapterName: mod.title,
                     subject: 'letteratura_latina',
                     link: summary ? `letteratura_latina/index.html?open=${summary}` : 'letteratura_latina/index.html',
+                    navText: `Apri ${mod.chapterTag}`
+                };
+            } else if (mod.subject === 'filosofia') {
+                const summary = filosofiaChapterLinks[moduleKey];
+                return {
+                    chapterName: mod.title,
+                    subject: 'filosofia',
+                    link: summary ? `filosofia/index.html?open=${summary}` : 'filosofia/index.html',
                     navText: `Apri ${mod.chapterTag}`
                 };
             }
@@ -1862,6 +1911,8 @@
             let codicologiaCorrect = 0;
             let latinaCount = 0;
             let latinaCorrect = 0;
+            let filosofiaCount = 0;
+            let filosofiaCorrect = 0;
 
             userResponses.forEach(resp => {
                 if (resp.subject === 'diritto') {
@@ -1879,6 +1930,9 @@
                 } else if (resp.subject === 'letteratura_latina') {
                     latinaCount++;
                     if (resp.isCorrect) latinaCorrect++;
+                } else if (resp.subject === 'filosofia') {
+                    filosofiaCount++;
+                    if (resp.isCorrect) filosofiaCorrect++;
                 } else {
                     arteCount++;
                     if (resp.isCorrect) arteCorrect++;
@@ -1959,6 +2013,17 @@
                         totalQuestions: latinaCount
                     });
                 }
+                if (filosofiaCount > 0) {
+                    stats.push({
+                        date: today,
+                        score: Math.round((filosofiaCorrect / filosofiaCount) * 30),
+                        total: 30,
+                        speed: Math.round(sessionSpeed / total),
+                        subject: 'filosofia',
+                        correct: filosofiaCorrect,
+                        totalQuestions: filosofiaCount
+                    });
+                }
                 
                 localStorage.setItem('lex-quiz-stats', JSON.stringify(stats));
             } catch(e) {
@@ -1990,6 +2055,10 @@
             document.getElementById('stat-latina-text').textContent = latinaCount > 0 ? `${latinaCorrect} / ${latinaCount} (${latPercent}%)` : "N/A";
             document.getElementById('stat-latina-bar').style.width = latPercent + '%';
 
+            const filPercent = filosofiaCount > 0 ? Math.round((filosofiaCorrect / filosofiaCount) * 100) : 0;
+            document.getElementById('stat-filosofia-text').textContent = filosofiaCount > 0 ? `${filosofiaCorrect} / ${filosofiaCount} (${filPercent}%)` : "N/A";
+            document.getElementById('stat-filosofia-bar').style.width = filPercent + '%';
+
             // Speed and guessing calculation
             let totalSpeed = 0;
             let totalAnswered = 0;
@@ -2001,16 +2070,17 @@
                 arte_romana: { sum: 0, count: 0 },
                 storia: { sum: 0, count: 0 },
                 codicologia: { sum: 0, count: 0 },
-                letteratura_latina: { sum: 0, count: 0 }
+                letteratura_latina: { sum: 0, count: 0 },
+                filosofia: { sum: 0, count: 0 }
             };
-            const guessesBySubject = { diritto: 0, arte: 0, arte_romana: 0, storia: 0, codicologia: 0, letteratura_latina: 0 };
+            const guessesBySubject = { diritto: 0, arte: 0, arte_romana: 0, storia: 0, codicologia: 0, letteratura_latina: 0, filosofia: 0 };
 
             userResponses.forEach(resp => {
                 const tSpent = resp.timeSpent || 0;
                 totalSpeed += tSpent;
                 totalAnswered++;
 
-                const sub = resp.subject === 'diritto' ? 'diritto' : (resp.subject === 'arte_romana' ? 'arte_romana' : (resp.subject === 'storia' ? 'storia' : (resp.subject === 'codicologia' ? 'codicologia' : (resp.subject === 'letteratura_latina' ? 'letteratura_latina' : 'arte'))));
+                const sub = resp.subject === 'diritto' ? 'diritto' : (resp.subject === 'arte_romana' ? 'arte_romana' : (resp.subject === 'storia' ? 'storia' : (resp.subject === 'codicologia' ? 'codicologia' : (resp.subject === 'letteratura_latina' ? 'letteratura_latina' : (resp.subject === 'filosofia' ? 'filosofia' : 'arte')))));
                 
                 if (speedBySubject[sub]) {
                     speedBySubject[sub].sum += tSpent;
@@ -2036,6 +2106,7 @@
             if (speedBySubject.storia.count > 0) speedDetails.push(`Storia Mod.: ${Math.round(speedBySubject.storia.sum / speedBySubject.storia.count)}s`);
             if (speedBySubject.codicologia && speedBySubject.codicologia.count > 0) speedDetails.push(`Codicologia: ${Math.round(speedBySubject.codicologia.sum / speedBySubject.codicologia.count)}s`);
             if (speedBySubject.letteratura_latina && speedBySubject.letteratura_latina.count > 0) speedDetails.push(`Latino: ${Math.round(speedBySubject.letteratura_latina.sum / speedBySubject.letteratura_latina.count)}s`);
+            if (speedBySubject.filosofia && speedBySubject.filosofia.count > 0) speedDetails.push(`Filosofia: ${Math.round(speedBySubject.filosofia.sum / speedBySubject.filosofia.count)}s`);
             document.getElementById('diag-speed-by-subject').textContent = speedDetails.length > 0 ? `Dettaglio per materia: ${speedDetails.join(', ')}` : 'Nessun dettaglio.';
 
             document.getElementById('diag-guessing-freq').textContent = `${guessingFreq}%`;
@@ -2049,7 +2120,7 @@
                 guessingDesc = 'Frequenza moderata. Tendi a rispondere d\'impulso in alcune domande difficili.';
             } else {
                 const worstSubjects = Object.keys(guessesBySubject).filter(k => guessesBySubject[k] > 0);
-                const subLabels = worstSubjects.map(s => s === 'diritto' ? 'Diritto' : (s === 'arte_romana' ? 'Arte Rom.' : (s === 'storia' ? 'Storia Mod.' : (s === 'codicologia' ? 'Codicologia' : (s === 'letteratura_latina' ? 'Latino' : 'Arte Mod.')))));
+                const subLabels = worstSubjects.map(s => s === 'diritto' ? 'Diritto' : (s === 'arte_romana' ? 'Arte Rom.' : (s === 'storia' ? 'Storia Mod.' : (s === 'codicologia' ? 'Codicologia' : (s === 'letteratura_latina' ? 'Latino' : (s === 'filosofia' ? 'Filosofia' : 'Arte Mod.'))))));
                 guessingDesc = `Alta probabilità di risposte a caso (${guessingFreq}%). Ti consigliamo di leggere con più calma, specialmente in: ${subLabels.join(', ')}.`;
             }
             document.getElementById('diag-guessing-desc').textContent = guessingDesc;
@@ -2061,8 +2132,9 @@
             const pctStoria = storiaCount > 0 ? Math.round((storiaCorrect / storiaCount) * 100) : 0;
             const pctCodicologia = codicologiaCount > 0 ? Math.round((codicologiaCorrect / codicologiaCount) * 100) : 0;
             const pctLatina = latinaCount > 0 ? Math.round((latinaCorrect / latinaCount) * 100) : 0;
+            const pctFilosofia = filosofiaCount > 0 ? Math.round((filosofiaCorrect / filosofiaCount) * 100) : 0;
 
-            const radarData = [pctDiritto, pctArte, pctRomana, pctStoria, pctCodicologia, pctLatina];
+            const radarData = [pctDiritto, pctArte, pctRomana, pctStoria, pctCodicologia, pctLatina, pctFilosofia];
 
             // Render Radar Chart
             const ctxRadar = document.getElementById('examRadarChart').getContext('2d');
@@ -2077,7 +2149,7 @@
             window.activeExamRadar = new Chart(ctxRadar, {
                 type: 'radar',
                 data: {
-                    labels: ['Diritto', 'Arte Moderna', 'Arte Romana', 'Storia Moderna', 'Codicologia', 'Letteratura Latina'],
+                    labels: ['Diritto', 'Arte Moderna', 'Arte Romana', 'Storia Moderna', 'Codicologia', 'Letteratura Latina', 'Storia della Filosofia'],
                     datasets: [{
                         label: 'Risposte Corrette (%)',
                         data: radarData,
@@ -2146,8 +2218,8 @@
                         const li = document.createElement('li');
                         li.className = 'rec-item';
                         
-                        const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : (meta.subject === 'storia' ? 'badge-st' : (meta.subject === 'codicologia' ? 'badge-cod' : (meta.subject === 'letteratura_latina' ? 'badge-lat' : 'badge-a'))));
-                        const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : (meta.subject === 'storia' ? 'ST' : (meta.subject === 'codicologia' ? 'COD' : (meta.subject === 'letteratura_latina' ? 'LAT' : 'AM'))));
+                        const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : (meta.subject === 'storia' ? 'badge-st' : (meta.subject === 'codicologia' ? 'badge-cod' : (meta.subject === 'letteratura_latina' ? 'badge-lat' : (meta.subject === 'filosofia' ? 'badge-fil' : 'badge-a')))));
+                        const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : (meta.subject === 'storia' ? 'ST' : (meta.subject === 'codicologia' ? 'COD' : (meta.subject === 'letteratura_latina' ? 'LAT' : (meta.subject === 'filosofia' ? 'FIL' : 'AM')))));
 
                         li.innerHTML = `
                             <div>
@@ -2356,6 +2428,9 @@
             } else if (subject === 'letteratura_latina') {
                 const link = latChapterLinks[moduleKey];
                 return link ? `letteratura_latina/${link}` : null;
+            } else if (subject === 'filosofia') {
+                const link = filosofiaChapterLinks[moduleKey];
+                return link ? `filosofia/${link}` : null;
             } else if (subject === 'arte') {
                 const link = arteChapterLinks[moduleKey];
                 return link ? `storia_arte/${link}` : null;
@@ -3052,8 +3127,8 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
                 const li = document.createElement('li');
                 li.className = 'rec-item';
                 
-                const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : (meta.subject === 'storia' ? 'badge-st' : (meta.subject === 'codicologia' ? 'badge-cod' : (meta.subject === 'letteratura_latina' ? 'badge-lat' : 'badge-a'))));
-                const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : (meta.subject === 'storia' ? 'ST' : (meta.subject === 'codicologia' ? 'COD' : (meta.subject === 'letteratura_latina' ? 'LAT' : 'AM'))));
+                const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : (meta.subject === 'storia' ? 'badge-st' : (meta.subject === 'codicologia' ? 'badge-cod' : (meta.subject === 'letteratura_latina' ? 'badge-lat' : (meta.subject === 'filosofia' ? 'badge-fil' : 'badge-a')))));
+                const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : (meta.subject === 'storia' ? 'ST' : (meta.subject === 'codicologia' ? 'COD' : (meta.subject === 'letteratura_latina' ? 'LAT' : (meta.subject === 'filosofia' ? 'FIL' : 'AM')))));
 
                 li.innerHTML = `
                     <div>

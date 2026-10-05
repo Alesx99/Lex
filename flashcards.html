@@ -114,6 +114,22 @@
             border: 1px solid rgba(75, 85, 99, 0.2);
         }
 
+        .filter-btn.active.filosofia-btn {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: #a855f7;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.15);
+        }
+
+        .card-face-front.filosofia-card {
+            border-top: 5px solid #a855f7;
+        }
+
+        .filosofia-badge {
+            background: rgba(168, 85, 247, 0.1);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
         /* 3D Flashcard Design */
         .flashcard-3d-scene {
             width: 100%;
@@ -469,6 +485,7 @@
                 <button class="filter-btn storia-btn" onclick="setFilter('storia')">Storia Moderna</button>
                 <button class="filter-btn codicologia-btn" onclick="setFilter('codicologia')">Codicologia</button>
                 <button class="filter-btn latina-btn" onclick="setFilter('letteratura_latina')">Letteratura Latina</button>
+                <button class="filter-btn filosofia-btn" onclick="setFilter('filosofia')">Storia della Filosofia</button>
             </div>
 
             <!-- SRS Mode Toggle -->
@@ -1148,6 +1165,103 @@
                 subject: "letteratura_latina",
                 question: "Cos'è la \"coniugazione perifrastica attiva\" in latino?",
                 answer: "È un costrutto formato dal participio futuro di un verbo combinato con le voci del verbo sum. Esprime imminenza (\"stare per...\"), intenzionalità (\"avere intenzione di...\") o destinazione (\"essere destinato a...\")."
+            },
+            // STORIA DELLA FILOSOFIA
+            {
+                id: "filosofia-fc1",
+                subject: "filosofia",
+                question: "Qual è il principio cardine del naturalismo di Bernardino Telesio e come influisce su Giordano Bruno?",
+                answer: "Telesio sostiene l'autonomia della natura indagata \"iuxta propria principia\" attraverso la sensibilità e le forze immanenti di Caldo e Freddo. Bruno radicalizza questa visione nell'infinità dell'universo e nell'immanenza divina: Dio è \"mens insita omnibus\" (anima cosmica vivificante)."
+            },
+            {
+                id: "filosofia-fc2",
+                subject: "filosofia",
+                question: "In che modo l'ipotesi eliocentrica copernicana venne interpretata da Osiander rispetto alla reale convinzione di Copernico?",
+                answer: "Andrea Osiander, nella prefazione anonima al De revolutionibus (1543), presentò l'eliocentrismo come un mero artificio matematico utile per \"salvare i fenomeni\" celesti, mentre Copernico e successivamente Keplero e Galilei la ritenevano una descrizione fisica e ontologica reale del cosmo."
+            },
+            {
+                id: "filosofia-fc3",
+                subject: "filosofia",
+                question: "Qual è la differenza fondamentale tra il metodo induttivo di Francesco Bacone e il metodo ipotetico-deduttivo di Galileo Galilei?",
+                answer: "Bacone teorizza l'induzione graduale ed eliminativa (basata sulle tre tavole di presenza, assenza e gradi per estirpare gli idola), priva di formalizzazione matematica. Galilei fonda invece il metodo sulle \"sensate esperienze\" e le \"necessarie dimostrazioni\", traducendo la natura in caratteri geometrico-matematici e verificando le ipotesi tramite il cimento."
+            },
+            {
+                id: "filosofia-fc4",
+                subject: "filosofia",
+                question: "Quale importanza storica rivestono le Disputationes Metaphysicae (1597) di Francisco Suárez per la filosofia moderna?",
+                answer: "Costituiscono la prima trattazione sistematica autonoma della metafisica svincolata dal commento testuale ad Aristotele. Fondando la metafisica sull'ente in quanto ente reale (conceptus obiectivus), Suárez influenzò la formazione scolastica di Cartesio, Leibniz e l'ontologia moderna tedesca."
+            },
+            {
+                id: "filosofia-fc5",
+                subject: "filosofia",
+                question: "Come perviene Cartesio al Cogito ergo sum e quale ruolo svolge il dubbio iperbolico?",
+                answer: "Attraverso il dubbio metodico radicalizzato a iperbolico (ipotesi del \"genio maligno\" che inganna anche sulle verità matematiche), Cartesio scopre che l'atto stesso del dubitare esige necessariamente un soggetto pensante: se dubito, penso; se penso, esisto in quanto res cogitans."
+            },
+            {
+                id: "filosofia-fc6",
+                subject: "filosofia",
+                question: "Cosa intende Spinoza con la celebre formula \"Deus sive Natura\" nell'Ethica?",
+                answer: "Sancisce il monismo panteista: esiste una sola Sostanza infinita, increata e autonoma, che si manifesta sia come causa immanente attiva (Natura naturans) sia come totalità degli effetti o modi finiti (Natura naturata). Pensiero ed estensione non sono due sostanze separate ma due attributi infiniti dell'unica Sostanza."
+            },
+            {
+                id: "filosofia-fc7",
+                subject: "filosofia",
+                question: "Che cosa sono le \"monadi\" nella metafisica di Gottfried Wilhelm Leibniz?",
+                answer: "Sono sostanze semplici, immateriali, inestese e indivisibili, veri atomi di forza spirituale dotati di percezione e appetizione. Essendo prive di porte o finestre verso l'esterno, la loro corrispondenza e coordinazione universale è garantita dall'Armonia Prestabilita da Dio all'atto della creazione."
+            },
+            {
+                id: "filosofia-fc8",
+                subject: "filosofia",
+                question: "Qual è il significato della scommessa su Dio (pari) formulata da Blaise Pascal nei Pensieri?",
+                answer: "Di fronte all'impossibilità per la ragione di dimostrare teoreticamente l'esistenza di Dio, l'uomo deve scommettere sul piano pratico ed esistenziale: scommettendo che Dio esiste, se si vince si ottiene la beatitudine eterna infinita; se si perde, si perdono solo beni finiti e illusori."
+            },
+            {
+                id: "filosofia-fc9",
+                subject: "filosofia",
+                question: "Quali sono le premesse antropologiche del patto politico nello Stato assoluto di Thomas Hobbes?",
+                answer: "Nello stato di natura l'uomo è guidato dal conatus di autoconservazione e dall'avidità egoistica (homo homini lupus), generando il bellum omnium contra omnes. Spinti dal timore della morte violenta, gli individui alienano tutti i propri diritti naturali (tranne la vita) a un sovrano terzo (il Leviatano) mediante un patto di unione e sottomissione."
+            },
+            {
+                id: "filosofia-fc10",
+                subject: "filosofia",
+                question: "Cosa esprime la massima \"Hypotheses non fingo\" formulata da Isaac Newton nei Principia?",
+                answer: "Rifiuta le ipotesi metafisiche o speculative arbitrarie non ricavate direttamente dall'osservazione dei fenomeni. La fisica deve formulare leggi matematiche esatte (come la legge di gravitazione universale) per spiegare come i corpi agiscono, senza pretendere di dedurre a priori la causa ontologica ultima della gravità."
+            },
+            {
+                id: "filosofia-fc11",
+                subject: "filosofia",
+                question: "Come confuta John Locke la teoria cartesiana delle idee innate nel Saggio sull'intelletto umano?",
+                answer: "Dimostra che la mente umana nasce come una tabula rasa, priva di qualsiasi nozione precostituita. Se esistessero idee innate (es. il principio di non-contraddizione o l'idea di Dio), dovrebbero essere note anche ai bambini o ai folli, mentre ogni contenuto mentale deriva esclusivamente dall'esperienza (esterna di sensazione o interna di riflessione)."
+            },
+            {
+                id: "filosofia-fc12",
+                subject: "filosofia",
+                question: "Qual è il nucleo dell'immaterialismo di George Berkeley riassunto in \"Esse est percipi\"?",
+                answer: "Sostiene che la materia corporea non ha un'esistenza ontologica indipendente dalla mente. L'essere degli oggetti sensibili consiste unicamente nel loro essere percepiti da una mente finita (esse est percipi aut percipere). La costanza e l'ordine della realtà esterna sono garantiti da Dio, che imprime le idee continuamente negli spiriti umani."
+            },
+            {
+                id: "filosofia-fc13",
+                subject: "filosofia",
+                question: "Come dissolve David Hume il principio di causalità necessaria?",
+                answer: "Dimostra che il legame causa-effetto non è fondabile né a priori tramite pura logica (la contraria non implica contraddizione) né a posteriori tramite esperienza certa (l'esperienza registra solo successione temporale e contiguità, non la connessione necessaria). La convinzione che il futuro ripeta il passato è fondata psicologicamente sull'abitudine (custom) e sulla credenza (belief)."
+            },
+            {
+                id: "filosofia-fc14",
+                subject: "filosofia",
+                question: "Quali ideali programmatici caratterizzano l'Encyclopédie di Diderot e d'Alembert nel secolo dei lumi?",
+                answer: "Rappresenta il manifesto dell'Illuminismo: diffondere il sapere critico liberato dal dogmatismo e dall'autorità religiosa, unire la speculazione filosofica alle scienze e alle arti meccaniche/manuali, e promuovere il progresso sociale, civile e tollerante fondato sull'uso pubblico della ragione."
+            },
+            {
+                id: "filosofia-fc15",
+                subject: "filosofia",
+                question: "Cosa intende Giambattista Vico con il principio del \"Verum-factum\" e la \"Scienza Nuova\"?",
+                answer: "L'uomo può conoscere con verità certa soltanto ciò che egli stesso ha prodotto (verum ipsum factum). Poiché il mondo della natura è stato creato da Dio, solo Dio ne possiede la scienza perfetta; l'uomo può invece avere autentica scienza del mondo storico, civile e delle istituzioni umane da lui edificate attraverso il tempo."
+            },
+            {
+                id: "filosofia-fc16",
+                subject: "filosofia",
+                question: "Cosa si intende per \"Rivoluzione Copernicana\" operata da Immanuel Kant nella Critica della ragion pura?",
+                answer: "Non è più il soggetto che deve conformarsi passivamente agli oggetti per conoscerli, ma sono gli oggetti d'esperienza che devono regolarsi secondo le forme a priori della sensibilità (spazio e tempo) e dell'intelletto (le dodici categorie). L'uomo conosce il fenomeno, non il noumeno (la cosa in sé)."
             }
         ];
 
@@ -1185,15 +1299,21 @@
             btns.forEach(btn => btn.classList.remove('active'));
             
             if (subject === 'tutte') {
-                filtersContainer.querySelector('.all-btn').classList.add('active');
+                filtersContainer.querySelector('.all-btn')?.classList.add('active');
             } else if (subject === 'diritto') {
-                filtersContainer.querySelector('.diritto-btn').classList.add('active');
+                filtersContainer.querySelector('.diritto-btn')?.classList.add('active');
             } else if (subject === 'arte') {
-                filtersContainer.querySelector('.arte-btn').classList.add('active');
+                filtersContainer.querySelector('.arte-btn')?.classList.add('active');
             } else if (subject === 'romana') {
-                filtersContainer.querySelector('.romana-btn').classList.add('active');
+                filtersContainer.querySelector('.romana-btn')?.classList.add('active');
             } else if (subject === 'storia') {
-                filtersContainer.querySelector('.storia-btn').classList.add('active');
+                filtersContainer.querySelector('.storia-btn')?.classList.add('active');
+            } else if (subject === 'codicologia') {
+                filtersContainer.querySelector('.codicologia-btn')?.classList.add('active');
+            } else if (subject === 'letteratura_latina') {
+                filtersContainer.querySelector('.latina-btn')?.classList.add('active');
+            } else if (subject === 'filosofia') {
+                filtersContainer.querySelector('.filosofia-btn')?.classList.add('active');
             }
 
             initDeck();
@@ -1303,6 +1423,10 @@
                 subjectText = 'Letteratura Latina';
                 badgeClass = 'card-subject-badge letteratura_latina-badge';
                 cardClass = 'card-face card-face-front letteratura_latina-card';
+            } else if (currentCard.subject === 'filosofia') {
+                subjectText = 'Storia della Filosofia';
+                badgeClass = 'card-subject-badge filosofia-badge';
+                cardClass = 'card-face card-face-front filosofia-card';
             } else {
                 subjectText = 'Arte Moderna';
                 badgeClass = 'card-subject-badge arte-badge';
@@ -1456,7 +1580,7 @@
             
             if (subjectParam) {
                 // Check if subject is one of the supported ones, else default to tutte
-                const validSubjects = ['diritto', 'arte', 'romana', 'storia'];
+                const validSubjects = ['diritto', 'arte', 'romana', 'storia', 'codicologia', 'letteratura_latina', 'filosofia'];
                 if (validSubjects.includes(subjectParam)) {
                     setFilter(subjectParam);
                 } else {

@@ -823,7 +823,139 @@ const searchDatabase = [
         description: "Antologia con testo originale a fronte e parafrasi letterale a due colonne: Inferno V di Dante (Paolo e Francesca, Amor ch'al cor gentil) e Sonetto 1 di Petrarca (Voi ch'ascoltate in rime sparse).",
         keywords: "letteratura italiana dante alighieri petrarca inferno 5 paolo e francesca amor ch al cor gentil galeotto canzoniere voi ch ascoltate rime sparse parafrasi terzina sonetto",
         navPath: "letteratura_italiana/index.html?open=summaries/spec1_dante_petrarca.md"
-    }
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // STORIA DELLA FILOSOFIA MODERNA (16 Studi Monografici)
+    // ═══════════════════════════════════════════════════════════════
+    {
+        title: "Il Naturalismo Rinascimentale e l'Alba della Modernità",
+        subject: "filosofia",
+        chapterTag: "Studio I",
+        description: "Bernardino Telesio (natura iuxta propria principia, caldo e freddo), Giordano Bruno (universo infinito, panteismo immanente, eroico furore), Tommaso Campanella (primalità dell'essere, Città del Sole) e magia naturale.",
+        keywords: "filosofia rinascimento naturalismo telesio caldo freddo bruno infinito panteismo mens insita omnibus eroico furore campanella posse nosse velle citta del sole magia ermetismo",
+        navPath: "filosofia/index.html?open=summaries/cap1_naturalismo.md"
+    },
+    {
+        title: "Alla Scoperta della Misura del Mondo – La Rivoluzione Astronomica",
+        subject: "filosofia",
+        chapterTag: "Studio II",
+        description: "Il crollo del geocentrismo tolemaico-aristotelico. Niccolò Copernico (De revolutionibus, prefazione di Osiander), Tycho Brahe (rottura delle sfere cristalline) e le tre leggi delle orbite ellittiche di Keplero.",
+        keywords: "filosofia astronomia rivoluzione scientifica copernico eliocentrismo osiander salvare i fenomeni tycho brahe sfere cristalline comete keplero orbite ellittiche tre leggi",
+        navPath: "filosofia/index.html?open=summaries/cap2_misura_mondo.md"
+    },
+    {
+        title: "Francis Bacon e Galileo Galilei – I Fondatori del Metodo Scientifico",
+        subject: "filosofia",
+        chapterTag: "Studio III",
+        description: "Bacon: critica della tradizione, dottrina degli idola (tribus, specus, fori, theatri), metafora delle api, induzione vera e Nuova Atlantide. Galilei: Sidereus Nuncius, caratteri matematici della natura, qualità primarie e secondarie, relatività classica.",
+        keywords: "filosofia scienza metodo bacone galileo novum organum sapere potere idoli induzione tavole nuova atlantide sidereus nuncius lettere copernicane dialogo massimi sistemi relativita abiura",
+        navPath: "filosofia/index.html?open=summaries/cap3_bacone_galileo.md"
+    },
+    {
+        title: "La Tarda Scolastica Europea e Francisco Suárez",
+        subject: "filosofia",
+        chapterTag: "Studio IV",
+        description: "La Seconda Scolastica iberica di Salamanca e Coimbra. Le Disputationes Metaphysicae (1597) di Suárez: superamento del commentario per il trattato sistematico, ontologia dell'ens inquantum ens e influenza sul razionalismo moderno.",
+        keywords: "filosofia scolastica suarez salamanca coimbra disputationes metaphysicae ontologia ens inquantum ens analogia entis metafisica generale speciale wolff cartesio",
+        navPath: "filosofia/index.html?open=summaries/cap4_tarda_scolastica.md"
+    },
+    {
+        title: "René Descartes – Il Dubbio, il Cogito e la Fondazione del Razionalismo",
+        subject: "filosofia",
+        chapterTag: "Studio V",
+        description: "Le quattro regole del metodo; dubbio metodico, dubbio iperbolico del Genio Maligno e certezza del Cogito ergo sum; res cogitans, prove di Dio, dualismo con la res extensa, ghiandola pineale, fisica dei vortici e morale provvisoria.",
+        keywords: "filosofia razionalismo cartesio descartes metodo evidenza analisi sintesi enumerazione dubbio iperbolico genio maligno cogito ergo sum res cogitans res extensa dio idee innate ghiandola pineale morale provvisoria",
+        navPath: "filosofia/index.html?open=summaries/cap5_cartesio.md"
+    },
+    {
+        title: "Baruch Spinoza – Deus Sive Natura e l'Etica More Geometrico",
+        subject: "filosofia",
+        chapterTag: "Studio VI",
+        description: "Il monismo panteista dell'Ethica: Sostanza unica increata (Deus sive Natura, causa sui), Natura naturans e naturata, attributi e modi, parallelismo psico-fisico, conatus, dottrina degli affetti, tre generi di conoscenza e Amor Dei intellectualis.",
+        keywords: "filosofia razionalismo spinoza etica geometria deus sive natura sostanza causa sui natura naturans naturata attributi pensiero estensione parallelismo conatus letizia tristezza cupiditas amor dei intellectualis beatitudine trattato teologico politico",
+        navPath: "filosofia/index.html?open=summaries/cap6_spinoza.md"
+    },
+    {
+        title: "Gottfried Wilhelm Leibniz – La Monadologia e l'Armonia Prestabilita",
+        subject: "filosofia",
+        chapterTag: "Studio VII",
+        description: "Verità di ragione (non-contraddizione) e di fatto (ragion sufficiente), praedicatum inest subjecto; monadologia: sostanze semplici inestese senza finestre, percezione e appercezione; armonia prestabilita e i due orologi; Teodicea e migliore dei mondi possibili.",
+        keywords: "filosofia razionalismo leibniz verita ragione fatto ragion sufficiente praedicatum inest subjecto monade monadologia atomi spirituali appercezione armonia prestabilita orologi teodicea male metafisico fisico morale migliore dei mondi",
+        navPath: "filosofia/index.html?open=summaries/cap7_leibniz.md"
+    },
+    {
+        title: "Crisi e Sviluppo del Razionalismo – Pascal, Malebranche e il Giusnaturalismo",
+        subject: "filosofia",
+        chapterTag: "Studio VIII",
+        description: "Blaise Pascal: esprit de géométrie ed esprit de finesse, canna pensante, divertissement e scommessa su Dio. Occasionalismo e Nicolas Malebranche (visione delle idee in Dio). Giusnaturalismo laico: Grozio (etiamsi daremus non esse Deum), Pufendorf, Thomasius.",
+        keywords: "filosofia razionalismo pascal esprit geometrie finesse canna pensante divertissement scommessa pari dio occasionalismo malebranche vision en dieu giusnaturalismo grozio pufendorf thomasius diritto naturale laico",
+        navPath: "filosofia/index.html?open=summaries/cap8_crisi_razionalismo.md"
+    },
+    {
+        title: "Thomas Hobbes – Materialismo Meccanicista e l'Assolutismo del Leviatano",
+        subject: "filosofia",
+        chapterTag: "Studio IX",
+        description: "Nominalismo e ragione come calcolo additivo/sottrattivo; materialismo corporeo e negazione dell'incorporeo; stato di natura come bellum omnium contra omnes (homo homini lupus); leggi naturali di prudenza e patto di sottomissione al Leviatano assoluto.",
+        keywords: "filosofia empirismo politica hobbes materialismo nominalismo calcolo ragione de corpore leviatano leviathan stato natura bellum omnium homo homini lupus leggi natura patto sottomissione sovranita assoluta indivisibile",
+        navPath: "filosofia/index.html?open=summaries/cap9_hobbes.md"
+    },
+    {
+        title: "Isaac Newton – I Principia e la Meccanica Razionale",
+        subject: "filosofia",
+        chapterTag: "Studio X",
+        description: "Philosophiae Naturalis Principia Mathematica (1687): le tre leggi della dinamica, gravitazione universale, Regulae philosophandi, rifiuto delle ipotesi arbitrarie (Hypotheses non fingo), spazio e tempo assoluti e Scolio Generale teologico su Dio Pantokrator.",
+        keywords: "filosofia scienza newton principia mathematica dinamica inerzia forza azione reazione gravitazione universale hypotheses non fingo regulae philosophandi spazio tempo assoluto scolio generale pantokrator",
+        navPath: "filosofia/index.html?open=summaries/cap10_newton.md"
+    },
+    {
+        title: "John Locke – L'Empirismo Gnoseologico e il Liberalismo Politico",
+        subject: "filosofia",
+        chapterTag: "Studio XI",
+        description: "Saggio sull'intelletto umano: confutazione dell'innatismo e mente come tabula rasa; sensazione e riflessione; idee semplici/complesse e critica della sostanza come substratum sconosciuto. Due trattati sul governo: diritti naturali (vita, libertà, proprietà), trust e divisione poteri; tolleranza.",
+        keywords: "filosofia empirismo locke saggio intelletto umano critica innatismo tabula rasa esperienza sensazione riflessione idee semplici complesse qualita primarie secondarie sostanza substratum due trattati governo stato natura proprieta liberalismo tolleranza",
+        navPath: "filosofia/index.html?open=summaries/cap11_locke.md"
+    },
+    {
+        title: "George Berkeley – L'Immaterialismo e il Principio Esse Est Percipi",
+        subject: "filosofia",
+        chapterTag: "Studio XII",
+        description: "Critica delle idee astratte nell'Introduzione ai Princìpi; immaterialismo ontologico: Esse est percipi (l'essere delle cose consiste nel loro essere percepite); negazione della materia inerte; le idee del cosmo come linguaggio visivo impresso continuamente da Dio.",
+        keywords: "filosofia empirismo berkeley immaterialismo esse est percipi esse est percipere critica idee astratte materia inesistente percezione spirito dio linguaggio natura hylas philonous apologetica",
+        navPath: "filosofia/index.html?open=summaries/cap12_berkeley.md"
+    },
+    {
+        title: "David Hume – Lo Scetticismo Radicale, la Causalità e le Passioni",
+        subject: "filosofia",
+        chapterTag: "Studio XIII",
+        description: "Impressioni e idee, principio di copia, Forchetta di Hume (relazioni tra idee vs materie di fatto); demolizione del nesso causale a priori: abitudine (custom) e credenza (belief); teoria del fascio dell'Io; scetticismo moderato; Legge di Hume e morale della simpatia.",
+        keywords: "filosofia empirismo scetticismo hume impressioni idee principio copia forchetta hume relazioni idee materie fatto critica causalita abitudine credenza critica sostanza io fascio passioni simpatia legge hume",
+        navPath: "filosofia/index.html?open=summaries/cap13_hume.md"
+    },
+    {
+        title: "Nello Spazio dell'Illuminismo – Modelli Inglese, Francese e Tedesco",
+        subject: "filosofia",
+        chapterTag: "Studio XIV",
+        description: "Il Secolo dei Lumi (Sapere aude). Deismo inglese (Toland, Tindal). Philosophes francesi: Voltaire (tolleranza), Montesquieu (separazione dei poteri nello Spirito delle leggi), Encyclopédie di Diderot e d'Alembert, sensismo della statua di Condillac, materialismo. Aufklärung: Wolff, Baumgarten (nascita dell'Estetica) e Lessing.",
+        keywords: "filosofia illuminismo lumi sapere aude deismo voltaire tolleranza candido montesquieu spirito leggi separazione poteri encyclopedie diderot dalembert condillac sensismo statua la mettrie uomo macchina wolff baumgarten estetica lessing tre anelli",
+        navPath: "filosofia/index.html?open=summaries/cap14_illuminismo.md"
+    },
+    {
+        title: "Due Casi Atipici – Giambattista Vico e Jean-Jacques Rousseau",
+        subject: "filosofia",
+        chapterTag: "Studio XV",
+        description: "Vico: critica a Cartesio, principio del verum-factum, Scienza Nuova, tre età dell'umanità (dèi, eroi, uomini), corsi e ricorsi storici e Provvidenza. Rousseau: critica della civiltà nei due Discorsi, il buon selvaggio, disuguaglianza e proprietà privata, Contratto Sociale (alienazione totale e Volontà Generale), l'Émile.",
+        keywords: "filosofia vico rousseau scienza nuova verum factum boria dotti nazioni tre eta dei eroi uomini corsi ricorsi provvidenza discorsi scienze arti disuguaglianza stato natura proprieta privata contratto sociale volonta generale emile pedagogia vicario savoiardo",
+        navPath: "filosofia/index.html?open=summaries/cap15_vico_rousseau.md"
+    },
+    {
+        title: "Immanuel Kant – La Filosofia Critica e i Tre Giudizi",
+        subject: "filosofia",
+        chapterTag: "Studio XVI",
+        description: "La svolta criticista e la rivoluzione copernicana; giudizi sintetici a priori; Critica della ragion pura: estetica trascendentale (spazio e tempo), analitica (categorie, deduzione trascendentale, Io Penso), dialettica (paralogismi, antinomie, confutazione prove di Dio), fenomeno e noumeno; Critica della ragion pratica: imperativo categorico e postulati; Critica del Giudizio: estetico (bello e sublime) e teleologico.",
+        keywords: "filosofia criticismo kant rivoluzione copernicana giudizi sintetici a priori critica ragion pura estetica trascendentale spazio tempo analitica categorie io penso deduzione fenomeno noumeno dialettica anima mondo dio antinomie critica ragion pratica imperativo categorico rispetto postulati critica giudizio estetico bello sublime teleologico",
+        navPath: "filosofia/index.html?open=summaries/cap16_kant.md"
+    },
 ];
 
 // Global export

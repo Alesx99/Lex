@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex Philosophia - Catalogo Storia della Filosofia Moderna</title>
+    <meta name="description" content="Piattaforma interattiva di studio sulla Storia della Filosofia Moderna. Sintesi accademiche, mappe concettuali e testi integrali da Bacon e Cartesio a Hume e Kant.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Centralized Glossary Database -->
+    <script src="../js/glossary_db.js"></script>
+    <style>
+        .search-container {
+            max-width: 620px;
+            margin: -2rem auto 3rem auto;
+            position: relative;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            background: rgba(23, 19, 38, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.light-theme .search-input {
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-filosofia);
+            background: rgba(23, 19, 38, 0.85);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition-fast);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-filosofia);
+        }
+
+        .results-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Philosophia</span></h1>
+            <p>Storia della Filosofia Moderna</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link active" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Galleria Studi
+            </a>
+            <a href="connections.html" class="nav-link" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Relazioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Hero Introduction -->
+        <section class="hero">
+            <h2>Storia della Filosofia Moderna</h2>
+            <div class="hero-divider"></div>
+            <p>Dall'alba della modernità rinascimentale e dalla Rivoluzione scientifica alle grandi metafisiche razionaliste, dall'empirismo britannico all'Illuminismo e alla svolta trascendentale di Immanuel Kant. 16 studi integrali con apparato critico, glossario e mappe.</p>
+        </section>
+
+        <!-- Live Search Box -->
+        <div class="search-container">
+            <input type="text" id="live-search" class="search-input" placeholder="Cerca filosofi, concetti, opere o teorie (es. Cogito, Monade, Sostanza, Imperativo...)" autocomplete="off">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </div>
+        <div id="search-results-count" class="results-count"></div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid" id="chapters-grid">
+            <!-- Studio I -->
+            <article class="chapter-card" data-chapter="Studio I" data-search="naturalismo rinascimento telesio bruno campanella natura iuxta propria principia animismo panteismo infinito mondi eroico furore citta del sole magia ermetismo alchimia">
+                <div class="card-header">
+                    <span class="chapter-num">Studio I</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Il Naturalismo Rinascimentale e l'Alba della Modernità</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">La riscoperta della natura nel Cinquecento. Bernardino Telesio e i princìpi del caldo e freddo; Giordano Bruno tra infinità dell'universo, panteismo immanente ed eroico furore; Tommaso Campanella tra autocoscienza primaria e l'utopia teocratica della Città del Sole; l'osmosi operativa tra magia naturale e scienza.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio I', 'summaries/cap1_naturalismo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap1_naturalismo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio II -->
+            <article class="chapter-card" data-chapter="Studio II" data-search="rivoluzione astronomica copernico brahe keplero eliocentrismo geocentrismo tolemaico de revolutionibus osiander sfere cristalline comete orbite ellittiche leggi keplero">
+                <div class="card-header">
+                    <span class="chapter-num">Studio II</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~6 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Alla Scoperta della Misura del Mondo – La Rivoluzione Astronomica</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Il crollo del cosmo chiuso geocentrico aristotelico-tolemaico. La teoria eliocentrica di Niccolò Copernico e la prefazione compromissoria di Osiander; il modello ticonico di Tycho Brahe e la distruzione empirica delle sfere cristalline; le tre leggi di Giovanni Keplero e la geometria ellittica dei moti planetari.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio II', 'summaries/cap2_misura_mondo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap2_misura_mondo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio III -->
+            <article class="chapter-card" data-chapter="Studio III" data-search="bacone galileo metodo scientifico novum organum idoli tribus specus fori theatri induzione tavole nuova atlantide sidereus nuncius lettere copernicane dialogo massimi sistemi saggiatore relativita abiura">
+                <div class="card-header">
+                    <span class="chapter-num">Studio III</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~14 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Francis Bacon e Galileo Galilei – I Fondatori del Metodo Scientifico</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">I due pilastri della rivoluzione scientifica. Francis Bacon: critica della tradizione, dottrina degli idola, metafora delle api, tavole induttive e Nuova Atlantide. Galileo Galilei: le scoperte del Sidereus Nuncius, il libro della natura in lingua matematica, la distinzione tra qualità primarie e secondarie, il principio di relatività e il processo del 1633.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio III', 'summaries/cap3_bacone_galileo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap3_bacone_galileo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio IV -->
+            <article class="chapter-card" data-chapter="Studio IV" data-search="seconda scolastica salamanca coimbra francisco suarez disputationes metaphysicae ontologia ens inquantum ens analogia entis metafisica generale speciale wolff">
+                <div class="card-header">
+                    <span class="chapter-num">Studio IV</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~6 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>La Tarda Scolastica Europea e Francisco Suárez</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">La rinascita del pensiero filosofico iberico tra Salamanca e Coimbra. Francisco Suárez e le Disputationes Metaphysicae (1597): il superamento del commentario aristotelico verso l'esposizione tematica autonoma; la nascita dell'ontologia moderna e l'influenza capitale su Cartesio, Spinoza, Leibniz e la metafisica tedesca.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio IV', 'summaries/cap4_tarda_scolastica.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap4_tarda_scolastica.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio V -->
+            <article class="chapter-card" data-chapter="Studio V" data-search="descartes cartesio metodo evidenza analisi sintesi enumerazione dubbio metodico iperbolico genio maligno cogito ergo sum res cogitans res extensa prove dio dualismo ghiandola pineale vortici morale provvisoria">
+                <div class="card-header">
+                    <span class="chapter-num">Studio V</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~15 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>René Descartes – Il Dubbio, il Cogito e la Fondazione del Razionalismo</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">La rifondazione del sapere razionalista. Le quattro regole del Discorso sul metodo; il dubbio metodico e iperbolico, l'ipotesi del Genio maligno e la certezza del Cogito ergo sum; le idee innate e le tre prove dell'esistenza di Dio; il dualismo tra res cogitans e res extensa; la fisica dei vortici e le massime della morale provvisoria.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio V', 'summaries/cap5_cartesio.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap5_cartesio.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio VI -->
+            <article class="chapter-card" data-chapter="Studio VI" data-search="spinoza etica geometria deus sive natura sostanza causa sui natura naturans natura naturata attributi modi pensiero estensione parallelismo conatus affetti letizia tristezza schiavitu liberta amor dei intellectualis trattato teologico politico">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VI</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~14 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Baruch Spinoza – Deus Sive Natura e l'Etica More Geometrico</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Il monismo panteista di Spinoza. Il metodo geometrico euclideo dell'Ethica; la Sostanza unica increata e infinita (Deus sive Natura); attributi (Pensiero ed Estensione) e modi finiti; il parallelismo psico-fisico; la dottrina degli affetti, il conatus e i tre generi di conoscenza fino all'Amor Dei intellectualis; la libertà di pensiero nel Trattato teologico-politico.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VI', 'summaries/cap6_spinoza.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap6_spinoza.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio VII -->
+            <article class="chapter-card" data-chapter="Studio VII" data-search="leibniz verita ragione fatto non contraddizione ragion sufficiente predicato inerente soggetto monade monadologia atomi spirituali appercezione armonia prestabilita orologi teodicea migliore mondi possibili male metafisico fisico morale">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~12 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Gottfried Wilhelm Leibniz – La Monadologia e l'Armonia Prestabilita</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Il genio universale del Barocco. Verità di ragione e verità di fatto; il principio di ragion sufficiente e la teoria del predicato contenuto nel soggetto; la nozione di monade come sostanza spirituale semplice priva di finestre; percezione e appercezione; l'Armonia prestabilita e l'analogia dei due orologi; la Teodicea e il migliore dei mondi possibili.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VII', 'summaries/cap7_leibniz.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap7_leibniz.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio VIII -->
+            <article class="chapter-card" data-chapter="Studio VIII" data-search="pascal esprit geometrie finesse canna pensante divertissement scommessa pari dio occasionalismo malebranche vision en dieu giusnaturalismo grozio pufendorf thomasius appetitus societatis etiamsi daremus">
+                <div class="card-header">
+                    <span class="chapter-num">Studio VIII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~10 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Crisi e Sviluppo del Razionalismo – Pascal, Malebranche e il Giusnaturalismo</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Le reazioni al cartesianesimo. Blaise Pascal: esprit de géométrie ed esprit de finesse, l'uomo come canna pensante, il divertissement e la celebre scommessa su Dio; l'Occasionalismo e Nicolas Malebranche con la visione delle idee in Dio; il Giusnaturalismo moderno da Ugo Grozio (l'autonomia del diritto naturale) a Samuel Pufendorf e Christian Thomasius.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio VIII', 'summaries/cap8_crisi_razionalismo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap8_crisi_razionalismo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio IX -->
+            <article class="chapter-card" data-chapter="Studio IX" data-search="hobbes materialismo nominalismo calcolo ragione corpi de cive leviatano stato natura bellum omnium homo homini lupus leggi natura patto unione sottomissione sovranita assoluta indivisibile chiesa">
+                <div class="card-header">
+                    <span class="chapter-num">Studio IX</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~11 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Thomas Hobbes – Materialismo Meccanicista e l'Assolutismo del Leviatano</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Il pensiero filosofico e politico di Thomas Hobbes. Il materialismo corporeo e il nominalismo linguistico: ragionare come computazione additiva e sottrattiva; lo stato di natura come guerra di tutti contro tutti (homo homini lupus); le leggi naturali della ragione; il patto sociale di sottomissione e i caratteri del potere assoluto, indivisibile e sovrano del Leviatano.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio IX', 'summaries/cap9_hobbes.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap9_hobbes.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio X -->
+            <article class="chapter-card" data-chapter="Studio X" data-search="newton principia mathematica leggi dinamica inerzia forza azione reazione gravitazione universale hypotheses non fingo regulae philosophandi spazio tempo assoluto scolio generale pantokrator">
+                <div class="card-header">
+                    <span class="chapter-num">Studio X</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Isaac Newton – I Principia e la Meccanica Razionale</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Il compimento della fisica classica nei Philosophiae Naturalis Principia Mathematica (1687). I tre assiomi della dinamica; la legge di gravitazione universale e l'unificazione del moto terrestre e celeste; le Regulae philosophandi e il rifiuto delle ipotesi arbitrarie (Hypotheses non fingo); spazio e tempo assoluti e la teologia dello Scolio Generale.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio X', 'summaries/cap10_newton.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap10_newton.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio XI -->
+            <article class="chapter-card" data-chapter="Studio XI" data-search="locke empirismo saggio intelletto umano critica innatismo tabula rasa esperienza sensazione riflessione idee semplici complesse qualita primarie secondarie sostanza substratum due trattati governo stato natura proprieta divisione poteri tolleranza">
+                <div class="card-header">
+                    <span class="chapter-num">Studio XI</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~13 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>John Locke – L'Empirismo Gnoseologico e il Liberalismo Politico</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">La fondazione dell'empirismo critico e del costituzionalismo liberale. La confutazione delle idee innate e la mente come tabula rasa; sensazione e riflessione; idee semplici e complesse; la critica della nozione di sostanza come sostegno sconosciuto; i Due trattati sul governo: diritti naturali inalienabili (vita, libertà, proprietà), trust e divisione dei poteri; la Lettera sulla tolleranza.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio XI', 'summaries/cap11_locke.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap11_locke.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio XII -->
+            <article class="chapter-card" data-chapter="Studio XII" data-search="berkeley immaterialismo esse est percipi critica idee astratte percezione spirito mente dio linguaggio natura hylas philonous materia inesistente">
+                <div class="card-header">
+                    <span class="chapter-num">Studio XII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~8 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>George Berkeley – L'Immaterialismo e il Principio Esse Est Percipi</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">L'immaterialismo apologetico di George Berkeley. La critica radicale alle idee astratte; il principio ontologico Esse est percipi: l'esistenza degli oggetti sensibili coincide con il loro essere percepiti; la distruzione filosofica della sostanza materiale inerte; la realtà del mondo esteriore come sistema armonico impresso costantemente nelle menti da Dio.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio XII', 'summaries/cap12_berkeley.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap12_berkeley.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio XIII -->
+            <article class="chapter-card" data-chapter="Studio XIII" data-search="hume scetticismo trattato natura umana ricerca intelletto impressioni idee principio copia forchetta hume relazioni idee materie fatto critica causalita abitudine credenza critica sostanza io fascio passioni simpatia">
+                <div class="card-header">
+                    <span class="chapter-num">Studio XIII</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~12 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>David Hume – Lo Scetticismo Radicale, la Causalità e le Passioni</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Il culmine dell'empirismo britannico. Impressioni ed idee; il principio di copia e la Forchetta di Hume; la demolizione del nesso causale necessario: abitudine psicologica e credenza istintiva; la dissoluzione dell'idea di sostanza e la teoria del fascio dell'Io; lo scetticismo moderato accademico; la subordinazione della ragione alle passioni e l'etica della simpatia.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio XIII', 'summaries/cap13_hume.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap13_hume.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio XIV -->
+            <article class="chapter-card" data-chapter="Studio XIV" data-search="illuminismo lumi sapere aude deismo toland tindal voltaire tolleranza candido montesquieu spirito leggi separazione poteri encyclopedie diderot dalembert condillac sensismo statua la mettrie uomo macchina wolff baumgarten estetica lessing tre anelli">
+                <div class="card-header">
+                    <span class="chapter-num">Studio XIV</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~11 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Nello Spazio dell'Illuminismo – Modelli Inglese, Francese e Tedesco</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">La costellazione dell'Illuminismo europeo. Il deismo inglese e la religione naturale; i philosophes francesi: la battaglia per la tolleranza di Voltaire, la separazione dei tre poteri di Montesquieu, l'epopea culturale dell'Encyclopédie di Diderot e d'Alembert, il sensismo di Condillac e il materialismo radicale; l'Aufklärung tedesca: Wolff, la nascita dell'Estetica con Baumgarten e la tolleranza di Lessing.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio XIV', 'summaries/cap14_illuminismo.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap14_illuminismo.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio XV -->
+            <article class="chapter-card" data-chapter="Studio XV" data-search="vico rousseau scienza nuova verum factum boria dotti nazioni tre eta dei eroi uomini corsi ricorsi provvidenza discorsi scienze arti disuguaglianza stato natura proprieta privata contratto sociale volonta generale emile pedagogia vicario savoiardo">
+                <div class="card-header">
+                    <span class="chapter-num">Studio XV</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~14 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Due Casi Atipici – Giambattista Vico e Jean-Jacques Rousseau</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">Due grandi voci eterodosse dell'età moderna. Giambattista Vico: il principio del verum-factum, la Scienza Nuova, le tre età dell'umanità e i corsi e ricorsi storici guidati dalla Provvidenza. Jean-Jacques Rousseau: la denuncia della corruzione civile nei due Discorsi; lo stato di natura e la nascita della disuguaglianza; la rifondazione della libertà nel Contratto Sociale attraverso la Volontà Generale; l'educazione naturale nell'Émile.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio XV', 'summaries/cap15_vico_rousseau.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap15_vico_rousseau.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>\n\n            <!-- Studio XVI -->
+            <article class="chapter-card" data-chapter="Studio XVI" data-search="kant criticismo rivoluzione copernicana giudizi sintetici a priori critica ragion pura estetica trascendentale spazio tempo analitica categorie io penso deduzione fenomeno noumeno dialettica anima mondo dio antinomie critica ragion pratica imperativo categorico rispetto postulati critica giudizio estetico bello sublime teleologico">
+                <div class="card-header">
+                    <span class="chapter-num">Studio XVI</span>
+                    <span class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        ~18 min lett.
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h3>Immanuel Kant – La Filosofia Critica e i Tre Giudizi</h3>
+                    <div class="author">Autore: <span>C. Esposito - P. Porro</span></div>
+                    <p class="description">La vetta della filosofia moderna. La svolta criticista e la rivoluzione copernicana; la fondazione della scienza sui giudizi sintetici a priori; la Critica della ragion pura: estetica (spazio e tempo), analitica (categorie e Io Penso), dialettica (paralogismi, antinomie, confutazione delle prove di Dio) e la distinzione fenomeno/noumeno; la Critica della ragion pratica: imperativo categorico, dovere formale e postulati morali; la Critica del Giudizio: il bello disinteressato, il sublime e la finalità teleologica della natura.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="openSummary('Studio XVI', 'summaries/cap16_kant.md')">Leggi Sintesi</button>
+                    <a class="btn btn-secondary" href="Storia della Filosofia.pdf" target="_blank" title="Apri PDF originale" onclick="if(typeof LexCore !== 'undefined' && LexCore.trackPdfView) LexCore.trackPdfView()">PDF</a>
+                    <a class="btn btn-secondary" href="summaries/cap16_kant.md" target="_blank" title="Visualizza Markdown raw">MD</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag">Studio I</span>
+                    <h3 class="modal-title" id="modal-chapter-title">Caricamento sintesi...</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="window.print()" title="Stampa o Salva PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+
+            <!-- Integrated Study Notepad -->
+            <div class="study-notes-panel">
+                <div class="notes-header">
+                    <label for="notes-textarea">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                        Taccuino Personale di Studio
+                    </label>
+                    <span class="notes-status" id="notes-status">Salvataggio automatico locale</span>
+                </div>
+                <textarea id="notes-textarea" class="notes-textarea" placeholder="Scrivi qui i tuoi appunti, riflessioni filosofiche o schemi per questo studio..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Portale Multidisciplinare di Studio &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // Theme toggle logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function setTheme(isLight) {
+            if (isLight) {
+                document.body.classList.add('light-theme');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                document.body.classList.remove('light-theme');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        // Check stored theme
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(currentTheme === 'light');
+
+        themeToggle.addEventListener('click', () => {
+            const isLight = document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            setTheme(isLight);
+        });
+
+        // Live Search Filtering
+        const searchInput = document.getElementById('live-search');
+        const cards = document.querySelectorAll('.chapter-card');
+        const resultsCount = document.getElementById('search-results-count');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            let matches = 0;
+
+            if (query === '') {
+                cards.forEach(card => card.style.display = 'flex');
+                resultsCount.style.display = 'none';
+                return;
+            }
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-search') || '';
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('.description').textContent.toLowerCase();
+                const chapter = card.getAttribute('data-chapter').toLowerCase();
+
+                if (searchData.includes(query) || title.includes(query) || desc.includes(query) || chapter.includes(query)) {
+                    card.style.display = 'flex';
+                    matches++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            resultsCount.style.display = 'block';
+            resultsCount.textContent = `Trovati ${matches} studi corrispondenti su ${cards.length}`;
+        });
+
+        // Markdown Reader Mechanism
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag');
+        const modalChapterTitle = document.getElementById('modal-chapter-title');
+        const markdownView = document.getElementById('markdown-view');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        // Configure marked options
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        function openSummary(chapterTag, filePath) {
+            if (typeof LexCore !== 'undefined' && LexCore.trackChapterRead) {
+                LexCore.trackChapterRead(filePath);
+            } 
+            modalChapterTag.textContent = chapterTag;
+            modalChapterTitle.textContent = "Caricamento sintesi...";
+            markdownView.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:200px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="3" style="animation: spin 1s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(168, 85, 247, 0.2)"></circle>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+            </div>`;
+            
+            if (!document.getElementById('spin-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'spin-keyframes';
+                style.innerHTML = "@keyframes spin { 100% { transform: rotate(360deg); } }";
+                document.head.appendChild(style);
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            // Reset notes
+            currentChapterKey = 'filosofia-' + filePath.replace(/\//g, '-').replace('.md', '');
+            initNotes();
+
+            // Fetch summary file
+            fetch(filePath)
+                .then(res => {
+                    if (!res.ok) throw new Error("Sintesi non trovata");
+                    return res.text();
+                })
+                .then(text => {
+                    const lines = text.split('\n');
+                    let title = "Sintesi";
+                    let contentText = text;
+                    
+                    if (lines[0].startsWith('# ')) {
+                        title = lines[0].substring(2).trim();
+                        contentText = lines.slice(1).join('\n');
+                    }
+                    
+                    modalChapterTitle.textContent = title;
+                    markdownView.innerHTML = marked.parse(contentText);
+                    modalBodyContent.scrollTop = 0;
+                    progressIndicator.style.width = '0%';
+                })
+                .catch(err => {
+                    modalChapterTitle.textContent = "Errore di Caricamento";
+                    markdownView.innerHTML = `<p style="color:var(--accent-filosofia); text-align:center; padding: 2rem 0;">Impossibile caricare la sintesi. Errore: ${err.message}</p>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+            saveNotes();
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('open')) {
+                closeSummary();
+            }
+        });
+
+        modalBodyContent.addEventListener('scroll', () => {
+            const totalScrollHeight = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            if (totalScrollHeight > 0) {
+                const percentage = (modalBodyContent.scrollTop / totalScrollHeight) * 100;
+                progressIndicator.style.width = percentage + '%';
+            }
+        });
+
+        // Notes Localstorage
+        let currentChapterKey = '';
+        const notesTextarea = document.getElementById('notes-textarea');
+        const notesStatus = document.getElementById('notes-status');
+        let saveTimeout = null;
+
+        function initNotes() {
+            const savedNote = localStorage.getItem(currentChapterKey) || '';
+            notesTextarea.value = savedNote;
+            notesStatus.textContent = "Nessuna modifica non salvata.";
+            notesStatus.style.color = "var(--text-muted)";
+        }
+
+        function saveNotes() {
+            if (!currentChapterKey) return;
+            localStorage.setItem(currentChapterKey, notesTextarea.value);
+            notesStatus.textContent = "Appunti salvati localmente!";
+            notesStatus.style.color = "var(--accent-filosofia)";
+            setTimeout(() => {
+                if (notesStatus.textContent === "Appunti salvati localmente!") {
+                    notesStatus.textContent = "Nessuna modifica.";
+                    notesStatus.style.color = "var(--text-muted)";
+                }
+            }, 2000);
+        }
+
+        notesTextarea.addEventListener('input', () => {
+            notesStatus.textContent = "Modifiche in corso...";
+            notesStatus.style.color = "var(--accent-filosofia)";
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveNotes, 1000);
+        });
+
+        // Deep linking (?open=summaries/capX_....md)
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const openPath = params.get('open');
+            if (openPath) {
+                const btn = Array.from(document.querySelectorAll('.chapter-card button')).find(b => {
+                    const onclickStr = b.getAttribute('onclick') || '';
+                    return onclickStr.includes(openPath);
+                });
+                
+                if (btn) {
+                    btn.click();
+                } else {
+                    const titleMatch = openPath.match(/cap(\d+)/);
+                    const tag = titleMatch ? "Studio " + titleMatch[1] : "Sintesi";
+                    openSummary(tag, openPath);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

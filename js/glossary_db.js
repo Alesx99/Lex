@@ -367,6 +367,88 @@ const glossaryDatabase = {
         term: "Terzina Dantesca",
         definition: "Metrica in rima incatenata (ABA BCB CDC) inventata da Dante Alighieri per la Commedia, in cui la rima del verso centrale di ogni terzina viene ripresa dal primo e dal terzo verso della terzina successiva.",
         domain: "letteratura_italiana"
+    },
+
+    // TERMINI FILOSOFICI (STORIA DELLA FILOSOFIA MODERNA)
+    "cogito": {
+        term: "Cogito Ergo Sum",
+        definition: "Principio primo e indubitabile della metafisica cartesiana: nell'atto stesso di dubitare e pensare, l'io coglie intuitivamente con evidenza assoluta la certezza della propria esistenza come sostanza pensante (res cogitans).",
+        domain: "filosofia"
+    },
+    "res_cogitans": {
+        term: "Res Cogitans",
+        definition: "La sostanza incorporea, inestesa, indivisibile, libera e autocosciente che costituisce l'essenza dell'anima razionale nella filosofia di René Descartes.",
+        domain: "filosofia"
+    },
+    "res_extensa": {
+        term: "Res Extensa",
+        definition: "La sostanza corporea e materiale definita unicamente dall'estensione spaziale tridimensionale geometrica, divisibile all'infinito e determinata da rigide leggi meccaniche.",
+        domain: "filosofia"
+    },
+    "deus_sive_natura": {
+        term: "Deus Sive Natura",
+        definition: "Celebre formula del monismo panteista di Spinoza che identifica ontologicamente Dio e la Natura: un'unica Sostanza infinita, eterna e increata, causa immanente di tutti i modi finiti.",
+        domain: "filosofia"
+    },
+    "conatus": {
+        term: "Conatus Sese Conservandi",
+        definition: "Lo sforzo immanente e naturale con cui ogni singolo ente tende, per quanto è in suo potere, a perseverare indefinitamente nel proprio essere e ad accrescere la propria potenza d'agire (Spinoza).",
+        domain: "filosofia"
+    },
+    "monade": {
+        term: "Monade",
+        definition: "Sostanza semplice spirituale, immateriale, inestesa e priva di parti teorizzata da Leibniz. Autentico atomo della natura 'senza finestre', centro di forza dotato di percezione e appetizione che rispecchia l'intero universo.",
+        domain: "filosofia"
+    },
+    "armonia_prestabilita": {
+        term: "Armonia Prestabilita",
+        definition: "Dottrina leibniziana secondo cui la perfetta corrispondenza tra l'anima e il corpo (e tra tutte le monadi del cosmo) è dovuta a una sincronia originaria impressa da Dio all'atto della creazione, come due orologi perfetti.",
+        domain: "filosofia"
+    },
+    "tabula_rasa": {
+        term: "Tabula Rasa",
+        definition: "Metafora empirista utilizzata da John Locke nel Saggio sull'intelletto umano: la mente umana alla nascita è un foglio bianco del tutto privo di caratteri o idee innate, che riceve ogni materiale unicamente dall'esperienza (sensazione e riflessione).",
+        domain: "filosofia"
+    },
+    "esse_est_percipi": {
+        term: "Esse Est Percipi",
+        definition: "Principio fondamentale dell'immaterialismo di George Berkeley: l'esistenza delle cose corporee sensibili coincide interamente con il loro essere percepite da una mente spirituale, negando l'esistenza della materia inerte extracorporea.",
+        domain: "filosofia"
+    },
+    "forchetta_hume": {
+        term: "Forchetta di Hume (Hume's Fork)",
+        definition: "Bipartizione gnoseologica introdotta da David Hume tra 'Relazioni tra idee' (verità matematiche necessarie a priori basate sul principio di non-contraddizione) e 'Materie di fatto' (conoscenze empiriche contingenti a posteriori, il cui contrario è sempre possibile).",
+        domain: "filosofia"
+    },
+    "leviatano": {
+        term: "Leviatano (Hobbes)",
+        definition: "Metafora biblica con cui Thomas Hobbes designa lo Stato sovrano: il 'dio mortale' al quale i sudditi hanno ceduto irrevocabilmente tutti i propri diritti naturali nello stato di natura in cambio della pace e della protezione della vita.",
+        domain: "filosofia"
+    },
+    "verum_factum": {
+        term: "Verum-Factum (Vico)",
+        definition: "Principio gnoseologico formulato da Giambattista Vico: 'Verum et factum reciprocantur seu convertuntur' (il vero e il fatto si convertono l'uno nell'altro). L'uomo può conoscere scientificamente solo ciò che egli stesso produce, rendendo la storia umana pienamente intelligibile.",
+        domain: "filosofia"
+    },
+    "volonta_generale": {
+        term: "Volontà Generale (Rousseau)",
+        definition: "La volontà del corpo politico sovrano unitario nel Contratto Sociale di Rousseau, distinta dalla mera somma degli interessi egoistici privati (volontà di tutti) e orientata esclusivamente al bene comune e all'utilità pubblica.",
+        domain: "filosofia"
+    },
+    "imperativo_categorico": {
+        term: "Imperativo Categorico",
+        definition: "La legge morale formale e incondizionata dettata dalla ragion pura pratica di Immanuel Kant ('Devi perché devi'), che impone di agire unicamente secondo massime che possano valere contemporaneamente come princìpi di una legislazione universale.",
+        domain: "filosofia"
+    },
+    "noumeno": {
+        term: "Noumeno (Cosa in sé)",
+        definition: "Nella filosofia critica kantiana, la realtà considerata in sé stessa, indipendentemente dalle forme pure a priori della sensibilità e dell'intelletto umano. Concetto-limite (Grenzbegriff) razionale, pensabile ma non conoscibile scientificamente.",
+        domain: "filosofia"
+    },
+    "sublime": {
+        term: "Sublime (Kant)",
+        definition: "Sentimento estetico suscitato nella Critica del Giudizio dalla contemplazione di ciò che è smisuratamente grande (sublime matematico) o infinitamente potente (sublime dinamico) nella natura, risvegliando nell'uomo la coscienza della propria dignità morale soprasensibile.",
+        domain: "filosofia"
     }
 };
 

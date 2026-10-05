@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v27';
+const CACHE_NAME = 'lex-cache-v28';
 const ASSETS = [
   './',
   './index.html',
@@ -34,6 +34,12 @@ const ASSETS = [
   'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js',
   
+  // Developed Subject: Storia della Filosofia
+  './filosofia/index.html',
+  './filosofia/style.css',
+  './filosofia/quiz.html',
+  './filosofia/connections.html',
+
   // Developed Subject: Arte Romana
   './arte_romana/index.html',
   './arte_romana/style.css',

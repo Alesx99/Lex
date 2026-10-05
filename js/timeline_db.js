@@ -993,6 +993,197 @@ const timelineDatabase = [
         subjectLabel: "Codicologia",
         description: "Carla Bozzolo ed Ezio Ornato pubblicano 'Pour une codicologie expérimentale', inaugurando l'applicazione di metodi statistici su larga scala al codice.",
         link: "codicologia/index.html?open=summaries/cap1.md"
+    },
+
+    // --- STORIA DELLA FILOSOFIA MODERNA ---
+    {
+        id: "fil_copernico_1543",
+        year: 1543,
+        title: "Copernico pubblica il De revolutionibus",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Niccolò Copernico espone la teoria eliocentrica, declassando la Terra a pianeta mobile e avviando la Rivoluzione scientifica.",
+        link: "filosofia/index.html?open=summaries/cap2_misura_mondo.md"
+    },
+    {
+        id: "fil_bruno_1584",
+        year: 1584,
+        title: "Giordano Bruno teorizza l'infinità dell'universo",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Bruno pubblica 'De l'infinito, universo e mondi', abbattendo le sfere celesti e affermando la pluralità innumerevole dei mondi abitati.",
+        link: "filosofia/index.html?open=summaries/cap1_naturalismo.md"
+    },
+    {
+        id: "fil_suarez_1597",
+        year: 1597,
+        title: "Francisco Suárez e le Disputationes Metaphysicae",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Suárez supera il commentario aristotelico ed espone tematicamente l'ontologia moderna, influenzando Cartesio e Leibniz.",
+        link: "filosofia/index.html?open=summaries/cap4_tarda_scolastica.md"
+    },
+    {
+        id: "fil_keplero_1609",
+        year: 1609,
+        title: "Keplero formula le leggi delle orbite ellittiche",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Nell'Astronomia Nova Keplero abbatte il dogma della circolarità dei moti celesti formulando le prime due leggi del moto planetario.",
+        link: "filosofia/index.html?open=summaries/cap2_misura_mondo.md"
+    },
+    {
+        id: "fil_galileo_1610",
+        year: 1610,
+        title: "Galileo pubblica il Sidereus Nuncius",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Galileo annuncia le scoperte del telescopio: le asperità della Luna, i satelliti medicei di Giove e la composizione stellare della Via Lattea.",
+        link: "filosofia/index.html?open=summaries/cap3_bacone_galileo.md"
+    },
+    {
+        id: "fil_bacone_1620",
+        year: 1620,
+        title: "Francis Bacon pubblica il Novum Organum",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Bacon espone la dottrina degli idola della mente e il metodo dell'induzione vera per estendere il dominio dell'uomo sulla natura.",
+        link: "filosofia/index.html?open=summaries/cap3_bacone_galileo.md"
+    },
+    {
+        id: "fil_cartesio_1637",
+        year: 1637,
+        title: "René Descartes pubblica il Discorso sul metodo",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Cartesio enuncia le quattro regole del metodo e pone la prima fondazione razionalista della filosofia moderna.",
+        link: "filosofia/index.html?open=summaries/cap5_cartesio.md"
+    },
+    {
+        id: "fil_cartesio_1641",
+        year: 1641,
+        title: "Descartes pubblica le Meditazioni metafisiche",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Attraverso il dubbio metodico e l'ipotesi del genio maligno, Cartesio giunge al Cogito ergo sum e alle prove razionali di Dio.",
+        link: "filosofia/index.html?open=summaries/cap5_cartesio.md"
+    },
+    {
+        id: "fil_hobbes_1651",
+        year: 1651,
+        title: "Thomas Hobbes pubblica il Leviatano",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Hobbes teorizza la nascita geometrica dello Stato assoluto per sfuggire alla guerra civile e alla paura dello stato di natura.",
+        link: "filosofia/index.html?open=summaries/cap9_hobbes.md"
+    },
+    {
+        id: "fil_spinoza_1677",
+        year: 1677,
+        title: "Spinoza e la pubblicazione postuma dell'Ethica",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Viene pubblicata l'Ethica more geometrico demonstrata, vertice del monismo panteista della Sostanza unica (Deus sive Natura).",
+        link: "filosofia/index.html?open=summaries/cap6_spinoza.md"
+    },
+    {
+        id: "fil_newton_1687",
+        year: 1687,
+        title: "Isaac Newton pubblica i Principia Mathematica",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Newton unifica la dinamica terrestre e celeste con la legge di gravitazione universale e i tre assiomi fondamentali del moto.",
+        link: "filosofia/index.html?open=summaries/cap10_newton.md"
+    },
+    {
+        id: "fil_locke_1690",
+        year: 1690,
+        title: "John Locke pubblica il Saggio sull'intelletto umano",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Locke abbatte l'innatismo teorizzando la mente come tabula rasa e fonda il liberalismo costituzionale con i Due trattati sul governo.",
+        link: "filosofia/index.html?open=summaries/cap11_locke.md"
+    },
+    {
+        id: "fil_berkeley_1710",
+        year: 1710,
+        title: "George Berkeley formula l'immaterialismo (Esse est percipi)",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Nei Princìpi della conoscenza umana Berkeley nega l'esistenza della materia inerte, identificando l'essere con la percezione mentale.",
+        link: "filosofia/index.html?open=summaries/cap12_berkeley.md"
+    },
+    {
+        id: "fil_leibniz_1714",
+        year: 1714,
+        title: "Gottfried Wilhelm Leibniz compone la Monadologia",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Leibniz espone il suo sistema metafisico incentrato sulle monadi immateriali senza finestre e sull'Armonia prestabilita da Dio.",
+        link: "filosofia/index.html?open=summaries/cap7_leibniz.md"
+    },
+    {
+        id: "fil_vico_1725",
+        year: 1725,
+        title: "Giambattista Vico pubblica la Scienza Nuova",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Vico fonda la filosofia della storia sul principio del verum-factum e descrive le tre età dell'umanità (dèi, eroi, uomini) con i corsi e ricorsi.",
+        link: "filosofia/index.html?open=summaries/cap15_vico_rousseau.md"
+    },
+    {
+        id: "fil_hume_1739",
+        year: 1739,
+        title: "David Hume pubblica il Trattato sulla natura umana",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Hume radicalizza l'empirismo demolendo la necessità oggettiva del nesso causale e l'idea dell'Io sostanza a favore dell'abitudine.",
+        link: "filosofia/index.html?open=summaries/cap13_hume.md"
+    },
+    {
+        id: "fil_encyclopedie_1751",
+        year: 1751,
+        title: "Inizio della pubblicazione dell'Encyclopédie",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Diderot e d'Alembert avviano il monumento editoriale dell'Illuminismo francese, integrando sapere teorico e arti meccaniche.",
+        link: "filosofia/index.html?open=summaries/cap14_illuminismo.md"
+    },
+    {
+        id: "fil_rousseau_1762",
+        year: 1762,
+        title: "Rousseau pubblica il Contratto Sociale e l'Émile",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Rousseau teorizza la sovranità popolare indivisibile fondata sulla Volontà Generale e l'educazione naturale del fanciullo.",
+        link: "filosofia/index.html?open=summaries/cap15_vico_rousseau.md"
+    },
+    {
+        id: "fil_kant_1781",
+        year: 1781,
+        title: "Immanuel Kant pubblica la Critica della ragion pura",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Kant compie la rivoluzione copernicana gnoseologica, fondando la scienza sui giudizi sintetici a priori e distinguendo fenomeno e noumeno.",
+        link: "filosofia/index.html?open=summaries/cap16_kant.md"
+    },
+    {
+        id: "fil_kant_1788",
+        year: 1788,
+        title: "Kant pubblica la Critica della ragion pratica",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Kant fonda la legge morale universale e formale sull'Imperativo categorico ('Devi perché devi') e sui postulati della libertà e di Dio.",
+        link: "filosofia/index.html?open=summaries/cap16_kant.md"
+    },
+    {
+        id: "fil_kant_1790",
+        year: 1790,
+        title: "Kant pubblica la Critica del Giudizio",
+        subject: "filosofia",
+        subjectLabel: "Storia della Filosofia",
+        description: "Kant unifica natura determinata e libertà morale attraverso il giudizio riflettente, analizzando il Bello disinteressato, il Sublime e la teleologia.",
+        link: "filosofia/index.html?open=summaries/cap16_kant.md"
     }
 ];
 
