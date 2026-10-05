@@ -460,22 +460,23 @@
                 <div class="reading-progress-bar" id="progress-indicator"></div>
             </div>
             
-            <div class="modal-body" id="modal-body-content">
-                <div class="markdown-content" id="markdown-view">
-                    <!-- Rendered markdown goes here -->
+            <!-- Split Container for Body and Notes -->
+            <div class="modal-content-split">
+                <!-- Modal Body Text -->
+                <div class="modal-body" id="modal-body-content">
+                    <div class="markdown-content" id="markdown-view">
+                        <!-- Rendered markdown goes here -->
+                    </div>
                 </div>
-            </div>
-
-            <!-- Integrated Study Notepad -->
-            <div class="study-notes-panel">
-                <div class="notes-header">
-                    <label for="notes-textarea">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                        Taccuino Personale di Studio
-                    </label>
-                    <span class="notes-status" id="notes-status">Salvataggio automatico locale</span>
+                <!-- Study Notepad Panel -->
+                <div class="modal-notes-panel" id="modal-notes-panel">
+                    <div class="notes-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span>Appunti di Studio</span>
+                    </div>
+                    <textarea id="notes-textarea" placeholder="Scrivi qui i tuoi appunti per questo capitolo... Verranno salvati automaticamente in locale."></textarea>
+                    <div class="notes-status" id="notes-status">Nessuna modifica.</div>
                 </div>
-                <textarea id="notes-textarea" class="notes-textarea" placeholder="Scrivi qui i tuoi appunti, riflessioni filosofiche o schemi per questo studio..."></textarea>
             </div>
         </div>
     </div>
@@ -586,30 +587,27 @@
             modal.classList.add('open');
             document.body.style.overflow = 'hidden';
 
-            // Reset notes
-            currentChapterKey = 'filosofia-' + filePath.replace(/\//g, '-').replace('.md', '');
-            initNotes();
+            progressIndicator.style.width = '0%';
 
-            // Fetch summary file
             fetch(filePath)
                 .then(res => {
                     if (!res.ok) throw new Error("Sintesi non trovata");
                     return res.text();
                 })
                 .then(text => {
-                    const lines = text.split('\n');
-                    let title = "Sintesi";
-                    let contentText = text;
-                    
-                    if (lines[0].startsWith('# ')) {
-                        title = lines[0].substring(2).trim();
-                        contentText = lines.slice(1).join('\n');
+                    const firstHeaderMatch = text.match(/^#\s+(.+)$/m);
+                    if (firstHeaderMatch) {
+                        modalChapterTitle.textContent = firstHeaderMatch[1];
+                    } else {
+                        modalChapterTitle.textContent = chapterTag;
                     }
-                    
-                    modalChapterTitle.textContent = title;
-                    markdownView.innerHTML = marked.parse(contentText);
+                    markdownView.innerHTML = marked.parse(text);
                     modalBodyContent.scrollTop = 0;
-                    progressIndicator.style.width = '0%';
+                    setTimeout(() => {
+                        injectGlossaryTooltips(markdownView);
+                        initializeParagraphs(filePath);
+                        initializeNotepad(filePath);
+                    }, 50);
                 })
                 .catch(err => {
                     modalChapterTitle.textContent = "Errore di Caricamento";
@@ -620,8 +618,15 @@
         function closeSummary() {
             modal.classList.remove('open');
             document.body.style.overflow = '';
-            saveNotes();
+            const palette = document.getElementById('highlight-palette');
+            if (palette) palette.style.display = 'none';
         }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeSummary();
+            }
+        });
 
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('open')) {
@@ -637,38 +642,143 @@
             }
         });
 
-        // Notes Localstorage
-        let currentChapterKey = '';
-        const notesTextarea = document.getElementById('notes-textarea');
-        const notesStatus = document.getElementById('notes-status');
-        let saveTimeout = null;
-
-        function initNotes() {
-            const savedNote = localStorage.getItem(currentChapterKey) || '';
-            notesTextarea.value = savedNote;
-            notesStatus.textContent = "Nessuna modifica non salvata.";
-            notesStatus.style.color = "var(--text-muted)";
-        }
-
-        function saveNotes() {
-            if (!currentChapterKey) return;
-            localStorage.setItem(currentChapterKey, notesTextarea.value);
-            notesStatus.textContent = "Appunti salvati localmente!";
-            notesStatus.style.color = "var(--accent-filosofia)";
-            setTimeout(() => {
-                if (notesStatus.textContent === "Appunti salvati localmente!") {
-                    notesStatus.textContent = "Nessuna modifica.";
-                    notesStatus.style.color = "var(--text-muted)";
+        // GLOSSARY TOOLTIPS INJECTOR
+        function injectGlossaryTooltips(container) {
+            if (!window.glossaryDatabase) return;
+            const terms = Object.keys(window.glossaryDatabase);
+            if (terms.length === 0) return;
+            terms.sort((a, b) => b.length - a.length);
+            
+            const walker = document.createTreeWalker(
+                container,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(node) {
+                        const parent = node.parentNode.tagName.toLowerCase();
+                        if (parent === 'a' || parent === 'code' || parent === 'pre' || parent === 'button' || parent === 'script' || parent === 'style' || (parent === 'span' && node.parentNode.classList.contains('glossary-term'))) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
                 }
-            }, 2000);
+            );
+            
+            const nodesToReplace = [];
+            while (walker.nextNode()) {
+                nodesToReplace.push(walker.currentNode);
+            }
+            
+            nodesToReplace.forEach(node => {
+                let text = node.nodeValue;
+                for (const term of terms) {
+                    const termMeta = window.glossaryDatabase[term];
+                    const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                    let regexStr = '\\b(' + escapedTerm + ')(i|e|a|o)?\\b';
+                    if (term.includes("'") || term.includes(" ")) {
+                        regexStr = '(' + escapedTerm + ')';
+                    }
+                    const regex = new RegExp(regexStr, 'gi');
+                    
+                    if (regex.test(text)) {
+                        const span = document.createElement('span');
+                        span.innerHTML = text.replace(regex, (match) => {
+                            return `<span class="glossary-term" data-term="${term}">${match}<span class="glossary-tooltip"><strong>${termMeta.term}</strong>: ${termMeta.definition}</span></span>`;
+                        });
+                        node.parentNode.replaceChild(span, node);
+                        break; 
+                    }
+                }
+            });
         }
 
-        notesTextarea.addEventListener('input', () => {
-            notesStatus.textContent = "Modifiche in corso...";
-            notesStatus.style.color = "var(--accent-filosofia)";
-            clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(saveNotes, 1000);
+        // PARAGRAPH HIGHLIGHTS
+        let activeParagraphIndex = -1;
+        let activeFilePath = '';
+
+        function initializeParagraphs(filePath) {
+            activeFilePath = filePath;
+            const paragraphs = markdownView.querySelectorAll('p');
+            const palette = document.getElementById('highlight-palette');
+
+            paragraphs.forEach((p, index) => {
+                const savedColor = localStorage.getItem(`highlight-${filePath}-${index}`);
+                if (savedColor) {
+                    p.className = `highlighted-${savedColor}`;
+                }
+
+                p.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    activeParagraphIndex = index;
+                    
+                    const pRect = p.getBoundingClientRect();
+                    const bodyRect = document.body.getBoundingClientRect();
+                    
+                    const top = pRect.top - bodyRect.top - 40;
+                    const left = pRect.left + (pRect.width / 2) - 60;
+                    
+                    palette.style.top = `${top}px`;
+                    palette.style.left = `${left}px`;
+                    palette.style.display = 'flex';
+                });
+            });
+        }
+
+        function applyHighlightColor(color) {
+            const palette = document.getElementById('highlight-palette');
+            palette.style.display = 'none';
+
+            if (activeParagraphIndex === -1 || !activeFilePath) return;
+
+            const paragraphs = markdownView.querySelectorAll('p');
+            const p = paragraphs[activeParagraphIndex];
+
+            if (color === 'clear') {
+                p.className = '';
+                localStorage.removeItem(`highlight-${activeFilePath}-${activeParagraphIndex}`);
+            } else {
+                p.className = `highlighted-${color}`;
+                localStorage.setItem(`highlight-${activeFilePath}-${activeParagraphIndex}`, color);
+            }
+
+            activeParagraphIndex = -1;
+        }
+
+        document.addEventListener('click', (e) => {
+            const palette = document.getElementById('highlight-palette');
+            if (palette && !palette.contains(e.target)) {
+                palette.style.display = 'none';
+            }
         });
+
+        // STUDY NOTEPAD INITIALIZER
+        let notesTimeout = null;
+
+        function initializeNotepad(filePath) {
+            const textarea = document.getElementById('notes-textarea');
+            const status = document.getElementById('notes-status');
+            
+            const savedNotes = localStorage.getItem(`notes-${filePath}`);
+            textarea.value = savedNotes || '';
+            status.textContent = "Nessuna modifica.";
+
+            textarea.oninput = () => {
+                if (typeof LexCore !== 'undefined' && LexCore.trackNoteTaken) {
+                    LexCore.trackNoteTaken();
+                } 
+                status.textContent = "Salvataggio...";
+                clearTimeout(notesTimeout);
+                
+                notesTimeout = setTimeout(() => {
+                    try {
+                        localStorage.setItem(`notes-${filePath}`, textarea.value);
+                        status.textContent = "Modifiche salvate.";
+                    } catch (err) {
+                        status.textContent = "Errore salvataggio.";
+                        console.error(err);
+                    }
+                }, 600);
+            };
+        }
 
         // Deep linking (?open=summaries/capX_....md)
         document.addEventListener('DOMContentLoaded', () => {
@@ -690,5 +800,15 @@
             }
         });
     </script>
+
+    <!-- Floating Paragraph Highlighter Palette -->
+    <div id="highlight-palette" class="highlight-palette" style="display: none;">
+        <button class="palette-color-btn color-yellow" onclick="applyHighlightColor('yellow')" title="Evidenzia in Giallo"></button>
+        <button class="palette-color-btn color-green" onclick="applyHighlightColor('green')" title="Evidenzia in Verde"></button>
+        <button class="palette-color-btn color-red" onclick="applyHighlightColor('red')" title="Evidenzia in Rosso"></button>
+        <button class="palette-color-btn color-clear" onclick="applyHighlightColor('clear')" title="Rimuovi Evidenziazione">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
 </body>
 </html>

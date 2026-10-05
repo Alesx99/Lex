@@ -375,24 +375,24 @@ const glossaryDatabase = {
         definition: "Principio primo e indubitabile della metafisica cartesiana: nell'atto stesso di dubitare e pensare, l'io coglie intuitivamente con evidenza assoluta la certezza della propria esistenza come sostanza pensante (res cogitans).",
         domain: "filosofia"
     },
-    "res_cogitans": {
+    "res cogitans": {
         term: "Res Cogitans",
         definition: "La sostanza incorporea, inestesa, indivisibile, libera e autocosciente che costituisce l'essenza dell'anima razionale nella filosofia di René Descartes.",
         domain: "filosofia"
     },
-    "res_extensa": {
+    "res extensa": {
         term: "Res Extensa",
         definition: "La sostanza corporea e materiale definita unicamente dall'estensione spaziale tridimensionale geometrica, divisibile all'infinito e determinata da rigide leggi meccaniche.",
         domain: "filosofia"
     },
-    "deus_sive_natura": {
+    "deus sive natura": {
         term: "Deus Sive Natura",
         definition: "Celebre formula del monismo panteista di Spinoza che identifica ontologicamente Dio e la Natura: un'unica Sostanza infinita, eterna e increata, causa immanente di tutti i modi finiti.",
         domain: "filosofia"
     },
     "conatus": {
         term: "Conatus Sese Conservandi",
-        definition: "Lo sforzo immanente e naturale con cui ogni singolo ente tende, per quanto è in suo potere, a perseverare indefinitamente nel proprio essere e ad accrescere la propria potenza d'agire (Spinoza).",
+        definition: "Lo sforzo immanente e naturale con cui ogni singolo ente tende, per quanto è in suo potere, a perseverare indefinitamente nel proprio essere e ad accrescere la propria potenza d'agire (Spinoza, Hobbes).",
         domain: "filosofia"
     },
     "monade": {
@@ -400,24 +400,49 @@ const glossaryDatabase = {
         definition: "Sostanza semplice spirituale, immateriale, inestesa e priva di parti teorizzata da Leibniz. Autentico atomo della natura 'senza finestre', centro di forza dotato di percezione e appetizione che rispecchia l'intero universo.",
         domain: "filosofia"
     },
-    "armonia_prestabilita": {
+    "armonia prestabilita": {
         term: "Armonia Prestabilita",
         definition: "Dottrina leibniziana secondo cui la perfetta corrispondenza tra l'anima e il corpo (e tra tutte le monadi del cosmo) è dovuta a una sincronia originaria impressa da Dio all'atto della creazione, come due orologi perfetti.",
         domain: "filosofia"
     },
-    "tabula_rasa": {
+    "tabula rasa": {
         term: "Tabula Rasa",
         definition: "Metafora empirista utilizzata da John Locke nel Saggio sull'intelletto umano: la mente umana alla nascita è un foglio bianco del tutto privo di caratteri o idee innate, che riceve ogni materiale unicamente dall'esperienza (sensazione e riflessione).",
         domain: "filosofia"
     },
-    "esse_est_percipi": {
+    "qualità primarie": {
+        term: "Qualità Primarie",
+        definition: "Proprietà oggettive inseparabili dai corpi materiali (estensione, figura, moto, solidità, numero) che producono nella mente idee conformi alla realtà fisica (Galilei, Locke).",
+        domain: "filosofia"
+    },
+    "qualità secondarie": {
+        term: "Qualità Secondarie",
+        definition: "Poteri dei corpi di produrre sensazioni soggettive nella mente (colori, sapori, suoni, odori) mediante la conformazione microscopica delle loro particelle (Locke).",
+        domain: "filosofia"
+    },
+    "esse est percipi": {
         term: "Esse Est Percipi",
         definition: "Principio fondamentale dell'immaterialismo di George Berkeley: l'esistenza delle cose corporee sensibili coincide interamente con il loro essere percepite da una mente spirituale, negando l'esistenza della materia inerte extracorporea.",
         domain: "filosofia"
     },
-    "forchetta_hume": {
+    "hypotheses non fingo": {
+        term: "Hypotheses Non Fingo",
+        definition: "Celebre formula metodologica di Isaac Newton nei Principia: il rifiuto di inventare congetture metafisiche a priori sulle cause ultime non deducibili induttivamente dai fenomeni osservati.",
+        domain: "filosofia"
+    },
+    "pantokrator": {
+        term: "Pantokrator (Signore dell'Universo)",
+        definition: "Titolo teologico con cui Newton nello Scolio generale designa Dio non come anima immanente del mondo, ma come Sovrano assoluto trascendente che regge e ordina il cosmo.",
+        domain: "filosofia"
+    },
+    "impressioni": {
+        term: "Impressioni (Hume)",
+        definition: "I contenuti mentali dotati del massimo grado di forza e vivacità, generati nel momento esatto in cui percepiamo un oggetto sensibile o proviamo una passione attuale.",
+        domain: "filosofia"
+    },
+    "forchetta di hume": {
         term: "Forchetta di Hume (Hume's Fork)",
-        definition: "Bipartizione gnoseologica introdotta da David Hume tra 'Relazioni tra idee' (verità matematiche necessarie a priori basate sul principio di non-contraddizione) e 'Materie di fatto' (conoscenze empiriche contingenti a posteriori, il cui contrario è sempre possibile).",
+        definition: "Bipartizione gnoseologica tra 'Relazioni tra idee' (verità matematiche necessarie a priori basate sul principio di non-contraddizione) e 'Materie di fatto' (conoscenze empiriche contingenti a posteriori, il cui contrario è sempre logicamente possibile).",
         domain: "filosofia"
     },
     "leviatano": {
@@ -425,24 +450,44 @@ const glossaryDatabase = {
         definition: "Metafora biblica con cui Thomas Hobbes designa lo Stato sovrano: il 'dio mortale' al quale i sudditi hanno ceduto irrevocabilmente tutti i propri diritti naturali nello stato di natura in cambio della pace e della protezione della vita.",
         domain: "filosofia"
     },
-    "verum_factum": {
-        term: "Verum-Factum (Vico)",
-        definition: "Principio gnoseologico formulato da Giambattista Vico: 'Verum et factum reciprocantur seu convertuntur' (il vero e il fatto si convertono l'uno nell'altro). L'uomo può conoscere scientificamente solo ciò che egli stesso produce, rendendo la storia umana pienamente intelligibile.",
+    "stato di natura": {
+        term: "Stato di Natura",
+        definition: "Condizione pre-politica originaria ipotizzata dai giusnaturalisti: guerra di tutti contro tutti per Hobbes; stato di pace regolato da diritti naturali per Locke; condizione di innocenza prerazionale per Rousseau.",
         domain: "filosofia"
     },
-    "volonta_generale": {
+    "verum factum": {
+        term: "Verum-Factum (Vico)",
+        definition: "Principio gnoseologico formulato da Giambattista Vico: 'Verum et factum reciprocantur seu convertuntur' (il vero e il fatto si convertono l'uno nell'altro). L'uomo può conoscere scientificamente solo ciò che egli stesso produce, rendendo la storia umana l'autentica scienza dell'uomo.",
+        domain: "filosofia"
+    },
+    "volontà generale": {
         term: "Volontà Generale (Rousseau)",
         definition: "La volontà del corpo politico sovrano unitario nel Contratto Sociale di Rousseau, distinta dalla mera somma degli interessi egoistici privati (volontà di tutti) e orientata esclusivamente al bene comune e all'utilità pubblica.",
         domain: "filosofia"
     },
-    "imperativo_categorico": {
-        term: "Imperativo Categorico",
-        definition: "La legge morale formale e incondizionata dettata dalla ragion pura pratica di Immanuel Kant ('Devi perché devi'), che impone di agire unicamente secondo massime che possano valere contemporaneamente come princìpi di una legislazione universale.",
+    "rivoluzione copernicana": {
+        term: "Rivoluzione Copernicana (Kant)",
+        definition: "L'inversione di prospettiva introdotta da Kant nella teoria della conoscenza: non è il soggetto che si adegua passivamente agli oggetti esterni, ma sono gli oggetti fenomenici che devono conformarsi alle forme a priori della mente umana.",
+        domain: "filosofia"
+    },
+    "giudizio sintetico a priori": {
+        term: "Giudizio Sintetico a Priori",
+        definition: "Giudizio fecondo ed estensivo del sapere, ma al tempo stesso universale e necessario in quanto fondato sulle forme pure a priori della sensibilità e dell'intelletto (il fondamento della scienza per Kant).",
+        domain: "filosofia"
+    },
+    "io penso": {
+        term: "Io Penso (Appercezione Trascendentale)",
+        definition: "La suprema unità sintetica originaria dell'autocoscienza che unifica il molteplice sensibile mediante le categorie, costituendo il legislatore trascendentale della natura in Kant.",
         domain: "filosofia"
     },
     "noumeno": {
         term: "Noumeno (Cosa in sé)",
         definition: "Nella filosofia critica kantiana, la realtà considerata in sé stessa, indipendentemente dalle forme pure a priori della sensibilità e dell'intelletto umano. Concetto-limite (Grenzbegriff) razionale, pensabile ma non conoscibile scientificamente.",
+        domain: "filosofia"
+    },
+    "imperativo categorico": {
+        term: "Imperativo Categorico",
+        definition: "La legge morale formale e incondizionata dettata dalla ragion pura pratica di Immanuel Kant ('Devi perché devi'), che impone di agire unicamente secondo massime che possano valere contemporaneamente come princìpi di una legislazione universale.",
         domain: "filosofia"
     },
     "sublime": {
