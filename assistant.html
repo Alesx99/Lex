@@ -682,6 +682,19 @@
             cap16_kant: "summaries/cap16_kant.md"
         };
 
+        const storiaContemporaneaChapterLinks = {
+            storia_contemp_mod1: "summaries/cap1.md",
+            storia_contemp_mod2: "summaries/cap8.md",
+            storia_contemp_mod3: "summaries/cap13.md",
+            storia_contemp_mod4: "summaries/cap20.md",
+            storia_contemp_mod5: "summaries/cap24.md",
+            storia_contemp_mod6: "summaries/cap29.md",
+            storia_contemp_mix: "summaries/cap1.md"
+        };
+        for (let i = 1; i <= 31; i++) {
+            storiaContemporaneaChapterLinks[`cap${i}`] = `summaries/cap${i}.md`;
+        }
+
         // Knowledge Base flat paragraphs
         let knowledgeBase = [];
         let isKbReady = false;
@@ -945,6 +958,14 @@
                 subject: 'filosofia',
                 chapterKey: 'filosofia_completo',
                 chapterTitle: 'Storia della Filosofia (Manuale Completo)'
+            });
+
+            // 5. Storia Contemporanea
+            filesToLoad.push({
+                url: "knowledge_base/storia_contemporanea/storia_contemporanea_completo.md",
+                subject: 'storia_contemporanea',
+                chapterKey: 'storia_contemporanea_completo',
+                chapterTitle: 'Storia Contemporanea (Manuale Completo)'
             });
 
             const total = filesToLoad.length;
@@ -1539,6 +1560,9 @@
             } else if (chapterKey === 'filosofia_completo') {
                 const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
                 return `knowledge_base/filosofia/filosofia_completo.md${anchor}`;
+            } else if (chapterKey === 'storia_contemporanea_completo') {
+                const anchor = sectionTitle ? '#' + encodeURIComponent(sectionTitle.replace(/\s+/g, '-')) : '';
+                return `knowledge_base/storia_contemporanea/storia_contemporanea_completo.md${anchor}`;
             }
 
             if (subject === 'diritto') {
@@ -1558,6 +1582,9 @@
             } else if (subject === 'filosofia') {
                 const rel = filosofiaChapterLinks[chapterKey];
                 return rel ? `filosofia/index.html?open=${rel}` : `filosofia/index.html`;
+            } else if (subject === 'storia_contemporanea') {
+                const rel = storiaContemporaneaChapterLinks[chapterKey] || (chapterKey && chapterKey.startsWith('cap') ? `summaries/${chapterKey}.md` : null);
+                return rel ? `storia_contemporanea/index.html?open=${rel}` : `storia_contemporanea/index.html`;
             } else {
                 const rel = arteChapterLinks[chapterKey];
                 return rel ? `storia_arte/index.html?open=${rel}` : `storia_arte/index.html`;

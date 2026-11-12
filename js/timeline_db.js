@@ -1185,6 +1185,199 @@ const timelineDatabase = [
         description: "Kant unifica natura determinata e libertà morale attraverso il giudizio riflettente, analizzando il Bello disinteressato, il Sublime e la teleologia.",
         link: "filosofia/index.html?open=summaries/cap16_kant.md"
     }
+,
+
+    // --- STORIA CONTEMPORANEA (Sabbatucci - Vidotto) ---
+    {
+        id: "stoc_1848",
+        year: 1848,
+        title: "La Primavera dei Popoli e lo Statuto Albertino",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "L'ondata rivoluzionaria travolge l'Europa: a Parigi cade la monarchia, a Milano le Cinque Giornate cacciano Radetzky e Carlo Alberto concede lo Statuto Albertino.",
+        link: "storia_contemporanea/index.html?open=summaries/cap1.md"
+    },
+    {
+        id: "stoc_1859",
+        year: 1859,
+        title: "Seconda Guerra d'Indipendenza Italiana",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "L'alleanza franco-piemontese di Plombières porta alle battaglie di Magenta e Solferino, all'annessione della Lombardia e alle insurrezioni nell'Italia centrale.",
+        link: "storia_contemporanea/index.html?open=summaries/cap3.md"
+    },
+    {
+        id: "stoc_1861",
+        year: 1861,
+        title: "Proclamazione del Regno d'Italia",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "In seguito alla spedizione dei Mille di Garibaldi e ai plebisciti, il 17 marzo 1861 il Parlamento di Torino proclama Vittorio Emanuele II re d'Italia.",
+        link: "storia_contemporanea/index.html?open=summaries/cap3.md"
+    },
+    {
+        id: "stoc_1870",
+        year: 1870,
+        title: "Disfatta di Sedan e Breccia di Porta Pia",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "La Prussia sconfigge Napoleone III a Sedan proclamando l'Impero tedesco a Versailles; l'Italia ne approfitta per liberare Roma attraverso la Breccia di Porta Pia.",
+        link: "storia_contemporanea/index.html?open=summaries/cap4.md"
+    },
+    {
+        id: "stoc_1884",
+        year: 1884,
+        title: "Conferenza di Berlino sulla spartizione dell'Africa",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Bismarck riunisce le potenze europee a Berlino fissando le regole per la spartizione coloniale del continente africano sul principio dell'occupazione effettiva.",
+        link: "storia_contemporanea/index.html?open=summaries/cap7.md"
+    },
+    {
+        id: "stoc_1891",
+        year: 1891,
+        title: "Promulgazione dell'enciclica Rerum Novarum",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Papa Leone XIII affronta la questione operaia moderna, difendendo la dignità del lavoro e incoraggiando la formazione di associazioni sindacali cattoliche.",
+        link: "storia_contemporanea/index.html?open=summaries/cap9.md"
+    },
+    {
+        id: "stoc_1911",
+        year: 1911,
+        title: "Guerra di Libia e suffragio universale giolittiano",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "L'Italia giolittiana intraprende la conquista coloniale della Libia contro l'Impero ottomano e approva il suffragio universale maschile.",
+        link: "storia_contemporanea/index.html?open=summaries/cap12.md"
+    },
+    {
+        id: "stoc_1914",
+        year: 1914,
+        title: "Attentato di Sarajevo e scoppio della Prima Guerra Mondiale",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "L'assassinio dell'arciduca Francesco Ferdinando a Sarajevo innesca il meccanismo delle alleanze militari europee, precipitando il continente nel primo conflitto mondiale.",
+        link: "storia_contemporanea/index.html?open=summaries/cap13.md"
+    },
+    {
+        id: "stoc_1917",
+        year: 1917,
+        title: "Rivoluzione d'Ottobre in Russia e Tesi di Lenin",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "I bolscevichi guidati da Lenin rovesciano il governo provvisorio a Pietrogrado, instaurano il potere dei Soviet e firmano la pace separata di Brest-Litovsk.",
+        link: "storia_contemporanea/index.html?open=summaries/cap14.md"
+    },
+    {
+        id: "stoc_1922",
+        year: 1922,
+        title: "Marcia su Roma e avvento del fascismo",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Le camicie nere fasciste marciano sulla capitale; il re Vittorio Emanuele III rifiuta lo stato d'assedio e affida a Benito Mussolini l'incarico di formare il governo.",
+        link: "storia_contemporanea/index.html?open=summaries/cap16.md"
+    },
+    {
+        id: "stoc_1929",
+        year: 1929,
+        title: "Crollo di Wall Street e Patti Lateranensi",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Il 'giovedì nero' di Wall Street scatena la Grande Depressione economica mondiale; in Italia lo Stato e la Santa Sede firmano la storica conciliazione dei Patti Lateranensi.",
+        link: "storia_contemporanea/index.html?open=summaries/cap17.md"
+    },
+    {
+        id: "stoc_1933",
+        year: 1933,
+        title: "Hitler nominato Cancelliere e New Deal negli USA",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Sull'onda della crisi economica Hitler assume il potere in Germania avviando la dittatura nazista; negli USA Franklin D. Roosevelt vara le riforme sociali ed economiche del New Deal.",
+        link: "storia_contemporanea/index.html?open=summaries/cap18.md"
+    },
+    {
+        id: "stoc_1939",
+        year: 1939,
+        title: "Invasione della Polonia e scoppio della Seconda Guerra Mondiale",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Dopo il patto Molotov-Ribbentrop con l'URSS, le truppe tedesche invadono la Polonia il 1° settembre 1939; Francia e Gran Bretagna dichiarano guerra alla Germania.",
+        link: "storia_contemporanea/index.html?open=summaries/cap21.md"
+    },
+    {
+        id: "stoc_1943",
+        year: 1943,
+        title: "L'8 Settembre e l'avvio della Resistenza in Italia",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Dopo la caduta di Mussolini, l'annuncio dell'armistizio con gli Alleati provoca lo sbandamento dell'esercito e la nascita del Comitato di Liberazione Nazionale (CLN) contro l'occupante nazista.",
+        link: "storia_contemporanea/index.html?open=summaries/cap21.md"
+    },
+    {
+        id: "stoc_1946",
+        year: 1946,
+        title: "Referendum del 2 Giugno: Nascita della Repubblica Italiana",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Nelle prime elezioni a suffragio universale anche femminile gli italiani scelgono la Repubblica ed eleggono l'Assemblea Costituente incaricata di redigere la Carta Costituzionale.",
+        link: "storia_contemporanea/index.html?open=summaries/cap24.md"
+    },
+    {
+        id: "stoc_1962",
+        year: 1962,
+        title: "Crisi dei Missili di Cuba e Concilio Vaticano II",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Il confronto USA-URSS a Cuba porta il mondo a un passo dalla guerra nucleare; papa Giovanni XXIII apre a Roma il Concilio ecumenico Vaticano II per rinnovare la Chiesa.",
+        link: "storia_contemporanea/index.html?open=summaries/cap25.md"
+    },
+    {
+        id: "stoc_1968",
+        year: 1968,
+        title: "La contestazione del '68 e la Primavera di Praga",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "I movimenti studenteschi e operai scuotono l'Occidente contestando il modello capitalistico e autoritario; a Praga i carri armati del Patto di Varsavia soffocano il 'socialismo dal volto umano'.",
+        link: "storia_contemporanea/index.html?open=summaries/cap26.md"
+    },
+    {
+        id: "stoc_1978",
+        year: 1978,
+        title: "Sequestro e uccisione di Aldo Moro",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "L'agguato delle Brigate Rosse al presidente della DC Aldo Moro culmina nel suo assassinio dopo 55 giorni, infliggendo un colpo letale alla politica di solidarietà nazionale tra DC e PCI.",
+        link: "storia_contemporanea/index.html?open=summaries/cap28.md"
+    },
+    {
+        id: "stoc_1989",
+        year: 1989,
+        title: "Caduta del Muro di Berlino e crollo dei regimi comunisti",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Il 9 novembre 1989 crolla il Muro di Berlino; l'evento segna la fine della divisione dell'Europa e anticipa la riunificazione tedesca e la disgregazione dell'URSS.",
+        link: "storia_contemporanea/index.html?open=summaries/cap27.md"
+    },
+    {
+        id: "stoc_1992",
+        year: 1992,
+        title: "Trattato di Maastricht e inchiesta Mani Pulite",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "I paesi CEE firmano a Maastricht il trattato fondativo dell'Unione Europea e della moneta unica; in Italia l'inchiesta giudiziaria di Tangentopoli spazza via i partiti della Prima Repubblica.",
+        link: "storia_contemporanea/index.html?open=summaries/cap30.md"
+    },
+    {
+        id: "stoc_2001",
+        year: 2001,
+        title: "Attentati dell'11 Settembre 2001 negli Stati Uniti",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Gli attacchi terroristici suicidi contro il World Trade Center e il Pentagono causano tremila morti, inaugurando l'era della guerra globale al terrorismo di George W. Bush.",
+        link: "storia_contemporanea/index.html?open=summaries/cap30.md"
+    }
+
 ];
 
 // Export to window object for browser access

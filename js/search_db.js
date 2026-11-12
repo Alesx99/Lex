@@ -720,13 +720,253 @@ const searchDatabase = [
         keywords: "inglese lingua accademico vocabolario abstract museologia restauro english art heritage",
         navPath: "inglese/index.html?open=summaries/cap1.md"
     },
-    {
-        title: "Storia Contemporanea Cap. I: Introduzione al Corso",
+        {
+        title: "Storia Contemporanea Cap. I: Le rivoluzioni del 1848",
         subject: "storia_contemporanea",
         chapterTag: "Capitolo I",
-        description: "Le vicende storiche globali dal Congresso di Vienna ad oggi, società di massa, totalitarismi, guerra fredda e fonti moderne.",
-        keywords: "storia contemporanea novecento risorgimento totalitarismo guerra fredda masse globalizzazione",
+        description: "La crisi rivoluzionaria europea del 1848, la caduta della monarchia orleanista in Francia, le Cinque Giornate di Milano, la Repubblica romana e la prima guerra di indipendenza.",
+        keywords: "storia contemporanea le rivoluzioni del 1848 1848 quarantotto parigi vienna milano venezia carlo alberto statuto albertino repubblica romana mazzini garibaldi kossuth",
         navPath: "storia_contemporanea/index.html?open=summaries/cap1.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. II: Società borghese e movimento operaio",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo II",
+        description: "L'ascesa della borghesia europea, il positivismo scientifico di Darwin, lo sviluppo economico e ferroviario, Marx e Il Capitale, la Prima Internazionale e l'enciclica Quanta Cura.",
+        keywords: "storia contemporanea società borghese e movimento operaio borghesia positivismo darwin progresso boom ferroviario proletariato urbano marx capitale prima internazionale bakunin pio ix",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap2.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. III: L'unità d'Italia",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo III",
+        description: "La seconda restaurazione, l'esperienza liberale in Piemonte e l'opera di Cavour, la diplomazia di Plombières, la spedizione dei Mille di Garibaldi e la proclamazione del Regno d'Italia.",
+        keywords: "storia contemporanea l'unità d'italia unita italia cavour piemonte garibaldi mille teano plebisciti mazzini solferino san martino lombardia vittorio emanuele ii",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap3.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. IV: L'Europa delle grandi potenze (1850-1890)",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo IV",
+        description: "L'egemonia continentale, la Francia di Napoleone III, la guerra di Crimea, l'ascesa della Prussia e l'unificazione tedesca di Bismarck, Sedan, la Comune di Parigi e la Terza Repubblica.",
+        keywords: "storia contemporanea l'europa delle grandi potenze (1850-1890) bismarck prussia sedan napoleone iii comune parigi germania unificazione terza repubblica crimea potenza alsazia lorena",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap4.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. V: I nuovi mondi: Stati Uniti e Giappone",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo V",
+        description: "Sviluppo e fratture negli USA, la guerra di secessione americana, l'abolizione della schiavitù, e la rivoluzione modernizzatrice della Restaurazione Meiji in Giappone.",
+        keywords: "storia contemporanea i nuovi mondi: stati uniti e giappone stati uniti secessione lincoln guerra civile schiavitu confederati unione giappone meiji modernizzazione samurai tokyo",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap5.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. VI: La seconda rivoluzione industriale",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo VI",
+        description: "La svolta capitalistica di fine Ottocento: concentrazioni industriali (trust, cartelli), dazi protezionistici, acciaio, chimica, elettricità, motore a scoppio e progresso medico.",
+        keywords: "storia contemporanea la seconda rivoluzione industriale seconda rivoluzione industriale acciaio chimica elettricita motore scoppio medicina pasteur protezionismo taylorismo monopoli",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap6.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. VII: Imperialismo e colonialismo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo VII",
+        description: "La febbre coloniale e la spartizione dell'Africa (Scramble for Africa), la Conferenza di Berlino del 1884-85, l'espansione asiatica e la guerra anglo-boera in Sudafrica.",
+        keywords: "storia contemporanea imperialismo e colonialismo imperialismo colonialismo africa spartizione berlino congo fashoda india gran bretagna boeri transvaal cecil rhodes",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap7.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. VIII: Stato e società nell'Italia unita",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo VIII",
+        description: "I problemi dell'unificazione: la Destra storica, l'accentramento prefettizio, il brigantaggio meridionale, Porta Pia, la Sinistra di Depretis, il trasformismo e il colonialismo di Crispi fino ad Adua.",
+        keywords: "storia contemporanea stato e società nell'italia unita italia unita destra storica brigantaggio piemontesizzazione depretis trasformismo crispi triplice alleanza adua fasci siciliani porta pia",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap8.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. IX: Verso la società di massa",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo IX",
+        description: "Istruzione obbligatoria, eserciti di leva, suffragio universale maschile, partiti di massa, sindacati, questione femminile (suffragette), la Seconda Internazionale e la Rerum Novarum.",
+        keywords: "storia contemporanea verso la società di massa societa di massa suffragio universale partiti sindacati cgil femminismo suffragette rerum novarum leone xiii nazionalismo secolarizzazione",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap9.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. X: L'Europa tra due secoli",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo X",
+        description: "Le nuove alleanze (Triplice Intesa e Triplice Alleanza), la Belle Époque e le sue contraddizioni, il caso Dreyfus in Francia, la Germania guglielmina, la Russia del 1905 e le guerre balcaniche.",
+        keywords: "storia contemporanea l'europa tra due secoli belle epoque triplice intesa triplice alleanza guglielmo ii dreyfus russia 1905 domenica sangue soviet duma balcani",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap10.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XI: Imperialismo e rivoluzione extraeuropea",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XI",
+        description: "Il ridimensionamento dell'Europa: la guerra russo-giapponese del 1905, la proclamazione della Repubblica in Cina con Sun Yat-sen e la rivoluzione messicana di Zapata e Villa.",
+        keywords: "storia contemporanea imperialismo e rivoluzione extraeuropea guerra russo giapponese tsushima cina repubblica sun yat-sen messico rivoluzione madero zapata pancho villa roosevelt panama",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap11.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XII: L'Italia giolittiana",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XII",
+        description: "La crisi di fine secolo, il decollo industriale del triangolo economico, il metodo di governo liberale di Giolitti, il Patto Gentiloni con i cattolici e la guerra di Libia (1911-12).",
+        keywords: "storia contemporanea l'italia giolittiana italia giolittiana giolitti riforme suffragio universale patto gentiloni guerra libia turati socialismo cgil mezzogiorno",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap12.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XIII: La prima guerra mondiale",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XIII",
+        description: "Dall'attentato di Sarajevo alle trincee: guerra d'usura, mobilitazione totale del fronte interno, Caporetto, la svolta del 1917, l'intervento USA e i trattati punitivi di Versailles.",
+        keywords: "storia contemporanea la prima guerra mondiale prima guerra mondiale sarajevo trincee gas somme verdun caporetto piave vittorio veneto 1917 wilson quattordici punti versailles",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap13.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XIV: La rivoluzione russa",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XIV",
+        description: "La caduta dello zarismo nel febbraio 1917, Lenin e le Tesi di Aprile, la Rivoluzione d'Ottobre, la guerra civile, il comunismo di guerra, la NEP e la fondazione dell'URSS.",
+        keywords: "storia contemporanea la rivoluzione russa rivoluzione russa lenin bolscevichi soviet tesi aprile rivoluzione ottobre armata rossa trotskij comunismo guerra nep urss stalin",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap14.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XV: L'eredità della grande guerra",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XV",
+        description: "Le trasformazioni sociali postbelliche, l'inflazione monetaria, il biennio rosso europeo, la Repubblica di Weimar, la crisi della Ruhr e gli accordi distensivi di Locarno.",
+        keywords: "storia contemporanea l'eredità della grande guerra eredita grande guerra biennio rosso repubblica weimar iperinflazione ruhr locarno briand stresemann societa nazioni",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap15.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XVI: Il dopoguerra in Italia e l'avvento del fascismo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XVI",
+        description: "La vittoria mutilata, l'impresa fiumana di D'Annunzio, il fascismo agrario e lo squadrismo, la marcia su Roma (1922), il delitto Matteotti, l'Aventino e le leggi fascistissime.",
+        keywords: "storia contemporanea il dopoguerra in italia e l'avvento del fascismo dopoguerra italia vittoria mutilata fiume dannunzio fasci combattimento marcia roma matteotti leggi fascistissime aventino mussolini",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap16.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XVII: La grande crisi: economia e società negli anni '30",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XVII",
+        description: "Il grande crollo di Wall Street del 1929 ('giovedì nero'), la Grande Depressione economica mondiale, Franklin Delano Roosevelt, il New Deal e la teoria economica keynesiana.",
+        keywords: "storia contemporanea la grande crisi: economia e società negli anni '30 grande crisi 1929 wall street crollo borsa roosevelt new deal keynes deficit spending disoccupazione ceto medio gold standard",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap17.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XVIII: L'età dei totalitarismi",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XVIII",
+        description: "La crisi definitiva di Weimar, l'ascesa di Adolf Hitler nel 1933, il Terzo Reich nazista, le leggi razziali di Norimberga, lo stalinismo dei gulag e la guerra civile spagnola.",
+        keywords: "storia contemporanea l'età dei totalitarismi totalitarismo hitler nazismo terzo reich norimberga shoah stalin gulag purghe piani quinquennali spagna franco guernica",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap18.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XIX: L'Italia fascista",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XIX",
+        description: "Il totalitarismo imperfetto: i Patti Lateranensi del 1929, l'inquadramento di massa, la battaglia del grano, lo Stato-imprenditore (IRI), l'invasione dell'Etiopia e le leggi razziali del 1938.",
+        keywords: "storia contemporanea l'italia fascista italia fascista patti lateranensi concordato chiesa iri battagliadelgrano autarchia etiopia impero leggi razziali 1938 consenso",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap19.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XX: Il tramonto del colonialismo. L'Asia e l'America Latina",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XX",
+        description: "La crisi degli imperi europei: Kemal Atatürk e la repubblica laica in Turchia, la resistenza nonviolenta di Gandhi in India, Mao Zedong in Cina e i populismi sudamericani (Vargas, Perón).",
+        keywords: "storia contemporanea il tramonto del colonialismo. l'asia e l'america latina tramonto colonialismo ataturk turchia gandhi india nonviolenza maozedong lunga marcia cina populismo vargas peron america latina",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap20.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXI: La seconda guerra mondiale",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXI",
+        description: "Dall'invasione della Polonia a Pearl Harbor, la battaglia di Stalingrado, l'8 settembre in Italia, la Resistenza partigiana, lo sbarco in Normandia, lo sterminio della Shoah e Hiroshima.",
+        keywords: "storia contemporanea la seconda guerra mondiale seconda guerra mondiale polonia blitzkrieg stalingrado el alamein normandia 8 settembre resistenza cln shoah auschwitz hiroshima bomba atomica",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap21.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXII: Il mondo diviso",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXII",
+        description: "Le conseguenze della guerra, nascita dell'ONU, la cortina di ferro, la Dottrina Truman, il Piano Marshall, la nascita della NATO e del Patto di Varsavia, la guerra di Corea e la destalinizzazione del 1956.",
+        keywords: "storia contemporanea il mondo diviso mondo diviso guerra fredda cortina ferro truman marshall nato patto varsavia cina mao guerra corea 1956 destalinizzazione cee",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap22.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXIII: La decolonizzazione e il Terzo Mondo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXIII",
+        description: "L'indipendenza dell'India e del Pakistan, la nascita di Israele (1948) e i conflitti arabo-israeliani, la crisi di Suez (Nasser), la guerra d'Algeria e il movimento dei non allineati di Bandung.",
+        keywords: "storia contemporanea la decolonizzazione e il terzo mondo decolonizzazione terzo mondo india partizione pakistan israele 1948 suez nasser algeria fln africa nera bandung non allineati",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap23.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXIV: L'Italia dopo il fascismo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXIV",
+        description: "Il referendum istituzionale del 2 giugno 1946 (Repubblica), l'Assemblea Costituente, la Costituzione del 1948, le elezioni del '48 con la vittoria della DC e il centrismo degasperiano.",
+        keywords: "storia contemporanea l'italia dopo il fascismo italia dopoguerra repubblica 2 giugno 1946 costituzione de gasperi togliatti elezioni 1948 centrismo cassa mezzogiorno nato ricostruzione",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap24.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXV: La società del benessere",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXV",
+        description: "Il miracolo economico degli anni '50 e '60, la diffusione dell'automobile e della TV, l'esplosione demografica del baby boom, la contestazione studentesca del 1968 e il Concilio Vaticano II.",
+        keywords: "storia contemporanea la società del benessere societa benessere miracolo economico consumi massa automobile tv baby boom 1968 contestazione gioventu femminismo vaticano ii giovanni xxiii",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap25.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXVI: Distensione e confronto",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXVI",
+        description: "L'età di Kennedy e Kruscev, la crisi missilistica di Cuba (1962), la guerra del Vietnam, la Primavera di Praga del 1968, la guerra del Kippur e lo shock petrolifero mondiale del 1973.",
+        keywords: "storia contemporanea distensione e confronto distensione kennedy kruscev cuba missili vietnam praga dubcek 1968 yom kippur opec crisi petrolifera 1973",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap26.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXVII: Apogeo e crisi del bipolarismo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXVII",
+        description: "Gli anni del riflusso, Ronald Reagan e il confronto con l'URSS, le riforme di Gorbaciov (perestrojka e glasnost), la caduta del Muro di Berlino nel 1989 e la dissoluzione dell'Unione Sovietica.",
+        keywords: "storia contemporanea apogeo e crisi del bipolarismo apogeo crisi bipolarismo reagan gorbaciov perestrojka glasnost muro berlino 1989 crollo urss riunificazione germania tiananmen",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap27.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXVIII: L'Italia dal miracolo alla crisi della Prima Repubblica",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXVIII",
+        description: "Il centrosinistra di Moro, l'autunno caldo del '69, lo Statuto dei Lavoratori, gli anni di piombo e lo stragismo, il compromesso storico di Berlinguer, il sequestro Moro e l'era del pentapartito di Craxi.",
+        keywords: "storia contemporanea l'italia dal miracolo alla crisi della prima repubblica miracolo economico autunno caldo statuto lavoratori terrorismo brigate rosse aldo moro compromesso storico berlinguer craxi pentapartito",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap28.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXIX: La società postindustriale",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXIX",
+        description: "I limiti dello sviluppo (ecologia), la terza rivoluzione industriale (microelettronica e computer), la globalizzazione dei mercati, i flussi migratori planetari e le sfide bioetiche.",
+        keywords: "storia contemporanea la società postindustriale societa postindustriale ecologia rivoluzione elettronica informatica internet globalizzazione migrazioni societa multietnica bioetica",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap29.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXX: Il mondo contemporaneo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXX",
+        description: "La dissoluzione dell'URSS e la Russia di Eltsin e Putin, le guerre etniche nella ex Jugoslavia, il Trattato di Maastricht e l'Unione Europea, gli attentati dell'11 settembre 2001 e le guerre in Afghanistan e Iraq.",
+        keywords: "storia contemporanea il mondo contemporaneo mondo contemporaneo fine urss russia eltsin jugoslavia bosnia maastricht euro unione europea 11 settembre terrorismo al qaeda iraq",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap30.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXXI: La seconda repubblica in Italia",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXXI",
+        description: "L'inchiesta giudiziaria di Tangentopoli (Mani Pulite), il crollo dei partiti storici, la riforma elettorale maggioritaria, la discesa in campo di Silvio Berlusconi nel 1994 e l'avvio del bipolarismo.",
+        keywords: "storia contemporanea la seconda repubblica in italia seconda repubblica tangentopoli mani pulite di pietro referendum maggioritario berlusconi polo liberta ulivo prodi euro 1994 2001",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap31.md"
     },
     {
         title: "Arte Contemporanea Cap. I: Introduzione al Corso",

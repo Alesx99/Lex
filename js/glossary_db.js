@@ -494,6 +494,83 @@ const glossaryDatabase = {
         term: "Sublime (Kant)",
         definition: "Sentimento estetico suscitato nella Critica del Giudizio dalla contemplazione di ciò che è smisuratamente grande (sublime matematico) o infinitamente potente (sublime dinamico) nella natura, risvegliando nell'uomo la coscienza della propria dignità morale soprasensibile.",
         domain: "filosofia"
+    },
+
+    // TERMINI STORICI (STORIA CONTEMPORANEA - SABBATUCCI VIDOTTO)
+    "statuto albertino": {
+        term: "Statuto Albertino",
+        definition: "Costituzione ottriata (concessa dall'alto) promulgata da Carlo Alberto nel 1848 per il Regno di Sardegna, poi estesa nel 1861 a tutto il Regno d'Italia. Istituiva una monarchia costituzionale pura con Senato regio e Camera censitaria.",
+        domain: "storia_contemporanea"
+    },
+    "trasformismo": {
+        term: "Trasformismo",
+        definition: "Prassi parlamentare inaugurata da Agostino Depretis nel 1882 volta a costituire una maggioranza centrista moderata e fluttuante attraverso accordi e compromessi individuali tra Destra e Sinistra storica.",
+        domain: "storia_contemporanea"
+    },
+    "totalitarismo": {
+        term: "Totalitarismo",
+        definition: "Categoria storiografica e politologica (Hannah Arendt) che definisce un regime a partito unico che controlla integralmente lo Stato, la società civile, l'economia, l'informazione e la sfera privata mediante il terrore poliziesco e l'ideologia.",
+        domain: "storia_contemporanea"
+    },
+    "patti lateranensi": {
+        term: "Patti Lateranensi (1929)",
+        definition: "Accordi tra il Regno d'Italia (Mussolini) e la Santa Sede (Pio XI) composti da Trattato (creazione della Città del Vaticano), Convenzione finanziaria e Concordato (cattolicesimo come religione di Stato, validità civile del matrimonio religioso).",
+        domain: "storia_contemporanea"
+    },
+    "guerra fredda": {
+        term: "Guerra Fredda",
+        definition: "Stato di permanente tensione e rivalità geopolitica, ideologica e militare (1947-1989/91) tra i blocchi guidati da Stati Uniti (NATO) e Unione Sovietica (Patto di Varsavia), caratterizzato da deterrenza nucleare e guerre per procura senza scontro armato diretto.",
+        domain: "storia_contemporanea"
+    },
+    "decolonizzazione": {
+        term: "Decolonizzazione",
+        definition: "Processo storico (1945-1975) di progressiva dissoluzione degli imperi coloniali europei (britannico, francese, olandese, portoghese) e di conquista dell'indipendenza politica da parte dei popoli d'Asia e d'Africa.",
+        domain: "storia_contemporanea"
+    },
+    "perestrojka": {
+        term: "Perestrojka",
+        definition: "Parola russa per 'ristrutturazione', programma di riforme economiche e istituzionali introdotto da Michail Gorbačëv a partire dal 1985 per modernizzare il sistema sovietico attraverso una parziale apertura all'iniziativa privata.",
+        domain: "storia_contemporanea"
+    },
+    "glasnost": {
+        term: "Glasnost'",
+        definition: "Termine russo per 'trasparenza' o 'pubblicità', politica inaugurata da Gorbačëv volta a garantire libertà di espressione e informazione, eliminando la censura ideologica sul passato e sul presente sovietico.",
+        domain: "storia_contemporanea"
+    },
+    "welfare state": {
+        term: "Welfare State (Stato Sociale)",
+        definition: "Complesso di politiche pubbliche inaugurato con il Rapporto Beveridge (1942) con cui lo Stato garantisce a tutti i cittadini livelli minimi di reddito, istruzione, sanità, previdenza e assistenza contro i rischi dell'esistenza.",
+        domain: "storia_contemporanea"
+    },
+    "new deal": {
+        term: "New Deal",
+        definition: "Programma di riforme economico-sociali varato dal presidente USA Franklin Delano Roosevelt nel 1933 per contrastare la Grande Crisi del 1929 mediante un massiccio intervento pubblico, lavori pubblici, sussidi e regolamentazione bancaria.",
+        domain: "storia_contemporanea"
+    },
+    "trattato di maastricht": {
+        term: "Trattato di Maastricht (1992)",
+        definition: "Accordo istitutivo dell'Unione Europea che ha sancito i tre pilastri comunitari, la cittadinanza europea e le tappe per l'adozione della moneta unica (Euro) secondo rigidi parametri di convergenza economica.",
+        domain: "storia_contemporanea"
+    },
+    "destra storica": {
+        term: "Destra Storica",
+        definition: "Schieramento politico liberale moderato erede di Cavour (Ricasoli, Minghetti, Sella, Lanza) che ha guidato l'Italia unita dal 1861 al 1876, realizzando l'accentramento amministrativo, il pareggio di bilancio e il completamento dell'Unità con Veneto e Roma.",
+        domain: "storia_contemporanea"
+    },
+    "sinistra storica": {
+        term: "Sinistra Storica",
+        definition: "Forza politica liberale progressista e democratica (Depretis, Crispi, Cairoli) al governo dal 1876, autrice dell'allargamento del suffragio (1882), della legge Coppino sull'istruzione elementare, dell'abolizione della tassa sul macinato e della svolta protezionista.",
+        domain: "storia_contemporanea"
+    },
+    "taylorismo": {
+        term: "Taylorismo (Organizzazione Scientifica del Lavoro)",
+        definition: "Metodo di razionalizzazione del lavoro industriale teorizzato da F.W. Taylor basato sulla scomposizione dei movimenti degli operai in gesti elementari cronometrati e standardizzati, alla base della catena di montaggio fordista.",
+        domain: "storia_contemporanea"
+    },
+    "fordismo": {
+        term: "Fordismo",
+        definition: "Modello produttivo fondato sulla catena di montaggio introdotto da Henry Ford nel 1913, che associa la produzione standardizzata di massa a salari elevati per ampliare il mercato di consumo tra gli stessi lavoratori salariati.",
+        domain: "storia_contemporanea"
     }
 };
 

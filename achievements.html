@@ -2029,6 +2029,19 @@
                     type: "binary"
                 },
                 {
+                    id: "master_storia_contemporanea",
+                    name: "Storico del Mondo Contemporaneo 🌍",
+                    desc: "Ottieni 30 in una simulazione di Storia Contemporanea.",
+                    current: (() => {
+                        try {
+                            const stats = JSON.parse(localStorage.getItem('lex-quiz-stats') || '[]');
+                            return stats.some(s => s.subject === 'storia_contemporanea' && s.score >= 30) ? 1 : 0;
+                        } catch(e){ return 0; }
+                    })(),
+                    target: 1,
+                    type: "binary"
+                },
+                {
                     id: "classicista_accademico",
                     name: "Classicista Accademico 🏛️",
                     desc: "Leggi interamente tutti e 5 i Capitoli Speciali di Letteratura Latina.",

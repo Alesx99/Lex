@@ -5652,6 +5652,530 @@ const quizDatabase = {
             }
         ]
     }
+,
+
+    // ═══════════════════════════════════════════════════════════════
+    // STORIA CONTEMPORANEA (Sabbatucci - Vidotto) — 7 Moduli
+    // ═══════════════════════════════════════════════════════════════
+
+    storia_contemp_mod1: {
+        subject: "storia_contemporanea",
+        chapterTag: "Modulo I",
+        title: "L'Ottocento, Borghesia e Nazioni (Capp. 1-7)",
+        questions: [
+            {
+                question: "Quale elemento distinse in modo inedito i moti rivoluzionari del 1848 rispetto alle precedenti ondate del 1820-21 e del 1830?",
+                options: [
+                    "L'assenza totale di rivendicazioni costituzionali e patriottiche.",
+                    "La massiccia partecipazione dei ceti popolari urbani e l'emergere di obiettivi sociali ed economici accanto a quelli politici.",
+                    "La guida militare esclusiva della classe nobiliare e dell'alto clero.",
+                    "Il sostegno incondizionato della Russia zarista a tutte le repubbliche insorte."
+                ],
+                correctIndex: 1,
+                explanation: "Come sottolineano Sabbatucci e Vidotto, la novità del 1848 risiede nell'irruzione autonoma delle masse operaie e artigiane urbane (es. le giornate di giugno a Parigi) e nell'affiancamento della questione sociale (diritto al lavoro, ateliers nationaux) alle istanze di libertà politica e indipendenza nazionale."
+            },
+            {
+                question: "In che modo l'esperienza della Seconda Repubblica francese si concluse istituzionalmente tra il 1851 e il 1852?",
+                options: [
+                    "Con l'instaurazione di una monarchia borbonica guidata da Enrico V.",
+                    "Con un colpo di Stato militare di Luigi Napoleone Bonaparte, sanzionato da plebisciti che restaurarono l'Impero col nome di Napoleone III.",
+                    "Con la vittoria socialista alle elezioni legislative e l'abolizione della proprietà privata.",
+                    "Con l'invasione austro-prussiana di Parigi e l'occupazione straniera permanente."
+                ],
+                correctIndex: 1,
+                explanation: "Il 2 dicembre 1851 Luigi Napoleone Bonaparte attuò un colpo di Stato militare sciogliendo la Camera. Nel dicembre 1852 un nuovo plebiscito a suffragio universale ratificò la fine della repubblica e la proclamazione del Secondo Impero (Napoleone III)."
+            },
+            {
+                question: "Quale fu la direttrice strategica fondamentale perseguita da Cavour negli anni Cinquanta dell'Ottocento per la causa italiana?",
+                options: [
+                    "Rifiutare qualsiasi legame diplomatico internazionale e puntare esclusivamente su insurrezioni mazziniane segrete.",
+                    "Modernizzare lo Stato sabaudo in senso laico e liberale, inserendo la questione italiana nel concerto delle potenze europee grazie all'alleanza con Napoleone III (Plombières).",
+                    "Cedere l'intero Piemonte all'Austria in cambio del Granducato di Toscana.",
+                    "Promuovere una confederazione di Stati monarchici presieduta stabilmente dal Papa Pio IX."
+                ],
+                correctIndex: 1,
+                explanation: "Cavour modernizzò il Piemonte (sviluppo ferroviario, liberismo, leggi Siccardi per la laicità) e internazionalizzò la questione italiana partecipando alla guerra di Crimea (1855) e stringendo con Napoleone III gli accordi segreti di Plombières (1858) propedeutici alla Seconda Guerra d'Indipendenza (1859)."
+            },
+            {
+                question: "Quale dinamica determinò la sconfitta della Francia di Napoleone III nella guerra franco-prussiana del 1870 e la proclamazione del Secondo Reich tedesco?",
+                options: [
+                    "La disfatta di Sedan del settembre 1870, dove Napoleone III fu fatto prigioniero, portando alla caduta dell'Impero e all'incoronazione di Guglielmo I a Versailles.",
+                    "La ritirata napoleonica dalla Russia e la battaglia di Lipsia.",
+                    "L'intervento della Gran Bretagna a difesa della Prussia che occupò Marsiglia.",
+                    "Una rivolta monarchica a Berlino che costrinse Bismarck a cedere l'Alsazia alla Francia."
+                ],
+                correctIndex: 0,
+                explanation: "La disfatta francese a Sedan (1° settembre 1870) portò alla cattura di Napoleone III, alla proclamazione della Terza Repubblica a Parigi e all'incoronazione di Guglielmo I di Hohenzollern come imperatore tedesco nella Sala degli Specchi di Versailles il 18 gennaio 1871."
+            },
+            {
+                question: "Cosa si intende per 'Restaurazione Meiji' avviata in Giappone nel 1868?",
+                options: [
+                    "Il ritorno all'isolamento feudale (sakoku) e la chiusura ermetica di tutti i porti agli occidentali.",
+                    "Una modernizzazione guidata dall'alto che abolì lo shogunato feudale dei Tokugawa, ripristinò l'autorità imperiale e trasformò rapidamente il Giappone in una potenza industriale e militare moderna.",
+                    "La colonizzazione britannica dell'arcipelago giapponese con l'insediamento di un viceré.",
+                    "La conversione di massa della corte imperiale giapponese al cristianesimo cattolico."
+                ],
+                correctIndex: 1,
+                explanation: "La 'rivoluzione dall'alto' dei Meiji (1868) pose fine al feudalesimo dei samurai e dei daimyo, centralizzò lo Stato, creò un esercito di leva, obbligo scolastico e un apparato industriale avanzato, trasformando il Giappone nella prima potenza moderna dell'Asia."
+            },
+            {
+                question: "Quali furono i settori trainanti della Seconda Rivoluzione Industriale (1870-1914) rispetto alla prima rivoluzione industriale del cotone e del vapore?",
+                options: [
+                    "L'acciaio, l'industria chimica, la generazione e distribuzione dell'elettricità e il motore a scoppio.",
+                    "L'agricoltura di sussistenza, la lana e i mulini a vento.",
+                    "La navigazione a remi e la fusione del bronzo.",
+                    "L'estrazione artigianale del carbone e l'artigianato tessile a domicilio."
+                ],
+                correctIndex: 0,
+                explanation: "La Seconda Rivoluzione Industriale fu caratterizzata dall'impiego su vasta scala dell'acciaio (processi Bessemer e Martin-Siemens), dallo sviluppo della chimica organica, farmaceutica e dei coloranti, dalle scoperte dell'elettromagnetismo (dinamo, lampadina di Edison) e dall'invenzione del motore a combustione interna."
+            }
+        ]
+    },
+
+    storia_contemp_mod2: {
+        subject: "storia_contemporanea",
+        chapterTag: "Modulo II",
+        title: "L'Italia Unita, la Società di Massa e l'Età Giolittiana (Capp. 8-12)",
+        questions: [
+            {
+                question: "Quale orientamento scelse la Destra Storica per l'organizzazione amministrativa del neonato Regno d'Italia (1861)?",
+                options: [
+                    "Un modello federale con ampie autonomie legislative concesse alle singole regioni.",
+                    "Un modello fortemente accentrato ('piemontesizzazione'), basato sull'estensione dello Statuto Albertino e sull'istituzione dei prefetti come rappresentanti del potere esecutivo centrale.",
+                    "L'autogestione comunale affidata a corporazioni sindacali.",
+                    "Il mantenimento dei codici legislativi borbonici ed asburgici nei rispettivi territori."
+                ],
+                correctIndex: 1,
+                explanation: "Temendo le forze centrifughe e l'esplosione del brigantaggio meridionale, la Destra Storica optò per un accentramento rigoroso (legge Lanza del 1865), estendendo a tutta la penisola le leggi piemontesi e concentrando l'ordine pubblico nella figura del prefetto."
+            },
+            {
+                question: "Cosa sanciva il principio del 'trasformismo' inaugurato da Agostino Depretis nel 1882?",
+                options: [
+                    "La trasformazione dell'Italia da monarchia a repubblica parlamentare.",
+                    "La convergenza parlamentare tra le ali moderate di Destra e Sinistra attorno a un grande centro ministeriale, isolando le opposizioni radicali ed estreme.",
+                    "L'obbligo per i parlamentari di cambiare partito a ogni sessione di bilancio.",
+                    "La trasformazione dell'esercito regio in milizia volontaria territoriale."
+                ],
+                correctIndex: 1,
+                explanation: "Depretis teorizzò e praticò l'accordo parlamentare tra liberali progressisti e moderati della Destra per garantire stabili maggioranze governative a scapito delle distinzioni programmatiche tradizionali, inaugurando una prassi centrista definita 'trasformismo'."
+            },
+            {
+                question: "Quale grave sconfitta militare pose bruscamente fine nel 1896 alla carriera politica e alle ambizioni imperialiste di Francesco Crispi?",
+                options: [
+                    "La battaglia di Custoza contro l'Austria.",
+                    "La disfatta di Adua in Etiopia, dove l'esercito italiano fu travolto dalle forze del negus Menelik.",
+                    "La battaglia navale di Lissa nell'Adriatico.",
+                    "La sconfitta di Dogali in Libia."
+                ],
+                correctIndex: 1,
+                explanation: "Il 1° marzo 1896 l'esercito italiano subì una catastrofica sconfitta ad Adua contro le truppe etiopiche del negus Menelik (quasi 7.000 soldati italiani caduti). L'eco della disfatta provocò violente manifestazioni in tutta Italia e costrinse Crispi alle dimissioni definitive."
+            },
+            {
+                question: "Quale documento pontificio, promulgato da papa Leone XIII nel 1891, segnò l'ingresso ufficiale della Chiesa cattolica nell'analisi della questione operaia moderna?",
+                options: [
+                    "Il Syllabus dei principali errori dell'età nostra.",
+                    "L'enciclica Rerum Novarum, che condannava il socialismo ma difendeva la dignità del salario operaio e incoraggiava la nascita di associazioni cattoliche dei lavoratori.",
+                    "I Patti Lateranensi.",
+                    "La bolla Unam Sanctam."
+                ],
+                correctIndex: 1,
+                explanation: "Con la Rerum Novarum (1891), Leone XIII rifiutò sia la lotta di classe marxista sia l'individualismo liberista senza regole, riaffermando la concordia tra le classi, i doveri dei padroni sul giusto salario e legittimando l'associazionismo sindacale di ispirazione cristiana."
+            },
+            {
+                question: "Quale fu la caratteristica fondamentale del 'metodo giolittiano' nella gestione dei conflitti sindacali nei primi anni del Novecento?",
+                options: [
+                    "L'intervento sistematico dell'esercito per reprimere duramente qualsiasi sciopero economico o manifestazione salariale.",
+                    "La neutralità del governo nei conflitti di lavoro strettamente economici tra capitale e lavoro, lasciando che le parti contrattassero liberamente e favorendo l'aumento dei salari.",
+                    "L'esproprio immediato di tutte le fabbriche private e la loro statalizzazione.",
+                    "L'abolizione delle Camere del Lavoro e della CGIL."
+                ],
+                correctIndex: 1,
+                explanation: "Giovanni Giolitti sostenne che lo Stato liberale non doveva parteggiare per gli industriali reprimendo gli scioperi economici, bensì mantenersi neutrale, riconoscendo la legittimità delle rivendicazioni salariali che aumentavano il potere d'acquisto delle masse e allargavano la base democratica dello Stato."
+            },
+            {
+                question: "Cosa stabiliva l'accordo politico noto come 'Patto Gentiloni', stipulato in occasione delle prime elezioni a suffragio universale maschile in Italia nel 1913?",
+                options: [
+                    "La rinuncia della massoneria al controllo delle logge parlamentari.",
+                    "Un accordo segreto tra i candidati liberali giolittiani e l'elettorato cattolico guidato dal conte Gentiloni, in cui i cattolici votavano i liberali che si impegnavano a non approvare leggi anticlericali o sul divorzio.",
+                    "L'adesione formale del Partito Socialista al governo di coalizione.",
+                    "La cessione di Trieste e Trento all'Italia da parte dell'Austria."
+                ],
+                correctIndex: 1,
+                explanation: "Il Patto Gentiloni (1913) consentì il superamento definitivo del Non Expedit: i cattolici votarono i candidati liberali moderati per sbarrare la strada ai socialisti, in cambio dell'impegno di questi ultimi a salvaguardare l'insegnamento religioso e a respingere il divorzio."
+            }
+        ]
+    },
+
+    storia_contemp_mod3: {
+        subject: "storia_contemporanea",
+        chapterTag: "Modulo III",
+        title: "La Grande Guerra, la Rivoluzione Russa e i Totalitarismi (Capp. 13-19)",
+        questions: [
+            {
+                question: "Per quale motivo la Prima Guerra Mondiale, pianificata dagli stati maggiori come una rapida 'guerra di movimento', si trasformò sul fronte occidentale in una logorante 'guerra di usura'?",
+                options: [
+                    "Perché la cavalleria pesante sconfisse rapidamente tutte le linee nemiche.",
+                    "Perché la potenza di fuoco delle nuove armi difensive (mitragliatrici, artiglieria pesante, reticolati di filo spinato) prevalse nettamente sulle capacità offensive, costringendo milioni di soldati a rintanarsi nelle trincee.",
+                    "A causa di un trattato di non belligeranza firmato a Natale 1914 tra soldati francesi e tedeschi che fermò ogni combattimento.",
+                    "Perché entrambi gli schieramenti decisero di combattere esclusivamente battaglie aeree senza fanteria."
+                ],
+                correctIndex: 1,
+                explanation: "Dopo la battaglia della Marna (settembre 1914), il fallimento del piano Schlieffen tedesco congelò il fronte in una linea ininterrotta di trincee dalla Manica alla Svizzera, inaugurando una logorante guerra d'usura in cui la difesa dominava sistematicamente sull'attacco."
+            },
+            {
+                question: "Cosa contenevano le celebri 'Tesi di aprile' esposte da Lenin al suo rientro a Pietrogrado nel 1917?",
+                options: [
+                    "L'appoggio incondizionato al governo provvisorio borghese di Kerenskij e la prosecuzione della guerra a oltranza.",
+                    "La formula 'Tutto il potere ai Soviet', la rottura immediata col governo provvisorio, la fine immediata della guerra imperialista e la terra ai contadini senza passare per una fase capitalistica borghese.",
+                    "La proposta di restaurare lo zarismo sotto una monarchia costituzionale retta dai menscevichi.",
+                    "L'alleanza diplomatica ed economica permanente con gli Stati Uniti d'America."
+                ],
+                correctIndex: 1,
+                explanation: "Nelle Tesi di aprile Lenin rovesciò l'ortodossia marxista tradizionale sostenendo che in Russia era possibile passare direttamente dalla rivoluzione 'borghese' di febbraio alla dittatura del proletariato, concentrando il potere nei Soviet e uscendo subito dalla guerra (Pace di Brest-Litovsk)."
+            },
+            {
+                question: "Quale evento storico del 1924 rappresentò il momento di massima crisi morale e politica del governo Mussolini, prima della svolta dittatoriale?",
+                options: [
+                    "Il delitto Matteotti, cioè il rapimento e l'assassinio del deputato socialista Giacomo Matteotti che aveva denunciato alla Camera le violenze e i brogli fascisti.",
+                    "La sconfitta militare in Libia contro le truppe senussite.",
+                    "Lo sciopero generale proclamato dalla Confederazione Generale del Lavoro nel 1920.",
+                    "L'occupazione di Fiume da parte dei legionari dannunziani."
+                ],
+                correctIndex: 0,
+                explanation: "L'uccisione di Giacomo Matteotti (giugno 1924) scosse profondamente l'opinione pubblica e portò alla secessione dell'Aventino delle opposizioni. Mussolini superò la crisi col celebre discorso del 3 gennaio 1925, assumendosi la responsabilità storica e morale dell'accaduto e varando le leggi fascistissime che instaurarono la dittatura a viso aperto."
+            },
+            {
+                question: "Come affrontò il presidente statunitense Franklin Delano Roosevelt la Grande Crisi del 1929 a partire dal 1933?",
+                options: [
+                    "Con un'ortodossia liberista rigida, tagliando la spesa pubblica e rifiutando ogni aiuto statale ai disoccupati.",
+                    "Attraverso il 'New Deal', un vasto piano di interventi statali nell'economia (lavori pubblici TVA, sostegno all'agricoltura AAA, previdenza sociale e regolamentazione bancaria) basato sul deficit spending teorizzato da Keynes.",
+                    "Dichiarando guerra al Regno Unito e al Giappone per conquistare mercati coloniali.",
+                    "Nazionalizzando integralmente tutti i mezzi di produzione e collettivizzando le terre."
+                ],
+                correctIndex: 1,
+                explanation: "Il New Deal di Roosevelt (1933) ruppe col dogma liberista del 'laissez-faire', assegnando allo Stato un ruolo attivo di stimolo della domanda interna mediante grandi opere pubbliche, sussidi all'occupazione e riforme del credito e della finanza."
+            },
+            {
+                question: "Cosa stabilivano le Leggi di Norimberga promulgate dal regime nazista nel 1935?",
+                options: [
+                    "La divisione amministrativa della Germania in sedici Lander autonomi.",
+                    "La privazione dei diritti politici e di cittadinanza per gli ebrei tedeschi e il divieto assoluto di matrimoni e relazioni tra ebrei e cittadini di sangue tedesco (difesa della razza ariana).",
+                    "L'uscita della Germania dalla Società delle Nazioni.",
+                    "La confisca di tutti i beni appartenenti alla Chiesa luterana tedesca."
+                ],
+                correctIndex: 1,
+                explanation: "Le leggi di Norimberga del settembre 1935 (Legge sulla cittadinanza del Reich e Legge per la protezione del sangue tedesco) costituirono la base giuridico-razziale dell'antisemitismo di Stato nazista, riducendo gli ebrei allo status di sudditi privi di diritti civili propedeutico alla successiva 'soluzione finale'."
+            },
+            {
+                question: "Quale accordo pose fine nel 1929 alla 'questione romana' che opponeva lo Stato italiano e la Santa Sede dal 1870?",
+                options: [
+                    "La legge delle Guarentigie.",
+                    "I Patti Lateranensi, composti da un trattato internazionale (creazione dello Stato della Città del Vaticano), una convenzione finanziaria e un concordato che regolava i rapporti religiosi e civili.",
+                    "L'accordo di villa Madama stipulato da Craxi.",
+                    "Il trattato di Rapallo."
+                ],
+                correctIndex: 1,
+                explanation: "L'11 febbraio 1929 Mussolini e il cardinale Gasparri firmarono i Patti Lateranensi: il Vaticano riconobbe il Regno d'Italia con Roma capitale, e lo Stato riconobbe la sovranità papale sulla Città del Vaticano, conferendo alla religione cattolica lo status di religione di Stato ed esenzioni fiscali."
+            }
+        ]
+    },
+
+    storia_contemp_mod4: {
+        subject: "storia_contemporanea",
+        chapterTag: "Modulo IV",
+        title: "Conflitto Globale e Ordine Bipolare (Capp. 20-23)",
+        questions: [
+            {
+                question: "Quale evento diplomatico e militare nell'agosto 1939 sconvolse gli equilibri europei alla vigilia dell'invasione della Polonia?",
+                options: [
+                    "Il patto d'Acciaio tra Italia e Giappone.",
+                    "Il patto Molotov-Ribbentrop di non aggressione tra la Germania nazista e l'URSS staliniana, corredato da un protocollo segreto per la spartizione della Polonia e dei paesi baltici.",
+                    "La conferenza di Monaco che dichiarò illegale qualsiasi annessione tedesca.",
+                    "La dichiarazione di neutralità perpetua pronunciata dal parlamento polacco."
+                ],
+                correctIndex: 1,
+                explanation: "Il patto Molotov-Ribbentrop del 23 agosto 1939 rimosse per Hitler il rischio di combattere su due fronti e consentì a Stalin di espandere i confini occidentali dell'URSS; il 1° settembre 1939 le truppe tedesche invasero la Polonia dando inizio alla Seconda Guerra Mondiale."
+            },
+            {
+                question: "Cosa accadde in Italia l'8 settembre 1943 in seguito all'armistizio di Cassibile reso noto dal maresciallo Badoglio?",
+                options: [
+                    "L'esercito italiano respinse con successo l'invasione anglo-americana sbarcata in Sicilia.",
+                    "L'annuncio dell'armistizio con gli Alleati lasciò le forze armate italiane senza ordini precisi; il re e Badoglio fuggirono a Brindisi mentre i tedeschi occupavano il Centro-Nord disarmando i reparti italiani.",
+                    "Mussolini fu confermato a capo del governo con pieni poteri militari dal Gran Consiglio del Fascismo.",
+                    "L'Italia firmò un'alleanza immediata con l'Unione Sovietica."
+                ],
+                correctIndex: 1,
+                explanation: "L'8 settembre 1943 fu una giornata drammatica di sbandamento generale delle forze armate. La fuga della monarchia e dei vertici militari a Brindisi lasciò l'esercito in balìa dell'occupazione tedesca, dando avvio alla Resistenza partigiana e alla guerra di liberazione contro i nazifascisti della Repubblica Sociale di Salò."
+            },
+            {
+                question: "Quale battaglia segnò tra l'inverno 1942 e il febbraio 1943 la svolta decisiva a favore dell'Armata Rossa sul fronte orientale europeo?",
+                options: [
+                    "La battaglia di El Alamein.",
+                    "La battaglia di Stalingrado, culminata nell'accerchiamento e nella resa della 6ª armata tedesca del generale von Paulus.",
+                    "La battaglia di Kursk.",
+                    "Lo sbarco alleato ad Anzio."
+                ],
+                correctIndex: 1,
+                explanation: "La sconfitta tedesca a Stalingrado (febbraio 1943) rappresentò il punto di svolta militare e psicologico dell'intera Seconda Guerra Mondiale in Europa, segnando l'inizio dell'inarrestabile avanzata sovietica verso Berlino."
+            },
+            {
+                question: "In che cosa consisteva il Piano Marshall (European Recovery Program) approvato dagli Stati Uniti nel 1947?",
+                options: [
+                    "Un piano segreto per invadere l'URSS con armi nucleari preventive.",
+                    "Un massiccio programma di aiuti economici e finanziari a fondo perduto e a basso interesse destinato ai paesi dell'Europa occidentale per favorirne la ricostruzione e arginare l'espansione del comunismo.",
+                    "La cessione di territori coloniali asiatici alla Francia e all'Italia.",
+                    "L'imposizione del dollaro come unica valuta a corso legale nei paesi sconfitti."
+                ],
+                correctIndex: 1,
+                explanation: "Il Piano Marshall stanziò circa 13 miliardi di dollari tra il 1948 e il 1952 per la ricostruzione industriale ed economica dell'Europa occidentale, fungendo sia da volano per i consumi e le esportazioni americane sia da scudo politico contro l'avanzata elettorale dei partiti comunisti filo-sovietici."
+            },
+            {
+                question: "Quale fu la causa e l'esito della crisi del canale di Suez del 1956?",
+                options: [
+                    "La nazionalizzazione del canale decisa dal presidente egiziano Nasser e l'attacco militare congiunto di Israele, Gran Bretagna e Francia, bloccato dalla condanna diplomatica congiunta di USA e URSS.",
+                    "L'occupazione egiziana di Tripoli e la risposta militare dell'Italia.",
+                    "La vendita del canale all'Unione Sovietica da parte del re Faruk.",
+                    "La costruzione di una diga sul Nilo finanziata interamente dal governo britannico."
+                ],
+                correctIndex: 0,
+                explanation: "La crisi di Suez (1956) simboleggiò il definitivo tramonto delle vecchie potenze coloniali (Francia e Regno Unito): nonostante il successo militare sul campo contro l'Egitto di Nasser, la pressione congiunta di Eisenhower e Kruscev costrinse gli invasori al ritiro incondizionato."
+            },
+            {
+                question: "Come si concluse la guerra di Corea (1950-1953) tra il blocco comunista e la coalizione a guida ONU/USA?",
+                options: [
+                    "Con l'unificazione democratica dell'intera penisola sotto il governo di Seul.",
+                    "Con un armistizio a Panmunjom che confermò la partizione della penisola coreana lungo il 38° parallelo tra Corea del Nord comunista e Corea del Sud filo-occidentale.",
+                    "Con l'uso dell'atomica da parte del generale MacArthur e la resa della Cina.",
+                    "Con la conquista dell'intera Corea da parte dell'Armata Rossa sovietica."
+                ],
+                correctIndex: 1,
+                explanation: "Dopo tre anni di sanguinosi combattimenti e l'intervento massiccio di centinaia di migliaia di 'volontari' cinesi, la guerra di Corea terminò nel luglio 1953 con l'armistizio di Panmunjom, cristallizzando la divisione al 38° parallelo che permane ancora oggi."
+            }
+        ]
+    },
+
+    storia_contemp_mod5: {
+        subject: "storia_contemporanea",
+        chapterTag: "Modulo V",
+        title: "L'Italia Repubblicana e la Società del Benessere (Capp. 24-28)",
+        questions: [
+            {
+                question: "Quale duplice verdetto decretarono gli elettori italiani nella storica giornata del 2 giugno 1946 (prime elezioni politiche a suffragio universale effettivo anche femminile)?",
+                options: [
+                    "La vittoria della Monarchia e l'elezione di Umberto II a re costituzionale.",
+                    "La vittoria della Repubblica al referendum istituzionale e l'elezione dell'Assemblea Costituente con il primato elettorale dei partiti di massa (DC, PSIUP, PCI).",
+                    "L'approvazione immediata dello Statuto Albertino modificato e la nomina di Togliatti a Presidente del Consiglio.",
+                    "La riconferma del governo monarchico presieduto da Pietro Badoglio."
+                ],
+                correctIndex: 1,
+                explanation: "Il 2 giugno 1946 la Repubblica prevalse sulla Monarchia con 12,7 milioni di voti contro 10,7 milioni. Contestualmente venne eletta l'Assemblea Costituente che, lavorando in spirito unitario antifascista, redasse la Costituzione italiana promulgata il 27 dicembre 1947 ed entrata in vigore il 1° gennaio 1948."
+            },
+            {
+                question: "Quale fattore economico permise all'Italia tra il 1958 e il 1963 di vivere il cosiddetto 'miracolo economico'?",
+                options: [
+                    "La scoperta di immensi giacimenti petroliferi nella pianura padana che resero l'Italia il primo esportatore mondiale di greggio.",
+                    "Un tasso di crescita industriale eccezionale trainato dai bassi costi della manodopera (dovuti all'emigrazione dal Sud), dall'apertura delle frontiere nel Mercato Comune Europeo (MEC) e dal successo mondiale dei beni di consumo durevoli (Fiat 500/600, elettrodomestici Zanussi/Ignis, Vespa).",
+                    "La chiusura autarchica dei mercati nazionali e il divieto di importare merci estere.",
+                    "L'abolizione delle imposte sulle grandi imprese e il blocco dei commerci con la Germania."
+                ],
+                correctIndex: 1,
+                explanation: "Il miracolo economico trasformò l'Italia da paese agricolo in potenza industriale avanzata. I fattori determinanti furono l'abbondante offerta di manodopera a basso costo, la stabilità monetaria, l'efficienza delle imprese pubbliche (IRI, ENI di Mattei) e l'inserimento nel Mercato Comune Europeo."
+            },
+            {
+                question: "Cosa rappresentò il Concilio Vaticano II (1962-1965) voluto da papa Giovanni XXIII per la Chiesa e il mondo contemporaneo?",
+                options: [
+                    "Un ritorno rigido alla liturgia tridentina in latino e la condanna totale della scienza moderna.",
+                    "Una svolta pastorale ed ecumenica ('aggiornamento'), con l'adozione delle lingue volgari nella messa, il riconoscimento della libertà religiosa e l'apertura al dialogo con le altre confessioni cristiane e con il mondo secolare.",
+                    "La soppressione formale del collegio cardinalizio e del papato.",
+                    "L'adesione dogmatica del cattolicesimo alla dottrina comunista sovietica."
+                ],
+                correctIndex: 1,
+                explanation: "Aperto da Giovanni XXIII e concluso da Paolo VI, il Concilio Vaticano II aprì la Chiesa al dialogo con la società contemporanea (costituzione Gaudium et Spes), riformò la liturgia introducendo la lingua nazionale e superò l'isolamento intransigente ereditato dal Sillabo ottocentesco."
+            },
+            {
+                question: "Quale drammatica crisi nucleare rischiò di far precipitare la Guerra Fredda in un conflitto atomico planetario nell'ottobre del 1962?",
+                options: [
+                    "La crisi dei missili a Cuba, scatenata dall'installazione segreta di rampe missilistiche sovietiche sull'isola e risolta dal blocco navale di Kennedy e dal compromesso con Kruscev.",
+                    "La guerra delle Falkland nell'Atlantico meridionale.",
+                    "Il blocco sovietico di Berlino del 1948.",
+                    "L'incidente della Baia dei Porci nel 1961."
+                ],
+                correctIndex: 0,
+                explanation: "Nell'ottobre 1962 la scoperta di missili nucleari sovietici a Cuba portò il mondo sull'orlo della guerra nucleare. Dopo tredici giorni di tensione estrema e il blocco navale imposto da Kennedy, Kruscev accettò di smantellare i missili in cambio dell'impegno USA a non invadere Cuba e del futuro ritiro dei missili Jupiter dalla Turchia."
+            },
+            {
+                question: "Quale strategia politica fu teorizzata dal segretario del PCI Enrico Berlinguer all'indomani del golpe militare di Pinochet in Cile del 1973?",
+                options: [
+                    "La lotta armata clandestina per rovesciare lo Stato borghese.",
+                    "La strategia del 'compromesso storico', ossia una grande intesa di governo e cooperazione democratica tra le forze di massa comuniste, socialiste e cattoliche (DC) per salvare la democrazia e fronteggiare la crisi economica e il terrorismo.",
+                    "La confluenza immediata del PCI nella Democrazia Cristiana.",
+                    "L'uscita dell'Italia dall'Unione Europea e dall'ONU."
+                ],
+                correctIndex: 1,
+                explanation: "Berlinguer comprese che anche con il 51% dei voti una sinistra isolata avrebbe rischiato una tragica reazione reazionaria come in Cile. Propose quindi alla DC di Aldo Moro una convergenza di lungo periodo fondata sulla solidarietà nazionale democratica per isolare l'eversione e governare le riforme."
+            },
+            {
+                question: "Quale tragico evento del 1978 rappresentò l'apice dell'attacco terroristico delle Brigate Rosse al cuore dello Stato italiano?",
+                options: [
+                    "La strage di piazza Fontana a Milano (1969).",
+                    "L'agguato di via Fani, il rapimento e l'uccisione dopo 55 giorni di prigionia del presidente della DC Aldo Moro, artefice della politica di solidarietà nazionale con il PCI.",
+                    "La strage della stazione di Bologna (1980).",
+                    "L'attentato di via Rasella a Roma."
+                ],
+                correctIndex: 1,
+                explanation: "Il 16 marzo 1978 le Brigate Rosse rapirono Aldo Moro massacrando i cinque uomini della sua scorta. Il sequestro durò 55 giorni e si concluse il 9 maggio con il ritrovamento del corpo di Moro in via Caetani, assestando un colpo mortale all'esperimento dei governi di solidarietà nazionale."
+            }
+        ]
+    },
+
+    storia_contemp_mod6: {
+        subject: "storia_contemporanea",
+        chapterTag: "Modulo VI",
+        title: "Società Postindustriale, Globalizzazione e Seconda Repubblica (Capp. 29-31)",
+        questions: [
+            {
+                question: "Quale svolta geopolitica epocale avvenne nella notte del 9 novembre 1989 in Europa?",
+                options: [
+                    "L'invasione sovietica della Polonia.",
+                    "L'abbattimento e l'apertura dei varchi del Muro di Berlino, preludio alla dissoluzione dei regimi comunisti dell'Est Europa e alla riunificazione della Germania nel 1990.",
+                    "L'ingresso della Jugoslavia nella Comunità Economica Europea.",
+                    "L'approvazione del trattato istitutivo della Società delle Nazioni."
+                ],
+                correctIndex: 1,
+                explanation: "La caduta del Muro di Berlino (9 novembre 1989) simboleggiò il collasso pacifico della cortina di ferro e dell'impero sovietico, aprendo la strada alla riunificazione tedesca (3 ottobre 1990) e alla disgregazione finale dell'URSS nel dicembre 1991."
+            },
+            {
+                question: "Cosa sancì il Trattato di Maastricht firmato nel febbraio del 1992 tra i paesi membri della Comunità Europea?",
+                options: [
+                    "La creazione dell'Unione Europea (UE), i parametri di convergenza economica per l'adozione della moneta unica (l'Euro) e l'istituzione della cittadinanza europea.",
+                    "L'obbligo di istituire un esercito federale europeo subordinato al presidente francese.",
+                    "L'abolizione dei dazi marittimi con gli Stati Uniti d'America.",
+                    "La dissoluzione dell'accordo di Schengen e la chiusura delle frontiere comunitarie."
+                ],
+                correctIndex: 0,
+                explanation: "Il Trattato di Maastricht (1992) trasformò la Comunità Economica Europea in Unione Europea (UE), definendo i famosi 'parametri di Maastricht' (rapporto deficit/PIL al 3%, debito/PIL al 60%) come tappe propedeutiche alla nascita dell'Euro (1° gennaio 1999 per le transazioni finanziarie, 2002 per la circolazione fisica)."
+            },
+            {
+                question: "Quale vasta inchiesta giudiziaria, avviata dalla Procura di Milano nel 1992, determinò il crollo della classe politica e dei partiti tradizionali della Prima Repubblica?",
+                options: [
+                    "Il processo per la strage di Capaci.",
+                    "L'inchiesta 'Mani Pulite' (Tangentopoli), coordinata da Antonio Di Pietro, che svelò un sistema capillare di corruzione e finanziamento illecito tra partiti di governo (DC, PSI) e mondo dell'imprenditoria.",
+                    "L'indagine sulla loggia massonica P2 di Licio Gelli.",
+                    "Il processo per lo scandalo della Banca Romana."
+                ],
+                correctIndex: 1,
+                explanation: "L'inchiesta 'Mani Pulite', partita nel febbraio 1992 con l'arresto di Mario Chiesa, portò alla luce il colossale sistema di mazzette e appalti truccati noto come 'Tangentopoli', spazzando via partiti storici come la DC e il PSI e aprendo la transizione verso la cosiddetta Seconda Repubblica."
+            },
+            {
+                question: "Cosa segnò la 'discesa in campo' dell'imprenditore televisivo Silvio Berlusconi nel gennaio 1994 nel panorama politico italiano?",
+                options: [
+                    "L'immediata restaurazione della monarchia sabauda.",
+                    "La nascita del movimento politico 'Forza Italia' che, sfruttando l'introduzione del sistema elettorale maggioritario (Mattarellum) e federando il centro-destra con Lega Nord e Alleanza Nazionale, vinse le elezioni politiche del marzo 1994 inaugurando il bipolarismo all'italiana.",
+                    "La fusione tra i Democratici di Sinistra e Rifondazione Comunista.",
+                    "La nomina di Carlo Azeglio Ciampi a Presidente della Repubblica a vita."
+                ],
+                correctIndex: 1,
+                explanation: "Con il messaggio televisivo del 26 gennaio 1994, Silvio Berlusconi fondò Forza Italia occupando il vuoto lasciato dal crollo della DC e dei partiti moderati, costituendo il Polo delle Libertà al Nord (con la Lega) e il Polo del Buon Governo al Sud (con MSI-AN) e vincendo le elezioni politiche del marzo 1994."
+            },
+            {
+                question: "Quale tragico evento del settembre 2001 ridefinì l'agenda di sicurezza internazionale globale dell'amministrazione Bush e della NATO?",
+                options: [
+                    "Lo scoppio della guerra civile in Rwanda.",
+                    "Gli attentati terroristici suicidi dell'11 settembre 2001 contro le Torri Gemelle di New York e il Pentagono, organizzati da Al Qaeda di Osama bin Laden, che innescarono la 'guerra globale al terrorismo' e le invasioni dell'Afghanistan (2001) e dell'Iraq (2003).",
+                    "L'affondamento del sottomarino russo Kursk nel mare di Barents.",
+                    "La firma della convenzione sul clima di Kyoto."
+                ],
+                correctIndex: 1,
+                explanation: "Gli attentati dell'11 settembre 2001 a New York e Washington, che causarono circa tremila vittime civili, segnarono l'inizio dell'era della dottrina della guerra preventiva di George W. Bush e della lotta globale al terrorismo jihadista transnazionale."
+            },
+            {
+                question: "Quale caratteristica demografica e sociale contraddistingue la società italiana alle soglie del XXI secolo secondo l'analisi di Sabbatucci e Vidotto?",
+                options: [
+                    "Un eccezionale boom delle nascite con famiglie composte in media da quattro o più figli.",
+                    "Una spiccata denatalità accompagnata da un progressivo invecchiamento della popolazione, trasformando l'Italia in uno dei paesi a più basso indice di fecondità e con un crescente saldo migratorio estero.",
+                    "La totale scomparsa della popolazione anziana oltre i 65 anni.",
+                    "L'emigrazione di massa di contadini verso le piantagioni del Sud America."
+                ],
+                correctIndex: 1,
+                explanation: "Come rilevano conclusivamente Sabbatucci e Vidotto, l'Italia contemporanea sperimenta una forte contrazione demografica ('inverno demografico') e l'aumento dell'aspettativa di vita, con profonde implicazioni sui sistemi pensionistici, sanitari e sul tessuto multietnico metropolitano."
+            }
+        ]
+    },
+
+    storia_contemp_mix: {
+        subject: "storia_contemporanea",
+        chapterTag: "Simulazione Generale",
+        title: "Test Globale di Storia Contemporanea (Dal 1848 a Oggi)",
+        questions: [
+            {
+                question: "Cosa stabilivano le Leggi Siccardi approvate in Piemonte nel 1850 sotto il governo d'Azeglio?",
+                options: [
+                    "L'introduzione della censura ecclesiastica su tutti i libri scolastici.",
+                    "L'abolizione dei privilegi anacronistici del clero (foro ecclesiastico, diritto d'asilo, manomorta), affermando la laicità della giurisdizione dello Stato.",
+                    "L'alleanza militare immediata con l'Impero austro-ungarico.",
+                    "La pena di morte per chiunque professasse fedi non cattoliche."
+                ],
+                correctIndex: 1,
+                explanation: "Le leggi Siccardi (1850) segnarono l'avvio della modernizzazione laica del Regno di Sardegna, eliminando i privilegi ecclesiastici e affermando il primato della legge civile statale su quella religiosa, battaglia in cui emerse la figura politica di Cavour."
+            },
+            {
+                question: "Quale conferenza internazionale del 1884-1885 convocata da Bismarck fissò le regole per la spartizione dell'Africa tra le potenze europee?",
+                options: [
+                    "La Conferenza di Berlino, che adottò il principio dell'occupazione di fatto (effettività) per legittimare il possesso coloniale di una regione.",
+                    "Il Congresso di Vienna.",
+                    "La conferenza di Versailles.",
+                    "La conferenza di Yalta."
+                ],
+                correctIndex: 0,
+                explanation: "La Conferenza di Berlino (1884-1885) stabilì che per rivendicare un territorio africano una potenza europea doveva notificare l'effettiva occupazione militare o amministrativa alle altre potenze, accelerando la corsa frenetica alla spartizione dell'Africa (Scramble for Africa)."
+            },
+            {
+                question: "Quale trattato di pace impose alla Germania sconfitta nel 1919 clausole punitive severissime, la perdita dell'Alsazia-Lorena, la smilitarizzazione della Renania e colossali riparazioni di guerra?",
+                options: [
+                    "Il trattato di Brest-Litovsk.",
+                    "Il Trattato di Versailles.",
+                    "La pace di Campoformio.",
+                    "Il patto di Londra."
+                ],
+                correctIndex: 1,
+                explanation: "Il Trattato di Versailles (giugno 1919) impose alla Germania la clausola di colpevolezza esclusiva del conflitto (Diktat), la restituzione di territori a Francia e Polonia, la riduzione dell'esercito a 100.000 uomini e un debito di 132 miliardi di marchi oro, creando un profondo risentimento sfruttato poi da Hitler."
+            },
+            {
+                question: "Quale fu il ruolo dell'IRI (Istituto per la Ricostruzione Industriale) fondato nel 1933 in Italia da Alberto Beneduce sotto il regime fascista?",
+                options: [
+                    "Favorire la svendita di tutte le aziende pubbliche agli investitori stranieri.",
+                    "Salvare dal fallimento le maggiori banche miste italiane (Banca Commerciale, Credito Italiano, Banco di Roma) acquisendone i pacchetti azionari e trasformando lo Stato italiano nel maggior proprietario industriale e bancario del paese ('Stato-imprenditore').",
+                    "Organizzare le squadre punitive fasciste nelle campagne emiliane.",
+                    "Costruire esclusivamente ferrovie e stazioni nel Meridione."
+                ],
+                correctIndex: 1,
+                explanation: "L'IRI (1933) permise allo Stato di subentrare nel controllo delle grandi banche in crisi e di rilevare partecipazioni strategiche nell'acciaio (Ansaldo, Ilva), nella cantieristica e nella meccanica, inaugurando il modello italiano di economia mista pubblica-privata durato per decenni."
+            },
+            {
+                question: "Cosa stabiliva la dottrina del 'contenimento' (containment) enunciata dal presidente statunitense Truman nel 1947?",
+                options: [
+                    "Il contenimento dell'emigrazione europea verso il Nord America.",
+                    "L'impegno permanente degli Stati Uniti a intervenire economicamente e militarmente ovunque per bloccare l'espansione e l'aggressione dell'Unione Sovietica e delle forze comuniste nel mondo.",
+                    "La riduzione obbligatoria del deficit di bilancio federale degli Stati Uniti.",
+                    "Il disarmo unilaterale dell'arsenale missilistico della marina americana."
+                ],
+                correctIndex: 1,
+                explanation: "La Dottrina Truman (marzo 1947), teorizzata da George Kennan, sancì l'inizio ufficiale della Guerra Fredda: gli USA assumevano il ruolo di garanti dell'ordine mondiale libero contro l'espansionismo del totalitarismo sovietico, inviando aiuti immediati a Grecia e Turchia."
+            },
+            {
+                question: "Quale legge fondamentale per i diritti del lavoro fu approvata in Italia nel maggio 1970 sull'onda delle lotte dell'autunno caldo del '69?",
+                options: [
+                    "La riforma della Cassa del Mezzogiorno.",
+                    "Lo Statuto dei Lavoratori (Legge 300/1970), che garantì la libertà di associazione e attività sindacale nei luoghi di lavoro e introdusse la tutela contro i licenziamenti illegittimi (art. 18).",
+                    "Il Testo Unico sull'Immigrazione.",
+                    "La legge sulle corporazioni fasciste."
+                ],
+                correctIndex: 1,
+                explanation: "Lo Statuto dei Lavoratori (legge 20 maggio 1970, n. 300), promosso dal ministro del Lavoro socialista Giacomo Brodolini e redatto dal giurista Gino Giugni, rappresentò una conquista storica stabilendo le rappresentanze sindacali aziendali (RSA) e proteggendo i lavoratori contro abusi e licenziamenti senza giusta causa."
+            }
+        ]
+    }
+
 };
 
 // Global export

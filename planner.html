@@ -390,7 +390,21 @@
                 "romana-arco-costantino", "romana-patrizia-plebea"
             ],
             storia: Array.from({length: 28}, (_, i) => `storia-fc${i+1}`),
-            codicologia: Array.from({length: 15}, (_, i) => `codicologia-fc${i+1}`)
+            codicologia: Array.from({length: 15}, (_, i) => `codicologia-fc${i+1}`),
+            storia_contemporanea: [
+                'stoc-statuto-albertino', 'stoc-accordi-plombieres', 'stoc-spedizione-mille',
+                'stoc-destra-storica', 'stoc-trasformismo', 'stoc-battaglia-adua',
+                'stoc-metodo-giolitti', 'stoc-guerra-usura', 'stoc-tesi-aprile',
+                'stoc-leggi-fascistissime', 'stoc-new-deal', 'stoc-armistizio-1943',
+                'stoc-referendum-1946', 'stoc-miracolo-economico', 'stoc-trattato-maastricht'
+            ],
+            contemporanea: [
+                'stoc-statuto-albertino', 'stoc-accordi-plombieres', 'stoc-spedizione-mille',
+                'stoc-destra-storica', 'stoc-trasformismo', 'stoc-battaglia-adua',
+                'stoc-metodo-giolitti', 'stoc-guerra-usura', 'stoc-tesi-aprile',
+                'stoc-leggi-fascistissime', 'stoc-new-deal', 'stoc-armistizio-1943',
+                'stoc-referendum-1946', 'stoc-miracolo-economico', 'stoc-trattato-maastricht'
+            ]
         };
 
         function getDueFlashcardsCount(subjectId) {
@@ -423,6 +437,7 @@
             { id: "letteratura-latina", name: "Letteratura Latina", cfu: 12, passed: false, grade: null, date: null, subject: "letteratura_latina" },
             { id: "codicologia", name: "Codicologia", cfu: 9, passed: false, grade: null, date: null, subject: "codicologia" },
             { id: "filosofia", name: "Storia della Filosofia", cfu: 6, passed: false, grade: null, date: null, subject: "filosofia" },
+            { id: "storia-contemporanea", name: "Storia Contemporanea", cfu: 9, passed: false, grade: null, date: null, subject: "contemporanea" },
             { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, grade: null, date: null, subject: "letteratura" },
             { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, grade: null, date: null, subject: "tesi" }
         ];
@@ -558,6 +573,7 @@
             if (subjKey === 'diritto') mappedSubj = 'diritto';
             if (subjKey === 'codicologia') mappedSubj = 'codicologia';
             if (subjKey === 'letteratura-latina' || subjKey === 'latina') mappedSubj = 'letteratura_latina';
+            if (subjKey === 'storia-contemporanea' || subjKey === 'contemporanea') mappedSubj = 'storia_contemporanea';
 
             if (window.searchDatabase) {
                 chapters = window.searchDatabase.filter(item => item.subject === mappedSubj);

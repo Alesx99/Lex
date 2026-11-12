@@ -364,6 +364,17 @@
             background: #a855f7;
         }
 
+        .contemporanea-fill {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+        }
+
+        .badge-sc {
+            background: rgba(220, 38, 38, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
         .badge-cod {
             background: rgba(75, 85, 99, 0.1);
             color: #4b5563;
@@ -885,6 +896,7 @@
                             <option value="codicologia">Solo Codicologia (Max 36 domande)</option>
                             <option value="letteratura_latina">Solo Letteratura Latina (Max 45 domande)</option>
                             <option value="filosofia">Solo Storia della Filosofia (Max 80 domande)</option>
+                            <option value="storia_contemporanea">Solo Storia Contemporanea (Max 42 domande)</option>
                         </select>
                     </div>
 
@@ -931,6 +943,7 @@
                                 <option value="codicologia">Codicologia</option>
                                 <option value="letteratura_latina">Letteratura Latina</option>
                                 <option value="filosofia">Storia della Filosofia</option>
+                                <option value="storia_contemporanea">Storia Contemporanea</option>
                             </select>
                         </div>
 
@@ -1147,6 +1160,16 @@
                             </div>
                             <div class="stat-bar-bg">
                                 <div class="stat-bar-fill filosofia-fill" id="stat-filosofia-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-bar-group">
+                            <div class="stat-label">
+                                <span>Storia Contemporanea</span>
+                                <span id="stat-contemporanea-text">0 / 0 (0%)</span>
+                            </div>
+                            <div class="stat-bar-bg">
+                                <div class="stat-bar-fill contemporanea-fill" id="stat-contemporanea-bar" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
@@ -1540,6 +1563,19 @@
             cap16_kant: "summaries/cap16_kant.md"
         };
 
+        const storiaContemporaneaChapterLinks = {
+            storia_contemp_mod1: "summaries/cap1.md",
+            storia_contemp_mod2: "summaries/cap8.md",
+            storia_contemp_mod3: "summaries/cap13.md",
+            storia_contemp_mod4: "summaries/cap20.md",
+            storia_contemp_mod5: "summaries/cap24.md",
+            storia_contemp_mod6: "summaries/cap29.md",
+            storia_contemp_mix: "summaries/cap1.md"
+        };
+        for (let i = 1; i <= 31; i++) {
+            storiaContemporaneaChapterLinks[`cap${i}`] = `summaries/cap${i}.md`;
+        }
+
         function getPoolSize(subject) {
             let count = 0;
             Object.values(quizDatabase).forEach(mod => {
@@ -1608,6 +1644,14 @@
                     chapterName: mod.title,
                     subject: 'filosofia',
                     link: summary ? `filosofia/index.html?open=${summary}` : 'filosofia/index.html',
+                    navText: `Apri ${mod.chapterTag}`
+                };
+            } else if (mod.subject === 'storia_contemporanea') {
+                const summary = storiaContemporaneaChapterLinks[moduleKey];
+                return {
+                    chapterName: mod.title,
+                    subject: 'storia_contemporanea',
+                    link: summary ? `storia_contemporanea/index.html?open=${summary}` : 'storia_contemporanea/index.html',
                     navText: `Apri ${mod.chapterTag}`
                 };
             }
@@ -1913,6 +1957,8 @@
             let latinaCorrect = 0;
             let filosofiaCount = 0;
             let filosofiaCorrect = 0;
+            let contemporaneaCount = 0;
+            let contemporaneaCorrect = 0;
 
             userResponses.forEach(resp => {
                 if (resp.subject === 'diritto') {
@@ -1933,6 +1979,9 @@
                 } else if (resp.subject === 'filosofia') {
                     filosofiaCount++;
                     if (resp.isCorrect) filosofiaCorrect++;
+                } else if (resp.subject === 'storia_contemporanea') {
+                    contemporaneaCount++;
+                    if (resp.isCorrect) contemporaneaCorrect++;
                 } else {
                     arteCount++;
                     if (resp.isCorrect) arteCorrect++;
@@ -2024,6 +2073,17 @@
                         totalQuestions: filosofiaCount
                     });
                 }
+                if (contemporaneaCount > 0) {
+                    stats.push({
+                        date: today,
+                        score: Math.round((contemporaneaCorrect / contemporaneaCount) * 30),
+                        total: 30,
+                        speed: Math.round(sessionSpeed / total),
+                        subject: 'storia_contemporanea',
+                        correct: contemporaneaCorrect,
+                        totalQuestions: contemporaneaCount
+                    });
+                }
                 
                 localStorage.setItem('lex-quiz-stats', JSON.stringify(stats));
             } catch(e) {
@@ -2059,6 +2119,12 @@
             document.getElementById('stat-filosofia-text').textContent = filosofiaCount > 0 ? `${filosofiaCorrect} / ${filosofiaCount} (${filPercent}%)` : "N/A";
             document.getElementById('stat-filosofia-bar').style.width = filPercent + '%';
 
+            const contempPercent = contemporaneaCount > 0 ? Math.round((contemporaneaCorrect / contemporaneaCount) * 100) : 0;
+            const statContempText = document.getElementById('stat-contemporanea-text');
+            const statContempBar = document.getElementById('stat-contemporanea-bar');
+            if (statContempText) statContempText.textContent = contemporaneaCount > 0 ? `${contemporaneaCorrect} / ${contemporaneaCount} (${contempPercent}%)` : "N/A";
+            if (statContempBar) statContempBar.style.width = contempPercent + '%';
+
             // Speed and guessing calculation
             let totalSpeed = 0;
             let totalAnswered = 0;
@@ -2071,16 +2137,17 @@
                 storia: { sum: 0, count: 0 },
                 codicologia: { sum: 0, count: 0 },
                 letteratura_latina: { sum: 0, count: 0 },
-                filosofia: { sum: 0, count: 0 }
+                filosofia: { sum: 0, count: 0 },
+                storia_contemporanea: { sum: 0, count: 0 }
             };
-            const guessesBySubject = { diritto: 0, arte: 0, arte_romana: 0, storia: 0, codicologia: 0, letteratura_latina: 0, filosofia: 0 };
+            const guessesBySubject = { diritto: 0, arte: 0, arte_romana: 0, storia: 0, codicologia: 0, letteratura_latina: 0, filosofia: 0, storia_contemporanea: 0 };
 
             userResponses.forEach(resp => {
                 const tSpent = resp.timeSpent || 0;
                 totalSpeed += tSpent;
                 totalAnswered++;
 
-                const sub = resp.subject === 'diritto' ? 'diritto' : (resp.subject === 'arte_romana' ? 'arte_romana' : (resp.subject === 'storia' ? 'storia' : (resp.subject === 'codicologia' ? 'codicologia' : (resp.subject === 'letteratura_latina' ? 'letteratura_latina' : (resp.subject === 'filosofia' ? 'filosofia' : 'arte')))));
+                const sub = resp.subject === 'diritto' ? 'diritto' : (resp.subject === 'arte_romana' ? 'arte_romana' : (resp.subject === 'storia' ? 'storia' : (resp.subject === 'codicologia' ? 'codicologia' : (resp.subject === 'letteratura_latina' ? 'letteratura_latina' : (resp.subject === 'filosofia' ? 'filosofia' : (resp.subject === 'storia_contemporanea' ? 'storia_contemporanea' : 'arte'))))));
                 
                 if (speedBySubject[sub]) {
                     speedBySubject[sub].sum += tSpent;
@@ -2107,6 +2174,7 @@
             if (speedBySubject.codicologia && speedBySubject.codicologia.count > 0) speedDetails.push(`Codicologia: ${Math.round(speedBySubject.codicologia.sum / speedBySubject.codicologia.count)}s`);
             if (speedBySubject.letteratura_latina && speedBySubject.letteratura_latina.count > 0) speedDetails.push(`Latino: ${Math.round(speedBySubject.letteratura_latina.sum / speedBySubject.letteratura_latina.count)}s`);
             if (speedBySubject.filosofia && speedBySubject.filosofia.count > 0) speedDetails.push(`Filosofia: ${Math.round(speedBySubject.filosofia.sum / speedBySubject.filosofia.count)}s`);
+            if (speedBySubject.storia_contemporanea && speedBySubject.storia_contemporanea.count > 0) speedDetails.push(`Storia Contemp.: ${Math.round(speedBySubject.storia_contemporanea.sum / speedBySubject.storia_contemporanea.count)}s`);
             document.getElementById('diag-speed-by-subject').textContent = speedDetails.length > 0 ? `Dettaglio per materia: ${speedDetails.join(', ')}` : 'Nessun dettaglio.';
 
             document.getElementById('diag-guessing-freq').textContent = `${guessingFreq}%`;
@@ -2120,7 +2188,7 @@
                 guessingDesc = 'Frequenza moderata. Tendi a rispondere d\'impulso in alcune domande difficili.';
             } else {
                 const worstSubjects = Object.keys(guessesBySubject).filter(k => guessesBySubject[k] > 0);
-                const subLabels = worstSubjects.map(s => s === 'diritto' ? 'Diritto' : (s === 'arte_romana' ? 'Arte Rom.' : (s === 'storia' ? 'Storia Mod.' : (s === 'codicologia' ? 'Codicologia' : (s === 'letteratura_latina' ? 'Latino' : (s === 'filosofia' ? 'Filosofia' : 'Arte Mod.'))))));
+                const subLabels = worstSubjects.map(s => s === 'diritto' ? 'Diritto' : (s === 'arte_romana' ? 'Arte Rom.' : (s === 'storia' ? 'Storia Mod.' : (s === 'codicologia' ? 'Codicologia' : (s === 'letteratura_latina' ? 'Latino' : (s === 'filosofia' ? 'Filosofia' : (s === 'storia_contemporanea' ? 'Storia Contemp.' : 'Arte Mod.')))))));
                 guessingDesc = `Alta probabilità di risposte a caso (${guessingFreq}%). Ti consigliamo di leggere con più calma, specialmente in: ${subLabels.join(', ')}.`;
             }
             document.getElementById('diag-guessing-desc').textContent = guessingDesc;
@@ -2431,6 +2499,33 @@
             } else if (subject === 'filosofia') {
                 const link = filosofiaChapterLinks[moduleKey];
                 return link ? `filosofia/${link}` : null;
+            } else if (subject === 'storia_contemporanea') {
+                let chapterFile = "summaries/cap1.md";
+                if (moduleKey === 'storia_contemp_mod1') {
+                    const rnd = Math.floor(Math.random() * 7) + 1;
+                    chapterFile = `summaries/cap${rnd}.md`;
+                } else if (moduleKey === 'storia_contemp_mod2') {
+                    const rnd = Math.floor(Math.random() * 5) + 8;
+                    chapterFile = `summaries/cap${rnd}.md`;
+                } else if (moduleKey === 'storia_contemp_mod3') {
+                    const rnd = Math.floor(Math.random() * 7) + 13;
+                    chapterFile = `summaries/cap${rnd}.md`;
+                } else if (moduleKey === 'storia_contemp_mod4') {
+                    const rnd = Math.floor(Math.random() * 4) + 20;
+                    chapterFile = `summaries/cap${rnd}.md`;
+                } else if (moduleKey === 'storia_contemp_mod5') {
+                    const rnd = Math.floor(Math.random() * 5) + 24;
+                    chapterFile = `summaries/cap${rnd}.md`;
+                } else if (moduleKey === 'storia_contemp_mod6') {
+                    const rnd = Math.floor(Math.random() * 3) + 29;
+                    chapterFile = `summaries/cap${rnd}.md`;
+                } else if (moduleKey === 'storia_contemp_mix') {
+                    const rnd = Math.floor(Math.random() * 31) + 1;
+                    chapterFile = `summaries/cap${rnd}.md`;
+                } else if (storiaContemporaneaChapterLinks[moduleKey]) {
+                    chapterFile = storiaContemporaneaChapterLinks[moduleKey];
+                }
+                return `storia_contemporanea/${chapterFile}`;
             } else if (subject === 'arte') {
                 const link = arteChapterLinks[moduleKey];
                 return link ? `storia_arte/${link}` : null;
@@ -2555,7 +2650,18 @@
                 document.getElementById('oral-question-text').textContent = currentOralQuestion;
                 
                 const chapterMeta = quizDatabase[currentOralModuleKey];
-                document.getElementById('oral-subject-tag').textContent = `Materia: ${subject === 'diritto' ? 'Diritto' : (subject === 'arte_romana' ? 'Arte Romana' : (subject === 'storia' ? 'Storia Moderna' : (subject === 'codicologia' ? 'Codicologia' : (subject === 'letteratura_latina' ? 'Letteratura Latina' : 'Arte Moderna'))))}`;
+                const subjectNames = {
+                    diritto: 'Diritto dei Beni Culturali',
+                    arte: "Storia dell'Arte Moderna",
+                    arte_romana: 'Arte Romana',
+                    storia: 'Storia Moderna',
+                    codicologia: 'Codicologia',
+                    letteratura_latina: 'Letteratura Latina',
+                    letteratura_italiana: 'Letteratura Italiana',
+                    filosofia: 'Storia della Filosofia',
+                    storia_contemporanea: 'Storia Contemporanea'
+                };
+                document.getElementById('oral-subject-tag').textContent = `Materia: ${subjectNames[subject] || subject}`;
                 document.getElementById('oral-chapter-tag').textContent = `${chapterMeta.chapterTag} - ${currentParsedSummary.title || chapterMeta.title}`;
                 
             } catch(err) {
@@ -3127,8 +3233,8 @@ Restituisci esclusivamente un oggetto JSON con la seguente struttura, in italian
                 const li = document.createElement('li');
                 li.className = 'rec-item';
                 
-                const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : (meta.subject === 'storia' ? 'badge-st' : (meta.subject === 'codicologia' ? 'badge-cod' : (meta.subject === 'letteratura_latina' ? 'badge-lat' : (meta.subject === 'filosofia' ? 'badge-fil' : 'badge-a')))));
-                const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : (meta.subject === 'storia' ? 'ST' : (meta.subject === 'codicologia' ? 'COD' : (meta.subject === 'letteratura_latina' ? 'LAT' : (meta.subject === 'filosofia' ? 'FIL' : 'AM')))));
+                const subClass = meta.subject === 'diritto' ? 'badge-d' : (meta.subject === 'arte_romana' ? 'badge-ar' : (meta.subject === 'storia' ? 'badge-st' : (meta.subject === 'codicologia' ? 'badge-cod' : (meta.subject === 'letteratura_latina' ? 'badge-lat' : (meta.subject === 'filosofia' ? 'badge-fil' : (meta.subject === 'storia_contemporanea' ? 'badge-sc' : 'badge-a'))))));
+                const subName = meta.subject === 'diritto' ? 'D' : (meta.subject === 'arte_romana' ? 'AR' : (meta.subject === 'storia' ? 'ST' : (meta.subject === 'codicologia' ? 'COD' : (meta.subject === 'letteratura_latina' ? 'LAT' : (meta.subject === 'filosofia' ? 'FIL' : (meta.subject === 'storia_contemporanea' ? 'SC' : 'AM'))))));
 
                 li.innerHTML = `
                     <div>

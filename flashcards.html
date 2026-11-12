@@ -114,7 +114,23 @@
             border: 1px solid rgba(75, 85, 99, 0.2);
         }
 
-        .filter-btn.active.filosofia-btn {
+                .filter-btn.active.storiacontemp-btn {
+            background: rgba(220, 38, 38, 0.15);
+            border-color: #dc2626;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
+        }
+
+        .card-face-front.storia_contemporanea-card {
+            border-top: 5px solid #dc2626;
+        }
+
+        .storia_contemporanea-badge {
+            background: rgba(220, 38, 38, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+        
+.filter-btn.active.filosofia-btn {
             background: rgba(168, 85, 247, 0.15);
             border-color: #a855f7;
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.15);
@@ -1262,7 +1278,99 @@
                 subject: "filosofia",
                 question: "Cosa si intende per \"Rivoluzione Copernicana\" operata da Immanuel Kant nella Critica della ragion pura?",
                 answer: "Non è più il soggetto che deve conformarsi passivamente agli oggetti per conoscerli, ma sono gli oggetti d'esperienza che devono regolarsi secondo le forme a priori della sensibilità (spazio e tempo) e dell'intelletto (le dodici categorie). L'uomo conosce il fenomeno, non il noumeno (la cosa in sé)."
+            },
+            // STORIA CONTEMPORANEA (Sabbatucci - Vidotto)
+            {
+                id: "stoc-statuto-albertino",
+                subject: "storia_contemporanea",
+                question: "Che cos'era lo Statuto Albertino concesso l'8 febbraio 1848 da Carlo Alberto?",
+                answer: "Era una costituzione 'ottriata' (concessa dall'alto dal sovrano) che istituiva una monarchia costituzionale pura: prevedeva una Camera dei deputati elettiva su base censitaria, un Senato di nomina regia a vita, il cattolicesimo come religione di Stato e il re come capo supremo dell'esecutivo e delle forze armate. Divenne poi la legge fondamentale del Regno d'Italia fino al 1948."
+            },
+            {
+                id: "stoc-accordi-plombieres",
+                subject: "storia_contemporanea",
+                question: "Cosa stabilivano gli accordi segreti di Plombières stipulati nel 1858 tra Cavour e Napoleone III?",
+                answer: "Prevedevano l'alleanza militare franco-piemontese in caso di aggressione austriaca, mirando a una nuova sistemazione della penisola in quattro stati (Regno dell'Alta Italia sotto i Savoia, Regno dell'Italia centrale, Stato pontificio ridotto a Roma, Regno del Sud) in cambio della cessione di Nizza e Savoia alla Francia."
+            },
+            {
+                id: "stoc-spedizione-mille",
+                subject: "storia_contemporanea",
+                question: "Come si svolse la Spedizione dei Mille guidata da Giuseppe Garibaldi nel 1860?",
+                answer: "Salpati da Quarto il 5 maggio 1860, i Mille sbarcarono a Marsala, sconfissero i borbonici a Calatafimi, conquistarono Palermo e liberarono la Sicilia. Risalita la penisola fino a Napoli, Garibaldi sconfisse i borbonici al Volturno e incontrò Vittorio Emanuele II a Teano (26 ottobre), rimettendo i territori conquistati alla sovranità sabauda."
+            },
+            {
+                id: "stoc-destra-storica",
+                subject: "storia_contemporanea",
+                question: "Quali furono i principali risultati e sacrifici della politica economica della Destra Storica (1861-1876)?",
+                answer: "La Destra Storica realizzò l'unificazione monetaria (lira italiana), estese la rete ferroviaria da 2.000 a oltre 6.000 km e raggiunse il pareggio di bilancio nel 1875 con il ministro Quintino Sella, imponendo però una durissima fiscalità sui consumi popolari (la famigerata tassa sul macinato del 1868)."
+            },
+            {
+                id: "stoc-trasformismo",
+                subject: "storia_contemporanea",
+                question: "In che cosa consisteva il 'trasformismo' inaugurato da Agostino Depretis nel 1882?",
+                answer: "Era una prassi parlamentare che superava le tradizionali divisioni ideologiche tra Destra e Sinistra liberale, costruendo di volta in volta maggioranze centriste di governo mediante accordi individuali e compromessi con singoli deputati, isolando le opposizioni radicali ed estreme."
+            },
+            {
+                id: "stoc-battaglia-adua",
+                subject: "storia_contemporanea",
+                question: "Cosa accadde nella battaglia di Adua (1° marzo 1896) e quali furono le sue conseguenze politiche?",
+                answer: "L'esercito coloniale italiano subì una disastrosa disfatta contro le forze etiopiche del negus Menelik (circa 7.000 soldati italiani caduti). La sconfitta scatenò violente proteste di piazza in tutta Italia, costrinse Francesco Crispi alle dimissioni definitive e arrestò per decenni l'espansionismo coloniale italiano nel Corno d'Africa."
+            },
+            {
+                id: "stoc-metodo-giolitti",
+                subject: "storia_contemporanea",
+                question: "Qual era la linea di governo di Giovanni Giolitti nei confronti delle agitazioni operaie e sindacali?",
+                answer: "Giolitti inaugurò una politica di neutralità dello Stato nei conflitti di lavoro a carattere economico: rifiutò l'uso della forza pubblica contro gli scioperi salariali, favorì il dialogo con i riformisti socialisti di Turati e sostenne che l'aumento dei salari avrebbe allargato il mercato interno e rafforzato le istituzioni liberali."
+            },
+            {
+                id: "stoc-guerra-usura",
+                subject: "storia_contemporanea",
+                question: "Perché la Prima Guerra Mondiale divenne una 'guerra di usura e di trincea'?",
+                answer: "Fallito il piano d'invasione rapida tedesco sulla Marna (1914), la straordinaria potenza di fuoco delle armi automatiche (mitragliatrici), dell'artiglieria pesante e dei reticolati spinati rese insormontabile la difesa sull'attacco, costringendo gli eserciti a immobilizzarsi in trincee per anni in una prova di logoramento umano, industriale ed economico."
+            },
+            {
+                id: "stoc-tesi-aprile",
+                subject: "storia_contemporanea",
+                question: "Quali erano i punti cardine delle 'Tesi di Aprile' presentate da Lenin nel 1917?",
+                answer: "Rottura immediata con il governo provvisorio borghese, rifiuto della guerra imperialista e pace immediata, nazionalizzazione e distribuzione della terra ai contadini, e passaggio immediato della rivoluzione alla fase socialista con la celebre parola d'ordine: 'Tutto il potere ai Soviet!'."
+            },
+            {
+                id: "stoc-leggi-fascistissime",
+                subject: "storia_contemporanea",
+                question: "Cosa sancirono le 'leggi fascistissime' promulgate in Italia tra il 1925 e il 1926?",
+                answer: "Trasformarono lo Stato statutario in dittatura aperta: soppressero la libertà di stampa e di associazione, sciolsero tutti i partiti antifascisti, istituirono la polizia politica segreta (OVRA), il Tribunale Speciale per la difesa dello Stato, la pena di morte e subordinarono il potere legislativo al Capo del Governo (Mussolini)."
+            },
+            {
+                id: "stoc-new-deal",
+                subject: "storia_contemporanea",
+                question: "Quali furono i pilastri del New Deal varato da Franklin D. Roosevelt a partire dal 1933?",
+                answer: "Abbandonando l'ortodossia del bilancio in pareggio, Roosevelt avviò un massiccio intervento statale (deficit spending keynesiano) con grandi opere pubbliche infrastrutturali (TVA), sussidi all'agricoltura (AAA), assicurazione dei depositi bancari (FDIC), e il varo del Social Security Act per pensioni e disoccupazione."
+            },
+            {
+                id: "stoc-armistizio-1943",
+                subject: "storia_contemporanea",
+                question: "Cosa comportò per l'Italia l'annuncio dell'armistizio dell'8 settembre 1943?",
+                answer: "L'annuncio della resa agli Alleati, dato senza direttive chiare alle truppe dal maresciallo Badoglio e dal re Vittorio Emanuele III in fuga a Brindisi, provocò la dissoluzione dell'esercito. I tedeschi occuparono l'Italia centro-settentrionale, liberando Mussolini che fondò la Repubblica Sociale Italiana (Salò), mentre a Roma nasceva il CLN avviando la Resistenza partigiana."
+            },
+            {
+                id: "stoc-referendum-1946",
+                subject: "storia_contemporanea",
+                question: "Quale esito ebbe il referendum istituzionale del 2 giugno 1946 in Italia?",
+                answer: "Nelle prime elezioni a suffragio universale effettivo esteso anche alle donne, la Repubblica vinse con 12.717.923 voti (54,3%) contro la Monarchia (10.719.284 voti). L'Assemblea Costituente eletta nello stesso giorno, guidata dai tre grandi partiti di massa (DC, PSIUP, PCI), redasse la Costituzione della Repubblica Italiana entrata in vigore il 1° gennaio 1948."
+            },
+            {
+                id: "stoc-miracolo-economico",
+                subject: "storia_contemporanea",
+                question: "Quali elementi trainarono il 'Miracolo Economico' italiano nel quinquennio 1958-1963?",
+                answer: "Bassi costi salariali favoriti dall'immigrazione interna dal Sud verso il triangolo industriale, stabilità della lira, ingresso nel Mercato Comune Europeo (MEC) e boom delle esportazioni di beni durevoli di consumo (automobili Fiat, scooter Vespa, elettrodomestici) che trasformarono l'Italia da nazione agricola a potenza industriale avanzata."
+            },
+            {
+                id: "stoc-trattato-maastricht",
+                subject: "storia_contemporanea",
+                question: "Cosa stabilì il Trattato di Maastricht firmato il 7 febbraio 1992?",
+                answer: "Istituì ufficialmente l'Unione Europea (UE), definì i tre pilastri dell'integrazione comunitaria (comunità europea, politica estera e di sicurezza comune, cooperazione giudiziaria), creò la cittadinanza europea e fissò i parametri rigorosi di convergenza economica e di bilancio per l'introduzione della moneta unica europea (l'Euro)."
             }
+
         ];
 
         // State variables
@@ -1314,6 +1422,8 @@
                 filtersContainer.querySelector('.latina-btn')?.classList.add('active');
             } else if (subject === 'filosofia') {
                 filtersContainer.querySelector('.filosofia-btn')?.classList.add('active');
+            } else if (subject === 'storia_contemporanea') {
+                filtersContainer.querySelector('.storiacontemp-btn')?.classList.add('active');
             }
 
             initDeck();
@@ -1427,6 +1537,10 @@
                 subjectText = 'Storia della Filosofia';
                 badgeClass = 'card-subject-badge filosofia-badge';
                 cardClass = 'card-face card-face-front filosofia-card';
+            } else if (currentCard.subject === 'storia_contemporanea') {
+                subjectText = 'Storia Contemporanea';
+                badgeClass = 'card-subject-badge storia_contemporanea-badge';
+                cardClass = 'card-face card-face-front storia_contemporanea-card';
             } else {
                 subjectText = 'Arte Moderna';
                 badgeClass = 'card-subject-badge arte-badge';
@@ -1580,7 +1694,9 @@
             
             if (subjectParam) {
                 // Check if subject is one of the supported ones, else default to tutte
-                const validSubjects = ['diritto', 'arte', 'romana', 'storia', 'codicologia', 'letteratura_latina', 'filosofia'];
+                const validSubjects = ['diritto', 'arte', 'romana', 'storia', 'codicologia', 'letteratura_latina', 'filosofia',
+
+            'storia_contemporanea'];
                 if (validSubjects.includes(subjectParam)) {
                     setFilter(subjectParam);
                 } else {

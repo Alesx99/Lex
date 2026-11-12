@@ -264,7 +264,9 @@
                     { id: 'storia', name: 'Storia' },
                     { id: 'arte', name: 'Storia Arte' },
                     { id: 'codicologia', name: 'Codicologia' },
-                    { id: 'letteratura_latina', name: 'Letteratura Latina' }
+                    { id: 'letteratura_latina', name: 'Letteratura Latina' },
+                    { id: 'filosofia', name: 'Storia della Filosofia' },
+                    { id: 'storia_contemporanea', name: 'Storia Contemporanea' }
                 ];
                 
                 const container = document.getElementById('subject-bars');
@@ -314,9 +316,9 @@
                 let chaptersRead = 0;
                 try {
                     const read = JSON.parse(localStorage.getItem('lex-unique-chapters-read') || '[]');
-                    // Heuristic: each subject has ~10-15 chapters. Let's assume 10 for calc.
+                    const targetCount = subId === 'storia_contemporanea' ? 31 : (subId === 'filosofia' ? 16 : 10);
                     const subRead = read.filter(path => path.includes(subId)).length;
-                    chaptersRead = Math.min(100, (subRead / 10) * 100);
+                    chaptersRead = Math.min(100, (subRead / targetCount) * 100);
                 } catch(e){}
 
                 return Math.round((quizScore * 0.5) + (chaptersRead * 0.5));
@@ -486,6 +488,7 @@
                             { id: "storia", name: "Storia Moderna", cfu: 6, passed: false, subject: "storia" },
                             { id: "codicologia", name: "Codicologia", cfu: 9, passed: false, subject: "codicologia" },
                             { id: "filosofia", name: "Storia della Filosofia", cfu: 6, passed: false, subject: "filosofia" },
+                            { id: "storia-contemporanea", name: "Storia Contemporanea", cfu: 9, passed: false, subject: "contemporanea" },
                             { id: "letteratura", name: "Letteratura Italiana", cfu: 6, passed: false, subject: "letteratura" },
                             { id: "tesi", name: "Prova Finale (Tesi)", cfu: 6, passed: false, subject: "tesi" }
                         ];
@@ -507,6 +510,7 @@
                     const subjKey = exam.subject || exam.id;
                     let mappedSubj = subjKey;
                     if (subjKey === 'romana') mappedSubj = 'arte_romana';
+                    if (subjKey === 'contemporanea' || subjKey === 'storia-contemporanea') mappedSubj = 'storia_contemporanea';
 
                     let chapters = [];
                     if (typeof searchDatabase !== 'undefined') {

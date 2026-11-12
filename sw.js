@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lex-cache-v28';
+const CACHE_NAME = 'lex-cache-v30';
 const ASSETS = [
   './',
   './index.html',
@@ -118,10 +118,43 @@ const ASSETS = [
   './inglese/style.css',
   './inglese/summaries/cap1.md',
 
-  // Introductory Subject: Storia Contemporanea
+  // Storia Contemporanea (Sabbatucci-Vidotto: 31 Capitoli + Quiz + Connessioni)
   './storia_contemporanea/index.html',
+  './storia_contemporanea/quiz.html',
+  './storia_contemporanea/connections.html',
   './storia_contemporanea/style.css',
   './storia_contemporanea/summaries/cap1.md',
+  './storia_contemporanea/summaries/cap2.md',
+  './storia_contemporanea/summaries/cap3.md',
+  './storia_contemporanea/summaries/cap4.md',
+  './storia_contemporanea/summaries/cap5.md',
+  './storia_contemporanea/summaries/cap6.md',
+  './storia_contemporanea/summaries/cap7.md',
+  './storia_contemporanea/summaries/cap8.md',
+  './storia_contemporanea/summaries/cap9.md',
+  './storia_contemporanea/summaries/cap10.md',
+  './storia_contemporanea/summaries/cap11.md',
+  './storia_contemporanea/summaries/cap12.md',
+  './storia_contemporanea/summaries/cap13.md',
+  './storia_contemporanea/summaries/cap14.md',
+  './storia_contemporanea/summaries/cap15.md',
+  './storia_contemporanea/summaries/cap16.md',
+  './storia_contemporanea/summaries/cap17.md',
+  './storia_contemporanea/summaries/cap18.md',
+  './storia_contemporanea/summaries/cap19.md',
+  './storia_contemporanea/summaries/cap20.md',
+  './storia_contemporanea/summaries/cap21.md',
+  './storia_contemporanea/summaries/cap22.md',
+  './storia_contemporanea/summaries/cap23.md',
+  './storia_contemporanea/summaries/cap24.md',
+  './storia_contemporanea/summaries/cap25.md',
+  './storia_contemporanea/summaries/cap26.md',
+  './storia_contemporanea/summaries/cap27.md',
+  './storia_contemporanea/summaries/cap28.md',
+  './storia_contemporanea/summaries/cap29.md',
+  './storia_contemporanea/summaries/cap30.md',
+  './storia_contemporanea/summaries/cap31.md',
+  './knowledge_base/storia_contemporanea/storia_contemporanea_completo.md',
 
   // Introductory Subject: Arte Contemporanea
   './arte_contemporanea/index.html',

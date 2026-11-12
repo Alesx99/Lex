@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa delle Connessioni - Lex Storia Contemporanea</title>
+    <meta name="description" content="Mappa concettuale interattiva delle relazioni geopolitiche, ideologiche ed economiche della Storia Contemporanea (1848 - XXI Secolo).">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lex Core (Shared UI & Logic) -->
+    <link rel="stylesheet" href="../js/lex_core.css">
+    <script src="../js/lex_core.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Centralized Glossary Database -->
+    <script src="../js/glossary_db.js"></script>
+    <style>
+        /* Specific page override for map view */
+        main {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-section {
+            flex: 1;
+            margin-top: 1rem;
+        }
+
+        .graph-edge.active {
+            stroke: var(--accent-gold);
+            stroke-width: 3px;
+            filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.7));
+        }
+
+        .graph-node:hover circle, .graph-node.active circle {
+            stroke: var(--accent-gold);
+            filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.6));
+        }
+
+        .graph-node-number {
+            fill: #ffffff;
+            font-weight: 700;
+        }
+
+        .panel-tag {
+            color: var(--accent-gold) !important;
+        }
+
+        .connection-item {
+            border-left-color: var(--accent-gold) !important;
+        }
+
+        .connections-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 1.5rem;
+            height: calc(100vh - 220px);
+            min-height: 620px;
+        }
+
+        @media (max-width: 1024px) {
+            .connections-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            main {
+                height: auto;
+            }
+        }
+
+        .map-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .map-svg {
+            width: 100%;
+            height: 100%;
+            min-height: 580px;
+            display: block;
+            user-select: none;
+        }
+
+        .graph-edge {
+            stroke: rgba(255, 255, 255, 0.12);
+            stroke-width: 1.8;
+            stroke-dasharray: 4, 3;
+            transition: all var(--transition-fast);
+        }
+
+        .graph-node {
+            cursor: pointer;
+            transition: transform var(--transition-fast);
+        }
+
+        .graph-node circle {
+            fill: #0c1527;
+            stroke: var(--border-color);
+            stroke-width: 2.2;
+            transition: all var(--transition-fast);
+        }
+
+        .graph-node text {
+            font-family: var(--font-sans);
+            pointer-events: none;
+            transition: fill var(--transition-fast);
+        }
+
+        .graph-node-label {
+            font-size: 11px;
+            fill: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .graph-node.active .graph-node-label {
+            fill: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* Filter Controls */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(220, 38, 38, 0.15);
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
+        /* Side Detail Panel */
+        .side-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            height: 100%;
+        }
+
+        .panel-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .panel-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+
+        .panel-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .panel-author {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .panel-section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .panel-desc {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .connection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .connection-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 8px;
+            padding: 0.9rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .connection-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
+        }
+
+        .conn-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .conn-desc {
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand">
+            <h1>Lex <span>Storia Contemporanea</span></h1>
+            <p>Mappa delle Connessioni Geopolitiche</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link" id="nav-hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Catalogo Capitoli
+            </a>
+            <a href="connections.html" class="nav-link active" id="nav-connections">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                Mappa Connessioni
+            </a>
+            <a href="quiz.html" class="nav-link" id="nav-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz Valutazione
+            </a>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" class="control-btn" title="Cambia Tema">
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Return Link to Root Hub -->
+        <a href="../index.html" class="back-hub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Torna al Portale Centrale
+        </a>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterGraph('all')">Tutti i Nodi (21)</button>
+            <button class="filter-btn" onclick="filterGraph('ottocento')">Ottocento & Nazioni</button>
+            <button class="filter-btn" onclick="filterGraph('guerre_totalitarismi')">Guerre Mondiali & Totalitarismi</button>
+            <button class="filter-btn" onclick="filterGraph('bipolarismo')">Guerra Fredda & Bipolarismo</button>
+            <button class="filter-btn" onclick="filterGraph('italia')">Linea Italia (1861-2005)</button>
+        </div>
+
+        <!-- Section: Interactive Visual Map -->
+        <section class="map-section">
+            <div class="connections-container">
+                
+                <!-- SVG Network Graph Card -->
+                <div class="map-card">
+                    <svg class="map-svg" id="connections-svg" viewBox="0 0 1000 650">
+                        <g id="edges-layer"></g>
+                        <g id="nodes-layer"></g>
+                    </svg>
+                </div>
+
+                <!-- Detail Panel -->
+                <div class="side-panel" id="side-panel">
+                    <div class="panel-header">
+                        <span class="panel-tag" id="panel-chapter-tag">Nodo Geopolitico</span>
+                        <h2 class="panel-title" id="panel-title">Seleziona un nodo</h2>
+                        <div class="panel-author" id="panel-author">Manuale di riferimento: <span>G. Sabbatucci, V. Vidotto</span></div>
+                    </div>
+
+                    <div class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        Inquadramento Storico
+                    </div>
+                    <p class="panel-desc" id="panel-desc">
+                        Clicca su uno dei nodi storici del grafo per esplorare le relazioni di causa-effetto, le influenze ideologiche e le conseguenze geopolitiche che hanno plasmato il mondo contemporaneo dal 1848 ad oggi.
+                    </p>
+
+                    <div class="panel-section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M18 8H6"></path><path d="M18 16H6"></path></svg>
+                        Connessioni Causali & Relazioni
+                    </div>
+                    <div class="connection-list" id="panel-connections-list">
+                        <!-- Connection list generated dynamically -->
+                    </div>
+
+                    <div style="margin-top: auto; padding-top: 1.5rem;">
+                        <button class="btn btn-primary" id="btn-read-summary" style="width: 100%; display: none;">Leggi Sintesi di Capitolo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Reading Modal Overlay -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-chapter-tag" id="modal-chapter-tag-view">Capitolo</span>
+                    <h3 class="modal-title" id="modal-chapter-title-view">Titolo del Capitolo</h3>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-close" onclick="window.print()" title="Stampa / Salva in PDF">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    </button>
+                    <button class="modal-close" onclick="closeSummary()" title="Chiudi finestra">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="progress-indicator"></div>
+            </div>
+            
+            <div class="modal-body" id="modal-body-content">
+                <div class="markdown-content" id="markdown-view">
+                    <!-- Rendered markdown goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Footer -->
+    <footer>
+        <p>Progetto realizzato da <a href="https://github.com/Alesx99" target="_blank">Alesx99</a>. Sintesi accademiche di Storia Contemporanea (Sabbatucci-Vidotto). &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Graph Script -->
+    <script>
+        // Graph Dataset: 21 Key Historical Nodes
+        const nodes = [
+            { id: 1, label: "1848", shortNum: "1", title: "Le Rivoluzioni del 1848", file: "summaries/cap1.md", cat: "ottocento", x: 80, y: 120, desc: "La 'Primavera dei Popoli' che abbatte l'equilibrio della Restaurazione di Vienna. A Parigi nasce la Seconda Repubblica; in Italia insorgono Milano e Venezia, si concede lo Statuto Albertino e Carlo Alberto avvia la Prima Guerra d'Indipendenza." },
+            { id: 2, label: "Borghesia & Lavoro", shortNum: "2", title: "Società Borghese e Movimento Operaio", file: "summaries/cap2.md", cat: "ottocento", x: 230, y: 90, desc: "L'ascesa irresistibile della borghesia, il positivismo di Darwin e Comte, la rivoluzione ferroviaria e la nascita della Prima Internazionale dei lavoratori con Marx e Bakunin." },
+            { id: 3, label: "Unità d'Italia", shortNum: "3", title: "L'Unità d'Italia e il Risorgimento", file: "summaries/cap3.md", cat: "italia", x: 180, y: 220, desc: "L'abilità diplomatica di Cavour, l'alleanza con la Francia a Plombières, la Seconda Guerra d'Indipendenza e la Spedizione dei Mille di Garibaldi che culmina nella proclamazione del Regno d'Italia nel 1861." },
+            { id: 4, label: "Bismarck & Reich", shortNum: "4", title: "L'Europa delle Grandi Potenze (1850-1890)", file: "summaries/cap4.md", cat: "ottocento", x: 380, y: 110, desc: "La vittoria prussiana a Sedan (1870), il crollo di Napoleone III, la nascita del Secondo Reich a Versailles e l'esperienza drammatica della Comune di Parigi, con l'equilibrio continentale bismarckiano." },
+            { id: 5, label: "USA & Meiji", shortNum: "5", title: "I Nuovi Mondi: Stati Uniti e Giappone", file: "summaries/cap5.md", cat: "ottocento", x: 80, y: 320, desc: "La Guerra Civile americana (1861-65) tra Nord industriale e Sud schiavista e, in Asia, la 'Restaurazione Meiji' (1868) che trasforma il Giappone feudale nella prima potenza industriale asiatica." },
+            { id: 6, label: "2ª Rivoluzione Ind.", shortNum: "6", title: "La Seconda Rivoluzione Industriale", file: "summaries/cap6.md", cat: "ottocento", x: 320, y: 230, desc: "L'età dell'acciaio, della chimica, dell'elettricità e del motore a scoppio. La nascita dei grandi monopoli industriali (trust, cartelli), il protezionismo e la medicina scientifica moderna." },
+            { id: 7, label: "Imperialismo", shortNum: "7", title: "Imperialismo e Spartizione Coloniale", file: "summaries/cap7.md", cat: "ottocento", x: 480, y: 180, desc: "La 'corsa all'Africa' (Scramble for Africa), la Conferenza di Berlino del 1884-85 e l'assoggettamento coloniale di Asia e Africa per materie prime e prestigio geopolitico." },
+            { id: 8, label: "Stato Unitario", shortNum: "8", title: "Stato e Società nell'Italia Unita", file: "summaries/cap8.md", cat: "italia", x: 230, y: 340, desc: "I governi della Destra Storica, la lotta al brigantaggio meridionale, la breccia di Porta Pia (1870), il trasformismo di Depretis, la Triplice Alleanza e la catastrofe coloniale di Crispi ad Adua (1896)." },
+            { id: 9, label: "Società di Massa", shortNum: "9", title: "Verso la Società di Massa", file: "summaries/cap9.md", cat: "ottocento", x: 450, y: 280, desc: "Suffragio universale maschile, scolarizzazione, nascita dei partiti moderni e dei sindacati, la questione femminile (suffragette) e l'enciclica sociale Rerum Novarum di Leone XIII." },
+            { id: 10, label: "Età Giolittiana", shortNum: "10", title: "L'Italia Giolittiana e il Decollo", file: "summaries/cap12.md", cat: "italia", x: 380, y: 380, desc: "Il decollo industriale del triangolo Milano-Torino-Genova, la neutralità nei conflitti di lavoro, le riforme sociali, il Patto Gentiloni e la conquista della Libia (1911-12)." },
+            { id: 11, label: "Grande Guerra", shortNum: "11", title: "La Prima Guerra Mondiale (1914-1918)", file: "summaries/cap13.md", cat: "guerre_totalitarismi", x: 600, y: 120, desc: "Dall'attentato di Sarajevo alle trincee di fango, la mobilitazione totale industriale, Caporetto e la riscossa del Piave, fino ai trattati punitivi di Versailles del 1919." },
+            { id: 12, label: "Rivoluzione Russa", shortNum: "12", title: "La Rivoluzione Bolscevica e l'URSS", file: "summaries/cap14.md", cat: "guerre_totalitarismi", x: 750, y: 80, desc: "La caduta dello zarismo nel febbraio 1917, le Tesi di Aprile di Lenin, la Rivoluzione d'Ottobre ('Tutto il potere ai Soviet'), la guerra civile dell'Armata Rossa e la nascita dell'Unione Sovietica." },
+            { id: 13, label: "Fascismo Italiano", shortNum: "13", title: "Il Fascismo e la Dittatura di Mussolini", file: "summaries/cap16.md", cat: "italia", x: 530, y: 360, desc: "Il mito della 'vittoria mutilata', lo squadrismo agrario, la marcia su Roma (1922), il delitto Matteotti, le leggi fascistissime, i Patti Lateranensi (1929) e le sciagurate leggi razziali del 1938." },
+            { id: 14, label: "Crisi del '29", shortNum: "14", title: "La Grande Crisi del 1929 e il New Deal", file: "summaries/cap17.md", cat: "guerre_totalitarismi", x: 650, y: 230, desc: "Il crollo di Wall Street ('giovedì nero'), la depressione economica mondiale che travolge la Repubblica di Weimar e la risposta keynesiana di Franklin D. Roosevelt con il New Deal." },
+            { id: 15, label: "Terzo Reich", shortNum: "15", title: "L'Età dei Totalitarismi e il Nazismo", file: "summaries/cap18.md", cat: "guerre_totalitarismi", x: 740, y: 200, desc: "L'ascesa di Hitler nel 1933, la dittatura monopartitica, le Leggi di Norimberga, l'espansionismo pangermanico e lo stalinismo sovietico con le grandi purghe e i gulag." },
+            { id: 16, label: "2ª Guerra Mondiale", shortNum: "16", title: "La Seconda Guerra Mondiale e la Shoah", file: "summaries/cap21.md", cat: "guerre_totalitarismi", x: 860, y: 160, desc: "L'invasione della Polonia, la caduta di Parigi, la svolta di Stalingrado, l'8 settembre italiano e la Resistenza partigiana, lo sterminio di 6 milioni di ebrei e l'apocalisse atomica di Hiroshima." },
+            { id: 17, label: "Guerra Fredda", shortNum: "17", title: "L'Ordine Bipolare e la Guerra Fredda", file: "summaries/cap22.md", cat: "bipolarismo", x: 780, y: 320, desc: "La divisione del mondo tra USA e URSS, la cortina di ferro, il Piano Marshall, la nascita della NATO e del Patto di Varsavia, la rivoluzione comunista in Cina e la guerra di Corea." },
+            { id: 18, label: "Decolonizzazione", shortNum: "18", title: "La Decolonizzazione e il Terzo Mondo", file: "summaries/cap23.md", cat: "bipolarismo", x: 680, y: 440, desc: "L'indipendenza dell'India con Gandhi, la nascita dello Stato di Israele (1948), la crisi del canale di Suez (1956), la conferenza di Bandung dei 'paesi non allineati' e l'emancipazione africana." },
+            { id: 19, label: "Repubblica & Boom", shortNum: "19", title: "L'Italia Repubblicana e il Miracolo", file: "summaries/cap24.md", cat: "italia", x: 520, y: 480, desc: "Il referendum del 2 giugno 1946, la Costituzione repubblicana del 1948, il centrismo degasperiano, il miracolo economico del '58-63, il centrosinistra, il '68 studentesco e lo Statuto dei Lavoratori." },
+            { id: 20, label: "Fine Bipolarismo", shortNum: "20", title: "Il Crollo del Muro e la Fine dell'URSS", file: "summaries/cap27.md", cat: "bipolarismo", x: 880, y: 380, desc: "La perestrojka e glasnost di Gorbaciov, la caduta del Muro di Berlino il 9 novembre 1989, la riunificazione tedesca e la formale dissoluzione dell'Unione Sovietica nel dicembre 1991." },
+            { id: 21, label: "Seconda Repubblica", shortNum: "21", title: "Seconda Repubblica e Globalizzazione", file: "summaries/cap31.md", cat: "italia", x: 750, y: 530, desc: "L'inchiesta Mani Pulite (Tangentopoli), la discesa in campo di Silvio Berlusconi (1994), il Trattato di Maastricht e la moneta unica Euro, fino all'11 settembre 2001 e all'inizio del XXI secolo." }
+        ];
+
+        // Links / Edges: Causal and Historical Relationships
+        const links = [
+            { source: 1, target: 3, desc: "I moti del 1848 e lo Statuto Albertino pongono le basi costituzionali e militari per il Risorgimento e l'unificazione sabauda guidata da Cavour." },
+            { source: 1, target: 2, desc: "L'insurrezione operaia parigina del giugno 1848 e la pubblicazione del Manifesto Comunista segnano la nascita autonoma del movimento operaio europeo." },
+            { source: 2, target: 6, desc: "Il boom industriale e l'accumulazione capitalistica ottocentesca sfociano nella Seconda Rivoluzione Industriale (acciaio, chimica, elettricità)." },
+            { source: 3, target: 8, desc: "La proclamazione del Regno d'Italia nel 1861 pone immediatamente la sfida dell'accentramento amministrativo, della questione meridionale e della presa di Roma." },
+            { source: 4, target: 7, desc: "L'equilibrio diplomatico bismarckiano garantisce la pace continentale in Europa, deviando le rivalità imperialistiche verso la spartizione coloniale dell'Africa." },
+            { source: 6, target: 7, desc: "La sovrapproduzione capitalistica e il fabbisogno di materie prime industriali guidano l'espansione imperialistica delle potenze verso mercati coloniali esclusivi." },
+            { source: 6, target: 9, desc: "L'urbanesimo e le grandi concentrazioni industriali portano alla nascita della società di massa, all'alfabetizzazione e alla diffusione dei sindacati e dei partiti moderni." },
+            { source: 8, target: 10, desc: "La crisi di fine secolo e la sconfitta di Adua portano all'abbandono dell'autoritarismo crispino a favore del riformismo liberale e dell'integrazione delle masse di Giolitti." },
+            { source: 9, target: 11, desc: "I nazionalismi esasperati della società di massa e la corsa agli armamenti fra i blocchi contrapposti (Intesa e Triplice) innescano la Grande Guerra a Sarajevo." },
+            { source: 10, target: 13, desc: "La crisi del sistema giolittiano e le tensioni dell'intervento nella prima guerra mondiale aprono la strada al collasso dello Stato liberale italiano e al fascismo." },
+            { source: 11, target: 12, desc: "I disastri bellici e la carestia provocati dalla Prima Guerra Mondiale portano al crollo dello zarismo e alla vittoria bolscevica di Lenin nella Rivoluzione d'Ottobre." },
+            { source: 11, target: 13, desc: "La crisi economica del dopoguerra, il risentimento per la 'vittoria mutilata' e il 'biennio rosso' alimentano lo squadrismo e la marcia su Roma di Mussolini." },
+            { source: 11, target: 14, desc: "I debiti interalleati e le iperinflazioni postbelliche creano l'instabilità monetaria globale che culmina nel crollo della Borsa di Wall Street nel 1929." },
+            { source: 14, target: 15, desc: "La disoccupazione di massa causata dalla crisi del '29 distrugge la Repubblica di Weimar e spiana la strada all'ascesa elettorale e dittatoriale di Hitler nel 1933." },
+            { source: 13, target: 15, desc: "Il regime fascista italiano fa da modello ideologico e istituzionale all'affermazione del Terzo Reich nazista, sfociando nell'Asse Roma-Berlino." },
+            { source: 15, target: 16, desc: "L'espansionismo razziale e militare nazista in Polonia scatena la Seconda Guerra Mondiale, culminata nell'orrore della Shoah e nei 50 milioni di morti." },
+            { source: 16, target: 17, desc: "La disfatta del nazifascismo e le conferenze di Yalta e Potsdam sanciscono la partizione bipolare dell'Europa e del mondo tra USA e blocco sovietico (Guerra Fredda)." },
+            { source: 16, target: 19, desc: "La caduta del fascismo (25 luglio 1943) e la Resistenza partigiana conducono alla vittoria della Repubblica nel referendum del 2 giugno 1946 e alla Costituzione." },
+            { source: 17, target: 18, desc: "L'indebolimento irreversibile delle potenze coloniali europee (Francia e Gran Bretagna) nella Seconda Guerra Mondiale accelera l'emancipazione dell'Asia e dell'Africa." },
+            { source: 17, target: 20, desc: "L'impossibilità per l'URSS di reggere la competizione tecnologica e militare con gli USA, unita alle riforme di Gorbaciov, porta al crollo del Muro di Berlino nel 1989." },
+            { source: 19, target: 21, desc: "Il collasso del sistema politico della Prima Repubblica sotto i colpi di Tangentopoli nel 1992 inaugura la Seconda Repubblica e l'era del bipolarismo berlusconiano." },
+            { source: 20, target: 21, desc: "La fine del bipolarismo e la riunificazione europea accelerano l'approvazione del Trattato di Maastricht (1992), l'introduzione dell'Euro e la globalizzazione." }
+        ];
+
+        // SVG rendering logic
+        const svg = document.getElementById('connections-svg');
+        const edgesLayer = document.getElementById('edges-layer');
+        const nodesLayer = document.getElementById('nodes-layer');
+
+        const panelTag = document.getElementById('panel-chapter-tag');
+        const panelTitle = document.getElementById('panel-title');
+        const panelAuthor = document.getElementById('panel-author');
+        const panelDesc = document.getElementById('panel-desc');
+        const panelConnList = document.getElementById('panel-connections-list');
+        const btnReadSummary = document.getElementById('btn-read-summary');
+
+        let activeNodeId = null;
+
+        function renderGraph(filteredNodes) {
+            edgesLayer.innerHTML = '';
+            nodesLayer.innerHTML = '';
+
+            const validIds = new Set(filteredNodes.map(n => n.id));
+
+            // Draw Edges
+            links.forEach(l => {
+                if (validIds.has(l.source) && validIds.has(l.target)) {
+                    const sNode = nodes.find(n => n.id === l.source);
+                    const tNode = nodes.find(n => n.id === l.target);
+                    if (sNode && tNode) {
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', sNode.x);
+                        line.setAttribute('y1', sNode.y);
+                        line.setAttribute('x2', tNode.x);
+                        line.setAttribute('y2', tNode.y);
+                        line.setAttribute('class', 'graph-edge');
+                        line.setAttribute('id', `edge-${l.source}-${l.target}`);
+                        edgesLayer.appendChild(line);
+                    }
+                }
+            });
+
+            // Draw Nodes
+            filteredNodes.forEach(n => {
+                const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                g.setAttribute('class', `graph-node ${activeNodeId === n.id ? 'active' : ''}`);
+                g.setAttribute('id', `node-${n.id}`);
+                g.setAttribute('transform', `translate(${n.x}, ${n.y})`);
+                g.onclick = () => selectNode(n.id);
+
+                // Circle
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('r', '20');
+                g.appendChild(circle);
+
+                // Number
+                const numText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                numText.setAttribute('class', 'graph-node-number');
+                numText.setAttribute('text-anchor', 'middle');
+                numText.setAttribute('dy', '5');
+                numText.setAttribute('font-size', '11');
+                numText.textContent = n.shortNum;
+                g.appendChild(numText);
+
+                // Label
+                const labelText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                labelText.setAttribute('class', 'graph-node-label');
+                labelText.setAttribute('text-anchor', 'middle');
+                labelText.setAttribute('y', '34');
+                labelText.textContent = n.label;
+                g.appendChild(labelText);
+
+                nodesLayer.appendChild(g);
+            });
+        }
+
+        function selectNode(id) {
+            activeNodeId = id;
+            const node = nodes.find(n => n.id === id);
+            if (!node) return;
+
+            if (typeof LexCore !== 'undefined') {
+                if (LexCore.trackConnectionNode) LexCore.trackConnectionNode();
+                if (LexCore.trackConnectionLink) LexCore.trackConnectionLink();
+            }
+
+            // Highlight node in UI
+            document.querySelectorAll('.graph-node').forEach(el => el.classList.remove('active'));
+            const activeEl = document.getElementById(`node-${id}`);
+            if (activeEl) activeEl.classList.add('active');
+
+            // Highlight connected edges
+            document.querySelectorAll('.graph-edge').forEach(edge => edge.classList.remove('active'));
+            links.forEach(l => {
+                if (l.source === id || l.target === id) {
+                    const edgeEl = document.getElementById(`edge-${l.source}-${l.target}`);
+                    if (edgeEl) edgeEl.classList.add('active');
+                }
+            });
+
+            // Update Panel details
+            panelTag.textContent = `Nodo ${node.shortNum} • ${node.label}`;
+            panelTitle.textContent = node.title;
+            panelAuthor.innerHTML = `Manuale: <span>G. Sabbatucci, V. Vidotto (Laterza)</span>`;
+            panelDesc.textContent = node.desc;
+
+            // Populate connections
+            panelConnList.innerHTML = '';
+            const connectedLinks = links.filter(l => l.source === id || l.target === id);
+
+            if (connectedLinks.length === 0) {
+                panelConnList.innerHTML = '<div style="color:var(--text-muted); font-size:0.85rem;">Nessuna connessione attiva nel filtro corrente.</div>';
+            } else {
+                connectedLinks.forEach(l => {
+                    const otherId = (l.source === id) ? l.target : l.source;
+                    const otherNode = nodes.find(n => n.id === otherId);
+                    if (!otherNode) return;
+
+                    const item = document.createElement('div');
+                    item.className = 'connection-item';
+                    item.onclick = () => selectNode(otherId);
+                    item.innerHTML = `
+                        <div class="conn-header">
+                            <span>${l.source === id ? '→ Conduce a:' : '← Originato da:'} ${otherNode.label}</span>
+                            <span>Nodo ${otherNode.shortNum}</span>
+                        </div>
+                        <div class="conn-desc">${l.desc}</div>
+                    `;
+                    panelConnList.appendChild(item);
+                });
+            }
+
+            // Set button to read summary
+            btnReadSummary.style.display = 'block';
+            btnReadSummary.onclick = () => openSummary(`Nodo ${node.shortNum}: ${node.title}`, node.file);
+        }
+
+        function filterGraph(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let filtered = nodes;
+            if (cat !== 'all') {
+                filtered = nodes.filter(n => n.cat === cat || (cat === 'italia' && (n.cat === 'italia' || n.id === 1 || n.id === 11 || n.id === 16)));
+            }
+            renderGraph(filtered);
+            if (activeNodeId) selectNode(activeNodeId);
+        }
+
+        // Summary Modal Reader Logic
+        const modal = document.getElementById('summary-modal');
+        const modalChapterTag = document.getElementById('modal-chapter-tag-view');
+        const modalChapterTitle = document.getElementById('modal-chapter-title-view');
+        const markdownView = document.getElementById('markdown-view');
+        const progressIndicator = document.getElementById('progress-indicator');
+        const modalBodyContent = document.getElementById('modal-body-content');
+
+        marked.setOptions({ gfm: true, breaks: true });
+
+        function openSummary(tag, filePath) {
+            modalChapterTag.textContent = tag;
+            modalChapterTitle.textContent = "Caricamento...";
+            markdownView.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--accent-gold);">Caricamento della sintesi di capitolo in corso...</div>`;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            fetch(filePath)
+                .then(r => {
+                    if (!r.ok) throw new Error("File non trovato");
+                    return r.text();
+                })
+                .then(text => {
+                    const firstHeader = text.match(/^#\s+(.+)$/m);
+                    modalChapterTitle.textContent = firstHeader ? firstHeader[1] : tag;
+                    markdownView.innerHTML = marked.parse(text);
+                    if (typeof LexCore !== 'undefined' && LexCore.trackChapterRead) {
+                        LexCore.trackChapterRead('storia_contemporanea/' + filePath);
+                    }
+                })
+                .catch(err => {
+                    markdownView.innerHTML = `<div style="color:#ef4444; padding:2rem;">Errore nel caricamento del file ${filePath}: ${err.message}</div>`;
+                });
+        }
+
+        function closeSummary() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        modal.addEventListener('click', e => { if (e.target === modal) closeSummary(); });
+        window.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeSummary(); });
+
+        modalBodyContent.addEventListener('scroll', () => {
+            const top = modalBodyContent.scrollTop;
+            const height = modalBodyContent.scrollHeight - modalBodyContent.clientHeight;
+            progressIndicator.style.width = height > 0 ? `${(top / height) * 100}%` : '0%';
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGraph(nodes);
+            selectNode(1); // Select 1848 by default
+        });
+    </script>
+</body>
+</html>
