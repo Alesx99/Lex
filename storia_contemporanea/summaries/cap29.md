@@ -4,6 +4,8 @@
 **Periodo Storico:** Anni '70 - 2000 | **Pagine Libro:** 662-680 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 29 bis: La Terza Rivoluzione Industriale, l'Economia della Conoscenza e le Contraddizioni della Globalizzazione](cap29_bis.md).
+
 
 ## Introduzione e Quadro Storico
 La crisi petrolifera del 73 suscitò nel mondo industrializzato una serie di interrogativi sui limiti dello sviluppo economico e sulla distruzione di risorse naturali da esso provocata. Grande diffusione ebbero di conseguenza le tematiche ecologiche e la ricerca di fonti alternative. Il successivo calo del prezzo del petrolio ha però indotto a ridimensionare la portata della crisi.
@@ -153,3 +155,6 @@ Più in generale, mentre sembrano arginate o arginabili alcune malattie degenera
 8. Nel mondo musulmano (ma anche in altre religioni) hanno assunto rilievo le correnti integraliste, o fondamentaliste.
 
 9. Ai progressi della medicina nella cura delle più diffuse malattie, ha fatto riscontro negli ultimi decenni la comparsa di nuovi virus, fra cui quello che provoca la Sindrome da immunodeficienza acquisita (Aids). Gli sviluppi della medicina e della genetica hanno aperto nuovi problemi nei rapporti fra scienza ed etica. I limiti degli interventi sulla natura e sulla vita costituiscono il campo di riflessione della bioetica.
+
+---
+[→ Vai all'Approfondimento: Capitolo 29 bis](cap29_bis.md) | [Vai all'Indice Generale](../index.html)

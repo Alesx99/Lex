@@ -4,6 +4,8 @@
 **Periodo Storico:** 1850-1875 | **Pagine Libro:** 21-46 | **Tempo di Lettura:** ~10 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 2 bis: Materialismo storico, Prima Internazionale e la frattura teorica tra Marx e Bakunin](cap2_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Al conservatorismo politico che, dopo il fallimento delle rivoluzioni del '48-49, caratterizzava la situazione europea, faceva riscontro un processo di profondo mutamento sociale. Il ventennio successivo al '48 vide la crescita della borghesia: il ceto sociale attraversato da notevoli differenziazioni interne e tuttavia portatore di uno stile di vita e di un insieme di valori sostanzialmente unitari.
@@ -183,3 +185,6 @@ Mentre i vertici vaticani inseguivano il sogno di un impossibile ritorno all'ant
 10. Bakunin, tra l'altro, riteneva che, una volta abbattuto il potere statale, il comunismo si sarebbe instaurato spontaneamente, senza dunque la fase di "dittatura del proletariato" prevista da Marx. Egli considerava, inoltre, le masse diseredate (e non il proletariato industriale) il soggetto della rivoluzione. Per quest'ultimo motivo il bakuninismo si diffuse soprattutto nei paesi più arretrati.
 
 11. Di fronte alla società borghese, il mondo cattolico da un lato assunse un atteggiamento di dura condanna (Sillabo, 1864), dall'altro, si fece promotore, con i movimenti cristianosociali, di un intervento dello Stato a favore dei lavoratori e di un associazionismo cattolico.
+
+---
+[→ Vai all'Approfondimento: Capitolo 2 bis](cap2_bis.md) | [Vai all'Indice Generale](../index.html)

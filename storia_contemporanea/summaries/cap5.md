@@ -4,6 +4,8 @@
 **Periodo Storico:** 1850-1900 | **Pagine Libro:** 97-112 | **Tempo di Lettura:** ~8 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 5 bis: La Guerra Civile Americana e la Restaurazione Meiji: due modelli di transizione industriale](cap5_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Alla metà dell'800 gli Stati Uniti erano un paese in crescente espansione, benché attraversato da forti differenze tra le diverse zone: il NordEst industrializzato, il Sud agricolo e tradizionalista nelle cui grandi piantagioni lavoravano milioni di schiavi neri, gli Stati dell'Ovest con una popolazione di liberi agricoltori e di allevatori di bestiame. Le popolazioni dell'Ovest cominciarono intorno alla metà del secolo a stringere invece i loro rapporti con il NordEst. Lo scontro sull'estensione della schiavitù ai nuovi territori dell'Unione vide dunque una contrapposizione tra gli Stati dell'Ovest e del NordEst e quelli del Sud. Questa nuova dislocazione dei rapporti reciproci tra le varie zone del paese trovò riscontro nella crisi del Partito democratico e nella nascita del Partito repubblicano (che faceva proprie sia le rivendicazioni protezionistiche degli industriali settentrionali sia le richieste di terre dei coloni dell'Ovest, e si qualificava in senso nettamente antischiavista).
@@ -106,3 +108,6 @@ Procedeva intanto l'opera di modernizzazione economica: sia nell'agricoltura, do
 4. L'isolamento della Cina dal resto del mondo fu violentemente interrotto, alla metà dell'800, dalla pressione esercitata, dopo le due "guerre dell'oppio" (1839-42 e 1856-60), dagli Stati europei (soprattutto dall'Inghilterra), che imposero al paese l'apertura al commercio straniero. Diverse furono invece, in Giappone, le conseguenze dell'impatto con l'Occidente. Anche qui fu la costrizione a permettere, dopo i "trattati ineguali" del 1858, la penetrazione economica delle grandi potenze. Ma l'umiliazione subita spinse i grandi feudatari e i samurai a una rivolta contro lo shogun, che di fatto esercitava il potere di sovrano assoluto relegando l'imperatore a un ruolo puramente simbolico.
 
 5. La "restaurazione Meiji" (1868) si risolse in una modernizzazione accelerata dell'intera società giapponese: una "rivoluzione dall'alto" che coinvolse l'economia e la legislazione, il sistema politico e i rapporti sociali, e che consentì al Giappone di compiere in pochi anni la transizione dal feudalesimo allo Stato moderno.
+
+---
+[→ Vai all'Approfondimento: Capitolo 5 bis](cap5_bis.md) | [Vai all'Indice Generale](../index.html)

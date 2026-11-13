@@ -4,6 +4,8 @@
 **Periodo Storico:** 1919-1929 | **Pagine Libro:** 322-341 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 15 bis: L'ordine geopolitico di Versailles e l'iperinflazione di Weimar: le radici dell'instabilità europea](cap15_bis.md).
+
 
 ## Introduzione e Quadro Storico
 La guerra era stata un'esperienza di massa senza precedenti e fece sentire i suoi effetti in ogni campo della vita sociale; tutti i valori tradizionali ne furono scossi. Il problema maggiore che i governi si trovarono di fronte fu quello dell'inserimento dei reduci. La politica si fece sempre più fenomeno di massa.
@@ -152,3 +154,6 @@ Un anno dopo la firma del patto, la Germania fu ammessa alla Società delle nazi
 10. Grazie al piano Dawes del 1924, la Germania poté fruire di prestiti internazionali (soprattutto statunitensi), che le avrebbero consentito una rapida ripresa economica.
 
 11. Con il piano Dawes iniziava una fase di distensione internazionale, confermata dagli accordi di Locarno del 1925, che normalizzavano i rapporti francotedeschi. Questa fase si interruppe alla fine del decennio in coincidenza con la crisi economica internazionale.
+
+---
+[→ Vai all'Approfondimento: Capitolo 15 bis](cap15_bis.md) | [Vai all'Indice Generale](../index.html)

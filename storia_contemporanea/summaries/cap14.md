@@ -4,6 +4,8 @@
 **Periodo Storico:** 1917-1924 | **Pagine Libro:** 302-321 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 14 bis: Da Pietrogrado a Brest-Litovsk: le Tesi di Aprile, la presa del Palazzo d'Inverno e il Comunismo di Guerra](cap14_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Nel marzo '17, la rivolta degli operai e dei soldati di Pietrogrado provocò la caduta dello zar e la formazione di un governo provvisorio dominato dalle forze liberalmoderate. Nel maggio si formò un secondo governo provvisorio cui parteciparono tutti i partiti, a eccezione dei bolscevichi. Frattanto, accanto al potere "legale" del governo veniva crescendo il potere parallelo dei soviet, i consigli eletti direttamente dagli operai e dai soldati.
@@ -138,3 +140,6 @@ Il primo grave scontro all'interno del gruppo dirigente ebbe per oggetto il prob
 8. Nel 1922 nacque l'Unione delle repubbliche socialiste sovietiche (Urss). La nuova costituzione comportava di fatto la dittatura del Partito comunista, l'unico del quale fosse consentita l'esistenza. I bolscevichi si proposero anche di trasformare cultura e valori tradizionali: da ciò la lotta contro la Chiesa ortodossa, nuove norme sulla famiglia e i rapporti tra i sessi, l'impegno nell'istruzione e nell'educazione dei giovani. In campo culturale, i primi anni '20 furono una stagione di fioritura delle avanguardie artistiche.
 
 9. Con l'ascesa di Stalin alla segreteria del partito (aprile '22) e la malattia di Lenin (morto nel gennaio '24), si scatenò una dura lotta all'interno del gruppo dirigente bolscevico. Stalin riuscì dapprima a emarginare Trotzkij (fautore di un continuo sviluppo e di una continua estensione del processo rivoluzionario), contrapponendogli la teoria del "socialismo in un solo paese". Quindi si sbarazzò dell""opposizione di sinistra" (Zinov'ev, Kamenev), che chiedeva la fine della Nep e l'accelerazione dello sviluppo industriale. Si affermava sempre più il suo potere personale.
+
+---
+[→ Vai all'Approfondimento: Capitolo 14 bis](cap14_bis.md) | [Vai all'Indice Generale](../index.html)

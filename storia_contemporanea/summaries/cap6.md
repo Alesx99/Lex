@@ -4,6 +4,8 @@
 **Periodo Storico:** 1870-1914 | **Pagine Libro:** 113-129 | **Tempo di Lettura:** ~8 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 6 bis: Dalla Grande Depressione (1873-1896) al capitalismo monopolistico: trust, cartelli e capitale finanziario](cap6_bis.md).
+
 
 ## Introduzione e Quadro Storico
 L'ultimo trentennio dell'800 vide una profonda trasformazione economica ("seconda rivoluzione industriale"). La crisi di sovrapproduzione del 1873 dette inizio a una fase di rallentamento dello sviluppo durata oltre un ventennio. La prolungata caduta dei prezzi che le si accompagnò era però conseguenza soprattutto di profonde trasformazioni organizzative e innovazioni tecnologiche.
@@ -136,3 +138,6 @@ Per quanto riguarda l'Asia e l'Africa, anch'esse conobbero nella seconda metà d
 9. Questo periodo vide anche la trasformazione scientifica della medicina, dovuta a quattro fattori: prevenzione e contenimento delle malattie epidemiche attraverso la diffusione delle pratiche igieniste; identificazione dei microrganismi; progressi della farmacologia; nuova ingegneria ospedaliera.
 
 10. I progressi della medicina e dell'igiene, sommandosi allo sviluppo dell'industria alimentare, determinarono in Europa una riduzione della mortalità. Nonostante il calo delle nascite verificatosi nei paesi economicamente più avanzati (dovuto alla diffusione dei metodi contraccettivi e a una nuova mentalità tesa a programmare razionalmente la famiglia), si ebbe così un sensibile aumento della popolazione.
+
+---
+[→ Vai all'Approfondimento: Capitolo 6 bis](cap6_bis.md) | [Vai all'Indice Generale](../index.html)

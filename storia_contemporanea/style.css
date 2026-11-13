@@ -460,6 +460,42 @@ main {
     color: var(--accent-gold);
 }
 
+/* Monographic In-depth Bis Cards */
+.chapter-card-bis {
+    border-color: rgba(212, 175, 55, 0.35);
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.05) 0%, var(--bg-card) 100%);
+}
+
+.chapter-card-bis::before {
+    opacity: 0.6;
+    background: linear-gradient(90deg, #d4af37, #f59e0b);
+}
+
+.chapter-card-bis:hover {
+    border-color: var(--accent-gold);
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.18);
+}
+
+.chapter-card-bis:hover::before {
+    opacity: 1;
+}
+
+.badge-bis {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--accent-gold);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    margin-left: 0.4rem;
+    vertical-align: middle;
+}
+
 .author {
     font-size: 0.85rem;
     color: var(--text-muted);

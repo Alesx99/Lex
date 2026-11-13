@@ -1198,6 +1198,15 @@ const timelineDatabase = [
         link: "storia_contemporanea/index.html?open=summaries/cap1.md"
     },
     {
+        id: "stoc_1848_francia",
+        year: 1848,
+        title: "I Moti Parigini del '48: Diritto al Lavoro e Giornate di Giugno",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "A Parigi la rivoluzione di febbraio rovescia Luigi Filippo: istituzione degli ateliers nationaux, scontro di classe nelle tragiche Giornate di Giugno e ascesa plebiscitaria di Luigi Napoleone Bonaparte.",
+        link: "storia_contemporanea/index.html?open=summaries/cap1_bis.md"
+    },
+    {
         id: "stoc_1859",
         year: 1859,
         title: "Seconda Guerra d'Indipendenza Italiana",
@@ -1223,6 +1232,15 @@ const timelineDatabase = [
         subjectLabel: "Storia Contemporanea",
         description: "La Prussia sconfigge Napoleone III a Sedan proclamando l'Impero tedesco a Versailles; l'Italia ne approfitta per liberare Roma attraverso la Breccia di Porta Pia.",
         link: "storia_contemporanea/index.html?open=summaries/cap4.md"
+    },
+    {
+        id: "stoc_1871_comune",
+        year: 1871,
+        title: "La Comune di Parigi e la Settimana di Sangue",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "Primo autogoverno socialista della storia sorto a Parigi dopo Sedan, represso ferocemente dall'esercito di Versailles con ventimila fucilazioni durante la 'Semaine Sanglante'.",
+        link: "storia_contemporanea/index.html?open=summaries/cap4_bis.md"
     },
     {
         id: "stoc_1884",
@@ -1340,6 +1358,15 @@ const timelineDatabase = [
         subjectLabel: "Storia Contemporanea",
         description: "I movimenti studenteschi e operai scuotono l'Occidente contestando il modello capitalistico e autoritario; a Praga i carri armati del Patto di Varsavia soffocano il 'socialismo dal volto umano'.",
         link: "storia_contemporanea/index.html?open=summaries/cap26.md"
+    },
+    {
+        id: "stoc_1969_piazza_fontana",
+        year: 1969,
+        title: "Strage di Piazza Fontana e Avvio degli Anni di Piombo",
+        subject: "storia_contemporanea",
+        subjectLabel: "Storia Contemporanea",
+        description: "L'attentato neofascista alla Banca dell'Agricoltura a Milano (17 morti) inaugura la 'strategia della tensione' e la drammatica stagione della violenza politica eversiva in Italia.",
+        link: "storia_contemporanea/index.html?open=summaries/cap28_bis.md"
     },
     {
         id: "stoc_1978",

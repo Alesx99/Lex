@@ -4,6 +4,8 @@
 **Periodo Storico:** 1870-1914 | **Pagine Libro:** 130-147 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 7 bis: L'Imperialismo e la spartizione dell'Africa: modelli interpretativi (Hobson, Lenin, Schumpeter) e scontro coloniale](cap7_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Vari fattori determinarono, negli ultimi decenni dell'800, quella corsa alla conquista coloniale che costituì il più caratteristico tratto dell'imperialismo europeo. Vi fu certamente la spinta esercitata dagli interessi economici (ricerca di materie prime a basso costo e di sbocchi per i prodotti industriali e i capitali d'investimento), ma non meno importante fu l'affermarsi di tendenze politicoideologiche che affiancavano a un acceso nazionalismo la fede nella missione civilizzatrice dell'uomo bianco.
@@ -123,3 +125,6 @@ Un ulteriore elemento di tensione fu costituito dalla scoperta, nel 1885-86, di 
 7. Poco dopo (1884-85), la conferenza di Berlino, convocata per risolvere i contrasti internazionali suscitati dall'espansione belga nel Congo, stabiliva i princìpi della spartizione dell'Africa e riconosceva il possesso di vari territori a Belgio, Francia, Germania e Inghilterra. L'incidente di Fashoda (Sudan) del 1898, quando Francia e Inghilterra furono a un passo dalla guerra, mostrò quali rischi di conflitti internazionali comportasse la corsa alla conquista.
 
 8. In Sud Africa l'Inghilterra, soprattutto attraverso la politica di Cecil Rhodes, mirò ad estendere il suo dominio dalla Colonia del Capo alle due repubbliche boere dell'Orange e del Transvaal, ricche di giacimenti d'oro e di diamanti. Il disegno poté realizzarsi solo dopo una lunga e sanguinosa guerra, vinta dalla Gran Bretagna contro i boeri (1899-1902).
+
+---
+[→ Vai all'Approfondimento: Capitolo 7 bis](cap7_bis.md) | [Vai all'Indice Generale](../index.html)

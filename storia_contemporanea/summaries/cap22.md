@@ -4,6 +4,8 @@
 **Periodo Storico:** 1945-1960 | **Pagine Libro:** 496-526 | **Tempo di Lettura:** ~12 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 22 bis: La genesi dell'ordine bipolare: Dottrina Truman, Piano Marshall e la divisione della Germania (1945-1949)](cap22_bis.md).
+
 
 ## Introduzione e Quadro Storico
 La seconda guerra mondiale sancì la crisi definitiva della supremazia europea e l'emergere di due superpotenze, Usa e Urss. Nasceva così un nuovo equilibrio internazionale di tipo bipolare. Gli orrori della guerra, le rivelazioni sullo sterminio degli ebrei, lo spaventoso potere distruttivo della bomba atomica colpirono profondamente l'opinione pubblica e spinsero le potenze vincitrici a cercare basi più stabili e regole nuove per i rapporti internazionali.
@@ -209,3 +211,6 @@ Eletto alla presidenza della Repubblica nel dicembre dello stesso anno, De Gaull
 12. Negli anni '50 e '60, mentre l'economia britannica visse un prolungato ristagno, in tutti i paesi dell'Europa occidentale si verificò una crescita economica sostenuta. Rapida fu soprattutto la ripresa della Germania favorita anche da una notevole stabilità politica. Il definitivo ridimensionamento politico dell'Europa, conseguenza del conflitto mondiale, favorì l'integrazione economica dei vari Stati, dapprima con la Comunità europea del carbone e dell'acciaio (Ceca) e poi con l'istituzione, nel 1957, della Comunità economica europea (Cee).
 
 13. La Francia attraversò negli anni '50 una grave crisi istituzionale, legata al problema algerino. Nel '58 De Gaulle assunse la guida del governo, varando una nuova costituzione (con cui nasceva la Quinta Repubblica) e concedendo l'indipendenza all'Algeria. In politica estera De Gaulle seguì una politica finalizzata alla creazione di un'Europa indipendente dai due blocchi ed egemonizzata dalla Francia.
+
+---
+[→ Vai all'Approfondimento: Capitolo 22 bis](cap22_bis.md) | [Vai all'Indice Generale](../index.html)

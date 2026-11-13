@@ -4,6 +4,8 @@
 **Periodo Storico:** 1945-1975 | **Pagine Libro:** 527-548 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 23 bis: La Bandung afroasiatica (1955) e la guerra d'indipendenza d'Algeria: il crollo degli imperi coloniali e il Movimento dei Non Allineati](cap23_bis.md).
+
 
 ## Introduzione e Quadro Storico
 La seconda guerra mondiale sancì la definitiva crisi del colonialismo e l'affermazione, a livello internazionale, del principio di autodeterminazione.
@@ -150,3 +152,6 @@ Gli anni del secondo conflitto mondiale - e, in una certa misura, anche quelli d
 9. Sul piano della politica internazionale, i paesi di nuova indipendenza cercarono una piattaforma comune (a partire dalla conferenza di Bandung del '55) nel "non allineamento". Progressivamente, però, tale neutralismo rispetto al contrasto EstOvest lasciò il campo, nella realtà, allo schieramento di molti paesi non allineati in senso filocomunista o filooccidentale. Sul piano economico, il Terzo Mondo era accomunato dalla realtà del sottosviluppo, ovvero dall'incapacità a risolvere i problemi di arretratezza economica resi ancor più gravi dall'aumento assai rapido della popolazione.
 
 10. I paesi dell'America Latina godevano da tempo dell'indipendenza politica ma si trovavano tuttavia in condizioni di dipendenza economica dagli Stati Uniti (che esercitavano una sorta di tutela su tutto il continente). L'instabilità politica dell'America centrale e meridionale si caratterizzò nell'oscillazione fra liberalismo, populismo e autoritarismo. Fra le esperienze più significative, quella del regime populistaautoritario stabilito da Perón in Argentina. Di grande rilievo, per l'attrazione che esercitò in tutta l'America Latina, fu la rivoluzione cubana guidata da Castro (1959) che diede al nuovo regime un orientamento comunista.
+
+---
+[→ Vai all'Approfondimento: Capitolo 23 bis](cap23_bis.md) | [Vai all'Indice Generale](../index.html)

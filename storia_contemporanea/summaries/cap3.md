@@ -4,6 +4,8 @@
 **Periodo Storico:** 1849-1861 | **Pagine Libro:** 47-65 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 3 bis: La dialettica risorgimentale: Cavour, Garibaldi e la 'conquista regia'](cap3_bis.md).
+
 
 ## Introduzione e Quadro Storico
 In Italia, la "seconda restaurazione" - cioè il ritorno dei sovrani legittimi dopo il fallimento delle rivoluzioni del '48-49 - bloccò ogni esperimento riformatore e frenò pesantemente lo sviluppo economico dei vari Stati, mentre veniva sancita l'egemonia austriaca nella penisola. Aumentava anche il fossato che separava i sovrani dall'opinione pubblica borghese, fenomeno evidente soprattutto nei due Stati che più perseguirono una politica repressiva e autoritaria: lo Stato pontificio e il Regno delle due Sicilie.
@@ -131,3 +133,6 @@ Va infine ricordato che l'unità non sarebbe stata raggiunta, non comunque in te
 7. Rimanevano scontenti i democratici, che cominciarono a pensare a una prosecuzione della lotta attraverso una spedizione nel Mezzogiorno. Nel maggio 1860 Garibaldi sbarcò in Sicilia con mille volontari e, sconfitte le truppe borboniche, formò un governo provvisorio. Le aspirazioni dei contadini - desiderosi anzitutto di una trasformazione dei rapporti di proprietà - causarono presto la fine del clima di concordia che aveva salutato i "liberatori". Spaventati dalle agitazioni agrarie, i proprietari terrieri guardarono con favore all'annessione al Piemonte.
 
 8. Dopo lo sbarco di Garibaldi in Calabria e il suo ingresso a Napoli, divenne urgente per il governo piemontese un'iniziativa al Sud tale da evitare complicazioni internazionali e garantire alla monarchia sabauda il controllo della situazione. Con l'intervento dell'esercito piemontese e le annessioni, la liberazione del Sud veniva così ricondotta entro i binari della politica cavouriana. Il 17 marzo 1861 Vittorio Emanuele II fu proclamato re d'Italia.
+
+---
+[→ Vai all'Approfondimento: Capitolo 3 bis](cap3_bis.md) | [Vai all'Indice Generale](../index.html)

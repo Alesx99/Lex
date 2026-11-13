@@ -4,6 +4,8 @@
 **Periodo Storico:** 1890-1914 | **Pagine Libro:** 214-233 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 10 bis: La crisi della Terza Repubblica francese e le radici della Grande Guerra: dall'Affaire Dreyfus alla Weltpolitik guglielmina](cap10_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Tra l'ultimo decennio dell'800 e i primi anni del '900 si delineò un mutamento nelle alleanze che segnò la crisi del sistema bismarckiano. Attraverso l'alleanza tra Francia e Russia, l""Intesa cordiale" francoinglese, l'accordo anglorusso sulle questioni asiatiche, si venne a costituire uno schieramento - poi detto Triplice intesa - contrapposto alla Triplice alleanza e di questa potenzialmente più forte.
@@ -170,3 +172,6 @@ Quello dei "giovani turchi" era un movimento composto in prevalenza da intellett
 11. Il decennio precedente la prima guerra mondiale vide un acuirsi dei contrasti internazionali. Dalle due crisi marocchine (1905 e 1911) la Germania uscì sconfitta, mentre la Francia ottenne infine un protettorato sul Marocco. Più gravi furono gli avvenimenti nella penisola balcanica.
 
 12. L'annessione della Bosnia-Erzegovina (1908) da parte dell'Austria, la guerra italoturca (1911), le due guerre balcaniche (1912-13) segnarono un profondo rivolgimento degli equilibri in questa area. La Turchia - dove nel 1908 si era verificata la rivoluzione dei "giovani turchi" - veniva definitivamente estromessa dall'Europa, mentre si faceva sempre più acuto il contrasto tra Austria e Serbia (protetta dalla Russia).
+
+---
+[→ Vai all'Approfondimento: Capitolo 10 bis](cap10_bis.md) | [Vai all'Indice Generale](../index.html)

@@ -4,6 +4,8 @@
 **Periodo Storico:** 1896-1914 | **Pagine Libro:** 244-268 | **Tempo di Lettura:** ~10 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 12 bis: Il sistema giolittiano tra riformismo e contraddizioni: triangolo industriale, patto Gentiloni e critica meridionalista](cap12_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Negli ultimi anni dell'800, si fece strada tra le forze conservatrici italiane la tentazione di risolvere in senso autoritario le tensioni politiche e sociali.
@@ -189,3 +191,6 @@ Gli echi della "settimana rossa" non si erano ancora spenti, quando lo scoppio d
 13. In età giolittiana si sviluppò, in campo cattolico, il movimento democraticocristiano, condannato dal nuovo papa Pio X. Ebbero un grande sviluppo, contemporaneamente, le organizzazioni sindacali "bianche". Sul piano politico le forze clericomoderate stabilirono alleanze elettorali, in funzione conservatrice, con i liberali: questa linea politica avrebbe avuto piena consacrazione, nelle elezioni del 1913, col "patto Gentiloni".
 
 14. I mutamenti in atto nel sistema politico italiano alla vigilia della grande guerra (sviluppo del nazionalismo, accresciuto peso dei cattolici, prevalenza dei rivoluzionari nel Psi) segnavano la progressiva crisi della politica giolittiana, sempre meno in grado di controllare la radicalizzazione politica che si stava verificando (e di cui, nel '14, la "settimana rossa" fu un rilevante sintomo). In questa situazione la guerra avrebbe significato la fine del giolittismo.
+
+---
+[→ Vai all'Approfondimento: Capitolo 12 bis](cap12_bis.md) | [Vai all'Indice Generale](../index.html)

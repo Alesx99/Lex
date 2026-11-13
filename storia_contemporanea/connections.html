@@ -345,6 +345,7 @@
 
                     <div style="margin-top: auto; padding-top: 1.5rem;">
                         <button class="btn btn-primary" id="btn-read-summary" style="width: 100%; display: none;">Leggi Sintesi di Capitolo</button>
+                        <button class="btn btn-secondary" id="btn-read-bis" style="width: 100%; margin-top: 0.6rem; display: none; background: rgba(212, 175, 55, 0.15); color: var(--accent-gold); border: 1px solid rgba(212, 175, 55, 0.4);">Approfondimento Monografico (Bis)</button>
                     </div>
                 </div>
             </div>
@@ -450,6 +451,7 @@
         const panelDesc = document.getElementById('panel-desc');
         const panelConnList = document.getElementById('panel-connections-list');
         const btnReadSummary = document.getElementById('btn-read-summary');
+        const btnReadBis = document.getElementById('btn-read-bis');
 
         let activeNodeId = null;
 
@@ -567,9 +569,15 @@
                 });
             }
 
-            // Set button to read summary
+            // Set buttons to read summary and bis monographic focus
             btnReadSummary.style.display = 'block';
             btnReadSummary.onclick = () => openSummary(`Nodo ${node.shortNum}: ${node.title}`, node.file);
+
+            if (btnReadBis) {
+                const bisFile = node.file.replace('.md', '_bis.md');
+                btnReadBis.style.display = 'block';
+                btnReadBis.onclick = () => openSummary(`Approfondimento • ${node.label}`, bisFile);
+            }
         }
 
         function filterGraph(cat) {
@@ -597,6 +605,9 @@
         function openSummary(tag, filePath) {
             modalChapterTag.textContent = tag;
             modalChapterTitle.textContent = "Caricamento...";
+            if (modalBodyContent) {
+                modalBodyContent.scrollTop = 0;
+            }
             markdownView.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--accent-gold);">Caricamento della sintesi di capitolo in corso...</div>`;
             modal.classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -626,6 +637,33 @@
 
         modal.addEventListener('click', e => { if (e.target === modal) closeSummary(); });
         window.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeSummary(); });
+
+        // Intercept clicks on links inside markdownView (internal links between base and bis chapters, or return to index)
+        markdownView.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            // Handle internal markdown chapter navigation
+            if (href.endsWith('.md')) {
+                e.preventDefault();
+                let targetPath = href;
+                if (!targetPath.startsWith('summaries/') && !targetPath.includes('/')) {
+                    targetPath = 'summaries/' + targetPath;
+                }
+                const cleanTag = targetPath.includes('_bis') ? 'Approfondimento Monografico' : 'Sintesi Capitolo';
+                openSummary(cleanTag, targetPath);
+                return;
+            }
+
+            // Handle return to catalog / index
+            if (href.includes('index.html') || href === '#' || href === './') {
+                e.preventDefault();
+                closeSummary();
+                return;
+            }
+        });
 
         modalBodyContent.addEventListener('scroll', () => {
             const top = modalBodyContent.scrollTop;

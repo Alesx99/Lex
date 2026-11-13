@@ -4,6 +4,8 @@
 **Periodo Storico:** 1958-1992 | **Pagine Libro:** 636-661 | **Tempo di Lettura:** ~11 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 28 bis: La notte della Repubblica: la strage di Piazza Fontana (1969), la violenza politica brigatista e il rapimento Moro (1978)](cap28_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Alla fine degli anni '80 si era sviluppato nell'opinione pubblica e nelle convinzioni dei singoli il rifiuto dei criteri che fin allora avevano regolato la vita politica in Italia e si era nel contempo accentuata l'aspettativa del nuovo.
@@ -154,3 +156,6 @@ Dopo le elezioni, la maggioranza di pentapartito si ricostituì faticosamente gr
 11. Negli anni '80, esauritasi l'esperienza della solidarietà nazionale, si ebbero per la prima volta governi a guida non democristiana (con Spadolini e poi con Craxi). Tra i problemi maggiori affrontati dall'esecutivo vi furono quelli dell'espansione abnorme della spesa pubblica e della malavita organizzata (mentre il terrorismo, dopo la legge sui "pentiti", risultava sostanzialmente sconfitto).
 
 12. I contrasti interni alla maggioranza "pentapartita" portarono, nell'87, alla crisi del governo Craxi e a nuove elezioni anticipate, che segnarono un progresso del Psi e un calo del Pci. Dopo le elezioni, la coalizione si ricostituiva, dando vita a tre successivi governi a guida democristiana (Goria, De Mita, Andreotti). Si accentuavano frattanto nell'opinione pubblica la critica alle disfunzioni del sistema politico e l'attesa delle riforme istituzionali.
+
+---
+[→ Vai all'Approfondimento: Capitolo 28 bis](cap28_bis.md) | [Vai all'Indice Generale](../index.html)

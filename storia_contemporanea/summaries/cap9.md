@@ -4,6 +4,8 @@
 **Periodo Storico:** Fine Ottocento - 1914 | **Pagine Libro:** 186-213 | **Tempo di Lettura:** ~11 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 9 bis: La società di massa e la Seconda Internazionale: nazionalizzazione delle masse, ortodossia di Kautsky e revisionismo di Bernstein](cap9_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Alla fine dell'800 cominciarono a delinearsi, nell'Europa occidentale e negli Stati Uniti, i caratteri della moderna società di massa. La maggioranza della popolazione viveva ormai nei centri urbani ed era inserita nel circolo dell'economia di mercato; i rapporti sociali si facevano più intensi e si basavano non più sulle comunità tradizionali, bensì sulle grandi istituzioni nazionali (apparati statali e organizzazioni di massa).
@@ -205,3 +207,6 @@ Anche in Italia, a partire dall'inizio del '900, vi fu una rinascita idealistica
 11. Sul piano delle ideologie politiche, nell'Europa di fine '800 trovò larga diffusione il nazionalismo, ormai divenuto una corrente nettamente conservatrice. In varia commistione con esso - e grazie all'appello alle componenti irrazionali della psicologia collettiva - si diffusero tendenze apertamente razziste e antisemite. In Germania e nell'Europa orientale il nazionalismo prese anche la forma, rispettivamente, di pangermanesimo e panslavismo. Espressione particolare del generale risveglio nazionalistico, ma anche reazione contro l'antisemitismo, fu il sionismo.
 
 12. Sul piano culturale, la fine del secolo vide la crisi del positivismo, a favore del diffondersi di nuove correnti che ponevano l'accento sul ruolo del soggetto, considerando elementi costitutivi dell'attività umana fattori quali l'istinto e la volontà. Le certezze del positivismo in campo scientifico entrarono in crisi anche per le scoperte della fisica contemporanea.
+
+---
+[→ Vai all'Approfondimento: Capitolo 9 bis](cap9_bis.md) | [Vai all'Indice Generale](../index.html)

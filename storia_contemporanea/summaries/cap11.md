@@ -4,6 +4,8 @@
 **Periodo Storico:** 1900-1914 | **Pagine Libro:** 234-243 | **Tempo di Lettura:** ~7 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 11 bis: Il declino dell'egemonia eurocentrica: la disfatta russa a Tsushima (1905) e la Rivoluzione repubblicana cinese (1911)](cap11_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Il primo quindicennio del '900 vide il manifestarsi dei primi segni d'un declino dell'Europa di fronte all'emergere di popoli extraeuropei. Preoccupava in particolare la crescita dei paesi asiatici (Cina e Giappone), che fece parlare di un "pericolo giallo".
@@ -97,3 +99,6 @@ Nel periodo a cavallo fra i due secoli, questi regimi assicurarono tuttavia al c
 6. Fino alla prima guerra mondiale l'imperialismo statunitense si rivolse principalmente verso l'America centrale. Ciò si manifestò soprattutto durante la presidenza di Theodore Roosevelt, nel contrasto con la Colombia per il canale di Panama. Sul piano interno, Roosevelt si caratterizzò con una politica di apertura ai problemi sociali, che contribuì alla sua grande popolarità. Le divisioni nel Partito repubblicano favorirono nel 1912 l'elezione del democratico Wilson, che riprese l'impegno sociale di Roosevelt inserendolo però in un quadro politico e ideologico assai diverso.
 
 7. Nei trent'anni precedenti la prima guerra mondiale, il notevole sviluppo economico dei paesi dell'America Latina non attenuò la loro dipendenza dagli Stati industrializzati dell'Occidente. Le campagne erano dominate dal latifondo, mentre una ristretta oligarchia terriera controllava la vita sociale e politica. I maggiori mutamenti sul piano politico furono la vittoria dei radicali in Argentina e la rivoluzione messicana cominciata nel 1910 e segnata dal conflitto fra le sue varie componenti: conflitto che solo nel 1921 si sarebbe concluso con la vittoria dei democratici.
+
+---
+[→ Vai all'Approfondimento: Capitolo 11 bis](cap11_bis.md) | [Vai all'Indice Generale](../index.html)

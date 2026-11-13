@@ -4,6 +4,8 @@
 **Periodo Storico:** 1939-1945 | **Pagine Libro:** 464-495 | **Tempo di Lettura:** ~13 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 21 bis: La guerra totale e lo sterminio industriale: Operazione Barbarossa, conferenza di Wannsee e la tragedia della Shoah](cap21_bis.md).
+
 
 ## Introduzione e Quadro Storico
 La distruzione della Cecoslovacchia (marzo '39) determinò una svolta nella politica anglofrancese verso la Germania. In risposta alle mire tedesche sulla Polonia, Francia e Inghilterra conclusero un'alleanza con questo paese.
@@ -242,3 +244,6 @@ Fu a questo punto che il nuovo presidente americano Harry Truman (Roosevelt era 
 11. Alla fine del '43 si formarono le prime bande partigiane. Tra la fine del '42 e l'estate del '43 si erano ricostituiti i partiti antifascisti, che nel settembre '43 diedero vita al Comitato di liberazione nazionale. La contrapposizione tra Cln e governo Badoglio si sbloccò per l'intervento di Togliatti, che propose di accantonare ogni pregiudiziale contro il re o Badoglio. Nell'aprile '44 si formò il primo governo di unità nazionale, con i partiti del Cln. Dopo la liberazione di Roma il re trasmise i propri poteri al figlio Umberto e si costituì un nuovo governo (con alla testa Bonomi), più direttamente legato al movimento partigiano che si andava sviluppando in tutta l'Italia settentrionale.
 
 12. Mentre gli angloamericani erano impegnati in Italia, fra il '43 e il '44 l'Urss iniziava una lenta ma inarrestabile avanzata. Nel giugno '44 gli alleati sbarcavano in Normandia e, di lì a poco, liberavano la Francia. Frattanto, nelle conferenze di Mosca (ottobre '44) e di Yalta (febbraio '45), russi, americani e inglesi si accordavano sulla futura sistemazione dell'Europa. Nel 1945 i tedeschi dovettero arretrare su entrambi i fronti, sotto la pressione di angloamericani e russi. Il 25 aprile, mentre la Resistenza proclamava l'insurrezione generale, l'Italia era liberata dalle forze alleate (Mussolini fu allora giustiziato dai partigiani). Pochi giorni dopo, entrati i russi a Berlino, la Germania capitolava. La guerra proseguiva, a quel punto, solo nel Pacifico contro il Giappone; terminò il 2 settembre, dopo l'esplosione di due bombe atomiche su Hiroshima e Nagasaki.
+
+---
+[→ Vai all'Approfondimento: Capitolo 21 bis](cap21_bis.md) | [Vai all'Indice Generale](../index.html)

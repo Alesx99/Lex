@@ -4,6 +4,8 @@
 **Periodo Storico:** 1973-1991 | **Pagine Libro:** 608-635 | **Tempo di Lettura:** ~11 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 27 bis: La fine dell'età dell'oro: il decoupling di Nixon (1971), gli shock petroliferi del 1973-1979 e l'ascesa del neoliberismo reaganiano-thatcheriano](cap27_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Nei paesi occidentali si manifestò nei tardi anni '70 una crisi delle ideologie di sinistra, sia riformiste sia rivoluzionarie, e la tendenza all'abbandono dell'impegno politico per un ritorno al privato o ai valori tradizionali (il cosiddetto "riflusso"). Nello stesso periodo esplose il fenomeno del terrorismo politico.
@@ -191,3 +193,6 @@ Alle incognite derivanti dalla mutata situazione politica si aggiungevano quelle
 11. In Cina l'ascesa di Deng Xiaoping portò a un processo di riforme interne e liberalizzazione economica che diede buoni risultati in termini di sviluppo produttivo, ma non si accompagnò alla democratizzazione.
 
 12. Il Giappone, già protagonista, nel secondo dopoguerra, di un "miracolo economico", divenne all'inizio degli anni '80 la seconda potenza industriale e finanziaria del mondo, senza peraltro svolgere in campo internazionale un ruolo adeguato alla sua forza economica.
+
+---
+[→ Vai all'Approfondimento: Capitolo 27 bis](cap27_bis.md) | [Vai all'Indice Generale](../index.html)

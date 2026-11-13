@@ -4,6 +4,8 @@
 **Periodo Storico:** 1929-1939 | **Pagine Libro:** 366-387 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 17 bis: La Grande Depressione del 1929 e la svolta economica del New Deal: sovrapproduzione, collasso bancario e teoria keynesiana](cap17_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Gli anni '20 furono per gli Stati Uniti un periodo di prosperità economica che INFLUÌ sulla stessa vita quotidiana degli americani (con la diffusione dell'automobile e degli elettrodomestici). Dal punto di vista politico, fu incontrastata l'egemonia del Partito repubblicano, sostenitore di un indirizzo conservatore e liberista.
@@ -183,3 +185,6 @@ Consideriamo anche i grandi capolavori della narrativa apparsi nel periodo fra l
 10. Negli anni '20 e '30 vennero fatte alcune scoperte scientifiche destinate a segnare la storia del XX secolo: anzitutto quella dell'energia nucleare (che avrebbe portato alla costruzione della bomba atomica). Sul piano delle applicazioni belliche della scienza, sono da ricordare i grandi sviluppi dell'aeronautica.
 
 11. Nella cultura europea si accentuarono allora i fenomeni di disgregazione e di perdita dell'unità, tanto che nessuna delle correnti del periodo può essere assunta da sola, come particolarmente rappresentativa. Furono anni, per gli intellettuali di grandi contrapposizioni ideologiche (liberalismocomunismo, democraziafascismo) e di impegno politico. L'emigrazione degli intellettuali tedeschi durante il nazismo provocò un impoverimento culturale dell'Europa.
+
+---
+[→ Vai all'Approfondimento: Capitolo 17 bis](cap17_bis.md) | [Vai all'Indice Generale](../index.html)

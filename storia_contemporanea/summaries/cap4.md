@@ -4,6 +4,8 @@
 **Periodo Storico:** 1850-1890 | **Pagine Libro:** 66-96 | **Tempo di Lettura:** ~11 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 4 bis: L'egemonia continentale bismarckiana e la Comune di Parigi (1870-1871)](cap4_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Nella seconda metà del secolo XIX, la scena europea continuò a essere dominata dalle cinque "grandi potenze", impegnate in una lotta per l'egemonia che, fra il 1850 e il 1870, provocò ben quattro guerre. In questo periodo, il ruolo più attivo fu svolto dalla Francia del Secondo Impero, che però, nel suo tentativo di indebolire l'Austria, finì col facilitare l'ascesa della Prussia. Dalla guerra francoprussiana del '70-71, uscì un nuovo equilibrio che faceva perno sulla Germania riunificata.
@@ -187,3 +189,6 @@ Gli occidentalisti segnarono un punto a loro favore e qualche spiraglio cominci�
 13. In Russia all'arretratezza politica e sociale faceva riscontro una grande vivacità della vita culturale e del dibattito ideologico. L'avvento al trono di Alessandro II alimentò grandi speranze di rinnovamento, in conseguenza di alcune riforme varate dal sovrano: la più importante di tutte fu l'abolizione della servitù della gleba (1861), che però non produsse i risultati sperati.
 
 14. Seguì una nuova stretta autoritaria, con conseguente accrescersi del distacco fra potere statale e ceti intellettuali.
+
+---
+[→ Vai all'Approfondimento: Capitolo 4 bis](cap4_bis.md) | [Vai all'Indice Generale](../index.html)

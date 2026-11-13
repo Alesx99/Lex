@@ -4,6 +4,8 @@
 **Periodo Storico:** 1848-1849 | **Pagine Libro:** 3-20 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 1 bis: I motivi rivoluzionari francesi del 1848: frattura di classe, ateliers nationaux e genesi del bonapartismo](cap1_bis.md).
+
 
 ## Introduzione e Quadro Storico
 La crisi rivoluzionaria del '48 interessò gran parte dell'Europa continentale, anche a causa di alcuni elementi comuni presenti nei vari paesi: crisi economica del 1846-47, azione dei democratici, attesa di un nuovo grande sommovimento rivoluzionario. Simili furono anche i contenuti delle varie insurrezioni: richiesta di libertà politiche e di democrazia, e - in Italia, Germania e Impero asburgico - spinta verso l'emancipazione nazionale. La novità delle rivoluzioni del '48 risiedette nella massiccia partecipazione dei ceti popolari urbani e nella presenza di obiettivi sociali accanto a quelli politici.
@@ -122,3 +124,6 @@ La Repubblica era ormai tale solo di nome. E la finzione fu abolita, nel dicembr
 10. La causa fondamentale del generale fallimento delle rivoluzioni del '48 va individuata nelle fratture all'interno delle forze che di quelle rivoluzioni erano state protagoniste: nei contrasti, cioè, fra correnti democraticoradicali e gruppi liberalmoderati. Aveva pesato inoltre, nel determinare la sconfitta delle esperienze rivoluzionarie italiane, l'estraneità delle masse contadine, che costituivano la stragrande maggioranza della popolazione.
 
 11. In Francia si accentuava, nel 1849, l'evoluzione della situazione politica in senso conservatore. Nel dicembre 1851 Bonaparte effettuò un colpo di Stato e riformò la costituzione. L'anno successivo un plebiscito sanzionava la restaurazione dell'Impero: Luigi Napoleone Bonaparte diventava imperatore con il nome di Napoleone III.
+
+---
+[→ Vai all'Approfondimento: Capitolo 1 bis](cap1_bis.md) | [Vai all'Indice Generale](../index.html)

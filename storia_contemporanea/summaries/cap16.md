@@ -4,6 +4,8 @@
 **Periodo Storico:** 1919-1926 | **Pagine Libro:** 342-365 | **Tempo di Lettura:** ~10 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 16 bis: La crisi dello Stato liberale italiano e l'avvento del fascismo: dallo squadrismo agrario alle Leggi Fascistissime (1919-1926)](cap16_bis.md).
+
 
 ## Introduzione e Quadro Storico
 I problemi del dopoguerra erano aggravati, in Italia, dalla debolezza delle strutture democratiche e dalla crisi della classe dirigente liberale. I cattolici si organizzarono politicamente con il Partito popolare (1919). A sinistra, la crescita del Partito socialista corrispondeva ad una prevalenza, in esso, delle correnti rivoluzionarie. La nascita del fascismo (1919) introdusse nella vita politica un nuovo stile aggressivo e violento.
@@ -193,3 +195,6 @@ Furono dichiarati decaduti dal mandato i deputati aventiniani. Fu reintrodotta l
 13. Nel giugno '24 il deputato socialista Matteotti - che aveva denunciato alla Camera i brogli e le violenze commesse dai fascisti in occasione delle elezioni - fu assassinato da un gruppo di squadristi. L'ondata di sdegno che ne seguì fece vacillare il potere di Mussolini. Ma le opposizioni, che abbandonarono la Camera (secessione dell'Aventino), erano troppo deboli per mettere in crisi il governo. Col duro discorso del 3 gennaio '25, Mussolini riacquistò il controllo della situazione.
 
 14. Tra il '25 e il '26 si consumò la fine dello Stato liberale: "fascistizzazione" della stampa, persecuzione degli antifascisti, rafforzamento dei poteri del capo del governo, legge "per la difesa dello Stato" (che, tra l'altro, istituiva il Tribunale speciale), scioglimento di tutti i partiti (tranne quello fascista).
+
+---
+[→ Vai all'Approfondimento: Capitolo 16 bis](cap16_bis.md) | [Vai all'Indice Generale](../index.html)

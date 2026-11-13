@@ -4,6 +4,8 @@
 **Periodo Storico:** 1925-1940 | **Pagine Libro:** 422-448 | **Tempo di Lettura:** ~11 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 19 bis: Il regime fascista tra ambizioni totalitarie e mediazioni di regime: la diarchia con la Corona e i Patti Lateranensi del 1929](cap19_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Nel regime fascista l'organizzazione dello Stato e quella del partito venivano a sovrapporsi. Fu la prima però - per volere di Mussolini - ad avere sempre la prevalenza, mentre la funzione del Pnf, sempre più burocratizzato, fu quella di "occupare" la società civile, soprattutto attraverso le sue organizzazioni collaterali. Un primo limite ai propositi totalitari del regime era rappresentato dal peso della Chiesa, la cui influenza venne espressamente riconosciuta coi Patti lateranensi (1929). I Patti rappresentarono anche un successo politico per il fascismo, sancito dal plebiscito di quello stesso anno.
@@ -149,3 +151,6 @@ Ma le aspirazioni alla pace contrastavano profondamente con le convinzioni e i p
 7. In Italia la maggioranza degli antifascisti - soprattutto ex popolari e liberali - rimasero in una posizione di silenziosa opposizione. I comunisti invece si impegnarono, benché con scarsi risultati, nell'agitazione clandestina; sulla stessa linea si mosse il gruppo di "Giustizia e Libertà", di indirizzo liberalsocialista. Gli altri gruppi in esilio all'estero (socialisti, repubblicani, democratici, federati nel '27 nella Concentrazione antifascista) svolsero soprattutto un'opera di elaborazione politica in vista di una sconfitta del regime che l'antifascismo non era in grado di provocare. Nonostante questa debolezza, l'importanza dell'antifascismo risiedette nella funzione di testimonianza e di preparazione dei quadri e delle piattaforme politiche della futura Italia democratica.
 
 8. Il consenso ottenuto dal regime cominciò a incrinarsi dopo l'impresa etiopica. La politica dell""autarchia" - finalizzata all'obiettivo dell'autosufficienza economica in caso di guerra - ottenne solo parziali successi e suscitò un diffuso malcontento. Soprattutto l'avvicinamento alla Germania e la politica discriminatoria nei confronti degli ebrei suscitarono timori e dissensi nella maggioranza della popolazione. Soltanto fra le nuove generazioni il disegno mussoliniano di trasformare in senso fascista la vita e la mentalità degli italiani ottenne qualche successo.
+
+---
+[→ Vai all'Approfondimento: Capitolo 19 bis](cap19_bis.md) | [Vai all'Indice Generale](../index.html)

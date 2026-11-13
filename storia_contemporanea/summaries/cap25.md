@@ -4,6 +4,8 @@
 **Periodo Storico:** 1950-1970 | **Pagine Libro:** 573-590 | **Tempo di Lettura:** ~8 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 25 bis: I 'Trenta Gloriosi' del capitalismo (1945-1975): modello fordista-keynesiano, welfare state e la contestazione del '68](cap25_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Negli anni '50 e '60 l'economia dei paesi industrializzati attraversò una fase di intenso sviluppo, che ebbe tra le sue cause: crescita della popolazione (da cui un aumento della domanda); innovazione tecnologica e razionalizzazione produttiva; espansione del commercio mondiale; politiche statali in sostegno della crescita.
@@ -146,3 +148,6 @@ I nuovi fermenti introdotti nella Chiesa dal Concilio - e prima ancora dalle enc
 8. Negli stessi anni si sviluppava un nuovo femminismo che - raggiunta ormai la parità tra i sessi sul piano dei diritti politici - criticava la divisione dei ruoli tra uomo e donna nella famiglia e nel lavoro, e più in generale rifiutava i valori "maschilisti" dominanti nelle società industrializzate.
 
 9. Di fronte alla nuova realtà della società del benessere, la Chiesa cattolica - pur ribadendo la sua critica al diffondersi di valori materialistici e di comportamenti contrari alle sue dottrine - tentò un proprio rinnovamento interno e un'apertura ai problemi del mondo contemporaneo. Tale nuovo corso iniziò col pontificato di Giovanni XXIII (1958-63) e proseguì con il Concilio Vaticano II.
+
+---
+[→ Vai all'Approfondimento: Capitolo 25 bis](cap25_bis.md) | [Vai all'Indice Generale](../index.html)

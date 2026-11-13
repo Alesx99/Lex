@@ -4,6 +4,8 @@
 **Periodo Storico:** 1922-1939 | **Pagine Libro:** 388-421 | **Tempo di Lettura:** ~13 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 18 bis: L'ingegneria del potere nazionalsocialista: 'Gleichschaltung', apparato repressivo SS e ideologia razzista di Norimberga](cap18_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Dopo la crisi del '29 si diffuse in tutta Europa il fenomeno della disaffezione verso la democrazia. Parallelamente si affermarono, negli anni '30, regimi antidemocratici, sia di tipo tradizionale sia di tipo "moderno" (cioè ispirati al fascismo e al nazismo). La novità del fascismo e del nazismo si evidenziò nel campo dell'organizzazione del potere, con quella ricerca di un controllo totale sui cittadini comune al regime staliniano) che ha fatto coniare il termine "totalitarismo".
@@ -202,3 +204,6 @@ troppo recente era il trauma del primo conflitto mondiale che ai francesi era co
 13. Nel 1939 la guerra civile terminava con la vittoria di Franco.
 
 14. Negli stessi anni della guerra di Spagna, la politica di arrendevolezza (appeasement) praticata da Francia e Inghilterra nei confronti della Germania finì coll'incoraggiare la politica espansionistica del nazismo. Nel 1938 avveniva l'annessione dell'Austria (Anschluss); subito dopo Hitler avanzava mire sul territorio cecoslovacco abitato da popolazione tedesca (sudeti). Gli accordi di Monaco (settembre '38) sembrarono conservare la pace, ma - accettando le richieste tedesche - finirono con lo spianare la strada a un nuovo conflitto mondiale.
+
+---
+[→ Vai all'Approfondimento: Capitolo 18 bis](cap18_bis.md) | [Vai all'Indice Generale](../index.html)

@@ -4,6 +4,8 @@
 **Periodo Storico:** 1991-2005 | **Pagine Libro:** 681-720 | **Tempo di Lettura:** ~13 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 30 bis: Il Collasso del Mondo Bipolare, le Guerre Balcaniche e l'Era del Terrorismo Globale](cap30_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Fra il 1989 e il 1991, gli equilibri mondiali subirono un radicale sconvolgimento. Nel vuoto aperto dalla crisi dell'Urss e dall'assenza di un nuovo ordine internazionale, si inserì una generale ripresa dei movimenti nazionalisti.
@@ -223,3 +225,6 @@ Saddam Hussein fuggì e il regime si sfaldò all'istante: bande di iracheni comp
 14. L'11 settembre 2001 il terrorismo integralista mise a segno un clamoroso attentato contro le "Twin Towers" a New York e contro il Pentagono a Washington. L'intero Occidente ne fu sconvolto. La reazione degli Stati Uniti e dei loro alleati si indirizzò contro l'Afghanistan, che ospitava il presunto capo dei terroristi, Osama bin Laden: l'oppressivo regime dei talebani fu spazzato via dai bombardamenti americani e dall'offensiva delle forze d'opposizione.
 
 15. Dopo i talebani, gli Stati Uniti volsero la loro attenzione all'Iraq di Saddam Hussein, accusato di nascondere armi di distruzione di massa. Dopo un infruttuoso negoziato tra Onu e Iraq, Stati Uniti e Gran Bretagna cominciarono a preparare un'operazione militare. Su questa decisione la comunità internazionale si divise: da una parte Stati Uniti, Gran Bretagna e Spagna, determinati all'uso della forza; dall'altra Francia, Germania, Russia, Cina e Stati arabi, favorevoli a una soluzione diplomatica. Il 20 marzo 2003 i primi missili statunitensi colpirono Baghdad. Nei giorni seguenti le truppe angloamericane cominciarono ad avanzare in Iraq. La resistenza dell'esercito iracheno fu debole: Saddam Hussein fuggì e il regime si sfaldò all'istante, ma la pacificazione del paese si rivelò lenta e difficile.
+
+---
+[→ Vai all'Approfondimento: Capitolo 30 bis](cap30_bis.md) | [Vai all'Indice Generale](../index.html)

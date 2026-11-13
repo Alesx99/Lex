@@ -4,6 +4,8 @@
 **Periodo Storico:** 1914-1918 | **Pagine Libro:** 269-301 | **Tempo di Lettura:** ~13 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 13 bis: La mobilitazione totale e l'intervento italiano (1914-1915): trincee, fronte interno e scontro politico tra neutralisti e interventisti](cap13_bis.md).
+
 
 ## Introduzione e Quadro Storico
 L'evento scatenante della prima guerra mondiale fu l'uccisione a Sarajevo, il 28 giugno '14, dell'arciduca Francesco Ferdinando, erede al trono degli Asburgo. Un mese dopo, l'Austria dichiarò guerra alla Serbia, ritenuta corresponsabile dell'attentato. La Russia, che proteggeva la Serbia, mobilitò il suo esercito provocando la reazione della Germania, alleata dell'Austria. Il 3 agosto la Germania dichiarò guerra alla Russia e alla Francia sua alleata. Il 5, dopo che le truppe tedesche ebbero invaso il Belgio neutrale, anche la Gran Bretagna scese in campo contro gli imperi centrali. Allo scoppio del conflitto, e alla sua successiva estensione su scala mondiale, concorsero una serie di tensioni preesistenti, ma anche errori e scelte avventate commesse dai capi politici e militari dei paesi interessati. Le scelte dei governanti furono del resto appoggiate da una forte mobilitazione dell'opinione pubblica. Gli stessi partiti socialisti si schierarono, nella maggior parte dei casi, su posizioni patriottiche.
@@ -209,3 +211,6 @@ Questi problemi si manifestarono fin dalle prime discussioni fra i capi di gover
 11. Anche grazie alla superiorità militare conseguita con l'intervento americano, nel novembre 1918 la guerra terminava con la vittoria dell'Intesa: un esito cui contribuirono in larga misura la dissoluzione interna dell'AustriaUngheria (causata dal distacco delle varie nazionalità) e la rivoluzione scoppiata in Germania.
 
 12. Alla conferenza della pace, che si tenne a Versailles, il compito dei vincitori si rivelò difficilissimo. Nelle dure condizioni imposte alla Germania risultò evidente il contrasto fra l'ideale di una pace democratica e l'obiettivo francese di una pace punitiva. La carta dell'Europa fu profondamente mutata, soprattutto in conseguenza della dissoluzione dell'Impero asburgico, che permise la nascita di nuovi Stati. L'ideale wilsoniano di un organismo internazionale che potesse evitare guerre future in sostanza non si realizzò: la Società delle nazioni nacque minata da profonde contraddizioni (anzitutto la mancata adesione degli Stati Uniti).
+
+---
+[→ Vai all'Approfondimento: Capitolo 13 bis](cap13_bis.md) | [Vai all'Indice Generale](../index.html)

@@ -969,6 +969,254 @@ const searchDatabase = [
         navPath: "storia_contemporanea/index.html?open=summaries/cap31.md"
     },
     {
+        title: "Storia Contemporanea Cap. I bis: I motivi rivoluzionari francesi del 1848: frattura di classe, ateliers nationaux e genesi del bonapartismo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo I bis",
+        description: "Analisi della crisi della Monarchia di Luglio, ateliers nationaux, il diritto al lavoro, l'insurrezione operaia delle Giornate di Giugno e l'ascesa plebiscitaria di Luigi Napoleone.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 1 bis capitolo i bis i motivi rivoluzionari francesi del 1848 frattura di classe ateliers nationaux e genesi del bonapartismo analisi della crisi della monarchia di luglio ateliers nationaux il diritto al lavoro l insurrezione operaia delle giornate di giugno e l ascesa plebiscitaria di luigi napoleone sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap1_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. II bis: Materialismo storico, Prima Internazionale e la frattura teorica tra Marx e Bakunin",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo II bis",
+        description: "Approfondimento sul materialismo storico di Marx ed Engels, lo scontro ideologico con l'anarchismo di Bakunin nella Prima Internazionale e la rottura al Congresso dell'Aia (1872).",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 2 bis capitolo ii bis materialismo storico prima internazionale e la frattura teorica tra marx e bakunin approfondimento sul materialismo storico di marx ed engels lo scontro ideologico con l anarchismo di bakunin nella prima internazionale e la rottura al congresso dell aia 1872 sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap2_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. III bis: La dialettica risorgimentale: Cavour, Garibaldi e la 'conquista regia'",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo III bis",
+        description: "La dialettica risorgimentale tra la strategia liberale-diplomatica di Cavour e l'iniziativa democratica di Garibaldi: plebisciti, spedizione dei Mille e la 'conquista regia'.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 3 bis capitolo iii bis la dialettica risorgimentale cavour garibaldi e la conquista regia la dialettica risorgimentale tra la strategia liberale diplomatica di cavour e l iniziativa democratica di garibaldi plebisciti spedizione dei mille e la conquista regia sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap3_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. IV bis: L'egemonia continentale bismarckiana e la Comune di Parigi (1870-1871)",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo IV bis",
+        description: "L'equilibrio continentale di Bismarck, i sistemi di alleanze anti-francesi e l'esperimento rivoluzionario della Comune di Parigi del 1871 con la 'Settimana di Sangue'.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 4 bis capitolo iv bis l egemonia continentale bismarckiana e la comune di parigi 1870 1871 l equilibrio continentale di bismarck i sistemi di alleanze anti francesi e l esperimento rivoluzionario della comune di parigi del 1871 con la settimana di sangue sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap4_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. V bis: La Guerra Civile Americana e la Restaurazione Meiji: due modelli di transizione industriale",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo V bis",
+        description: "Due percorsi di modernizzazione a confronto: la Guerra di Secessione americana tra Nord industriale e Sud schiavista e la modernizzazione guidata dall'alto del Giappone Meiji.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 5 bis capitolo v bis la guerra civile americana e la restaurazione meiji due modelli di transizione industriale due percorsi di modernizzazione a confronto la guerra di secessione americana tra nord industriale e sud schiavista e la modernizzazione guidata dall alto del giappone meiji sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap5_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. VI bis: Dalla Grande Depressione (1873-1896) al capitalismo monopolistico: trust, cartelli e capitale finanziario",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo VI bis",
+        description: "L'impatto della Grande Depressione del 1873, il passaggio al capitalismo organizzato dei monopoli e trust, la nascita del capitale finanziario e la Seconda Rivoluzione Industriale.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 6 bis capitolo vi bis dalla grande depressione 1873 1896 al capitalismo monopolistico trust cartelli e capitale finanziario l impatto della grande depressione del 1873 il passaggio al capitalismo organizzato dei monopoli e trust la nascita del capitale finanziario e la seconda rivoluzione industriale sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap6_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. VII bis: L'Imperialismo e la spartizione dell'Africa: modelli interpretativi (Hobson, Lenin, Schumpeter) e scontro coloniale",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo VII bis",
+        description: "Le teorie economiche e sociologiche dell'imperialismo (Hobson, Lenin, Schumpeter), la spartizione dell'Africa alla Conferenza di Berlino (1884-85) e il conflitto anglo-boero.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 7 bis capitolo vii bis l imperialismo e la spartizione dell africa modelli interpretativi hobson lenin schumpeter e scontro coloniale le teorie economiche e sociologiche dell imperialismo hobson lenin schumpeter la spartizione dell africa alla conferenza di berlino 1884 85 e il conflitto anglo boero sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap7_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. VIII bis: Le contraddizioni dell'Italia Unita: questione demaniale, grande brigantaggio e autoritarismo crispino",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo VIII bis",
+        description: "I nodi irrisolti dell'unificazione italiana: l'impatto fiscale, la legge Pica contro il grande brigantaggio meridionale, il trasformismo e la svolta autoritaria di Francesco Crispi.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 8 bis capitolo viii bis le contraddizioni dell italia unita questione demaniale grande brigantaggio e autoritarismo crispino i nodi irrisolti dell unificazione italiana l impatto fiscale la legge pica contro il grande brigantaggio meridionale il trasformismo e la svolta autoritaria di francesco crispi sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap8_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. IX bis: La società di massa e la Seconda Internazionale: nazionalizzazione delle masse, ortodossia di Kautsky e revisionismo di Bernstein",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo IX bis",
+        description: "La nazionalizzazione delle masse, la nascita dei partiti socialisti moderni, il dibattito tra ortodossia marxista e revisionismo, e la dottrina sociale della Rerum Novarum.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 9 bis capitolo ix bis la società di massa e la seconda internazionale nazionalizzazione delle masse ortodossia di kautsky e revisionismo di bernstein la nazionalizzazione delle masse la nascita dei partiti socialisti moderni il dibattito tra ortodossia marxista e revisionismo e la dottrina sociale della rerum novarum sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap9_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. X bis: La crisi della Terza Repubblica francese e le radici della Grande Guerra: dall'Affaire Dreyfus alla Weltpolitik guglielmina",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo X bis",
+        description: "L'affaire Dreyfus e la polarizzazione della Terza Repubblica tra laicismo e nazionalismo, la Weltpolitik navale di Guglielmo II e l'accerchiamento diplomatico della Triplice Intesa.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 10 bis capitolo x bis la crisi della terza repubblica francese e le radici della grande guerra dall affaire dreyfus alla weltpolitik guglielmina l affaire dreyfus e la polarizzazione della terza repubblica tra laicismo e nazionalismo la weltpolitik navale di guglielmo ii e l accerchiamento diplomatico della triplice intesa sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap10_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XI bis: Il declino dell'egemonia eurocentrica: la disfatta russa a Tsushima (1905) e la Rivoluzione repubblicana cinese (1911)",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XI bis",
+        description: "Il tramonto dell'eurocentrismo: lo shock mondiale della disfatta russa a Tsushima contro il Giappone (1905), la Rivoluzione repubblicana di Sun Yat-sen in Cina e il Big Stick USA.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 11 bis capitolo xi bis il declino dell egemonia eurocentrica la disfatta russa a tsushima 1905 e la rivoluzione repubblicana cinese 1911 il tramonto dell eurocentrismo lo shock mondiale della disfatta russa a tsushima contro il giappone 1905 la rivoluzione repubblicana di sun yat sen in cina e il big stick usa sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap11_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XII bis: Il sistema giolittiano tra riformismo e contraddizioni: triangolo industriale, patto Gentiloni e critica meridionalista",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XII bis",
+        description: "L'età giolittiana: decollo del triangolo industriale, legislazione sociale e suffragio universale maschile, il patto Gentiloni e le aspre critiche di Salvemini e dei meridionalisti.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 12 bis capitolo xii bis il sistema giolittiano tra riformismo e contraddizioni triangolo industriale patto gentiloni e critica meridionalista l età giolittiana decollo del triangolo industriale legislazione sociale e suffragio universale maschile il patto gentiloni e le aspre critiche di salvemini e dei meridionalisti sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap12_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XIII bis: La mobilitazione totale e l'intervento italiano (1914-1915): trincee, fronte interno e scontro politico tra neutralisti e interventisti",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XIII bis",
+        description: "La Grande Guerra sul fronte italiano: la frattura tra neutralisti e interventisti, il Patto di Londra, la guerra di logoramento sull'Isonzo, il fronte interno e la mobilitazione totale.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 13 bis capitolo xiii bis la mobilitazione totale e l intervento italiano 1914 1915 trincee fronte interno e scontro politico tra neutralisti e interventisti la grande guerra sul fronte italiano la frattura tra neutralisti e interventisti il patto di londra la guerra di logoramento sull isonzo il fronte interno e la mobilitazione totale sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap13_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XIV bis: Da Pietrogrado a Brest-Litovsk: le Tesi di Aprile, la presa del Palazzo d'Inverno e il Comunismo di Guerra",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XIV bis",
+        description: "Dalla caduta dello zarismo alla rivoluzione d'Ottobre: le Tesi di Aprile di Lenin, l'assalto al Palazzo d'Inverno, la pace di Brest-Litovsk e la dittatura del Comunismo di Guerra.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 14 bis capitolo xiv bis da pietrogrado a brest litovsk le tesi di aprile la presa del palazzo d inverno e il comunismo di guerra dalla caduta dello zarismo alla rivoluzione d ottobre le tesi di aprile di lenin l assalto al palazzo d inverno la pace di brest litovsk e la dittatura del comunismo di guerra sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap14_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XV bis: L'ordine geopolitico di Versailles e l'iperinflazione di Weimar: le radici dell'instabilità europea",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XV bis",
+        description: "Il fallimento della pace punitiva di Versailles, il collasso economico e l'iperinflazione della Repubblica di Weimar, i piani Dawes/Young e la breve distensione di Locarno (1925).",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 15 bis capitolo xv bis l ordine geopolitico di versailles e l iperinflazione di weimar le radici dell instabilità europea il fallimento della pace punitiva di versailles il collasso economico e l iperinflazione della repubblica di weimar i piani dawes/young e la breve distensione di locarno 1925 sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap15_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XVI bis: La crisi dello Stato liberale italiano e l'avvento del fascismo: dallo squadrismo agrario alle Leggi Fascistissime (1919-1926)",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XVI bis",
+        description: "La crisi dello Stato liberale italiano: biennio rosso, la genesi e le violenze dello squadrismo agrario fascista, la marcia su Roma, il delitto Matteotti e le Leggi Fascistissime.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 16 bis capitolo xvi bis la crisi dello stato liberale italiano e l avvento del fascismo dallo squadrismo agrario alle leggi fascistissime 1919 1926 la crisi dello stato liberale italiano biennio rosso la genesi e le violenze dello squadrismo agrario fascista la marcia su roma il delitto matteotti e le leggi fascistissime sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap16_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XVII bis: La Grande Depressione del 1929 e la svolta economica del New Deal: sovrapproduzione, collasso bancario e teoria keynesiana",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XVII bis",
+        description: "Il crac di Wall Street del 1929: crisi di sovrapproduzione, collasso bancario a catena, la risposta interventista del New Deal di Roosevelt e la rivoluzione keynesiana.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 17 bis capitolo xvii bis la grande depressione del 1929 e la svolta economica del new deal sovrapproduzione collasso bancario e teoria keynesiana il crac di wall street del 1929 crisi di sovrapproduzione collasso bancario a catena la risposta interventista del new deal di roosevelt e la rivoluzione keynesiana sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap17_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XVIII bis: L'ingegneria del potere nazionalsocialista: 'Gleichschaltung', apparato repressivo SS e ideologia razzista di Norimberga",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XVIII bis",
+        description: "L'architettura del totalitarismo nazionalsocialista: Gleichschaltung, il terrore di Gestapo e SS, le leggi razziali di Norimberga del 1935 e l'ideologia antisemita del Terzo Reich.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 18 bis capitolo xviii bis l ingegneria del potere nazionalsocialista gleichschaltung apparato repressivo ss e ideologia razzista di norimberga l architettura del totalitarismo nazionalsocialista gleichschaltung il terrore di gestapo e ss le leggi razziali di norimberga del 1935 e l ideologia antisemita del terzo reich sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap18_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XIX bis: Il regime fascista tra ambizioni totalitarie e mediazioni di regime: la diarchia con la Corona e i Patti Lateranensi del 1929",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XIX bis",
+        description: "Le peculiarità del regime fascista italiano: il totalitarismo imperfetto, la diarchia istituzionale con la Corona, la conciliazione con la Chiesa nei Patti Lateranensi e le leggi razziali del 1938.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 19 bis capitolo xix bis il regime fascista tra ambizioni totalitarie e mediazioni di regime la diarchia con la corona e i patti lateranensi del 1929 le peculiarità del regime fascista italiano il totalitarismo imperfetto la diarchia istituzionale con la corona la conciliazione con la chiesa nei patti lateranensi e le leggi razziali del 1938 sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap19_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XX bis: I nazionalismi asiatici nel primo Novecento: la disobbedienza civile non violenta di Gandhi e la Lunga Marcia di Mao Zedong",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XX bis",
+        description: "I movimenti di liberazione nazionale in Asia: il Satyagraha e la disobbedienza non violenta di Gandhi in India, la guerra civile cinese e la Lunga Marcia di Mao Zedong.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 20 bis capitolo xx bis i nazionalismi asiatici nel primo novecento la disobbedienza civile non violenta di gandhi e la lunga marcia di mao zedong i movimenti di liberazione nazionale in asia il satyagraha e la disobbedienza non violenta di gandhi in india la guerra civile cinese e la lunga marcia di mao zedong sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap20_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXI bis: La guerra totale e lo sterminio industriale: Operazione Barbarossa, conferenza di Wannsee e la tragedia della Shoah",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXI bis",
+        description: "La Seconda Guerra Mondiale come scontro totale ideologico: l'invasione dell'URSS (Barbarossa), la pianificazione burocratica di Wannsee e lo sterminio sistematico della Shoah.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 21 bis capitolo xxi bis la guerra totale e lo sterminio industriale operazione barbarossa conferenza di wannsee e la tragedia della shoah la seconda guerra mondiale come scontro totale ideologico l invasione dell urss barbarossa la pianificazione burocratica di wannsee e lo sterminio sistematico della shoah sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap21_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXII bis: La genesi dell'ordine bipolare: Dottrina Truman, Piano Marshall e la divisione della Germania (1945-1949)",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXII bis",
+        description: "La genesi dell'ordine bipolare: Dottrina Truman del contenimento, ricostruzione europea con il Piano Marshall, crisi del blocco di Berlino e divisione della Germania.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 22 bis capitolo xxii bis la genesi dell ordine bipolare dottrina truman piano marshall e la divisione della germania 1945 1949 la genesi dell ordine bipolare dottrina truman del contenimento ricostruzione europea con il piano marshall crisi del blocco di berlino e divisione della germania sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap22_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXIII bis: La Bandung afroasiatica (1955) e la guerra d'indipendenza d'Algeria: il crollo degli imperi coloniali e il Movimento dei Non Allineati",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXIII bis",
+        description: "La decolonizzazione: la conferenza di Bandung del 1955, la nascita del Terzo Mondo e del Movimento dei Non Allineati, la crisi di Suez del 1956 e la sanguinosa guerra d'Algeria.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 23 bis capitolo xxiii bis la bandung afroasiatica 1955 e la guerra d indipendenza d algeria il crollo degli imperi coloniali e il movimento dei non allineati la decolonizzazione la conferenza di bandung del 1955 la nascita del terzo mondo e del movimento dei non allineati la crisi di suez del 1956 e la sanguinosa guerra d algeria sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap23_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXIV bis: La transizione post-fascista in Italia: referendum del 2 giugno 1946, compromesso costituente e la frattura elettorale del 1948",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXIV bis",
+        description: "L'Italia repubblicana: il referendum istituzionale del 2 giugno 1946, il compromesso costituente antifascista, l'egemonia democristiana di De Gasperi e le elezioni del 1948.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 24 bis capitolo xxiv bis la transizione post fascista in italia referendum del 2 giugno 1946 compromesso costituente e la frattura elettorale del 1948 l italia repubblicana il referendum istituzionale del 2 giugno 1946 il compromesso costituente antifascista l egemonia democristiana di de gasperi e le elezioni del 1948 sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap24_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXV bis: I 'Trenta Gloriosi' del capitalismo (1945-1975): modello fordista-keynesiano, welfare state e la contestazione del '68",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXV bis",
+        description: "L'età dell'oro del capitalismo occidentale: modello fordista-keynesiano, welfare state e consumi di massa, la rivoluzione giovanile e studentesca del Maggio francese e del Sessantotto.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 25 bis capitolo xxv bis i trenta gloriosi del capitalismo 1945 1975 modello fordista keynesiano welfare state e la contestazione del 68 l età dell oro del capitalismo occidentale modello fordista keynesiano welfare state e consumi di massa la rivoluzione giovanile e studentesca del maggio francese e del sessantotto sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap25_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXVI bis: L'orlo dell'apocalisse nucleare e la guerra asimmetrica: i 13 giorni di Cuba (1962) e la tragedia del Vietnam",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXVI bis",
+        description: "La Guerra Fredda all'apice: la crisi dei missili di Cuba del 1962 e il rischio dell'olocausto nucleare, e l'escalation militare asimmetrica della guerra del Vietnam.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 26 bis capitolo xxvi bis l orlo dell apocalisse nucleare e la guerra asimmetrica i 13 giorni di cuba 1962 e la tragedia del vietnam la guerra fredda all apice la crisi dei missili di cuba del 1962 e il rischio dell olocausto nucleare e l escalation militare asimmetrica della guerra del vietnam sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap26_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXVII bis: La fine dell'età dell'oro: il decoupling di Nixon (1971), gli shock petroliferi del 1973-1979 e l'ascesa del neoliberismo reaganiano-thatcheriano",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXVII bis",
+        description: "La fine del ciclo di Bretton Woods con la decisione di Nixon (1971), gli shock petroliferi del 1973 e 1979, la stagflazione e l'avvento della rivoluzione liberista di Thatcher e Reagan.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 27 bis capitolo xxvii bis la fine dell età dell oro il decoupling di nixon 1971 gli shock petroliferi del 1973 1979 e l ascesa del neoliberismo reaganiano thatcheriano la fine del ciclo di bretton woods con la decisione di nixon 1971 gli shock petroliferi del 1973 e 1979 la stagflazione e l avvento della rivoluzione liberista di thatcher e reagan sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap27_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXVIII bis: La notte della Repubblica: la strage di Piazza Fontana (1969), la violenza politica brigatista e il rapimento Moro (1978)",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXVIII bis",
+        description: "Gli 'Anni di Piombo' in Italia: la strage di Piazza Fontana, la strategia della tensione, il terrorismo delle Brigate Rosse, il compromesso storico e il rapimento e omicidio di Aldo Moro.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 28 bis capitolo xxviii bis la notte della repubblica la strage di piazza fontana 1969 la violenza politica brigatista e il rapimento moro 1978 gli anni di piombo in italia la strage di piazza fontana la strategia della tensione il terrorismo delle brigate rosse il compromesso storico e il rapimento e omicidio di aldo moro sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap28_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXIX bis: La Terza Rivoluzione Industriale, l'Economia della Conoscenza e le Contraddizioni della Globalizzazione",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXIX bis",
+        description: "La Terza Rivoluzione Industriale: dal fordismo al toyotismo snello, la rivoluzione del microchip e di Internet, le contraddizioni della globalizzazione neoliberista e la crisi climatica.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 29 bis capitolo xxix bis la terza rivoluzione industriale l economia della conoscenza e le contraddizioni della globalizzazione la terza rivoluzione industriale dal fordismo al toyotismo snello la rivoluzione del microchip e di internet le contraddizioni della globalizzazione neoliberista e la crisi climatica sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap29_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXX bis: Il Collasso del Mondo Bipolare, le Guerre Balcaniche e l'Era del Terrorismo Globale",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXX bis",
+        description: "Il collasso dell'URSS e il decennio di Eltsin, la tragedia delle guerre jugoslave con il genocidio di Srebrenica, l'unipolarismo USA, l'11 settembre 2001 e la guerra in Iraq.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 30 bis capitolo xxx bis il collasso del mondo bipolare le guerre balcaniche e l era del terrorismo globale il collasso dell urss e il decennio di eltsin la tragedia delle guerre jugoslave con il genocidio di srebrenica l unipolarismo usa l 11 settembre 2001 e la guerra in iraq sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap30_bis.md"
+    },
+    {
+        title: "Storia Contemporanea Cap. XXXI bis: La Crisi della Prima Repubblica, la Transizione del 1992-1994 e l'Avvento del Bipolarismo",
+        subject: "storia_contemporanea",
+        chapterTag: "Capitolo XXXI bis",
+        description: "La caduta della Prima Repubblica: Maastricht e la crisi valutaria del 1992, le inchieste di Mani Pulite, le stragi mafiose di Falcone e Borsellino e la nascita del bipolarismo berlusconiano.",
+        keywords: "storia contemporanea approfondimento focus monografico capitolo 31 bis capitolo xxxi bis la crisi della prima repubblica la transizione del 1992 1994 e l avvento del bipolarismo la caduta della prima repubblica maastricht e la crisi valutaria del 1992 le inchieste di mani pulite le stragi mafiose di falcone e borsellino e la nascita del bipolarismo berlusconiano sabbatucci vidotto",
+        navPath: "storia_contemporanea/index.html?open=summaries/cap31_bis.md"
+    },
+    {
         title: "Arte Contemporanea Cap. I: Introduzione al Corso",
         subject: "arte_contemporanea",
         chapterTag: "Capitolo I",

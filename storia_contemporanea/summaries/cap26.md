@@ -4,6 +4,8 @@
 **Periodo Storico:** 1960-1975 | **Pagine Libro:** 591-607 | **Tempo di Lettura:** ~8 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 26 bis: L'orlo dell'apocalisse nucleare e la guerra asimmetrica: i 13 giorni di Cuba (1962) e la tragedia del Vietnam](cap26_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Negli Usa la presidenza Kennedy (durata dal '60 al '63, quando Kennedy fu assassinato) fu improntata a un indirizzo riformistico. In politica estera, la grave crisi legata alla presenza di missili nucleari sovietici a Cuba (1962) si risolse infine con un successo americano e non compromise la distensione (nel '63 Usa e Urss firmarono un trattato per la messa al bando degli esperimenti nucleari nell'atmosfera). In Urss Kruscev accentuò i caratteri pacifici del confronto con l'Occidente. Ma nel 1964 fu destituito anche per il fallimento dei suoi piani economici.
@@ -140,3 +142,6 @@ Giunta dopo un venticinquennio di sviluppo pressoché ininterrotto e di benesser
 7. Il Medio Oriente fu teatro in questi anni di due successive guerre: la "guerra dei sei giorni" del '67 e la "guerra del Kippur" del '73. In seguito alla guerra del '67, Israele occupò nuovi territori arabi, riacutizzando il problema palestinese. La guerra del '73 fu all'origine del blocco petrolifero proclamato dai paesi arabi e del successivo aumento del prezzo del petrolio.
 
 8. L'aumento del prezzo del petrolio nel '73 (che si inseriva in una fase di instabilità monetaria internazionale inaugurata nel '71 dalla sospensione della convertibilità del dollaro) generò una crisi economica internazionale di vaste proporzioni. A differenza delle crisi del passato, la crescita della disoccupazione si sommava a un elevato tasso di inflazione. La gravità della crisi indusse ad interrogarsi sui fondamenti stessi della civiltà nata con la rivoluzione industriale.
+
+---
+[→ Vai all'Approfondimento: Capitolo 26 bis](cap26_bis.md) | [Vai all'Indice Generale](../index.html)

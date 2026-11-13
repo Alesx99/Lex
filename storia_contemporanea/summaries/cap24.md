@@ -4,6 +4,8 @@
 **Periodo Storico:** 1943-1958 | **Pagine Libro:** 549-572 | **Tempo di Lettura:** ~10 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 24 bis: La transizione post-fascista in Italia: referendum del 2 giugno 1946, compromesso costituente e la frattura elettorale del 1948](cap24_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Le condizioni in cui versava l'Italia alla fine della guerra erano gravissime: se le industrie non erano state eccessivamente danneggiate, era però stata fortemente colpita l'agricoltura; ingenti anche i danni subiti dall'edilizia e dai trasporti; elevatissima l'inflazione. La maggioranza della popolazione risentiva della scarsità di cibo e abitazioni e dell'alta disoccupazione. I problemi dell'ordine pubblico erano gravi: difficoltà nella smobilitazione dei partigiani, occupazione delle terre, borsa nera, separatismo e banditismo in Sicilia.
@@ -179,3 +181,6 @@ Già negli anni '54-55, il Psi aveva iniziato una cauta revisione della politica
 10. Negli anni del "centrismo" ('48-53) la politica dei governi De Gasperi non fu priva di importanti interventi sociali, come la riforma agraria e l'istituzione della Cassa per il Mezzogiorno. La politica di austerità finanziaria e contenimento dei consumi perseguita dal governo suscitò numerose proteste di piazza cui le forze dell'ordine risposero con durezza. In questa situazione la Dc cercò di rendere più stabile la propria maggioranza con una riforma del meccanismo elettorale ("legge truffa"), la cui approvazione suscitò vivaci proteste a sinistra e fu comunque priva di risultati pratici nelle elezioni del '53.
 
 11. Gli anni '53-58 furono un periodo di transizione. Alle novità sul piano economico ("piano Vanoni", ministero delle Partecipazioni statali) e istituzionale (insediamento della Corte costituzionale) si affiancarono mutamenti entro i partiti che avrebbero poi reso possibile l'allargamento della maggioranza ai socialisti. Nella Dc si affermò con la segreteria Fanfani (1954) una nuova generazione, più attenta all'intervento dello Stato nell'economia e più sensibile ai problemi sociali. Il Psi, soprattutto a partire dal '56, andava allontanandosi dai comunisti.
+
+---
+[→ Vai all'Approfondimento: Capitolo 24 bis](cap24_bis.md) | [Vai all'Indice Generale](../index.html)

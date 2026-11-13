@@ -4,6 +4,8 @@
 **Periodo Storico:** 1861-1896 | **Pagine Libro:** 148-185 | **Tempo di Lettura:** ~13 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 8 bis: Le contraddizioni dell'Italia Unita: questione demaniale, grande brigantaggio e autoritarismo crispino](cap8_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Al momento dell'unità l'agricoltura era l'attività economica nettamente prevalente nel paese; si trattava di un'agricoltura per lo più povera, caratterizzata da una grande varietà negli assetti produttivi: aziende agricole moderne (Pianura Padana), mezzadria (Italia centrale), latifondo (Mezzogiorno). La condizione di vita dei contadini era generalmente ai limiti della sussistenza fisica. Questa realtà di arretratezza economica e disagio sociale era assai poco conosciuta dalla classe dirigente.
@@ -215,3 +217,6 @@ Questo successo aumentò le difficoltà del governo Crispi che doveva subire i c
 13. Nettamente diversa la politica di Giolitti, a capo del governo nel '92-93, imperniata su una più equa pressione fiscale e su una linea non repressiva nei confronti dei conflitti sociali. Il rifiuto di Giolitti di adottare misure eccezionali contro i Fasci siciliani e lo scandalo della Banca romana provocarono le sue dimissioni.
 
 14. Gli atti di maggior rilievo del nuovo governo Crispi (1893) furono: la riforma bancaria (nascita della Banca d'Italia), la proclamazione dello stato d'assedio in Sicilia e Lunigiana, le leggi antisocialiste, l'ulteriore spinta all'azione coloniale che portò alla guerra con l'Etiopia. La sconfitta di Adua (1896) causò la fine politica di Crispi.
+
+---
+[→ Vai all'Approfondimento: Capitolo 8 bis](cap8_bis.md) | [Vai all'Indice Generale](../index.html)

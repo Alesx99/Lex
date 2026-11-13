@@ -86,7 +86,7 @@ Ogni materia possiede una cartella dedicata che ricalca uno schema uniforme:
 - **`restauro/`**: 1 sintesi capitolo | Esempi file: `index.html, style.css, summaries`
 - **`storia/`**: 14 sintesi capitolo | Esempi file: `extracted_text, index.html, quiz.html, style.css, summaries`
 - **`storia_arte/`**: 107 sintesi capitolo | Esempi file: `write_all_summaries.py, extracted_text, index.html, js, generate_clean_summaries.py`
-- **`storia_contemporanea/`**: 31 sintesi capitolo | Esempi file: `index.html, quiz.html, connections.html, style.css, summaries (cap1.md-cap31.md), extracted_text, Sabbatucci e Vidotto.pdf`
+- **`storia_contemporanea/`**: 62 moduli didattici (31 capitoli base `cap1.md-cap31.md` + 31 approfondimenti monografici `cap1_bis.md-cap31_bis.md`) | Esempi file: `index.html, quiz.html, connections.html, style.css, summaries/ (cap1.md-cap31.md, cap1_bis.md-cap31_bis.md), extracted_text, Sabbatucci e Vidotto.pdf`
 - **`storia_medievale/`**: 1 sintesi capitolo | Esempi file: `index.html, style.css, summaries`
 - **`tesi/`**: 1 sintesi capitolo | Esempi file: `index.html, js, style.css, summaries`
 
@@ -232,9 +232,9 @@ Ogni materia possiede una cartella dedicata che ricalca uno schema uniforme:
 │   ├── Sabbatucci e Vidotto - Il mondo contemporaneo. Dal 1848 a oggi.pdf
 │   ├── extracted_text/
 │   └── summaries/
-│       ├── cap1.md
+│       ├── cap1.md, cap1_bis.md
 │       ├── ...
-│       └── cap31.md
+│       └── cap31.md, cap31_bis.md
 ├── cristiana/
 │   ├── index.html
 │   ├── style.css

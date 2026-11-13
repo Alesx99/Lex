@@ -4,6 +4,8 @@
 **Periodo Storico:** 1992-2005 | **Pagine Libro:** 721-743 | **Tempo di Lettura:** ~9 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 31 bis: La Crisi della Prima Repubblica, la Transizione del 1992-1994 e l'Avvento del Bipolarismo](cap31_bis.md).
+
 
 ## Introduzione e Quadro Storico
 I primi anni '90 vedevano aggravarsi i fattori di crisi, sia sul terreno dell'economia (aumento del deficit pubblico, rallentamento della produzione, svalutazione della lira), sia su quello della convivenza civile (ripresa dell'offensiva mafiosa, dilagare della corruzione). Sul piano politico, le maggiori novità furono la trasformazione del Pci in Partito democratico della sinistra e l'emergere di nuovi movimenti ostili al sistema dei partiti (Verdi, Leghe, Rete).
@@ -116,3 +118,6 @@ Nelle elezioni del 13 maggio 2001 la vittoria della Casa delle libertà risultò
 5. Le trasformazioni sociali dell'Italia si misurano ormai con i comportamenti demografici che registrano una spiccata denatalità e un invecchiamento della popolazione. L'omologazione dei consumi non riesce a nascondere differenze sociali basate soprattutto sulla disuguaglianza dei redditi e dei livelli culturali.
 
 6. Le elezioni politiche del maggio 2001 diedero una netta vittoria alla Casa delle libertà, la coalizione guidata da Berlusconi, che nel giugno successivo formò il nuovo governo di centrodestra.
+
+---
+[→ Vai all'Approfondimento: Capitolo 31 bis](cap31_bis.md) | [Vai all'Indice Generale](../index.html)

@@ -29210,3 +29210,578 @@ società, in G. Sabbatucci, V. Vidotto (a e. di), Storia d'Italia, vol. 6 cit.
 
 ---
 
+
+
+---
+
+=== CORPUS DEGLI APPROFONDIMENTI MONOGRAFICI CRITICI (CAPITOLI 1 BIS - 31 BIS) ===
+
+## Indice Ragionato dei Moduli di Approfondimento Monografico (Capitoli I bis - XXXI bis)
+
+| Modulo | Periodo | Nuclei di Approfondimento Storiografico |
+|:---|:---:|:---|
+| **Capitolo I bis** | 1848-1852 | I motivi rivoluzionari francesi del 1848: frattura di classe, ateliers nationaux e genesi del bonapartismo (Concetto guida: *Diritto al Lavoro e Bonapartismo*) |
+| **Capitolo II bis** | 1850-1876 | Materialismo storico, Prima Internazionale e la frattura teorica tra Marx e Bakunin (Concetto guida: *Plusvalore e Anarchismo Sociale*) |
+| **Capitolo III bis** | 1849-1861 | La dialettica risorgimentale: Cavour, Garibaldi e la 'conquista regia' (Concetto guida: *Connubio e Rivoluzione Passiva*) |
+| **Capitolo IV bis** | 1862-1890 | L'egemonia continentale bismarckiana e la Comune di Parigi (1870-1871) (Concetto guida: *Realpolitik e Sistema Bismarckiano*) |
+| **Capitolo V bis** | 1850-1890 | La Guerra Civile Americana e la Restaurazione Meiji: due modelli di transizione industriale (Concetto guida: *Rivoluzione dall'Alto e Zaibatsu*) |
+| **Capitolo VI bis** | 1873-1914 | Dalla Grande Depressione (1873-1896) al capitalismo monopolistico: trust, cartelli e capitale finanziario (Concetto guida: *Capitale Finanziario e Taylorismo*) |
+| **Capitolo VII bis** | 1875-1914 | L'Imperialismo e la spartizione dell'Africa: modelli interpretativi (Hobson, Lenin, Schumpeter) e scontro coloniale (Concetto guida: *Scramble for Africa e Campi di Concentramento*) |
+| **Capitolo VIII bis** | 1861-1896 | Le contraddizioni dell'Italia Unita: questione demaniale, grande brigantaggio e autoritarismo crispino (Concetto guida: *Piemontesizzazione e Trasformismo*) |
+| **Capitolo IX bis** | 1889-1914 | La società di massa e la Seconda Internazionale: nazionalizzazione delle masse, ortodossia di Kautsky e revisionismo di Bernstein (Concetto guida: *Società di Massa e Revisionismo*) |
+| **Capitolo X bis** | 1890-1914 | La crisi della Terza Repubblica francese e le radici della Grande Guerra: dall'Affaire Dreyfus alla Weltpolitik guglielmina (Concetto guida: *Weltpolitik e Polveriera Balcanica*) |
+| **Capitolo XI bis** | 1900-1914 | Il declino dell'egemonia eurocentrica: la disfatta russa a Tsushima (1905) e la Rivoluzione repubblicana cinese (1911) (Concetto guida: *Pericolo Giallo e Big Stick*) |
+| **Capitolo XII bis** | 1901-1914 | Il sistema giolittiano tra riformismo e contraddizioni: triangolo industriale, patto Gentiloni e critica meridionalista (Concetto guida: *Giolittismo e Patto Gentiloni*) |
+| **Capitolo XIII bis** | 1914-1918 | La mobilitazione totale e l'intervento italiano (1914-1915): trincee, fronte interno e scontro politico tra neutralisti e interventisti (Concetto guida: *Guerra di Posizione e Radiose Giornate*) |
+| **Capitolo XIV bis** | 1917-1921 | Da Pietrogrado a Brest-Litovsk: le Tesi di Aprile, la presa del Palazzo d'Inverno e il Comunismo di Guerra (Concetto guida: *Tesi di Aprile e Comunismo di Guerra*) |
+| **Capitolo XV bis** | 1919-1925 | L'ordine geopolitico di Versailles e l'iperinflazione di Weimar: le radici dell'instabilità europea (Concetto guida: *Diktat e Spirito di Locarno*) |
+| **Capitolo XVI bis** | 1919-1926 | La crisi dello Stato liberale italiano e l'avvento del fascismo: dallo squadrismo agrario alle Leggi Fascistissime (1919-1926) (Concetto guida: *Squadrismo e Leggi Fascistissime*) |
+| **Capitolo XVII bis** | 1929-1939 | La Grande Depressione del 1929 e la svolta economica del New Deal: sovrapproduzione, collasso bancario e teoria keynesiana (Concetto guida: *Deficit Spending e New Deal*) |
+| **Capitolo XVIII bis** | 1933-1939 | L'ingegneria del potere nazionalsocialista: 'Gleichschaltung', apparato repressivo SS e ideologia razzista di Norimberga (Concetto guida: *Gleichschaltung e Antisemitismo di Norimberga*) |
+| **Capitolo XIX bis** | 1925-1940 | Il regime fascista tra ambizioni totalitarie e mediazioni di regime: la diarchia con la Corona e i Patti Lateranensi del 1929 (Concetto guida: *Patti Lateranensi e Leggi Razziali del 1938*) |
+| **Capitolo XX bis** | 1919-1939 | I nazionalismi asiatici nel primo Novecento: la disobbedienza civile non violenta di Gandhi e la Lunga Marcia di Mao Zedong (Concetto guida: *Satyagraha e Lunga Marcia*) |
+| **Capitolo XXI bis** | 1939-1945 | La guerra totale e lo sterminio industriale: Operazione Barbarossa, conferenza di Wannsee e la tragedia della Shoah (Concetto guida: *Vernichtungskrieg e Shoah*) |
+| **Capitolo XXII bis** | 1945-1955 | La genesi dell'ordine bipolare: Dottrina Truman, Piano Marshall e la divisione della Germania (1945-1949) (Concetto guida: *Dottrina Truman e Cortina di Ferro*) |
+| **Capitolo XXIII bis** | 1945-1962 | La Bandung afroasiatica (1955) e la guerra d'indipendenza d'Algeria: il crollo degli imperi coloniali e il Movimento dei Non Allineati (Concetto guida: *Non Allineamento e Guerra d'Algeria*) |
+| **Capitolo XXIV bis** | 1943-1953 | La transizione post-fascista in Italia: referendum del 2 giugno 1946, compromesso costituente e la frattura elettorale del 1948 (Concetto guida: *Compromesso Costituzionale e Centrismo*) |
+| **Capitolo XXV bis** | 1950-1975 | I 'Trenta Gloriosi' del capitalismo (1945-1975): modello fordista-keynesiano, welfare state e la contestazione del '68 (Concetto guida: *Welfare State e Antiautoritarismo del '68*) |
+| **Capitolo XXVI bis** | 1960-1975 | L'orlo dell'apocalisse nucleare e la guerra asimmetrica: i 13 giorni di Cuba (1962) e la tragedia del Vietnam (Concetto guida: *Crisi di Cuba e Guerra del Vietnam*) |
+| **Capitolo XXVII bis** | 1971-1989 | La fine dell'età dell'oro: il decoupling di Nixon (1971), gli shock petroliferi del 1973-1979 e l'ascesa del neoliberismo reaganiano-thatcheriano (Concetto guida: *Stagflazione e Neoliberismo (Reaganomics)*) |
+| **Capitolo XXVIII bis** | 1969-1984 | La notte della Repubblica: la strage di Piazza Fontana (1969), la violenza politica brigatista e il rapimento Moro (1978) (Concetto guida: *Strategia della Tensione e Caso Moro*) |
+| **Capitolo XXIX bis** | Anni '70 del Novecento - Inizio XXI Secolo | La Terza Rivoluzione Industriale, l'Economia della Conoscenza e le Contraddizioni della Globalizzazione (Concetto guida: *Globalizzazione e Post-Fordismo*) |
+| **Capitolo XXX bis** | 1989 - 2003 | Il Collasso del Mondo Bipolare, le Guerre Balcaniche e l'Era del Terrorismo Globale (Concetto guida: *Pulizia Etnica e Guerra Preventiva*) |
+| **Capitolo XXXI bis** | 1992 - 2006 | La Crisi della Prima Repubblica, la Transizione del 1992-1994 e l'Avvento del Bipolarismo (Concetto guida: *Transizione Istituzionale e Bipolarismo Incompiuto*) |
+
+---
+
+### Capitolo I bis: I motivi rivoluzionari francesi del 1848: frattura di classe, ateliers nationaux e genesi del bonapartismo
+- **Periodo Storico:** 1848-1852
+- **Concetto Guida:** Diritto al Lavoro e Bonapartismo
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi marxiana del primo vero scontro di classe moderno (*Le lotte di classe in Francia*, 1850; *Il 18 Brumaio di Luigi Bonaparte*, 1852):**  
+   Karl Marx individua nelle giornate parigine del giugno 1848 il momento inaugurale della storia proletaria contemporanea. Secondo Marx, la repubblica di febbraio era una mera alleanza tattica interclassista tra borghesia e lavoratori per abbattere l'oligarchia finanziaria; non appena il proletariato pretese di dare un contenuto materiale alla repubblica imponendo il diritto al lavoro, la borghesia rivelò la propria natura repressiva, coalizzandosi con la reazione aristocratica e clericale. L'ascesa di Bonaparte riflette lo stallo tra le classi e il peso reazionario dei 'contadini parcellari' francesi, simili a *«sacchi di patate»* privi di coscienza autonoma che si affidano alla memoria del grande imperatore.
+
+2. **L'interpretazione liberale e sociologica di Alexis de Tocqueville (*Souvenirs*, 1850-1851):**  
+   Testimone oculare e deputato all'Assemblea Costituente, Tocqueville riconosce nelle giornate di giugno non una contesa per la forma di governo (monarchia vs repubblica), ma una titanica e spaventosa contesa sociale sulla *proprietà privata*. Per l'autore de *La democrazia in America*, la rivoluzione del '48 dimostrò il pericolo supremo dell'invidia sociale e del socialismo dogmatico, che pretendendo di sacrificare la libertà civile sull'altare di un'uguaglianza materiale forzata finisce inevitabilmente per spalancare le porte all'onnipotenza statuale e al dispotismo bonapartista.
+
+3. **La revisione storiografica contemporanea (Maurice Agulhon, François Furet):**  
+   Gli storici contemporanei hanno sottolineato la natura complessa e plurale dell'identità operaia del 1848: gli insorti di giugno non erano ancora un proletariato di fabbrica omogeneo e marxianamente compatto, bensì in larga prevalenza artigiani specializzati, falegnami, tipografi, ebanisti e muratori che difendevano la propria autonomia di mestiere e il valore morale del lavoro dignitoso contro l'omologazione capitalistica e il paternalismo statale. Inoltre, Agulhon ha evidenziato come la Seconda Repubblica abbia costituito un formidabile 'apprendistato della politica democratica' per le masse contadine, destinato a germogliare decenni dopo nella Terza Repubblica.
+
+---
+
+### Capitolo II bis: Materialismo storico, Prima Internazionale e la frattura teorica tra Marx e Bakunin
+- **Periodo Storico:** 1850-1876
+- **Concetto Guida:** Plusvalore e Anarchismo Sociale
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione marxista-leninista ortodossa (Lenin, Stato e rivoluzione, 1917):**  
+   Celebra la linea di Marx all'Aja come l'unica storicamente corretta per emancipare il movimento operaio dalle chimere piccolo-borghesi e fondare partiti disciplinati capaci di guidare la dittatura proletaria.
+
+2. **La rivalutazione storiografica dell'anarchismo (George Woodcock, Franco Venturi):**  
+   Sottolinea come le intuizioni di Bakunin sul pericolo autoritario e burocratico di un 'comunismo di Stato' si siano rivelate straordinariamente profetiche alla luce degli esiti del totalitarismo sovietico novecentesco.
+
+3. **La sintesi storica di Eric Hobsbawm (L'età del capitale, 1975):**  
+   Inquadra lo scontro Marx-Bakunin non solo come disputa dottrinaria, ma come riflesso delle diverse tappe di sviluppo del capitalismo: Marx esprimeva la realtà dei paesi industrializzati a forte proletariato urbano, mentre Bakunin dava voce all'esasperazione delle masse contadine arretrate della periferia mediterranea e russa.
+
+---
+
+### Capitolo III bis: La dialettica risorgimentale: Cavour, Garibaldi e la 'conquista regia'
+- **Periodo Storico:** 1849-1861
+- **Concetto Guida:** Connubio e Rivoluzione Passiva
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione gramsciana della 'rivoluzione mancata' (Antonio Gramsci, Quaderni del carcere):**  
+   Sostiene che il Partito d'Azione mazziniano e garibaldino fallì perché non seppe legare la lotta per l'indipendenza nazionale a una radicale riforma agraria che distribuisse le terre ai contadini del Sud; ciò consentì ai moderati cavouriani di realizzare una 'rivoluzione passiva' e una pura conquista regia a spese delle masse.
+
+2. **La tesi liberale e modernizzatrice di Rosario Romeo (Cavour e il suo tempo, 1984):**  
+   Difende l'opera di Cavour dimostrando che la subordinazione delle rivendicazioni sociali alla causa monarchica fu l'unica scelta realistica che evitò il soffocamento dell'Italia da parte delle potenze conservatrici europee e garantì la creazione delle precondizioni economiche dell'accumulazione capitalistica.
+
+3. **La prospettiva revisionista di Denis Mack Smith (Garibaldi e Cavour nel 1860):**  
+   Mette in risalto la profonda diffidenza e la rivalità quasi insanabile tra Cavour e Garibaldi, sottolineando come l'Unità fu il frutto di un equilibrio precario tra due visioni del mondo opposte, risolto solo dalla generosità patriottica di Garibaldi a Teano.
+
+---
+
+### Capitolo IV bis: L'egemonia continentale bismarckiana e la Comune di Parigi (1870-1871)
+- **Periodo Storico:** 1862-1890
+- **Concetto Guida:** Realpolitik e Sistema Bismarckiano
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi marxiana della Comune come prototipo della dittatura proletaria (Karl Marx, La guerra civile in Francia, 1871):**  
+   Celebra la Comune come la prima forma politica finalmente scoperta nella storia in cui il proletariato non si impadronisce della macchina statale burocratica borghese per usarla ai propri fini, ma la distrugge dalle fondamenta istituendo la democrazia diretta dei produttori associati.
+
+2. **La critica liberale dell'autoritarismo bismarckiano (Fritz Stern, L'oro e il ferro, 1977):**  
+   Evidenzia come il successo abbagliante della Realpolitik abbia abituato le classi dirigenti e il popolo tedesco all'obbedienza cieca verso l'autoritarismo militare e all'idolatria della forza, impedendo la maturazione di una solida coscienza democratica e aprendo il solco della catastrofe del Novecento.
+
+3. **L'analisi diplomatica di Henry Kissinger (Diplomazia, 1994):**  
+   Definisce Bismarck un genio assoluto ma tragico dell'equilibrio: il suo sistema diplomatico era così sofisticato e calibrato sulle sue personali capacità intuitive che nessun successore avrebbe mai potuto gestirlo senza far precipitare l'Europa nel conflitto armato.
+
+---
+
+### Capitolo V bis: La Guerra Civile Americana e la Restaurazione Meiji: due modelli di transizione industriale
+- **Periodo Storico:** 1850-1890
+- **Concetto Guida:** Rivoluzione dall'Alto e Zaibatsu
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione della guerra civile come 'Seconda Rivoluzione Americana' (Charles e Mary Beard; Eric Foner):**  
+   Sostiene che la guerra civile non fu un mero conflitto morale sulla schiavitù, ma il cataclisma economico necessario che distrusse l'oligarchia agraria del Sud e spianò la strada al trionfo incontcontrastato del grande capitalismo monopolistico industriale del Nord.
+
+2. **La tesi sociologica di Barrington Moore (Le origini sociali della dittatura e della democrazia, 1966):**  
+   Mette a confronto i due modelli: negli USA la vittoria violenta del Nord borghese impose la democrazia capitalistica; in Giappone, la modernizzazione fu condotta da una coalizione reazionaria di nobiltà terriera e burocrazia, generando un capitalismo autoritario e militarista sfociato nel fascismo asiatico degli anni Trenta.
+
+3. **La prospettiva di E. H. Norman (La nascita del Giappone moderno):**  
+   Sottolinea come la rapidità straordinaria della modernizzazione Meiji sia stata pagata al prezzo di una spietata oppressione fiscale sui contadini e dell'esaltazione quasi religiosa del culto imperiale scintoista come surrogato della democrazia civile.
+
+---
+
+### Capitolo VI bis: Dalla Grande Depressione (1873-1896) al capitalismo monopolistico: trust, cartelli e capitale finanziario
+- **Periodo Storico:** 1873-1914
+- **Concetto Guida:** Capitale Finanziario e Taylorismo
+
+**Tesi Storiografiche di Riferimento:**
+1. **La diagnosi leniniana dell'imperialismo (Nikolaj Lenin, L'imperialismo fase suprema del capitalismo, 1916):**  
+   Dimostra come la nascita dei monopoli e la dominazione del capitale finanziario abbiano reso inevitabile la spartizione del pianeta tra trust e grandi potenze, conducendo strutturalmente alla conflagrazione della guerra mondiale imperialistica.
+
+2. **La tesi classica di David Landes (Prometeo liberato, 1969):**  
+   Interpreta la Seconda Rivoluzione Industriale come il passaggio dalla tecnologia empirica basata sul carbone e sul ferro alla tecnologia scientifica fondata sull'elettricità, la chimica organica e la produzione di massa, in cui l'efficienza manageriale sostituisce l'iniziativa dell'imprenditore individuale.
+
+3. **L'analisi sociologica di Thorstein Veblen (La teoria della classe agiata, 1899):**  
+   Denuncia come il capitalismo monopolistico abbia sostituito la figura virtuosa dell'ingegnere produttore con quella del finanziere speculatore e dell'oligarchia dei 'capitani d'industria', dediti unicamente al consumo vistoso e al sabotaggio della produzione per mantenere alti i profitti.
+
+---
+
+### Capitolo VII bis: L'Imperialismo e la spartizione dell'Africa: modelli interpretativi (Hobson, Lenin, Schumpeter) e scontro coloniale
+- **Periodo Storico:** 1875-1914
+- **Concetto Guida:** Scramble for Africa e Campi di Concentramento
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi leniniana dell'esaurimento dei mercati (Lenin, L'imperialismo, 1916):**  
+   Spiega la spartizione dell'Africa come l'inevitabile scontro tra capitali finanziari europei alla disperata ricerca di materie prime esclusive e fonti di manodopera schiavistica non sindacalizzata per contrastare la caduta del saggio di profitto.
+
+2. **L'interpretazione geopolitica e strategica di Ronald Robinson e John Gallagher (Africa and the Victorians, 1961):**  
+   Sostiene che la corsa all'Africa non fu dettata dall'avidità dei mercati commerciali, ma dalla reazione a catena innescata dalla necessità britannica di difendere la sicurezza navale delle rotte marittime verso l'India (Suez e il Capo), trascinando le altre potenze nella competizione per imitazione e prestigio.
+
+3. **La tesi culturale-postcoloniale di Edward Said (Cultura e imperialismo, 1993):**  
+   Dimostra come la dominazione materiale dell'Africa sia stata resa possibile solo dalla preliminare costruzione letteraria e culturale dell'alterità esotica orientale e nera come 'inferiore, pigra e irrazionale', rendendo la violenza coloniale accettabile per la coscienza borghese europea.
+
+---
+
+### Capitolo VIII bis: Le contraddizioni dell'Italia Unita: questione demaniale, grande brigantaggio e autoritarismo crispino
+- **Periodo Storico:** 1861-1896
+- **Concetto Guida:** Piemontesizzazione e Trasformismo
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi classica di Benedetto Croce (Storia d'Italia dal 1871 al 1915, 1928):**  
+   Esalta l'opera della Destra Storica come un capolavoro di rigore morale, onestà amministrativa e devozione allo Stato, minimizzando il fenomeno del brigantaggio come una devianza criminale premoderna che lo Stato liberale aveva il dovere di stroncare per civilizzare la nazione.
+
+2. **La critica meridionalista e marxista di Antonio Gramsci (I Quaderni del carcere):**  
+   Denuncia la natura di classe dello Stato unitario, fondato sul blocco agrario-industriale tra i padroni del Nord e i latifondisti parassitari del Sud a spese del proletariato contadino, trasformando il Mezzogiorno in un mercato coloniale subordinato.
+
+3. **La rivalutazione storiografica del trasformismo di Alberto Caracciolo:**  
+   Sottolinea come il trasformismo non fu una mera patologia corruttiva, ma l'unico dispositivo politico che consentì di mantenere la governabilità del paese e la stabilità delle istituzioni rappresentative in una fase di transizione priva di partiti moderni strutturati.
+
+---
+
+### Capitolo IX bis: La società di massa e la Seconda Internazionale: nazionalizzazione delle masse, ortodossia di Kautsky e revisionismo di Bernstein
+- **Periodo Storico:** 1889-1914
+- **Concetto Guida:** Società di Massa e Revisionismo
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi classica di George L. Mosse (La nazionalizzazione delle masse, 1975):**  
+   Dimostra come la penetrazione dell'ideologia nazionale nelle masse attraverso monumenti, cerimonie pubbliche e miti romantici abbia preparato il terreno emotivo ed estetico per il consenso totale preteso dai regimi totalitari fascista e nazista del Novecento.
+
+2. **L'interpretazione sociologica di Robert Michels (La sociologia del partito politico, 1911):**  
+   Formula la celebre 'legge ferrea dell'oligarchia': dimostra che anche il più democratico dei partiti operai di massa (come l'SPD) tende inesorabilmente a trasformarsi in una struttura gerarchica dominata da un'oligarchia professionale di burocrati tesi alla conservazione del proprio potere.
+
+3. **La prospettiva di Rosa Luxemburg (Riforma sociale o rivoluzione?, 1899):**  
+   Demolisce le tesi di Bernstein sostenendo che il parlamento borghese non potrà mai estirpare il capitalismo dall'interno, e che l'abbandono della meta rivoluzionaria condanna la socialdemocrazia al tradimento degli ideali operai, come tragicamente confermato nell'agosto 1914.
+
+---
+
+### Capitolo X bis: La crisi della Terza Repubblica francese e le radici della Grande Guerra: dall'Affaire Dreyfus alla Weltpolitik guglielmina
+- **Periodo Storico:** 1890-1914
+- **Concetto Guida:** Weltpolitik e Polveriera Balcanica
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi controversa di Fritz Fischer (Assalto al potere mondiale, 1961):**  
+   Attesta documentariamente la responsabilità primaria della classe dirigente della Germania guglielmina, la quale perseguiva consapevolmente e pianificava una guerra europea egemonica per spezzare l'accerchiamento dell'Intesa e conquistare il dominio continentale.
+
+2. **L'interpretazione sonnambula di Christopher Clark (I sonnambuli. Come l'Europa arrivò alla Grande Guerra, 2012):**  
+   Rifiuta la colpa esclusiva tedesca e descrive i leader di tutte le grandi potenze europee come 'sonnambuli' ciechi e prigionieri di logiche paranoiche, incapaci di calibrare la portata distruttiva delle loro decisioni a catena.
+
+3. **L'analisi sociologica e ideologica di Zeev Sternhell (La nascita dell'ideologia fascista, 1989):**  
+   Individua nell'Affaire Dreyfus e nel nazionalismo reazionario dell'Action Française il vero laboratorio culturale del totalitarismo fascista moderno, fondato sull'odio per la democrazia borghese e sull'antisemitismo biologico.
+
+---
+
+### Capitolo XI bis: Il declino dell'egemonia eurocentrica: la disfatta russa a Tsushima (1905) e la Rivoluzione repubblicana cinese (1911)
+- **Periodo Storico:** 1900-1914
+- **Concetto Guida:** Pericolo Giallo e Big Stick
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi di Akira Iriye (Il potere e la civiltà, 1997):**  
+   Analizza la vittoria giapponese del 1905 come un punto di svolta culturale epocale: dimostrò che la modernizzazione non era sinonimo di occidentalizzazione, offrendo a tutti i paesi non europei la prova che era possibile padroneggiare la tecnologia capitalistica senza rinunciare alla propria identità asiatica.
+
+2. **L'interpretazione della diplomazia del dollaro di William Appleman Williams (La tragedia della diplomazia americana, 1959):**  
+   Mostra come l'imperialismo della 'porta aperta' e del Big Stick americano abbia inaugurato una nuova e più pervasiva forma di dominio neocoloniale invisibile, basato sul ricatto finanziario e sui colpi di stato guidati dall'intelligence anziché sulle guarnigioni coloniali visibili.
+
+3. **La prospettiva di François-Xavier Guerra (Messico: la reinvenzione dell'Occidente):**  
+   Interpreta la Rivoluzione Messicana del 1910 non solo come lotta agraria, ma come il primo grande sconvolgimento sociale del Novecento in cui l'aspirazione comunitaria delle masse indigene tradizionali si scontrò con l'apparato centralizzatore dello Stato moderno.
+
+---
+
+### Capitolo XII bis: Il sistema giolittiano tra riformismo e contraddizioni: triangolo industriale, patto Gentiloni e critica meridionalista
+- **Periodo Storico:** 1901-1914
+- **Concetto Guida:** Giolittismo e Patto Gentiloni
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'apologia progressista di Giovanni Sabbatucci e Vittorio Vidotto:**  
+   Riconosce a Giolitti il merito storico eccezionale di aver tentato con intelligenza e coraggio di ampliare le basi del consenso democratico dello Stato liberale, comprendendo la necessità di integrare pacificamente i lavoratori prima che la polarizzazione distruggesse le istituzioni.
+
+2. **La feroce accusa meridionalista di Gaetano Salvemini (Il ministro della malavita, 1910):**  
+   Sostiene che la modernizzazione giolittiana fu un patto scellerato a spese del Sud: Giolitti concesse riforme e libertà agli operai del Nord perché pagati con l'asservimento feudale, la corruzione poliziesca e la miseria contadina del Mezzogiorno.
+
+3. **L'interpretazione gramsciana della transizione (Antonio Gramsci, L'Ordine Nuovo):**  
+   Individua nel giolittismo il tentativo estremo e fallimentare della borghesia italiana di assorbire i vertici del riformismo operaio ('trasformismo progressista') per disinnescare la potenziale alleanza rivoluzionaria tra operai del Nord e contadini del Sud.
+
+---
+
+### Capitolo XIII bis: La mobilitazione totale e l'intervento italiano (1914-1915): trincee, fronte interno e scontro politico tra neutralisti e interventisti
+- **Periodo Storico:** 1914-1918
+- **Concetto Guida:** Guerra di Posizione e Radiose Giornate
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione classica della crisi dello Stato liberale di Renzo De Felice (Mussolini il rivoluzionario, 1965):**  
+   Individua nel maggio radioso del 1915 la vera rottura genetica della legalità statutaria italiana: per la prima volta la piazza armata e la violenza verbale imposero la propria volontà all'organo sovrano della sovranità parlamentare, fungendo da matrice psicologica diretta del fascismo.
+
+2. **La tesi antropologica di Paul Fussell (La Grande Guerra e la memoria moderna, 1975):**  
+   Dimostra come la Grande Guerra abbia distrutto il linguaggio, l'estetica e l'ottimismo razionalista dell'Occidente ottocentesco, inaugurando la moderna visione disincantata, ironica e traumatizzata della condizione umana dominata dalla tecnologia omicida.
+
+3. **L'analisi militare e sociale di Mario Isnenghi e Giorgio Rochat (La grande guerra 1914-1918):**  
+   Evidenzia il baratro tra la retorica nazionalista degli ufficiali borghesi e la muta sofferenza delle masse contadine meridionali mandate al macello come carne da cannone da una giustizia militare spietata fondata sulla decimazione sommaria ordinata da Cadorna.
+
+---
+
+### Capitolo XIV bis: Da Pietrogrado a Brest-Litovsk: le Tesi di Aprile, la presa del Palazzo d'Inverno e il Comunismo di Guerra
+- **Periodo Storico:** 1917-1921
+- **Concetto Guida:** Tesi di Aprile e Comunismo di Guerra
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione bolscevica ortodossa (Lev Trockij, Storia della rivoluzione russa, 1930):**  
+   Sostiene che la Rivoluzione d'Ottobre fu la legittima e necessaria incarnazione della volontà delle masse proletarie oppresse, e che senza la disciplina di ferro del partito leninista la Russia sarebbe caduta vittima di una spietata dittatura militare fascista ante-litteram guidata dai generali bianchi.
+
+2. **La tesi critica liberale di Richard Pipes (La rivoluzione russa, 1990):**  
+   Demolisce il mito della rivoluzione popolare, descrivendo l'Ottobre come un colpo di stato militare classico perpetrato da una setta di intellettuali fanatici e cospiratori (l'intellighenzia bolscevica) che impose una tirannia totalitaria sanguinaria distruggendo il germoglio democratico della Costituente.
+
+3. **L'analisi storica di E. H. Carr (La rivoluzione bolscevica 1917-1923):**  
+   Colloca il bolscevismo nel contesto del collasso strutturale dell'Impero zarista sotto il peso della guerra totale, dimostrando come le misure draconiane del Comunismo di Guerra non furono il frutto di un astratto disegno dottrinario, ma risposte disperate all'anarchia e alla carestia per preservare l'integrità statale russa.
+
+---
+
+### Capitolo XV bis: L'ordine geopolitico di Versailles e l'iperinflazione di Weimar: le radici dell'instabilità europea
+- **Periodo Storico:** 1919-1925
+- **Concetto Guida:** Diktat e Spirito di Locarno
+
+**Tesi Storiografiche di Riferimento:**
+1. **La profezia economica di John Maynard Keynes (Le conseguenze economiche della pace, 1919):**  
+   Dimostra con lucidità matematica che l'imposizione di riparazioni punitive e sproporzionate alla Germania avrebbe distrutto il tessuto economico del continente, avvelenato i rapporti internazionali e condotto fatalmente a una nuova guerra europea di revanscismo distruttivo.
+
+2. **L'interpretazione storico-politica di Detlev Peukert (La repubblica di Weimar, 1987):**  
+   Descrive Weimar come la prima 'democrazia della modernità' affetta da una fragilità strutturale: fu travolta non dai suoi difetti istituzionali, ma dall'impatto cumulativo della disfatta bellica, dell'iperinflazione che polverizzò il ceto medio e dalla delegittimazione permanente da parte delle élite tradizionali.
+
+3. **L'analisi sociologica e psicologica di Ian Kershaw:**  
+   Evidenzia come l'umiliazione del Diktat di Versailles e lo shock traumatizzante dell'iperinflazione del 1923 abbiano creato nella società tedesca una nevrosi di massa ossessionata dalla vendetta nazionale, fornendo il terreno fertile in cui poterono attecchire le paranoie complottiste e antisemite del nazionalsocialismo.
+
+---
+
+### Capitolo XVI bis: La crisi dello Stato liberale italiano e l'avvento del fascismo: dallo squadrismo agrario alle Leggi Fascistissime (1919-1926)
+- **Periodo Storico:** 1919-1926
+- **Concetto Guida:** Squadrismo e Leggi Fascistissime
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi monumentale di Renzo De Felice (Mussolini il fascista, 1966):**  
+   Distingue rigorosamente tra il 'fascismo-movimento' (espressione dei ceti medi emergenti desiderosi di protagonismo sociale) e il 'fascismo-regime' (il compromesso autoritario tra Mussolini, la monarchia, gli agrari e la grande industria per garantire la stabilità sociale).
+
+2. **La teoria del fascismo come 'malattia morale' di Benedetto Croce:**  
+   Interpreta il fascismo come una tragica ma temporanea 'parentesi' e una 'crisi di coscienza' scatenata dagli odi della guerra, rifiutando di considerare il fascismo come il prodotto inevitabile delle contraddizioni strutturali del Risorgimento e dello Stato liberale.
+
+3. **L'interpretazione marxista dell'Internazionale Comunista (Gramsci, Togliatti):**  
+   Definisce il fascismo non come un fenomeno transitorio, ma come la 'dittatura terroristica aperta del grande capitale monopolistico e agrario', resasi necessaria quando la borghesia non riuscì più a governare con gli strumenti della democrazia parlamentare.
+
+---
+
+### Capitolo XVII bis: La Grande Depressione del 1929 e la svolta economica del New Deal: sovrapproduzione, collasso bancario e teoria keynesiana
+- **Periodo Storico:** 1929-1939
+- **Concetto Guida:** Deficit Spending e New Deal
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi monetarista di Milton Friedman e Anna Schwartz (A Monetary History of the United States, 1963):**  
+   Sostiene che la crisi del '29 non fu generata dalle contraddizioni intrinseche del capitalismo, ma dal tragico errore di politica monetaria della Federal Reserve, la quale invece di immettere liquidità nel sistema bancario restrinse il credito, trasformando una normale recessione nella Grande Depressione.
+
+2. **L'interpretazione classica di John Kenneth Galbraith (Il grande crollo, 1955):**  
+   Evidenzia come la catastrofe fu il frutto dell'avidità speculativa irrazionale, della fragilità delle banche non regolate e soprattutto della scandalosa disuguaglianza nella distribuzione del reddito che soffocò la domanda dei consumatori.
+
+3. **L'analisi istituzionale di Eric Hobsbawm (L'età degli estremi, 1994):**  
+   Definisce la Grande Depressione del '29 come il trauma che spazzò via il liberismo dell'Ottocento, dimostrando che senza l'intervento pianificatore dello Stato e l'adozione delle ricette keynesiane il capitalismo democratico non sarebbe sopravvissuto alla sfida del comunismo sovietico e del fascismo.
+
+---
+
+### Capitolo XVIII bis: L'ingegneria del potere nazionalsocialista: 'Gleichschaltung', apparato repressivo SS e ideologia razzista di Norimberga
+- **Periodo Storico:** 1933-1939
+- **Concetto Guida:** Gleichschaltung e Antisemitismo di Norimberga
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione filosofica del totalitarismo di Hannah Arendt (Le origini del totalitarismo, 1951):**  
+   Identifica nel nazismo (assieme allo stalinismo) il modello archetipico di totalitarismo: un regime che distrugge la sfera pubblica e privata dell'individuo attraverso la combinazione inedita di terrore poliziesco permanente, ideologia scientifica paranoica e riduzione degli esseri umani a 'oggetti sacrificabili' nei campi di sterminio.
+
+2. **Il dibattito storiografico tra intenzionalisti e funzionalisti (Kershaw, Broszat, Mommsen):**  
+   Mentre gli intenzionalisti (Klaus Hildebrand) vedono nella distruzione della democrazia e nella Shoah l'attuazione rigorosa e premeditata del piano scritto da Hitler nel Mein Kampf, i funzionalisti dimostrano che il Terzo Reich era una 'poliarchia caotica' di poteri concorrenti (SS, partito, esercito, ministeri) che gareggiavano nel radicalizzare le misure repressive per 'andare incontro alla volontà del Führer' (*working towards the Führer*).
+
+3. **L'analisi sociologica e psicologica di Theodor W. Adorno (La personalità autoritaria, 1950):**  
+   Indaga le radici psico-sociali del consenso tedesco, evidenziando come l'educazione autoritaria patriarcale prussiana e il conformismo piccolo-borghese abbiano forgiato personalità fragili pronte a identificarsi narcisisticamente nel capo infallibile e a scaricare la propria frustrazione sul capro espiatorio ebraico.
+
+---
+
+### Capitolo XIX bis: Il regime fascista tra ambizioni totalitarie e mediazioni di regime: la diarchia con la Corona e i Patti Lateranensi del 1929
+- **Periodo Storico:** 1925-1940
+- **Concetto Guida:** Patti Lateranensi e Leggi Razziali del 1938
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi del consenso di massa di Renzo De Felice (Mussolini il duce. Gli anni del consenso 1929-1936):**  
+   Dimostra documentariamente che negli anni Trenta il regime fascista godette di una vastissima, reale e autentica adesione popolare (in particolare tra i ceti medi e il mondo cattolico), fondata sul prestigio personale del duce e sulla conciliazione lateranense.
+
+2. **La categoria del 'totalitarismo imperfetto' di Giovanni Sabbatucci:**  
+   Evidenzia come la coesistenza obbligata con la Chiesa cattolica e la dipendenza istituzionale dalla monarchia sabauda abbiano impedito al fascismo di assumere i caratteri della compiuta tirannia totalitaria hitleriana o staliniana, conservando un'alternativa costituzionale pronta a riemergere nel 1943.
+
+3. **L'interpretazione culturale e religiosa di Emilio Gentile (Il culto del littorio, 1993):**  
+   Definisce il fascismo come la prima 'religione politica' laica contemporanea, dotata di propri martiri, liturgie, dogmi e riti collettivi, volta alla trasformazione antropologica dell'individuo in cellula subordinata della mistica della nazione armata.
+
+---
+
+### Capitolo XX bis: I nazionalismi asiatici nel primo Novecento: la disobbedienza civile non violenta di Gandhi e la Lunga Marcia di Mao Zedong
+- **Periodo Storico:** 1919-1939
+- **Concetto Guida:** Satyagraha e Lunga Marcia
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi postcoloniale sulla modernità alternativa di Partha Chatterjee (La nazione e i suoi frammenti, 1993):**  
+   Dimostra come Gandhi abbia rifiutato non solo la dominazione politica britannica, ma la stessa modernità industriale e tecnocratica occidentale, proponendo un modello di civiltà fondato sull'autosufficienza rurale del villaggio tradizionale indiano contro la voracità capitalistica.
+
+2. **L'interpretazione storico-militare di Lucien Bianco (Le origini della rivoluzione cinese 1915-1949):**  
+   Evidenzia come il successo di Mao sia scaturito dalla capacità geniale di comprendere che la chiave del potere in Cina risiedeva nelle campagne e non nelle fabbriche, combinando la guerra di popolo contadina con una rigorosa disciplina morale dell'Armata Rossa (le 'Tre Regole e Otto Avvertenze').
+
+3. **La prospettiva diplomatica di Judith Brown (Gandhi's Rise to Power):**  
+   Sottolinea la straordinaria abilità tattica e politica di Gandhi, capace di manovrare sia le grandi folle rurali con il linguaggio dei miti religiosi tradizionali indù, sia le complesse trattative legali con i viceré britannici, rendendo l'India ingovernabile per Londra.
+
+---
+
+### Capitolo XXI bis: La guerra totale e lo sterminio industriale: Operazione Barbarossa, conferenza di Wannsee e la tragedia della Shoah
+- **Periodo Storico:** 1939-1945
+- **Concetto Guida:** Vernichtungskrieg e Shoah
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione della burocrazia dello sterminio di Raul Hilberg (La distruzione degli ebrei d'Europa, 1961):**  
+   Dimostra con immenso rigore documentario che la Shoah non fu l'opera isolata di una banda di fanatici delle SS, ma il risultato della cooperazione cosciente e zelante dell'intero apparato statale tedesco: burocrati dei ministeri, giuristi, diplomatici, medici, ingegneri e ferrovieri che gestirono la distruzione come una normale procedura amministrativa.
+
+2. **La tesi sociologica della modernità di Zygmunt Bauman (Modernità e Olocausto, 1989):**  
+   Sostiene che la Shoah non fu una regressione alla barbarie medievale, ma il prodotto legittimo e mostruoso della razionalità tecnica e scientifica della modernità occidentale: la divisione del lavoro, l'ingegneria sociale e l'efficienza impersonale slegate da qualsiasi responsabilità morale individuale.
+
+3. **La triplice guerra della Resistenza italiana di Claudio Pavone (Una guerra civile, 1991):**  
+   Scardina la retorica dell'epopea patriottica unanime e analizza la Resistenza italiana del 1943-45 come un intreccio inscindibile di tre conflitti simultanei: guerra patriottica contro l'invasore tedesco, guerra civile tra partigiani e fascisti repubblichini di Salò, e guerra di classe proletaria contro l'ordine borghese colluso col fascismo.
+
+---
+
+### Capitolo XXII bis: La genesi dell'ordine bipolare: Dottrina Truman, Piano Marshall e la divisione della Germania (1945-1949)
+- **Periodo Storico:** 1945-1955
+- **Concetto Guida:** Dottrina Truman e Cortina di Ferro
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi ortodossa americana di Arthur Schlesinger Jr.:**  
+   Attribuisce la responsabilità primaria ed esclusiva della Guerra Fredda all'aggressività totalitaria, paranoica e messianica di Stalin, il quale violò gli accordi di Yalta asservendo l'Europa dell'Est e costringendo le democrazie occidentali a reagire per autodifesa con la Dottrina Truman e la NATO.
+
+2. **La critica revisionista di William Appleman Williams (La tragedia della diplomazia americana, 1959):**  
+   Rovescia le colpe, dimostrando che l'URSS postbellica era dissanguata e desiderosa solo di sicurezza sui confini, mentre furono gli USA a inaugurare la diplomazia nucleare aggressiva per imporre l'egemonia globale del capitalismo finanziario di Wall Street e dei mercati aperti.
+
+3. **La sintesi post-revisionista di John Lewis Gaddis (La guerra fredda. Una nuova storia, 2005):**  
+   Utilizzando gli archivi sovietici declassificati dopo il 1991, conclude che l'ordine bipolare fu una risultante strutturale della caduta della Germania: la Guerra Fredda fu inevitabile per l'antagonismo ontologico tra due visioni del mondo incompatibili, ma fu vinta dagli USA grazie alla superiorità economica e alla capacità di creare alleanze fondate sul consenso anziché sulla coercizione imperiale del Cremlino.
+
+---
+
+### Capitolo XXIII bis: La Bandung afroasiatica (1955) e la guerra d'indipendenza d'Algeria: il crollo degli imperi coloniali e il Movimento dei Non Allineati
+- **Periodo Storico:** 1945-1962
+- **Concetto Guida:** Non Allineamento e Guerra d'Algeria
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi rivoluzionaria della violenza disalienante di Frantz Fanon (I dannati della terra, 1961):**  
+   Lo psichiatra martinicano militante dell'FLN teorizza che la violenza anticoloniale non è solo uno strumento militare, ma un'indispensabile catarsi psicologica che consente al colonizzato di liberarsi dal complesso di inferiorità inculcato dal dominatore bianco e ricostruire la propria dignità di uomo libero.
+
+2. **L'interpretazione classica della tragedia francese di Alistair Horne (A Savage War of Peace: Algeria 1954-1962):**  
+   Descrive il conflitto algerino come una tragedia greca in cui entrambe le parti furono prigioniere di torti secolari: la cecità dei coloni impedì qualsiasi riforma democratica tempestiva, costringendo l'FLN alla via del terrore e l'esercito francese alla degradazione morale della tortura sistematica.
+
+3. **L'analisi sociologica del Terzo Mondo di Alfred Sauvy:**  
+   Sottolinea come Bandung abbia rappresentato la fine del monopolio delle potenze occidentali nel dettare i valori della convivenza umana, aprendo una nuova era fondata sulla rivendicazione della sovranità economica sulle risorse naturali contro il neocolonialismo.
+
+---
+
+### Capitolo XXIV bis: La transizione post-fascista in Italia: referendum del 2 giugno 1946, compromesso costituente e la frattura elettorale del 1948
+- **Periodo Storico:** 1943-1953
+- **Concetto Guida:** Compromesso Costituzionale e Centrismo
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi della 'Repubblica dei partiti' di Pietro Scoppola (La repubblica dei partiti, 1991):**  
+   Interpreta la transizione democratica come il capolavoro dei moderni partiti di massa antifascisti (DC, PCI, PSI), che seppero canalizzare l'energia disgregatrice e violenta del dopoguerra all'interno delle regole della legalità repubblicana, fungendo da veri costruttori della cittadinanza democratica.
+
+2. **L'interpretazione storico-politica di Giorgio Galli (Il bipartitismo imperfetto, 1966):**  
+   Definisce il sistema politico scaturito dal 18 aprile 1948 come un 'bipartitismo imperfetto': la presenza del più grande partito comunista d'Occidente (fedele a Mosca) e l'appartenenza dell'Italia alla NATO impedirono la fisiologica alternanza di governo tra destra e sinistra, condannando la DC a governare ininterrottamente e favorendo la degenerazione occupazionale dello Stato.
+
+3. **La prospettiva sociale di Paul Ginsborg (Storia d'Italia dal dopoguerra a oggi):**  
+   Sottolinea come la vittoria della DC nel 1948 fu resa possibile non solo dalla crociata anticomunista della Chiesa, ma dalla capacità di De Gasperi di presentare la DC come il baluardo rassicurante della piccola proprietà contadina e del ceto medio contro qualsiasi esperimento di collettivizzazione.
+
+---
+
+### Capitolo XXV bis: I 'Trenta Gloriosi' del capitalismo (1945-1975): modello fordista-keynesiano, welfare state e la contestazione del '68
+- **Periodo Storico:** 1950-1975
+- **Concetto Guida:** Welfare State e Antiautoritarismo del '68
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi sociologica della mutazione antropologica di Pier Paolo Pasolini (Scritti corsari, 1975):**  
+   Denuncia amaramente come il miracolo economico e la civiltà dei consumi di massa abbiano provocato un 'genocidio culturale' ben peggiore del fascismo: l'omologazione totalitaria dei desideri e la distruzione delle antiche culture contadine e dialettali a favore dell'edonismo consumistico.
+
+2. **L'interpretazione storica di Eric Hobsbawm (L'età degli estremi, 1994):**  
+   Definisce la rivoluzione culturale degli anni Sessanta come la più profonda trasformazione della vita umana dai tempi del Neolitico: la distruzione dei legami familiari patriarcali tradizionali, l'ascesa globale dell'individualismo giovanile e l'emancipazione delle donne dal destino domestico.
+
+3. **L'analisi filosofica di Herbert Marcuse (L'uomo a una dimensione, 1964):**  
+   Dimostra come la società capitalistica avanzata abbia imparato a neutralizzare il potenziale rivoluzionario non con la violenza poliziesca, ma integrando gli operai attraverso il miraggio dell'abbondanza di merci futili, trasformando l'alienazione in conformismo inconsapevole.
+
+---
+
+### Capitolo XXVI bis: L'orlo dell'apocalisse nucleare e la guerra asimmetrica: i 13 giorni di Cuba (1962) e la tragedia del Vietnam
+- **Periodo Storico:** 1960-1975
+- **Concetto Guida:** Crisi di Cuba e Guerra del Vietnam
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione critica dell'imperialismo liberale di David Halberstam (I migliori e i più brillanti, 1972):**  
+   Spiega la tragedia del Vietnam come il fallimento morale e intellettuale della classe dirigente tecnocratica kennediana e johnsoniana (McNamara, Rusk, Bundy): uomini intelligentissimi ma privi di comprensione storica e di empatia culturale, accecati dall'arroganza della potenza militare tecnologica.
+
+2. **L'analisi diplomatica di Henry Kissinger (Diplomazia, 1994):**  
+   Difende la gestione pragmatica della crisi di Cuba come il trionfo della deterrenza razionale, evidenziando tuttavia come il Vietnam abbia distrutto il consenso bipartisan sulla politica estera americana, condannando Washington a una prolungata paralisi geopolitica nota come 'sindrome del Vietnam'.
+
+3. **La tesi storica sulla Primavera di Praga di François Fejtö (Storia delle democrazie popolari):**  
+   Dimostra come l'invasione sovietica del 1968 abbia sancito la morte cerebrale e morale definitiva del modello sovietico: l'URSS rinunciò a qualsiasi egemonia ideale e culturale, riducendosi a un puro impero poliziesco e militare fondato sui carri armati.
+
+---
+
+### Capitolo XXVII bis: La fine dell'età dell'oro: il decoupling di Nixon (1971), gli shock petroliferi del 1973-1979 e l'ascesa del neoliberismo reaganiano-thatcheriano
+- **Periodo Storico:** 1971-1989
+- **Concetto Guida:** Stagflazione e Neoliberismo (Reaganomics)
+
+**Tesi Storiografiche di Riferimento:**
+1. **La critica radicale del neoliberismo di David Harvey (Breve storia del neoliberismo, 2005):**  
+   Demolisce il mito della libertà individuale e interpreta il neoliberismo di Reagan e Thatcher non come una teoria economica razionale, ma come un lucido 'progetto politico di restaurazione del potere di classe' delle élite finanziarie per riappropriarsi della ricchezza ceduta ai lavoratori durante l'Età dell'Oro.
+
+2. **La tesi monetarista di Milton Friedman (Capitalismo e libertà, 1962):**  
+   Celebra la fine di Bretton Woods e le riforme reaganiane come la liberazione delle forze creative dell'individuo dalle catene soffocanti della burocrazia statale, dimostrando che solo la deregolamentazione e il rigore monetario potevano debellare la piaga dell'inflazione.
+
+3. **L'interpretazione geopolitica di John Lewis Gaddis:**  
+   Evidenzia come la Reaganomics, pur al prezzo di un mostruoso debito pubblico interno, abbia conseguito il suo supremo obiettivo strategico: imponendo all'URSS una corsa agli armamenti ad altissima tecnologia che l'economia sovietica pianificata non poteva sostenere, Reagan spezzò la schiena all'impero sovietico accelerandone la caduta.
+
+---
+
+### Capitolo XXVIII bis: La notte della Repubblica: la strage di Piazza Fontana (1969), la violenza politica brigatista e il rapimento Moro (1978)
+- **Periodo Storico:** 1969-1984
+- **Concetto Guida:** Strategia della Tensione e Caso Moro
+
+**Tesi Storiografiche di Riferimento:**
+1. **L'interpretazione storico-filosofica di Miguel Gotor (Il memoriale di Aldo Moro, 2011):**  
+   Analizza le lettere e gli scritti di Moro dalla prigionia come il documento politico più alto del Novecento italiano: Moro comprese di essere vittima di un doppio complotto, sacrificato dalle BR ma consapevolmente abbandonato dai suoi stessi compagni di partito (il 'Partito della Fermezza') e dalle potenze geopolitiche atlantiche ostili all'ingresso dei comunisti al governo.
+
+2. **La tesi sociologica di Giovanni De Luna (Le ragioni di un decennio. 1969-1979, 2009):**  
+   Rifiuta la demonizzazione indistinta degli Anni di Piombo come mera sequenza di lutti, evidenziando come quel decennio fu al tempo stesso una straordinaria e luminosa stagione di riforme civili democratiche (Statuto dei lavoratori, divorzio, diritto di famiglia, riforma sanitaria del 1978 con l'istituzione del SSN e chiusura dei manicomi con la Legge Basaglia).
+
+3. **La prospettiva di Paul Ginsborg (Storia d'Italia dal dopoguerra a oggi):**  
+   Mostra come l'assassinio di Moro abbia bloccato per un quindicennio la transizione della democrazia italiana verso un compiuto bipolarismo occidentale, relegando il paese a un immobilismo politico dominato dalla lottizzazione partitica che avrebbe condotto direttamente a Tangentopoli nel 1992.
+
+---
+
+### Capitolo XXIX bis: La Terza Rivoluzione Industriale, l'Economia della Conoscenza e le Contraddizioni della Globalizzazione
+- **Periodo Storico:** Anni '70 del Novecento - Inizio XXI Secolo
+- **Concetto Guida:** Globalizzazione e Post-Fordismo
+
+**Quadro Cronologico ed Eventi Chiave:**
+
+| Anno | Evento Chiave | Impatto Storico ed Economico |
+|:---:|:---|:---|
+| **1971** | Sospensione convertibilità dollaro-oro (Nixon); invenzione microprocessore Intel 4004 | Fine del sistema monetario stabile di Bretton Woods e avvio della rivoluzione del silicio. |
+| **1973** | Crisi petrolifera arabo-israeliana | Fine del 'trentennio glorioso' della crescita economica occidentale; decollo delle teorie ecologiste. |
+| **1981** | Lancio del Personal Computer IBM | Democratizzazione della tecnologia informatica, preludio all'informatizzazione di massa dell'ufficio e della vita privata. |
+| **1989-1991** | Ideazione del World Wide Web al CERN di Ginevra | Nascita di Internet come spazio pubblico planetario di circolazione ipertestuale dei dati. |
+| **1992** | Conferenza di Rio su Ambiente e Sviluppo | Istituzionalizzazione globale del concetto di 'sviluppo sostenibile' e avvio della diplomazia climatica. |
+| **1995** | Istituzione della World Trade Organization (WTO) | Costituzione del quadro normativo globale per l'abbattimento universale dei dazi doganali e barriere commerciali. |
+| **1997** | Firma del Protocollo di Kyoto | Primo accordo internazionale vincolante per la riduzione delle emissioni antropiche di gas serra. |
+| **1999** | Battaglia di Seattle contro il vertice WTO | Nascita del movimento di massa altermondista contro la globalizzazione neoliberista corporativa. |
+| **2001** | Vertice G8 di Genova (luglio) | Climax e tragica repressione del movimento critico globale; cesura nella storia della contestazione europea. |
+
+---
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi della 'Network Society' (Manuel Castells):** Castells sostiene che la rivoluzione informatica abbia plasmato un nuovo modello socio-economico, il "capitalismo informazionale", nel quale la competitività globale non deriva più dall'accumulazione di lavoro materiale, ma dalla capacità generativa e trasmissiva di dati digitali organizzati in nodi e flussi reticolari.
+2. **La compressione spazio-temporale del capitalismo (David Harvey):** Il geografo marxista David Harvey definisce la transizione post-fordista come una manovra del capitalismo tesa a superare le proprie crisi di sovra-accumulazione attraverso la flessibilizzazione assoluta e l'accelerazione vertiginosa del ricambio di merci e capitali, erodendo lo spazio tramite il tempo e privatizzando radicalmente i beni comuni.
+3. **Le contraddizioni della disuguaglianza globale (Thomas Piketty e Zygmunt Bauman):** Mentre Zygmunt Bauman analizza le conseguenze esistenziali della 'modernità liquida', dove le élite globali vivono nello spazio virtuale mentre le masse subordinate restano relegate alla desolazione locale, Thomas Piketty documenta empiricamente come la deregolamentazione post-1980 abbia restaurato livelli di concentrazione patrimoniale tipici della Belle Époque, indebolendo il ceto medio occidentale.
+
+---
+
+### Capitolo XXX bis: Il Collasso del Mondo Bipolare, le Guerre Balcaniche e l'Era del Terrorismo Globale
+- **Periodo Storico:** 1989 - 2003
+- **Concetto Guida:** Pulizia Etnica e Guerra Preventiva
+
+**Quadro Cronologico ed Eventi Chiave:**
+
+| Data / Anno | Evento Geopolitico | Conseguenze Strutturali |
+|:---:|:---|:---|
+| **9 Novembre 1989** | Caduta del Muro di Berlino | Crollo del blocco sovietico e riunificazione tedesca (3 ottobre 1990). |
+| **Gennaio - Febbraio 1991** | Guerra del Golfo (*Operazione Desert Storm*) | Liberazione del Kuwait da Saddam Hussein; trionfo temporaneo del multilateralismo a guida USA. |
+| **Giugno 1991** | Dichiarazione di indipendenza di Slovenia e Croazia | Inizio della sanguinosa dissoluzione della Repubblica Socialista Federale di Jugoslavia. |
+| **25 Dicembre 1991** | Dimissioni di Gorbačëv e scioglimento dell'URSS | Fine ufficiale della Guerra Fredda e scomparsa dell'altro polo dell'ordine bipolare novecentesco. |
+| **Luglio 1995** | Genocidio di Srebrenica | Massacro di 8.000 musulmani; svolta morale che induce l'intervento armato NATO in Bosnia. |
+| **Novembre 1995** | Firma degli Accordi di Dayton | Fine della guerra bosniaca e spartizione del paese su basi etnico-cantonali. |
+| **Marzo - Giugno 1999** | Campagna aerea NATO contro la Repubblica Federale di Jugoslavia | Operazione militare senza mandato ONU per arrestare la repressione in Kosovo; frattura con la Russia. |
+| **11 Settembre 2001** | Attentati qaedisti a New York e al Pentagono | Collasso dell'inviolabilità del territorio metropolitano americano; inizio dell'era della guerra al terrore. |
+| **Ottobre 2001** | Invasione dell'Afghanistan (*Enduring Freedom*) | Rovesciamento del regime dei Talebani e avvio di una ventennale occupazione occidentale. |
+| **Marzo 2003** | Invasione anglo-americana dell'Iraq | Rovesciamento di Saddam Hussein in assenza di risoluzione ONU; frattura nell'Occidente e caos mediorientale. |
+
+---
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi dello 'Scontro delle Civiltà' (Samuel P. Huntington):** In polemica diretta con la 'Fine della Storia' di Fukuyama, Huntington profetizzò che nel mondo post-Guerra Fredda i conflitti non sarebbero più stati motivati da ideologie politiche o interessi economici razionali, ma da fratture culturali e religiose profonde, identificando nella linea di faglia tra Islam e Occidente il fronte più esplosivo del XXI secolo.
+2. **Le 'Nuove Guerre' (Mary Kaldor):** La studiosa britannica dimostra come i conflitti post-bipolari (Balcani, Caucaso, Africa subsahariana) abbiano una natura radicalmente diversa dalle guerre classiche interstatali del passato: sono guerre privatizzate, condotte da reti fluide di miliziani, bande paramilitari e criminalità organizzata transnazionale, in cui l'obiettivo primario non è sconfiggere un esercito regolare sul campo, ma colpire, terrorizzare e sfollare la popolazione civile inerme per alimentare economie di saccheggio.
+3. **L'ordine imperiale e il paradosso della sicurezza (Eric Hobsbawm e Joseph Nye):** Mentre Hobsbawm sottolinea come il tentativo statunitense di stabilire un impero globale solitario fosse destinato al fallimento a causa dell'asimmetria tra strapotere militare e debolezza economica strutturale, Joseph Nye ha criticato la deriva unilaterale dell'amministrazione Bush per aver dilapidato il prezioso *soft power* (l'attrattività dei valori democratici e della cooperazione multilaterale) a vantaggio di una pura coercizione militare che ha isolato l'America.
+
+---
+
+### Capitolo XXXI bis: La Crisi della Prima Repubblica, la Transizione del 1992-1994 e l'Avvento del Bipolarismo
+- **Periodo Storico:** 1992 - 2006
+- **Concetto Guida:** Transizione Istituzionale e Bipolarismo Incompiuto
+
+**Quadro Cronologico ed Eventi Chiave:**
+
+| Data / Anno | Evento Politico / Giudiziario | Valenza Storica |
+|:---:|:---|:---|
+| **17 Febbraio 1992** | Arresto di Mario Chiesa a Milano | Inizio convenzionale dell'inchiesta 'Mani Pulite' condotta dal Pool di Milano. |
+| **5-6 Aprile 1992** | Elezioni politiche generali | Crollo storico della maggioranza di pentapartito sotto il 50%; exploit della Lega Nord al 8,6%. |
+| **23 Maggio 1992** | Strage di Capaci (morte di Falcone) | Apice della guerra stragista mafiosa; elezione di Oscar Luigi Scalfaro al Quirinale. |
+| **19 Luglio 1992** | Strage di Via D'Amelio (morte di Borsellino) | Secondo trauma nazionale; istituzione del regime penitenziario duro 41-bis per i mafiosi. |
+| **Settembre 1992** | Uscita della lira dallo SME e manovra Amato | Crisi valutaria sistemica e varo della più pesante manovra economica della storia repubblicana. |
+| **Gennaio 1993** | Arresto di Totò Riina a Palermo | Cattura del capo assoluto dei Corleonesi ad opera dei ROS dei Carabinieri dopo 24 anni di latitanza. |
+| **18 Aprile 1993** | Referendum elettorale Segni | L'82,7% degli italiani vota per l'abrogazione del proporzionale, sancendo la fine della Prima Repubblica. |
+| **Maggio - Luglio 1993** | Stragi di Roma, Firenze e Milano | Terrorismo mafioso e destabilizzazione eversiva nel continente. |
+| **Gennaio 1994** | 'Discesa in campo' di Silvio Berlusconi | Fondazione di Forza Italia e riorganizzazione dell'elettorato moderato in funzione anticomunista. |
+| **27-28 Marzo 1994** | Vittoria elettorale del centrodestra | Avvio formale della Seconda Repubblica; formazione del primo governo Berlusconi. |
+| **Aprile 1996** | Vittoria dell'Ulivo guidato da Romano Prodi | Prima alternanza di governo democratica della storia italiana; aggancio all'Euro. |
+
+---
+
+**Tesi Storiografiche di Riferimento:**
+1. **La tesi del 'collasso della sovranità limitata' (Paul Ginsborg):** Lo storico italo-britannico dimostra che la Prima Repubblica non è crollata semplicemente per gli scandali di corruzione, ma perché la fine della Guerra Fredda ne ha cancellato la ragion d'essere geopolitica, rendendo non più sostenibile il costo economico e morale di un ceto politico delegittimato e incapace di modernizzare lo Stato.
+2. **La rivoluzione conservatrice e mediatica (Simona Colarizi):** Colarizi analizza la transizione come una crisi di rappresentanza delle classi medie che, spaventate dalla scomparsa della DC e dal rischio dell'egemonia delle sinistre, hanno trovato in Silvio Berlusconi un interprete carismatico capace di forgiare una nuova identità culturale fondata sull'individualismo televisivo, la promessa di benessere privato e l'avversione per le tasse e il ceto giudiziario.
+3. **L'anomalia italiana e il bipolarismo zoppo (Giovanni Orsina):** Orsina evidenzia come il passaggio alla Seconda Repubblica non abbia prodotto una compiuta democrazia liberale all'anglosassone, bensì una guerra civile simbolica tra due blocchi contrapposti: da una parte un'élite tecnocratica e moralizzatrice che identificava la virtù nella magistratura e nei vincoli europei; dall'altra un blocco populista e difensivo che rivendicava la sovranità popolare e l'immunità del consenso elettorale dalle regole dei contropoteri legali.
+
+---

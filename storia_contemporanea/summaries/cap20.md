@@ -4,6 +4,8 @@
 **Periodo Storico:** 1919-1939 | **Pagine Libro:** 449-463 | **Tempo di Lettura:** ~8 min  
 
 ---
+> 💡 **Approfondimento Monografico:** Per un'analisi critica e storiografica su questo periodo, consulta il [Capitolo 20 bis: I nazionalismi asiatici nel primo Novecento: la disobbedienza civile non violenta di Gandhi e la Lunga Marcia di Mao Zedong](cap20_bis.md).
+
 
 ## Introduzione e Quadro Storico
 Il contributo, in uomini e materie prime, dato dalle colonie inglesi e francesi durante la grande guerra, le suggestioni della rivoluzione russa e dell'ideologia wilsoniana avevano alimentato le aspirazioni all'indipendenza delle colonie europee I movimenti indipendentisti erano stati spesso strumentalizzati durante la guerra soprattutto in Medio Oriente, dove l'appoggio inglese al nazionalismo arabo contrastava in realtà con la contemporanea spartizione della regione tra Gran Bretagna e Francia e con il riconoscimento dei diritti del movimento sionista in Palestina.
@@ -134,3 +136,6 @@ Nell'autunno del 1930, quando cominciavano a farsi sentire le ripercussioni dell
 7. In Giappone gli anni tra le due guerre videro un notevole sviluppo economico e l'affermarsi di una spinta imperialistica, in coincidenza con lo sviluppo dei movimenti di destra e con un crescente autoritarismo del sistema politico.
 
 8. In America Latina la grande crisi ebbe conseguenze fortemente negative, ma stimolò comunque in alcuni paesi un processo di diversificazione produttiva. Sul piano politico, molti Stati latinoamericani videro l'affermarsi di dittature personali o di governi più o meno autoritari. In alcuni casi (Brasile, Messico e, più tardi, Argentina), questi regimi assunsero un indirizzo populista e godettero dell'appoggio dei lavoratori urbani.
+
+---
+[→ Vai all'Approfondimento: Capitolo 20 bis](cap20_bis.md) | [Vai all'Indice Generale](../index.html)
